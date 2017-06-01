@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sm.pfprod.dal.user.login.PfUserDao">
+
+    <sql id="Base_Column_List" >
+         user_id, user_name, password, for_salt, email, phone_no, is_block, is_first, role_type, role_desc,
+         real_name, remark, last_login_time, is_deleted, gmt_create, gmt_modify
+    </sql>
+
+    <!-- 保存用户信息 -->
+    <insert id="saveUser" parameterType="com.sm.pfprod.model.entity.UserInfo">
+        INSERT INTO user_info(
+            user_name , password , for_salt , email , phone_no ,
+            is_block , role_type , role_desc ,real_name ,
+            remark , gmt_create , gmt_modify
+        )
+        VALUES
+            (
+              #{userName} , #{password} , #{forSalt}  ,  #{email} ,  #{phoneNo} ,
+              #{isBlock} , #{roleType} , #{roleDesc} , #{realName} ,
+              #{remark}  , now() , now()
+            );
+    </insert>
+
+    <!-- 修改用户信息 -->
+    <update id="updateUser" parameterType="com.sm.pfprod.model.entity.UserInfo">
+        UPDATE user_info
+        SET
+            <if test="userName != null">
+                user_name = #{userName} ,
+            </if>
+            <if test="email != null">
+                email = #{email} ,
+            </if>
+            <if test="phoneNo != null">
+                phone_no = #{phoneNo} ,
+            </if>
+            <if test="isBlock != null">
+                is_block = #{isBlock} ,
+            </if>
+            <if test="isFirst != null">
+                is_first = #{isFirst} ,
+            </if>
+            <if test="roleType != null">
+                role_type = #{roleType} ,
+            </if>
+            <if test="roleDesc != null">
+                role_desc = #{roleDesc} ,
+            </if>
+            <if test="realName != null">
+                real_name = #{realName} ,
+            </if>
+            <if test="remark != null">
+                remark = #{remark} ,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted} ,
+            </if>
+            gmt_modify = NOW()
+        WHERE
+            user_id = '4';  
+    </update>
+
+    <!-- 修改密码 -->
+    <update id="updatePsw" parameterType="com.sm.pfprod.model.entity.UserInfo">
+        UPDATE user_info
+        SET password = #{password}, for_salt = #{forSalt}
+        WHERE user_id = #{userId}
+    </update>
+
+    <!-- 根据用户获取用户信息 -->
+    <select id="selectUser" resultType="com.sm.pfprod.model.entity.UserInfo">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_info
+        WHERE user_name = #{userName}
+    </select>
+
+    <!-- 根据用户id获取用户信息 -->
+    <select id="selectUserById" resultType="com.sm.pfprod.model.entity.UserInfo">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_info
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- 获取用户列表 -->
+    <select id="listUsers" resultType="com.sm.pfprod.model.vo.user.PfUsersVo">
+        SELECT
+         user_id, user_name, email, phone_no, is_block, is_first, role_type
+         real_name, remark, last_login_time, is_deleted, gmt_create
+        FROM user_info
+    </select>
+
+</mapper>

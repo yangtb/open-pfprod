@@ -1,0 +1,29 @@
+<assembly>
+    <id>bin</id>
+    <formats>
+        <format>war</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <fileSets>
+        <fileSet>
+            <directory>target/pfprod/dist/</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>target/pfprod</directory>
+            <includes>
+                <include>WEB-INF/classes/**</include>
+                <include>WEB-INF/lib/**</include>
+            </includes>
+            <excludes>
+                <exclude>WEB-INF/classes/assembly.xml</exclude>
+                <exclude>WEB-INF/classes/deploy/**</exclude>
+            </excludes>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

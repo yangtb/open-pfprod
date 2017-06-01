@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <!-- 应用名称
+    <property name="APP_NAME" value="${app_name}" />
+    -->
+    <!--日志文件的保存路径,首先查找系统属性-Dlog.dir,如果存在就使用其；否则，在当前目录下创建名为logs目录做日志存放的目录
+    <property name="LOG_HOME" value="${loggingRoot}/${app_name}" />
+    -->
+    <!-- 日志输出格式
+    <property name="ENCODER_PATTERN"
+              value="%d{yyyy-MM-dd  HH:mm:ss.SSS} [%thread] %-5level %logger{80} - %msg%n" />
+    <contextName>${APP_NAME}</contextName>
+    -->
+    <!-- 控制台日志：输出全部日志到控制台 -->
+    <appender name="CONSOLE-APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd  HH:mm:ss.SSS}  %-5level %-32t - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <appender name="DEFAULT-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${loggingRoot}/${app_name}/default.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd  HH:mm:ss.SSS}  %-5level %-32t - %msg%n
+            </Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>info</level>
+        </filter>
+    </appender>
+
+    <appender name="ERROR-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd  HH:mm:ss.SSS}  %-5level %-32t - %msg%n
+            </Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>error</level>
+        </filter>
+    </appender>
+
+    <appender name="PFPROD-WEB-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${loggingRoot}/${app_name}/pfprod-web.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd  HH:mm:ss.SSS}  %-5level %-32t - %msg%n
+            </Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>error</level>
+        </filter>
+    </appender>
+
+    <appender name="PFPROD-COMMON-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${loggingRoot}/${app_name}/pfprod-common.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd  HH:mm:ss.SSS}  %-5level %-32t - %msg%n
+            </Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>error</level>
+        </filter>
+    </appender>
+
+    <appender name="PFPROD-DAL-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${loggingRoot}/${app_name}/pfprod-dal.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd  HH:mm:ss.SSS}  %-5level %-32t - %msg%n
+            </Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>error</level>
+        </filter>
+    </appender>
+
+    <appender name="PFPROD-INTEGRATION-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${loggingRoot}/${app_name}/pfprod-integration.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd  HH:mm:ss.SSS}  %-5level %-32t - %msg%n
+            </Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>error</level>
+        </filter>
+    </appender>
+
+    <appender name="PFPROD-SERVICE-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${loggingRoot}/${app_name}/pfprod-service.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd  HH:mm:ss.SSS}  %-5level %-32t - %msg%n
+            </Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>error</level>
+        </filter>
+    </appender>
+
+    <appender name="PFPROD-MONITOR-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${loggingRoot}/${app_name}/pfprod-monitor.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd  HH:mm:ss.SSS}, pfprod-monitor.log, %p, %msg%n
+            </Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>info</level>
+        </filter>
+    </appender>
+
+    <logger name="com.sm.pfprod.web" additivity="false">
+        <level value="${log_level}" />
+        <appender-ref ref="CONSOLE-APPENDER" />
+        <appender-ref ref="DEFAULT-APPENDER" />
+        <appender-ref ref="PFPROD-WEB-APPENDER" />
+    </logger>
+
+    <logger name="com.sm.pfprod.service" additivity="false">
+        <level value="${log_level}" />
+        <appender-ref ref="CONSOLE-APPENDER" />
+        <appender-ref ref="DEFAULT-APPENDER" />
+        <appender-ref ref="PFPROD-SERVICE-APPENDER" />
+    </logger>
+
+    <logger name="com.sm.pfprod.integration" additivity="false">
+        <level value="${log_level}" />
+        <appender-ref ref="CONSOLE-APPENDER" />
+        <appender-ref ref="DEFAULT-APPENDER" />
+        <appender-ref ref="PFPROD-INTEGRATION-APPENDER" />
+    </logger>
+
+    <logger name="com.sm.pfprod.dal" additivity="false">
+        <level value="${log_level}" />
+        <appender-ref ref="CONSOLE-APPENDER" />
+        <appender-ref ref="DEFAULT-APPENDER" />
+        <appender-ref ref="PFPROD-DAL-APPENDER" />
+    </logger>
+
+    <logger name="com.sm.pfprod.common" additivity="false">
+        <level value="${log_level}" />
+        <appender-ref ref="CONSOLE-APPENDER" />
+        <appender-ref ref="DEFAULT-APPENDER" />
+        <appender-ref ref="PFPROD-COMMON-APPENDER" />
+    </logger>
+
+    <logger name="monitor" additivity="false">
+        <level value="${log_level}" />
+        <appender-ref ref="CONSOLE-APPENDER" />
+        <appender-ref ref="DEFAULT-APPENDER" />
+        <appender-ref ref="PFPROD-MONITOR-APPENDER" />
+    </logger>
+
+    <root>
+        <level value="${log_level}" />
+        <appender-ref ref="CONSOLE-APPENDER" />
+        <appender-ref ref="ERROR-APPENDER" />
+        <appender-ref ref="DEFAULT-APPENDER" />
+    </root>
+</configuration>
