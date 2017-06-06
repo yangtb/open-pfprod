@@ -1,0 +1,11 @@
+app_name=pfprod
+
+log_level=info
+
+loggingRoot=/home/admin/logs
+
+run_mode=NORMAL
+
+jdbc.url=jdbc:mysql://112.124.33.7:3306/medicalcare?zeroDateTimeBehavior=convertToNull
+jdbc.username=med
+jdbc.password=medicalcore01
