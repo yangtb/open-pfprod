@@ -14,8 +14,8 @@
     <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
             <list>
-                <value>classpath:META-INF/config.properties</value>
-                <value>classpath*:META-INF/pfprod_jdbc.properties</value>
+                <value>classpath:config.properties</value>
+                <value>classpath*:pfprod_jdbc.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="utf-8" />
@@ -61,7 +61,7 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:META-INF/spring/mybatis_config.xml"/>
+        <property name="configLocation" value="classpath:spring/mybatis_config.xml"/>
         <property name="mapperLocations">
             <list>
                 <value>classpath*:com/sm/pfprod/dal/**/*Dao*.xml</value>

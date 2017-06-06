@@ -10,7 +10,7 @@ public abstract class TestBase {
 
 	@BeforeClass
 	public static void beforeClass() {
-		context = new ClassPathXmlApplicationContext("classpath:META-INF/spring/pfprod_service_server.xml");
+		context = new ClassPathXmlApplicationContext("classpath:spring/pfprod_service_server.xml");
 	}
 
 	@AfterClass
