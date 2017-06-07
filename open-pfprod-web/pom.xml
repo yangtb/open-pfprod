@@ -89,7 +89,7 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/${project.artifactId}</path>
-                    <port>9400</port>
+                    <port>9090</port>
                     <uriEncoding>utf-8</uriEncoding>
                 </configuration>
             </plugin>
