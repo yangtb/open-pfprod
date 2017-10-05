@@ -14,14 +14,21 @@
     <version>${open.pfprod.facade.version}</version>
 
     <dependencies>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-        </dependency>
+        <!-- 项目内jar -->
         <dependency>
             <groupId>com.sm</groupId>
             <artifactId>open-care-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.sm</groupId>
+            <artifactId>open-pfprod-model</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
