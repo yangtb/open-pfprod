@@ -1,17 +1,15 @@
 package com.sm.pfprod.service.user.login.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.log.LoggerUtil;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.dal.user.login.PfUserDao;
-import com.sm.pfprod.model.dto.common.User;
+import com.sm.pfprod.model.dto.common.UserDto;
+import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.dto.user.login.LoginDto;
-import com.sm.pfprod.model.dto.user.login.PfUserDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
 import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
 import com.sm.pfprod.model.entity.UserInfo;
@@ -28,16 +26,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 注册、登陆
  */
-@Service("pfLoginService")
+@Service("pfUserService")
 public class PfUserServiceImpl implements PfUserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PfLoginHelper.class);
@@ -45,76 +47,72 @@ public class PfUserServiceImpl implements PfUserService {
     @Resource
     private PfUserDao pfUserDao;
 
-    @Value("#{configProperties['private_key']}")
-    private String              privateKey;             // 私钥
-    @Value("#{configProperties['algorithmName']}")
-    private String              algorithmName;          // 加密算法
-    @Value("#{configProperties['hashIterations']}")
-    private int                 hashIterations;         // 加密次数
+    @Value(value = "${private_key}")
+    private String privateKey;             // 私钥
+    @Value(value = "${algorithmName}")
+    private String algorithmName;          // 加密算法
+    @Value(value = "${hashIterations}")
+    private int hashIterations;         // 加密次数
 
-    /**
-     * 获取用户列表
-     * @param dto
-     * @return
-     */
     @Override
-    public PageInfo<PfUsersVo> listUsers(PfUserDto dto) {
-        /* 设置分页默认值 */
-        if (null == dto.getPageNum() || dto.getPageNum() < 1) {
-            dto.setPageNum(1);
-        }
-        if (null == dto.getPageSize() || dto.getPageSize() < 1) {
-            dto.setPageSize(15);
-        }
-        PageHelper.startPage(dto.getPageNum(), dto.getPageSize()); // 设置分页查询
-        List<PfUsersVo> list = pfUserDao.listUsers();
-        return new PageInfo<PfUsersVo>(list);
+    public List<PfUsersVo> listUsers(PfUserDto dto) {
+        return pfUserDao.listUsers(dto);
+    }
+
+    @Override
+    public Long countUsers(PfUserDto dto) {
+        return pfUserDao.countUsers();
+    }
+
+    @Transactional
+    @Override
+    public boolean saveUser(RegisterDto dto) {
+        UserInfo user = new UserInfo();
+        BeanUtils.copyProperties(dto, user);
+        // 新增用户
+        pfUserDao.saveUser(user);
+        // 插入用户角色
+        pfUserDao.saveUserRole(dto.getRoles(), user.getUserId());
+        return true;
+    }
+
+    @Override
+    public boolean isExistUser(String userName) {
+        return pfUserDao.isExistUser(userName);
     }
 
     /**
-     * 保存用户信息
+     * 编辑用户
      *
      * @param dto
      * @return
      */
     @Override
-    public Boolean saveUser(RegisterDto dto) {
-        try {
-            LoggerUtil.info(LOGGER, "【PfLoginServiceImpl-saveUser-params】dto={0}", JSON.toJSONString(dto));
-            UserInfo user = new UserInfo();
-            BeanUtils.copyProperties(dto, user);
-            /* 密码处理 */
-            String plaintext = PfLoginHelper.getPlaintext(privateKey, dto.getPassword());
-            String salt = PfLoginHelper.getSalt(dto.getUserName());
-            // 设置盐值
-            user.setForSalt(salt);
-            // 加密密码
-            user.setPassword(PfLoginHelper.getHashPsw(algorithmName, plaintext, hashIterations, salt));
-            return pfUserDao.saveUser(user) == 1 ? true : false;
-        } catch (BizRuntimeException e) {
-            LoggerUtil.error(LOGGER, "【PfLoginServiceImpl-saveUser-error】, e.getMessage():{0}", e.getMessage());
-            return false;
-        } catch (Exception e) {
-            LoggerUtil.error(LOGGER, "【PfLoginServiceImpl-saveUser-error】, e.getMessage():{0}", e.getMessage());
-            return false;
-        }
-    }
-
-    /**
-     * 编辑用户
-     * @param dto
-     * @return
-     */
-    @Override
-    public Boolean updateUser(RegisterDto dto) {
-        LoggerUtil.info(LOGGER, "【PfLoginServiceImpl-updateUser-params】dto={0}", JSON.toJSONString(dto));
+    public boolean updateUser(RegisterDto dto) {
         UserInfo user = new UserInfo();
         BeanUtils.copyProperties(dto, user);
-        return pfUserDao.updateUser(user) == 1 ? true : false;
+        // 修改用户信息
+        pfUserDao.updateUser(user);
+        // 删除用户角色
+        pfUserDao.delUserRole(dto.getUserId());
+        // 插入用户角色
+        pfUserDao.saveUserRole(dto.getRoles(), dto.getUserId());
+        return true;
+    }
+
+    @Override
+    public boolean delUser(List<Long> users) {
+        return pfUserDao.delUser(users) >= 1 ? true : false;
+    }
+
+    @Override
+    public boolean freezeUser(List<Long> users) {
+        return pfUserDao.freezeUser(users) >= 1 ? true : false;
     }
 
     /**
      * 登陆验证
+     *
      * @param dto
      * @return
      */
@@ -131,7 +129,7 @@ public class PfUserServiceImpl implements PfUserService {
             /* 登录成功后设置session*/
             Session session = subject.getSession();
             UserInfo userInfo = (UserInfo) subject.getPrincipal();
-            User user = new User();
+            UserDto user = new UserDto();
             BeanUtils.copyProperties(userInfo, user);
             session.setAttribute(AuthConstant.CURRENT_USER, user);
             return true;
@@ -145,7 +143,7 @@ public class PfUserServiceImpl implements PfUserService {
             throw new BizRuntimeException(PfUserConstant.EXPIRED_CREDENTIALS_ERROR, PfUserConstant.EXPIRED_CREDENTIALS_ERROR_MSG);
         } catch (UnauthorizedException e) {
             throw new BizRuntimeException(PfUserConstant.UNAUTHORIZED_ERROR, PfUserConstant.UNAUTHORIZED_ERROR_MSG);
-        }catch (ExcessiveAttemptsException e) {
+        } catch (ExcessiveAttemptsException e) {
             throw new BizRuntimeException(PfUserConstant.LOGIN_FAILED_TIMES_ERROR, PfUserConstant.LOGIN_FAILED_TIMES_ERROR_MSG);
         } catch (AuthenticationException e) {
             // 其他错误，比如锁定，如果想单独处理请单独catch处理
@@ -155,6 +153,7 @@ public class PfUserServiceImpl implements PfUserService {
 
     /**
      * 根据用户获取用户信息
+     *
      * @param userName
      * @return
      */
@@ -165,6 +164,7 @@ public class PfUserServiceImpl implements PfUserService {
 
     /**
      * 修改密码
+     *
      * @param dto
      * @return
      */
@@ -180,7 +180,7 @@ public class PfUserServiceImpl implements PfUserService {
         /* 验证原密码 */
         String oldPlaintext = PfLoginHelper.getPlaintext(privateKey, dto.getOldPassword());
         UserInfo userInfo = pfUserDao.selectUserById(dto.getUserId());
-        String oldCiphertext = PfLoginHelper.getHashPsw(algorithmName, oldPlaintext, hashIterations, userInfo.getForSalt());
+        String oldCiphertext = PfLoginHelper.getHashPsw(algorithmName, oldPlaintext, hashIterations, userInfo.getSalt());
         if (!StringUtils.equals(userInfo.getPassword(), oldCiphertext)) {
             // 原密码错误异常
             throw new BizRuntimeException(PfUserConstant.OLD_PASSWORD_ERROR, PfUserConstant.OLD_PASSWORD_ERROR_MSG);
@@ -193,10 +193,34 @@ public class PfUserServiceImpl implements PfUserService {
         String newPlaintext = PfLoginHelper.getPlaintext(privateKey, dto.getNewPassword());
         String salt = PfLoginHelper.getSalt(dto.getUserName());
         // 设置盐值
-        user.setForSalt(salt);
+        user.setSalt(salt);
         // 加密密码
         user.setPassword(PfLoginHelper.getHashPsw(algorithmName, newPlaintext, hashIterations, salt));
         return pfUserDao.updatePsw(user) == 1 ? true : false;
+    }
+
+    @Override
+    public String genEncriptPwd(String rawPwd, String salt) {
+        if (StringUtils.isBlank(salt)) {
+            salt = "";
+        }
+        PasswordEncoder passwordEncoder = new StandardPasswordEncoder(salt);
+        String encodedPassword = passwordEncoder.encode(rawPwd);
+        return encodedPassword;
+    }
+
+    public static void main(String[] args) {
+        String salt = UUID.randomUUID().toString().replace("-", "");
+        System.out.println(salt + ", " + genEncriptPwd1("ytb316", salt));
+    }
+
+    public static String genEncriptPwd1(String rawPwd, String salt) {
+        if (StringUtils.isBlank(salt)) {
+            salt = "";
+        }
+        PasswordEncoder passwordEncoder = new StandardPasswordEncoder(salt);
+        String encodedPassword = passwordEncoder.encode(rawPwd);
+        return encodedPassword;
     }
 
     /**
@@ -206,7 +230,7 @@ public class PfUserServiceImpl implements PfUserService {
     public boolean logout() {
         Subject subject = SecurityUtils.getSubject();
         if (subject.isAuthenticated()) {
-            LoggerUtil.debug(LOGGER, "登出用户：userName={0}", ((UserInfo) subject.getPrincipal()).getUserName());
+            LoggerUtil.debug(LOGGER, "登出用户：userName={0}", ((UserInfo) subject.getPrincipal()).getUsername());
             // session 会销毁，在SessionListener监听session销毁，清理权限缓存
             subject.logout();
         }

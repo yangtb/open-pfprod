@@ -1,19 +1,10 @@
 package com.sm.pfprod.service.user;
 
-import com.alibaba.fastjson.JSON;
-import com.sm.pfprod.model.dto.common.User;
-import com.sm.pfprod.model.vo.menu.PfMenuVo;
 import com.sm.pfprod.service.TestBase;
-import com.sm.pfprod.service.user.menu.PfMenuService;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.List;
 
 public class TestPfMenuService extends TestBase {
 
-    private PfMenuService pfMenuService;
+  /*  private PfMenuService pfMenuService;
 
     @Before
     public void before() {
@@ -40,5 +31,5 @@ public class TestPfMenuService extends TestBase {
         if (null != pfMenuService) {
             pfMenuService = null;
         }
-    }
+    }*/
 }

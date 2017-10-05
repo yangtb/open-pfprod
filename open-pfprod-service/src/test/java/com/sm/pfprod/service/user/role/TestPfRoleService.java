@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class TestPfRoleService extends TestBase {
 
-    private PfRoleService pfRoleService;
+   /* private PfRoleService pfRoleService;
 
     @Before
     public void before() {
@@ -31,5 +31,5 @@ public class TestPfRoleService extends TestBase {
         if (null != pfRoleService) {
             pfRoleService = null;
         }
-    }
+    }*/
 }

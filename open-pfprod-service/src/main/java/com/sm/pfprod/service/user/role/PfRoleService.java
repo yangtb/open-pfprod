@@ -1,58 +1,101 @@
 package com.sm.pfprod.service.user.role;
 
-import com.github.pagehelper.PageInfo;
-import com.sm.pfprod.model.dto.user.common.PfCommonDto;
 import com.sm.pfprod.model.dto.user.role.PfRoleDto;
-import com.sm.pfprod.model.entity.SysAuthority;
 import com.sm.pfprod.model.entity.SysRole;
-import com.sm.pfprod.model.entity.UserRole;
+import com.sm.pfprod.model.entity.SysRoleMenu;
 import com.sm.pfprod.model.vo.role.PfRoleVo;
 
 import java.util.List;
 
 /**
- * 用户角色
+ * @ClassName: PfRoleService
+ * @Description: 用户角色
+ * @Author yangtongbin
+ * @Date 2017/9/9 15:52
  */
 public interface PfRoleService {
 
     /**
      * 获取角色列表
+     *
      * @return
      */
-    PageInfo<PfRoleVo> listRoles(PfCommonDto dto);
+    List<PfRoleVo> listRoles(PfRoleDto dto);
 
     /**
-     * 获取用户角色
-     * @param userId
+     * 查询角色列表
+     *
      * @return
      */
-    List<UserRole> listRole(Long userId);
+    List<PfRoleVo> list();
+
+    /**
+     * 获取用户所有角色
+     *
+     * @param userId 用户id
+     * @return
+     */
+    List<PfRoleVo> listUserRole(Long userId);
+
+    /**
+     * 角色总数
+     */
+    Long countRoles(PfRoleDto dto);
 
     /**
      * 新增菜单
+     *
      * @param dto
      * @return
      */
-    boolean saveRole(PfRoleDto dto);
+    boolean addRole(SysRole dto);
+
+    /**
+     * 判断是否存在该角色
+     *
+     * @param roleName 角色名称
+     * @return
+     */
+    boolean isExistRole(String roleName);
 
     /**
      * 修改菜单
+     *
      * @param dto
      * @return
      */
-    boolean updateRole(PfRoleDto dto);
+    boolean editRole(SysRole dto);
+
+    /**
+     * 删除角色所有菜单
+     *
+     * @param roleId 角色ID
+     * @return
+     */
+    boolean delRoleMenu(Long roleId);
+
+    /**
+     * 保存角色菜单
+     *
+     * @param dto
+     * @return
+     */
+    boolean saveRoleMenu(List<SysRoleMenu> dto);
 
     /**
      * 删除菜单
-     * @param roleId
+     *
+     * @param roles
      * @return
      */
-    boolean delRole(Long roleId);
+    boolean delRole(List<Long> roles);
 
     /**
-     * 获取用户有权限url
-     * @param userId
+     * 作废/恢复角色
+     *
+     * @param roles
      * @return
      */
-    List<SysAuthority> selectAuthority(Long userId);
+    boolean cancelRole(List<SysRole> roles);
+
 }

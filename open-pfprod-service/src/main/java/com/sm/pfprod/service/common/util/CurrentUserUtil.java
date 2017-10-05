@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.log.LoggerUtil;
-import com.sm.pfprod.model.dto.common.User;
+import com.sm.pfprod.model.dto.common.UserDto;
 import com.sm.pfprod.model.vo.common.auth.UserAuthVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,12 +44,12 @@ public class CurrentUserUtil {
      * @param request
      * @return
      */
-    public static User currentUser(HttpServletRequest request) {
-        User user = null;
+    public static UserDto currentUser(HttpServletRequest request) {
+        UserDto user = null;
         try {
-            user = (User) request.getSession().getAttribute(AuthConstant.CURRENT_USER);
+            user = (UserDto) request.getSession().getAttribute(AuthConstant.CURRENT_USER);
             if (null == user || null == user.getUserId()) {
-                return new User();
+                return new UserDto();
             }
         } catch (Exception e) {
             LoggerUtil.info(LOGGER, "currentUser; key:{0} >> error: {1}", AuthConstant.CURRENT_USER, e.getMessage());
@@ -61,7 +61,7 @@ public class CurrentUserUtil {
      * 动态获取当前的用户Id
      */
     public static Long getCurrentUserId(HttpServletRequest request) {
-        User user = new User();
+        UserDto user = new UserDto();
         if (null == user || null == user.getUserId()) {
             throw new BizRuntimeException(ErrorCode.ERROR_NET_150001, "session_user为空，访问被拒绝");
         }

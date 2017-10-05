@@ -30,8 +30,9 @@ public class PfLoginHelper {
             Assert.isTrue(StringUtils.isNotEmpty(privateKey), ErrorCode.ERROR_PARAM_170002, MessageFormat.format(ErrorMessage.MESSAGE_PARAM_170002, "privateKey"));
             Assert.isTrue(StringUtils.isNotEmpty(password), ErrorCode.ERROR_PARAM_170002, MessageFormat.format(ErrorMessage.MESSAGE_PARAM_170002, "password"));
             /* 获取明文密码 */
-            byte[] res = RSAEncrypt.decrypt(RSAEncrypt.loadPrivateKeyByStr(privateKey), Base64.decodeBase64(password));
-            return new String(res);
+            //byte[] res = RSAEncrypt.decrypt(RSAEncrypt.loadPrivateKeyByStr(privateKey), Base64.decodeBase64(password));
+            //return new String(res);
+            return null;
         } catch (BizRuntimeException e) {
             throw new BizRuntimeException(e.getErrorCode(), e.getMessage());
         } catch (Exception e) {
