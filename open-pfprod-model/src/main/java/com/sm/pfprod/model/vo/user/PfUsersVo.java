@@ -14,9 +14,10 @@ public class PfUsersVo implements Serializable {
     @JSONField(name = "user_name")
     private String      userName;       // 用户名
     private String      email;          // 电邮
+    @JSONField(name = "phone_no")
     private String      phoneNo;        // 联系电话
-    @JSONField(name = "is_block")
-    private String      isBlock;        // 是否锁定
+    private int         sex;            // 性别
+    private boolean     enabled;        // 是否锁定
     @JSONField(name = "is_first")
     private int         isFirst;        // 是否首次为0, 否则为1
     @JSONField(name = "role_type")
@@ -63,12 +64,12 @@ public class PfUsersVo implements Serializable {
         this.phoneNo = phoneNo;
     }
 
-    public String getIsBlock() {
-        return isBlock;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setIsBlock(String isBlock) {
-        this.isBlock = isBlock;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public int getIsFirst() {
@@ -125,5 +126,13 @@ public class PfUsersVo implements Serializable {
 
     public void setGmtCreate(Date gmtCreate) {
         this.gmtCreate = gmtCreate;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 }

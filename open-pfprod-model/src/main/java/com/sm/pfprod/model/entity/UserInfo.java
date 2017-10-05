@@ -11,16 +11,17 @@ public class UserInfo implements Serializable {
     private static final long serialVersionUID = 8710243137962838732L;
 
     private Long        userId;         // 管理员ID
-    private String      userName;       // 管理员用户名
+    private String      username;       // 管理员用户名
     private String      password;       // 密码
-    private String      forSalt;        // 密码盐值
+    private String      salt;           // 密码盐值
     private String      email;          // 电邮
     private String      phoneNo;        // 联系电话
-    private String      isBlock;        // 是否锁定
+    private boolean     enabled;        // 是否启用,1启用 0停用
     private int         isFirst;        // 是否首次为0, 否则为1
     private String      roleType;       // 用户角色类型：1超级管理员，2普通管理员
     private String      roleDesc;       // 管理员角色描述
     private String      realName;       // 真实姓名
+    private int         sex;            // 性别
     private String      remark;         // 备注
     private Date        lastLoginTime;  // 最后登录时间
     private String      isDeleted;      // 删除标示，N未删除 Y-已删除
@@ -35,12 +36,12 @@ public class UserInfo implements Serializable {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -51,12 +52,12 @@ public class UserInfo implements Serializable {
         this.password = password;
     }
 
-    public String getForSalt() {
-        return forSalt;
+    public String getSalt() {
+        return salt;
     }
 
-    public void setForSalt(String forSalt) {
-        this.forSalt = forSalt;
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getEmail() {
@@ -75,12 +76,12 @@ public class UserInfo implements Serializable {
         this.phoneNo = phoneNo;
     }
 
-    public String getIsBlock() {
-        return isBlock;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setIsBlock(String isBlock) {
-        this.isBlock = isBlock;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public int getIsFirst() {
@@ -113,6 +114,14 @@ public class UserInfo implements Serializable {
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 
     public String getRemark() {

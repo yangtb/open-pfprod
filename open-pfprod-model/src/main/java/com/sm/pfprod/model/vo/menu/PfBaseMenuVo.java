@@ -1,14 +1,11 @@
 package com.sm.pfprod.model.vo.menu;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
 import java.io.Serializable;
 
 public class PfBaseMenuVo implements Serializable {
 
     private static final long serialVersionUID = 3193336837884976266L;
 
-    @JSONField(name = "menu_id")
     private Long            menuId;     // 菜单ID
     private String          url;        // 菜单url
     private String          name;       // 菜单名称

@@ -10,36 +10,36 @@ public class RegisterDto implements Serializable {
     private static final long serialVersionUID = -6354572733503100572L;
 
     @JSONField(name = "user_id")
-    private String      userId;       // 用户id
+    private Long        userId;         // 用户id
     @JSONField(name = "user_name")
-    private String      userName;       // 用户名
+    private String      username;       // 用户名
     private String      password;       // 密码
     private String      email;          // 电邮
     @JSONField(name = "phone_no")
     private String      phoneNo;        // 联系电话
     @JSONField(name = "role_type")
     private String      roleType;       // 用户角色类型：1超级管理员，2普通管理员
-    @JSONField(name = "is_block")
-    private String      isBlock;        // 是否锁定
+    private boolean     enabled;        // 是否锁定
     @JSONField(name = "real_name")
     private String      realName;       // 真实姓名
+    private int         sex;            // 性别
     private String      remark;         // 备注
     private List<Long>  roles;          // 用户角色
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -74,12 +74,12 @@ public class RegisterDto implements Serializable {
         this.roleType = roleType;
     }
 
-    public String getIsBlock() {
-        return isBlock;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setIsBlock(String isBlock) {
-        this.isBlock = isBlock;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getRealName() {
@@ -88,6 +88,14 @@ public class RegisterDto implements Serializable {
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 
     public String getRemark() {
