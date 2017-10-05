@@ -12,8 +12,8 @@
     <modules>
         <module>open-pfprod-common</module>
         <module>open-pfprod-dal</module>
-        <module>open-pfprod-facade</module>
         <module>open-pfprod-integration</module>
+        <module>open-pfprod-facade</module>
         <module>open-pfprod-model</module>
         <module>open-pfprod-service</module>
         <module>open-pfprod-web</module>
@@ -37,7 +37,13 @@
         <fastjson.version>1.2.7.sec01</fastjson.version>
 
         <!-- 第三方jar的版本管理 -->
-        <spring.version>4.0.0.RELEASE</spring.version>
+        <spring.version>4.3.7.RELEASE</spring.version>
+        <spring.security.version>4.2.2.RELEASE</spring.security.version>
+        <spring.security.core.tiger>2.0.8.RELEASE</spring.security.core.tiger>
+        <spring.oauth2.version>2.1.0.RELEASE</spring.oauth2.version>
+        <spring.boot.version>1.5.2.RELEASE</spring.boot.version>
+        <spring.rabbit.version>1.7.1.RELEASE</spring.rabbit.version>
+        <spring.data.redis.version>1.8.1.RELEASE</spring.data.redis.version>
         <servlet.api.version>3.1.0</servlet.api.version>
         <commons.lang.version>2.6</commons.lang.version>
         <slf4j.api.version>1.7.21</slf4j.api.version>
@@ -57,21 +63,9 @@
         <ehcache.version>2.6.11</ehcache.version>
         <shiro.version>1.3.2</shiro.version>
         <pagehelper.version>4.2.1</pagehelper.version>
+        <freemarker.version>2.3.23</freemarker.version>
     </properties>
-    <!--
-    <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-            <name>Release Repository</name>
-            <url>http://121.43.186.82:8081/nexus/content/repositories/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <name>Snapshot Repository</name>
-            <url>http://121.43.186.82:8081/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
-    -->
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -221,6 +215,61 @@
                 <artifactId>spring-oxm</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-crypto</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-taglibs</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-acl</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core-tiger</artifactId>
+                <version>${spring.security.core.tiger}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${spring.oauth2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-cloud-connectors</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.amqp</groupId>
+                <artifactId>spring-rabbit</artifactId>
+                <version>${spring.rabbit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${spring.data.redis.version}</version>
+            </dependency>
             <!-- Servlet -->
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -264,6 +313,25 @@
                 <artifactId>pagehelper</artifactId>
                 <version>${pagehelper.version}</version>
             </dependency>
+
+            <!-- velocity -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-tools</artifactId>
+                <version>${velocity.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+
             <!-- 单元测试 -->
             <dependency>
                 <groupId>junit</groupId>
