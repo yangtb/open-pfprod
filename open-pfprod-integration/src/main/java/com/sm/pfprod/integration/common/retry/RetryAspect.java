@@ -16,7 +16,7 @@ public class RetryAspect {
 	private static final Logger LOGGER = LoggerFactory.getLogger("monitor");
 
 	/** 尝试执行次数 */
-	@Value("#{configProperties['integration.retry.num']}")
+	@Value(value = "${integration.retry.num}")
 	private int defaultRetryTimes = 3;
 
 	@Around("@annotation(retry)")
