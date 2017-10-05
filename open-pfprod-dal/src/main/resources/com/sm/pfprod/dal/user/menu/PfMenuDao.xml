@@ -2,59 +2,95 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sm.pfprod.dal.user.menu.PfMenuDao">
 
-    <sql id="Base_Column_List" >
+    <sql id="Base_Column_List">
         sm.menu_id ,sm.level ,sm.url , sm.name ,sm.parent_id , sm.sort ,
         sm.disable , sm.is_deleted , sm.gmt_create , sm.gmt_modify , sm.img
     </sql>
 
+    <resultMap id="resMenuResult" type="com.sm.pfprod.model.vo.menu.PfMenuVo">
+        <result column="parent_menu_id" property="parentMenuId"/>
+        <result column="parent_url" property="parentUrl"/>
+        <result column="parent_menu_name" property="parentMenuName"/>
+        <result column="parent_img" property="parentImg"/>
+        <collection property="groupList" ofType="com.sm.pfprod.model.vo.menu.PfBaseMenuVo" javaType="java.util.List">
+            <result column="menu_id" property="menuId" />
+            <result column="url" property="url" />
+            <result column="name" property="name" />
+            <result column="img" property="img" />
+        </collection>
+    </resultMap>
+
     <!-- 获取用户所有菜单 -->
-    <select id="listMyMenus" resultType="com.sm.pfprod.model.entity.SysMenu">
+    <select id="listMyMenus" resultMap="resMenuResult">
         SELECT
-            <include refid="Base_Column_List"/>
-        FROM user_role ur
+             sm.menu_id, sm.url, sm.name, sm.img,
+             pa.menu_id as parent_menu_id, pa.url as parent_url, pa.name as parent_menu_name, pa.img as parent_img
+        FROM
+            user_role ur
         INNER JOIN sys_role_menu srm ON srm.role_id = ur.role_id
-        INNER JOIN sys_menu sm on sm.menu_id = srm.menu_id
+        INNER JOIN sys_menu sm ON sm.menu_id = srm.menu_id and parent_id != 0
+        INNER JOIN sys_menu pa ON sm.parent_id = pa.menu_id
         WHERE
             ur.user_id = #{userId}
-        group by sm.menu_id
+        and sm.disable = 0
+        GROUP BY
+            sm.menu_id
     </select>
 
     <!-- 获取菜单 -->
-    <select id="listMenus" parameterType="com.sm.pfprod.model.dto.user.menu.MenuDto" resultType="com.sm.pfprod.model.entity.SysMenu">
-        SELECT
-          <include refid="Base_Column_List"/>
-        FROM
-          sys_menu sm
-        WHERE
-          sm.is_deleted = 'N'
-        <choose>
-            <when test="parent_id != null">
-                AND sm.parent_id = #{parentId}
-            </when>
-            <otherwise>
-                AND sm.parent_id is null
-            </otherwise>
-        </choose>
-    </select>
-
-    <!-- 获取系统所有菜单 -->
-    <select id="listSysMenus" resultType="com.sm.pfprod.model.entity.SysMenu">
+    <select id="listMenus" parameterType="com.sm.pfprod.model.dto.user.menu.MenuDto"
+            resultType="com.sm.pfprod.model.entity.SysMenu">
         SELECT
         <include refid="Base_Column_List"/>
         FROM
-          sys_menu sm
+        sys_menu sm
         WHERE
-          sm.is_deleted = 'N'
+        sm.is_deleted = 'N'
+        <if test="name != null and name != ''">
+            AND sm.name LIKE concat(#{name},'%')
+        </if>
+        <if test="level != null and level != 0">
+            AND sm.level = #{level}
+        </if>
+        <if test="disable != null">
+            AND sm.disable = #{disable}
+        </if>
+        ORDER BY menu_id
+        limit #{offset}, #{limit}
+    </select>
+
+    <!-- 菜单总数 -->
+    <select id="countMenus" parameterType="com.sm.pfprod.model.dto.user.menu.MenuDto" resultType="java.lang.Long">
+        SELECT
+        COUNT(1)
+        FROM
+        sys_menu sm
+        WHERE
+        sm.is_deleted = 'N'
+        <if test="name != null and name != ''">
+            AND sm.name LIKE concat(#{name},'%')
+        </if>
+        <if test="level != null and level != 0">
+            AND sm.level = #{level}
+        </if>
+        <if test="disable != null">
+            AND sm.disable = #{disable}
+        </if>
+    </select>
+
+    <!-- 判断是否存在该菜单 -->
+    <select id="isExistMenu" resultType="java.lang.Boolean">
+        SELECT COUNT(1) FROM sys_menu WHERE menu_id = #{menuId}
     </select>
 
     <!-- 新增菜单 -->
     <insert id="addMenu" parameterType="com.sm.pfprod.model.entity.SysMenu">
         INSERT INTO sys_menu(
-          level , url , name , parent_id , sort ,
+          menu_id, level , url , name , parent_id , sort ,
           disable , is_deleted , gmt_create , gmt_modify ,img
         )
         VALUES(
-          #{level} , #{url} , #{name} , #{parentId} , #{sort} ,
+          #{menuId}, #{level} , #{url} , #{name} , #{parentId} , #{sort} ,
           0 , 'N', NOW() , NOW() , #{img}
         )
     </insert>
@@ -62,22 +98,52 @@
     <!-- 编辑菜单 -->
     <update id="updateMenu" parameterType="com.sm.pfprod.model.entity.SysMenu">
         UPDATE sys_menu
-        SET level = '1' ,
+        SET level = #{level} ,
             url = #{url} ,
             name = #{name} ,
             parent_id = #{parentId} ,
             sort = #{sort} ,
             disable = #{disable} ,
+            <if test="isDeleted != null and isDeleted != ''">
             is_deleted = #{isDeleted} ,
+            </if>
             gmt_modify = NOW() ,
             img = #{img}
         WHERE
             menu_id = ${menuId}
     </update>
 
-    <!-- 删除菜单 -->
-    <delete id="delMenu">
-        UPDATE sys_menu SET is_deleted = 'Y' WHERE menu_id = ${menuId}
-    </delete>
+    <!-- 修改菜单状态 -->
+    <update id="changeStatusMenu" parameterType="com.sm.pfprod.model.dto.user.menu.MenuDto">
+        UPDATE sys_menu SET disable=#{disable} WHERE menu_id = #{menuId}
+    </update>
+
+    <!-- 获取系统所有菜单【tree】 -->
+    <select id="listSysMenus" resultType="com.sm.pfprod.model.vo.menu.PfMenuZtreeVo">
+        SELECT
+            sm.menu_id as id,
+            sm.name as name ,
+            sm.parent_id as pId,
+            IF(sm.parent_id = 0 , TRUE , FALSE) open
+        FROM
+            sys_menu sm
+        WHERE
+            sm.is_deleted = 'N'
+        AND sm.disable = 0
+    </select>
+
+    <!-- 获取角色拥有菜单 -->
+    <select id="listMenuRoleTree" resultType="com.sm.pfprod.model.vo.menu.PfMenuZtreeVo">
+        SELECT
+             sm.menu_id AS id ,
+             sm.parent_id AS pId ,
+             IF(srm.role_menu_id is null , FALSE , TRUE) checked
+        FROM
+            sys_menu sm
+        LEFT JOIN sys_role_menu srm ON srm.menu_id = sm.menu_id and srm.role_id = #{roleId}
+        WHERE
+             sm.is_deleted = 'N'
+        AND sm.disable = 0;
+    </select>
 
 </mapper>

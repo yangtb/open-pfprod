@@ -12,7 +12,7 @@
     </select>
 
     <!-- 新增角色 -->
-    <insert id="saveRole" parameterType="com.sm.pfprod.model.entity.SysRole">
+    <insert id="addRole" parameterType="com.sm.pfprod.model.entity.SysRole">
         INSERT INTO sys_role(
             <include refid="Base_Column_List"/>
         )
@@ -43,9 +43,34 @@
     </update>
 
     <!-- 删除角色 -->
-    <delete id="delRole">
-        UPDATE sys_role SET is_deleted = 'Y' WHERE role_id = #{roleId}
+    <delete id="delRole" parameterType="java.util.List">
+        UPDATE sys_role SET is_deleted = 'Y'
+        WHERE
+        role_id in (
+        <foreach collection="list" item="item" separator="," >
+            #{item.roleId}
+        </foreach>
+        )
     </delete>
+
+    <!-- 删除角色拥有菜单 -->
+    <delete id="delRoleMenu">
+        delete from sys_role_menu where role_id = #{roleId}
+    </delete>
+
+    <!-- 作废/恢复角色 -->
+    <update id="cancelRole">
+        UPDATE sys_role SET state = #{state} WHERE role_id = #{roleId};
+    </update>
+
+    <!-- 新增角色拥有菜单 -->
+    <insert id="saveRoleMenu" parameterType="java.util.List">
+        INSERT INTO sys_role_menu(role_id, menu_id, gmt_create, gmt_modify)
+        VALUES
+        <foreach collection="list" item="item" separator="," >
+            (#{item.roleId}, #{item.menuId}, NOW(), NOW())
+        </foreach>
+    </insert>
 
     <!-- 获取用户有权限url -->
     <select id="selectAuthority" resultType="com.sm.pfprod.model.entity.SysAuthority">
@@ -63,26 +88,63 @@
             sa.authority_id
     </select>
 
-    <resultMap id="resList" type="com.sm.pfprod.model.vo.role.PfRoleVo">
-        <result column="role_id" property="roleId"/>
-        <result column="name" property="name"/>
-        <result column="resume" property="resume"/>
-        <result column="creator_id" property="creatorId"/>
-        <result column="gmt_create" property="gmtCreate"/>
-        <result column="dict_name" property="roleId"/>
-        <collection property="menuIdList" ofType="long" javaType="java.util.List">
-            <result column="menu_id" javaType="Long"/>
-        </collection>
-    </resultMap>
-
-    <!-- 获取所有角色 -->
-    <select id="listRoles" resultMap="resList">
+    <select id="list" resultType="com.sm.pfprod.model.vo.role.PfRoleVo">
         SELECT
-            sr.role_id, sr.name , sr.resume , sr.state , sr.creator_id , sr.gmt_create, srm.menu_id
+            sr.role_id, sr.name
         FROM
             sys_role sr
-        LEFT JOIN sys_role_menu srm ON sr.role_id = srm.role_id
         WHERE
             sr.is_deleted = 'N'
+        AND sr.state = 0
     </select>
+
+    <!--获取用户角色 -->
+    <select id="listUserRole" resultType="com.sm.pfprod.model.vo.role.PfRoleVo">
+        SELECT
+            sr.role_id ,
+            sr.name ,
+            if(ur.user_id is null, false, true) as checked
+        FROM
+            sys_role sr
+        LEFT JOIN user_role ur ON sr.role_id = ur.role_id AND ur.user_id = #{userId} AND ur.is_deleted = 'N'
+        WHERE
+            sr.is_deleted = 'N'
+        AND sr.state = 0
+        ORDER BY sr.role_id
+    </select>
+
+    <!-- 获取所有角色 -->
+    <select id="listRoles" parameterType="com.sm.pfprod.model.dto.user.role.PfRoleDto"
+            resultType="com.sm.pfprod.model.vo.role.PfRoleVo">
+        SELECT
+            sr.role_id, sr.name , sr.resume , sr.state , sr.creator_id , sr.gmt_create
+        FROM
+            sys_role sr
+        WHERE
+            sr.is_deleted = 'N'
+        <if test="conditionValue != null and conditionValue !=''">
+            AND sr.name LIKE concat(#{conditionValue},'%')
+        </if>
+        AND sr.state = #{state}
+        ORDER BY sr.role_id
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="countRoles" parameterType="com.sm.pfprod.model.dto.user.role.PfRoleDto" resultType="java.lang.Long">
+        SELECT
+            count(1)
+        FROM
+            sys_role sr
+        WHERE
+            sr.is_deleted = 'N'
+        <if test="conditionValue != null and conditionValue !=''">
+            AND sr.name LIKE concat(#{conditionValue},'%')
+        </if>
+    </select>
+
+    <!-- 判断是否存在该角色 -->
+    <select id="isExistRole" resultType="java.lang.Boolean">
+        SELECT COUNT(1) FROM sys_role WHERE name = #{roleName}
+    </select>
+
 </mapper>
