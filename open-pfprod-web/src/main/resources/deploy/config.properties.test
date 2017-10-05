@@ -1,14 +1,8 @@
 app_name=pfprod
 
 log_level=DEBUG
-
 loggingRoot=logs
-
-run_mode=DEV
 
 jdbc.url=jdbc:mysql://localhost:3306/med?zeroDateTimeBehavior=convertToNull&amp;allowMultiQueries=true
 jdbc.username=root
 jdbc.password=Yangtb0424
-
-pfprod_staticServer=http://127.0.0.1:8080
-pfprod_basePath=http://127.0.0.1:8080
