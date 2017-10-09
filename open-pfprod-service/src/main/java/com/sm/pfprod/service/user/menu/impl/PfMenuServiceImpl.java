@@ -5,12 +5,15 @@ import com.sm.pfprod.model.dto.common.UserDto;
 import com.sm.pfprod.model.dto.user.menu.MenuDto;
 import com.sm.pfprod.model.entity.SysMenu;
 import com.sm.pfprod.model.enums.AdminRoleType;
+import com.sm.pfprod.model.vo.menu.PfBaseMenuVo;
 import com.sm.pfprod.model.vo.menu.PfMenuVo;
 import com.sm.pfprod.model.vo.menu.PfMenuZtreeVo;
 import com.sm.pfprod.service.user.menu.PfMenuService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("pfMenuService")
@@ -61,7 +64,37 @@ public class PfMenuServiceImpl implements PfMenuService {
 
     @Override
     public List<PfMenuVo> listMyMenus(Long userId) {
-        return pfMenuDao.listMyMenus(userId);
+        List<SysMenu> menus = pfMenuDao.listMyMenus(userId);
+        List<PfMenuVo> parentMenuList = new ArrayList<>();
+        PfMenuVo pfMenuVo;
+        for (SysMenu sysMenu : menus) {
+            pfMenuVo = new PfMenuVo();
+            if (sysMenu.getLevel() == 1) {
+                pfMenuVo.setParentMenuId(sysMenu.getMenuId());
+                pfMenuVo.setParentMenuName(sysMenu.getName());
+                pfMenuVo.setParentImg(sysMenu.getImg());
+                pfMenuVo.setParentUrl(sysMenu.getUrl());
+                parentMenuList.add(pfMenuVo);
+            }
+        }
+
+        List<PfBaseMenuVo> groupList;
+        PfBaseMenuVo pfBaseMenuVo;
+        for (PfMenuVo parentMenuVo : parentMenuList) {
+            groupList = new ArrayList<>();
+            for (SysMenu sysMenu : menus) {
+                if (sysMenu.getParentId() == parentMenuVo.getParentMenuId()) {
+                    pfBaseMenuVo = new PfBaseMenuVo();
+                    pfBaseMenuVo.setMenuId(sysMenu.getMenuId());
+                    pfBaseMenuVo.setName(sysMenu.getName());
+                    pfBaseMenuVo.setUrl(sysMenu.getUrl());
+                    pfBaseMenuVo.setImg(sysMenu.getImg());
+                    groupList.add(pfBaseMenuVo);
+                }
+            }
+            parentMenuVo.setGroupList(groupList);
+        }
+        return parentMenuList;
     }
 
    /* @Override
@@ -74,9 +107,6 @@ public class PfMenuServiceImpl implements PfMenuService {
             sysMenus =
         }
     }*/
-
-
-
 
 
 }

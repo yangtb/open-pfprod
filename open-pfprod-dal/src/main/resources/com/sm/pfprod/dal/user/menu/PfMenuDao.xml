@@ -7,29 +7,14 @@
         sm.disable , sm.is_deleted , sm.gmt_create , sm.gmt_modify , sm.img
     </sql>
 
-    <resultMap id="resMenuResult" type="com.sm.pfprod.model.vo.menu.PfMenuVo">
-        <result column="parent_menu_id" property="parentMenuId"/>
-        <result column="parent_url" property="parentUrl"/>
-        <result column="parent_menu_name" property="parentMenuName"/>
-        <result column="parent_img" property="parentImg"/>
-        <collection property="groupList" ofType="com.sm.pfprod.model.vo.menu.PfBaseMenuVo" javaType="java.util.List">
-            <result column="menu_id" property="menuId" />
-            <result column="url" property="url" />
-            <result column="name" property="name" />
-            <result column="img" property="img" />
-        </collection>
-    </resultMap>
-
     <!-- 获取用户所有菜单 -->
-    <select id="listMyMenus" resultMap="resMenuResult">
+    <select id="listMyMenus" resultType="com.sm.pfprod.model.entity.SysMenu">
         SELECT
-             sm.menu_id, sm.url, sm.name, sm.img,
-             pa.menu_id as parent_menu_id, pa.url as parent_url, pa.name as parent_menu_name, pa.img as parent_img
+            sm.menu_id, sm.url, sm.name, sm.level, sm.img, sm.parent_id
         FROM
             user_role ur
         INNER JOIN sys_role_menu srm ON srm.role_id = ur.role_id
-        INNER JOIN sys_menu sm ON sm.menu_id = srm.menu_id and parent_id != 0
-        INNER JOIN sys_menu pa ON sm.parent_id = pa.menu_id
+        INNER JOIN sys_menu sm ON sm.menu_id = srm.menu_id
         WHERE
             ur.user_id = #{userId}
         and sm.disable = 0

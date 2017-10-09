@@ -74,7 +74,7 @@
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/ztree/js/jquery.ztree.all.min.js"></script>
-<script src="${contextPath}/public/biz/js/RoleController.js"></script>
+<script src="${contextPath}/public/biz/js/roleController.js"></script>
 
 <script type="text/html" id="stateTpl">
     {{#  if(d.state == 0){ }}
@@ -86,7 +86,7 @@
 
 <script type="text/html" id="viewTreeBar">
     <a class="layui-btn layui-btn-mini" lay-event="editAuth">
-        <i class="iconfont icon-look"></i> 查看权限
+        <i class="iconfont icon-quanxian"></i> 查看权限
     </a>
 </script>
 

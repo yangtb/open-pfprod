@@ -1,4 +1,4 @@
-/** kit_admin-v1.0.4 MIT License By http://kit/zhengjinfan.cn */
+/** kit_admin-v1.0.9 MIT License By http://kit/zhengjinfan.cn e-mail:zheng_jinfan@126.com */
 ;layui.define(function (n) {
     !function (e, t) {
         "function" == typeof define && define.amd ? define(t) : "object" == typeof n ? module.exports = t() : e.NProgress = t()

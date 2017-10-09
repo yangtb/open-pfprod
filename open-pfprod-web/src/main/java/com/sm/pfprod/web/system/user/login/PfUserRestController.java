@@ -75,7 +75,7 @@ public class PfUserRestController extends BaseController {
             keyPair = rsaKeyPairQueue.takeQueue(request);
             model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
         } catch (InterruptedException e) {
-            logger.error("新智用户时，rsa公私钥队列相关操作异常", e);
+            logger.error("新增用户时，rsa公私钥队列相关操作异常", e);
         }
         if (StringUtils.equals(formType, "edit")) {
             model.addAttribute("roles", pfRoleFacade.listUserRole(userId));

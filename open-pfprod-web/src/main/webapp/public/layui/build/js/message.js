@@ -1,4 +1,4 @@
-/** kit_admin-v1.0.4 MIT License By http://kit/zhengjinfan.cn */
+/** kit_admin-v1.0.9 MIT License By http://kit/zhengjinfan.cn e-mail:zheng_jinfan@126.com */
 ;layui.define(["jquery"], function (i) {
     var s = layui.jquery, e = (s(document), s("body")), a = {
         v: "1.0.0", times: 1, _message: function () {

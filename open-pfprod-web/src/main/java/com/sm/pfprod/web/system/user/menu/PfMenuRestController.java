@@ -63,7 +63,7 @@ public class PfMenuRestController extends BaseController {
     public ResultObject addMenu(@RequestBody SysMenu dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getLevel() != null, "level");
-        Assert.isTrue(StringUtils.isNotBlank(dto.getUrl()), "url");
+        //Assert.isTrue(StringUtils.isNotBlank(dto.getUrl()), "url");
         Assert.isTrue(StringUtils.isNotBlank(dto.getName()), "name");
 
         return ResultObject.create("addMenu", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
@@ -78,7 +78,7 @@ public class PfMenuRestController extends BaseController {
     public ResultObject updateMenu(@RequestBody SysMenu dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getLevel() != null, "level");
-        Assert.isTrue(StringUtils.isNotBlank(dto.getUrl()), "url");
+        //Assert.isTrue(StringUtils.isNotBlank(dto.getUrl()), "url");
         Assert.isTrue(StringUtils.isNotBlank(dto.getName()), "name");
 
         return ResultObject.create("updateMenu", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,

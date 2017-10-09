@@ -1,6 +1,5 @@
 package com.sm.pfprod.web.system.home;
 
-import com.alibaba.fastjson.JSON;
 import com.sm.pfprod.facade.menu.PfMenuFacade;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.system.BaseController;

@@ -54,9 +54,9 @@
 
         <div class="layui-form-item form-item-my">
             <div class="layui-inline">
-                <label class="layui-form-label">菜单url<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                <label class="layui-form-label">菜单url</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="url" lay-verify="required" autocomplete="off" class="layui-input">
+                    <input type="text" name="url" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
@@ -99,7 +99,7 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
-<script src="${contextPath}/public/biz/js/MenuFormController.js"></script>
+<script src="${contextPath}/public/biz/js/menuFormController.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 

@@ -4,25 +4,22 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>标价范围预测系统</title>
+    <title>开放平台管理系统</title>
     <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
-
-    <!--
-    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-    -->
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
     <link rel="stylesheet" href="${contextPath}/public/layui/build/css/app.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/layui/build/css/themes/default.css" media="all" id="skin"
+          kit-skin/>
 
     <script>
         var basePath = '${basePath}';
     </script>
 </head>
 
-<body>
-<div class=""></div>
+<body class="kit-theme">
 <div class="layui-layout layui-layout-admin kit-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo" style="font-size:18px">开放平台管理系统</div>
+        <div class="layui-logo" style="font-size:16px">开放平台管理系统</div>
         <div class="layui-logo kit-logo-mobile">K</div>
 
         <ul class="layui-nav layui-layout-left kit-nav">
@@ -42,15 +39,21 @@
         <ul class="layui-nav layui-layout-right kit-nav">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <i class="layui-icon">&#xe63f;</i> 皮肤</a>
+                    <i class="iconfont icon-skin1"></i> 皮肤</a>
                 </a>
                 <dl class="layui-nav-child skin">
-                    <dd><a href="javascript:;" data-skin="default" style="color:#393D49;"><i class="layui-icon">&#xe658;</i> 默认</a></dd>
-                    <dd><a href="javascript:;" data-skin="orange" style="color:#ff6700;"><i class="layui-icon">&#xe658;</i> 橘子橙</a></dd>
-                    <dd><a href="javascript:;" data-skin="green" style="color:#00a65a;"><i class="layui-icon">&#xe658;</i> 原谅绿</a></dd>
-                    <dd><a href="javascript:;" data-skin="pink" style="color:#FA6086;"><i class="layui-icon">&#xe658;</i> 少女粉</a></dd>
-                    <dd><a href="javascript:;" data-skin="blue.1" style="color:#00c0ef;"><i class="layui-icon">&#xe658;</i> 天空蓝</a></dd>
-                    <dd><a href="javascript:;" data-skin="red" style="color:#dd4b39;"><i class="layui-icon">&#xe658;</i> 枫叶红</a></dd>
+                    <dd><a href="javascript:;" data-skin="default" style="color:#393D49;"><i
+                            class="layui-icon">&#xe658;</i> 默认</a></dd>
+                    <dd><a href="javascript:;" data-skin="orange" style="color:#ff6700;"><i
+                            class="layui-icon">&#xe658;</i> 橘子橙</a></dd>
+                    <dd><a href="javascript:;" data-skin="green" style="color:#00a65a;"><i
+                            class="layui-icon">&#xe658;</i> 原谅绿</a></dd>
+                    <dd><a href="javascript:;" data-skin="pink" style="color:#FA6086;"><i
+                            class="layui-icon">&#xe658;</i> 少女粉</a></dd>
+                    <dd><a href="javascript:;" data-skin="blue.1" style="color:#00c0ef;"><i
+                            class="layui-icon">&#xe658;</i> 天空蓝</a></dd>
+                    <dd><a href="javascript:;" data-skin="red" style="color:#dd4b39;"><i class="layui-icon">&#xe658;</i>
+                        枫叶红</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item">
@@ -68,10 +71,11 @@
                     <img src="${basePath}/public/biz/img/0.jpg" class="layui-nav-img">$!username
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" kit-target data-options="{url:'${basePath}/menu/page',icon:'&#xe658;',title:'基本资料',id:'966'}">
-                        <span>基本资料</span></a></dd>
-                    <dd><a href="javascript:;"><i class="iconfont icon-my"></i> 基本资料</a></dd>
-                    <dd id="modifyPass"><a href="javascript:;"><i class="iconfont icon-modifyPass"></i> 修改密码</a></dd>
+                    <dd><a href="javascript:;" kit-target
+                           data-options="{url:'${basePath}/menu/page',icon:'icon-wodeziliao',title:'基本资料',id:'9999'}">
+                        <i class="iconfont icon-wodeziliao"></i><span> 基本资料</span></a></dd>
+                    <dd id="modifyPass"><a href="javascript:;" data-title="修改密码">
+                        <i class="iconfont icon-modifyPass"></i><span> 修改密码</span></a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item">
@@ -91,24 +95,27 @@
                         <i class="iconfont icon-home"></i><span> 首页</span>
                     </a>
                 </li>
-                #if($menus)
+                #if(!$menus.isEmpty())
                     #foreach($element in $menus)
                     <li class="layui-nav-item">
-                        <a href="javascript:;">
+                        <a href="javascript:;"
+                           #if($element.groupList.isEmpty())kit-target data-id='$!element.parentMenuId'
+                           data-icon='$!element.parentImg' data-title='$!element.parentMenuName'
+                           data-url='${contextPath}$!element.parentUrl'#end>
                             <i class="iconfont $!element.parentImg"></i>
                             <span> $!element.parentMenuName</span>
                         </a>
-                        #if($element.groupList)
+                        #if(!$element.groupList.isEmpty())
                             <dl class="layui-nav-child">
-                                #foreach($menu in $element.groupList)
-                                    <dd>
-                                        <a href="javascript:;" data-url="${contextPath}$!menu.url"
-                                           data-icon="$!menu.img"
-                                           data-title="$!menu.name" kit-target data-id='$!menu.menuId'>
-                                            <i class="iconfont $!menu.img"></i><span> $!menu.name</span>
-                                        </a>
-                                    </dd>
-                                #end
+                            #foreach($menu in $element.groupList)
+                                <dd>
+                                    <a href="javascript:;" data-url="${contextPath}$!menu.url"
+                                       data-icon="$!menu.img"
+                                       data-title="$!menu.name" kit-target data-id='$!menu.menuId'>
+                                        <i class="iconfont $!menu.img"></i><span> $!menu.name</span>
+                                    </a>
+                                </dd>
+                            #end
                             </dl>
                         #end
                     </li>
@@ -117,6 +124,7 @@
             </ul>
         </div>
     </div>
+
     <div class="layui-body" id="container">
         <!-- 内容主体区域 -->
         <div style="padding: 15px;">主体内容加载中,请稍等...</div>
@@ -131,7 +139,7 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
-<script src="${contextPath}/public/biz/js/IndexController.js"></script>
+<script src="${contextPath}/public/biz/js/indexController.js"></script>
 
 </body>
 

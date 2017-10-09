@@ -54,7 +54,7 @@
 <script src="${contextPath}/public/amazeui/js/amazeui.min.js"></script>
 <script src="${contextPath}/public/amazeui/js/app.js"></script>
 <script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
-<script src="${contextPath}/public/biz/js/LoginController.js"></script>
+<script src="${contextPath}/public/biz/js/loginController.js"></script>
 
 <script type="text/javascript">
     $(function () {
