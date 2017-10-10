@@ -35,8 +35,9 @@
             <div class="layui-inline">
                 <label class="layui-form-label">登录账号</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="user_name" lay-verify="required|username" autocomplete="off" class="layui-input"
-                           #if(${formType} == 'edit')disabled=""#end>
+                    <input type="text" name="user_name" lay-verify="required|username" autocomplete="off"
+                           class="layui-input #if(${formType} == 'edit')layui-disabled#end"
+                           #if(${formType} == 'edit')disabled#end>
                 </div>
             </div>
         </div>
