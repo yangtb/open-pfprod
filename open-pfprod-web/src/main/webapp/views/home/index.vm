@@ -72,7 +72,7 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="javascript:;" kit-target
-                           data-options="{url:'${basePath}/menu/page',icon:'icon-wodeziliao',title:'基本资料',id:'9999'}">
+                           data-options="{url:'${basePath}/user/userDetail',icon:'icon-wodeziliao',title:'基本资料',id:'9999'}">
                         <i class="iconfont icon-wodeziliao"></i><span> 基本资料</span></a></dd>
                     <dd id="modifyPass"><a href="javascript:;" data-title="修改密码">
                         <i class="iconfont icon-modifyPass"></i><span> 修改密码</span></a></dd>
