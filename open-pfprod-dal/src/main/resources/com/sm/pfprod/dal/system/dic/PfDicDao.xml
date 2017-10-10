@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sm.pfprod.dal.system.dic.PfDicDao">
+
+    <!-- 查询字典分组 -->
+    <select id="listDicGroups" resultType="com.sm.pfprod.model.entity.SysDictionary">
+        SELECT
+            id ,
+            group_name ,
+            group_code ,
+            dict_name ,
+            dict_code ,
+            remark
+        FROM
+            sys_dictionary
+        WHERE
+            status = 'enabled'
+        <if test="dicName != null and dicName != ''">
+        AND dict_name LIKE concat(#{dicName},'%')
+        </if>
+        AND group_code = 'DICTIONARY_GROUP'
+        ORDER BY id
+    </select>
+
+    <!-- 获取字典枚举 -->
+    <select id="listEnums" resultType="com.sm.pfprod.model.entity.SysDictionary">
+        SELECT
+            id ,
+            group_name ,
+            group_code ,
+            dict_name ,
+            dict_code ,
+            ext_value ,
+            gmt_create ,
+            sort_num ,
+            operator ,
+            remark
+        FROM
+            sys_dictionary
+        WHERE
+            STATUS = 'enabled'
+        AND group_code != 'DICTIONARY_GROUP'
+        <if test="enumName != null and enumName != ''">
+            AND dict_name LIKE concat(#{enumName},'%')
+        </if>
+        <if test="groupCode != null and groupCode != ''">
+            AND group_code = #{groupCode}
+        </if>
+        ORDER BY sort_num
+        limit #{offset}, #{limit}
+    </select>
+
+    <!-- 获取字典枚举总数 -->
+    <select id="countEnum" resultType="java.lang.Long">
+        SELECT
+            count(1)
+        FROM
+            sys_dictionary
+        WHERE
+            status = 'enabled'
+        <if test="enumName != null and enumName != ''">
+            AND dict_name LIKE concat(#{enumName},'%')
+        </if>
+        <if test="groupCode != null and groupCode != ''">
+            AND group_code = #{groupCode}
+        </if>
+        AND group_code != 'DICTIONARY_GROUP'
+    </select>
+
+    <!-- 获取所有枚举 -->
+    <select id="listAllEnums" resultType="com.sm.pfprod.model.entity.SysDictionary">
+        SELECT
+            id ,
+            group_name ,
+            group_code ,
+            dict_name ,
+            dict_code ,
+            ext_value ,
+            gmt_create ,
+            sort_num ,
+            operator ,
+            remark
+        FROM
+            sys_dictionary
+        WHERE
+            status = 'enabled'
+        AND group_code != 'DICTIONARY_GROUP'
+    </select>
+
+    <!-- 判断是否存在该字典 -->
+    <select id="isExistDic" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM sys_dictionary WHERE dict_code = #{dictCode} AND group_code = 'DICTIONARY_GROUP'
+    </select>
+
+    <!-- 判断是否存在该字典枚举 -->
+    <select id="isExistEnum" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM sys_dictionary WHERE dict_code = #{dictCode} AND group_code = #{groupCode}
+    </select>
+
+    <!-- 新增字典 -->
+    <insert id="addDic" parameterType="com.sm.pfprod.model.entity.SysDictionary">
+        INSERT INTO sys_dictionary (
+            group_name , group_code , dict_name , dict_code ,
+            ext_value , gmt_create , gmt_modify , status , sort_num , operator , remark , sys_type
+        )
+        VALUES(
+            #{groupName} , #{groupCode}, #{dictName} , #{dictCode} ,
+            #{extValue} , NOW() , NOW() , 'enabled', #{sortNum} , #{operator}, #{remark}, 'all'
+        )
+    </insert>
+
+    <!-- 编辑字典 -->
+    <update id="editDic" parameterType="com.sm.pfprod.model.entity.SysDictionary">
+        UPDATE sys_dictionary
+        SET dict_name = #{dictName} ,
+            dict_code = #{dictCode} ,
+            <if test="groupName != null and groupName != ''">
+                group_name = #{groupName} ,
+            </if>
+            <if test="groupCode != null and groupCode != ''">
+                group_code = #{groupCode} ,
+            </if>
+            <if test="sortNum != null and sortNum != ''">
+                sort_num = #{sortNum} ,
+            </if>
+                ext_value = #{extValue} ,
+                operator= #{operator} ,
+                remark = #{remark} ,
+            gmt_modify = NOW()
+        WHERE
+        id = #{id}
+    </update>
+
+    <!-- 删除字典 -->
+    <delete id="delDic">
+        UPDATE sys_dictionary SET status = 'disabled'
+        WHERE
+        id in (
+        <foreach collection="list" item="item" separator="," >
+            #{item}
+        </foreach>
+        )
+    </delete>
+
+</mapper>

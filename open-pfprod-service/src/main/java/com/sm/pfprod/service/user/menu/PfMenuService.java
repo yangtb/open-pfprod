@@ -1,6 +1,5 @@
 package com.sm.pfprod.service.user.menu;
 
-import com.sm.pfprod.model.dto.common.UserDto;
 import com.sm.pfprod.model.dto.user.menu.MenuDto;
 import com.sm.pfprod.model.entity.SysMenu;
 import com.sm.pfprod.model.vo.menu.PfMenuVo;

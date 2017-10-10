@@ -1,10 +1,10 @@
-package com.sm.pfprod.web.system.user.notice;
+package com.sm.pfprod.web.system.notice;
 
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.facade.notice.PfNoticeFacade;
 import com.sm.pfprod.model.dto.system.notice.PfNoticeDto;
-import com.sm.pfprod.model.dto.user.common.PfCommonListDto;
+import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.SysNotice;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.web.security.CurrentUserUtils;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @ClassName: PfNoticeRestController

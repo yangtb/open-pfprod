@@ -103,15 +103,13 @@ layui.config({
     var rowStatus;
     //监听提交
     form.on('submit(menuSearchFilter)', function (data) {
-        if (data.field.menuStatus == 0) {
-            $('.bach-invalid').text('批量停用');
+        if (data.field.menuStatus == '0') {
+            $('.bach-invalid').html('<i class="iconfont icon-stop"></i>' + ' 批量停用');
             rowStatus = 0;
         } else {
-            $('.bach-invalid').text('批量启用');
+            $('.bach-invalid').html('<i class="iconfont icon-save"></i>' + ' 批量启用');
             rowStatus = 1;
         }
-        console.log(data)
-        console.log(table)
         table.reload('menuTableId', {
             where: {
                 name: data.field.menuName,

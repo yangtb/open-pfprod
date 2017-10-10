@@ -1,14 +1,6 @@
 package com.sm.pfprod.service.user.role;
 
-import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.PageInfo;
-import com.sm.pfprod.model.dto.user.common.PfCommonDto;
-import com.sm.pfprod.model.entity.SysRole;
-import com.sm.pfprod.model.vo.role.PfRoleVo;
 import com.sm.pfprod.service.TestBase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 public class TestPfRoleService extends TestBase {
 

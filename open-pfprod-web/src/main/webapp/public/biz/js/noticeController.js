@@ -132,7 +132,6 @@ layui.config({
     }
 
     var _commonAjax = function (index, url, reqData, msg) {
-        console.log(reqData)
         $.ajax({
             url: url,
             type: 'post',

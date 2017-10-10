@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sm.pfprod.dal.system.param.PfParamDao">
+
+    <sql id="base_sql">
+        param_code , param_name , param_value , default_value , data_type ,
+        extend_value , sys_type , biz_module , gmt_create , gmt_modify , status ,
+        sort_num , operator , remark
+    </sql>
+
+    <!-- 获取参数列表 -->
+    <select id="listParams" parameterType="com.sm.pfprod.model.dto.system.param.ParamDto"
+            resultType="com.sm.pfprod.model.entity.SysParam">
+        SELECT
+            id ,
+            <include refid="base_sql"/>
+        FROM
+            sys_param
+        WHERE
+            status = #{status}
+        <if test="paramName != null and paramName != ''">
+            AND param_name LIKE concat(#{paramName},'%')
+        </if>
+        ORDER BY id
+        limit #{offset}, #{limit}
+    </select>
+
+    <!-- 获取参数总数 -->
+    <select id="count" resultType="java.lang.Long">
+        SELECT
+            count(1)
+        FROM
+            sys_param
+        WHERE
+            status = 'enabled'
+        <if test="paramName != null and paramName != ''">
+            AND param_name LIKE concat(#{paramName},'%')
+        </if>
+        <if test="status != null and status != ''">
+            AND status = #{status}
+        </if>
+    </select>
+
+    <!-- 获取所有参数 -->
+    <select id="listAllParam" resultType="com.sm.pfprod.model.entity.SysParam">
+        SELECT
+            id ,
+            <include refid="base_sql"/>
+        FROM
+            sys_param
+        WHERE
+            status = 'enabled'
+    </select>
+
+    <!-- 判断是否存在该参数 -->
+    <select id="isExistParam" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM sys_param WHERE param_code = #{paramCode} AND sys_type = #{sysType}
+    </select>
+
+    <!-- 新增参数 -->
+    <insert id="addParam" parameterType="com.sm.pfprod.model.entity.SysDictionary">
+        INSERT INTO sys_param (
+          <include refid="base_sql"/>
+        )
+        VALUES(
+            #{paramCode} , #{paramName} , #{paramValue} , #{defaultValue} , #{dataType} ,
+            #{extendValue} , #{sysType} , #{bizModule} , now(), now() , 'enabled' ,
+            #{sortNum}, #{operator} , #{remark}
+        )
+    </insert>
+
+    <!-- 编辑参数 -->
+    <update id="editParam" parameterType="com.sm.pfprod.model.entity.SysDictionary">
+        UPDATE sys_param
+        SET
+            param_code = #{paramCode},
+            param_name = #{paramName},
+            param_value = #{paramValue},
+            default_value = #{defaultValue},
+            data_type = #{dataType},
+            extend_value = #{extendValue},
+            sys_type = #{sysType},
+            biz_module = #{bizModule},
+            sort_num = #{sortNum},
+            <if test="operator != null and operator != ''">
+            operator = #{operator} ,
+            </if>
+            remark = #{remark} ,
+            gmt_modify = NOW()
+        WHERE
+          id = #{id}
+    </update>
+
+    <!-- 停用、启用参数 -->
+    <update id="changeStatus">
+        UPDATE sys_param SET status = #{status}
+        WHERE
+        id in (
+        <foreach collection="list" item="item" separator="," >
+            #{item}
+        </foreach>
+        )
+    </update>
+</mapper>

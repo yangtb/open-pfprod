@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>服务器信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
+
+</head>
+
+<body>
+<div class="wrapper-content">
+    <form class="layui-form site-block">
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:150px;">操作系统的名称：</label>
+            <div class="layui-input-block" style="margin-left: 180px;">
+                <input disabled type="text" value="Linux" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:150px;">操作系统的版本：</label>
+            <div class="layui-input-block" style="margin-left: 180px;">
+                <input disabled type="text" value="2.6.32-573.22.1.el6.x86_64" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:150px;">Java的运行环境版本：</label>
+            <div class="layui-input-block" style="margin-left: 180px;">
+                <input disabled type="text" value="1.7.0_25" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:150px;">当前电脑CPU数量：</label>
+            <div class="layui-input-block" style="margin-left: 180px;">
+                <input disabled type="text" value="1个" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:150px;">虚拟机中的内存总量：</label>
+            <div class="layui-input-block" style="margin-left: 180px;">
+                <input disabled type="text" value="90.9375M" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:150px;">虚拟机中的空闲内存：</label>
+            <div class="layui-input-block" style="margin-left: 180px;">
+                <input disabled type="text" value="34.95889M" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:150px;">试图使用的最大内存：</label>
+            <div class="layui-input-block" style="margin-left: 180px;">
+                <input disabled type="text" value="241.6875M" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+
+        <div class="layui-progress layui-progress-big">
+            <label class="layui-form-label" style="width:150px;">内存使用：</label>
+            <div class="layui-progress-bar layui-bg-green" lay-percent="20%"></div>
+        </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:150px;">当前工作目录：</label>
+            <div class="layui-input-block" style="margin-left: 180px;">
+                <input disabled type="text" value="/data/tomcat/market-admin_8010/webapps/ROOT" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="${contextPath}/public/common/js/jquery.min.js"></script>
+
+<script>
+
+</script>
+
+</body>
+</html>

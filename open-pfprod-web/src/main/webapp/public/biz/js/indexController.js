@@ -22,6 +22,7 @@ layui.config({
         var skin = $that.children('a').data('skin');
         switchSkin(skin);
     });
+
     var setSkin = function (value) {
             layui.data('kit_skin', {
                 key: 'skin',
@@ -40,6 +41,13 @@ layui.config({
             var skin = getSkinName();
             switchSkin(skin === undefined ? 'default' : skin);
         }();
+
+    // 只展开一个二级菜单
+    $(".kit-side ul li.layui-nav-item").each(function () {
+        $(this).on('click', function () {
+            $(this).siblings().removeClass('layui-nav-itemed');
+        });
+    });
 
     $("#modifyPass").on('click', function () {
         common.open('修改密码', basePath + '/user/modifyPass', 600, 300, null, '4');

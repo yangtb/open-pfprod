@@ -11,7 +11,7 @@ import com.sm.pfprod.facade.role.PfRoleFacade;
 import com.sm.pfprod.facade.user.PfUserFacade;
 import com.sm.pfprod.model.dto.common.UserDto;
 import com.sm.pfprod.model.dto.user.PfUserDto;
-import com.sm.pfprod.model.dto.user.common.PfCommonListDto;
+import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
 import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
 import com.sm.pfprod.model.result.PageResult;
@@ -32,7 +32,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * 登陆

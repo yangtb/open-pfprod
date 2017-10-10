@@ -1,4 +1,4 @@
-package com.sm.pfprod.model.dto.user.common;
+package com.sm.pfprod.model.dto.common;
 
 import java.io.Serializable;
 import java.util.List;
