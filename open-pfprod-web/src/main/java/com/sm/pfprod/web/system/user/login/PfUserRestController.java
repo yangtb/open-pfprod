@@ -84,6 +84,11 @@ public class PfUserRestController extends BaseController {
         return "pages/user/userForm";
     }
 
+    @RequestMapping("/userDetail")
+    public String userDetail(Model model) {
+        return "pages/user/userDetail";
+    }
+
     /**
      * 获取用户列表
      *
