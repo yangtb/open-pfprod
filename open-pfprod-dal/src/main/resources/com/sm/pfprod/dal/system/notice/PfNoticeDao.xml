@@ -3,18 +3,16 @@
 <mapper namespace="com.sm.pfprod.dal.system.notice.PfNoticeDao">
 
     <sql id="Base_Column_List" >
-        notice_title, notice_type, notice_content, is_deleted, creator, gmt_create, gmt_modify
+        notice_title, notice_type, notice_content, is_deleted, operator, gmt_create, gmt_modify
     </sql>
 
     <!-- 获取公告list -->
     <select id="listNotices" parameterType="com.sm.pfprod.model.dto.system.notice.PfNoticeDto"
             resultType="com.sm.pfprod.model.vo.system.SysNoticeVo">
         SELECT
-          sn.id, sn.notice_title, sn.notice_type, sn.notice_content, sn.creator, sn.gmt_create,
-          ui.username as creatorName
+          sn.id, sn.notice_title, sn.notice_type, sn.notice_content, sn.operator, sn.gmt_create
         FROM
           sys_notice sn
-        INNER JOIN user_info ui on sn.creator = ui.user_id
         WHERE
           sn.is_deleted = 'N'
         <if test="publishTimeBegin != null and publishTimeBegin != '' ">
@@ -50,7 +48,7 @@
         <include refid="Base_Column_List"/>
         )
         VALUES(
-        #{noticeTitle} , #{noticeType} , #{noticeContent} , 'N' , #{creator} , NOW() , NOW()
+        #{noticeTitle} , #{noticeType} , #{noticeContent} , 'N' , #{operator} , NOW() , NOW()
         );
     </insert>
 

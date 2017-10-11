@@ -11,7 +11,7 @@ public class SysNoticeVo implements Serializable {
     private String      noticeTitle;        // 公告标题
     private String      noticeType;         // 公告类型 1=系统公告2=活动公告
     private String      noticeContent;      // 公告内容
-    private Long        creator;            // 创建人ID
+    private String      operator;            // 创建人ID
     private String      creatorName;        // 创建人
     private Date        gmtCreate;          // 创建时间
     private Date        gmtUpdate;          // 更新时间
@@ -48,12 +48,12 @@ public class SysNoticeVo implements Serializable {
         this.noticeContent = noticeContent;
     }
 
-    public Long getCreator() {
-        return creator;
+    public String getOperator() {
+        return operator;
     }
 
-    public void setCreator(Long creator) {
-        this.creator = creator;
+    public void setOperator(String operator) {
+        this.operator = operator;
     }
 
     public String getCreatorName() {

@@ -49,7 +49,7 @@
             <span class="notice-span notice-notice-sub-title">
                 <label class="notice-label" id="noticeType"></label>
                 <label class="notice-label" id="gmtCreate"></label>
-                <label class="notice-label" id="creatorName"></label>
+                <label class="notice-label" id="operator"></label>
             </span>
             <hr class="layui-bg-green">
             <div>
@@ -84,8 +84,8 @@
             if (data.gmtCreate) {
                 $("#gmtCreate").html('发布时间：' + data.gmtCreate);
             }
-            if (data.creatorName) {
-                $("#creatorName").html('发布者：' + data.creatorName);
+            if (data.operator) {
+                $("#operator").html('发布者：' + data.operator);
             }
             $("#noticeContent").html(data.noticeContent);
         });

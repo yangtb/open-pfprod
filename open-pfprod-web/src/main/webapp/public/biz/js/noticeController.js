@@ -28,7 +28,7 @@ layui.config({
             //{field: 'id', width: 60, title: 'ID', fixed: true},
             {field: 'noticeTitle', width: 470, title: '公告标题'},
             {field: 'noticeType', width: 100, title: '公告类型', templet: '#noticeTypeTpl'},
-            {field: 'creatorName', width: 100, title: '发布人'},
+            {field: 'operator', width: 100, title: '发布人'},
             {field: 'gmtCreate', width: 170, sort: true, title: '发布时间'},
             {fixed: 'right', width: 160, title: '操作', align: 'center', toolbar: '#noticeBar'}
         ]] //设置表头

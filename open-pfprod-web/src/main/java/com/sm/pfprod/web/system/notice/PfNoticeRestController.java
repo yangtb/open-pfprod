@@ -74,7 +74,7 @@ public class PfNoticeRestController extends BaseController {
         Assert.isTrue(StringUtils.isNotBlank(dto.getNoticeTitle()), "noticeTitle");
         Assert.isTrue(StringUtils.isNotBlank(dto.getNoticeType()), "noticeType");
         Assert.isTrue(StringUtils.isNotBlank(dto.getNoticeContent()), "noticeContent");
-        dto.setCreator(CurrentUserUtils.getCurrentUserId());
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.create("addNotice", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfNoticeFacade.addNotice(dto));
     }
