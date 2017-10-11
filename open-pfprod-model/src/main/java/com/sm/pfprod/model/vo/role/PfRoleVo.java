@@ -11,7 +11,7 @@ public class PfRoleVo implements Serializable {
     private String      name;           // 角色名称
     private String      resume;         // 角色描述
     private int         state;          // 是否有效(0-有效 1-无效)
-    private Long        creatorId;      // 创建人ID
+    private String      operator;       // 创建人
     private Date        gmtCreate;      // 创建时间
     private boolean     checked;        // 是否拥有某权限
 
@@ -47,12 +47,12 @@ public class PfRoleVo implements Serializable {
         this.state = state;
     }
 
-    public Long getCreatorId() {
-        return creatorId;
+    public String getOperator() {
+        return operator;
     }
 
-    public void setCreatorId(Long creatorId) {
-        this.creatorId = creatorId;
+    public void setOperator(String operator) {
+        this.operator = operator;
     }
 
     public Date getGmtCreate() {

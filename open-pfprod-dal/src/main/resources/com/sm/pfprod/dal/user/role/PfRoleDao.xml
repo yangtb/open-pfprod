@@ -117,7 +117,7 @@
     <select id="listRoles" parameterType="com.sm.pfprod.model.dto.user.role.PfRoleDto"
             resultType="com.sm.pfprod.model.vo.role.PfRoleVo">
         SELECT
-            sr.role_id, sr.name , sr.resume , sr.state , sr.creator_id , sr.gmt_create
+            sr.role_id, sr.name , sr.resume , sr.state , sr.operator , sr.gmt_create
         FROM
             sys_role sr
         WHERE

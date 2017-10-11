@@ -21,7 +21,7 @@ layui.config({
             {field: 'name', width: 100, title: '角色名称', fixed: true},
             {field: 'resume', width: 200, title: '描述'},
             {field: 'state', width: 70, sort: true, templet: '#stateTpl', title: '状态'},
-            {field: 'creatorId', width: 100, title: '创建人'},
+            {field: 'operator', width: 100, title: '创建人'},
             {field: 'gmtCreate', width: 170, sort: true, title: '创建时间'},
             {fixed: 'right', width: 120, title: '操作', align: 'center', toolbar: '#viewTreeBar'}
         ]] //设置表头
