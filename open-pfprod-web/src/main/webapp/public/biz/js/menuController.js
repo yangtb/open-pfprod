@@ -104,10 +104,10 @@ layui.config({
     //监听提交
     form.on('submit(menuSearchFilter)', function (data) {
         if (data.field.menuStatus == '0') {
-            $('.bach-invalid').html('<i class="iconfont icon-stop"></i>' + ' 批量停用');
+            $('.bach-invalid').html('<i class="iconfont icon-stop"></i>' + ' 停用');
             rowStatus = 0;
         } else {
-            $('.bach-invalid').html('<i class="iconfont icon-save"></i>' + ' 批量启用');
+            $('.bach-invalid').html('<i class="iconfont icon-save"></i>' + ' 启用');
             rowStatus = 1;
         }
         table.reload('menuTableId', {
