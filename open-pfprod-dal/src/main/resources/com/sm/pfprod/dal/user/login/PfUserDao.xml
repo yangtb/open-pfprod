@@ -136,22 +136,20 @@
             gmt_create
         FROM
             user_info
+        WHERE is_deleted = 'N'
         <if test="conditionValue != null and conditionValue !=''">
-            <trim prefix="WHERE" prefixOverrides="AND|OR">
-                <choose>
-                    <when test="type != null and type == '1'.toString()">
-                        username like concat(#{conditionValue},'%')
-                    </when>
-                    <when test="type != null and type == '2'.toString()">
-                        real_name like concat(#{conditionValue},'%')
-                    </when>
-                    <when test="type != null and type == '3'.toString()">
-                        phone_no like concat(#{conditionValue},'%')
-                    </when>
-                </choose>
-            </trim>
+            <choose>
+                <when test="type != null and type == '1'.toString()">
+                    and username like concat(#{conditionValue},'%')
+                </when>
+                <when test="type != null and type == '2'.toString()">
+                    and real_name like concat(#{conditionValue},'%')
+                </when>
+                <when test="type != null and type == '3'.toString()">
+                    and phone_no like concat(#{conditionValue},'%')
+                </when>
+            </choose>
         </if>
-        where is_deleted = 'N'
         ORDER BY user_id
         limit #{offset}, #{limit}
     </select>
@@ -161,20 +159,19 @@
         SELECT
         count(1)
         FROM user_info
+        WHERE is_deleted = 'N'
         <if test="conditionValue != null and conditionValue !=''">
-            <trim prefix="WHERE" prefixOverrides="AND|OR">
-                <choose>
-                    <when test="type != null and type == '1'.toString()">
-                        username like concat(#{conditionValue},'%')
-                    </when>
-                    <when test="type != null and type == '2'.toString()">
-                        real_name like concat(#{conditionValue},'%')
-                    </when>
-                    <when test="type != null and type == '3'.toString()">
-                        phone_no like concat(#{conditionValue},'%')
-                    </when>
-                </choose>
-            </trim>
+            <choose>
+                <when test="type != null and type == '1'.toString()">
+                    and username like concat(#{conditionValue},'%')
+                </when>
+                <when test="type != null and type == '2'.toString()">
+                    and real_name like concat(#{conditionValue},'%')
+                </when>
+                <when test="type != null and type == '3'.toString()">
+                    and phone_no like concat(#{conditionValue},'%')
+                </when>
+            </choose>
         </if>
     </select>
 
