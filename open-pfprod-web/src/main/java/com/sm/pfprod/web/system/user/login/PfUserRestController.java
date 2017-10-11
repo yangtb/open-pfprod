@@ -1,23 +1,17 @@
 package com.sm.pfprod.web.system.user.login;
 
-import com.alibaba.fastjson.JSON;
-import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.ResultObject;
-import com.sm.open.care.core.exception.BizRuntimeException;
-import com.sm.open.care.core.log.LoggerUtil;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.open.care.core.utils.rsa.RSAEncrypt;
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
 import com.sm.pfprod.facade.role.PfRoleFacade;
 import com.sm.pfprod.facade.user.PfUserFacade;
 import com.sm.pfprod.model.dto.common.PfCommonListDto;
-import com.sm.pfprod.model.dto.common.UserDto;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
 import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
 import com.sm.pfprod.model.result.PageResult;
-import com.sm.pfprod.service.common.util.CurrentUserUtil;
-import com.sm.pfprod.service.user.login.PfUserService;
+import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;
 import com.sm.pfprod.web.system.BaseController;
 import org.apache.commons.collections.CollectionUtils;
@@ -44,8 +38,6 @@ public class PfUserRestController extends BaseController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PfUserRestController.class);
 
     @Resource
-    private PfUserService pfUserService;
-    @Resource
     private PfUserFacade pfUserFacade;
     @Resource
     private PfRoleFacade pfRoleFacade;
@@ -63,7 +55,14 @@ public class PfUserRestController extends BaseController {
     }
 
     @RequestMapping("/modifyPass")
-    public String modifyPass() {
+    public String modifyPass(Model model, HttpServletRequest request) {
+        RsaKeyPair keyPair;
+        try {
+            keyPair = rsaKeyPairQueue.takeQueue(request);
+            model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
+        } catch (InterruptedException e) {
+            logger.error("【PfUserRestController-modifyPass】新增用户时，rsa公私钥队列相关操作异常", e);
+        }
         return "pages/user/modifyPass";
     }
 
@@ -75,7 +74,7 @@ public class PfUserRestController extends BaseController {
             keyPair = rsaKeyPairQueue.takeQueue(request);
             model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
         } catch (InterruptedException e) {
-            logger.error("新增用户时，rsa公私钥队列相关操作异常", e);
+            logger.error("【PfUserRestController-form】新增用户时，rsa公私钥队列相关操作异常", e);
         }
         if (StringUtils.equals(formType, "edit")) {
             model.addAttribute("roles", pfRoleFacade.listUserRole(userId));
@@ -123,7 +122,7 @@ public class PfUserRestController extends BaseController {
             String plainPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getPassword());
             dto.setPassword(plainPsw);
         } catch (InterruptedException e) {
-            logger.error("新增用户时，rsa公私钥队列相关操作异常", e);
+            logger.error("密码解密时，rsa公私钥队列相关操作异常", e);
         }
 
         return ResultObject.create("saveUser", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
@@ -183,18 +182,30 @@ public class PfUserRestController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/update_psw", method = RequestMethod.POST)
+    @RequestMapping(value = "/updatePsw", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject updatePsw(HttpServletRequest request, @RequestBody UpdatePswDto dto) {
-        UserDto user = CurrentUserUtil.currentUser(request);
-        if (user == null || StringUtils.isEmpty(user.getUserName())) {
-            throw new BizRuntimeException(ErrorCode.ERROR_NET_150001, "session_user为空，访问被拒绝");
+         /* 参数校验 */
+        Assert.isTrue(dto.getOldPassword() != null, "oldPassword");
+        Assert.isTrue(dto.getNewPassword() != null, "newPassword");
+
+        dto.setUserId(CurrentUserUtils.getCurrentUserId());
+        dto.setUserName(CurrentUserUtils.getCurrentUsername());
+
+        // 密码转化为明文
+        RsaKeyPair keyPair;
+        try {
+            keyPair = rsaKeyPairQueue.takeQueue(request);
+            String plainOldPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getOldPassword());
+            String plainNewPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getNewPassword());
+            dto.setOldPassword(plainOldPsw);
+            dto.setNewPassword(plainNewPsw);
+        } catch (InterruptedException e) {
+            logger.error("修改密码时，rsa公私钥队列相关操作异常", e);
         }
-        dto.setUserId(user.getUserId());
-        dto.setUserName(user.getUserName());
-        LoggerUtil.info(LOGGER, "session中的用户信息：", JSON.toJSONString(user));
+
         return ResultObject.create("updatePsw", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
-                ResultObject.DATA_TYPE_OBJECT, pfUserService.updatePsw(dto));
+                ResultObject.DATA_TYPE_OBJECT, pfUserFacade.updatePsw(dto));
     }
 
 }

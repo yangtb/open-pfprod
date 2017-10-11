@@ -2,6 +2,7 @@ package com.sm.pfprod.facade.user;
 
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
+import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
 import com.sm.pfprod.model.result.PageResult;
 
 import java.util.List;
@@ -52,5 +53,13 @@ public interface PfUserFacade {
      * @return
      */
     boolean freezeUser(List<Long> users);
+
+    /**
+     * 修改密码
+     *
+     * @param dto
+     * @return
+     */
+    boolean updatePsw(UpdatePswDto dto);
 
 }

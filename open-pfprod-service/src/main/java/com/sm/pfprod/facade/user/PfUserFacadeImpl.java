@@ -5,6 +5,8 @@ import com.sm.open.care.core.enums.Level;
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
+import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
+import com.sm.pfprod.model.entity.UserInfo;
 import com.sm.pfprod.model.param.PageParam;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.result.ResultFactory;
@@ -57,5 +59,21 @@ public class PfUserFacadeImpl implements PfUserFacade {
     @Override
     public boolean freezeUser(List<Long> users) {
         return pfUserService.freezeUser(users);
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param dto
+     * @return
+     */
+    @Override
+    public boolean updatePsw(UpdatePswDto dto) {
+        // 查询用户密码、盐值等
+        UserInfo userInfo = pfUserService.selectUser(dto.getUserName());
+        if (!pfUserService.matchPassword(dto.getOldPassword(), userInfo.getSalt(), userInfo.getPassword())) {
+            throw new BizRuntimeException(PfUserConstant.OLD_PASSWORD_ERROR, PfUserConstant.OLD_PASSWORD_ERROR_MSG);
+        }
+        return pfUserService.updatePsw(dto);
     }
 }

@@ -8,4 +8,8 @@ public class PfUserConstant {
     public static final String ADD_USER_ISEXIST                     = "addUserIsExist";
     public static final String ADD_USER_ISEXIST_MSG                 = "该用户名已被使用";
 
+    public static final String OLD_PASSWORD_ERROR                   = "oldPasswordError";
+    public static final String OLD_PASSWORD_ERROR_MSG               = "原密码错误";
+
+
 }

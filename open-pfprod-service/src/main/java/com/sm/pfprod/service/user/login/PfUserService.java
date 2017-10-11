@@ -96,4 +96,14 @@ public interface PfUserService {
      */
     String genEncriptPwd(String rawPwd, String salt);
 
+    /**
+     * 验证密码
+     *
+     * @param rawPwd     原密码
+     * @param salt       盐值
+     * @param encriptPwd 加密密码
+     * @return
+     */
+    boolean matchPassword(String rawPwd, String salt, String encriptPwd);
+
 }

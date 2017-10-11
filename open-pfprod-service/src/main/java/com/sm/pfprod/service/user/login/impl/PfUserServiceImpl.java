@@ -87,26 +87,23 @@ public class PfUserServiceImpl implements PfUserService {
 
     @Override
     public boolean updatePsw(UpdatePswDto dto) {
-        return false;
+        // 密码加密
+        UserInfo userInfo = new UserInfo();
+        String salt = UUID.randomUUID().toString().replace("-", "");
+        userInfo.setSalt(salt);
+        userInfo.setUserId(dto.getUserId());
+        userInfo.setPassword(genEncriptPwd(dto.getNewPassword(), salt));
+        return pfUserDao.updatePsw(userInfo) == 1 ? true : false;
+    }
+
+    @Override
+    public boolean matchPassword(String rawPwd, String salt, String encriptPwd) {
+        PasswordEncoder passwordEncoder = new StandardPasswordEncoder(salt);
+        return passwordEncoder.matches(rawPwd, encriptPwd);
     }
 
     @Override
     public String genEncriptPwd(String rawPwd, String salt) {
-        if(StringUtils.isBlank(salt)){
-            salt = "";
-        }
-        PasswordEncoder passwordEncoder = new StandardPasswordEncoder(salt);
-        String encodedPassword = passwordEncoder.encode(rawPwd);
-        return encodedPassword;
-    }
-
-
-    public static void main(String[] args) {
-        String salt = UUID.randomUUID().toString().replace("-", "");
-        System.out.println(salt + ", " + genEncriptPwd1("ytb316", salt));
-    }
-
-    public static String genEncriptPwd1(String rawPwd, String salt) {
         if (StringUtils.isBlank(salt)) {
             salt = "";
         }
@@ -114,6 +111,5 @@ public class PfUserServiceImpl implements PfUserService {
         String encodedPassword = passwordEncoder.encode(rawPwd);
         return encodedPassword;
     }
-
 
 }
