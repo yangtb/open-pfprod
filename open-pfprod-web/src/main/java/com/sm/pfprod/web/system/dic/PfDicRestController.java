@@ -101,6 +101,7 @@ public class PfDicRestController extends BaseController {
         /* 参数校验 */
         Assert.isTrue(StringUtils.isNotBlank(dto.getDictCode()), "dictCode");
         Assert.isTrue(StringUtils.isNotBlank(dto.getDictName()), "dictName");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.create("editDic", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfDicFacade.editDic(dto));
     }
@@ -153,6 +154,7 @@ public class PfDicRestController extends BaseController {
         Assert.isTrue(StringUtils.isNotBlank(dto.getGroupName()), "groupCode");
         Assert.isTrue(StringUtils.isNotBlank(dto.getDictCode()), "dictCode");
         Assert.isTrue(StringUtils.isNotBlank(dto.getDictName()), "dictName");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.create("editEnum", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfDicFacade.editEnum(dto));
     }
