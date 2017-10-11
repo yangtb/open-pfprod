@@ -9,31 +9,43 @@
     <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var publicKey = '${publicKey}';
+        var basePath = '${basePath}';
+    </script>
 </head>
 
 <body>
+
 <div class="wrapper-content">
+
     <form class="layui-form" id="modifyPassForm">
         <div class="layui-form-item">
             <label class="layui-form-label">原密码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input"
-                       placeholder="请输入原密码">
+                <input type="hidden" name="oldPassword" id="encryptOldPassword">
+                <input type="password" id="clearOldPassword" lay-verify="required" autocomplete="off"
+                       placeholder="请输入原密码"
+                       class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">新密码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input"
-                       placeholder="请输入新密码">
+                <input type="hidden" name="newPassword" id="encryptNewPassword">
+                <input type="password" id="clearNewPassword" lay-verify="required|pass" autocomplete="off"
+                       placeholder="请输入新密码"
+                       class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">确认密码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input"
-                       placeholder="请确认新密码">
+                <input type="password" id="clearNewPassword2" lay-verify="required" autocomplete="off"
+                       placeholder="请确认新密码"
+                       class="layui-input">
             </div>
         </div>
 
@@ -45,9 +57,21 @@
             </div>
         </div>
     </form>
+
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="${contextPath}/public/common/js/jquery.min.js"></script>
+<script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
+<script src="${contextPath}/public/biz/js/modifyPassController.js"></script>
+<script src="${contextPath}/public/biz/js/modifyPassFormController.js"></script>
+
+<script>
+    $(function () {
+        var modifyPassController = new ModifyPassController();
+        modifyPassController.init(publicKey);
+    });
+</script>
 
 </body>
 </html>
