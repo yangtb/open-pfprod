@@ -8,6 +8,7 @@ import com.sm.pfprod.model.dto.user.role.PfRoleListDto;
 import com.sm.pfprod.model.dto.user.role.PfRoleMenuDto;
 import com.sm.pfprod.model.entity.SysRole;
 import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.system.BaseController;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -69,6 +70,7 @@ public class PfRoleRestController extends BaseController {
         /* 参数校验 */
         Assert.isTrue(StringUtils.isNotBlank(dto.getName()), "name");
         Assert.isTrue(StringUtils.isNotBlank(dto.getResume()), "resume");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.create("saveRole", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfRoleFacade.addRole(dto));
     }

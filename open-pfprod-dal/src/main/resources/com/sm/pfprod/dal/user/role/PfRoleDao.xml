@@ -3,7 +3,7 @@
 <mapper namespace="com.sm.pfprod.dal.user.role.PfRoleDao">
 
     <sql id="Base_Column_List" >
-        name , resume , state , is_deleted , creator_id , gmt_create , gmt_update
+        name , resume , state , is_deleted , operator , gmt_create , gmt_update
     </sql>
 
     <!-- 获取用户角色 -->
@@ -17,7 +17,7 @@
             <include refid="Base_Column_List"/>
         )
         VALUES(
-            #{name} , #{resume} , 0 , 'N' , #{creatorId} , NOW() , NOW()
+            #{name} , #{resume} , 0 , 'N' , #{operator} , NOW() , NOW()
         );
     </insert>
 
@@ -34,8 +34,8 @@
             <if test="state != null">
                 state = #{state} ,
             </if>
-            <if test="creatorId != null">
-                creator_id = #{creatorId} ,
+            <if test="operator != null">
+                operator = #{operator} ,
             </if>
             gmt_update = NOW()
         WHERE
