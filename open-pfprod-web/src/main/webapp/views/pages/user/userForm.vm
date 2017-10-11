@@ -50,14 +50,14 @@
                     <label class="layui-form-label">登录密码</label>
                     <div class="layui-input-inline">
                         <input type="hidden" name="password" id="encryptPassword">
-                        <input type="password" id="clearPassword" lay-verify="required|pass" placeholder="请输入密码"
+                        <input type="password" id="clearPassword" lay-verify="required|pass" autocomplete="off" placeholder="请输入密码"
                                class="layui-input">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">确认密码</label>
                     <div class="layui-input-inline">
-                        <input type="password" id="clearPassword2" lay-verify="required|pass" placeholder="请确认密码"
+                        <input type="password" id="clearPassword2" lay-verify="required|pass" autocomplete="off" placeholder="请确认密码"
                                class="layui-input">
                     </div>
                 </div>
@@ -68,13 +68,13 @@
             <div class="layui-inline">
                 <label class="layui-form-label">邮箱</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="email" lay-verify="required|email" class="layui-input">
+                    <input type="text" name="email" lay-verify="required|email" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">真实姓名</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="real_name" lay-verify="required" class="layui-input">
+                    <input type="text" name="real_name" lay-verify="required" autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
@@ -92,7 +92,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">联系手机</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="phone_no" lay-verify="required|phone" class="layui-input">
+                    <input type="text" name="phone_no" lay-verify="required|phone" autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
