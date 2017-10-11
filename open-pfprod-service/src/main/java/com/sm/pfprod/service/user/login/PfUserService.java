@@ -1,16 +1,21 @@
 package com.sm.pfprod.service.user.login;
 
 
-import com.sm.pfprod.model.dto.user.login.LoginDto;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
 import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
 import com.sm.pfprod.model.entity.UserInfo;
-import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.user.PfUsersVo;
 
+import java.security.interfaces.RSAPrivateKey;
 import java.util.List;
 
+/**
+ * @ClassName: PfUserService
+ * @Description: 用户相关接口
+ * @Author yangtongbin
+ * @Date 2017/10/11 11:11
+ */
 public interface PfUserService {
 
     /**
@@ -24,7 +29,6 @@ public interface PfUserService {
      * 用户总数
      */
     Long countUsers(PfUserDto dto);
-
 
     /**
      * 保存用户信息
@@ -68,14 +72,6 @@ public interface PfUserService {
     boolean freezeUser(List<Long> users);
 
     /**
-     * 登陆验证
-     *
-     * @param dto
-     * @return
-     */
-    boolean login(LoginDto dto);
-
-    /**
      * 根据用户获取用户信息
      *
      * @param userName
@@ -94,14 +90,10 @@ public interface PfUserService {
     /**
      * 密码加密
      *
-     * @param rawPwd
-     * @param salt
+     * @param rawPwd 原始密码
+     * @param salt   盐值
      * @return
      */
     String genEncriptPwd(String rawPwd, String salt);
 
-    /**
-     * 登出系统
-     */
-    boolean logout();
 }

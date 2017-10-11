@@ -11,6 +11,9 @@
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
 
     <script>
+        var formType = '${formType}';
+        var publicKey = '${publicKey}';
+        var basePath = '${basePath}';
         var contextPath = '${contextPath}';
     </script>
 
@@ -46,7 +49,7 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">登录密码</label>
                     <div class="layui-input-inline">
-                        <input type="hidden" name="password" id="encryptPassword" >
+                        <input type="hidden" name="password" id="encryptPassword">
                         <input type="password" id="clearPassword" lay-verify="required|pass" placeholder="请输入密码"
                                class="layui-input">
                     </div>
@@ -129,13 +132,12 @@
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
+<script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 <script src="${contextPath}/public/biz/js/userFormController.js"></script>
-<script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
+<script src="${contextPath}/public/biz/js/registerController.js"></script>
 <script>
-    var formType = '${formType}';
-    var publicKey = '${publicKey}';
-
+    #if(${formType} == 'edit')
     function fullForm(data) {
         $(document).ready(function () {
             $("#userform").autofill(data);
@@ -143,21 +145,13 @@
                 layui.form.render();
             });
         });
-    }
-    /*$(function () {
-        $.jCryption.crypt.setPublicKey(publicKey);
-        // 用户登录前密码加密
-        $('#clearPassword').keyup(function(){
-            _valueOfEncryptPassword($(this).val());
-        }).change(function(){
-            _valueOfEncryptPassword($(this).val());
-        });
-        var _valueOfEncryptPassword = function(value){
-            var encryptPassword = $.jCryption.crypt.encrypt(value);
-            $('#encryptPassword').val(encryptPassword);
-        }
+    };
+    #end
 
-    });*/
+    $(function () {
+        var registerController = new RegisterController();
+        registerController.init(publicKey);
+    });
 </script>
 
 </body>

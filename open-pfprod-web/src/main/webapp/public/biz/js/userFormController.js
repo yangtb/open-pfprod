@@ -2,7 +2,7 @@
  * 用户表单
  */
 layui.config({
-    base: '../public/layui/build/js/'
+    base: basePath + '/public/layui/build/js/'
 }).use(['form', 'layer', 'table', 'jquery', 'common'], function () {
     var $ = layui.$,
         form = layui.form,
@@ -33,9 +33,14 @@ layui.config({
             return false;
         }
         data.field.roles = roles;
-        console.log(JSON.stringify(data.field))
 
-        var url = contextPath + "/user/" + formType;
+        // 判断2次密码是不是一致
+        if ($("#clearPassword").val() != $("#clearPassword2").val()) {
+            common.errorMsg("两次输入密码不一致，请重新输入");
+            return false;
+        }
+
+        var url = basePath + "/user/" + formType;
         $.ajax({
             url: url,
             type: 'post',

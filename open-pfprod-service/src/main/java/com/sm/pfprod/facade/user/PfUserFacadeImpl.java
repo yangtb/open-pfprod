@@ -3,7 +3,6 @@ package com.sm.pfprod.facade.user;
 import com.sm.open.care.core.annotation.Loggable;
 import com.sm.open.care.core.enums.Level;
 import com.sm.open.care.core.exception.BizRuntimeException;
-import com.sm.pfprod.facade.role.PfRoleConstant;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
 import com.sm.pfprod.model.param.PageParam;

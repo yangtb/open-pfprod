@@ -6,12 +6,13 @@ import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.log.LoggerUtil;
 import com.sm.open.care.core.utils.Assert;
+import com.sm.open.care.core.utils.rsa.RSAEncrypt;
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
 import com.sm.pfprod.facade.role.PfRoleFacade;
 import com.sm.pfprod.facade.user.PfUserFacade;
+import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.dto.common.UserDto;
 import com.sm.pfprod.model.dto.user.PfUserDto;
-import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
 import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
 import com.sm.pfprod.model.result.PageResult;
@@ -109,11 +110,21 @@ public class PfUserRestController extends BaseController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public ResultObject saveUser(@RequestBody RegisterDto dto) {
+    public ResultObject saveUser(@RequestBody RegisterDto dto, HttpServletRequest request) {
         /* 参数校验 */
         Assert.isTrue(dto.getUsername() != null, "username");
         Assert.isTrue(StringUtils.isNotBlank(dto.getPassword()), "password");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getRoles()), "roles");
+
+        // 密码转化为明文
+        RsaKeyPair keyPair;
+        try {
+            keyPair = rsaKeyPairQueue.takeQueue(request);
+            String plainPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getPassword());
+            dto.setPassword(plainPsw);
+        } catch (InterruptedException e) {
+            logger.error("新增用户时，rsa公私钥队列相关操作异常", e);
+        }
 
         return ResultObject.create("saveUser", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfUserFacade.saveUser(dto));
@@ -186,17 +197,4 @@ public class PfUserRestController extends BaseController {
                 ResultObject.DATA_TYPE_OBJECT, pfUserService.updatePsw(dto));
     }
 
-    /**
-     * 登出
-     *
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    @ResponseBody
-    public ResultObject logout(HttpServletRequest request) {
-        pfUserService.logout();
-        return ResultObject.create("logout", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
-                ResultObject.DATA_TYPE_OBJECT, pfUserService.logout());
-    }
 }
