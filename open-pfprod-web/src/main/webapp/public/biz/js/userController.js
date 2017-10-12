@@ -92,22 +92,7 @@ layui.config({
     });
 
     var _resetPass = function (data) {
-        layer.prompt({
-            title: '输入密码',
-            formType: 1 //prompt风格，支持0-2
-        }, function (val, index) {
-            //layer.msg('得到了' + currentData[0].user_id + "----" + val);
-            _resetPassAjax(data.user_id, val)
-            layer.close(index);
-        });
-    }
-
-    var _resetPassAjax = function (userId, pass) {
-        var data = {};
-        data.userId = userId;
-        data.pass = pass;
-        var url = contextPath + '/user/resetPass';
-        _commonAjax(null, url, data, "密码重置");
+        common.open('密码重置', 'resetPassword', 360, 220, _successFunction(data));
     }
 
     // 获取编辑行数据
@@ -139,7 +124,7 @@ layui.config({
 
     var _addOrEdit = function (formType, currentEditData) {
         if (formType == 'add') {
-            common.open('新增用户', 'form?formType=' + formType, 700, 410);
+            common.open('新增用户', 'form?formType=' + formType, 700, 420);
         } else {
             common.open('编辑用户', 'form?formType=' + formType + "&userId=" + currentEditData.user_id, 700, 360, _successFunction(currentEditData));
         }
