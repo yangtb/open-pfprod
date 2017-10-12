@@ -76,4 +76,12 @@ public class PfUserFacadeImpl implements PfUserFacade {
         }
         return pfUserService.updatePsw(dto);
     }
+
+    @Override
+    public boolean resetPsw(RegisterDto dto) {
+        UpdatePswDto updatePswDto = new UpdatePswDto();
+        updatePswDto.setUserId(dto.getUserId());
+        updatePswDto.setNewPassword(dto.getPassword());
+        return pfUserService.updatePsw(updatePswDto);
+    }
 }

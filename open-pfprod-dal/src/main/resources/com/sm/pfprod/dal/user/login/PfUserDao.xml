@@ -106,7 +106,7 @@
     <!-- 修改密码 -->
     <update id="updatePsw" parameterType="com.sm.pfprod.model.entity.UserInfo">
         UPDATE user_info
-        SET password = #{password}, salt = #{salt}
+        SET password = #{password}, salt = #{salt}, gmt_modify = NOW()
         WHERE user_id = #{userId}
     </update>
 

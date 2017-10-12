@@ -56,32 +56,30 @@ public class PfUserRestController extends BaseController {
 
     @RequestMapping("/modifyPass")
     public String modifyPass(Model model, HttpServletRequest request) {
-        RsaKeyPair keyPair;
-        try {
-            keyPair = rsaKeyPairQueue.takeQueue(request);
-            model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
-        } catch (InterruptedException e) {
-            logger.error("【PfUserRestController-modifyPass】新增用户时，rsa公私钥队列相关操作异常", e);
-        }
+        RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
+        model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
         return "pages/user/modifyPass";
     }
 
     @RequestMapping("/form")
     public String form(String formType, Long userId, Model model, HttpServletRequest request) {
         model.addAttribute("formType", formType);
-        RsaKeyPair keyPair;
-        try {
-            keyPair = rsaKeyPairQueue.takeQueue(request);
-            model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
-        } catch (InterruptedException e) {
-            logger.error("【PfUserRestController-form】新增用户时，rsa公私钥队列相关操作异常", e);
-        }
+        RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
+        model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
+
         if (StringUtils.equals(formType, "edit")) {
             model.addAttribute("roles", pfRoleFacade.listUserRole(userId));
         } else {
             model.addAttribute("roles", pfRoleFacade.list());
         }
         return "pages/user/userForm";
+    }
+
+    @RequestMapping("/resetPassword")
+    public String resetPassword(Model model, HttpServletRequest request) {
+        RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
+        model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
+        return "pages/user/passReset";
     }
 
     @RequestMapping("/userDetail")
@@ -115,15 +113,10 @@ public class PfUserRestController extends BaseController {
         Assert.isTrue(StringUtils.isNotBlank(dto.getPassword()), "password");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getRoles()), "roles");
 
+        RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
         // 密码转化为明文
-        RsaKeyPair keyPair;
-        try {
-            keyPair = rsaKeyPairQueue.takeQueue(request);
-            String plainPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getPassword());
-            dto.setPassword(plainPsw);
-        } catch (InterruptedException e) {
-            logger.error("密码解密时，rsa公私钥队列相关操作异常", e);
-        }
+        String plainPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getPassword());
+        dto.setPassword(plainPsw);
 
         return ResultObject.create("saveUser", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfUserFacade.saveUser(dto));
@@ -192,20 +185,35 @@ public class PfUserRestController extends BaseController {
         dto.setUserId(CurrentUserUtils.getCurrentUserId());
         dto.setUserName(CurrentUserUtils.getCurrentUsername());
 
+        RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
         // 密码转化为明文
-        RsaKeyPair keyPair;
-        try {
-            keyPair = rsaKeyPairQueue.takeQueue(request);
-            String plainOldPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getOldPassword());
-            String plainNewPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getNewPassword());
-            dto.setOldPassword(plainOldPsw);
-            dto.setNewPassword(plainNewPsw);
-        } catch (InterruptedException e) {
-            logger.error("修改密码时，rsa公私钥队列相关操作异常", e);
-        }
+        String plainOldPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getOldPassword());
+        String plainNewPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getNewPassword());
+        dto.setOldPassword(plainOldPsw);
+        dto.setNewPassword(plainNewPsw);
 
         return ResultObject.create("updatePsw", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfUserFacade.updatePsw(dto));
+    }
+
+    /**
+     * 密码重置
+     *
+     * @param request
+     * @param dto
+     * @return
+     */
+    @RequestMapping(value = "/resetPsw", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject resetPsw(HttpServletRequest request, @RequestBody RegisterDto dto) {
+         /* 参数校验 */
+        Assert.isTrue(dto.getPassword() != null, "password");
+        RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
+        // 密码转化为明文
+        String plainPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getPassword());
+        dto.setPassword(plainPsw);
+        return ResultObject.create("resetPsw", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
+                ResultObject.DATA_TYPE_OBJECT, pfUserFacade.resetPsw(dto));
     }
 
 }

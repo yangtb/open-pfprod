@@ -25,6 +25,7 @@ public interface PfUserFacade {
 
     /**
      * 新增用户
+     *
      * @param dto
      * @return
      */
@@ -62,4 +63,10 @@ public interface PfUserFacade {
      */
     boolean updatePsw(UpdatePswDto dto);
 
+    /**
+     * 密码重置
+     *
+     * @return
+     */
+    boolean resetPsw(RegisterDto dto);
 }
