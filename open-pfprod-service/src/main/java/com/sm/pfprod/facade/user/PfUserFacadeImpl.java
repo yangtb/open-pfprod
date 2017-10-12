@@ -2,6 +2,7 @@ package com.sm.pfprod.facade.user;
 
 import com.sm.open.care.core.annotation.Loggable;
 import com.sm.open.care.core.enums.Level;
+import com.sm.open.care.core.enums.YesOrNo;
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
@@ -10,7 +11,9 @@ import com.sm.pfprod.model.entity.UserInfo;
 import com.sm.pfprod.model.param.PageParam;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.result.ResultFactory;
+import com.sm.pfprod.service.system.email.PfEmailService;
 import com.sm.pfprod.service.user.login.PfUserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -21,6 +24,12 @@ public class PfUserFacadeImpl implements PfUserFacade {
 
     @Resource
     private PfUserService pfUserService;
+    @Resource
+    private PfEmailService pfEmailService;
+
+    /** 发送邮件开关 */
+    @Value(value = "${reset.password.email.switch}")
+    private final String resetPswSwitch = "N";
 
     @Loggable(bizDec = "获取用户列表", level = Level.info)
     @Override
@@ -82,6 +91,9 @@ public class PfUserFacadeImpl implements PfUserFacade {
         UpdatePswDto updatePswDto = new UpdatePswDto();
         updatePswDto.setUserId(dto.getUserId());
         updatePswDto.setNewPassword(dto.getPassword());
+        if (resetPswSwitch.equals(YesOrNo.YES.getCode())) {
+            pfEmailService.sendEmail();
+        }
         return pfUserService.updatePsw(updatePswDto);
     }
 }
