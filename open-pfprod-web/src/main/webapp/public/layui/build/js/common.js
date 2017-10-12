@@ -18,7 +18,7 @@ layui.define(['layer'], function (exports) {
 
         /**成功 msg提示 */
         sucMsg: function (text) {
-            layer.msg(text);
+            parent.layer.msg(text);
         },
 
         toastTop: function (text) {
