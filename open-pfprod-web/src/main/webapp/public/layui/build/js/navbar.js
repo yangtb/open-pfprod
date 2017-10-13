@@ -41,7 +41,7 @@
                 })
             }), e(".kit-side-fold").off("click").on("click", function () {
                 var i = t.find("div.kit-side");
-                i.hasClass("kit-sided") ? (i.removeClass("kit-sided"), t.find("div.layui-body").removeClass("kit-body-folded"), t.find("div.layui-footer").removeClass("kit-footer-folded")) : (i.addClass("kit-sided"), t.find("div.layui-body").addClass("kit-body-folded"), t.find("div.layui-footer").addClass("kit-footer-folded"))
+                i.hasClass("kit-sided") ? (i.removeClass("kit-sided"), t.find("div.layui-body").removeClass("kit-body-folded"), t.find("div.layui-footer").removeClass("kit-footer-folded"), t.find(".kit-side-fold > i").addClass('icon-fold').removeClass('icon-expand')) : (i.addClass("kit-sided"), t.find("div.layui-body").addClass("kit-body-folded"), t.find("div.layui-footer").addClass("kit-footer-folded"), t.find(".kit-side-fold > i").addClass('icon-expand').removeClass('icon-fold'))
             }), l
         },
         render: function (i) {
