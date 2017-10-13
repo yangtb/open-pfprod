@@ -22,7 +22,8 @@ import java.io.IOException;
  */
 public class PfUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(PfUrlAuthenticationSuccessHandler.class);
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PfUrlAuthenticationSuccessHandler.class);
 
     private String targetUrl;
 

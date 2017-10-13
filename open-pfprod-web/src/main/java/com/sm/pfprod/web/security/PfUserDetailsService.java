@@ -7,8 +7,8 @@ import com.sm.pfprod.service.user.login.PfUserService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -29,7 +29,8 @@ import java.util.*;
  * @Date 2017/9/2 22:42
  */
 public class PfUserDetailsService implements UserDetailsService, InitializingBean {
-    private Log logger = LogFactory.getLog(PfUserDetailsService.class);
+
+    private static final Logger logger = LoggerFactory.getLogger(PfUserDetailsService.class);
 
     private AuthorityService authorityService;
 
@@ -71,7 +72,7 @@ public class PfUserDetailsService implements UserDetailsService, InitializingBea
         dbAuthsSet.addAll(customAuthorities);
 
         List<String> authorities = authorityService.findAuthoritiesByUserId(user.getUserId());
-        if (authorities != null && authorities.size() > 0) {
+        if (CollectionUtils.isNotEmpty(authorities)) {
             for (Iterator<String> iterator = authorities.iterator(); iterator.hasNext(); ) {
                 String authority = iterator.next();
                 dbAuthsSet.add(new PfGrantedAuthority(authority));
@@ -79,7 +80,7 @@ public class PfUserDetailsService implements UserDetailsService, InitializingBea
         }
 
         List<GrantedAuthority> dbAuthList = new ArrayList<GrantedAuthority>(dbAuthsSet);
-        if (dbAuthList.size() == 0) {
+        if (CollectionUtils.size(dbAuthList) == 0) {
             logger.debug("用户'" + username + "'没有权限资源，该用户将被当做‘用户不存在’处理");
             throw new UsernameNotFoundException(messages.getMessage("PfUserDetailsService.noAuthority", new Object[]{username}, "用户" + username + "没有被授予权限资源"));
         }

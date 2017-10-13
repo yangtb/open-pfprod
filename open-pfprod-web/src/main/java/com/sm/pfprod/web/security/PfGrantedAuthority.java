@@ -3,10 +3,10 @@ package com.sm.pfprod.web.security;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * @ClassName: YtGrantedAuthority
+ * @ClassName: PfGrantedAuthority
  * @Description: 角色权限资源授权体
- * @author 王勇琳
- * @date 2017年6月29日 下午5:26:33
+ * @Author yangtongbin
+ * @Date 2017/10/12 21:39
  */
 public class PfGrantedAuthority implements GrantedAuthority {
 	private static final long serialVersionUID = -1194969608168682514L;

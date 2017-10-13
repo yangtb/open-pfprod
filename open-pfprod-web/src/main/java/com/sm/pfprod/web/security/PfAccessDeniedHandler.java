@@ -13,13 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @ClassName: YtAccessDeniedHandler
+ * @ClassName: PfAccessDeniedHandler
  * @Description: 非法访问（认证异常）拒绝的处理
- * @author 王勇琳
- * @date 2017年6月30日 下午6:16:12
+ * @Author yangtongbin
+ * @Date 2017/10/12 21:39
  */
 public class PfAccessDeniedHandler implements AccessDeniedHandler {
-	protected static final Log logger = LogFactory.getLog(PfAccessDeniedHandler.class);
 
 	private String errorPage;
 

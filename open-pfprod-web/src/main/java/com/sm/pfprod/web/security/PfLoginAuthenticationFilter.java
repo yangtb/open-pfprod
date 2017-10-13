@@ -5,6 +5,8 @@ import com.sm.open.care.core.utils.rsa.RSAEncrypt;
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  * @Date 2017/9/1 23:07
  */
 public class PfLoginAuthenticationFilter extends PfAbstractAuthenticationProcessingFilter {
+
+    private static final Logger logger = LoggerFactory.getLogger(PfLoginAuthenticationFilter.class);
 
     public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
     public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";

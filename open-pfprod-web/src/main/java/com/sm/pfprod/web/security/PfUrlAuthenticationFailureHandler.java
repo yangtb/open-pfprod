@@ -2,8 +2,8 @@ package com.sm.pfprod.web.security;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -26,7 +26,7 @@ import java.io.IOException;
  */
 public class PfUrlAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
-    protected final Log logger = LogFactory.getLog(getClass());
+    private static final Logger logger = LoggerFactory.getLogger(PfUrlAuthenticationFailureHandler.class);
 
     private String defaultFailureUrl;
     private boolean forwardToDestination = false;

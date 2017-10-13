@@ -1,5 +1,7 @@
 package com.sm.pfprod.web.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.CompositeLogoutHandler;
@@ -19,12 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @ClassName: YtLogoutFilter
+ * @ClassName: PfLogoutFilter
  * @Description: 退出登录过滤器
- * @author 王勇琳
- * @date 2017年6月29日 下午6:34:32
+ * @Author yangtongbin
+ * @Date 2017/10/12 21:40
  */
 public class PfLogoutFilter extends GenericFilterBean {
+
+	private static final Logger logger = LoggerFactory.getLogger(PfLogoutFilter.class);
 
 	private RequestMatcher logoutRequestMatcher = new AntPathRequestMatcher("/logout");
 
@@ -43,9 +47,7 @@ public class PfLogoutFilter extends GenericFilterBean {
 		HttpServletResponse response = (HttpServletResponse) res;
 		if (requiresLogout(request, response)) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			if (logger.isDebugEnabled()) {
-				logger.debug("用户'" + auth + "'正在退出登录，并将退出到指定位置");
-			}
+				logger.debug("用户{}正在退出登录，并将退出到指定位置", auth);
 			//退出操作
 			this.handler.logout(request, response, auth);
 			//退出成功操作

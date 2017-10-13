@@ -1,5 +1,7 @@
 package com.sm.pfprod.web.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +21,8 @@ import org.springframework.util.Assert;
  * @Date 2017/9/2 22:49
  */
 public class UsernamePasswordAuthenticationProvider extends PfAbstractUserDetailsAuthenticationProvider {
+
+    private static final Logger logger = LoggerFactory.getLogger(UsernamePasswordAuthenticationProvider.class);
 
     private SaltSource saltSource;
 

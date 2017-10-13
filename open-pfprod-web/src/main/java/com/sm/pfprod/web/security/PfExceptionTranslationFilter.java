@@ -26,10 +26,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @ClassName: YtExceptionTranslationFilter
+ * @ClassName: PfExceptionTranslationFilter
  * @Description: 异常解析过滤器
- * @author 王勇琳
- * @date 2017年6月29日 下午5:25:56
+ * @Author yangtongbin
+ * @Date 2017/10/12 21:39
  */
 public class PfExceptionTranslationFilter extends GenericFilterBean {
 

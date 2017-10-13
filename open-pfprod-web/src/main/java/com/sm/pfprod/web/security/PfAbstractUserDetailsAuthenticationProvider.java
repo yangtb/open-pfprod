@@ -1,8 +1,8 @@
 package com.sm.pfprod.web.security;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -28,7 +28,7 @@ import org.springframework.util.Assert;
  */
 public abstract class PfAbstractUserDetailsAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 
-    protected final Log logger = LogFactory.getLog(getClass());
+    private static final Logger logger = LoggerFactory.getLogger(PfAbstractUserDetailsAuthenticationProvider.class);
 
     protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
     private UserCache userCache = new NullUserCache();

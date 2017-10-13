@@ -13,8 +13,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * @ClassName: RsaKeyPairQueueInit
  * @Description: Rsa公私钥队列初始化
- * @author 王勇琳
- * @date 2017年7月12日 上午10:26:17
+ * @Author yangtongbin
+ * @Date 2017/10/12 21:40
  */
 public class RsaKeyPairQueueInit {
 	private final static Logger logger = LoggerFactory.getLogger(RsaKeyPairQueueInit.class);

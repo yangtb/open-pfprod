@@ -1,6 +1,7 @@
 package com.sm.pfprod.web.security;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,7 +14,7 @@ import java.util.Set;
  * @Description: 当前登录用户上下文
  */
 public class SecurityContext {
-    private static final Logger logger = Logger.getLogger(SecurityContext.class);
+    private static final Logger logger = LoggerFactory.getLogger(SecurityContext.class);
 
     public static final String ANONYMOUS_USER = "anonymousUser";
 

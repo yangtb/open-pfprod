@@ -36,7 +36,7 @@
                 class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint"/>
     <!-- 认证异常处理 -->
     <beans:bean id="accessDeniedHandler" class="com.sm.pfprod.web.security.PfAccessDeniedHandler">
-        <beans:property name="errorPage" value="/403.jsp"/>
+        <beans:property name="errorPage" value="/403.html"/>
     </beans:bean>
 
     <beans:bean id="loginAuthenticationFilter" class="com.sm.pfprod.web.security.PfLoginAuthenticationFilter">
