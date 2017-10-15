@@ -49,7 +49,7 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit="" lay-filter="addNotice">
-                    <i class="iconfont icon-save"></i> 保存
+                    <i class="iconfont icon-save-copy"></i> 保存
                 </button>
                 <button type="button" class="layui-btn" id="preview">
                     <i class="iconfont icon-look2"></i> 预览
