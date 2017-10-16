@@ -76,7 +76,7 @@
 
     <security:global-method-security pre-post-annotations="enabled" jsr250-annotations="enabled" proxy-target-class="true"/>
     <mvc:view-controller path="/" view-name="redirect:/login" />
-    <mvc:view-controller path="/logoutsuccess" view-name="redirect:/" />
+    <mvc:view-controller path="/logoutsuccess" view-name="redirect:/login" />
 
 
 </beans>
