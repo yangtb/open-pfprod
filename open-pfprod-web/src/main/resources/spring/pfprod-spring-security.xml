@@ -15,13 +15,19 @@
     <http pattern="**.jpg" security="none"></http>
     <http pattern="**.png" security="none"></http>
 
+    <http pattern="/403.html" security="none"></http>
+    <http pattern="/404.html" security="none"></http>
+    <http pattern="/login/**" security="none"></http>
+    <http pattern="/" security="none"></http>
+    <http pattern="/logoutsuccess" security="none"></http>
+
     <http use-expressions="true" entry-point-ref="http403RestfulEntryPoint"
           authentication-manager-ref="authenticationManager">
         <intercept-url pattern="/**" access="permitAll"/>
         <custom-filter position="FORM_LOGIN_FILTER" ref="loginAuthenticationFilter"/>
         <custom-filter position="LOGOUT_FILTER" ref="logoutFilter"/>
         <access-denied-handler ref="accessDeniedHandler"/>
-        <anonymous enabled="true" granted-authority="ROLE_ANONYMOUS" username="anonymousUser"/>
+        <anonymous enabled="false" granted-authority="ROLE_ANONYMOUS" username="anonymousUser"/>
         <csrf disabled="true"/>
         <headers defaults-disabled="true">
             <cache-control/>
@@ -120,7 +126,7 @@
     <!-- 自定义认证用户，username可以与数据库中相同。当username与数据库中一样时，其Authorities将会把自定义的增加进去，其它属性以数据库为准 -->
     <util:list id="customUserList" list-class="java.util.ArrayList" value-type="com.sm.pfprod.web.security.CustomUser">
         <beans:bean class="com.sm.pfprod.web.security.CustomUser"
-                    p:username="yangtb" p:customAuthoritiesAsString="ROLE_SUPER"/>
+                    p:username="super" p:customAuthoritiesAsString="ROLE_SUPER"/>
     </util:list>
 
     <beans:bean id="securityContext" class="com.sm.pfprod.web.security.SecurityContext"/>
