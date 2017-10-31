@@ -2,7 +2,7 @@
  * 字典表单
  */
 layui.config({
-    base: '../public/layui/build/js/'
+    base: basePath + '/public/layui/build/js/'
 }).use(['form', 'layer', 'jquery', 'common'], function () {
     var $ = layui.$,
         form = layui.form,
@@ -10,11 +10,11 @@ layui.config({
 
     //监听提交
     form.on('submit(addDic)', function (data) {
-        var url = basePath + '/dic/';
+        var url = basePath + '/pf/r/dic/';
         if (formType == 'add') {
-            url = 'add';
+            url += 'add';
         } else if (formType == 'edit') {
-            url = 'edit';
+            url += 'edit';
         }
         $.ajax({
             url: url,

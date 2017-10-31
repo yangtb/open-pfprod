@@ -10,11 +10,11 @@ layui.config({
 
     //监听提交
     form.on('submit(addParam)', function (data) {
-        var url = basePath + '/param/';
+        var url = basePath + '/pf/r/param/';
         if (formType == 'add') {
-            url = 'add';
+            url += 'add';
         } else if (formType == 'edit') {
-            url = 'edit';
+            url += 'edit';
         }
         $.ajax({
             url: url,

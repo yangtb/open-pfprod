@@ -3,7 +3,7 @@
  * @constructor
  */
 layui.config({
-    base: '../public/layui/build/js/'
+    base: basePath + '/public/layui/build/js/'
 }).use(['table', 'form', 'jquery', 'laydate', 'common'], function () {
     var $ = layui.$,
         table = layui.table,
@@ -32,7 +32,7 @@ layui.config({
             {field: 'gmtCreate', width: 170, sort: true, title: '发布时间'},
             {fixed: 'right', width: 160, title: '操作', align: 'center', toolbar: '#noticeBar'}
         ]] //设置表头
-        , url: 'list'
+        , url: basePath + '/pf/p/notice/list'
         , limit: 15
         , even: true
         , limits: [15, 30, 100]
@@ -108,7 +108,7 @@ layui.config({
     });
 
     var _delNotice = function (currentData) {
-        var url = basePath + '/notice/del';
+        var url = basePath + '/pf/r/notice/del';
         var reqData = new Array();
         var noticeTitle = '';
         $.each(currentData, function (index, content) {

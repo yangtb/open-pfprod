@@ -3,7 +3,9 @@ package com.sm.pfprod.facade.menu;
 import com.sm.open.care.core.annotation.Loggable;
 import com.sm.open.care.core.enums.Level;
 import com.sm.open.care.core.exception.BizRuntimeException;
+import com.sm.pfprod.model.dto.system.menu.PfMenuListDto;
 import com.sm.pfprod.model.dto.user.menu.MenuDto;
+import com.sm.pfprod.model.entity.SysFunction;
 import com.sm.pfprod.model.entity.SysMenu;
 import com.sm.pfprod.model.param.PageParam;
 import com.sm.pfprod.model.result.PageResult;
@@ -24,7 +26,7 @@ public class PfMenuFacadeImpl implements PfMenuFacade {
 
     @Loggable(bizDec = "获取系统菜单列表", level = Level.info)
     @Override
-    public PageResult<SysMenu> listMenus(MenuDto dto) {
+    public PageResult<SysFunction> listMenus(MenuDto dto) {
         try {
             PageParam.initPageDto(dto);
             return ResultFactory.initPageResultWithSuccess(pfMenuService.countMenus(dto), pfMenuService.listMenus(dto));
@@ -36,8 +38,8 @@ public class PfMenuFacadeImpl implements PfMenuFacade {
 
     @Loggable(bizDec = "新增系统菜单", level = Level.info)
     @Override
-    public boolean addMenu(SysMenu dto) {
-        if (pfMenuService.isExistMenu(dto.getMenuId())) {
+    public boolean addMenu(SysFunction dto) {
+        if (pfMenuService.isExistMenu(dto.getCode())) {
             throw new BizRuntimeException(PfMenuConstant.ADD_MENU_ISEXIST, PfMenuConstant.ADD_MENU_ISEXIST_MSG);
         }
         return pfMenuService.addMenu(dto);
@@ -45,13 +47,13 @@ public class PfMenuFacadeImpl implements PfMenuFacade {
 
     @Loggable(bizDec = "修改系统菜单状态", level = Level.info)
     @Override
-    public boolean changeStatusMenu(MenuDto dto) {
-        return pfMenuService.changeStatusMenu(dto);
+    public boolean changeStatusMenu(PfMenuListDto dto) {
+        return pfMenuService.changeStatusMenu(dto.getList(), dto.getStatus());
     }
 
     @Loggable(bizDec = "修改系统菜单", level = Level.info)
     @Override
-    public boolean updateMenu(SysMenu dto) {
+    public boolean updateMenu(SysFunction dto) {
         return pfMenuService.updateMenu(dto);
     }
 

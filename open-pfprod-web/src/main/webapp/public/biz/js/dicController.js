@@ -3,7 +3,7 @@
  * @constructor
  */
 layui.config({
-    base: '../public/layui/build/js/'
+    base: basePath + '/public/layui/build/js/'
 }).use(['table', 'form', 'jquery', 'common'], function () {
     var $ = layui.$,
         table = layui.table,
@@ -20,7 +20,7 @@ layui.config({
             {field: 'dictName', width: 150, title: '字典名称'},
             {fixed: 'right', width: 82, title: '操作', align: 'center', toolbar: '#dicBar'}
         ]] //设置表头
-        , url: basePath + '/dic/list'
+        , url: basePath + '/pf/p/dic/list'
         , even: true
         , page: false
     });
@@ -42,7 +42,7 @@ layui.config({
             {field: 'operator', width: 120, title: '最后修改人'},
             {fixed: 'right', width: 100, title: '操作', align: 'center', toolbar: '#enumBar'}
         ]] //设置表头
-        , url: basePath + '/dic/enum/list'
+        , url: basePath + '/pf/p/dic/enum/list'
         , limit: 15
         , even: true
         , limits: [15, 30, 100]
@@ -197,7 +197,7 @@ layui.config({
     });
 
     var _delDic = function (currentData) {
-        var url = basePath + '/dic/del';
+        var url = basePath + '/pf/r/dic/del';
         var reqData = new Array();
         var name = '';
         $.each(currentData, function (index, content) {
@@ -231,7 +231,7 @@ layui.config({
     });
 
     var _delEnum = function (currentData) {
-        var url = basePath + '/dic/del';
+        var url = basePath + '/pf/r/dic/del';
         var reqData = new Array();
         var name = '';
         $.each(currentData, function (index, content) {
@@ -300,7 +300,7 @@ layui.config({
     $('.refreshCache').on('click', function () {
 
         $.ajax({
-            url: basePath + '/dic/refreshCache',
+            url: basePath + '/pf/r/dic/refreshCache',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",

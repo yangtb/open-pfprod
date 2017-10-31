@@ -23,7 +23,7 @@ layui.config({
             return false;
         }
 
-        var url = basePath + "/user/updatePsw";
+        var url = basePath + "/pf/r/user/updatePsw";
         $.ajax({
             url: url,
             type: 'post',

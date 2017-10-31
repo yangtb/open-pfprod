@@ -1,4 +1,4 @@
-package com.sm.pfprod.web.system;
+package com.sm.pfprod.web.portal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

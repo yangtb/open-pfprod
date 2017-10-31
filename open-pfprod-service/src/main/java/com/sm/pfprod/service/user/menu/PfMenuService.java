@@ -1,6 +1,7 @@
 package com.sm.pfprod.service.user.menu;
 
 import com.sm.pfprod.model.dto.user.menu.MenuDto;
+import com.sm.pfprod.model.entity.SysFunction;
 import com.sm.pfprod.model.entity.SysMenu;
 import com.sm.pfprod.model.vo.menu.PfMenuVo;
 import com.sm.pfprod.model.vo.menu.PfMenuZtreeVo;
@@ -20,7 +21,7 @@ public interface PfMenuService {
      *
      * @return
      */
-    List<SysMenu> listMenus(MenuDto dto);
+    List<SysFunction> listMenus(MenuDto dto);
 
     /**
      * 菜单总数
@@ -33,23 +34,24 @@ public interface PfMenuService {
      * @param dto
      * @return
      */
-    boolean addMenu(SysMenu dto);
+    boolean addMenu(SysFunction dto);
 
     /**
      * 判断是否存在该菜单
      *
-     * @param menuId 菜单ID
+     * @param code 菜单code
      * @return
      */
-    boolean isExistMenu(Long menuId);
+    boolean isExistMenu(String code);
 
     /**
      * 修改菜单状态
      *
-     * @param dto
+     * @param list
+     * @param status
      * @return
      */
-    boolean changeStatusMenu(MenuDto dto);
+    boolean changeStatusMenu(List<Long> list, String status);
 
     /**
      * 编辑菜单
@@ -57,7 +59,7 @@ public interface PfMenuService {
      * @param dto
      * @return
      */
-    boolean updateMenu(SysMenu dto);
+    boolean updateMenu(SysFunction dto);
 
     /**
      * 获取菜单[tree]

@@ -1,6 +1,6 @@
-package com.sm.pfprod.web.system.user.monitor;
+package com.sm.pfprod.web.portal.monitor;
 
-import com.sm.pfprod.web.system.BaseController;
+import com.sm.pfprod.web.portal.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date 2017/10/9 09:44
  */
 @Controller
-@RequestMapping(value = "/monitor")
-public class PfMonitorRestController extends BaseController {
+@RequestMapping(value = "/pf/p/monitor")
+public class PfMonitorController extends BaseController {
 
     @RequestMapping("/server/page")
     public String page() {

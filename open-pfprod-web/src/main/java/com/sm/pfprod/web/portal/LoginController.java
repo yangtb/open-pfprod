@@ -1,4 +1,4 @@
-package com.sm.pfprod.web.system;
+package com.sm.pfprod.web.portal;
 
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;

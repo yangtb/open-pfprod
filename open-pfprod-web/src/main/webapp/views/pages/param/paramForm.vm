@@ -12,6 +12,7 @@
 
     <script>
         var basePath = '${basePath}';
+        var formType = '${formType}';
     </script>
 </head>
 
@@ -113,7 +114,6 @@
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 
 <script>
-    var formType = '${formType}';
     function fullForm(data) {
         $(document).ready(function(){
             $("#paramform").autofill(data);

@@ -24,83 +24,94 @@
 
     <!-- 获取菜单 -->
     <select id="listMenus" parameterType="com.sm.pfprod.model.dto.user.menu.MenuDto"
-            resultType="com.sm.pfprod.model.entity.SysMenu">
-        SELECT
-        <include refid="Base_Column_List"/>
+            resultType="com.sm.pfprod.model.entity.SysFunction">
+        SELECT  id , name , code , parent_code , sys_function_code , level , function_url ,
+                sort_num , function_type , platform_type , status ,
+                icon_type , icon_source , gmt_create , gmt_modify
         FROM
-        sys_menu sm
+            sys_function sf
         WHERE
-        sm.is_deleted = 'N'
+            1 = 1
         <if test="name != null and name != ''">
-            AND sm.name LIKE concat(#{name},'%')
+            AND sf.name LIKE concat(#{name},'%')
         </if>
         <if test="level != null and level != 0">
-            AND sm.level = #{level}
+            AND sf.level = #{level}
         </if>
-        <if test="disable != null">
-            AND sm.disable = #{disable}
+        <if test="status != null">
+            AND sf.status = #{status}
         </if>
-        ORDER BY menu_id
+        ORDER BY id
         limit #{offset}, #{limit}
     </select>
 
     <!-- 菜单总数 -->
     <select id="countMenus" parameterType="com.sm.pfprod.model.dto.user.menu.MenuDto" resultType="java.lang.Long">
         SELECT
-        COUNT(1)
+            COUNT(1)
         FROM
-        sys_menu sm
+            sys_function sf
         WHERE
-        sm.is_deleted = 'N'
+            1 = 1
         <if test="name != null and name != ''">
-            AND sm.name LIKE concat(#{name},'%')
+            AND sf.name LIKE concat(#{name},'%')
         </if>
         <if test="level != null and level != 0">
-            AND sm.level = #{level}
+            AND sf.level = #{level}
         </if>
-        <if test="disable != null">
-            AND sm.disable = #{disable}
+        <if test="status != null">
+            AND sf.status = #{status}
         </if>
     </select>
 
     <!-- 判断是否存在该菜单 -->
     <select id="isExistMenu" resultType="java.lang.Boolean">
-        SELECT COUNT(1) FROM sys_menu WHERE menu_id = #{menuId}
+        SELECT COUNT(1) FROM sys_function WHERE code = #{code}
     </select>
 
     <!-- 新增菜单 -->
-    <insert id="addMenu" parameterType="com.sm.pfprod.model.entity.SysMenu">
-        INSERT INTO sys_menu(
-          menu_id, level , url , name , parent_id , sort ,
-          disable , is_deleted , gmt_create , gmt_modify ,img
+    <insert id="addMenu" parameterType="com.sm.pfprod.model.entity.SysFunction">
+        INSERT INTO sys_function (
+          	name , code , parent_code , sys_function_code , level ,
+            function_url , sort_num , function_type , platform_type ,
+            status , icon_type , icon_source , gmt_create , gmt_modify
         )
         VALUES(
-          #{menuId}, #{level} , #{url} , #{name} , #{parentId} , #{sort} ,
-          0 , 'N', NOW() , NOW() , #{img}
+          #{name}, #{code} , #{parentCode} , #{sysFunctionCode} , #{level} ,
+          #{functionUrl} , #{sortNum} , #{functionType} , #{platformType} ,
+          #{status} , #{iconType} , #{iconSource} , NOW() , NOW()
         )
     </insert>
 
     <!-- 编辑菜单 -->
-    <update id="updateMenu" parameterType="com.sm.pfprod.model.entity.SysMenu">
-        UPDATE sys_menu
-        SET level = #{level} ,
-            url = #{url} ,
-            name = #{name} ,
-            parent_id = #{parentId} ,
-            sort = #{sort} ,
-            disable = #{disable} ,
-            <if test="isDeleted != null and isDeleted != ''">
-            is_deleted = #{isDeleted} ,
-            </if>
-            gmt_modify = NOW() ,
-            img = #{img}
+    <update id="updateMenu" parameterType="com.sm.pfprod.model.entity.SysFunction">
+        UPDATE sys_function
+        SET name = #{name} ,
+            code = #{code} ,
+            parent_code = #{parentCode} ,
+            sys_function_code = #{sysFunctionCode} ,
+            level = #{level} ,
+            function_url = #{functionUrl} ,
+            sort_num = #{sortNum} ,
+            function_type = #{functionType} ,
+            platform_type = #{platformType} ,
+            status = #{status} ,
+            icon_type = #{iconType} ,
+            icon_source = #{iconSource} ,
+            gmt_modify = NOW()
         WHERE
-            menu_id = ${menuId}
+            id = #{id}
     </update>
 
     <!-- 修改菜单状态 -->
-    <update id="changeStatusMenu" parameterType="com.sm.pfprod.model.dto.user.menu.MenuDto">
-        UPDATE sys_menu SET disable=#{disable} WHERE menu_id = #{menuId}
+    <update id="changeStatusMenu">
+        UPDATE sys_function SET status = #{status}
+        WHERE
+        id in (
+        <foreach collection="list" item="item" separator="," >
+            #{item}
+        </foreach>
+        )
     </update>
 
     <!-- 获取系统所有菜单【tree】 -->

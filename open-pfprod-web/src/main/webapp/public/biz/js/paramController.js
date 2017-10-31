@@ -3,7 +3,7 @@
  * @constructor
  */
 layui.config({
-    base: '../public/layui/build/js/'
+    base: basePath + '/public/layui/build/js/'
 }).use(['table', 'form', 'jquery', 'common'], function () {
     var $ = layui.$,
         table = layui.table,
@@ -32,7 +32,7 @@ layui.config({
             {field: 'operator', width: 120, title: '操作人员'},
             {fixed: 'right', width: 160, title: '操作', align: 'center', toolbar: '#paramBar'}
         ]] //设置表头
-        , url: basePath + '/param/list'
+        , url: basePath + '/pf/p/param/list'
         , limit: 15
         , even: true
         , limits: [15, 30, 100]
@@ -86,7 +86,6 @@ layui.config({
             return;
         }
         _addOrEdit("edit", currentData[0]);
-
     });
 
     // 获取编辑行数据
@@ -123,7 +122,7 @@ layui.config({
     });
 
     var _changeParam = function (currentData) {
-        var url = basePath + '/param/changeStatus';
+        var url = basePath + '/pf/r/param/changeStatus';
         var reqData = new Array();
         var name = '';
         $.each(currentData, function (index, content) {

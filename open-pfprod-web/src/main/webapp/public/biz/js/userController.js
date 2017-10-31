@@ -2,9 +2,8 @@
  * 用户
  * @constructor
  */
-
 layui.config({
-    base: '../public/layui/build/js/'
+    base: basePath + '/public/layui/build/js/'
 }).use(['table', 'form', 'jquery', 'common'], function () {
     var $ = layui.$,
         table = layui.table,
@@ -35,7 +34,7 @@ layui.config({
             {field: 'last_login_time', width: 170, sort: true, title: '最后登录时间'},
             {fixed: 'right', width: 180, title: '操作', align: 'center', toolbar: '#userBar'}
         ]] //设置表头
-        , url: 'list'
+        , url: basePath + '/pf/p/user/list'
         , limit: 15
         , even: true
         , limits: [15, 30, 100]
@@ -139,7 +138,7 @@ layui.config({
     }
 
     var _delUser = function (currentData) {
-        var url = contextPath + '/user/del';
+        var url = basePath + '/pf/r/user/del';
         var reqData = new Array();
         var username = '';
         $.each(currentData, function (index, content) {
@@ -163,7 +162,7 @@ layui.config({
     }
 
     var _freezeUser = function (currentData) {
-        var url = contextPath + '/user/freeze';
+        var url = basePath + '/pf/r/user/freeze';
         var reqData = new Array();
         var username = '';
         $.each(currentData, function (index, content) {

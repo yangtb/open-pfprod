@@ -1,4 +1,4 @@
-package com.sm.pfprod.web.system.util;
+package com.sm.pfprod.web.util;
 
 import com.sm.pfprod.model.entity.SysDictionary;
 import com.sm.pfprod.model.enums.PfEnum;
@@ -55,7 +55,6 @@ public class EnumUtil {
         }
         return item.getDicMap();
     }
-
 
     /**
      * 构造方法 从数据库读取枚举值

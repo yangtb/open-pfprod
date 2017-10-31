@@ -16,7 +16,7 @@ layui.config({
 
     //监听提交
     form.on('submit(resetPsw)', function (data) {
-        var url = basePath + "/user/resetPsw";
+        var url = basePath + "/pf/r/user/resetPsw";
         $.ajax({
             url: url,
             type: 'post',

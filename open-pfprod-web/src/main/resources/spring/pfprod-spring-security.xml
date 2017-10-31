@@ -23,7 +23,7 @@
 
     <http use-expressions="true" entry-point-ref="http403RestfulEntryPoint"
           authentication-manager-ref="authenticationManager">
-        <intercept-url pattern="/**" access="permitAll"/>
+        <intercept-url pattern="/pf/**" access="permitAll"/>
         <custom-filter position="FORM_LOGIN_FILTER" ref="loginAuthenticationFilter"/>
         <custom-filter position="LOGOUT_FILTER" ref="logoutFilter"/>
         <access-denied-handler ref="accessDeniedHandler"/>

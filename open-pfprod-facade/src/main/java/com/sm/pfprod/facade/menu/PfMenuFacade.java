@@ -1,6 +1,8 @@
 package com.sm.pfprod.facade.menu;
 
+import com.sm.pfprod.model.dto.system.menu.PfMenuListDto;
 import com.sm.pfprod.model.dto.user.menu.MenuDto;
+import com.sm.pfprod.model.entity.SysFunction;
 import com.sm.pfprod.model.entity.SysMenu;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.menu.PfMenuVo;
@@ -21,7 +23,7 @@ public interface PfMenuFacade {
      *
      * @return
      */
-    PageResult<SysMenu> listMenus(MenuDto dto);
+    PageResult<SysFunction> listMenus(MenuDto dto);
 
     /**
      * 新增菜单
@@ -29,7 +31,7 @@ public interface PfMenuFacade {
      * @param dto
      * @return
      */
-    boolean addMenu(SysMenu dto);
+    boolean addMenu(SysFunction dto);
 
     /**
      * 修改菜单状态
@@ -37,7 +39,7 @@ public interface PfMenuFacade {
      * @param dto
      * @return
      */
-    boolean changeStatusMenu(MenuDto dto);
+    boolean changeStatusMenu(PfMenuListDto dto);
 
     /**
      * 编辑菜单
@@ -45,7 +47,7 @@ public interface PfMenuFacade {
      * @param dto
      * @return
      */
-    boolean updateMenu(SysMenu dto);
+    boolean updateMenu(SysFunction dto);
 
     /**
      * 获取菜单[tree]

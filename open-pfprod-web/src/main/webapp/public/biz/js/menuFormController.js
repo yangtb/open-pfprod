@@ -2,7 +2,7 @@
  * 菜单表单
  */
 layui.config({
-    base: '../public/layui/build/js/'
+    base: basePath + '/public/layui/build/js/'
 }).use(['form', 'layer', 'table', 'jquery', 'common'], function () {
     var $ = layui.$,
         form = layui.form,
@@ -11,9 +11,7 @@ layui.config({
 
     //自定义验证规则
     form.verify({
-        menuId: [/^[1-9]\d*$/, '菜单id必须是正整数']
-        , parentId: [/^[0-9]\d*$/, '父菜单id必须是大于等于0数字']
-        , sort: [/^[1-9]\d*$/, '排序必须是正整数']
+        sort: [/^[1-9]\d*$/, '排序必须是正整数']
     });
 
     //监听指定开关
@@ -24,11 +22,11 @@ layui.config({
     });
     //监听提交
     form.on('submit(addMenu)', function (data) {
-        var url = '';
+        var url = basePath + '/pf/r/menu/';
         if (formType == 'add') {
-            url = 'add';
+            url += 'add';
         } else if (formType == 'edit') {
-            url = 'edit';
+            url += 'edit';
         }
         if (!data.field.disable) {
             data.field.disable = 1;

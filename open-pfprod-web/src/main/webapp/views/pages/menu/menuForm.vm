@@ -9,44 +9,35 @@
     <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '${basePath}';
+        var formType = '${formType}';
+    </script>
 </head>
 
 <body class="body-my">
 
 <div class="wrapper-content">
     <form class="layui-form" id="menuform">
-
-        <div class="layui-form-item form-item-my">
-            <div class="layui-inline">
-                <label class="layui-form-label">菜单ID<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
-                <div class="layui-input-inline">
-                    <input type="text" name="menuId" lay-verify="required|menuId" autocomplete="off"
-                           class="layui-input">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">父菜单ID<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
-                <div class="layui-input-inline">
-                    <input type="text" name="parentId" lay-verify="parentId" autocomplete="off"
-                           class="layui-input">
-                </div>
-            </div>
+        <div hidden>
+            <input name="id" hidden>
         </div>
-
         <div class="layui-form-item form-item-my">
             <div class="layui-inline">
-                <label class="layui-form-label">菜单名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                <label class="layui-form-label">名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
                     <input type="text" name="name" data-fill="" lay-verify="required" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">菜单类型<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                <label class="layui-form-label">级别<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
                     <select name="level" id="level" lay-verify="required">
                         <option value="">请选择</option>
                         <option value="1">一级</option>
                         <option value="2">二级</option>
+                        <option value="3">三级</option>
                     </select>
                 </div>
             </div>
@@ -54,32 +45,83 @@
 
         <div class="layui-form-item form-item-my">
             <div class="layui-inline">
-                <label class="layui-form-label">菜单url</label>
+                <label class="layui-form-label">编码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
-                    <input type="text" name="url" autocomplete="off" class="layui-input">
+                    <input type="text" name="code" lay-verify="required" autocomplete="off"
+                           class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">排序<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                <label class="layui-form-label">父编码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
-                    <input type="text" name="sort" lay-verify="required|sort" autocomplete="off" class="layui-input">
+                    <input type="text" name="parentCode" autocomplete="off"
+                           class="layui-input">
                 </div>
             </div>
         </div>
 
         <div class="layui-form-item form-item-my">
-            <label class="layui-form-label">状态</label>
-            <div class="layui-input-block">
-                <input type="checkbox" checked="" name="disable" lay-skin="switch"
-                       lay-filter="menuDisableSwitch" value="0" lay-text="有效|无效">
+            <div class="layui-inline">
+                <label class="layui-form-label">权限url</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="functionUrl" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">资源类别<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                <div class="layui-input-inline">
+                    <select name="functionType" lay-verify="required">
+                        <option value="1" selected>菜单权限功能</option>
+                        <option value="2">按钮、链接功能权限资源</option>
+                        <option value="3">接口功能权限资源</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item form-item-my">
+            <div class="layui-inline">
+                <label class="layui-form-label">排序<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                <div class="layui-input-inline">
+                    <input type="text" name="sortNum" lay-verify="required|sort" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">状态</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" checked="" name="status" lay-skin="switch"
+                           lay-filter="menuDisableSwitch" value="enabled" lay-text="有效|无效">
+                </div>
             </div>
         </div>
 
         <div class="layui-form-item form-item-my5">
-            <label class="layui-form-label">图标</label>
-            <div class="layui-input-block">
-                <input type="text" name="img" autocomplete="off" class="layui-input">
+            <div class="layui-inline">
+                <label class="layui-form-label">图标类型</label>
+                <div class="layui-input-inline">
+                    <select name="iconType" lay-verify="required">
+                        <option value="0">无</option>
+                        <option value="1">iconfont矢量图标</option>
+                        <option value="2">url图标</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">图标</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="iconSource" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
 
+        <div class="layui-form-item form-item-my5">
+            <div class="layui-inline">
+                <label class="layui-form-label">所属平台<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                <div class="layui-input-inline">
+                    <select name="platformType" lay-verify="required">
+                        <option value="pfprod">管理平台</option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -104,7 +146,6 @@
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 
 <script>
-    var formType = '${formType}';
     function fullForm(data) {
         $(document).ready(function(){
             $("#menuform").autofill(data);

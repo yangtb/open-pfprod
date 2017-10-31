@@ -3,7 +3,7 @@
  */
 var message;
 layui.config({
-    base: 'public/layui/build/js/'
+    base: basePath + '/public/layui/build/js/'
 }).use(['app', 'message', 'common'], function () {
     var app = layui.app,
         $ = layui.jquery,
@@ -50,7 +50,7 @@ layui.config({
     });
 
     $("#modifyPass").on('click', function () {
-        common.open('<i class="iconfont icon-modifyPass"></i>' + ' 修改密码', basePath + '/user/modifyPass', 600, 300, null, '4');
+        common.open('<i class="iconfont icon-modifyPass"></i>' + ' 修改密码', basePath + '/pf/p/user/modifyPass', 600, 300, null, '4');
     });
 
     var url = basePath + '/openplatformlogout';

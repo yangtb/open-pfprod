@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '${basePath}';
+    </script>
 </head>
 
 <body>
@@ -20,6 +24,9 @@
             <div class="layui-btn-group">
                 <button type="button" class="layui-btn add">
                     <i class="iconfont icon-add"></i> 增加
+                </button>
+                <button type="button" class="layui-btn edit">
+                    <i class="iconfont icon-edit"></i> 编辑
                 </button>
                 <button type="button" class="layui-btn bach-invalid">
                     <i class="iconfont icon-stop"></i> 停用
@@ -34,12 +41,13 @@
                     <option value="">请选择</option>
                     <option value="1">一级</option>
                     <option value="2">二级</option>
+                    <option value="3">三级</option>
                 </select>
             </div>
             <div class="layui-input-inline" style="width: 100px;">
-                <select name="menuStatus">
-                    <option value="0" selected>启用</option>
-                    <option value="1">停用</option>
+                <select name="status">
+                    <option value="enabled" selected>启用</option>
+                    <option value="disabled">停用</option>
                 </select>
             </div>
         </div>
@@ -65,31 +73,65 @@
 
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-mini" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>
-    {{#  if(d.disable == 0){ }}
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="disable"><i class="iconfont icon-stop"></i> 停用</a>
+    {{#  if(d.status == 'enabled'){ }}
+    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="stop"><i class="iconfont icon-stop"></i> 停用</a>
     {{#  } else { }}
-    <a class="layui-btn  layui-btn-mini" lay-event="enable"><i class="iconfont icon-save"></i> 启用</a>
+    <a class="layui-btn  layui-btn-mini" lay-event="recover"><i class="iconfont icon-save"></i> 启用</a>
     {{#  } }}
 </script>
 
 <script type="text/html" id="levelTpl">
     {{#  if(d.level == 1){ }}
     <span class="label label-info">一级</span>
-    {{#  } else { }}
+    {{#  } }}
+    {{#  if(d.level == 2){ }}
     <span class="label label-warning">二级</span>
+    {{#  } }}
+    {{#  if(d.level == 3){ }}
+    <span class="label label-danger">三级</span>
     {{#  } }}
 </script>
 
-<script type="text/html" id="disableTpl">
-    {{#  if(d.disable == 0){ }}
+<script type="text/html" id="functionTypeTpl">
+    {{#  if(d.functionType == 1){ }}
+    <span class="label label-info">菜单权限功能</span>
+    {{#  } }}
+    {{#  if(d.functionType == 2){ }}
+    <span class="label label-warning">按钮、链接功能权限资源</span>
+    {{#  } }}
+    {{#  if(d.functionType == 3){ }}
+    <span class="label label-danger">接口功能权限资源</span>
+    {{#  } }}
+</script>
+
+<script type="text/html" id="iconTypeTpl">
+    {{#  if(d.iconType == 0){ }}
+    <span class="label label-info">无</span>
+    {{#  } }}
+    {{#  if(d.iconType == 1){ }}
+    <span class="label label-info">iconfont矢量图标</span>
+    {{#  } }}
+    {{#  if(d.iconType == 2){ }}
+    <span class="label label-warning">url图标</span>
+    {{#  } }}
+</script>
+
+<script type="text/html" id="statusTpl">
+    {{#  if(d.status == 'enabled'){ }}
     <span class="label label-info">有效</span>
     {{#  } else { }}
-    <span class="label label-warning">无效</span>
+    <span class="label label-danger">无效</span>
     {{#  } }}
 </script>
 
 <script type="text/html" id="imgTpl">
-    <span><i class="iconfont {{d.img}}"></i> {{d.img}}</span>
+    {{#  if(d.iconType != 0){ }}
+        {{#  if(d.iconType == '1'){ }}
+        <span><i class="iconfont {{d.iconSource}}"></i> {{d.iconSource}}</span>
+        {{#  } else { }}
+        <span>{{d.iconSource}}</span>
+        {{#  } }}
+    {{#  } }}
 </script>
 
 </body>

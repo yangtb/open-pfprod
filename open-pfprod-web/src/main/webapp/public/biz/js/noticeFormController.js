@@ -2,7 +2,7 @@
  * 菜单表单
  */
 layui.config({
-    base: '../public/layui/build/js/'
+    base: basePath + '/public/layui/build/js/'
 }).use(['form', 'layer', 'layedit', 'jquery', 'common'], function () {
     var $ = layui.$,
         form = layui.form,
@@ -31,7 +31,7 @@ layui.config({
         data.noticeTitle = $("input[name='noticeTitle']").val();
         data.noticeType = $("select[name='noticeType']").val();
         data.noticeContent = layedit.getContent(editIndex); //获取html
-        var index = common.open('公告预览', basePath + '/notice/detail', 880, 430, _successFunction(data));
+        var index = common.open('公告预览', basePath + '/pf/p/notice/detail', 880, 430, _successFunction(data));
         layer.full(index);
     });
 
@@ -53,11 +53,11 @@ layui.config({
             common.errorMsg("请填写公告内容");
             return false;
         }
-        var url = basePath + '/notice/';
+        var url = basePath + '/pf/r/notice/';
         if (formType == 'add') {
-            url = 'add';
+            url += 'add';
         } else if (formType == 'edit') {
-            url = 'edit';
+            url += 'edit';
         }
         $.ajax({
             url: url,

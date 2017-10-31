@@ -1,8 +1,8 @@
 package com.sm.pfprod.dal.user.menu;
 
 import com.sm.pfprod.model.dto.user.menu.MenuDto;
+import com.sm.pfprod.model.entity.SysFunction;
 import com.sm.pfprod.model.entity.SysMenu;
-import com.sm.pfprod.model.vo.menu.PfMenuVo;
 import com.sm.pfprod.model.vo.menu.PfMenuZtreeVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -18,7 +18,7 @@ public interface PfMenuDao {
      * @param dto
      * @return
      */
-    List<SysMenu> listMenus(MenuDto dto);
+    List<SysFunction> listMenus(MenuDto dto);
 
     /**
      * 菜单总数
@@ -34,23 +34,23 @@ public interface PfMenuDao {
      * @param dto
      * @return
      */
-    boolean addMenu(SysMenu dto);
+    boolean addMenu(SysFunction dto);
 
     /**
      * 判断是否存在该菜单
      *
-     * @param menuId 菜单ID
+     * @param code 菜单code
      * @return
      */
-    boolean isExistMenu(@Param("menuId") Long menuId);
+    boolean isExistMenu(@Param("code") String code);
 
     /**
      * 删除菜单
      *
-     * @param dto
      * @return
      */
-    int changeStatusMenu(MenuDto dto);
+    int changeStatusMenu(@Param("list") List<Long> list,
+                         @Param("status") String status);
 
     /**
      * 获取系统所有菜单
@@ -73,7 +73,7 @@ public interface PfMenuDao {
      * @param dto
      * @return
      */
-    boolean updateMenu(SysMenu dto);
+    boolean updateMenu(SysFunction dto);
 
     /**
      * 获取用户菜单

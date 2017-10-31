@@ -1,18 +1,16 @@
-package com.sm.pfprod.web.system.user.menu;
+package com.sm.pfprod.web.rest.user.menu;
 
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.facade.menu.PfMenuFacade;
+import com.sm.pfprod.model.dto.system.menu.PfMenuListDto;
 import com.sm.pfprod.model.dto.user.menu.MenuDto;
 import com.sm.pfprod.model.dto.user.role.PfRoleCommonDto;
-import com.sm.pfprod.model.entity.SysMenu;
-import com.sm.pfprod.model.result.PageResult;
-import com.sm.pfprod.web.system.BaseController;
+import com.sm.pfprod.model.entity.SysFunction;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,41 +27,20 @@ import java.util.Map;
  * @Date 2017/9/8 09:57
  */
 @Controller
-@RequestMapping(value = "/menu")
-public class PfMenuRestController extends BaseController {
+@RequestMapping(value = "/pf/r/menu")
+public class PfMenuRestController {
 
     @Resource
     private PfMenuFacade pfMenuFacade;
-
-    @RequestMapping("/page")
-    public String menu() {
-        return "pages/menu/menu";
-    }
-
-    @RequestMapping("/form")
-    public String form(String formType, Model model) {
-        model.addAttribute("formType", formType);
-        return "pages/menu/menuForm";
-    }
-
-    /**
-     * 获取系统菜单
-     */
-    @RequestMapping(value = "/list")
-    @ResponseBody
-    public PageResult listMenus(MenuDto dto) {
-        return pfMenuFacade.listMenus(dto);
-    }
 
     /**
      * 新增系统菜单
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public ResultObject addMenu(@RequestBody SysMenu dto) {
+    public ResultObject addMenu(@RequestBody SysFunction dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getLevel() != null, "level");
-        //Assert.isTrue(StringUtils.isNotBlank(dto.getUrl()), "url");
         Assert.isTrue(StringUtils.isNotBlank(dto.getName()), "name");
 
         return ResultObject.create("addMenu", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
@@ -75,10 +52,9 @@ public class PfMenuRestController extends BaseController {
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
-    public ResultObject updateMenu(@RequestBody SysMenu dto) {
+    public ResultObject updateMenu(@RequestBody SysFunction dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getLevel() != null, "level");
-        //Assert.isTrue(StringUtils.isNotBlank(dto.getUrl()), "url");
         Assert.isTrue(StringUtils.isNotBlank(dto.getName()), "name");
 
         return ResultObject.create("updateMenu", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
@@ -90,33 +66,12 @@ public class PfMenuRestController extends BaseController {
      */
     @RequestMapping(value = "/changeStatus", method = RequestMethod.POST)
     @ResponseBody
-    public ResultObject changeStatusMenu(@RequestBody MenuDto dto) {
+    public ResultObject changeStatusMenu(@RequestBody PfMenuListDto dto) {
         /* 参数校验 */
-        Assert.isTrue(dto.getMenuId() != null, "menuId");
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getStatus()), "status");
         return ResultObject.create("changeStatusMenu", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfMenuFacade.changeStatusMenu(dto));
-    }
-
-    /**
-     * 批量修改系统菜单状态
-     */
-    @RequestMapping(value = "/batchChangeStatus", method = RequestMethod.POST)
-    @ResponseBody
-    public ResultObject batchChangeStatus(@RequestBody List<Map<Long, Integer>> listMap) {
-         /* 参数校验 */
-        MenuDto dto;
-        Assert.isTrue(CollectionUtils.isNotEmpty(listMap), "入参有误");
-        for (Map<Long, Integer> map : listMap) {
-            dto = new MenuDto();
-            try {
-                BeanUtils.populate(dto, map);
-                pfMenuFacade.changeStatusMenu(dto);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return ResultObject.create("batchChangeStatus", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
-                ResultObject.DATA_TYPE_OBJECT, true);
     }
 
     /**

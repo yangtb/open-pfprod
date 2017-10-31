@@ -3,7 +3,7 @@
  * @constructor
  */
 layui.config({
-    base: '../public/layui/build/js/'
+    base: basePath + '/public/layui/build/js/'
 }).use(['layer', 'table', 'form', 'jquery', 'common'], function () {
     var $ = layui.$,
         table = layui.table,
@@ -128,7 +128,7 @@ layui.config({
 
     var _cancelRole = function (index, reqData, msg) {
         $.ajax({
-            url: contextPath + '/role/cancel',
+            url: basePath + '/pf/r/role/cancel',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",
@@ -186,7 +186,7 @@ layui.config({
 
     var _delRole = function (index, reqData) {
         $.ajax({
-            url: contextPath + '/role/del',
+            url: basePath + 'pf/r/role/del',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",
@@ -234,7 +234,7 @@ layui.config({
         zTreeRoleId = roleId;
         var reqData = {roleId: roleId}
         $.ajax({
-            url: contextPath + '/menu/list/role/tree',
+            url: basePath + '/pf/r/menu/list/role/tree',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",
@@ -270,7 +270,7 @@ layui.config({
 
     var _saveRoleMenu = function (reqData) {
         $.ajax({
-            url: contextPath + '/role/save/roleMenu',
+            url: basePath + '/pf/r/role/save/roleMenu',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",
@@ -333,7 +333,7 @@ layui.config({
 
     $(document).ready(function () {
         $.ajax({
-            url: contextPath + '/menu/list/tree',
+            url: basePath + '/pf/r/menu/list/tree',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",

@@ -3,6 +3,7 @@ package com.sm.pfprod.service.user.menu.impl;
 import com.sm.pfprod.dal.user.menu.PfMenuDao;
 import com.sm.pfprod.model.dto.common.UserDto;
 import com.sm.pfprod.model.dto.user.menu.MenuDto;
+import com.sm.pfprod.model.entity.SysFunction;
 import com.sm.pfprod.model.entity.SysMenu;
 import com.sm.pfprod.model.enums.AdminRoleType;
 import com.sm.pfprod.model.vo.menu.PfBaseMenuVo;
@@ -23,7 +24,7 @@ public class PfMenuServiceImpl implements PfMenuService {
     private PfMenuDao pfMenuDao;
 
     @Override
-    public List<SysMenu> listMenus(MenuDto dto) {
+    public List<SysFunction> listMenus(MenuDto dto) {
         return pfMenuDao.listMenus(dto);
     }
 
@@ -33,22 +34,22 @@ public class PfMenuServiceImpl implements PfMenuService {
     }
 
     @Override
-    public boolean addMenu(SysMenu dto) {
+    public boolean addMenu(SysFunction dto) {
         return pfMenuDao.addMenu(dto);
     }
 
     @Override
-    public boolean isExistMenu(Long menuId) {
-        return pfMenuDao.isExistMenu(menuId);
+    public boolean isExistMenu(String code) {
+        return pfMenuDao.isExistMenu(code);
     }
 
     @Override
-    public boolean changeStatusMenu(MenuDto dto) {
-        return pfMenuDao.changeStatusMenu(dto) == 1 ? true : false;
+    public boolean changeStatusMenu(List<Long> list, String status) {
+        return pfMenuDao.changeStatusMenu(list, status) == 1 ? true : false;
     }
 
     @Override
-    public boolean updateMenu(SysMenu dto) {
+    public boolean updateMenu(SysFunction dto) {
         return pfMenuDao.updateMenu(dto);
     }
 

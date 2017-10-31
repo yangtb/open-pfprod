@@ -40,7 +40,7 @@ layui.config({
             return false;
         }
 
-        var url = basePath + "/user/" + formType;
+        var url = basePath + "/pf/r/user/" + formType;
         $.ajax({
             url: url,
             type: 'post',

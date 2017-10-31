@@ -8,17 +8,17 @@ public class MenuDto extends PageParam implements Serializable {
 
     private static final long serialVersionUID = 1699729232949638650L;
 
-    private Long    menuId;     // 菜单ID
-    private String  name;       // 菜单名称
-    private Integer level;      // 菜单级别
-    private int     disable;    // 菜单状态
+    private Long        id;         // 菜单ID
+    private String      name;       // 菜单名称
+    private Integer     level;      // 菜单级别
+    private String      status;     // 菜单状态
 
-    public Long getMenuId() {
-        return menuId;
+    public Long getId() {
+        return id;
     }
 
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -37,11 +37,11 @@ public class MenuDto extends PageParam implements Serializable {
         this.level = level;
     }
 
-    public int getDisable() {
-        return disable;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDisable(int disable) {
-        this.disable = disable;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

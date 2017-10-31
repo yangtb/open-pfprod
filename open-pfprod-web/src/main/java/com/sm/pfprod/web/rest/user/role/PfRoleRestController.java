@@ -1,19 +1,15 @@
-package com.sm.pfprod.web.system.user.role;
+package com.sm.pfprod.web.rest.user.role;
 
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.facade.role.PfRoleFacade;
-import com.sm.pfprod.model.dto.user.role.PfRoleDto;
 import com.sm.pfprod.model.dto.user.role.PfRoleListDto;
 import com.sm.pfprod.model.dto.user.role.PfRoleMenuDto;
 import com.sm.pfprod.model.entity.SysRole;
-import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.web.security.CurrentUserUtils;
-import com.sm.pfprod.web.system.BaseController;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,34 +25,11 @@ import java.util.List;
  * @Date 2017/9/17 23:13
  */
 @Controller
-@RequestMapping(value = "/role")
-public class PfRoleRestController extends BaseController {
+@RequestMapping(value = "/pf/r/role")
+public class PfRoleRestController {
 
     @Resource
     private PfRoleFacade pfRoleFacade;
-
-    @RequestMapping("/page")
-    public String page() {
-        return "pages/role/role";
-    }
-
-    @RequestMapping("/form")
-    public String form(String formType, Model model) {
-        model.addAttribute("formType", formType);
-        return "pages/role/roleForm";
-    }
-
-    /**
-     * 获取所有角色
-     *
-     * @param dto
-     * @return
-     */
-    @RequestMapping(value = "/list")
-    @ResponseBody
-    public PageResult listRoles(PfRoleDto dto) {
-        return pfRoleFacade.listRoles(dto);
-    }
 
     /**
      * 新增角色

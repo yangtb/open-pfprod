@@ -1,8 +1,8 @@
-package com.sm.pfprod.web.system.home;
+package com.sm.pfprod.web.portal.home;
 
 import com.sm.pfprod.facade.menu.PfMenuFacade;
+import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
-import com.sm.pfprod.web.system.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

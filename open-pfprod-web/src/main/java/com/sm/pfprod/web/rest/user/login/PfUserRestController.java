@@ -1,25 +1,19 @@
-package com.sm.pfprod.web.system.user.login;
+package com.sm.pfprod.web.rest.user.login;
 
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.open.care.core.utils.rsa.RSAEncrypt;
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
-import com.sm.pfprod.facade.role.PfRoleFacade;
 import com.sm.pfprod.facade.user.PfUserFacade;
 import com.sm.pfprod.model.dto.common.PfCommonListDto;
-import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
 import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
-import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;
-import com.sm.pfprod.web.system.BaseController;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,72 +26,14 @@ import javax.servlet.http.HttpServletRequest;
  * 登陆
  */
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/pf/r/user")
 public class PfUserRestController extends BaseController {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(PfUserRestController.class);
 
     @Resource
     private PfUserFacade pfUserFacade;
-    @Resource
-    private PfRoleFacade pfRoleFacade;
+
     @Resource(name = "rsaKeyPairQueue")
     private RsaKeyPairQueue rsaKeyPairQueue;
-
-    /**
-     * rsa公钥常量变量名
-     */
-    private static final String PUBLIC_KEY = "publicKey";
-
-    @RequestMapping("/page")
-    public String page() {
-        return "pages/user/user";
-    }
-
-    @RequestMapping("/modifyPass")
-    public String modifyPass(Model model, HttpServletRequest request) {
-        RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
-        model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
-        return "pages/user/modifyPass";
-    }
-
-    @RequestMapping("/form")
-    public String form(String formType, Long userId, Model model, HttpServletRequest request) {
-        model.addAttribute("formType", formType);
-        RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
-        model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
-
-        if (StringUtils.equals(formType, "edit")) {
-            model.addAttribute("roles", pfRoleFacade.listUserRole(userId));
-        } else {
-            model.addAttribute("roles", pfRoleFacade.list());
-        }
-        return "pages/user/userForm";
-    }
-
-    @RequestMapping("/resetPassword")
-    public String resetPassword(Model model, HttpServletRequest request) {
-        RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
-        model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
-        return "pages/user/passReset";
-    }
-
-    @RequestMapping("/userDetail")
-    public String userDetail(Model model) {
-        return "pages/user/userDetail";
-    }
-
-    /**
-     * 获取用户列表
-     *
-     * @param dto
-     * @return
-     */
-    @RequestMapping(value = "/list")
-    @ResponseBody
-    public PageResult listUsers(PfUserDto dto) {
-        return pfUserFacade.listUsers(dto);
-    }
 
     /**
      * 新增用户
@@ -140,7 +76,7 @@ public class PfUserRestController extends BaseController {
     }
 
     /**
-     * 删除用户
+     * 冻结用户
      *
      * @param dto 用户id集合
      * @return
@@ -155,7 +91,7 @@ public class PfUserRestController extends BaseController {
     }
 
     /**
-     * 冻结用户
+     * 删除用户
      *
      * @param dto 用户id集合
      * @return

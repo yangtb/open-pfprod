@@ -1,19 +1,17 @@
-package com.sm.pfprod.web.system.dic;
+package com.sm.pfprod.web.rest.dic;
 
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.facade.dic.PfDicFacade;
-import com.sm.pfprod.model.dto.system.dic.PfDicDto;
 import com.sm.pfprod.model.dto.common.PfCommonListDto;
+import com.sm.pfprod.model.dto.system.dic.PfDicDto;
 import com.sm.pfprod.model.entity.SysDictionary;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.web.security.CurrentUserUtils;
-import com.sm.pfprod.web.system.BaseController;
-import com.sm.pfprod.web.system.util.EnumUtil;
+import com.sm.pfprod.web.util.EnumUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,55 +20,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 
 /**
- * @ClassName: PfParamRestController
- * @Description: 参数管理
+ * @ClassName: PfDicRestController
+ * @Description: 字典管理
  * @Author yangtongbin
  * @Date 2017/10/9 11:05
  */
 @Controller
-@RequestMapping(value = "/dic")
-public class PfDicRestController extends BaseController {
+@RequestMapping(value = "/pf/r/dic")
+public class PfDicRestController {
 
     @Resource
     private PfDicFacade pfDicFacade;
 
     @Resource
     private EnumUtil enumUtil;
-
-    @RequestMapping("/page")
-    public String page() {
-        return "pages/dic/dicPage";
-    }
-
-    @RequestMapping("/form")
-    public String form(String formType, Model model) {
-        model.addAttribute("formType", formType);
-        return "pages/dic/dicForm";
-    }
-
-    @RequestMapping("/enum/form")
-    public String enumForm(String formType, Model model) {
-        model.addAttribute("formType", formType);
-        return "pages/dic/enumForm";
-    }
-
-    /**
-     * 获取字典分组
-     */
-    @RequestMapping(value = "/list")
-    @ResponseBody
-    public PageResult listDicGroups(PfDicDto dto) {
-        return pfDicFacade.listDicGroups(dto);
-    }
-
-    /**
-     * 获取字典枚举
-     */
-    @RequestMapping(value = "/enum/list")
-    @ResponseBody
-    public PageResult listEnums(PfDicDto dto) {
-        return pfDicFacade.listEnums(dto);
-    }
 
     /**
      * 新增字典

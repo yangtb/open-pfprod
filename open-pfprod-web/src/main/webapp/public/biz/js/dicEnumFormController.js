@@ -10,11 +10,11 @@ layui.config({
 
     //监听提交
     form.on('submit(addEnum)', function (data) {
-        var url = basePath + '/dic/enum/';
+        var url = basePath + '/pf/r/dic/enum/';
         if (formType == 'add') {
-            url = 'add';
+            url += 'add';
         } else if (formType == 'edit') {
-            url = 'edit';
+            url += 'edit';
         }
         $.ajax({
             url: url,
