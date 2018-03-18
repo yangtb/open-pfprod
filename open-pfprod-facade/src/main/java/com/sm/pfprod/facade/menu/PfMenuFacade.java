@@ -3,7 +3,6 @@ package com.sm.pfprod.facade.menu;
 import com.sm.pfprod.model.dto.system.menu.PfMenuListDto;
 import com.sm.pfprod.model.dto.user.menu.MenuDto;
 import com.sm.pfprod.model.entity.SysFunction;
-import com.sm.pfprod.model.entity.SysMenu;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.menu.PfMenuVo;
 import com.sm.pfprod.model.vo.menu.PfMenuZtreeVo;
@@ -67,9 +66,10 @@ public interface PfMenuFacade {
     /**
      * 获取用户菜单
      *
-     * @param userId 用户id
+     * @param isSuper 是否是超级管理员
+     * @param userId  用户id
      * @return
      */
-    List<PfMenuVo> listMyMenus(Long userId);
+    List<PfMenuVo> listMyMenus(boolean isSuper, Long userId);
 
 }

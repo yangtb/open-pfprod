@@ -8,6 +8,7 @@ import com.sm.pfprod.model.entity.SysParam;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ public class PfParamRestController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_PARAM_ADD','ROLE_SUPER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addParam(@RequestBody SysParam dto) {
@@ -56,6 +58,7 @@ public class PfParamRestController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_PARAM_EDIT','ROLE_SUPER')")
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject editParam(@RequestBody SysParam dto) {
@@ -77,6 +80,7 @@ public class PfParamRestController {
      * @param dto 参数id集合
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_PARAM_CHANGESTATUS','ROLE_SUPER')")
     @RequestMapping(value = "/changeStatus", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject changeStatus(@RequestBody PfParamListDto dto) {

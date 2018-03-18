@@ -17,6 +17,7 @@ public class PfMenuVo extends PfBaseMenuVo implements Serializable {
     private String                      parentUrl;
     private String                      parentMenuName;
     private String                      parentImg;
+    private String                      parentCode;
     private List<PfBaseMenuVo>          groupList;      //  菜单list
 
     public Long getParentMenuId() {
@@ -25,6 +26,14 @@ public class PfMenuVo extends PfBaseMenuVo implements Serializable {
 
     public void setParentMenuId(Long parentMenuId) {
         this.parentMenuId = parentMenuId;
+    }
+
+    public String getParentCode() {
+        return parentCode;
+    }
+
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode;
     }
 
     public String getParentUrl() {

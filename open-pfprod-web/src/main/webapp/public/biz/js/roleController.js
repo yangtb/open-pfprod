@@ -186,7 +186,7 @@ layui.config({
 
     var _delRole = function (index, reqData) {
         $.ajax({
-            url: basePath + 'pf/r/role/del',
+            url: basePath + '/pf/r/role/del',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",
@@ -234,7 +234,7 @@ layui.config({
         zTreeRoleId = roleId;
         var reqData = {roleId: roleId}
         $.ajax({
-            url: basePath + '/pf/r/menu/list/role/tree',
+            url: basePath + '/pf/r/role/list/role/tree',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",
@@ -303,7 +303,7 @@ layui.config({
         var checkedNodeData = new Array();
         for (var i = 0; i < nodes.length; i++) {
             var data = {};
-            data.menuId = nodes[i].id;
+            data.menuId = nodes[i].menuId;
             data.roleId = roleId;
             checkedNodeData.push(data);
         }
@@ -333,7 +333,7 @@ layui.config({
 
     $(document).ready(function () {
         $.ajax({
-            url: basePath + '/pf/r/menu/list/tree',
+            url: basePath + '/pf/r/role/list/tree',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",

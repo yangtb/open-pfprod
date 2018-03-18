@@ -11,6 +11,7 @@ import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.util.EnumUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,7 @@ public class PfDicRestController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_DIC_ADD','ROLE_SUPER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addDic(@RequestBody SysDictionary dto) {
@@ -58,6 +60,7 @@ public class PfDicRestController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_DIC_EDIT','ROLE_SUPER')")
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject editDic(@RequestBody SysDictionary dto) {
@@ -75,6 +78,7 @@ public class PfDicRestController {
      * @param dto 字典id集合
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_DIC_DEL','ROLE_SUPER')")
     @RequestMapping(value = "/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delDic(@RequestBody PfCommonListDto dto) {
@@ -90,6 +94,7 @@ public class PfDicRestController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_DIC_ENUM_ADD','ROLE_SUPER')")
     @RequestMapping(value = "/enum/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addEnum(@RequestBody SysDictionary dto) {
@@ -109,6 +114,7 @@ public class PfDicRestController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_DIC_ENUM_EDIT','ROLE_SUPER')")
     @RequestMapping(value = "/enum/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject editEnum(@RequestBody SysDictionary dto) {
@@ -127,6 +133,7 @@ public class PfDicRestController {
      *
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_DIC_REFRESHCACHE','ROLE_SUPER')")
     @RequestMapping(value = "/refreshCache", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject refreshCache() {

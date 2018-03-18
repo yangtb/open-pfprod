@@ -3,6 +3,7 @@ package com.sm.pfprod.web.portal.home;
 import com.sm.pfprod.facade.menu.PfMenuFacade;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
+import com.sm.pfprod.web.security.SecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,8 @@ public class PfHomeController extends BaseController {
 
     @RequestMapping("/index")
     public String index(Model model) {
-        model.addAttribute("menus", pfMenuFacade.listMyMenus(CurrentUserUtils.getCurrentUserId()));
+        boolean isSuper = SecurityContext.hasRole("ROLE_SUPER");
+        model.addAttribute("menus", pfMenuFacade.listMyMenus(isSuper, CurrentUserUtils.getCurrentUserId()));
         model.addAttribute("username", CurrentUserUtils.getCurrentUser().getUsername());
         return "/home/index";
     }

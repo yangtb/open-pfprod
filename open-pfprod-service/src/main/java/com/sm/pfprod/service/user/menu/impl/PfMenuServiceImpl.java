@@ -1,16 +1,12 @@
 package com.sm.pfprod.service.user.menu.impl;
 
 import com.sm.pfprod.dal.user.menu.PfMenuDao;
-import com.sm.pfprod.model.dto.common.UserDto;
 import com.sm.pfprod.model.dto.user.menu.MenuDto;
 import com.sm.pfprod.model.entity.SysFunction;
-import com.sm.pfprod.model.entity.SysMenu;
-import com.sm.pfprod.model.enums.AdminRoleType;
 import com.sm.pfprod.model.vo.menu.PfBaseMenuVo;
 import com.sm.pfprod.model.vo.menu.PfMenuVo;
 import com.sm.pfprod.model.vo.menu.PfMenuZtreeVo;
 import com.sm.pfprod.service.user.menu.PfMenuService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -64,17 +60,17 @@ public class PfMenuServiceImpl implements PfMenuService {
     }
 
     @Override
-    public List<PfMenuVo> listMyMenus(Long userId) {
-        List<SysMenu> menus = pfMenuDao.listMyMenus(userId);
+    public List<PfMenuVo> listMyMenus(boolean isSuper, Long userId) {
+        List<SysFunction> menus = isSuper ? pfMenuDao.listAllMenus() : pfMenuDao.listMyMenus(userId);
         List<PfMenuVo> parentMenuList = new ArrayList<>();
         PfMenuVo pfMenuVo;
-        for (SysMenu sysMenu : menus) {
+        for (SysFunction sysMenu : menus) {
             pfMenuVo = new PfMenuVo();
             if (sysMenu.getLevel() == 1) {
-                pfMenuVo.setParentMenuId(sysMenu.getMenuId());
+                pfMenuVo.setParentCode(sysMenu.getCode());
                 pfMenuVo.setParentMenuName(sysMenu.getName());
-                pfMenuVo.setParentImg(sysMenu.getImg());
-                pfMenuVo.setParentUrl(sysMenu.getUrl());
+                pfMenuVo.setParentImg(sysMenu.getIconSource());
+                pfMenuVo.setParentUrl(sysMenu.getFunctionUrl());
                 parentMenuList.add(pfMenuVo);
             }
         }
@@ -83,13 +79,16 @@ public class PfMenuServiceImpl implements PfMenuService {
         PfBaseMenuVo pfBaseMenuVo;
         for (PfMenuVo parentMenuVo : parentMenuList) {
             groupList = new ArrayList<>();
-            for (SysMenu sysMenu : menus) {
-                if (sysMenu.getParentId() == parentMenuVo.getParentMenuId()) {
+            for (SysFunction sysMenu : menus) {
+                if (sysMenu.getLevel() == 1) {
+                    continue;
+                }
+                if (sysMenu.getParentCode().equals(parentMenuVo.getParentCode())) {
                     pfBaseMenuVo = new PfBaseMenuVo();
-                    pfBaseMenuVo.setMenuId(sysMenu.getMenuId());
+                    pfBaseMenuVo.setMenuId(sysMenu.getId());
                     pfBaseMenuVo.setName(sysMenu.getName());
-                    pfBaseMenuVo.setUrl(sysMenu.getUrl());
-                    pfBaseMenuVo.setImg(sysMenu.getImg());
+                    pfBaseMenuVo.setUrl(sysMenu.getFunctionUrl());
+                    pfBaseMenuVo.setImg(sysMenu.getIconSource());
                     groupList.add(pfBaseMenuVo);
                 }
             }
@@ -97,17 +96,5 @@ public class PfMenuServiceImpl implements PfMenuService {
         }
         return parentMenuList;
     }
-
-   /* @Override
-    public List<PfMenuVo> listMyMenus() {
-        List<SysMenu> sysMenus = null;
-        *//* 如果是超级管理员 *//*
-        if (user.getRoleType().equals(AdminRoleType.SUNPER.getValue())) {
-            //sysMenus = pfMenuDao.listSysMenus();
-        } else {
-            sysMenus =
-        }
-    }*/
-
 
 }

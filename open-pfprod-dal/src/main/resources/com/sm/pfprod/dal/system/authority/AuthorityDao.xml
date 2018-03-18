@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sm.pfprod.dal.system.authority.AuthorityDao">
+	
+	<!-- 根据用户ID查找用户拥有的功能菜单及资源的权限编码集合 -->
+	<select id="findFunctionCodesByUserId" resultType="java.lang.String">
+		SELECT
+			DISTINCT
+			sf.CODE AS 'authority'
+		FROM
+			user_role ur
+		left join sys_role_menu srm on ur.role_id = srm.role_id
+		left join sys_function sf on srm.menu_id = sf.id
+		WHERE
+			ur.user_id = #{userId}
+	</select>
+	
+	
+</mapper>

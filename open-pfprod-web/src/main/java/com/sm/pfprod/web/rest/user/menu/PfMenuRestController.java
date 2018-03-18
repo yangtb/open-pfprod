@@ -10,6 +10,7 @@ import com.sm.pfprod.model.entity.SysFunction;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,7 @@ public class PfMenuRestController {
     /**
      * 新增系统菜单
      */
+    @PreAuthorize("hasAnyRole('ROLE_MENU_ADD','ROLE_SUPER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addMenu(@RequestBody SysFunction dto) {
@@ -50,6 +52,7 @@ public class PfMenuRestController {
     /**
      * 编辑系统菜单
      */
+    @PreAuthorize("hasAnyRole('ROLE_MENU_EDIT','ROLE_SUPER')")
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject updateMenu(@RequestBody SysFunction dto) {
@@ -64,6 +67,7 @@ public class PfMenuRestController {
     /**
      * 修改系统菜单状态
      */
+    @PreAuthorize("hasAnyRole('ROLE_MENU_STATUS','ROLE_SUPER')")
     @RequestMapping(value = "/changeStatus", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject changeStatusMenu(@RequestBody PfMenuListDto dto) {
@@ -72,29 +76,6 @@ public class PfMenuRestController {
         Assert.isTrue(StringUtils.isNotBlank(dto.getStatus()), "status");
         return ResultObject.create("changeStatusMenu", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfMenuFacade.changeStatusMenu(dto));
-    }
-
-    /**
-     * 获取系统菜单【tree】
-     */
-    @RequestMapping(value = "/list/tree", method = RequestMethod.POST)
-    @ResponseBody
-    public ResultObject listMenuTree() {
-        return ResultObject.create("listMenuTree", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
-                ResultObject.DATA_TYPE_LIST, pfMenuFacade.listMenuTree());
-    }
-
-    /**
-     * 获取角色拥有菜单
-     */
-    @RequestMapping(value = "/list/role/tree", method = RequestMethod.POST)
-    @ResponseBody
-    public ResultObject listMenuRoleTree(@RequestBody PfRoleCommonDto dto) {
-        /* 参数校验 */
-        Assert.isTrue(dto.getRoleId() != null, "roleId");
-        Long roleId = dto.getRoleId();
-        return ResultObject.create("listMenuRoleTree", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
-                ResultObject.DATA_TYPE_LIST, pfMenuFacade.listMenuRoleTree(roleId));
     }
 
 }

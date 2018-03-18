@@ -8,6 +8,7 @@ import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,7 @@ public class PfUserController extends BaseController {
      */
     private static final String PUBLIC_KEY = "publicKey";
 
+    @PreAuthorize("hasAnyRole('ROLE_USER_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String page() {
         return "pages/user/user";
@@ -49,6 +51,7 @@ public class PfUserController extends BaseController {
         return "pages/user/modifyPass";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER_MG','ROLE_SUPER')")
     @RequestMapping("/form")
     public String form(String formType, Long userId, Model model, HttpServletRequest request) {
         model.addAttribute("formType", formType);
@@ -63,6 +66,7 @@ public class PfUserController extends BaseController {
         return "pages/user/userForm";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER_RESET_PSW','ROLE_SUPER')")
     @RequestMapping("/resetPassword")
     public String resetPassword(Model model, HttpServletRequest request) {
         RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
@@ -70,6 +74,7 @@ public class PfUserController extends BaseController {
         return "pages/user/passReset";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER_MG','ROLE_SUPER')")
     @RequestMapping("/userDetail")
     public String userDetail(Model model) {
         return "pages/user/userDetail";
@@ -82,6 +87,7 @@ public class PfUserController extends BaseController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_USER_MG','ROLE_SUPER')")
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listUsers(PfUserDto dto) {

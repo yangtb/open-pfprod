@@ -28,8 +28,8 @@ layui.config({
         } else if (formType == 'edit') {
             url += 'edit';
         }
-        if (!data.field.disable) {
-            data.field.disable = 1;
+        if (!data.field.status) {
+            data.field.status = "disabled";
         }
         $.ajax({
             url: url,
@@ -45,10 +45,13 @@ layui.config({
                     common.sucMsg("保存成功");
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
-                    //parent.location.reload();//刷新父页面
-                    parent.layui.table.reload('menuTableId', {
-                        height: 'full-68'
-                    });
+                    if (formType == 'edit') {
+                        parent.layui.common.refreshCurrentPage();
+                    } else {
+                        parent.layui.table.reload('menuTableId', {
+                            height: 'full-68'
+                        });
+                    }
                     return true;
                 }
             },

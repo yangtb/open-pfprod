@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 验证码相关config bean -->
+	<bean id="imageCodeUtil" class="com.sm.pfprod.web.util.ImageCodeUtil">
+		<constructor-arg name="width" value="${ImageCode.width}"></constructor-arg>
+		<constructor-arg name="height" value="${ImageCode.height}"></constructor-arg>
+		<constructor-arg name="codeLength" value="${ImageCode.codeLength}"></constructor-arg>
+		<constructor-arg name="randomString" value="${ImageCode.randomString}"></constructor-arg>
+		<constructor-arg name="sessionKey" value="${ImageCode.sessionKey}"></constructor-arg>
+		<constructor-arg name="fontName" value="${ImageCode.font.name}"></constructor-arg>
+		<constructor-arg name="fontStyle" value="${ImageCode.font.style}"></constructor-arg>
+		<constructor-arg name="fontSize" value="${ImageCode.font.size}"></constructor-arg>
+	</bean>
+
+</beans>

@@ -50,7 +50,7 @@ layui.config({
     });
 
     $("#modifyPass").on('click', function () {
-        common.open('<i class="iconfont icon-modifyPass"></i>' + ' 修改密码', basePath + '/pf/p/user/modifyPass', 600, 300, null, '4');
+        common.open('<i class="iconfont icon-modifyPass"></i>' + ' 修改密码', basePath + '/pf/p/user/modifyPass', 600, 300, null, '1');
     });
 
     var url = basePath + '/openplatformlogout';

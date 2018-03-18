@@ -1,6 +1,7 @@
 package com.sm.pfprod.web.portal.monitor;
 
 import com.sm.pfprod.web.portal.BaseController;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/pf/p/monitor")
 public class PfMonitorController extends BaseController {
 
+    @PreAuthorize("hasAnyRole('ROLE_SYS_MONITOR','ROLE_SUPER')")
     @RequestMapping("/server/page")
     public String page() {
         return "pages/monitor/serverInfo";

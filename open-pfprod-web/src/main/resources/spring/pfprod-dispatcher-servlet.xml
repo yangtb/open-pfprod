@@ -76,7 +76,24 @@
 
     <security:global-method-security pre-post-annotations="enabled" jsr250-annotations="enabled" proxy-target-class="true"/>
     <mvc:view-controller path="/" view-name="redirect:/login" />
-    <mvc:view-controller path="/logoutsuccess" view-name="redirect:/login" />
+    <mvc:view-controller path="/logout/success" view-name="redirect:/login" />
 
-
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/**" />
+            <mvc:exclude-mapping path="/login**" />
+            <mvc:exclude-mapping path="/login/**" />
+            <mvc:exclude-mapping path="/logout/**" />
+            <mvc:exclude-mapping path="/error**" />
+            <mvc:exclude-mapping path="/public/**" />
+            <mvc:exclude-mapping path="/help/**" />
+            <mvc:exclude-mapping path="/" />
+            <mvc:exclude-mapping path="/login" />
+            <mvc:exclude-mapping path="/403.html" />
+            <mvc:exclude-mapping path="/404.html" />
+            <mvc:exclude-mapping path="/500.html" />
+            <bean class="com.sm.pfprod.web.interceptor.SessionTimeOutInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

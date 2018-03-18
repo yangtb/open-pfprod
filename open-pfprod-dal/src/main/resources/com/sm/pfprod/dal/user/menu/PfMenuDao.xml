@@ -8,18 +8,30 @@
     </sql>
 
     <!-- 获取用户所有菜单 -->
-    <select id="listMyMenus" resultType="com.sm.pfprod.model.entity.SysMenu">
+    <select id="listMyMenus" resultType="com.sm.pfprod.model.entity.SysFunction">
         SELECT
-            sm.menu_id, sm.url, sm.name, sm.level, sm.img, sm.parent_id
+            sf.id, sf.function_url, sf.name, sf.level, sf.icon_source, sf.code, sf.parent_code
         FROM
             user_role ur
         INNER JOIN sys_role_menu srm ON srm.role_id = ur.role_id
-        INNER JOIN sys_menu sm ON sm.menu_id = srm.menu_id
+        INNER JOIN sys_function sf ON sf.id = srm.menu_id
         WHERE
             ur.user_id = #{userId}
-        and sm.disable = 0
+        AND sf.status = 'enabled'
+	    AND sf.function_type = 1
         GROUP BY
-            sm.menu_id
+            sf.id
+    </select>
+
+    <!-- 获取系统所有菜单 -->
+    <select id="listAllMenus" resultType="com.sm.pfprod.model.entity.SysFunction">
+        SELECT
+            sf.id, sf.function_url, sf.name, sf.level, sf.icon_source, sf.code, sf.parent_code
+        FROM
+            sys_function sf
+        WHERE
+            sf.status = 'enabled'
+	    AND sf.function_type = 1
     </select>
 
     <!-- 获取菜单 -->
@@ -117,29 +129,29 @@
     <!-- 获取系统所有菜单【tree】 -->
     <select id="listSysMenus" resultType="com.sm.pfprod.model.vo.menu.PfMenuZtreeVo">
         SELECT
-            sm.menu_id as id,
-            sm.name as name ,
-            sm.parent_id as pId,
-            IF(sm.parent_id = 0 , TRUE , FALSE) open
+            sf.id as menuId,
+            sf.code as id,
+            sf.name as name ,
+            sf.parent_code as pId,
+            true as open
         FROM
-            sys_menu sm
+            sys_function sf
         WHERE
-            sm.is_deleted = 'N'
-        AND sm.disable = 0
+            sf.status = 'enabled'
     </select>
 
     <!-- 获取角色拥有菜单 -->
     <select id="listMenuRoleTree" resultType="com.sm.pfprod.model.vo.menu.PfMenuZtreeVo">
         SELECT
-             sm.menu_id AS id ,
-             sm.parent_id AS pId ,
+             sf.code as id,
+             sf.parent_code as pId,
              IF(srm.role_menu_id is null , FALSE , TRUE) checked
         FROM
-            sys_menu sm
-        LEFT JOIN sys_role_menu srm ON srm.menu_id = sm.menu_id and srm.role_id = #{roleId}
+            sys_function sf
+        LEFT JOIN sys_role_menu srm ON srm.menu_id = sf.id and srm.role_id = #{roleId}
         WHERE
-             sm.is_deleted = 'N'
-        AND sm.disable = 0;
+             sf.status = 'enabled'
     </select>
+
 
 </mapper>

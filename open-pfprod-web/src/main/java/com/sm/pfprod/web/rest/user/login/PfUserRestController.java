@@ -13,6 +13,7 @@ import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,7 @@ public class PfUserRestController extends BaseController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_USER_ADD','ROLE_SUPER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject saveUser(@RequestBody RegisterDto dto, HttpServletRequest request) {
@@ -64,6 +66,7 @@ public class PfUserRestController extends BaseController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_USER_EDIT','ROLE_SUPER')")
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject updateUser(@RequestBody RegisterDto dto) {
@@ -81,6 +84,7 @@ public class PfUserRestController extends BaseController {
      * @param dto 用户id集合
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_USER_FREEZE','ROLE_SUPER')")
     @RequestMapping(value = "/freeze", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject freezeUser(@RequestBody PfCommonListDto dto) {
@@ -96,6 +100,7 @@ public class PfUserRestController extends BaseController {
      * @param dto 用户id集合
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_USER_DEL','ROLE_SUPER')")
     @RequestMapping(value = "/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delUser(@RequestBody PfCommonListDto dto) {
@@ -139,6 +144,7 @@ public class PfUserRestController extends BaseController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_USER_RESET_PSW','ROLE_SUPER')")
     @RequestMapping(value = "/resetPsw", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject resetPsw(HttpServletRequest request, @RequestBody RegisterDto dto) {

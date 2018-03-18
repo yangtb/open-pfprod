@@ -4,6 +4,7 @@ import com.sm.pfprod.facade.notice.PfNoticeFacade;
 import com.sm.pfprod.model.dto.system.notice.PfNoticeDto;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.web.portal.BaseController;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,17 +25,20 @@ public class PfNoticeController extends BaseController {
     @Resource
     private PfNoticeFacade pfNoticeFacade;
 
+    @PreAuthorize("hasAnyRole('ROLE_NOTICE_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String page() {
         return "pages/notice/notice";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_NOTICE_MG','ROLE_SUPER')")
     @RequestMapping("/form")
     public String form(String formType, Model model) {
         model.addAttribute("formType", formType);
         return "pages/notice/noticeForm";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_NOTICE_MG','ROLE_SUPER')")
     @RequestMapping("/detail")
     public String detail() {
         return "pages/notice/noticeDetail";
@@ -46,6 +50,7 @@ public class PfNoticeController extends BaseController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_NOTICE_MG','ROLE_SUPER')")
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listNotices(PfNoticeDto dto) {

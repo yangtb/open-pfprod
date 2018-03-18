@@ -82,7 +82,7 @@ public interface PfMenuService {
      * @param userId 用户id
      * @return
      */
-    List<PfMenuVo> listMyMenus(Long userId);
+    List<PfMenuVo> listMyMenus(boolean isSuper, Long userId);
 
 
 }

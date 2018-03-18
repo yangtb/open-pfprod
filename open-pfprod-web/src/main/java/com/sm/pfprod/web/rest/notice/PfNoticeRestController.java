@@ -8,6 +8,7 @@ import com.sm.pfprod.model.entity.SysNotice;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ public class PfNoticeRestController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_NOTICE_ADD','ROLE_SUPER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addNotice(@RequestBody SysNotice dto) {
@@ -53,6 +55,7 @@ public class PfNoticeRestController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_NOTICE_EDIT','ROLE_SUPER')")
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject editNotice(@RequestBody SysNotice dto) {
@@ -70,6 +73,7 @@ public class PfNoticeRestController {
      * @param dto 公告id集合
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_NOTICE_DEL','ROLE_SUPER')")
     @RequestMapping(value = "/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delNotice(@RequestBody PfCommonListDto dto) {

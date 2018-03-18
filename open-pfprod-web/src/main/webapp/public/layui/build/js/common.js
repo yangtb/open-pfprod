@@ -76,6 +76,13 @@ layui.define(['layer'], function (exports) {
             }, function () {
 
             })
+        },
+
+        /**
+         * 刷新table当前页
+         */
+        refreshCurrentPage : function() {
+            $(".layui-laypage-btn").click()
         }
     };
     exports('common', common)

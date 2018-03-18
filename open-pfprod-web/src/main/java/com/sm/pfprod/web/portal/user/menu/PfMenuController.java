@@ -4,6 +4,7 @@ import com.sm.pfprod.facade.menu.PfMenuFacade;
 import com.sm.pfprod.model.dto.user.menu.MenuDto;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.web.portal.BaseController;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +25,13 @@ public class PfMenuController extends BaseController {
     @Resource
     private PfMenuFacade pfMenuFacade;
 
+    @PreAuthorize("hasAnyRole('ROLE_MENU_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String menu() {
         return "pages/menu/menu";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_MENU_MG','ROLE_SUPER')")
     @RequestMapping("/form")
     public String form(String formType, Model model) {
         model.addAttribute("formType", formType);
@@ -38,6 +41,7 @@ public class PfMenuController extends BaseController {
     /**
      * 获取系统菜单
      */
+    @PreAuthorize("hasAnyRole('ROLE_MENU_MG','ROLE_SUPER')")
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listMenus(MenuDto dto) {

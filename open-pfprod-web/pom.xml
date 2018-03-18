@@ -89,10 +89,40 @@
         </dependency>
     </dependencies>
 
+    <!-- 下面的配置将会根据不同环境把对应配置参数打入属性配置文件的变量中去start -->
+    <profiles>
+        <profile>
+            <id>development</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <env>test</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>uat</id>
+            <properties>
+                <env>uat</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <env>prod</env>
+            </properties>
+        </profile>
+    </profiles>
     <build>
-        <finalName>pfprod</finalName>
+        <finalName>${project.artifactId}</finalName>
         <filters>
-            <filter>src/main/resources/deploy/config.properties.${env}</filter>
+            <filter>profile.${env}.properties</filter>
         </filters>
         <resources>
             <resource>
@@ -100,6 +130,7 @@
                 <filtering>true</filtering>
                 <includes>
                     <include>**/*.properties</include>
+                    <include>log4j2.xml</include>
                 </includes>
             </resource>
             <resource>
@@ -118,34 +149,12 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/${project.artifactId}</path>
-                    <port>9090</port>
+                    <port>8080</port>
                     <uriEncoding>utf-8</uriEncoding>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    <!-- 配置将会根据不同环境把对应配置参数打入属性配置文件的变量中去end -->
 
-    <profiles>
-        <profile>
-            <id>local</id>
-            <properties>
-                <env>local</env>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>test</id>
-            <properties>
-                <env>test</env>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <env>prod</env>
-            </properties>
-        </profile>
-    </profiles>
 </project>

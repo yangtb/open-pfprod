@@ -23,11 +23,13 @@ layui.config({
             {field: 'phone_no', width: 120, title: '手机号'},
             {field: 'email', width: 160, sort: true, title: '邮箱'},
             {field: 'enabled', width: 70, title: '状态', templet: '#enabledTpl'},
+            {field:'sex', title:'状态', width:85, templet: '#switchTpl', unresize: true},
             {
                 field: 'role_type',
                 width: 110,
                 title: '账户类型',
-                style: 'background-color: #5FB878; color: #fff;',
+                style:'background-color: #009688; color: #fff;',
+                //style: 'background-color: #5FB878; color: #fff;',
                 templet: '#roleTypeTpl',
                 sort: true
             },
@@ -91,7 +93,7 @@ layui.config({
     });
 
     var _resetPass = function (data) {
-        common.open('密码重置', 'resetPassword', 360, 220, _successFunction(data));
+        common.open('密码重置', 'resetPassword', 460, 220, _successFunction(data));
     }
 
     // 获取编辑行数据

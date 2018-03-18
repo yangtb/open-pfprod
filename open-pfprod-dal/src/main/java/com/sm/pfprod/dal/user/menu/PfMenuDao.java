@@ -81,6 +81,12 @@ public interface PfMenuDao {
      * @param userId 用户id
      * @return
      */
-    List<SysMenu> listMyMenus(@Param("userId") Long userId);
+    List<SysFunction> listMyMenus(@Param("userId") Long userId);
 
+    /**
+     * 获取系统所有菜单
+     *
+     * @return
+     */
+    List<SysFunction> listAllMenus();
 }

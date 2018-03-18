@@ -17,6 +17,7 @@ layui.config({
     //监听提交
     form.on('submit(resetPsw)', function (data) {
         var url = basePath + "/pf/r/user/resetPsw";
+        console.log(JSON.stringify(data.field))
         $.ajax({
             url: url,
             type: 'post',
@@ -24,7 +25,6 @@ layui.config({
             contentType: "application/json",
             data: JSON.stringify(data.field),
             success: function (data) {
-                console.log(data)
                 if (data.code != 0) {
                     common.errorMsg(data.msg);
                     return false;

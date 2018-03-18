@@ -2,13 +2,16 @@ package com.sm.pfprod.web.rest.user.role;
 
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
+import com.sm.pfprod.facade.menu.PfMenuFacade;
 import com.sm.pfprod.facade.role.PfRoleFacade;
+import com.sm.pfprod.model.dto.user.role.PfRoleCommonDto;
 import com.sm.pfprod.model.dto.user.role.PfRoleListDto;
 import com.sm.pfprod.model.dto.user.role.PfRoleMenuDto;
 import com.sm.pfprod.model.entity.SysRole;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +33,8 @@ public class PfRoleRestController {
 
     @Resource
     private PfRoleFacade pfRoleFacade;
+    @Resource
+    private PfMenuFacade pfMenuFacade;
 
     /**
      * 新增角色
@@ -37,6 +42,7 @@ public class PfRoleRestController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_ROLE_ADD','ROLE_SUPER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addRole(@RequestBody SysRole dto) {
@@ -54,6 +60,7 @@ public class PfRoleRestController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_ROLE_EDIT','ROLE_SUPER')")
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject editRole(@RequestBody SysRole dto) {
@@ -71,6 +78,7 @@ public class PfRoleRestController {
      * @param roles 角色id集合
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_ROLE_DEL','ROLE_SUPER')")
     @RequestMapping(value = "/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delRole(@RequestBody List<Long> roles) {
@@ -86,6 +94,7 @@ public class PfRoleRestController {
      * @param roles 角色id集合
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_ROLE_CANCEL','ROLE_SUPER')")
     @RequestMapping(value = "/cancel", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject cancelRole(@RequestBody PfRoleListDto roles) {
@@ -101,6 +110,7 @@ public class PfRoleRestController {
      * @param dto
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_ROLE_SAVE_ROLEMENU','ROLE_SUPER')")
     @RequestMapping(value = "/save/roleMenu", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject saveRoleMenu(@RequestBody PfRoleMenuDto dto) {
@@ -108,6 +118,31 @@ public class PfRoleRestController {
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getRoleMenus()), "roleMenus");
         return ResultObject.create("saveRoleMenu", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfRoleFacade.saveRoleMenu(dto));
+    }
+
+    /**
+     * 获取系统菜单【tree】
+     */
+    @PreAuthorize("hasAnyRole('ROLE_ROLE_ALL_MENU','ROLE_SUPER')")
+    @RequestMapping(value = "/list/tree", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject listMenuTree() {
+        return ResultObject.create("listMenuTree", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
+                ResultObject.DATA_TYPE_LIST, pfMenuFacade.listMenuTree());
+    }
+
+    /**
+     * 获取角色拥有菜单
+     */
+    @PreAuthorize("hasAnyRole('ROLE_ROLE_OWN_MENU','ROLE_SUPER')")
+    @RequestMapping(value = "/list/role/tree", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject listMenuRoleTree(@RequestBody PfRoleCommonDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getRoleId() != null, "roleId");
+        Long roleId = dto.getRoleId();
+        return ResultObject.create("listMenuRoleTree", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
+                ResultObject.DATA_TYPE_LIST, pfMenuFacade.listMenuRoleTree(roleId));
     }
 
 }

@@ -6,25 +6,34 @@ public class PfMenuZtreeVo implements Serializable {
 
     private static final long serialVersionUID = -4901737093643963963L;
 
-    private Long id;
-    private Long pId;
-    private String name;
-    private boolean checked;
-    private boolean open;
+    private Long        menuId;     // 菜单id
+    private String      id;
+    private String      pId;
+    private String      name;
+    private boolean     checked;
+    private boolean     open;
 
-    public Long getId() {
+    public Long getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(Long menuId) {
+        this.menuId = menuId;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getpId() {
+    public String getpId() {
         return pId;
     }
 
-    public void setpId(Long pId) {
+    public void setpId(String pId) {
         this.pId = pId;
     }
 

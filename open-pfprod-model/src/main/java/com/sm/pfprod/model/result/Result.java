@@ -34,6 +34,12 @@ public class Result implements Serializable {
 	public Result(){
 		
 	}
+
+	public Result(Boolean isSuccess, String errorCode, String errorDesc) {
+		this.isSuccess = isSuccess;
+		this.errorCode = errorCode;
+		this.errorDesc = errorDesc;
+	}
 	
 	public Result(Boolean isSuccess, String errorCode, String errorDesc,
                   String displayMsg, ErrorContext errorContext,
@@ -44,6 +50,13 @@ public class Result implements Serializable {
 		this.displayMsg = displayMsg;
 		this.errorContext = errorContext;
 		this.errorParameters = errorParameters;
+	}
+
+	public Result change(Boolean isSuccess, String errorCode, String errorDesc) {
+		this.isSuccess = isSuccess;
+		this.errorCode = errorCode;
+		this.errorDesc = errorDesc;
+		return this;
 	}
 
 	public Boolean getIsSuccess() {

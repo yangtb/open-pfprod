@@ -1,67 +1,93 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>登陆</title>
-    <meta name="description" content="这是一个 登陆 页面">
-    <meta name="keywords" content="index">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="stylesheet" href="${contextPath}/public/amazeui/css/amazeui.min.css"/>
-    <link rel="stylesheet" href="${contextPath}/public/amazeui/css/admin.css">
-    <link rel="stylesheet" href="${contextPath}/public/amazeui/css/app.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>开放平台登陆</title>
+    <meta name="keywords" content="登录">
+    <meta name="description" content="登录">
+    <link rel="stylesheet" type="text/css" href="${basePath}/public/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${basePath}/public/biz/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${basePath}/public/biz/css/login.css">
+
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>
+        if (window.top !== window.self) {
+            window.top.location = window.location;
+        }
+    </script>
+    <script>
+        var basePath = '${basePath}';
+        var publicKey = '${publicKey}';
+    </script>
 </head>
-
-<body data-type="login">
-
-<div class="am-g myapp-login">
-    <div class="myapp-login-logo-block  tpl-login-max">
-        <div class="myapp-login-logo-text">
-            <div class="myapp-login-logo-text">
-                <span> Login</span>
+<body class="signin">
+<div class="signinpanel">
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="signin-info">
+                <div class="logopanel m-b">
+                    <h1>开放管理平台</h1>
+                </div>
+                <div class="m-b"></div>
+                <h4>欢迎使用 <strong>开放平台后台</strong></h4>
+                <ul class="m-b">
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势一</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势二</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势三</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势四</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势五</li>
+                </ul>
+                <strong>还没有账号？ <a href="#">立即注册&raquo;</a></strong>
             </div>
         </div>
-
-        <div class="login-font">
-            <i>Log In </i> or <span> Sign Up</span>
+        <div class="col-sm-5">
+            <div id="login-switch" class="login-switch">
+                <div class="login-title"><div class="login-hidden" id="scanLogin">扫码<br>登录</div><div id="passwordLogin">密码<br>登录</div></div>
+            </div>
+            <div id="passwordLoginBody">
+                <form method="post" id="loginForm" action="${contextPath}/pfprodlogin" onSubmit="return submitForm()">
+                    <h4 class="no-margins">登录：</h4>
+                    <p class="m-t-md">登录到开放平台后台</p>
+                    <input type="text" id="username" name="username" maxlength="11" class="form-control uname" placeholder="用户名" />
+                    <input type="hidden" name="password" id="encryptPassword" />
+                    <input type="password" id="clearPassword" maxlength="16" class="form-control pword m-b" placeholder="密码" />
+                    <input type="text" id="vcode" name="vcode" maxlength="4" style="width:50%;float: left;margin-top: 0px;color: #333" class="form-control" placeholder="验证码" />
+                    <image id="vcodeImage" style="width: 50%;height: 34px" src="${basePath}/login/verificationCode" title="点击图片更换一张 "/>
+                    <a id="loginwarning" style="margin-top: 5px;color: red">$!{errorMsg}</a>
+                    <input id="doLoginBtn" type="submit" data-loading-text="登录中..." class="btn btn-success btn-block" value="登录">
+                </form>
+            </div>
+            <div class="login-hidden" id="scanLoginBody">
+                <form method="post" id="scanForm" action="">
+                    <h4 class="no-margins">登录：</h4>
+                    <p class="m-t-md">app扫一扫，快速登录</p>
+                    <div class="login-scancode" id="scanCode"></div>
+                    <div id="scanCodeExpire" class="login-input login-hidden">
+                        二维码失效
+                        <br>
+                        <input class="btn btn-primary btn-xs" onclick="retryScanCode()" value="刷新">
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="am-u-sm-10 login-am-center">
-            <form class="am-form" method="post" action="${contextPath}/pfprodlogin">
-                <fieldset>
-                    <div class="am-form-group">
-                        <input type="text" name="username" placeholder="输入用户名">
-                    </div>
-                    <div class="am-form-group">
-                        <input type="hidden" name="password" id="encryptPassword"/>
-                        <input type="password" id="clearPassword" placeholder="请输入密码"/>
-                    </div>
-                    #if(${errorMsg})
-                        <p style="color: red;">${errorMsg}</p>
-                    #end
-                    <p>
-                        <button type="submit" class="am-btn am-btn-default">登录</button>
-                    </p>
-                </fieldset>
-            </form>
+    </div>
+    <div class="signup-footer">
+        <div class="pull-left">
+            技术服务电话：XXXX-XXXXXXX
+            <br>
+            版权所有 © ***有限公司.
         </div>
     </div>
 </div>
-
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
-<script src="${contextPath}/public/amazeui/js/amazeui.min.js"></script>
-<script src="${contextPath}/public/amazeui/js/app.js"></script>
+<script src="${contextPath}/public/common/js/jquery.qrcode.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
 <script src="${contextPath}/public/biz/js/loginController.js"></script>
+<script src="${contextPath}/public/bootstrap/js/bootstrap.min.js"></script>
+<script src="${contextPath}/public/biz/js/login.js?t=${now}"></script>
 
-<script type="text/javascript">
-    $(function () {
-        var loginController = new LoginController();
-        loginController.init('${publicKey}');
-    });
-</script>
 </body>
-
 </html>

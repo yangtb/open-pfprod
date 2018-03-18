@@ -4,6 +4,7 @@ import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.exception.BizRuntimeException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +27,10 @@ public class GlobalExceptionResolver {
         if (e instanceof BizRuntimeException) {
             BizRuntimeException bizEx = (BizRuntimeException) e;
             return ResultObject.create(requestUrl, bizEx.getErrorCode(), bizEx.getMessage());
-        } else {
+        } else if (e instanceof AccessDeniedException) {
+            // 无权限异常抛到上层
+            throw new AccessDeniedException(e.getMessage());
+        }else {
             return ResultObject.create(requestUrl, ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
         }
     }

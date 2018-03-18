@@ -71,8 +71,8 @@ public class PfMenuFacadeImpl implements PfMenuFacade {
 
     @Loggable(bizDec = "获取用户菜单", level = Level.info)
     @Override
-    public List<PfMenuVo> listMyMenus(Long userId) {
-        return pfMenuService.listMyMenus(userId);
+    public List<PfMenuVo> listMyMenus(boolean isSuper, Long userId) {
+        return pfMenuService.listMyMenus(isSuper, userId);
     }
 
 

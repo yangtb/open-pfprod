@@ -14,7 +14,7 @@
         <property name="locations">
             <list>
                 <value>classpath:config/config.properties</value>
-                <value>classpath:config/pfprod_jdbc.properties</value>
+                <value>classpath:config/jdbc.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="utf-8"/>
@@ -24,10 +24,11 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <aop:aspectj-autoproxy/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <import resource="classpath*:spring/pfprod-service-server.xml"/>
     <import resource="classpath*:spring/pfprod-schedule-thread-pool.xml"/>
     <import resource="classpath*:spring/pfprod-spring-security.xml"/>
+    <import resource="classpath*:spring/pfprod-spring-beans.xml"/>
 
 </beans>

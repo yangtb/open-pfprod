@@ -4,6 +4,7 @@ import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.rsa.RSAEncrypt;
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;
+import com.sm.pfprod.web.util.ImageCodeUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,12 +30,15 @@ public class PfLoginAuthenticationFilter extends PfAbstractAuthenticationProcess
 
     public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
     public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
+    public static final String SPRING_SECURITY_FORM_VCODE_KEY = "vcode";
 
     private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
     private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
+    private String vcodeParameter = SPRING_SECURITY_FORM_VCODE_KEY;
     private boolean postOnly = true;
 
     private RsaKeyPairQueue rsaKeyPairQueue;
+    private ImageCodeUtil imageCodeUtil;
 
     public PfLoginAuthenticationFilter() {
         super(new AntPathRequestMatcher("/login", "POST"));
@@ -46,9 +50,9 @@ public class PfLoginAuthenticationFilter extends PfAbstractAuthenticationProcess
             throw new AuthenticationServiceException("不支持" + request.getMethod() + "认证请求方法！");
         }
 
-        //TODO 用户名的分发校验
-        //TODO 用户密码的解密及基础校验
-        //TODO 其他参数的校验处理
+        // 用户名的分发校验
+        // 用户密码的解密及基础校验
+        // 其他参数的校验处理
 
         String username = obtainUsername(request);
         String password = obtainPassword(request);
@@ -59,7 +63,10 @@ public class PfLoginAuthenticationFilter extends PfAbstractAuthenticationProcess
         if (StringUtils.isBlank(password)) {
             throw new AuthenticationServiceException("密码不能为空！");
         }
-
+        String vcode = obtainVcode(request);
+        if(!vcode.equalsIgnoreCase((String) request.getSession().getAttribute(imageCodeUtil.getSessionKey())) ){
+            throw new AuthenticationServiceException("验证码错误！");
+        }
         username = username.trim();
 
         try {
@@ -93,6 +100,10 @@ public class PfLoginAuthenticationFilter extends PfAbstractAuthenticationProcess
         return request.getParameter(usernameParameter);
     }
 
+    protected String obtainVcode(HttpServletRequest request) {
+        return request.getParameter(vcodeParameter);
+    }
+
     protected void setDetails(HttpServletRequest request, UsernamePasswordAuthenticationToken authRequest) {
         authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
     }
@@ -123,4 +134,7 @@ public class PfLoginAuthenticationFilter extends PfAbstractAuthenticationProcess
         this.rsaKeyPairQueue = rsaKeyPairQueue;
     }
 
+    public void setImageCodeUtil(ImageCodeUtil imageCodeUtil) {
+        this.imageCodeUtil = imageCodeUtil;
+    }
 }

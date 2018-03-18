@@ -9,6 +9,8 @@ import com.sm.pfprod.model.param.PageParam;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.result.ResultFactory;
 import com.sm.pfprod.service.system.dic.PfDicService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -17,6 +19,8 @@ import java.util.List;
 @Component("pfDicFacade")
 public class PfDicFacadeImpl implements PfDicFacade {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(PfDicFacadeImpl.class);
+
     @Resource
     private PfDicService pfDicService;
 
@@ -24,6 +28,7 @@ public class PfDicFacadeImpl implements PfDicFacade {
     @Override
     public PageResult<SysDictionary> listDicGroups(PfDicDto dto) {
         try {
+            LOGGER.debug("获取字典分组列表", dto.toString());
             PageParam.initPageDto(dto);
             return ResultFactory.initPageResultWithSuccess(0L, pfDicService.listDicGroups(dto));
         } catch (Exception e) {

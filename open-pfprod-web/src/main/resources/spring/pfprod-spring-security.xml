@@ -18,16 +18,17 @@
     <http pattern="/403.html" security="none"></http>
     <http pattern="/404.html" security="none"></http>
     <http pattern="/login/**" security="none"></http>
-    <http pattern="/" security="none"></http>
-    <http pattern="/logoutsuccess" security="none"></http>
+    <http pattern="/logout/success" security="none"></http>
+    <!--<http pattern="/" security="none"></http>-->
 
     <http use-expressions="true" entry-point-ref="http403RestfulEntryPoint"
           authentication-manager-ref="authenticationManager">
         <intercept-url pattern="/pf/**" access="permitAll"/>
+        <!-- session超时处理-->
         <custom-filter position="FORM_LOGIN_FILTER" ref="loginAuthenticationFilter"/>
         <custom-filter position="LOGOUT_FILTER" ref="logoutFilter"/>
         <access-denied-handler ref="accessDeniedHandler"/>
-        <anonymous enabled="false" granted-authority="ROLE_ANONYMOUS" username="anonymousUser"/>
+        <anonymous enabled="true" granted-authority="ROLE_ANONYMOUS" username="anonymousUser"/>
         <csrf disabled="true"/>
         <headers defaults-disabled="true">
             <cache-control/>
@@ -52,6 +53,7 @@
         <beans:property name="authenticationSuccessHandler" ref="authenticationSuccessHandler"/>
         <beans:property name="authenticationFailureHandler" ref="authenticationFailureHandler"/>
         <beans:property name="rsaKeyPairQueue" ref="rsaKeyPairQueue"/>
+        <beans:property name="imageCodeUtil" ref="imageCodeUtil"/>
     </beans:bean>
 
     <beans:bean id="sessionAuthenticationStrategy"
@@ -102,7 +104,7 @@
     </beans:bean>
 
     <beans:bean id="logoutSuccessHandler" class="com.sm.pfprod.web.security.PfLogoutSuccessHandler">
-        <beans:property name="defaultTargetUrl" value="/logoutsuccess"/>
+        <beans:property name="defaultTargetUrl" value="/logout/success"/>
     </beans:bean>
 
     <authentication-manager alias="authenticationManager">

@@ -6,6 +6,7 @@ import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.util.EnumUtil;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,12 +27,14 @@ public class PfParamController extends BaseController {
     @Resource
     private PfParamFacade pfParamFacade;
 
+    @PreAuthorize("hasAnyRole('ROLE_PARAM_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String page(Model model) {
         model.addAttribute("modualMap", EnumUtil.getEnumMap(SysDicGroupEnum.SYS_PARAM_BIZ_MODUAL.getCode()));
         return "pages/param/param";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_PARAM_MG','ROLE_SUPER')")
     @RequestMapping("/form")
     public String form(String formType, Model model) {
         model.addAttribute("formType", formType);
@@ -42,6 +45,7 @@ public class PfParamController extends BaseController {
     /**
      * 获取参数列表
      */
+    @PreAuthorize("hasAnyRole('ROLE_PARAM_MG','ROLE_SUPER')")
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listDicGroups(ParamDto dto) {

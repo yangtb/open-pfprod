@@ -6,8 +6,16 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource"></property>
+    <bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">
+        <property name="logViolation" value="true" />
+        <property name="throwException" value="false" />
+    </bean>
+
+    <bean id="log-filter" class="com.alibaba.druid.filter.logging.Slf4jLogFilter">
+        <property name="connectionLogEnabled" value="false"/>
+        <property name="statementLogEnabled" value="false"/>
+        <property name="resultSetLogEnabled" value="true"/>
+        <property name="statementExecutableSqlLogEnable" value="true"/>
     </bean>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
@@ -38,6 +46,10 @@
         <property name="logAbandoned" value="${druid.logAbandoned}"/>
         <!-- 数据库加密 -->
         <!--<property name="connectionProperties" value="${druid.config.decrypt}" />-->
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
