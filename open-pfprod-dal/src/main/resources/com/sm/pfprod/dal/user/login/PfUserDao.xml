@@ -150,6 +150,7 @@
                 </when>
             </choose>
         </if>
+        and username != 'super'
         ORDER BY user_id
         limit #{offset}, #{limit}
     </select>

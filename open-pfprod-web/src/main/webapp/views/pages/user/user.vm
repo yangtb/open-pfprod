@@ -32,10 +32,10 @@
                     <i class="iconfont icon-edit"></i> 编辑
                 </button>
                 <button type="button" class="layui-btn" id="del">
-                    <i class="iconfont icon-delete"></i> 删除
+                    <i class="iconfont icon-delete"></i> 批量删除
                 </button>
                 <button type="button" class="layui-btn" id="freeze">
-                    <i class="iconfont icon-freeze2"></i> 冻结
+                    <i class="iconfont icon-freeze2"></i> 批量冻结
                 </button>
                 <button type="button" class="layui-btn" id="resetPass">
                     <i class="iconfont icon-resetpass"></i> 密码重置
@@ -75,13 +75,12 @@
 <script src="${contextPath}/public/biz/js/userController.js"></script>
 
 <script type="text/html" id="userBar">
-    <a class="layui-btn layui-btn-mini" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>
-    <a class="layui-btn layui-btn-mini" lay-event="resetPass"><i class="iconfont icon-resetpass"></i> 密码重置</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="resetPass"><i class="iconfont icon-resetpass"></i> 密码重置</a>
 </script>
 
 <script type="text/html" id="switchTpl">
-    <!-- 这里的 checked 的状态只是演示 -->
-    <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo" {{ d.id == 10003 ? 'checked' : '' }}>
+    <input type="checkbox" name="status" value="{{d.enabled}}" lay-skin="switch" lay-text="正常|锁定" lay-filter="statusSwitch" {{ d.enabled == 1 ? 'checked' : '' }}>
 </script>
 
 <script type="text/html" id="sexTpl">

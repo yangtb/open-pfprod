@@ -120,9 +120,9 @@ layui.config({
     //监听提交
     form.on('submit(menuSearchFilter)', function (data) {
         if (data.field.status == 'enabled') {
-            $('.bach-invalid').html('<i class="iconfont icon-stop"></i>' + ' 停用');
+            $('.bach-invalid').html('<i class="iconfont icon-stop"></i>' + ' 批量停用');
         } else {
-            $('.bach-invalid').html('<i class="iconfont icon-save"></i>' + ' 启用');
+            $('.bach-invalid').html('<i class="iconfont icon-save"></i>' + ' 批量启用');
         }
         table.reload('menuTableId', {
             where: {

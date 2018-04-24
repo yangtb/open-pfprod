@@ -28,6 +28,11 @@ public class GlobalExceptionResolver {
             BizRuntimeException bizEx = (BizRuntimeException) e;
             return ResultObject.create(requestUrl, bizEx.getErrorCode(), bizEx.getMessage());
         } else if (e instanceof AccessDeniedException) {
+            // 1:判断是否是ajax请求
+            if (request.getHeader("x-requested-with") != null
+                    && "XMLHttpRequest".equalsIgnoreCase(request.getHeader("x-requested-with"))) {
+                return ResultObject.create(requestUrl, ErrorCode.ERROR_NET_150001, "没有访问权限");
+            }
             // 无权限异常抛到上层
             throw new AccessDeniedException(e.getMessage());
         }else {

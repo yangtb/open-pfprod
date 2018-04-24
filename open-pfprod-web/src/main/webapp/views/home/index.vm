@@ -65,6 +65,11 @@
                     <i class="iconfont icon-message"></i>消息<span class="layui-badge">9</span>
                 </a>
             </li>
+            #*<li class="layui-nav-item">
+                <a rel="full_screen">
+                    <i class="iconfont icon-message"></i>全屏
+                </a>
+            </li>*#
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="${basePath}/public/biz/img/0.jpg" class="layui-nav-img">$!username
@@ -138,6 +143,7 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/biz/js/indexController.js"></script>
 
 </body>

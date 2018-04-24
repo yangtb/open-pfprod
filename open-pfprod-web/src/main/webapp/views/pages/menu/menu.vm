@@ -29,7 +29,7 @@
                     <i class="iconfont icon-edit"></i> 编辑
                 </button>
                 <button type="button" class="layui-btn bach-invalid">
-                    <i class="iconfont icon-stop"></i> 停用
+                    <i class="iconfont icon-stop"></i> 批量停用
                 </button>
             </div>
             <div class="layui-input-inline">
@@ -72,11 +72,11 @@
 <script src="${contextPath}/public/biz/js/menuController.js"></script>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-mini" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>
     {{#  if(d.status == 'enabled'){ }}
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="stop"><i class="iconfont icon-stop"></i> 停用</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="stop"><i class="iconfont icon-stop"></i> 停用</a>
     {{#  } else { }}
-    <a class="layui-btn  layui-btn-mini" lay-event="recover"><i class="iconfont icon-save"></i> 启用</a>
+    <a class="layui-btn  layui-btn-xs" lay-event="recover"><i class="iconfont icon-save"></i> 启用</a>
     {{#  } }}
 </script>
 

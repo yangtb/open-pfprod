@@ -23,7 +23,7 @@ layui.config({
             {field: 'phone_no', width: 120, title: '手机号'},
             {field: 'email', width: 160, sort: true, title: '邮箱'},
             {field: 'enabled', width: 70, title: '状态', templet: '#enabledTpl'},
-            {field:'sex', title:'状态', width:85, templet: '#switchTpl', unresize: true},
+            {field: 'enabled', title:'状态', width:85, templet: '#switchTpl', unresize: true},
             {
                 field: 'role_type',
                 width: 110,
@@ -188,6 +188,7 @@ layui.config({
     }
 
     var _commonAjax = function (index, url, reqData, msg) {
+        layer.load(1);
         $.ajax({
             url: url,
             type: 'post',
@@ -195,6 +196,7 @@ layui.config({
             contentType: "application/json",
             data: JSON.stringify(reqData),
             success: function (data) {
+                layer.closeAll('loading');
                 if (data.code != 0) {
                     common.errorMsg(data.msg);
                     return false;
@@ -203,11 +205,13 @@ layui.config({
                     if (index) {
                         layer.close(index);
                     }
-                    _userTableReload();
+                    layui.common.refreshCurrentPage();
+                    //_userTableReload();
                     return true;
                 }
             },
             error: function () {
+                layer.closeAll('loading');
                 common.errorMsg(msg + "失败");
                 return false;
             }
@@ -225,6 +229,17 @@ layui.config({
             height: 'full-68'
         });
     }
+
+    //监听性别操作
+    form.on('switch(statusSwitch)', function(obj){
+        if (obj.elem.checked){
+            common.sucMsg("保存成功");
+            //layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+        } else {
+            common.errorMsg("保存失败");
+        }
+    });
+
 
 });
 

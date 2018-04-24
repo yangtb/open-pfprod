@@ -15,7 +15,10 @@ layui.config({
     laydate.render({
         elem: '#publishTime'
         //,theme: '#393D49'
+        , theme: 'molv'
         , range: true
+        , calendar: true
+        , max: 0
     });
 
     //执行渲染
