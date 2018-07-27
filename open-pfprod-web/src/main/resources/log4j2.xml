@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Log4j 2.x 配置文件。每30秒自动检查和应用配置文件的更新；http://logging.apache.org/log4j/2.x/manual/configuration.html -->
 <configuration status="${log4j2.level}" monitorInterval="3600">
+
+	<properties>
+		<property name="CONSOLE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight{%5p} %style{%processId}{magenta} --- [%15.15t] %style{%-40.40c{1.}}{cyan} : %m%n</property>
+		<property name="FILE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %processId --- [%15.15t] %-40.40c{1.} : %m%n</property>
+	</properties>
+
 	<Appenders>
 		<!-- 定义控制台输出 -->
 		<Console name="console" target="SYSTEM_OUT" follow="true">
 			<Filters>
 				<ThresholdFilter level="${log4j2.console.level}" onMatch="ACCEPT" onMismatch="DENY"/>
 			</Filters>
-			<PatternLayout pattern="[console] %date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%c{1}:%L] - %msg%n" />
+			<PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
 		</Console >
 
 		<!-- 默认日志 -->
 		<RollingRandomAccessFile name="default" immediateFlush="false" append="true" fileName="${log4j2.log.basepath}/defaultLog.log" filePattern="${log4j2.log.basepath}/%d{yyyy-MM-dd}/defaultLog-%i.log">
-			<PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %p [%t] [%c{1}:%L] - %msg%n" />
+			<PatternLayout pattern="${FILE_LOG_PATTERN}" />
 			<Policies>
 				<!-- TimeBased Triggering Policy 基于时间的触发策略。该策略主要是完成周期性的log文件封存工作。有两个参数：
 					interval，integer型，指定两次封存动作之间的时间间隔。单位:以日志的命名精度来确定单位，比如上面的filePattern中的yyyy-MM-dd-HH 单位为小时，yyyy-MM-dd-HH-mm 单位为分钟
