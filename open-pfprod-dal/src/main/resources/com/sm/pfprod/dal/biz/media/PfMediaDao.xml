@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sm.pfprod.dal.biz.media.PfMediaDao">
+
+    <!-- 获取banner总数 -->
+    <select id="countBanner" resultType="java.lang.Long">
+        SELECT
+            count(1)
+        FROM notice
+    </select>
+
+    <!-- banner列表 -->
+    <select id="listBanners" resultType="com.sm.pfprod.model.entity.Notice">
+        SELECT
+            id ,
+            notice_code ,
+            title ,
+            short_name ,
+            content ,
+            picture_url ,
+            status ,
+            sort_num ,
+            start_time ,
+            end_time ,
+            reach ,
+            notice_type ,
+            remark ,
+            link_url ,
+            is_limit_area ,
+            is_limit_group ,
+            app_code ,
+            isv_appid ,
+            isv_scope ,
+            is_auth ,
+            operator ,
+            gmt_create ,
+            gmt_modify
+        FROM notice
+    </select>
+</mapper>

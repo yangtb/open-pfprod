@@ -12,14 +12,14 @@
             keyColumn="user_id" keyProperty="userId">
         INSERT INTO user_info(
             username , password , salt , email , phone_no ,
-            enabled , role_type , role_desc ,real_name , sex,
-            remark , gmt_create , gmt_modify
+            enabled , role_type , role_desc , real_name , sex,
+            remark , gmt_create , gmt_modify , operator
         )
         VALUES
             (
               #{username} , #{password} , #{salt} ,  #{email} ,  #{phoneNo} ,
               #{enabled} , #{roleType} , #{roleDesc} , #{realName} , #{sex} ,
-              #{remark}  , now() , now()
+              #{remark}  , now() , now() , #{operator}
             );
     </insert>
 
@@ -98,6 +98,9 @@
             <if test="isDeleted != null">
                 is_deleted = #{isDeleted} ,
             </if>
+            <if test="operator != null and operator != ''">
+                operator = #{operator},
+            </if>
             gmt_modify = NOW()
         WHERE
             user_id = #{userId};
@@ -133,7 +136,7 @@
         SELECT
             user_id , username , email , sex , phone_no , enabled ,
             is_first , real_name , last_login_time , is_deleted , role_type,
-            gmt_create
+            gmt_create , gmt_modify, operator
         FROM
             user_info
         WHERE is_deleted = 'N'

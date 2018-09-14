@@ -29,11 +29,11 @@
                     <i class="iconfont icon-edit"></i> 编辑
                 </button>
                 <button type="button" class="layui-btn bach-invalid">
-                    <i class="iconfont icon-stop"></i> 批量停用
+                    <i class="iconfont icon-batch-reduce"></i> 批量停用
                 </button>
             </div>
             <div class="layui-input-inline">
-                <input type="text" name="menuName"  class="layui-input"
+                <input type="text" name="menuName" class="layui-input" autocomplete="off"
                        placeholder="请输入菜单名称">
             </div>
             <div class="layui-input-inline" style="width: 100px;">

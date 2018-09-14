@@ -79,7 +79,7 @@ layui.config({
         }
 
         var msg = $('.bach-invalid').text();
-        layer.confirm('真的要' + msg + '菜单' + name + '么？', {
+        layer.confirm('真的要' + msg + '菜单：' + name + '么？', {
             title: msg + '菜单提示',
             resize: false,
             btn: ['确定', '取消'],
@@ -120,9 +120,9 @@ layui.config({
     //监听提交
     form.on('submit(menuSearchFilter)', function (data) {
         if (data.field.status == 'enabled') {
-            $('.bach-invalid').html('<i class="iconfont icon-stop"></i>' + ' 批量停用');
+            $('.bach-invalid').html('<i class="iconfont icon-batch-reduce"></i>' + ' 批量停用');
         } else {
-            $('.bach-invalid').html('<i class="iconfont icon-save"></i>' + ' 批量启用');
+            $('.bach-invalid').html('<i class="iconfont icon-icon-import"></i>' + ' 批量启用');
         }
         table.reload('menuTableId', {
             where: {
@@ -149,6 +149,11 @@ layui.config({
             return;
         }
         _addOrEdit("edit", currentData[0]);
+    });
+
+    //监听行双击事件
+    table.on('rowDouble(menuTableFilter)', function(obj){
+        _addOrEdit("edit", obj.data);
     });
 
     // 获取编辑行数据

@@ -20,8 +20,9 @@ public class PfAccessDeniedHandler implements AccessDeniedHandler {
 
 	private String errorPage;
 
+	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
-			AccessDeniedException accessDeniedException) throws IOException, ServletException {
+					   AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		if (!response.isCommitted()) {
 			if (errorPage != null) {
 				request.setAttribute(WebAttributes.ACCESS_DENIED_403, accessDeniedException);

@@ -43,7 +43,7 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label"></label>
-            <div class="layui-form-mid layui-word-aux">8-16位，至少包含1个大写字母、小写字母、数字</div>
+            <div class="layui-form-mid" style="color: #FF5722">8-16位，至少包含1个大写字母、小写字母、数字</div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">

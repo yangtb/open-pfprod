@@ -34,6 +34,7 @@ public class PfConcurrentSessionControlAuthenticationStrategy implements Message
 		this.sessionRegistry = sessionRegistry;
 	}
 
+	@Override
 	public void onAuthentication(Authentication authentication, HttpServletRequest request, HttpServletResponse response) {
 		final List<SessionInformation> sessions = sessionRegistry.getAllSessions(authentication.getPrincipal(), false);
 		int sessionCount = sessions.size();
@@ -99,6 +100,7 @@ public class PfConcurrentSessionControlAuthenticationStrategy implements Message
 	 * @param messageSource
 	 * @see MessageSourceAware#setMessageSource(MessageSource)
 	 */
+	@Override
 	public void setMessageSource(MessageSource messageSource) {
 		Assert.notNull(messageSource, "MessageSource注入不能为空");
 		this.messages = new MessageSourceAccessor(messageSource);

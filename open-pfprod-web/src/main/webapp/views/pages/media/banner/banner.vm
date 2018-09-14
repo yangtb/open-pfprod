@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>banner管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '${basePath}';
+    </script>
+</head>
+
+<body>
+
+<div class="wrapper-content">
+    <form class="layui-form">
+        <div class="layui-inline">
+            <div class="layui-btn-group">
+                <button type="button" class="layui-btn add">
+                    <i class="iconfont icon-add"></i> 增加
+                </button>
+                <button type="button" class="layui-btn edit">
+                    <i class="iconfont icon-edit"></i> 编辑
+                </button>
+                <button type="button" class="layui-btn del">
+                    <i class="iconfont icon-delete"></i> 删除
+                </button>
+                <button type="button" class="layui-btn del">
+                    <i class="iconfont icon-publish"></i> 发布
+                </button>
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" name="menuName" class="layui-input"
+                       placeholder="标题">
+            </div>
+            <div class="layui-input-inline">
+                <select name="menuLevel" >
+                    <option value="">请选择banner位</option>
+                    #foreach($param in ${bannerPosition.keySet()})
+                        <option value="$param">${bannerPosition.get($param)}</option>
+                    #end
+                </select>
+            </div>
+            <div class="layui-input-inline" style="width: 120px;">
+                <select name="status">
+                    <option value="" selected>请选择状态</option>
+                    <option value="enabled" >待提交</option>
+                    <option value="disabled">已发布</option>
+                    <option value="disabled">已撤销</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn" lay-submit lay-filter="noticeSearchFilter">
+                    <i class="iconfont icon-query"></i> 查询
+                </button>
+                <button type="reset" class="layui-btn layui-btn-primary">
+                    <i class="iconfont icon-reset"></i> 重置
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <form id="exportForm" action="${basePath}/pf/p/biz/excel/downloadExcel" method="post">
+        <input type="hidden" value="USER" name="accountType" id="accountType" >
+    </form>
+
+    <table id="bannerTable" lay-filter="demoTableFilter">
+    </table>
+
+</div>
+
+<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="${contextPath}/public/biz/js/bannerController.js"></script>
+
+<script type="text/html" id="bannerBar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="del"><i class="iconfont icon-delete"></i> 删除</a>
+</script>
+
+<script type="text/html" id="switchTpl">
+    <input type="checkbox" name="status" value="{{d.enabled}}" lay-skin="switch" lay-text="发布|撤销" lay-filter="statusSwitch" {{ d.enabled == 1 ? 'checked' : '' }}>
+</script>
+
+</body>
+
+</html>

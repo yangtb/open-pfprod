@@ -50,6 +50,7 @@ public class PfUserRestController extends BaseController {
         Assert.isTrue(dto.getUsername() != null, "username");
         Assert.isTrue(StringUtils.isNotBlank(dto.getPassword()), "password");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getRoles()), "roles");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
 
         RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
         // 密码转化为明文
@@ -73,7 +74,7 @@ public class PfUserRestController extends BaseController {
         /* 参数校验 */
         Assert.isTrue(dto.getUsername() != null, "username");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getRoles()), "roles");
-
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.create("updateUser", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfUserFacade.updateUser(dto));
     }

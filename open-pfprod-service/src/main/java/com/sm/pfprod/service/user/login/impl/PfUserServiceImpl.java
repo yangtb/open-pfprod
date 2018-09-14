@@ -35,7 +35,7 @@ public class PfUserServiceImpl implements PfUserService {
         return pfUserDao.countUsers();
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean saveUser(RegisterDto dto) {
         UserInfo user = new UserInfo();
@@ -56,7 +56,7 @@ public class PfUserServiceImpl implements PfUserService {
         return pfUserDao.isExistUser(userName);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean updateUser(RegisterDto dto) {
         UserInfo user = new UserInfo();

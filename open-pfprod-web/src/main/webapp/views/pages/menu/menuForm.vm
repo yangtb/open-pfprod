@@ -27,13 +27,13 @@
             <div class="layui-inline">
                 <label class="layui-form-label">名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
-                    <input type="text" name="name" data-fill="" lay-verify="required" autocomplete="off" class="layui-input">
+                    <input type="text" name="name" data-fill="" lay-verify="required" lay-vertype="tips" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">级别<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
-                    <select name="level" id="level" lay-verify="required">
+                    <select name="level" id="level" lay-verify="required" lay-vertype="tips">
                         <option value="">请选择</option>
                         <option value="1">一级</option>
                         <option value="2">二级</option>
@@ -47,12 +47,12 @@
             <div class="layui-inline">
                 <label class="layui-form-label">编码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
-                    <input type="text" name="code" lay-verify="required" autocomplete="off"
+                    <input type="text" name="code" lay-verify="required" lay-vertype="tips" autocomplete="off"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">父编码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                <label class="layui-form-label">父编码</label>
                 <div class="layui-input-inline">
                     <input type="text" name="parentCode" autocomplete="off"
                            class="layui-input">
@@ -70,7 +70,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">资源类别<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
-                    <select name="functionType" lay-verify="required">
+                    <select name="functionType" lay-verify="required" lay-vertype="tips">
                         <option value="1" selected>菜单权限功能</option>
                         <option value="2">按钮、链接功能权限资源</option>
                         <option value="3">接口功能权限资源</option>
@@ -83,7 +83,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">排序<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
-                    <input type="text" name="sortNum" lay-verify="required|sort" autocomplete="off" class="layui-input">
+                    <input type="text" name="sortNum" lay-verify="required|sort" lay-vertype="tips" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
@@ -118,7 +118,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">所属平台<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
-                    <select name="platformType" lay-verify="required">
+                    <select name="platformType" lay-verify="required" lay-vertype="tips">
                         <option value="pfprod">管理平台</option>
                     </select>
                 </div>

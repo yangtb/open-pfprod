@@ -25,7 +25,7 @@ public class EnumUtil {
     @Resource
     private PfDicService pfDicService;
 
-    public static Map<String, PfEnum> allEnums = new HashMap<String, PfEnum>();
+    public static Map<String, PfEnum> allEnums = new HashMap<>();
 
     /**
      * 获取指定枚举类型 指定枚举值的显示值

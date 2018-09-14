@@ -88,6 +88,11 @@ layui.config({
         _addOrEdit("edit", currentData[0]);
     });
 
+    //监听行双击事件
+    table.on('rowDouble(paramTableFilter)', function(obj){
+        _addOrEdit("edit", obj.data);
+    });
+
     // 获取编辑行数据
     var _getCheckData = function () {
         var checkStatus = table.checkStatus('paramTableId')

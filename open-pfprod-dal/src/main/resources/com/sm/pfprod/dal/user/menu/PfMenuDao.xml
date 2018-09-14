@@ -20,7 +20,7 @@
         AND sf.status = 'enabled'
 	    AND sf.function_type = 1
         GROUP BY
-            sf.id
+            sf.sort_num
     </select>
 
     <!-- 获取系统所有菜单 -->
@@ -32,6 +32,7 @@
         WHERE
             sf.status = 'enabled'
 	    AND sf.function_type = 1
+	    ORDER BY sf.sort_num
     </select>
 
     <!-- 获取菜单 -->

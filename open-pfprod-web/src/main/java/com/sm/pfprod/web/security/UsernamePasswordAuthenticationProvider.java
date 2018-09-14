@@ -40,6 +40,7 @@ public class UsernamePasswordAuthenticationProvider extends PfAbstractUserDetail
      * @throws AuthenticationException
      * @see PfAbstractUserDetailsAuthenticationProvider#additionalAuthenticationChecks(org.springframework.security.core.userdetails.UserDetails, org.springframework.security.authentication.UsernamePasswordAuthenticationToken)
      */
+    @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails,
                                                   UsernamePasswordAuthenticationToken authentication)
             throws AuthenticationException {
@@ -62,6 +63,7 @@ public class UsernamePasswordAuthenticationProvider extends PfAbstractUserDetail
         }
     }
 
+    @Override
     protected void doAfterPropertiesSet() throws Exception {
         Assert.notNull(this.userDetailsService, "UserDetailsService注入不能为空");
     }
@@ -76,6 +78,7 @@ public class UsernamePasswordAuthenticationProvider extends PfAbstractUserDetail
      * @throws AuthenticationException
      * @see PfAbstractUserDetailsAuthenticationProvider#retrieveUser(String, org.springframework.security.authentication.UsernamePasswordAuthenticationToken)
      */
+    @Override
     protected final UserDetails retrieveUser(String username,
                                              UsernamePasswordAuthenticationToken authentication)
             throws AuthenticationException {

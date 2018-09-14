@@ -19,21 +19,21 @@ layui.config({
             //{field: 'user_id', width: 80, hidden: true, title: 'ID'},
             {field: 'user_name', width: 100, title: '账号', fixed: true},
             {field: 'real_name', width: 100, title: '姓名'},
-            {field: 'sex', width: 70, sort: true, templet: '#sexTpl', title: '性别'},
+            {field: 'sex', width: 70, templet: '#sexTpl', title: '性别'},
             {field: 'phone_no', width: 120, title: '手机号'},
-            {field: 'email', width: 160, sort: true, title: '邮箱'},
+            {field: 'email', width: 160, title: '邮箱'},
             {field: 'enabled', width: 70, title: '状态', templet: '#enabledTpl'},
-            {field: 'enabled', title:'状态', width:85, templet: '#switchTpl', unresize: true},
+            //{field: 'enabled', title:'状态', width:100, templet: '#switchTpl', unresize: true},
             {
                 field: 'role_type',
                 width: 110,
                 title: '账户类型',
-                style:'background-color: #009688; color: #fff;',
-                //style: 'background-color: #5FB878; color: #fff;',
-                templet: '#roleTypeTpl',
-                sort: true
+                style: 'background-color: #5FB878; color: #fff;',
+                templet: '#roleTypeTpl'
             },
-            {field: 'last_login_time', width: 170, sort: true, title: '最后登录时间'},
+            {field: 'gmt_create', width: 170, sort: true, title: '创建时间'},
+            {field: 'gmt_modify', width: 170, sort: true, title: '修改时间'},
+            {field: 'operator', width: 100, title: '操作人员'},
             {fixed: 'right', width: 180, title: '操作', align: 'center', toolbar: '#userBar'}
         ]] //设置表头
         , url: basePath + '/pf/p/user/list'
@@ -59,6 +59,11 @@ layui.config({
         }
         _addOrEdit("edit", currentData[0]);
 
+    });
+
+    //监听行双击事件
+    table.on('rowDouble(userTableFilter)', function (obj) {
+        _addOrEdit("edit", obj.data);
     });
 
     $('#del').on('click', function () {
@@ -231,8 +236,8 @@ layui.config({
     }
 
     //监听性别操作
-    form.on('switch(statusSwitch)', function(obj){
-        if (obj.elem.checked){
+    form.on('switch(statusSwitch)', function (obj) {
+        if (obj.elem.checked) {
             common.sucMsg("保存成功");
             //layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
         } else {

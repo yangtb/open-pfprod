@@ -24,11 +24,9 @@ public class RsaKeyPairQueueInit {
 	private final AtomicBoolean isExcute = new AtomicBoolean(false);
 	
 	private final ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(2);
-	
+
 	/**
 	 * 初始化rsa公私钥队列
-	 * @author 王勇琳
-	 * @date 2017年7月11日 下午6:48:28
 	 */
 	public void init(){
 		if(!isExcute.compareAndSet(false, true)){

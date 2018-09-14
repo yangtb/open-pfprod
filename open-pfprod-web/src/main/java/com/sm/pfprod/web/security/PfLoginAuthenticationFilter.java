@@ -44,6 +44,7 @@ public class PfLoginAuthenticationFilter extends PfAbstractAuthenticationProcess
         super(new AntPathRequestMatcher("/login", "POST"));
     }
 
+    @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
         if (postOnly && !request.getMethod().equals("POST")) {

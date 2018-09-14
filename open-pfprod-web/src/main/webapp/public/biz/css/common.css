@@ -46,3 +46,7 @@
 .label-danger {
     background-color: #d9534f
 }
+
+.label-width-my {
+    width: 100px;
+}

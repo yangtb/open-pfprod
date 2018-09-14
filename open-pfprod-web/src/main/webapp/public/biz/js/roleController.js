@@ -87,6 +87,11 @@ layui.config({
         _addOrEdit("edit", currentEditData);
     });
 
+    //监听行双击事件
+    table.on('rowDouble(roleTableFilter)', function(obj){
+        _addOrEdit("edit", obj.data);
+    });
+
     $('.cancel').on('click', function () {
         var checkStatus = table.checkStatus('roleTableId')
             , data = checkStatus.data;

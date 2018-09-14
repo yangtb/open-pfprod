@@ -4,10 +4,7 @@ import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.facade.menu.PfMenuFacade;
 import com.sm.pfprod.model.dto.system.menu.PfMenuListDto;
-import com.sm.pfprod.model.dto.user.menu.MenuDto;
-import com.sm.pfprod.model.dto.user.role.PfRoleCommonDto;
 import com.sm.pfprod.model.entity.SysFunction;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @ClassName: PfMenuRestController

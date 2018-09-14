@@ -52,12 +52,14 @@ public abstract class PfAbstractUserDetailsAuthenticationProvider implements Aut
                                                            UsernamePasswordAuthenticationToken authentication)
             throws AuthenticationException;
 
+    @Override
     public final void afterPropertiesSet() throws Exception {
         Assert.notNull(this.userCache, "UserCache必须注入或已存在");
         Assert.notNull(this.messages, "MessageSourceAccessor必须注入或已存在");
         doAfterPropertiesSet();
     }
 
+    @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         Assert.isInstanceOf(UsernamePasswordAuthenticationToken.class, authentication,
                 messages.getMessage("PfAbstractUserDetailsAuthenticationProvider.onlySupports", "仅支持UsernamePasswordAuthenticationToken"));
@@ -149,6 +151,7 @@ public abstract class PfAbstractUserDetailsAuthenticationProvider implements Aut
         this.hideUserNotFoundExceptions = hideUserNotFoundExceptions;
     }
 
+    @Override
     public void setMessageSource(MessageSource messageSource) {
         this.messages = new MessageSourceAccessor(messageSource);
     }
@@ -157,6 +160,7 @@ public abstract class PfAbstractUserDetailsAuthenticationProvider implements Aut
         this.userCache = userCache;
     }
 
+    @Override
     public boolean supports(Class<?> authentication) {
         return (UsernamePasswordAuthenticationToken.class
                 .isAssignableFrom(authentication));
@@ -183,6 +187,7 @@ public abstract class PfAbstractUserDetailsAuthenticationProvider implements Aut
     }
 
     private class DefaultPreAuthenticationChecks implements UserDetailsChecker {
+        @Override
         public void check(UserDetails user) {
             logger.debug("用户账户信息：" + JSON.toJSON(user));
             if (!user.isAccountNonLocked()) {
@@ -204,6 +209,7 @@ public abstract class PfAbstractUserDetailsAuthenticationProvider implements Aut
     }
 
     private class DefaultPostAuthenticationChecks implements UserDetailsChecker {
+        @Override
         public void check(UserDetails user) {
             if (!user.isCredentialsNonExpired()) {
                 logger.debug("用户账户密令已过期");

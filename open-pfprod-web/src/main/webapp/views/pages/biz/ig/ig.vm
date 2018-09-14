@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ig管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '${basePath}';
+    </script>
+</head>
+
+<body>
+
+<div class="wrapper-content">
+    <div id="step-symptoms" class="step">
+
+        <div class="step-wrapper">
+
+            <div class="step-content">
+                <h2 class="step-title">选择症状</h2>
+
+
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-1" id="symptoms-model-wrapper">
+
+                            <div id="symptoms-models" class="">
+
+
+
+                                <div class="symptoms-model small animate" id="model-m-front" data-bind="visible:gender()=='Male'">
+
+
+                                    <div id="mapster_wrap_0" style="position: relative; padding: 0px; width: 191px; height: 326px;">
+
+
+
+                                        <img usemap="#map-m-front" src="/Content/images/man-front.png" style="position: absolute; left: 0px; top: 0px; padding: 0px; border: 0px none; opacity: 0;">
+                                    </div>
+
+
+
+                                    <map name="map-m-front">
+                                        <area href="#" alt="" shape="poly" coords="78,13, 83,13, 84,14, 101,14, 103,13, 108,13, 108,11, 106,8, 105,7, 104,6, 103,4, 100,3, 96,3, 90,3, 84,3, 81,4, 80,6, 79,8, 78,12" data-key="brain">
+                                        <area href="#" alt="" shape="poly" coords="94,16, 94,18, 96,21, 100,21, 103,19, 103,17, 100,16, 95,16, 94,17, 94,17" data-key="eye">
+                                        <area href="#" alt="" shape="poly" coords="90,18, 90,17, 89,16, 84,16, 83,17, 83,19, 84,21, 89,21, 90,19, 90,17" data-key="eye">
+                                        <area href="#" alt="" shape="poly" coords="78,19, 78,28, 81,32, 84,26, 81,19" data-key="ear">
+                                        <area href="#" alt="" shape="poly" coords="103,29, 104,32, 105,31, 108,27, 108,19, 104,19, 101,26, 101,26" data-key="ear">
+                                        <area href="#" alt="" shape="poly" coords="89,26, 90,28, 94,28, 94,28, 95,28, 96,26, 95,23, 94,18, 94,17, 91,17" data-key="nose">
+                                        <area href="#" alt="" shape="poly" coords="84,37, 86,39, 91,41, 96,41, 101,39, 103,37, 104,33, 103,31, 100,28, 95,28, 86,28, 83,33" data-key="oral">
+                                        <area href="#" alt="" shape="poly" coords="83,41, 83,48, 91,56, 101,48, 101,41, 91,43" data-key="neck">
+                                        <area href="#" alt="" shape="poly" coords="66,64, 74,57, 88,57, 86,57, 86,57, 86,57, 86,57, 86,57, 91,62, 91,80, 84,85, 71,85, 66,80" data-key="chest">
+                                        <area href="#" alt="" shape="poly" coords="94,58, 110,58, 119,66, 118,82, 114,85, 99,85, 91,82, 91,62" data-key="chest">
+                                        <area href="#" alt="" shape="poly" coords="65,83, 73,87, 84,85, 91,83, 100,87, 114,85, 118,82, 120,92, 115,107, 68,107, 64,92" data-key="up-abdomen">
+                                        <area href="#" alt="" shape="poly" coords="68,108, 116,108, 115,120, 118,134, 68,134, 70,120" data-key="down-abdomen">
+                                        <area href="#" alt="" shape="poly" coords="68,134, 91,136, 118,134, 118,138, 104,149, 80,149, 68,139" data-key="reproduction">
+                                        <area href="#" alt="" shape="poly" coords="50,68, 59,58, 64,58, 64,92, 57,108, 49,108, 45,104, 49,89" data-key="upperarm">
+                                        <area href="#" alt="" shape="poly" coords="120,58, 126,61, 135,72, 135,88, 140,104, 130,113, 120,82" data-key="upperarm">
+                                        <area href="#" alt="" shape="poly" coords="47,103, 40,112, 38,115, 35,122, 34,128, 33,134, 30,138, 27,145, 34,149, 39,141, 44,134, 48,129, 52,123, 54,117, 55,110, 57,108, 50,107" data-key="forearm">
+                                        <area href="#" alt="" shape="poly" coords="130,112, 136,112, 141,107, 150,117, 154,132, 164,148, 154,154, 151,144, 136,127" data-key="forearm">
+                                        <area href="#" alt="" shape="poly" coords="162,148, 171,155, 174,159, 174,159, 175,161, 175,171, 170,179, 164,179, 159,176, 156,175, 156,165, 154,159, 154,153" data-key="hand">
+                                        <area href="#" alt="" shape="poly" coords="27,146, 33,149, 33,159, 30,166, 30,178, 28,178, 23,181, 18,180, 15,178, 13,175, 12,171, 10,161, 13,156, 19,153, 24,150" data-key="hand">
+                                        <area href="#" alt="" shape="poly" coords="65,148, 78,151, 83,160, 86,176, 89,179, 84,195, 80,212, 71,211, 65,212, 61,170" data-key="thigh">
+                                        <area href="#" alt="" shape="poly" coords="101,159, 109,151, 120,148, 125,175, 125,212, 119,210, 109,210, 106,212, 103,191, 98,179, 99,174, 99,166" data-key="thigh">
+                                        <area href="#" alt="" shape="poly" coords="63,232, 69,235, 73,236, 75,236, 75,242, 75,252, 74,261, 71,271, 69,276, 66,283, 66,291, 58,291, 58,278, 58,270, 58,260, 59,245, 61,234, 60,232, 64,232" data-key="shank">
+                                        <area href="#" alt="" shape="poly" coords="114,235, 129,234, 132,245, 135,288, 124,290, 124,280, 115,259" data-key="shank">
+                                        <area href="#" alt="" shape="poly" coords="63,216, 68,212, 75,212, 81,217, 81,224, 75,232, 63,231" data-key="knee">
+                                        <area href="#" alt="" shape="poly" coords="108,214, 113,212, 119,212, 125,215, 126,230, 120,232, 113,234, 108,225" data-key="knee">
+                                        <area href="#" alt="" shape="poly" coords="58,292, 61,295, 68,291, 68,306, 66,315, 59,318, 52,315, 52,310, 58,305" data-key="foot">
+                                        <area href="#" alt="" shape="poly" coords="124,292, 130,293, 134,292, 135,303, 141,315, 134,317, 126,315, 126,301" data-key="foot">
+                                        <area href="#" alt="" shape="poly" coords="84,160, 88,156, 95,156, 100,160, 98,165, 98,175, 95,178, 89,178, 86,176, 86,165" data-key="reproduction1">
+                                    </map>
+                                </div>
+
+
+
+                                <div class="symptoms-model big animate" data-bind="visible:gender()=='Male'" id="model-m-back">
+
+                                    <div id="mapster_wrap_1" style="display: block; position: relative; padding: 0px; width: 190px; height: 326px;">
+
+
+                                        <img usemap="#map-m-back" src="/Content/images/man-back.png" style="position: absolute; left: 0px; top: 0px; padding: 0px; border: 0px none; opacity: 0;">
+                                    </div>
+
+                                    <map name="map-m-back">
+                                        <area href="#" alt="" shape="poly" coords="85,9, 85,17, 87,18, 89,18, 92,26, 92,32, 109,32, 110,26, 113,18, 114,18, 115,17, 115,9, 113,7, 112,7, 112,6, 110,4, 109,3, 107,2, 94,2, 92,3, 90,4, 89,6, 88,7" data-key="brain">
+                                        <area href="#" alt="" shape="poly" coords="112,28, 113,31, 114,29, 117,26, 117,18, 113,18, 110,24, 110,24" data-key="ear">
+                                        <area href="#" alt="" shape="poly" coords="88,18, 84,18, 85,27, 87,28, 88,29, 88,31, 90,31, 92,26, 90,23" data-key="ear">
+                                        <area href="#" alt="" shape="poly" coords="92,32, 90,36, 90,41, 90,43, 94,41, 107,41, 110,44, 110,36, 109,32" data-key="neck">
+                                        <area href="#" alt="" shape="poly" coords="90,43, 81,52, 83,53, 97,53, 99,51, 102,51, 104,53, 117,53, 120,52, 109,43, 105,41, 94,41, 89,44" data-key="neck">
+                                        <area href="#" alt="" shape="poly" coords="52,95, 57,99, 63,102, 66,95, 68,90, 69,85, 69,84, 74,78, 76,66, 78,53, 77,52, 71,54, 64,58, 62,59, 58,66, 57,72, 56,84" data-key="shoulder">
+                                        <area href="#" alt="" shape="poly" coords="138,103, 145,102, 149,99, 147,89, 145,84, 145,69, 144,64, 140,61, 135,56, 132,54, 128,53, 124,53, 122,53, 124,69, 127,79, 130,85, 133,90, 135,95" data-key="upperarm">
+                                        <area href="#" alt="" shape="poly" coords="52,97, 51,102, 49,103, 46,108, 52,113, 58,114, 59,110, 61,108, 63,103, 57,100" data-key="elbow">
+                                        <area href="#" alt="" shape="poly" coords="138,103, 140,108, 142,110, 143,117, 148,113, 155,112, 154,108, 152,104, 150,102, 149,99, 149,99, 145,102" data-key="elbow">
+                                        <area href="#" alt="" shape="poly" coords="46,108, 43,112, 41,117, 38,123, 37,129, 36,134, 34,139, 31,146, 38,150, 43,143, 48,135, 52,130, 56,124, 58,118, 58,117, 59,114, 52,113" data-key="forearm">
+                                        <area href="#" alt="" shape="poly" coords="143,117, 144,124, 148,132, 153,138, 158,145, 160,153, 168,149, 165,143, 163,136, 161,129, 160,124, 159,119, 155,112, 148,113" data-key="forearm">
+                                        <area href="#" alt="" shape="poly" coords="168,151, 176,159, 179,163, 179,163, 179,166, 179,175, 175,183, 169,183, 164,180, 161,179, 161,169, 159,163, 159,156" data-key="hand">
+                                        <area href="#" alt="" shape="poly" coords="31,149, 38,151, 38,161, 36,169, 36,179, 33,180, 28,183, 23,181, 21,180, 19,176, 18,173, 18,168, 21,160, 24,155, 29,153" data-key="hand">
+                                        <area href="#" alt="" shape="poly" coords="78,53, 74,78, 71,85, 74,94, 76,99, 77,115, 123,115, 123,115, 124,115, 127,100, 130,85, 127,79, 124,70, 122,53, 120,52, 117,53, 104,53, 102,51, 99,51, 97,53, 83,53, 79,52" data-key="back">
+                                        <area href="#" alt="" shape="poly" coords="76,127, 74,141, 78,140, 98,140, 100,144, 102,144, 104,140, 124,140, 128,141, 125,122, 124,115, 77,115" data-key="waist">
+                                        <area href="#" alt="" shape="poly" coords="69,166, 74,175, 78,178, 82,179, 94,179, 97,178, 95,174, 98,168, 100,168, 100,144, 98,140, 78,140, 74,141, 72,153" data-key="cavity">
+                                        <area href="#" alt="" shape="poly" coords="100,144, 100,166, 100,168, 103,168, 105,174, 104,178, 107,179, 123,179, 128,176, 130,173, 130,160, 129,150, 128,141, 124,140, 104,140, 102,144" data-key="cavity">
+                                        <area href="#" alt="" shape="poly" coords="98,168, 95,174, 97,178, 98,180, 102,180, 103,180, 105,174, 103,168" data-key="stool">
+                                        <area href="#" alt="" shape="poly" coords="68,166, 74,175, 78,178, 82,179, 94,179, 97,178, 97,180, 95,188, 93,195, 89,204, 88,211, 85,220, 83,225, 76,225, 67,221, 67,201" data-key="thigh">
+                                        <area href="#" alt="" shape="poly" coords="104,178, 103,180, 104,189, 108,205, 110,215, 112,226, 129,226, 130,183, 130,173, 128,176, 123,179, 107,179" data-key="thigh">
+                                        <area href="#" alt="" shape="poly" coords="66,230, 63,240, 61,246, 59,255, 59,300, 67,300, 67,290, 69,281, 73,272, 76,265, 77,257, 78,242, 79,237, 82,231" data-key="shank">
+                                        <area href="#" alt="" shape="poly" coords="113,232, 129,231, 132,236, 135,246, 137,255, 135,267, 135,290, 135,300, 127,300, 127,291, 127,283, 124,278, 120,269, 119,262, 118,247, 117,239" data-key="shank">
+                                        <area href="#" alt="" shape="poly" coords="58,301, 57,306, 56,307, 53,307, 52,307, 52,310, 54,311, 56,312, 57,315, 58,316, 59,317, 63,317, 64,317, 67,315, 67,313, 67,303, 67,300, 58,300" data-key="ankle">
+                                        <area href="#" alt="" shape="poly" coords="127,300, 125,305, 124,305, 123,305, 123,308, 125,310, 127,311, 127,312, 128,315, 129,317, 130,318, 134,318, 135,317, 137,315, 138,313, 138,306, 137,305, 135,303, 135,300" data-key="ankle">
+                                    </map>
+                                </div>
+
+
+                                <div class="symptoms-model" data-bind="visible:gender()=='Female'" id="model-f-back">
+                                    <div id="mapster_wrap_3" style="display: block; position: relative; padding: 0px; width: 190px; height: 326px;">
+
+
+                                        <img usemap="#map-f-back" src="/Content/images/woman-back.png" style="position: absolute; left: 0px; top: 0px; padding: 0px; border: 0px none; opacity: 0;">
+                                    </div>
+                                    <map name="map-f-back">
+                                        <area href="#" alt="" shape="poly" coords="76,16, 75,21, 75,23, 81,23, 84,31, 84,37, 103,37, 103,31, 106,23, 112,23, 112,21, 111,15, 108,11, 108,10, 107,8, 106,7, 103,5, 98,2, 89,2, 86,5, 83,7, 81,8, 78,11" data-key="brain">
+                                        <area href="#" alt="" shape="poly" coords="104,35, 106,37, 107,36, 109,32, 109,23, 106,23, 103,31, 103,31" data-key="ear">
+                                        <area href="#" alt="" shape="poly" coords="81,23, 77,23, 78,32, 79,33, 79,35, 81,36, 83,36, 84,31, 83,28" data-key="ear">
+                                        <area href="#" alt="" shape="poly" coords="84,38, 84,41, 84,45, 84,47, 88,46, 98,46, 102,47, 102,41, 102,38" data-key="neck">
+                                        <area href="#" alt="" shape="poly" coords="82,50, 79,52, 76,55, 91,55, 93,52, 96,52, 98,55, 111,55, 106,50, 102,47, 98,46, 88,46, 84,47" data-key="neck">
+                                        <area href="#" alt="" shape="poly" coords="50,102, 53,106, 58,107, 61,101, 63,96, 65,91, 66,88, 70,84, 71,69, 71,57, 70,56, 63,58, 58,65, 57,72, 56,78, 55,84, 53,91" data-key="upperarm">
+                                        <area href="#" alt="" shape="poly" coords="116,56, 117,69, 119,78, 119,86, 121,89, 123,93, 124,97, 127,103, 128,107, 134,106, 138,103, 134,94, 132,84, 129,76, 129,66, 127,61, 122,57" data-key="upperarm">
+                                        <area href="#" alt="" shape="poly" coords="50,102, 47,107, 46,108, 43,113, 48,118, 55,119, 56,116, 57,113, 58,107, 53,106" data-key="elbow">
+                                        <area href="#" alt="" shape="poly" coords="128,107, 131,113, 131,116, 132,122, 137,117, 144,117, 143,113, 141,109, 139,107, 138,104, 138,103, 134,106" data-key="elbow">
+                                        <area href="#" alt="" shape="poly" coords="43,113, 42,118, 41,123, 40,128, 38,133, 37,140, 36,144, 33,150, 40,152, 41,148, 45,140, 47,134, 51,128, 52,124, 53,122, 55,119, 50,118" data-key="forearm">
+                                        <area href="#" alt="" shape="poly" coords="133,122, 137,129, 141,135, 144,142, 148,150, 148,153, 155,152, 154,148, 152,142, 149,135, 148,131, 147,124, 144,117, 138,117" data-key="sl_przedramieforearm">
+                                        <area href="#" alt="" shape="poly" coords="155,152, 164,159, 164,162, 164,164, 164,167, 164,173, 159,177, 155,177, 152,177, 148,175, 148,168, 147,163, 148,153" data-key="hand">
+                                        <area href="#" alt="" shape="poly" coords="33,149, 40,152, 41,163, 40,170, 40,175, 36,177, 32,177, 30,177, 27,175, 27,174, 26,172, 23,167, 25,162, 27,157, 32,154" data-key="hand">
+                                        <area href="#" alt="" shape="poly" coords="71,56, 71,69, 70,79, 71,88, 72,98, 75,114, 109,114, 114,114, 114,113, 116,99, 118,88, 119,79, 117,69, 116,56, 109,55, 104,55, 98,55, 96,52, 93,52, 91,55, 81,55, 75,55" data-key="back">
+                                        <area href="#" alt="" shape="poly" coords="72,126, 68,140, 72,139, 92,139, 94,143, 96,143, 98,139, 118,139, 122,140, 117,126, 114,114, 75,114" data-key="waist">
+                                        <area href="#" alt="" shape="poly" coords="66,165, 67,170, 71,173, 76,174, 83,174, 88,173, 88,169, 91,163, 93,163, 93,144, 91,139, 76,139, 67,142, 66,149" data-key="cavity">
+                                        <area href="#" alt="" shape="poly" coords="94,144, 94,163, 94,163, 96,163, 98,168, 98,173, 103,174, 112,174, 118,173, 122,170, 123,165, 123,154, 123,149, 122,142, 114,139, 98,139" data-key="cavity">
+                                        <area href="#" alt="" shape="poly" coords="91,163, 88,169, 89,173, 91,175, 94,175, 96,175, 98,169, 96,163" data-key="stool">
+                                        <area href="#" alt="" shape="poly" coords="66,172, 70,174, 75,177, 79,177, 84,177, 89,175, 89,180, 88,192, 87,200, 86,206, 84,215, 83,230, 81,230, 73,230, 67,230, 67,206" data-key="thigh">
+                                        <area href="#" alt="" shape="poly" coords="98,174, 98,178, 101,187, 102,203, 103,213, 103,226, 121,228, 123,185, 124,170, 122,174, 117,177, 102,175" data-key="thigh">
+                                        <area href="#" alt="" shape="poly" coords="67,231, 66,240, 65,246, 63,255, 63,300, 71,300, 71,290, 73,281, 77,272, 78,265, 79,258, 79,248, 81,238, 82,231" data-key="shank">
+                                        <area href="#" alt="" shape="poly" coords="103,228, 121,228, 122,233, 123,241, 124,251, 126,264, 124,286, 124,299, 117,299, 116,287, 113,280, 111,274, 108,266, 107,259, 106,244, 104,235" data-key="shank">
+                                        <area href="#" alt="" shape="poly" coords="62,302, 62,304, 62,305, 62,306, 61,307, 61,309, 61,310, 61,311, 61,314, 62,317, 67,317, 68,316, 71,314, 72,312, 73,307, 71,305, 71,300, 62,300" data-key="ankle">
+                                        <area href="#" alt="" shape="poly" coords="117,299, 117,304, 117,305, 117,306, 117,307, 117,309, 117,310, 117,311, 118,314, 118,317, 121,317, 124,317, 126,316, 127,314, 128,312, 128,309, 126,306, 126,302, 126,299" data-key="ankle">
+                                    </map>
+                                </div>
+
+
+
+                                <div class="symptoms-model" id="model-f-front" data-bind="visible:gender()=='Female'">
+                                    <div id="mapster_wrap_2" style="display: block; position: relative; padding: 0px; width: 190px; height: 326px;">
+
+
+                                        <img usemap="#map-f-front" src="/Content/images/woman-front.png" style="position: absolute; left: 0px; top: 0px; padding: 0px; border: 0px none; opacity: 0;">
+                                    </div>
+                                    <map name="map-f-front">
+                                        <area href="#" alt="" shape="poly" coords="77,13, 84,13, 84,15, 104,15, 104,13, 109,13, 109,11, 107,7, 107,7, 105,5, 104,3, 101,2, 96,1, 91,1, 85,2, 82,3, 80,6, 79,7, 77,11" data-key="brain">
+                                        <area href="#" alt="" shape="poly" coords="91,18, 91,17, 90,16, 85,16, 84,17, 84,20, 85,21, 90,21, 91,20, 91,17" data-key="eye">
+                                        <area href="#" alt="" shape="poly" coords="104,18, 104,17, 102,16, 97,16, 96,17, 96,20, 97,21, 102,21, 104,20, 104,17" data-key="eye">
+                                        <area href="#" alt="" shape="poly" coords="79,18, 79,27, 82,31, 85,25, 82,18" data-key="ear">
+                                        <area href="#" alt="" shape="poly" coords="104,28, 105,31, 106,30, 109,26, 109,18, 105,18, 102,25, 102,25" data-key="ear">
+                                        <area href="#" alt="" shape="poly" coords="90,25, 91,27, 95,27, 95,27, 96,27, 97,25, 96,22, 95,17, 95,16, 92,16" data-key="nose">
+                                        <area href="#" alt="" shape="poly" coords="85,36, 86,38, 90,38, 94,38, 99,38, 101,36, 101,32, 101,30, 99,28, 94,28, 86,28, 85,30" data-key="oral">
+                                        <area href="#" alt="" shape="poly" coords="85,41, 85,52, 92,55, 101,52, 101,41, 92,43" data-key="neck">
+                                        <area href="#" alt="" shape="poly" coords="69,63, 71,56, 89,56, 87,56, 87,56, 87,56, 87,56, 87,56, 92,61, 92,81, 86,73, 75,71, 69,74" data-key="chest">
+                                        <area href="#" alt="" shape="poly" coords="95,56, 115,56, 117,65, 117,74, 109,72, 99,74, 92,81, 92,61" data-key="chest">
+                                        <area href="#" alt="" shape="poly" coords="70,74, 69,81, 70,87, 72,92, 81,92, 85,89, 89,86, 90,82, 90,78, 86,74, 80,72, 75,72" data-key="breast">
+                                        <area href="#" alt="" shape="poly" coords="96,78, 96,83, 97,86, 100,88, 102,91, 105,92, 114,92, 116,87, 117,82, 117,77, 114,74, 109,72, 100,74" data-key="breast">
+                                        <area href="#" alt="" shape="poly" coords="71,93, 79,94, 86,91, 92,87, 99,91, 106,94, 115,93, 114,99, 114,107, 72,107, 72,98" data-key="up-abdomen">
+                                        <area href="#" alt="" shape="poly" coords="72,107, 114,107, 115,119, 119,133, 69,133, 72,118" data-key="down-abdomen">
+                                        <area href="#" alt="" shape="poly" coords="69,133, 92,135, 119,133, 120,142, 105,148, 79,148, 67,142" data-key="reproduction">
+                                        <area href="#" alt="" shape="poly" coords="58,67, 62,58, 70,57, 66,91, 59,111, 53,108, 49,106, 55,88" data-key="upperarm">
+                                        <area href="#" alt="" shape="poly" coords="115,56, 124,57, 130,72, 132,87, 138,106, 128,112, 120,82" data-key="upperarm">
+                                        <area href="#" alt="" shape="poly" coords="49,106, 45,112, 43,116, 40,122, 39,128, 36,134, 35,138, 33,145, 38,149, 43,142, 46,134, 50,129, 54,123, 56,117, 58,114, 59,111, 53,108" data-key="forearm">
+                                        <area href="#" alt="" shape="poly" coords="128,112, 133,109, 138,106, 145,117, 148,132, 157,147, 148,150, 147,143, 135,124" data-key="forearm">
+                                        <area href="#" alt="" shape="poly" coords="157,145, 166,153, 167,157, 167,159, 168,160, 170,169, 165,174, 158,174, 153,173, 151,170, 151,163, 148,157, 148,150" data-key="hand">
+                                        <area href="#" alt="" shape="poly" coords="33,145, 39,149, 39,158, 36,165, 36,173, 34,175, 31,177, 28,177, 24,175, 21,173, 19,169, 19,160, 19,155, 25,152, 30,149" data-key="hand">
+                                        <area href="#" alt="" shape="poly" coords="85,152, 87,152, 95,152, 100,152, 99,158, 97,164, 95,165, 90,165, 87,164, 86,158" data-key="reproduction1">
+                                        <area href="#" alt="" shape="poly" coords="66,150, 65,174, 66,211, 71,209, 79,209, 85,211, 85,192, 86,182, 87,173, 87,165, 85,158, 82,153, 79,149, 74,148, 70,148" data-key="thigh">
+                                        <area href="#" alt="" shape="poly" coords="119,148, 111,148, 106,150, 104,153, 101,157, 99,162, 97,167, 97,170, 99,179, 101,188, 102,197, 104,206, 105,211, 107,209, 111,208, 115,208, 120,209, 122,210, 122,188, 122,172, 122,162, 121,152" data-key="thigh">
+                                        <area href="#" alt="" shape="poly" coords="72,233, 74,234, 77,234, 80,235, 80,241, 79,251, 77,260, 75,270, 74,275, 71,282, 71,290, 62,290, 62,277, 62,269, 62,259, 64,244, 66,233, 66,231, 71,233" data-key="shank">
+                                        <area href="#" alt="" shape="poly" coords="111,234, 126,233, 128,245, 131,290, 124,290, 121,279, 114,258" data-key="shank">
+                                        <area href="#" alt="" shape="poly" coords="66,215, 71,211, 79,211, 85,215, 84,221, 80,233, 66,230" data-key="knee">
+                                        <area href="#" alt="" shape="poly" coords="106,213, 111,210, 117,210, 124,213, 125,230, 119,231, 111,233, 107,224" data-key="knee">
+                                        <area href="#" alt="" shape="poly" coords="61,291, 65,291, 71,291, 71,305, 69,316, 61,317, 56,316, 58,310, 61,304" data-key="foot">
+                                        <area href="#" alt="" shape="poly" coords="125,291, 128,291, 132,291, 133,302, 137,315, 132,316, 126,316, 125,306" data-key="foot">
+                                    </map>
+                                </div>
+
+
+
+                            </div>
+
+</div>
+
+<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+
+</body>
+
+</html>
