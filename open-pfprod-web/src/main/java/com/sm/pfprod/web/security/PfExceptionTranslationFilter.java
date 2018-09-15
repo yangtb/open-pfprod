@@ -56,6 +56,7 @@ public class PfExceptionTranslationFilter extends GenericFilterBean {
 		Assert.notNull(authenticationEntryPoint, "authenticationEntryPoint必须定义！");
 	}
 
+	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
@@ -134,13 +135,12 @@ public class PfExceptionTranslationFilter extends GenericFilterBean {
 	}
 
 	private static final class DefaultThrowableAnalyzer extends ThrowableAnalyzer {
+		@Override
 		protected void initExtractorMap() {
 			super.initExtractorMap();
-			registerExtractor(ServletException.class, new ThrowableCauseExtractor() {
-				public Throwable extractCause(Throwable throwable) {
-					ThrowableAnalyzer.verifyThrowableHierarchy(throwable, ServletException.class);
-					return ((ServletException) throwable).getRootCause();
-				}
+			registerExtractor(ServletException.class, throwable -> {
+				ThrowableAnalyzer.verifyThrowableHierarchy(throwable, ServletException.class);
+				return ((ServletException) throwable).getRootCause();
 			});
 		}
 	}

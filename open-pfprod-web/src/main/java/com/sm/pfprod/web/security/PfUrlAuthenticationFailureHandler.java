@@ -51,6 +51,7 @@ public class PfUrlAuthenticationFailureHandler implements AuthenticationFailureH
      * @throws ServletException
      * @see org.springframework.security.web.authentication.AuthenticationFailureHandler#onAuthenticationFailure(HttpServletRequest, HttpServletResponse, org.springframework.security.core.AuthenticationException)
      */
+    @Override
     public void onAuthenticationFailure(HttpServletRequest request,
                                         HttpServletResponse response,
                                         AuthenticationException exception)

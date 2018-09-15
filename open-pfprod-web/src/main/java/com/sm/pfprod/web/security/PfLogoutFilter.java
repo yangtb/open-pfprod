@@ -41,6 +41,7 @@ public class PfLogoutFilter extends GenericFilterBean {
 		this.logoutSuccessHandler = logoutSuccessHandler;
 	}
 
+	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
