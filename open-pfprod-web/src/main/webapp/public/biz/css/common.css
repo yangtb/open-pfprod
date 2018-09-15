@@ -1,0 +1,52 @@
+/**
+    自定义样式
+ */
+
+/* 页内填充 */
+.wrapper-content {
+    margin: 10px 10px 10px 10px
+}
+
+/* from表单上下间距 */
+.form-item-my {
+    margin-bottom: 0px;
+}
+
+.form-item-my5 {
+    margin-bottom: 5px;
+}
+
+.body-my {
+    overflow: hidden;
+}
+
+.label {
+    border-radius: 0.25em;
+    color: #fff;
+    display: inline;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.2em 0.6em 0.3em;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+.label-info {
+    background-color: #5bc0de
+}
+
+
+.label-warning {
+    background-color: #f0ad4e
+}
+
+
+.label-danger {
+    background-color: #d9534f
+}
+
+.label-width-my {
+    width: 100px;
+}

@@ -12,8 +12,8 @@
     <modules>
         <module>open-pfprod-common</module>
         <module>open-pfprod-dal</module>
-        <module>open-pfprod-facade</module>
         <module>open-pfprod-integration</module>
+        <module>open-pfprod-facade</module>
         <module>open-pfprod-model</module>
         <module>open-pfprod-service</module>
         <module>open-pfprod-web</module>
@@ -25,6 +25,7 @@
 
         <!-- 项目里的jar版本管理 -->
         <open.care.core.version>1.0.0</open.care.core.version>
+        <open.core.facade.version>1.0.0</open.core.facade.version>
         <open.pfprod.common.version>1.0.0</open.pfprod.common.version>
         <open.pfprod.model.version>1.0.0</open.pfprod.model.version>
         <open.pfprod.dal.version>1.0.0</open.pfprod.dal.version>
@@ -35,17 +36,25 @@
 
         <!-- 阿里的jar版本管理 -->
         <fastjson.version>1.2.7.sec01</fastjson.version>
+        <dubbo.version>2.5.9</dubbo.version>
+
+        <zookeeper.version>3.4.6</zookeeper.version>
+        <zkclient.version>0.10</zkclient.version>
 
         <!-- 第三方jar的版本管理 -->
-        <spring.version>4.0.0.RELEASE</spring.version>
+        <spring.version>4.3.7.RELEASE</spring.version>
+        <spring.security.version>4.2.2.RELEASE</spring.security.version>
+        <spring.security.core.tiger>2.0.8.RELEASE</spring.security.core.tiger>
+        <spring.oauth2.version>2.1.0.RELEASE</spring.oauth2.version>
+        <spring.boot.version>1.5.2.RELEASE</spring.boot.version>
+        <spring.rabbit.version>1.7.1.RELEASE</spring.rabbit.version>
+        <spring.data.redis.version>1.8.1.RELEASE</spring.data.redis.version>
         <servlet.api.version>3.1.0</servlet.api.version>
         <commons.lang.version>2.6</commons.lang.version>
-        <slf4j.api.version>1.7.21</slf4j.api.version>
-        <slf4j.log4j12.version>1.7.21</slf4j.log4j12.version>
         <velocity.version>1.6.2</velocity.version>
         <velocity.tools.version>2.0</velocity.tools.version>
-        <druid-version>1.0.9</druid-version>
-        <mybatis.version>3.2.8</mybatis.version>
+        <druid-version>1.1.6</druid-version>
+        <mybatis.version>3.2.7</mybatis.version>
         <mybatis.spring.version>1.2.2</mybatis.spring.version>
         <mysql.version>5.1.21</mysql.version>
         <aspectj.version>1.8.9</aspectj.version>
@@ -57,21 +66,11 @@
         <ehcache.version>2.6.11</ehcache.version>
         <shiro.version>1.3.2</shiro.version>
         <pagehelper.version>4.2.1</pagehelper.version>
+        <freemarker.version>2.3.23</freemarker.version>
+        <log4j2.version>2.9.1</log4j2.version>
+        <slf4j.version>1.7.25</slf4j.version>
     </properties>
-    <!--
-    <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-            <name>Release Repository</name>
-            <url>http://121.43.186.82:8081/nexus/content/repositories/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <name>Snapshot Repository</name>
-            <url>http://121.43.186.82:8081/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
-    -->
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -79,6 +78,23 @@
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>${zookeeper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.101tec</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>${zkclient.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.sm</groupId>
                 <artifactId>open-care-core</artifactId>
@@ -114,21 +130,16 @@
                 <artifactId>open-pfprod-facade</artifactId>
                 <version>${open.pfprod.facade.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.sm</groupId>
+                <artifactId>open-core-facade</artifactId>
+                <version>${open.core.facade.version}</version>
+            </dependency>
             <!-- 以下为第三方jar -->
             <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
                 <version>${commons.lang.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>${slf4j.log4j12.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.api.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.aspectj</groupId>
@@ -154,6 +165,11 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
             </dependency>
             <!-- Spring -->
             <dependency>
@@ -221,6 +237,61 @@
                 <artifactId>spring-oxm</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-crypto</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-taglibs</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-acl</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core-tiger</artifactId>
+                <version>${spring.security.core.tiger}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${spring.oauth2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-cloud-connectors</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.amqp</groupId>
+                <artifactId>spring-rabbit</artifactId>
+                <version>${spring.rabbit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${spring.data.redis.version}</version>
+            </dependency>
             <!-- Servlet -->
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -264,6 +335,26 @@
                 <artifactId>pagehelper</artifactId>
                 <version>${pagehelper.version}</version>
             </dependency>
+
+            <!-- velocity -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-tools</artifactId>
+                <version>${velocity.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+
+
             <!-- 单元测试 -->
             <dependency>
                 <groupId>junit</groupId>
@@ -271,6 +362,40 @@
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
+
+            <!-- log4j2 start -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j2.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j2.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-jcl</artifactId>
+                <version>${log4j2.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-jul</artifactId>
+                <version>${log4j2.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j2.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <!-- log4j2 end -->
+
         </dependencies>
     </dependencyManagement>
 
@@ -279,7 +404,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>3.5.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>

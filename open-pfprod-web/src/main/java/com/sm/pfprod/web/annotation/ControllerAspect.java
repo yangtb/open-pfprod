@@ -16,7 +16,7 @@ public class ControllerAspect {
 
 	private static final Logger MONITORLOG = LoggerFactory.getLogger("monitor");
 
-	private static final String PREFIX = "care-Monitor-";
+	private static final String PREFIX = "Monitor-";
 
 
 	@Pointcut("within(@org.springframework.stereotype.Controller *)")

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>开放平台登陆</title>
+    <meta name="keywords" content="登录">
+    <meta name="description" content="登录">
+    <link rel="stylesheet" type="text/css" href="${basePath}/public/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${basePath}/public/biz/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${basePath}/public/biz/css/login1.css">
+
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+    <script>
+        if (window.top !== window.self) {
+            window.top.location = window.location;
+        }
+    </script>
+    <script>
+        var basePath = '${basePath}';
+        var publicKey = '${publicKey}';
+    </script>
+</head>
+<body>
+<div class="header">
+    <div class="nav-home">
+        <img src="/login-logo.png" class="nav-img" alt="">
+        <div class="nav-lable">
+            开放管理平台
+        </div>
+    </div>
+</div>
+<div class="bg_default content">
+    <div class="content_inner">
+        <form method="post" id="loginForm" action="${contextPath}/pfprodlogin" onSubmit="return submitForm()">
+            <div class="login_pannel" style="background-color: #FFFFFF;width: 400px;height: 330px;">
+                <div style="height: 54px;position: relative">
+                    <div style="font-family: PingFangSC-Regular;
+font-size: 18px;
+color: #3F75CF;
+letter-spacing: 0;
+line-height: 18px;margin-left: 40px;position: absolute;top: 50%;margin-top: -10px">
+                        登录
+                    </div>
+                </div>
+                <div style="border: 1px solid #F5F5F5"></div>
+                <div class="row row-mid">
+                    <div class="col-sm-3 text-right text-valige">用户名</div>
+                    <div class="col-sm-8"><input type="text" id="username" name="username" maxlength="20"
+                                                 class="form-control uname" placeholder="请输入您的用户名"/></div>
+                </div>
+                <div class="row row-mid">
+                    <div class="col-sm-3 text-right text-valige">密码</div>
+                    <div class="col-sm-8">
+                        <input type="password" id="clearPassword" maxlength="20" class="form-control"
+                               placeholder="请输入密码"/>
+                        <input type="hidden" name="password" id="encryptPassword" />
+                    </div>
+                </div>
+
+                <div class="row row-mid">
+                    <div class="col-sm-3 text-right text-valige">验证码</div>
+                    <div class="col-sm-4"><input type="text" id="vcode" name="vcode" maxlength="4"
+                                                 style="width:100%;float: left;margin-top: 0px;color: #333"
+                                                 class="form-control" placeholder="请输入验证码"/></div>
+                    <div class="col-sm-4">
+                        <image id="vcodeImage" style="width: 100%;height: 40px" src="${basePath}/login/verificationCode"
+                               title="点击图片更换一张 "/>
+                    </div>
+                </div>
+                <div class="row row-button" style="height: 23px!important;">
+                    <a id="loginwarning" class="col-sm-12" style="margin-top: 5px;color: red">$!{errorMsg}</a></div>
+                <div class="row row-button">
+                    <input id="doLoginBtn" type="submit"  data-loading-text="登录中..."
+                           class="btn btn-success btn-block" style="height: 40px;" value="登录">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="footer">
+    <div class="nav-footer-home">
+        <div class="nav-footer-lable">
+            Copyright &copy; 2018-2020 XXXXXXXXX有限公司 合作热线：4000000000 通讯地址: XXXXXXXXXXXXXXXXXXXXXXX
+        </div>
+    </div>
+</div>
+
+<script src="${contextPath}/public/common/js/jquery.min.js"></script>
+<script src="${contextPath}/public/common/js/jquery.qrcode.min.js"></script>
+<script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
+<script src="${contextPath}/public/biz/js/loginController.js"></script>
+<script src="${contextPath}/public/bootstrap/js/bootstrap.min.js"></script>
+<script src="${contextPath}/public/biz/js/login.js?t=${now}"></script>
+
+</body>
+</html>

@@ -1,58 +1,82 @@
 package com.sm.pfprod.service.user.role;
 
-import com.github.pagehelper.PageInfo;
-import com.sm.pfprod.model.dto.user.common.PfCommonDto;
 import com.sm.pfprod.model.dto.user.role.PfRoleDto;
-import com.sm.pfprod.model.entity.SysAuthority;
+import com.sm.pfprod.model.dto.user.role.PfRoleListDto;
+import com.sm.pfprod.model.dto.user.role.PfRoleMenuDto;
 import com.sm.pfprod.model.entity.SysRole;
-import com.sm.pfprod.model.entity.UserRole;
+import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.role.PfRoleVo;
 
 import java.util.List;
 
 /**
- * 用户角色
+ * @ClassName: PfRoleService
+ * @Description: 用户角色
+ * @Author yangtongbin
+ * @Date 2017/9/9 15:52
  */
 public interface PfRoleService {
 
     /**
-     * 获取角色列表
-     * @return
-     */
-    PageInfo<PfRoleVo> listRoles(PfCommonDto dto);
-
-    /**
-     * 获取用户角色
-     * @param userId
-     * @return
-     */
-    List<UserRole> listRole(Long userId);
-
-    /**
-     * 新增菜单
+     * 角色列表
+     *
      * @param dto
      * @return
      */
-    boolean saveRole(PfRoleDto dto);
+    PageResult listRoles(PfRoleDto dto);
 
     /**
-     * 修改菜单
+     * 查询角色列表
+     *
+     * @return
+     */
+    List<PfRoleVo> list();
+
+    /**
+     * 查询用户角色
+     *
+     * @param userId 用户id
+     * @return
+     */
+    List<PfRoleVo> listUserRole(Long userId);
+
+    /**
+     * 新增角色
+     *
      * @param dto
      * @return
      */
-    boolean updateRole(PfRoleDto dto);
+    boolean addRole(SysRole dto);
 
     /**
-     * 删除菜单
-     * @param roleId
+     * 编辑菜单
+     *
+     * @param dto
      * @return
      */
-    boolean delRole(Long roleId);
+    boolean editRole(SysRole dto);
 
     /**
-     * 获取用户有权限url
-     * @param userId
+     * 删除角色
+     *
+     * @param roles 角色ID
      * @return
      */
-    List<SysAuthority> selectAuthority(Long userId);
+    boolean delRole(List<Long> roles);
+
+    /**
+     * 作废/恢复角色
+     *
+     * @param roles
+     * @return
+     */
+    boolean cancelRole(PfRoleListDto roles);
+
+    /**
+     * 保存角色菜单
+     *
+     * @param dto
+     */
+    boolean saveRoleMenu(PfRoleMenuDto dto);
+
 }

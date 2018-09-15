@@ -12,7 +12,7 @@
     <groupId>com.sm</groupId>
     <artifactId>open-pfprod-common</artifactId>
     <packaging>jar</packaging>
-    <version>${open.pfprod.common.version}</version>
+    <version>1.0.0</version>
 
     <dependencies>
         <dependency>

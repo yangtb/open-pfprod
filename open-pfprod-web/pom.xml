@@ -12,7 +12,7 @@
     <groupId>com.sm</groupId>
     <artifactId>open-pfprod-web</artifactId>
     <packaging>war</packaging>
-    <version>${open.pfprod.web.version}</version>
+    <version>1.0.0</version>
 
     <dependencies>
         <dependency>
@@ -38,7 +38,23 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -58,12 +74,74 @@
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-tools</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+        </dependency>
     </dependencies>
 
+    <!-- 下面的配置将会根据不同环境把对应配置参数打入属性配置文件的变量中去start -->
+    <profiles>
+        <profile>
+            <id>development</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <env>test</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>uat</id>
+            <properties>
+                <env>uat</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <env>prod</env>
+            </properties>
+        </profile>
+    </profiles>
     <build>
-        <finalName>pfprod</finalName>
+        <finalName>${project.artifactId}</finalName>
         <filters>
-            <filter>src/main/resources/deploy/config.properties.${env}</filter>
+            <filter>profile.${env}.properties</filter>
         </filters>
         <resources>
             <resource>
@@ -71,6 +149,7 @@
                 <filtering>true</filtering>
                 <includes>
                     <include>**/*.properties</include>
+                    <include>log4j2.xml</include>
                 </includes>
             </resource>
             <resource>
@@ -89,34 +168,12 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/${project.artifactId}</path>
-                    <port>9400</port>
+                    <port>8080</port>
                     <uriEncoding>utf-8</uriEncoding>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    <!-- 配置将会根据不同环境把对应配置参数打入属性配置文件的变量中去end -->
 
-    <profiles>
-        <profile>
-            <id>local</id>
-            <properties>
-                <env>local</env>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>test</id>
-            <properties>
-                <env>test</env>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <env>prod</env>
-            </properties>
-        </profile>
-    </profiles>
 </project>

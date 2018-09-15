@@ -14,7 +14,7 @@ public class SysRoleMenu implements Serializable {
     private Long    roleId;         // 角色ID
     private Long    menuId;         // 权限ID
     private Date    gmtCreate;      // 创建时间
-    private Date    gmtUpdate;      // 更新时间
+    private Date    gmtModify;      // 更新时间
     private String  isDeleted;      // 删除标示，N未删除 Y-已删除
 
     public Long getRoleMenuId() {
@@ -49,12 +49,12 @@ public class SysRoleMenu implements Serializable {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtUpdate() {
-        return gmtUpdate;
+    public Date getGmtModify() {
+        return gmtModify;
     }
 
-    public void setGmtUpdate(Date gmtUpdate) {
-        this.gmtUpdate = gmtUpdate;
+    public void setGmtModify(Date gmtModify) {
+        this.gmtModify = gmtModify;
     }
 
     public String getIsDeleted() {

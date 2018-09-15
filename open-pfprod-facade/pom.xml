@@ -11,7 +11,7 @@
 
     <groupId>com.sm</groupId>
     <artifactId>open-pfprod-facade</artifactId>
-    <version>${open.pfprod.facade.version}</version>
+    <version>1.0.0</version>
 
     <dependencies>
         <dependency>

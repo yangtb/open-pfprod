@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-lazy-init="true">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:config/*.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <context:component-scan base-package="com.sm.pfprod.web">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <ref bean="fastJsonHttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <mvc:default-servlet-handler/>
+
+    <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+        <property name="features">
+            <list>
+                <value>QuoteFieldNames</value>
+                <value>WriteDateUseDateFormat</value>
+                <value>DisableCircularReferenceDetect</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath">
+            <value>/views/</value>
+        </property>
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">UTF-8</prop>
+                <prop key="output.encoding">UTF-8</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="order" value="0" />
+        <property name="cache" value="false" />
+        <property name="prefix" value="" />
+        <property name="suffix" value=".vm" />
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="requestContextAttribute" value="rc" />
+        <property name="exposeSpringMacroHelpers" value="true" />
+        <property name="exposeSessionAttributes" value="true" />
+        <!-- 		<property name="dateToolAttribute" value="dateTool" /> -->
+        <property name="allowSessionOverride" value="true" />
+        <property name="exposeRequestAttributes" value="true"/>
+    </bean>
+
+
+    <security:global-method-security pre-post-annotations="enabled" jsr250-annotations="enabled" proxy-target-class="true"/>
+    <mvc:view-controller path="/" view-name="redirect:/login" />
+    <mvc:view-controller path="/logout/success" view-name="redirect:/login" />
+
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/**" />
+            <mvc:exclude-mapping path="/login**" />
+            <mvc:exclude-mapping path="/login/**" />
+            <mvc:exclude-mapping path="/logout/**" />
+            <mvc:exclude-mapping path="/error**" />
+            <mvc:exclude-mapping path="/public/**" />
+            <mvc:exclude-mapping path="/help/**" />
+            <mvc:exclude-mapping path="/" />
+            <mvc:exclude-mapping path="/login" />
+            <mvc:exclude-mapping path="/403.html" />
+            <mvc:exclude-mapping path="/404.html" />
+            <mvc:exclude-mapping path="/500.html" />
+            <bean class="com.sm.pfprod.web.interceptor.SessionTimeOutInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>
