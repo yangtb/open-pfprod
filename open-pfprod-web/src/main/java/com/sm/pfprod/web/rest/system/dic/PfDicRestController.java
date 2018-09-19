@@ -1,4 +1,4 @@
-package com.sm.pfprod.web.rest.dic;
+package com.sm.pfprod.web.rest.system.dic;
 
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;

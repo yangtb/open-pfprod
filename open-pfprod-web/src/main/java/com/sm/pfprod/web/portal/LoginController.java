@@ -8,6 +8,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,9 +48,16 @@ public class LoginController extends BaseController {
     @Resource
     private ImageCodeUtil imageCodeUtil;
 
+    /**
+     * 网站名称
+     */
+    @Value("${website.name}")
+    private String websiteName;
+
     @RequestMapping(value = "/login")
     public String home(Model model, HttpServletRequest request) {
         this.setModelAttr(model, request);
+        model.addAttribute("websiteName", websiteName);
         return "login";
     }
 
@@ -60,6 +68,7 @@ public class LoginController extends BaseController {
         } else {
             model.addAttribute(ERROR_MSG, "");
         }
+        model.addAttribute("websiteName", websiteName);
         this.setModelAttr(model, request);
         return "login";
     }

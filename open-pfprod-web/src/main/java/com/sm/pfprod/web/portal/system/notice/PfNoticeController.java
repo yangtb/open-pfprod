@@ -28,20 +28,20 @@ public class PfNoticeController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_NOTICE_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String page() {
-        return "pages/notice/notice";
+        return "pages/system/notice/notice";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_NOTICE_MG','ROLE_SUPER')")
     @RequestMapping("/form")
     public String form(String formType, Model model) {
         model.addAttribute("formType", formType);
-        return "pages/notice/noticeForm";
+        return "pages/system/notice/noticeForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_NOTICE_MG','ROLE_SUPER')")
     @RequestMapping("/detail")
     public String detail() {
-        return "pages/notice/noticeDetail";
+        return "pages/system/notice/noticeDetail";
     }
 
     /**

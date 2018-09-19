@@ -1,4 +1,4 @@
-package com.sm.pfprod.web.rest.param;
+package com.sm.pfprod.web.rest.system.param;
 
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;

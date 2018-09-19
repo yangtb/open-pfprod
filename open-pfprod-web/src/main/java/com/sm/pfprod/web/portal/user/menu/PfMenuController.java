@@ -28,14 +28,14 @@ public class PfMenuController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_MENU_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String menu() {
-        return "pages/menu/menu";
+        return "pages/user/menu/menu";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MENU_MG','ROLE_SUPER')")
     @RequestMapping("/form")
     public String form(String formType, Model model) {
         model.addAttribute("formType", formType);
-        return "pages/menu/menuForm";
+        return "pages/user/menu/menuForm";
     }
 
     /**

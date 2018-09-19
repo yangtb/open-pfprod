@@ -28,21 +28,21 @@ public class PfDicController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_DIC_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String page() {
-        return "pages/dic/dicPage";
+        return "pages/system/dic/dicPage";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_DIC_MG','ROLE_SUPER')")
     @RequestMapping("/form")
     public String form(String formType, Model model) {
         model.addAttribute("formType", formType);
-        return "pages/dic/dicForm";
+        return "pages/system/dic/dicForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_DIC_MG','ROLE_SUPER')")
     @RequestMapping("/enum/form")
     public String enumForm(String formType, Model model) {
         model.addAttribute("formType", formType);
-        return "pages/dic/enumForm";
+        return "pages/system/dic/enumForm";
     }
 
     /**

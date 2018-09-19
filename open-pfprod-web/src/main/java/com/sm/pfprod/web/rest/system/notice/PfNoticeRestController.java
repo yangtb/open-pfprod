@@ -1,4 +1,4 @@
-package com.sm.pfprod.web.rest.notice;
+package com.sm.pfprod.web.rest.system.notice;
 
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
@@ -45,8 +45,7 @@ public class PfNoticeRestController {
         Assert.isTrue(StringUtils.isNotBlank(dto.getNoticeType()), "noticeType");
         Assert.isTrue(StringUtils.isNotBlank(dto.getNoticeContent()), "noticeContent");
         dto.setOperator(CurrentUserUtils.getCurrentUsername());
-        return ResultObject.create("addNotice", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
-                ResultObject.DATA_TYPE_OBJECT, pfNoticeService.addNotice(dto));
+        return ResultObject.createSuccess("addNotice", ResultObject.DATA_TYPE_OBJECT, pfNoticeService.addNotice(dto));
     }
 
     /**
@@ -63,8 +62,7 @@ public class PfNoticeRestController {
         Assert.isTrue(StringUtils.isNotBlank(dto.getNoticeTitle()), "noticeTitle");
         Assert.isTrue(StringUtils.isNotBlank(dto.getNoticeType()), "noticeType");
         Assert.isTrue(StringUtils.isNotBlank(dto.getNoticeContent()), "noticeContent");
-        return ResultObject.create("editNotice", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
-                ResultObject.DATA_TYPE_OBJECT, pfNoticeService.editNotice(dto));
+        return ResultObject.createSuccess("editNotice", ResultObject.DATA_TYPE_OBJECT, pfNoticeService.editNotice(dto));
     }
 
     /**
@@ -79,7 +77,7 @@ public class PfNoticeRestController {
     public ResultObject delNotice(@RequestBody PfCommonListDto dto) {
         /* 参数校验 */
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
-        return ResultObject.create("delNotice", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
+        return ResultObject.createSuccess("delNotice",
                 ResultObject.DATA_TYPE_OBJECT, pfNoticeService.delNotice(dto.getList()));
     }
 

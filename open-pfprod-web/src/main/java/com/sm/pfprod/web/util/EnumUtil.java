@@ -6,7 +6,6 @@ import com.sm.pfprod.service.system.dic.PfDicService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -34,7 +33,10 @@ public class EnumUtil {
      * @param dictCode  枚举值
      * @return
      */
-    public static String getEnumTxt(String groupCode, String dictCode) {
+    public String getEnumTxt(String groupCode, String dictCode) {
+        if (allEnums.isEmpty()) {
+            init();
+        }
         String txt = allEnums.get(groupCode).getDicMap().get(dictCode);
         if (StringUtils.isBlank(txt)) {
             txt = dictCode;
@@ -48,7 +50,10 @@ public class EnumUtil {
      * @param groupCode 枚举类型
      * @return
      */
-    public static Map<String, String> getEnumMap(String groupCode) {
+    public Map<String, String> getEnumMap(String groupCode) {
+        if (allEnums.isEmpty()) {
+            init();
+        }
         PfEnum item = allEnums.get(groupCode);
         if (item == null) {
             return null;
@@ -59,7 +64,6 @@ public class EnumUtil {
     /**
      * 构造方法 从数据库读取枚举值
      */
-    @PostConstruct
     public void init() {
         List<SysDictionary> dictionaries = pfDicService.listAllEnums();
         for (SysDictionary dictionary : dictionaries) {

@@ -28,14 +28,14 @@ public class PfRoleController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_ROLE_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String page() {
-        return "pages/role/role";
+        return "pages/user/role/role";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ROLE_MG','ROLE_SUPER')")
     @RequestMapping("/form")
     public String form(String formType, Model model) {
         model.addAttribute("formType", formType);
-        return "pages/role/roleForm";
+        return "pages/user/role/roleForm";
     }
 
     /**

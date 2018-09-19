@@ -31,6 +31,6 @@ public class PfMonitorController extends BaseController {
         request.setAttribute("math", new MathTool());
         request.setAttribute("number", new NumberTool());
         model.addAttribute("serverInfo", pfMonitorService.selectServerInfo());
-        return "pages/monitor/serverInfo";
+        return "pages/system/monitor/serverInfo";
     }
 }

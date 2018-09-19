@@ -26,20 +26,22 @@ public class PfParamController extends BaseController {
 
     @Resource
     private PfParamService pfParamService;
+    @Resource
+    private EnumUtil enumUtil;
 
     @PreAuthorize("hasAnyRole('ROLE_PARAM_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String page(Model model) {
-        model.addAttribute("modualMap", EnumUtil.getEnumMap(SysDicGroupEnum.SYS_PARAM_BIZ_MODUAL.getCode()));
-        return "pages/param/param";
+        model.addAttribute("modualMap", enumUtil.getEnumMap(SysDicGroupEnum.SYS_PARAM_BIZ_MODUAL.getCode()));
+        return "pages/system/param/param";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_PARAM_MG','ROLE_SUPER')")
     @RequestMapping("/form")
     public String form(String formType, Model model) {
         model.addAttribute("formType", formType);
-        model.addAttribute("modualMap", EnumUtil.getEnumMap(SysDicGroupEnum.SYS_PARAM_BIZ_MODUAL.getCode()));
-        return "pages/param/paramForm";
+        model.addAttribute("modualMap", enumUtil.getEnumMap(SysDicGroupEnum.SYS_PARAM_BIZ_MODUAL.getCode()));
+        return "pages/system/param/paramForm";
     }
 
     /**
