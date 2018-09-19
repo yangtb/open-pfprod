@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>开放平台登陆</title>
+    <title>${websiteName}</title>
     <meta name="keywords" content="登录">
     <meta name="description" content="登录">
     <link rel="stylesheet" type="text/css" href="${basePath}/public/bootstrap/css/bootstrap.min.css">
@@ -26,9 +26,10 @@
 <body>
 <div class="header">
     <div class="nav-home">
-        <img src="/login-logo.png" class="nav-img" alt="">
+        #*logo地址*#
+        <img src="" class="nav-img" alt="">
         <div class="nav-lable">
-            开放管理平台
+            ${websiteName}
         </div>
     </div>
 </div>
@@ -49,22 +50,23 @@ line-height: 18px;margin-left: 40px;position: absolute;top: 50%;margin-top: -10p
                 <div class="row row-mid">
                     <div class="col-sm-3 text-right text-valige">用户名</div>
                     <div class="col-sm-8"><input type="text" id="username" name="username" maxlength="20"
-                                                 class="form-control uname" placeholder="请输入您的用户名"/></div>
+                                                 class="form-control uname" placeholder="请输入您的用户名" autocomplete="off"/></div>
                 </div>
                 <div class="row row-mid">
                     <div class="col-sm-3 text-right text-valige">密码</div>
                     <div class="col-sm-8">
                         <input type="password" id="clearPassword" maxlength="20" class="form-control"
-                               placeholder="请输入密码"/>
+                               placeholder="请输入密码" autocomplete="off"/>
                         <input type="hidden" name="password" id="encryptPassword" />
                     </div>
                 </div>
 
                 <div class="row row-mid">
                     <div class="col-sm-3 text-right text-valige">验证码</div>
-                    <div class="col-sm-4"><input type="text" id="vcode" name="vcode" maxlength="4"
-                                                 style="width:100%;float: left;margin-top: 0px;color: #333"
-                                                 class="form-control" placeholder="请输入验证码"/></div>
+                    <div class="col-sm-4">
+                        <input type="text" id="vcode" name="vcode" maxlength="4"
+                                         style="width:100%;float: left;margin-top: 0px;color: #333"
+                                         class="form-control" placeholder="请输入验证码" autocomplete="off"/></div>
                     <div class="col-sm-4">
                         <image id="vcodeImage" style="width: 100%;height: 40px" src="${basePath}/login/verificationCode"
                                title="点击图片更换一张 "/>

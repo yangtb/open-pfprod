@@ -37,7 +37,7 @@
                         <option value="">请选择</option>
                         <option value="1">一级</option>
                         <option value="2">二级</option>
-                        <option value="3">三级</option>
+                        #*<option value="3">三级</option>*#
                     </select>
                 </div>
             </div>
@@ -68,12 +68,11 @@
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">资源类别<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                <label class="layui-form-label">菜单位置<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
-                    <select name="functionType" lay-verify="required" lay-vertype="tips">
-                        <option value="1" selected>菜单权限功能</option>
-                        <option value="2">按钮、链接功能权限资源</option>
-                        <option value="3">接口功能权限资源</option>
+                    <select name="position" lay-verify="required" lay-vertype="tips">
+                        <option value="left" selected>左侧</option>
+                        <option value="top">顶部</option>
                     </select>
                 </div>
             </div>
@@ -81,9 +80,13 @@
 
         <div class="layui-form-item form-item-my">
             <div class="layui-inline">
-                <label class="layui-form-label">排序<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                <label class="layui-form-label">资源类别<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
-                    <input type="text" name="sortNum" lay-verify="required|sort" lay-vertype="tips" autocomplete="off" class="layui-input">
+                    <select name="functionType" lay-verify="required" lay-vertype="tips">
+                        <option value="1" selected>菜单权限功能</option>
+                        <option value="2">按钮、链接功能权限资源</option>
+                        <option value="3">接口功能权限资源</option>
+                    </select>
                 </div>
             </div>
             <div class="layui-inline">
@@ -115,6 +118,12 @@
         </div>
 
         <div class="layui-form-item form-item-my5">
+            <div class="layui-inline">
+                <label class="layui-form-label">排序<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                <div class="layui-input-inline">
+                    <input type="text" name="sortNum" lay-verify="required|sort" lay-vertype="tips" autocomplete="off" class="layui-input">
+                </div>
+            </div>
             <div class="layui-inline">
                 <label class="layui-form-label">所属平台<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">

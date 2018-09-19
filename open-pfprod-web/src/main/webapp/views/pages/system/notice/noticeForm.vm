@@ -22,13 +22,6 @@
         <div hidden>
             <input name="id" hidden>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">公告标题<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
-            <div class="layui-input-block">
-                <input type="text" name="noticeTitle" lay-verify="required|title" autocomplete="off" class="layui-input"
-                       placeholder="请输入公告标题">
-            </div>
-        </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">公告类型<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
@@ -39,10 +32,21 @@
                 </select>
             </div>
         </div>
-        <div class="layui-form-item layui-form-text">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">公告标题<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <div class="layui-input-block">
+                <input type="text" name="noticeTitle" lay-verify="required|title" autocomplete="off" class="layui-input"
+                       placeholder="请输入公告标题">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
             <label class="layui-form-label">公告内容<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <textarea id="noticeContentEditor" name="noticeContent" lay-verify="content" style="display: none;"></textarea>
+                    <textarea id="noticeContentEditor" name="noticeContent" placeholder="请输入内容"
+                              style="border:0;padding:0;width: 100%; height: 300px">
+                </textarea>
             </div>
         </div>
 
@@ -73,19 +77,37 @@
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 <script src="${contextPath}/public/biz/js/noticeFormController.js"></script>
+<!-- 加载编辑器的容器 -->
+<script id="noticeContentEditor" name="noticeContent" type="text/plain">
+        这里写你的初始化内容
+
+</script>
+<!-- 配置文件 -->
+<script src="${contextPath}/public/common/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script src="${contextPath}/public/common/ueditor/ueditor.all.js"></script><!-- 编辑器源码文件 -->
+<script src="${contextPath}/public/common/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('noticeContentEditor');
+</script>
 <script>
     function fullForm(data) {
         $(document).ready(function () {
             $("#noticeForm").autofill(data);
-            var content = $("#noticeContentEditor");
-            content.val(data.noticeContent);
-            layui.use('form',function(){
+            layui.use('form', function () {
                 layui.form.render();
             });
         });
+        //对编辑器的操作最好在编辑器ready之后再做
+        ue.ready(function() {
+            //设置编辑器的内容
+            ue.setContent(data.noticeContent);
+        });
     }
 
-    if (formType == 'edit') {
+    /*if (formType == 'edit') {
         layui.use('layedit',function() {
             var layedit = layui.layedit;
             //构建一个默认的编辑器
@@ -93,7 +115,7 @@
                 height: 150
             });
         });
-    }
+    }*/
 
 </script>
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>开放平台管理系统</title>
+    <title>${websiteName}</title>
     <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
     <link rel="stylesheet" href="${contextPath}/public/layui/build/css/app.css" media="all">
@@ -19,25 +19,38 @@
 <body class="kit-theme">
 <div class="layui-layout layui-layout-admin kit-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo" style="font-size:16px"><i class="iconfont icon-yunpingtai"></i> 开放平台管理系统</div>
+        <div class="layui-logo" style="font-size:16px">
+            <i class="iconfont icon-yunpingtai"></i> ${websiteName}
+        </div>
         <div class="layui-logo kit-logo-mobile">S</div>
 
         <ul class="layui-nav layui-layout-left kit-nav">
-
-            <li class="layui-nav-item"><a href="javascript:;">控制台</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;" kit-target
-                   data-options="{url:'${basePath}/user/userDetail',icon:'icon-zuoyejindu',title:'项目进度',id:'99998'}">
-                    <span> 项目进度</span></a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">其它系统</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="javascript:;">邮件管理</a></dd>
-                    <dd><a href="javascript:;">消息管理</a></dd>
-                    <dd><a href="javascript:;">授权管理</a></dd>
-                </dl>
-            </li>
+            #if(!$topMenus.isEmpty())
+                #foreach($element in $topMenus)
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"
+                           #if($element.groupList.isEmpty()) kit-target data-id='$!element.parentMenuId'
+                           data-icon='$!element.parentImg' data-title='$!element.parentMenuName'
+                           data-url='${contextPath}$!element.parentUrl'#end>
+                            <i class="iconfont $!element.parentImg"></i>
+                            <span> $!element.parentMenuName</span>
+                        </a>
+                        #if(!$element.groupList.isEmpty())
+                            <dl class="layui-nav-child">
+                                #foreach($menu in $element.groupList)
+                                    <dd>
+                                        <a href="javascript:;" data-url="${contextPath}$!menu.url"
+                                           data-icon="$!menu.img"
+                                           data-title="$!menu.name" kit-target data-id='$!menu.menuId'>
+                                            <i class="iconfont $!menu.img"></i><span> $!menu.name</span>
+                                        </a>
+                                    </dd>
+                                #end
+                            </dl>
+                        #end
+                    </li>
+                #end
+            #end
         </ul>
 
         <ul class="layui-nav layui-layout-right kit-nav">
@@ -65,11 +78,11 @@
                     <i class="iconfont icon-message"></i>消息<span class="layui-badge">9</span>
                 </a>
             </li>
-            #*<li class="layui-nav-item">
+            <li class="layui-nav-item">
                 <a rel="full_screen">
-                    <i class="iconfont icon-message"></i>全屏
+                    <i class="iconfont icon-quanping2"></i> 全屏
                 </a>
-            </li>*#
+            </li>
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="${basePath}/public/biz/img/0.jpg" class="layui-nav-img">$!username
@@ -93,17 +106,11 @@
             <div class="kit-side-fold"><i class="iconfont icon-fold" aria-hidden="true"></i></div>
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
-                <li class="layui-nav-item">
-                    <a href="javascript:;" data-url="form.html" data-icon="icon-home" data-title="首页" kit-target
-                       data-id='-1'>
-                        <i class="iconfont icon-home"></i><span> 首页</span>
-                    </a>
-                </li>
-                #if(!$menus.isEmpty())
-                    #foreach($element in $menus)
+                #if(!$leftMenus.isEmpty())
+                    #foreach($element in $leftMenus)
                     <li class="layui-nav-item">
                         <a href="javascript:;"
-                           #if($element.groupList.isEmpty())kit-target data-id='$!element.parentMenuId'
+                            #if($element.groupList.isEmpty()) kit-target data-id='$!element.parentMenuId'
                            data-icon='$!element.parentImg' data-title='$!element.parentMenuName'
                            data-url='${contextPath}$!element.parentUrl'#end>
                             <i class="iconfont $!element.parentImg"></i>
@@ -136,8 +143,8 @@
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        Copyright 2017 &copy;
-        <a href="">972276866@qq.com(推荐使用IE9+,Firefox、Chrome 浏览器访问)</a>
+        ${websiteCopyright}
+        <a href="">(推荐使用IE9+,Firefox、Chrome 浏览器访问)</a>
 
     </div>
 </div>

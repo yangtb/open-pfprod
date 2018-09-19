@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html style="padding-top: 0px">
+<head>
+    <meta charset="utf-8">
+    <title>${formType}消息模板</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '${basePath}';
+        var formType = '${formType}';
+        var templateType = '${templateType}';
+    </script>
+</head>
+
+<body>
+
+<div class="wrapper-content">
+    <div class="layui-tab" lay-filter="templateTab">
+        <ul class="layui-tab-title">
+            <li class="layui-this" lay-id="sms">短信模板</li>
+            <li lay-id="email">邮件模板</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form" id="smsform">
+                    <div hidden>
+                        <input name="templateId" hidden>
+                    </div>
+
+                    <div class="layui-form-item form-item-my5">
+                        <label class="layui-form-label">模板名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="templateName" lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div hidden>
+                        <input name="templateType" value="sms" hidden>
+                    </div>
+                    <div class="layui-form-item layui-form-text form-item-my5">
+                        <label class="layui-form-label">模板内容<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                        <div class="layui-input-block">
+                            <textarea name="content" class="layui-textarea" lay-verify="required" autocomplete="off"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit="" lay-filter="addSms">
+                                <i class="iconfont icon-save-copy"></i> 保存
+                            </button>
+                            #if(${formType} == 'add')
+                                <button type="reset" class="layui-btn layui-btn-danger">
+                                    <i class="iconfont icon-reset"></i> 重置
+                                </button>
+                            #end
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-tab-item">
+                <form class="layui-form" id="emailform">
+                    <div hidden>
+                        <input name="templateId" hidden>
+                    </div>
+
+                    <div class="layui-form-item form-item-my5">
+                        <label class="layui-form-label">模板名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="templateName" lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div hidden>
+                        <input name="templateType" value="email" hidden>
+                    </div>
+                    <div class="layui-form-item layui-form-text form-item-my5">
+                        <label class="layui-form-label">模板内容<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                        <div class="layui-input-block">
+                             <textarea id="contentEditor" name="content" placeholder="请输入内容"
+                                       style="border:0;padding:0;width: 100%; height: 200px" lay-verify="required" autocomplete="off">
+                             </textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit="" lay-filter="addEmail">
+                                <i class="iconfont icon-save-copy"></i> 保存
+                            </button>
+                            #if(${formType} == 'add')
+                                <button type="reset" class="layui-btn layui-btn-danger">
+                                    <i class="iconfont icon-reset"></i> 重置
+                                </button>
+                            #end
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="${contextPath}/public/biz/js/messageFormController.js"></script>
+<script src="${contextPath}/public/common/js/jquery.min.js"></script>
+<script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
+
+<!-- 加载编辑器的容器 -->
+<script id="contentEditor" name="noticeContent" type="text/plain">
+
+</script>
+<!-- 配置文件 -->
+<script src="${contextPath}/public/common/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script src="${contextPath}/public/common/ueditor/ueditor.all.js"></script><!-- 编辑器源码文件 -->
+<script src="${contextPath}/public/common/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('contentEditor');
+</script>
+
+<script>
+    function fullForm(data) {
+        $(document).ready(function(){
+            if (data.templateType == 'email') {
+                $("#emailform").autofill(data);
+            } else {
+                $("#smsform").autofill(data);
+            }
+            layui.use('form',function(){
+                layui.form.render();
+            });
+
+        });
+        if (data.templateType == 'email') {
+            //对编辑器的操作最好在编辑器ready之后再做
+            ue.ready(function () {
+                //设置编辑器的内容
+                ue.setContent(data.content);
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
