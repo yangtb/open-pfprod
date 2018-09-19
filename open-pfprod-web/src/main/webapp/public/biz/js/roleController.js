@@ -261,7 +261,7 @@ layui.config({
 
     $('#saveSet').on('click', function () {
         if (!zTreeRoleId) {
-            common.toastTip('rt', "请先选中一个角色查看权限")
+            common.toastTip('rt', "请点击左侧【查看权限】按钮")
             return;
         }
         var reqData = {};

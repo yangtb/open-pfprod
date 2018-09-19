@@ -86,9 +86,11 @@ layui.config({
 
     var _addOrEdit = function (formType, currentEditData) {
         if (formType == 'add') {
-            common.open('新增公告', 'form?formType=' + formType, 880, 430);
+            var addIndex = common.open('新增公告', 'form?formType=' + formType, 880, 430);
+            layer.full(addIndex);
         } else {
-            common.open('编辑公告', 'form?formType=' + formType, 880, 430, _successFunction(currentEditData));
+            var editIndex = common.open('编辑公告', 'form?formType=' + formType, 880, 430, _successFunction(currentEditData));
+            layer.full(editIndex);
         }
     };
 

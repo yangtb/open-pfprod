@@ -63,6 +63,30 @@ layui.define(['layer'], function (exports) {
             return index;
         },
 
+        commonPost: function (url, bizData, msg) {
+            $.ajax({
+                url: url,
+                type: 'post',
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(bizData),
+                success: function (data) {
+                    if (data.code != 0) {
+                        common.errorMsg(data.msg);
+                        return false;
+                    } else {
+                        common.sucMsg(msg + "成功");
+                        return true;
+                    }
+                },
+                error: function () {
+                    common.errorMsg(msg + "失败");
+                    return false;
+                }
+            });
+            return false;
+        },
+
         /**退出*/
         logOut: function (title, text, url, type, dataType, data, callback) {
             parent.layer.confirm(text, {

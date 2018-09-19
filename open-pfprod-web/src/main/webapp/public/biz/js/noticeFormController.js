@@ -3,16 +3,10 @@
  */
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['form', 'layer', 'layedit', 'jquery', 'common'], function () {
+}).use(['form', 'layer', 'jquery', 'common'], function () {
     var $ = layui.$,
         form = layui.form,
-        layedit = layui.layedit,
         common = layui.common;
-
-    //创建一个编辑器
-    var editIndex = layedit.build('noticeContentEditor', {
-        height: 150
-    });
 
     //自定义验证规则
     form.verify({
@@ -21,16 +15,13 @@ layui.config({
                 return '标题至少得4个字符';
             }
         },
-        content: function (value) {
-            layedit.sync(editIndex);
-        }
     });
 
     $("#preview").on('click', function () {
         var data = {};
         data.noticeTitle = $("input[name='noticeTitle']").val();
         data.noticeType = $("select[name='noticeType']").val();
-        data.noticeContent = layedit.getContent(editIndex); //获取html
+        data.noticeContent = UE.getEditor('noticeContentEditor').getContent(); //获取html
         var index = common.open('公告预览', basePath + '/pf/p/notice/detail', 880, 430, _successFunction(data));
         layer.full(index);
     });
@@ -49,7 +40,7 @@ layui.config({
 
     //监听提交
     form.on('submit(addNotice)', function (data) {
-        if (!layedit.getContent(editIndex)) {
+        if (!UE.getEditor('noticeContentEditor').getContent()) {
             common.errorMsg("请填写公告内容");
             return false;
         }
