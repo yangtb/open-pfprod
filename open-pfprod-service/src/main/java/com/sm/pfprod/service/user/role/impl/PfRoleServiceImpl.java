@@ -2,6 +2,7 @@ package com.sm.pfprod.service.user.role.impl;
 
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
+import com.sm.open.core.facade.model.param.pf.user.SysRoleMenuParam;
 import com.sm.open.core.facade.model.param.pf.user.role.PfRoleListParam;
 import com.sm.open.core.facade.model.param.pf.user.role.PfRoleMenuParam;
 import com.sm.open.core.facade.model.param.pf.user.role.PfRoleParam;
@@ -99,7 +100,10 @@ public class PfRoleServiceImpl implements PfRoleService {
 
     @Override
     public boolean saveRoleMenu(PfRoleMenuDto dto) {
-        CommonResult<Boolean> result = roleClient.saveRoleMenu(BeanUtil.convert(dto, PfRoleMenuParam.class));
+        PfRoleMenuParam pfRoleMenuParam = new PfRoleMenuParam();
+        List<SysRoleMenuParam> sysRoleMenuParams = BeanUtil.convertList(dto.getRoleMenus(), SysRoleMenuParam.class);
+        pfRoleMenuParam.setRoleMenus(sysRoleMenuParams);
+        CommonResult<Boolean> result = roleClient.saveRoleMenu(pfRoleMenuParam);
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }

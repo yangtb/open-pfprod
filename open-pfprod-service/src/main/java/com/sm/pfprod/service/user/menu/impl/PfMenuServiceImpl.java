@@ -1,6 +1,5 @@
 package com.sm.pfprod.service.user.menu.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
 import com.sm.open.core.facade.model.param.pf.system.auth.SysFunctionParam;

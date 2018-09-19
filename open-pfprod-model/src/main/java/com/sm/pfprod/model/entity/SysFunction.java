@@ -1,11 +1,18 @@
 package com.sm.pfprod.model.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 系统功能权限资源库
  */
+@Setter
+@Getter
+@ToString
 public class SysFunction implements Serializable {
 
     private static final long serialVersionUID = 4513416522686508600L;
@@ -23,126 +30,8 @@ public class SysFunction implements Serializable {
     private String      status;             // 状态：有效(enabled)、无效(disabled) , 默认有效
     private int         iconType;           // 图标类型,0表示无，1表示iconfont的矢量图标，2表示url图标
     private String      iconSource;         // 图标源
+    private String      position;           // 菜单位置left=左边，top=顶部
     private Date        gmtCreate;          // 创建时间
     private Date        gmtModify;          // 更新时间
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getParentCode() {
-        return parentCode;
-    }
-
-    public void setParentCode(String parentCode) {
-        this.parentCode = parentCode;
-    }
-
-    public String getSysFunctionCode() {
-        return sysFunctionCode;
-    }
-
-    public void setSysFunctionCode(String sysFunctionCode) {
-        this.sysFunctionCode = sysFunctionCode;
-    }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
-
-    public String getFunctionUrl() {
-        return functionUrl;
-    }
-
-    public void setFunctionUrl(String functionUrl) {
-        this.functionUrl = functionUrl;
-    }
-
-    public int getSortNum() {
-        return sortNum;
-    }
-
-    public void setSortNum(int sortNum) {
-        this.sortNum = sortNum;
-    }
-
-    public int getFunctionType() {
-        return functionType;
-    }
-
-    public void setFunctionType(int functionType) {
-        this.functionType = functionType;
-    }
-
-    public String getPlatformType() {
-        return platformType;
-    }
-
-    public void setPlatformType(String platformType) {
-        this.platformType = platformType;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public int getIconType() {
-        return iconType;
-    }
-
-    public void setIconType(int iconType) {
-        this.iconType = iconType;
-    }
-
-    public String getIconSource() {
-        return iconSource;
-    }
-
-    public void setIconSource(String iconSource) {
-        this.iconSource = iconSource;
-    }
-
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtModify() {
-        return gmtModify;
-    }
-
-    public void setGmtModify(Date gmtModify) {
-        this.gmtModify = gmtModify;
-    }
 }

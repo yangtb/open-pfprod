@@ -30,5 +30,9 @@
     <!-- 角色服务 -->
     <dubbo:reference id="pfRoleFacade" interface="com.sm.open.core.facade.pf.user.role.PfRoleFacade"/>
 
-    
+    <!-- 系统设置服务 -->
+    <dubbo:reference id="pfSetFacade" interface="com.sm.open.core.facade.pf.system.set.PfSetFacade"/>
+
+    <!-- 消息模板服务 -->
+    <dubbo:reference id="pfMessageFacade" interface="com.sm.open.core.facade.pf.system.message.PfMessageFacade"/>
 </beans>
