@@ -205,6 +205,7 @@ public abstract class PfAbstractAuthenticationProcessingFilter extends GenericFi
 		this.continueChainBeforeSuccessfulAuthentication = continueChainBeforeSuccessfulAuthentication;
 	}
 
+	@Override
 	public void setApplicationEventPublisher(ApplicationEventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
 	}
@@ -214,6 +215,7 @@ public abstract class PfAbstractAuthenticationProcessingFilter extends GenericFi
 		this.authenticationDetailsSource = authenticationDetailsSource;
 	}
 
+	@Override
 	public void setMessageSource(MessageSource messageSource) {
 		this.messages = new MessageSourceAccessor(messageSource);
 	}
