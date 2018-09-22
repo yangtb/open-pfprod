@@ -41,7 +41,7 @@
                     <option value="">请选择</option>
                     <option value="1">一级</option>
                     <option value="2">二级</option>
-                    #*<option value="3">三级</option>*#
+                    <option value="3">三级</option>
                 </select>
             </div>
             <div class="layui-input-inline" style="width: 100px;">

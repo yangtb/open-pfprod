@@ -58,7 +58,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">发件箱</label>
                 <div class="layui-input-inline">
-                    <input name="nickname" type="text" lay-verify="email" autocomplete="off" class="layui-input"
+                    <input name="userName" type="text" lay-verify="email" autocomplete="off" class="layui-input"
                            lay-verify="required" lay-vertype="tips">
                 </div>
                 <div class="layui-form-mid layui-word-aux">发送邮件的邮箱地址</div>
@@ -67,7 +67,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">发件人</label>
                 <div class="layui-input-inline">
-                    <input name="userName" lay-verify="pass" autocomplete="off" class="layui-input" type="text"
+                    <input name="nickname" autocomplete="off" class="layui-input" type="text"
                            lay-verify="required" lay-vertype="tips">
                 </div>
             </div>

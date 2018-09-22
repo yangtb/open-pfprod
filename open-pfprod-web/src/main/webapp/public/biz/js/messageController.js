@@ -17,8 +17,9 @@ layui.config({
         , height: 'full-68' //容器高度
         , cols: [[
             {checkbox: true, fixed: true},
-            {field: 'templateId', width: 100, title: '模板id', fixed: true},
-            {field: 'templateName', width: 180, title: '模板名称'},
+            //{field: 'templateId', width: 100, title: '模板id', fixed: true},
+            {field: 'templateName', width: 180, title: '模板名称', fixed: true},
+            {field: 'templateCode', width: 150, title: '模板编码',},
             {field: 'templateType', width: 100, title: '模板类型'},
             {field: 'content', width: 250, title: '内容'},
             {field: 'isDeleted', width: 90, title: '是否删除', templet: '#isDeletedTpl'},

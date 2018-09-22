@@ -1,16 +1,20 @@
 package com.sm.pfprod.web.rest.user.login;
 
 import com.sm.open.care.core.ResultObject;
+import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.open.care.core.utils.rsa.RSAEncrypt;
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
 import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
 import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
+import com.sm.pfprod.model.dto.user.register.RegisterVcodeDto;
+import com.sm.pfprod.model.dto.user.register.UserRegisterDto;
 import com.sm.pfprod.service.user.login.PfUserService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;
+import com.sm.pfprod.web.util.ImageCodeUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -38,6 +42,9 @@ public class PfUserRestController extends BaseController {
 
     @Resource(name = "rsaKeyPairQueue")
     private RsaKeyPairQueue rsaKeyPairQueue;
+
+    @Resource
+    private ImageCodeUtil imageCodeUtil;
 
     /**
      * 新增用户
@@ -161,5 +168,35 @@ public class PfUserRestController extends BaseController {
         return ResultObject.create("resetPsw", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfUserService.resetPsw(dto));
     }
+
+    @RequestMapping(value = "/register/add", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject registerUser(@RequestBody UserRegisterDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(StringUtils.isNotBlank(dto.getEmail()), "email");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getEmailVercode()), "emailVercode");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getOrgName()), "orgName");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getPassword()), "password");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getPhone()), "phone");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getUsername()), "orgName");
+        return ResultObject.createSuccess("registerUser", ResultObject.DATA_TYPE_OBJECT,
+                pfUserService.registerUser(dto));
+    }
+
+    @RequestMapping(value = "/register/sendEmailVcode", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject sendRegisterEmailVcode(HttpServletRequest request, @RequestBody RegisterVcodeDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(StringUtils.isNotBlank(dto.getEmail()), "email");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getPhotoVercode()), "photoVercode");
+        // 验证码校验
+        if (!dto.getPhotoVercode()
+                .equalsIgnoreCase((String) request.getSession().getAttribute(imageCodeUtil.getSessionKey()))) {
+            throw new BizRuntimeException("photoVcodeError", "请输入正确的图片验证码");
+        }
+        return ResultObject.createSuccess("sendRegisterEmailVcode", ResultObject.DATA_TYPE_OBJECT,
+                pfUserService.sendRegisterEmailVcode(dto.getEmail(), null));
+    }
+
 
 }

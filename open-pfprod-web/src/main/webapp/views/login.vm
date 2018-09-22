@@ -3,9 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link href="${basePath}/public/biz/img/logo/favicon.ico" rel="shortcut icon">
     <title>${websiteName}</title>
     <meta name="keywords" content="登录">
     <meta name="description" content="登录">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="${basePath}/public/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${basePath}/public/biz/css/style.css">
     <link rel="stylesheet" type="text/css" href="${basePath}/public/biz/css/login1.css">
@@ -27,7 +29,7 @@
 <div class="header">
     <div class="nav-home">
         #*logo地址*#
-        <img src="" class="nav-img" alt="">
+        <img src="${basePath}/public/biz/img/logo/logo.jpg" class="nav-img" alt="">
         <div class="nav-lable">
             ${websiteName}
         </div>
@@ -36,14 +38,11 @@
 <div class="bg_default content">
     <div class="content_inner">
         <form method="post" id="loginForm" action="${contextPath}/pfprodlogin" onSubmit="return submitForm()">
-            <div class="login_pannel" style="background-color: #FFFFFF;width: 400px;height: 330px;">
+            <div class="login_pannel" style="background-color: #FFFFFF;width: 400px;height: 360px;">
                 <div style="height: 54px;position: relative">
-                    <div style="font-family: PingFangSC-Regular;
-font-size: 18px;
-color: #3F75CF;
-letter-spacing: 0;
-line-height: 18px;margin-left: 40px;position: absolute;top: 50%;margin-top: -10px">
-                        登录
+                    <div style="font-family: PingFangSC-Regular;font-size: 18px;color: #029789!important;letter-spacing: 0;
+                            line-height: 18px;margin-left: 40px;position: absolute;top: 50%;margin-top: -10px">
+                        <strong>登录</strong>
                     </div>
                 </div>
                 <div style="border: 1px solid #F5F5F5"></div>
@@ -72,11 +71,18 @@ line-height: 18px;margin-left: 40px;position: absolute;top: 50%;margin-top: -10p
                                title="点击图片更换一张 "/>
                     </div>
                 </div>
+
                 <div class="row row-button" style="height: 23px!important;">
                     <a id="loginwarning" class="col-sm-12" style="margin-top: 5px;color: red">$!{errorMsg}</a></div>
                 <div class="row row-button">
                     <input id="doLoginBtn" type="submit"  data-loading-text="登录中..."
-                           class="btn btn-success btn-block" style="height: 40px;" value="登录">
+                           class="layui-btn layui-btn-fluid" style="height: 40px;" value="登录">
+                </div>
+                <div class="row row-mid" style="float: right; padding-right: 50px;">
+                    <strong>
+                        <a href="${contextPath}/index" class="open-prod-link layui-hide-xs">游客登陆 </a>
+                        <a href="${contextPath}/pf/p/user/register/page"class="open-prod-link layui-hide-xs">机构注册&raquo;</a>
+                    </strong>
                 </div>
             </div>
         </form>
@@ -85,7 +91,7 @@ line-height: 18px;margin-left: 40px;position: absolute;top: 50%;margin-top: -10p
 <div class="footer">
     <div class="nav-footer-home">
         <div class="nav-footer-lable">
-            Copyright &copy; 2018-2020 XXXXXXXXX有限公司 合作热线：4000000000 通讯地址: XXXXXXXXXXXXXXXXXXXXXXX
+            ${websiteCopyright} ${websiteApprove}
         </div>
     </div>
 </div>

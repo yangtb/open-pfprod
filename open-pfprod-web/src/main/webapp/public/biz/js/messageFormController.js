@@ -11,6 +11,19 @@ layui.config({
 
     element.tabChange('templateTab', templateType);
 
+    form.verify({
+        templateName: function (value) {
+            if (value.length > 64) {
+                return '模板名称最多64个字';
+            }
+        },
+        templateCode: function (value) {
+            if (value.length > 32) {
+                return '模板编码最多32个字符';
+            }
+        }
+    });
+
     form.on('submit(addSms)', function (data) {
         return _postTemplateData(data);
     });

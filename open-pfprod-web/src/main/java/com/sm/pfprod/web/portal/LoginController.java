@@ -54,10 +54,18 @@ public class LoginController extends BaseController {
     @Value("${website.name}")
     private String websiteName;
 
+    @Value("${website.copyright}")
+    private String websiteCopyright;
+
+    @Value("${website.approve}")
+    private String websiteApprove;
+
     @RequestMapping(value = "/login")
     public String home(Model model, HttpServletRequest request) {
         this.setModelAttr(model, request);
         model.addAttribute("websiteName", websiteName);
+        model.addAttribute("websiteCopyright", websiteCopyright);
+        model.addAttribute("websiteApprove", websiteApprove);
         return "login";
     }
 
@@ -69,6 +77,8 @@ public class LoginController extends BaseController {
             model.addAttribute(ERROR_MSG, "");
         }
         model.addAttribute("websiteName", websiteName);
+        model.addAttribute("websiteCopyright", websiteCopyright);
+        model.addAttribute("websiteApprove", websiteApprove);
         this.setModelAttr(model, request);
         return "login";
     }

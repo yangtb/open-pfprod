@@ -98,7 +98,7 @@ layui.config({
     });
 
     var _resetPass = function (data) {
-        common.open('密码重置', 'resetPassword', 460, 220, _successFunction(data));
+        common.open('密码重置', 'resetPassword', 480, 220, _successFunction(data));
     }
 
     // 获取编辑行数据
@@ -113,8 +113,11 @@ layui.config({
             where: {
                 type: data.field.type,
                 conditionValue: data.field.queryCondition
-            },
-            height: 'full-68'
+            }
+            , height: 'full-68'
+            , page: {
+                curr: 1 //重新从第 1 页开始
+            }
         });
     });
 

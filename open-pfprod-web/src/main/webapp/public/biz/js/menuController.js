@@ -129,8 +129,11 @@ layui.config({
                 name: data.field.menuName,
                 level: data.field.menuLevel,
                 status: data.field.status
-            },
-            height: 'full-68'
+            }
+            , height: 'full-68'
+            , page: {
+                curr: 1 //重新从第 1 页开始
+            }
         });
     });
 

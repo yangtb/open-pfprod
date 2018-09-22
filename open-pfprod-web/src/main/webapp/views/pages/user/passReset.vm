@@ -36,14 +36,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">密码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <input type="hidden" name="password" id="encryptPassword"/>
-                <input type="password" id="clearPassword" lay-verify="required|pass" autocomplete="off"
+                <input type="hidden" name="password" autocomplete="off" id="encryptPassword"/>
+                <input type="password" id="clearPassword" lay-verify="required|pass" lay-vertype="tips" autocomplete="off"
                        placeholder="请输入重置密码" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label"></label>
-            <div class="layui-form-mid" style="color: #FF5722">8-16位，至少包含1个大写字母、小写字母、数字</div>
+            <div class="layui-form-mid" style="color: #FF5722">8-16位，至少包含1个大写字母、1个小写字母和数字</div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">

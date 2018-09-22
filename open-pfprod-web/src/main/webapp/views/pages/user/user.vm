@@ -28,18 +28,18 @@
                 <button type="button" class="layui-btn" id="add">
                     <i class="iconfont icon-add"></i> 增加
                 </button>
-                <button type="button" class="layui-btn" id="edit">
+                #*<button type="button" class="layui-btn" id="edit">
                     <i class="iconfont icon-edit"></i> 编辑
-                </button>
+                </button>*#
                 <button type="button" class="layui-btn" id="del">
-                    <i class="iconfont icon-batch-del"></i> 批量删除
+                    <i class="iconfont icon-batch-del"></i> 删除
                 </button>
                 <button type="button" class="layui-btn" id="freeze">
-                    <i class="iconfont icon-freeze2"></i> 批量冻结
+                    <i class="iconfont icon-freeze2"></i> 冻结
                 </button>
-                <button type="button" class="layui-btn" id="resetPass">
+                #*<button type="button" class="layui-btn" id="resetPass">
                     <i class="iconfont icon-resetpass"></i> 密码重置
-                </button>
+                </button>*#
             </div>
         </div>
         <div class="layui-inline">
@@ -54,6 +54,13 @@
             <div class="layui-input-inline" style="width: 150px;">
                 <input type="text" name="queryCondition" autocomplete="off" class="layui-input">
             </div>
+        </div>
+        <div class="layui-input-inline">
+            <select name="idOrg">
+                <option value="">所属机构</option>
+                <option value="sms">短信</option>
+                <option value="email">邮件</option>
+            </select>
         </div>
         <div class="layui-inline">
             <div class="layui-input-inline">
@@ -84,10 +91,14 @@
 </script>
 
 <script type="text/html" id="sexTpl">
+    {{#  if(d.sex == 1){ }}
+    男
+    {{#  } }}
     {{#  if(d.sex == 2){ }}
     <span style="color: #F581B1;">女</span>
-    {{#  } else { }}
-    男
+    {{#  } }}
+    {{#  if(d.sex == ''){ }}
+
     {{#  } }}
 </script>
 <script type="text/html" id="roleTypeTpl">

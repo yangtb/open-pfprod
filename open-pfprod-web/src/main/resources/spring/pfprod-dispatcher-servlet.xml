@@ -96,6 +96,8 @@
             <mvc:exclude-mapping path="/403.html" />
             <mvc:exclude-mapping path="/404.html" />
             <mvc:exclude-mapping path="/500.html" />
+            <mvc:exclude-mapping path="/pf/p/user/register/page" />
+            <mvc:exclude-mapping path="/pf/r/user/register/**" />
             <bean class="com.sm.pfprod.web.interceptor.SessionTimeOutInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

@@ -35,7 +35,15 @@
                     <div class="layui-form-item form-item-my5">
                         <label class="layui-form-label">模板名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                         <div class="layui-input-block">
-                            <input type="text" name="templateName" lay-verify="required" autocomplete="off" class="layui-input">
+                            <input type="text" name="templateName" lay-verify="required|templateName"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item form-item-my5">
+                        <label class="layui-form-label">模板编码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="templateCode" lay-verify="required|templateCode"
+                                   autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div hidden>
@@ -71,7 +79,15 @@
                     <div class="layui-form-item form-item-my5">
                         <label class="layui-form-label">模板名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                         <div class="layui-input-block">
-                            <input type="text" name="templateName" lay-verify="required" autocomplete="off" class="layui-input">
+                            <input type="text" name="templateName" lay-verify="required|templateName"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item form-item-my5">
+                        <label class="layui-form-label">模板编码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="templateCode" lay-verify="required|templateCode"
+                                   autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div hidden>

@@ -1,5 +1,6 @@
 package com.sm.pfprod.service.system.message.impl;
 
+import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.param.pf.system.message.PfMessageParam;
@@ -38,7 +39,7 @@ public class PfMessageServiceImpl implements PfMessageService {
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
-        return false;
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
     @Override
@@ -47,7 +48,7 @@ public class PfMessageServiceImpl implements PfMessageService {
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
-        return false;
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
     @Override
@@ -56,6 +57,7 @@ public class PfMessageServiceImpl implements PfMessageService {
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
-        return false;
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
+
 }

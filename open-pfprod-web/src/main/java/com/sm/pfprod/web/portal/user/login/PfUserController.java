@@ -8,6 +8,7 @@ import com.sm.pfprod.service.user.role.PfRoleService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,10 +34,27 @@ public class PfUserController extends BaseController {
     @Resource(name = "rsaKeyPairQueue")
     private RsaKeyPairQueue rsaKeyPairQueue;
 
+    @Value("${website.name}")
+    private String websiteName;
+
+    @Value("${website.copyright}")
+    private String websiteCopyright;
+
+    @Value("${website.approve}")
+    private String websiteApprove;
+
     /**
      * rsa公钥常量变量名
      */
     private static final String PUBLIC_KEY = "publicKey";
+
+    @RequestMapping("/register/page")
+    public String registerPage(Model model, HttpServletRequest request) {
+        RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
+        model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
+        model.addAttribute("websiteName", websiteName);
+        return "pages/user/register/register";
+    }
 
     @PreAuthorize("hasAnyRole('ROLE_USER_MG','ROLE_SUPER')")
     @RequestMapping("/page")
@@ -57,12 +75,14 @@ public class PfUserController extends BaseController {
         model.addAttribute("formType", formType);
         RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
         model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
-
+        // 角色处理
         if (StringUtils.equals(formType, "edit")) {
             model.addAttribute("roles", pfRoleService.listUserRole(userId));
         } else {
             model.addAttribute("roles", pfRoleService.list());
         }
+        // 机构处理
+
         return "pages/user/userForm";
     }
 
