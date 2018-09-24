@@ -8,6 +8,24 @@ layui.config({
         form = layui.form,
         common = layui.common;
 
+    form.verify({
+        name: function (value) {
+            if (value.length > 32) {
+                return '角色名称最多32个字';
+            }
+        },
+        code: function (value) {
+            if (value.length > 32) {
+                return '角色编码最多32个字';
+            }
+        },
+        resume: function (value) {
+            if (value.length > 255) {
+                return '角色描述最多255个字';
+            }
+        }
+    });
+
     //监听提交
     form.on('submit(addRole)', function (data) {
         var url = basePath + '/pf/r/role/';

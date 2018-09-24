@@ -19,6 +19,7 @@ layui.config({
             {checkbox: true, fixed: true},
             //{field: 'roleId', width: 80, hidden: true, title: '角色ID'},
             {field: 'name', width: 100, title: '角色名称', fixed: true},
+            {field: 'code', width: 100, title: '角色编码'},
             {field: 'resume', width: 200, title: '描述'},
             {field: 'state', width: 70, sort: true, templet: '#stateTpl', title: '状态'},
             {field: 'operator', width: 100, title: '创建人'},
@@ -54,9 +55,9 @@ layui.config({
 
     var _addOrEdit = function (formType, currentEditData) {
         if (formType == 'add') {
-            common.open('新增角色', 'form?formType=' + formType, 500, 280);
+            common.open('新增角色', 'form?formType=' + formType, 550, 330);
         } else {
-            common.open('编辑角色', 'form?formType=' + formType, 500, 280, _successFunction(currentEditData));
+            common.open('编辑角色', 'form?formType=' + formType, 550, 330, _successFunction(currentEditData));
         }
     };
 

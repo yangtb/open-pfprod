@@ -26,15 +26,22 @@
         <div class="layui-form-item">
             <label class="layui-form-label">角色名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input"
+                <input type="text" name="name" lay-verify="required|name" lay-vertype="tips" autocomplete="off" class="layui-input"
                        placeholder="请输入角色名称">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色编码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <div class="layui-input-block">
+                <input type="text" name="code" lay-verify="required|code" lay-vertype="tips" autocomplete="off" class="layui-input"
+                       placeholder="请输入角色编码">
             </div>
         </div>
 
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">角色描述<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <textarea name="resume" lay-verify="required" class="layui-textarea"
+                <textarea name="resume" lay-verify="required|resume" lay-vertype="tips" class="layui-textarea"
                           placeholder="请输入角色描述"></textarea>
             </div>
         </div>
