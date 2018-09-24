@@ -84,8 +84,8 @@ public class PfMenuServiceImpl implements PfMenuService {
     }
 
     @Override
-    public List<PfMenuVo> listMyMenus(boolean isSuper, Long userId) {
-        CommonResult<List<PfMenuResult>> result = menuClient.listMyMenus(isSuper, userId);
+    public List<PfMenuVo> listMyMenus(boolean isSuper, boolean isAnonymousUser, Long userId) {
+        CommonResult<List<PfMenuResult>> result = menuClient.listMyMenus(isSuper, isAnonymousUser, userId);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convertList(result.getContent(), PfMenuVo.class);
         }

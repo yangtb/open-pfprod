@@ -6,6 +6,7 @@ import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.security.SecurityContext;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,17 +40,29 @@ public class PfHomeController extends BaseController {
     @Value("${website.copyright}")
     private String websiteCopyright;
 
+    @PreAuthorize("isAnonymous() || isAuthenticated()")
     @RequestMapping("/index")
     public String index(Model model) {
-        boolean isSuper = SecurityContext.hasRole("ROLE_SUPER");
-        List<PfMenuVo> menuVos = pfMenuService.listMyMenus(isSuper, CurrentUserUtils.getCurrentUserId());
-        Map<String, List<PfMenuVo>> menus = menuVos.stream().collect(Collectors.groupingBy(PfMenuVo::getPosition));
-        model.addAttribute("topMenus", menus.get("top"));
-        model.addAttribute("leftMenus", menus.get("left"));
+        if (SecurityContext.isAnonymousUser()) {
+            // 匿名用户
+            List<PfMenuVo> menuVos = pfMenuService.listMyMenus(false, true, null);
+            Map<String, List<PfMenuVo>> menus = menuVos.stream().collect(Collectors.groupingBy(PfMenuVo::getPosition));
+            model.addAttribute("topMenus", menus.get("top"));
+            model.addAttribute("leftMenus", menus.get("left"));
+            model.addAttribute("username", "匿名用户");
+            model.addAttribute("isAnonymousUser", true);
+        } else {
+            // 认证用户
+            boolean isSuper = SecurityContext.hasRole("ROLE_SUPER");
+            List<PfMenuVo> menuVos = pfMenuService.listMyMenus(isSuper, false, CurrentUserUtils.getCurrentUserId());
+            Map<String, List<PfMenuVo>> menus = menuVos.stream().collect(Collectors.groupingBy(PfMenuVo::getPosition));
+            model.addAttribute("topMenus", menus.get("top"));
+            model.addAttribute("leftMenus", menus.get("left"));
+            model.addAttribute("username", CurrentUserUtils.getCurrentUser().getUsername());
+            model.addAttribute("isAnonymousUser", false);
+        }
         model.addAttribute("websiteName", websiteName);
         model.addAttribute("websiteCopyright", websiteCopyright);
-
-        model.addAttribute("username", CurrentUserUtils.getCurrentUser().getUsername());
         return "/home/index";
     }
 

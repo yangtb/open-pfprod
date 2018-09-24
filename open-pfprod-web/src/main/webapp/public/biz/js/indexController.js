@@ -57,4 +57,21 @@ layui.config({
     $('#logout').on('click', function () {
         common.logOut('退出登录提示！', '你真的确定要退出系统吗？', url)
     })
+
+    if (isAnonymousUser == 'true') {
+        layer.msg('您当前已进入游客模式！', {
+            time: 0 //不自动关闭
+            , btn: ['知道了', '已有账号，点击登陆']
+            , yes: function (index) {
+                layer.close(index);
+            }, btn2: function () {
+                if (window != top) {
+                    top.location.href = basePath + "/login";
+                } else {
+                    window.location.href = basePath + "/login";
+                }
+            }
+        });
+    }
+
 });

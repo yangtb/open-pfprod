@@ -9,11 +9,10 @@
     <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
     <link rel="stylesheet" href="${contextPath}/public/layui/build/css/app.css" media="all">
-    <link rel="stylesheet" href="${contextPath}/public/layui/build/css/themes/default.css" media="all" id="skin"
-          kit-skin/>
-
+    <link rel="stylesheet" href="${contextPath}/public/layui/build/css/themes/default.css" media="all" id="skin" kit-skin/>
     <script>
         var basePath = '${basePath}';
+        var isAnonymousUser='${isAnonymousUser}';
     </script>
 </head>
 
@@ -88,13 +87,15 @@
                 <a href="javascript:;">
                     <img src="${basePath}/public/biz/img/0.jpg" class="layui-nav-img">$!username
                 </a>
-                <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" kit-target
-                           data-options="{url:'${basePath}/user/userDetail',icon:'icon-wodeziliao',title:'基本资料',id:'9999'}">
-                        <i class="iconfont icon-wodeziliao"></i><span> 基本资料</span></a></dd>
-                    <dd id="modifyPass"><a href="javascript:;" data-title="修改密码">
-                        <i class="iconfont icon-modifyPass"></i><span> 修改密码</span></a></dd>
-                </dl>
+                #if(${isAnonymousUser} == false)
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" kit-target
+                               data-options="{url:'${basePath}/user/userDetail',icon:'icon-wodeziliao',title:'基本资料',id:'9999'}">
+                            <i class="iconfont icon-wodeziliao"></i><span> 基本资料</span></a></dd>
+                        <dd id="modifyPass"><a href="javascript:;" data-title="修改密码">
+                            <i class="iconfont icon-modifyPass"></i><span> 修改密码</span></a></dd>
+                    </dl>
+                #end
             </li>
             <li class="layui-nav-item">
                 <a id="logout" href="javascript:;"><i class="iconfont icon-logout2"></i> 注销</a>
@@ -109,7 +110,7 @@
             <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
                 #if(!$leftMenus.isEmpty())
                     #foreach($element in $leftMenus)
-                    <li class="layui-nav-item">
+                    <li class="layui-nav-item #if(${velocityCount}==1)layui-nav-itemed#end">
                         <a href="javascript:;"
                             #if($element.groupList.isEmpty()) kit-target data-id='$!element.parentMenuId'
                            data-icon='$!element.parentImg' data-title='$!element.parentMenuName'
@@ -144,9 +145,7 @@
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        ${websiteCopyright}
-        <a href="">(推荐使用IE9+,Firefox、Chrome 浏览器访问)</a>
-
+        ${websiteCopyright}<a href="">(推荐使用IE9+,Firefox、Chrome 浏览器访问)</a>
     </div>
 </div>
 

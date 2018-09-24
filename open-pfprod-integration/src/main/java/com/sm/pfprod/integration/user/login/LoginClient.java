@@ -59,8 +59,8 @@ public class LoginClient {
         return pfUserFacade.selectUser(userName);
     }
 
-    public CommonResult<List<String>> findAuthoritiesByUserId(Long userId) {
-        return pfUserFacade.findAuthoritiesByUserId(userId);
+    public CommonResult<List<String>> findAuthoritiesByUserId(Long userId, String roleType) {
+        return pfUserFacade.findAuthoritiesByUserId(userId, roleType);
     }
 
     public CommonResult<Boolean> registerUser(UserRegisterParam param) {
