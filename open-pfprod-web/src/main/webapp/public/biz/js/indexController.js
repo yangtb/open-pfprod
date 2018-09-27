@@ -61,6 +61,12 @@ layui.config({
     if (fgActive == '0') {
         $('#orgInfo').click();
     } else {
+        var msg;
+        if (moment(gmtValid).isBefore(new Date())) {
+            msg = "您的平台试用已到期！";
+        }  else {
+            msg= '您的平台试用将于' + moment(gmtValid).format('YYYY月MM月DD日') +'到期！';
+        }
         if (moment(gmtValid).isBefore(moment().add(orgExpiryNoticeDay, 'days').calendar())) {
             layer.open({
                 type: 1
@@ -73,8 +79,7 @@ layui.config({
                 ,btnAlign: 'c'
                 ,moveType: 1 //拖拽模式，0或者1
                 ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">' +
-                    '尊敬的用户：<br><br>' +
-                    '您的平台试用将于' +moment(gmtValid).format('YYYY月MM月DD日') +'到期！<br><br>' +
+                    '尊敬的用户：<br><br>' + msg +'<br><br>' +
                     '为了不影响您的使用，请您尽快申请续期 ^_^</div>'
                 ,success: function(layero){
                     //var btn = layero.find('.layui-layer-btn');
