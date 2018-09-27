@@ -5,6 +5,7 @@ import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.system.org.PfBachOrgDto;
 import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.entity.SysOrgReg;
 import com.sm.pfprod.service.system.org.PfOrgService;
@@ -94,11 +95,34 @@ public class PfOrgRestController {
     @PreAuthorize("hasAnyRole('ROLE_ORG_AUTH','ROLE_SUPER')")
     @RequestMapping(value = "/auth", method = RequestMethod.POST)
     @ResponseBody
-    public ResultObject authOrg(@RequestBody PfBachChangeStatusDto dto) {
+    public ResultObject authOrg(@RequestBody PfBachOrgDto dto) {
         /* 参数校验 */
-        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getIdRegList()), "申请ID");
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getIdOrgList()), "机构ID");
+        String currentUsername = CurrentUserUtils.getCurrentUsername();
+        dto.setConfirmor(currentUsername);
+        dto.setOperator(currentUsername);
         return pfOrgService.authOrg(dto) ? ResultObject.createSuccess("authOrg", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("authOrg", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
+
+    /**
+     * 机构认证驳回
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_ORG_REJECT','ROLE_SUPER')")
+    @RequestMapping(value = "/reject", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject rejectOrg(@RequestBody PfBachOrgDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getIdRegList()), "申请ID");
+        String currentUsername = CurrentUserUtils.getCurrentUsername();
+        dto.setConfirmor(currentUsername);
+        dto.setOperator(currentUsername);
+        return pfOrgService.rejectOrg(dto) ? ResultObject.createSuccess("rejectOrg", ResultObject.DATA_TYPE_OBJECT, true)
+                : ResultObject.create("rejectOrg", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
 
     /**
@@ -120,6 +144,5 @@ public class PfOrgRestController {
         return pfOrgService.activeOrg(dto) ? ResultObject.createSuccess("activeOrg", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("activeOrg", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
-
 
 }

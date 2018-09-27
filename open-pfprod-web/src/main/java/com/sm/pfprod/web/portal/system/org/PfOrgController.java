@@ -3,6 +3,7 @@ package com.sm.pfprod.web.portal.system.org;
 import com.alibaba.fastjson.JSON;
 import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.open.care.core.utils.DateUtil;
+import com.sm.pfprod.model.dto.system.org.PfOrgAuthDto;
 import com.sm.pfprod.model.dto.system.org.PfOrgDto;
 import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.result.PageResult;
@@ -66,7 +67,7 @@ public class PfOrgController extends BaseController {
     }
 
     /**
-     * 获取结构列表
+     * 获取机构列表
      *
      * @param dto
      * @return
@@ -81,5 +82,19 @@ public class PfOrgController extends BaseController {
         }
         return pfOrgService.listOrgs(dto);
     }
+
+    /**
+     * 获取机构认证列表
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_OM0020','ROLE_SUPER')")
+    @RequestMapping(value = "/list/auth")
+    @ResponseBody
+    public PageResult listAuthOrgs(PfOrgAuthDto dto) {
+        return pfOrgService.listAuthOrg(dto);
+    }
+
 
 }

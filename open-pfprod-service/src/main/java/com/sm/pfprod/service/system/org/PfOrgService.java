@@ -1,6 +1,8 @@
 package com.sm.pfprod.service.system.org;
 
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.system.org.PfBachOrgDto;
+import com.sm.pfprod.model.dto.system.org.PfOrgAuthDto;
 import com.sm.pfprod.model.dto.system.org.PfOrgDto;
 import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.entity.SysOrgReg;
@@ -18,6 +20,14 @@ public interface PfOrgService {
      * @return
      */
     PageResult listOrgs(PfOrgDto dto);
+
+    /**
+     * 机构认证列表
+     *
+     * @param dto
+     * @return
+     */
+    PageResult listAuthOrg(PfOrgAuthDto dto);
 
     /**
      * 查询所有机构
@@ -63,7 +73,15 @@ public interface PfOrgService {
      * @param dto
      * @return
      */
-    boolean authOrg(PfBachChangeStatusDto dto);
+    boolean authOrg(PfBachOrgDto dto);
+
+    /**
+     * 机构认证驳回
+     *
+     * @param dto
+     * @return
+     */
+    boolean rejectOrg(PfBachOrgDto dto);
 
     /**
      * 根据id查询机构信息
@@ -80,6 +98,5 @@ public interface PfOrgService {
      * @return
      */
     boolean activeOrg(SysOrgReg dto);
-
 
 }

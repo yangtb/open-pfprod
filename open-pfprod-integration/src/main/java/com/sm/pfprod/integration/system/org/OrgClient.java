@@ -1,9 +1,7 @@
 package com.sm.pfprod.integration.system.org;
 
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
-import com.sm.open.core.facade.model.param.pf.system.org.PfOrgParam;
-import com.sm.open.core.facade.model.param.pf.system.org.SysOrgParam;
-import com.sm.open.core.facade.model.param.pf.system.org.SysOrgRegParam;
+import com.sm.open.core.facade.model.param.pf.system.org.*;
 import com.sm.open.core.facade.model.result.pf.system.org.SysOrgResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
@@ -24,6 +22,10 @@ public class OrgClient {
         return pfOrgFacade.listOrgs(param);
     }
 
+    public PfPageResult listAuthOrg(PfOrgAuthParam param) {
+        return pfOrgFacade.listAuthOrg(param);
+    }
+
     public CommonResult<List<SysOrgResult>> listAllOrg() {
         return pfOrgFacade.listAllOrg();
     }
@@ -41,8 +43,12 @@ public class OrgClient {
         return pfOrgFacade.delOrg(param);
     }
 
-    public CommonResult<Boolean> authOrg(PfBachChangeStatusParam param) {
+    public CommonResult<Boolean> authOrg(PfBachOrgParam param) {
         return pfOrgFacade.authOrg(param);
+    }
+
+    public CommonResult<Boolean> rejectOrg(PfBachOrgParam param) {
+        return pfOrgFacade.rejectOrg(param);
     }
 
     public CommonResult<SysOrgResult> selectOrgInfoById(Long idOrg) {

@@ -3,14 +3,15 @@ package com.sm.pfprod.service.system.org.impl;
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
-import com.sm.open.core.facade.model.param.pf.system.org.PfOrgParam;
-import com.sm.open.core.facade.model.param.pf.system.org.SysOrgParam;
-import com.sm.open.core.facade.model.param.pf.system.org.SysOrgRegParam;
+import com.sm.open.core.facade.model.param.pf.system.org.*;
+import com.sm.open.core.facade.model.result.pf.system.org.SysOrgAuthResult;
 import com.sm.open.core.facade.model.result.pf.system.org.SysOrgResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.system.org.OrgClient;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.system.org.PfBachOrgDto;
+import com.sm.pfprod.model.dto.system.org.PfOrgAuthDto;
 import com.sm.pfprod.model.dto.system.org.PfOrgDto;
 import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.entity.SysOrgReg;
@@ -34,6 +35,15 @@ public class PfOrgServiceImpl implements PfOrgService {
     @Override
     public PageResult listOrgs(PfOrgDto dto) {
         PfPageResult<SysOrgResult> result = orgClient.listOrgs(BeanUtil.convert(dto, PfOrgParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public PageResult listAuthOrg(PfOrgAuthDto dto) {
+        PfPageResult<SysOrgAuthResult> result = orgClient.listAuthOrg(BeanUtil.convert(dto, PfOrgAuthParam.class));
         if (result == null) {
             return null;
         }
@@ -91,8 +101,17 @@ public class PfOrgServiceImpl implements PfOrgService {
     }
 
     @Override
-    public boolean authOrg(PfBachChangeStatusDto dto) {
-        CommonResult<Boolean> result = orgClient.authOrg(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
+    public boolean authOrg(PfBachOrgDto dto) {
+        CommonResult<Boolean> result = orgClient.authOrg(BeanUtil.convert(dto, PfBachOrgParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean rejectOrg(PfBachOrgDto dto) {
+        CommonResult<Boolean> result = orgClient.rejectOrg(BeanUtil.convert(dto, PfBachOrgParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
