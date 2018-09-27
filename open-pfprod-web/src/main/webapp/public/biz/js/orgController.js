@@ -46,14 +46,23 @@ layui.config({
         }
     });
 
+    form.on('checkbox(expiredFilter)', function(data){
+        if (data.elem.checked) {
+            $("#fgActive").val("");
+            form.render('select');
+        }
+    });
+
     //监听提交
     form.on('submit(orgSearchFilter)', function (data) {
         var name = data.field.name;
         var fgActive = data.field.fgActive;
+        var expired = data.field.expired ? true : false;
         table.reload('orgTableId', {
             where: {
                 name: name,
-                fgActive: fgActive
+                fgActive: fgActive,
+                expired : expired
             }
             , height: 'full-68'
             , page: {
@@ -137,7 +146,7 @@ layui.config({
         });
     });
 
-    $(".auth").on('click', function () {
+    $(".del").on('click', function () {
         var checkStatus = table.checkStatus('orgTableId')
             , data = checkStatus.data;
         if (data.length == 0) {
@@ -148,7 +157,7 @@ layui.config({
     });
 
     var _authOrg = function (currentData) {
-        var url = basePath + '/pf/r/org/auth';
+        var url = basePath + '/pf/r/org/del';
         var reqData = new Array();
         var messageTitle = '';
         $.each(currentData, function (index, content) {
@@ -161,14 +170,14 @@ layui.config({
         var data = {};
         data.list = reqData;
         data.status = '1';
-        layer.confirm('确定认证' + messageTitle + '么？', {
-            title: '认证机构提示',
+        layer.confirm('确定删除' + messageTitle + '么？', {
+            title: '删除机构提示',
             resize: false,
             btn: ['确定', '取消'],
             btnAlign: 'c',
             icon: 3
         }, function (index) {
-            _commonAjax(index, url, data, "认证");
+            _commonAjax(index, url, data, "删除");
         })
     }
 

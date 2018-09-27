@@ -69,6 +69,10 @@ public class PfOrgController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listOrgs(PfOrgDto dto) {
+        // 临过期
+        if (dto.isExpired()) {
+            dto.setGmtValid(DateUtil.date2Str(DateUtil.addDate(new Date(), orgExpiryNoticeDay)));
+        }
         return pfOrgService.listOrgs(dto);
     }
 

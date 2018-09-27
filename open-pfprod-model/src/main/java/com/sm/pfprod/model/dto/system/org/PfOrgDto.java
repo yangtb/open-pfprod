@@ -17,5 +17,13 @@ public class PfOrgDto extends PageParam implements Serializable {
     private String name;
     private String fgActive;
     private String fgValid;
+    /**
+     * 临过期状态
+     */
+    private boolean expired;
+    /**
+     * 临过期时间
+     */
+    private String gmtValid;
 
 }
