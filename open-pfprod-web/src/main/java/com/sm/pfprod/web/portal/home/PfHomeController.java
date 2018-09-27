@@ -1,6 +1,10 @@
 package com.sm.pfprod.web.portal.home;
 
+import com.alibaba.fastjson.JSON;
+import com.sm.pfprod.model.dto.home.PfHomeDto;
+import com.sm.pfprod.model.vo.home.PfHomeVo;
 import com.sm.pfprod.model.vo.menu.PfMenuVo;
+import com.sm.pfprod.service.home.PfHomeService;
 import com.sm.pfprod.service.user.menu.PfMenuService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
@@ -28,6 +32,9 @@ public class PfHomeController extends BaseController {
     @Resource
     private PfMenuService pfMenuService;
 
+    @Resource
+    private PfHomeService pfHomeService;
+
     /**
      * 网站名称
      */
@@ -43,26 +50,21 @@ public class PfHomeController extends BaseController {
     @PreAuthorize("isAnonymous() || isAuthenticated()")
     @RequestMapping("/index")
     public String index(Model model) {
-        if (SecurityContext.isAnonymousUser()) {
-            // 匿名用户
-            List<PfMenuVo> menuVos = pfMenuService.listMyMenus(false, true, null);
-            Map<String, List<PfMenuVo>> menus = menuVos.stream().collect(Collectors.groupingBy(PfMenuVo::getPosition));
-            model.addAttribute("topMenus", menus.get("top"));
-            model.addAttribute("leftMenus", menus.get("left"));
-            model.addAttribute("username", "匿名用户");
-            model.addAttribute("isAnonymousUser", true);
-        } else {
-            // 认证用户
-            boolean isSuper = SecurityContext.hasRole("ROLE_SUPER");
-            List<PfMenuVo> menuVos = pfMenuService.listMyMenus(isSuper, false, CurrentUserUtils.getCurrentUserId());
-            Map<String, List<PfMenuVo>> menus = menuVos.stream().collect(Collectors.groupingBy(PfMenuVo::getPosition));
-            model.addAttribute("topMenus", menus.get("top"));
-            model.addAttribute("leftMenus", menus.get("left"));
-            model.addAttribute("username", CurrentUserUtils.getCurrentUser().getUsername());
-            model.addAttribute("isAnonymousUser", false);
+        PfHomeDto homeDto = new PfHomeDto();
+        homeDto.setSuper(SecurityContext.hasRole("ROLE_SUPER") ? true : false);
+        homeDto.setAnonymousUser(SecurityContext.isAnonymousUser() ? true : false);
+        homeDto.setUserId(SecurityContext.isAnonymousUser() ? null : CurrentUserUtils.getCurrentUserId());
+        homeDto.setIdOrg(SecurityContext.isAnonymousUser() ? null : CurrentUserUtils.getCurrentUser().getIdOrg());
+
+        PfHomeVo pfHomeVo = pfHomeService.selectHomeInfo(homeDto);
+        if (pfHomeVo == null) {
+            pfHomeVo = new PfHomeVo();
         }
-        model.addAttribute("websiteName", websiteName);
-        model.addAttribute("websiteCopyright", websiteCopyright);
+        pfHomeVo.setUsername(SecurityContext.isAnonymousUser() ?
+                "匿名用户" : CurrentUserUtils.getCurrentUser().getUsername());
+        pfHomeVo.setWebsiteName(websiteName);
+        pfHomeVo.setWebsiteCopyright(websiteCopyright);
+        model.addAttribute("homeInfo", pfHomeVo);
         return "/home/index";
     }
 
