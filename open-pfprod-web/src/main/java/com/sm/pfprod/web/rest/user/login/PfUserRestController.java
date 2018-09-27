@@ -1,5 +1,7 @@
 package com.sm.pfprod.web.rest.user.login;
 
+import com.sm.open.care.core.ErrorCode;
+import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.Assert;
@@ -13,8 +15,11 @@ import com.sm.pfprod.model.dto.user.register.UserRegisterDto;
 import com.sm.pfprod.service.user.login.PfUserService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
+import com.sm.pfprod.web.security.SecurityContext;
+import com.sm.pfprod.web.security.User;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;
 import com.sm.pfprod.web.util.ImageCodeUtil;
+import com.sm.pfprod.web.util.SysUserAuthUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -60,7 +65,12 @@ public class PfUserRestController extends BaseController {
         Assert.isTrue(dto.getUsername() != null, "username");
         Assert.isTrue(StringUtils.isNotBlank(dto.getPassword()), "password");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getRoles()), "roles");
-        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+
+        User user = SecurityContext.currentUser();
+        dto.setOperator(user.getUsername());
+        if (!SysUserAuthUtils.isPlatOrSuper() && dto.getIdOrg().equals(user.getIdOrg())) {
+            throw new BizRuntimeException(ErrorCode.USER_AUTH_EXCEPTION, ErrorMessage.USER_AUTH_EXCEPTION_MSG);
+        }
 
         RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
         // 密码转化为明文
@@ -84,7 +94,12 @@ public class PfUserRestController extends BaseController {
         /* 参数校验 */
         Assert.isTrue(dto.getUsername() != null, "username");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getRoles()), "roles");
-        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+
+        User user = SecurityContext.currentUser();
+        dto.setOperator(user.getUsername());
+        if (!SysUserAuthUtils.isPlatOrSuper() && dto.getIdOrg().equals(user.getIdOrg())) {
+            throw new BizRuntimeException(ErrorCode.USER_AUTH_EXCEPTION, ErrorMessage.USER_AUTH_EXCEPTION_MSG);
+        }
         return ResultObject.create("updateUser", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfUserService.updateUser(dto));
     }

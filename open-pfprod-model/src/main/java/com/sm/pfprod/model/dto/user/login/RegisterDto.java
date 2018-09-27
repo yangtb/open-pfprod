@@ -32,5 +32,9 @@ public class RegisterDto implements Serializable {
     private String      remark;         // 备注
     private List<Long>  roles;          // 用户角色
     private String      operator;       // 操作人员
+    /**
+     * 用户所在机构
+     */
+    private Long        idOrg;
 
 }

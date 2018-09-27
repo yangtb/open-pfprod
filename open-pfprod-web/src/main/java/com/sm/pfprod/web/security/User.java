@@ -33,6 +33,12 @@ public class User implements Serializable {
 
 	/** 当前用户所在机构id */
 	private Long idOrg;
+
+	/** 当前用户所在机构级别 */
+	private String fgPlat;
+
+	/** 当前用户所在机构状态 */
+	private String fgActive;
 	
 	/** 用户头像 */
 	private String headPhoto;
@@ -103,6 +109,22 @@ public class User implements Serializable {
 
 	public void setIdOrg(Long idOrg) {
 		this.idOrg = idOrg;
+	}
+
+	public String getFgPlat() {
+		return fgPlat;
+	}
+
+	public void setFgPlat(String fgPlat) {
+		this.fgPlat = fgPlat;
+	}
+
+	public String getFgActive() {
+		return fgActive;
+	}
+
+	public void setFgActive(String fgActive) {
+		this.fgActive = fgActive;
 	}
 
 	public String getHeadPhoto() {

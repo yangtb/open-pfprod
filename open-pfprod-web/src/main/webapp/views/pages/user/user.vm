@@ -58,9 +58,20 @@
         <div class="layui-input-inline">
             <select name="idOrg">
                 <option value="">所属机构</option>
-                #foreach($param in ${orgMap.keySet()})
-                    <option value="$param">${orgMap.get($param)}</option>
-                #end
+                <optgroup label="已认证">
+                    #foreach($element in $allOrg)
+                        #if($element.fgActive == "1")
+                            <option value="$element.idOrg" #if($!userOrgId==$element.idOrg)selected#end>$element.name</option>
+                        #end
+                    #end
+                </optgroup>
+                <optgroup label="未认证">
+                    #foreach($element in $allOrg)
+                        #if($element.fgActive == "0")
+                            <option value="$element.idOrg"#if($!userOrgId==$element.idOrg)selected#end>$element.name</option>
+                        #end
+                    #end
+                </optgroup>
             </select>
         </div>
         <div class="layui-inline">

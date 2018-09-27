@@ -39,10 +39,23 @@
             <div class="layui-inline">
                 <label class="layui-form-label">所属机构</label>
                 <div class="layui-input-inline">
-                    <select name="idOrg" xm-select="example9_1" xm-select-radio="">
-                        #foreach($element in $allOrg)
-                            <option value="$element.idOrg" data-flag="$element.fgActive">$element.name</option>
-                        #end
+                    <select name="idOrg">
+                        <option value="">请选择</option>
+                        <optgroup label="已认证">
+                            #foreach($element in $allOrg)
+                                #if($element.fgActive == "1")
+                                    <option value="$element.idOrg">$element.name</option>
+                                #end
+                            #end
+                        </optgroup>
+                        <optgroup label="未认证">
+                            #foreach($element in $allOrg)
+                                #if($element.fgActive == "0")
+                                    <option value="$element.idOrg">$element.name</option>
+                                #end
+                            #end
+                        </optgroup>
+                    </select>
                     </select>
                 </div>
             </div>
@@ -148,7 +161,6 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
-<script src="${contextPath}/public/layui/expand/formSelects-v4.js" type="text/javascript" charset="utf-8"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
@@ -169,13 +181,6 @@
     $(function () {
         var registerController = new RegisterController();
         registerController.init(publicKey);
-    });
-
-    layui.formSelects.btns('example9_1', []);
-    layui.formSelects.render('example9_1', {
-        template: function(name, value, selected, disabled){
-            return name + '<i class=\'iconfont icon-yirenzheng\' style=\'color: #f03f2d\'></i>';
-        }
     });
 </script>
 

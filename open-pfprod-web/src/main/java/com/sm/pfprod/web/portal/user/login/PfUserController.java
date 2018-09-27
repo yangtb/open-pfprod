@@ -2,12 +2,16 @@ package com.sm.pfprod.web.portal.user.login;
 
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
 import com.sm.pfprod.model.dto.user.PfUserDto;
+import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.system.org.PfOrgService;
 import com.sm.pfprod.service.user.login.PfUserService;
 import com.sm.pfprod.service.user.role.PfRoleService;
 import com.sm.pfprod.web.portal.BaseController;
+import com.sm.pfprod.web.security.CurrentUserUtils;
+import com.sm.pfprod.web.security.User;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;
+import com.sm.pfprod.web.util.SysUserAuthUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 登陆
@@ -63,7 +69,16 @@ public class PfUserController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_USER_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String page(Model model) {
-        model.addAttribute("orgMap", pfOrgService.listAllOrgMap());
+        // 机构处理, 平台级别保留全部，平台以下级别只保留当前机构
+        User user = CurrentUserUtils.getCurrentUser();
+        if (SysUserAuthUtils.isPlatOrSuper()) {
+            model.addAttribute("allOrg", pfOrgService.listAllOrg());
+        } else {
+            List<SysOrg> myOrgList = pfOrgService.listAllOrg().stream()
+                    .filter(sysOrg -> sysOrg.getIdOrg().equals(user.getIdOrg())).collect(Collectors.toList());
+            model.addAttribute("allOrg", myOrgList);
+        }
+        model.addAttribute("userOrgId", user.getIdOrg());
         return "pages/user/user";
     }
 
@@ -88,7 +103,14 @@ public class PfUserController extends BaseController {
             model.addAttribute("roles", pfRoleService.list());
         }
         // 机构处理
-        model.addAttribute("allOrg", pfOrgService.listAllOrg());
+        User user = CurrentUserUtils.getCurrentUser();
+        if (SysUserAuthUtils.isPlatOrSuper()) {
+            model.addAttribute("allOrg", pfOrgService.listAllOrg());
+        } else {
+            List<SysOrg> myOrgList = pfOrgService.listAllOrg().stream()
+                    .filter(sysOrg -> sysOrg.getIdOrg().equals(user.getIdOrg())).collect(Collectors.toList());
+            model.addAttribute("allOrg", myOrgList);
+        }
         return "pages/user/userForm";
     }
 
@@ -117,6 +139,10 @@ public class PfUserController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listUsers(PfUserDto dto) {
+        User user = CurrentUserUtils.getCurrentUser();
+        if (!SysUserAuthUtils.isPlatOrSuper()) {
+            dto.setIdOrg(user.getIdOrg());
+        }
         return pfUserService.listUsers(dto);
     }
 }

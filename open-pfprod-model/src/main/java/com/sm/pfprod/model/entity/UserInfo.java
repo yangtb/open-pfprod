@@ -36,5 +36,9 @@ public class UserInfo implements Serializable {
     private String      operator;       // 操作人员
     private Date        gmtCreate;      // 创建时间
     private Date        gmtModify;      // 更新时间
+    /** 当前用户所在机构级别 */
+    private String fgPlat;
 
+    /** 当前用户所在机构状态 */
+    private String fgActive;
 }

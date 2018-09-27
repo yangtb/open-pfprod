@@ -112,7 +112,8 @@ layui.config({
         table.reload('userTableId', {
             where: {
                 type: data.field.type,
-                conditionValue: data.field.queryCondition
+                conditionValue: data.field.queryCondition,
+                idOrg : data.field.idOrg
             }
             , height: 'full-68'
             , page: {
