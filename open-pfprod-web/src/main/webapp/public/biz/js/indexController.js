@@ -61,7 +61,7 @@ layui.config({
     if (fgActive == '0') {
         $('#orgInfo').click();
     } else {
-        if (moment(gmtValid).isBefore(moment().add(31, 'days').calendar())) {
+        if (moment(gmtValid).isBefore(moment().add(orgExpiryNoticeDay, 'days').calendar())) {
             layer.open({
                 type: 1
                 ,title: false //不显示标题栏

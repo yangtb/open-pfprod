@@ -47,6 +47,12 @@ public class PfHomeController extends BaseController {
     @Value("${website.copyright}")
     private String websiteCopyright;
 
+    /**
+     * 机构试用到期提醒
+     */
+    @Value("${org.expiry.notice.day}")
+    private int orgExpiryNoticeDay = 30;
+
     @PreAuthorize("isAnonymous() || isAuthenticated()")
     @RequestMapping("/index")
     public String index(Model model) {
@@ -65,6 +71,7 @@ public class PfHomeController extends BaseController {
         pfHomeVo.setWebsiteName(websiteName);
         pfHomeVo.setWebsiteCopyright(websiteCopyright);
         model.addAttribute("homeInfo", pfHomeVo);
+        model.addAttribute("orgExpiryNoticeDay", orgExpiryNoticeDay);
         return "/home/index";
     }
 

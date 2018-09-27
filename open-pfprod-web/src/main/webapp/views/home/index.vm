@@ -15,6 +15,7 @@
         var isAnonymousUser='${homeInfo.anonymousUser}';
         var fgActive= '$!{homeInfo.sysOrg.getFgActive()}';
         var gmtValid = '$!{homeInfo.sysOrg.getGmtValid()}';
+        var orgExpiryNoticeDay = '$!{orgExpiryNoticeDay}';
     </script>
 </head>
 

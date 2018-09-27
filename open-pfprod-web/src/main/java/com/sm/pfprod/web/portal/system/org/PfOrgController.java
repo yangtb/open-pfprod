@@ -8,6 +8,7 @@ import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.system.org.PfOrgService;
 import com.sm.pfprod.web.portal.BaseController;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,12 @@ public class PfOrgController extends BaseController {
     @Resource
     private PfOrgService pfOrgService;
 
+    /**
+     * 机构试用到期提醒
+     */
+    @Value("${org.expiry.notice.day}")
+    private int orgExpiryNoticeDay = 30;
+
     @PreAuthorize("hasAnyRole('ROLE_ORG_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String page() {
@@ -46,7 +53,7 @@ public class PfOrgController extends BaseController {
             model.addAttribute("fgActive", sysOrg.getFgActive());
             if (sysOrg.getFgActive().equals(YesOrNoNum.YES.getCode())) {
                 Date gmtValid = DateUtil.parseDate(sysOrg.getGmtValid());
-                model.addAttribute("renewFlag", gmtValid.before(DateUtil.addDate(gmtValid, 31)));
+                model.addAttribute("renewFlag", gmtValid.before(DateUtil.addDate(gmtValid, orgExpiryNoticeDay)));
             }
         }
         return "pages/system/org/orgForm";
