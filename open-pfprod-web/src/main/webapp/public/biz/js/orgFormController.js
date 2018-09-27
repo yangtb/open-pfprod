@@ -100,5 +100,19 @@ layui.config({
         return false;
     });
 
+    form.on('submit(activeOrg)', function (data) {
+        var bizData = {}
+        bizData.idOrg = data.field.idOrg;
+        var url = basePath + '/pf/r/org/active';
+        return common.commonPost(url, bizData, "申请激活");
+    });
+
+    form.on('submit(renewOrg)', function (data) {
+        var bizData = {}
+        bizData.idOrg = data.field.idOrg;
+        var url = basePath + '/pf/r/org/active';
+        return common.commonPost(url, bizData, "申请续期");
+    });
+
 });
 

@@ -5,6 +5,7 @@ import com.sm.open.care.core.utils.BeanUtil;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.param.pf.system.org.PfOrgParam;
 import com.sm.open.core.facade.model.param.pf.system.org.SysOrgParam;
+import com.sm.open.core.facade.model.param.pf.system.org.SysOrgRegParam;
 import com.sm.open.core.facade.model.result.pf.system.org.SysOrgResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
@@ -12,6 +13,7 @@ import com.sm.pfprod.integration.system.org.OrgClient;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.dto.system.org.PfOrgDto;
 import com.sm.pfprod.model.entity.SysOrg;
+import com.sm.pfprod.model.entity.SysOrgReg;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.system.org.PfOrgService;
 import org.apache.commons.collections.MapUtils;
@@ -105,4 +107,14 @@ public class PfOrgServiceImpl implements PfOrgService {
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
+
+    @Override
+    public boolean activeOrg(SysOrgReg dto) {
+        CommonResult<Boolean> result = orgClient.activeOrg(BeanUtil.convert(dto, SysOrgRegParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
 }

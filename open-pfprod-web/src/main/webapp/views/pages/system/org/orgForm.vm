@@ -79,11 +79,10 @@
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">激活<i class="iconfont icon-required"
-                                                     style="color: #f03f2d"></i></label>
-                <div class="layui-input-block">
-                    <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
-                           lay-filter="fgActiveSwitch" value="1" lay-text="已激活|未激活">
+                <label class="layui-form-label">排序</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="sort" autocomplete="off" class="layui-input"
+                           lay-verify="sort" lay-vertype="tips">
                 </div>
             </div>
         </div>
@@ -96,17 +95,18 @@
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">排序</label>
+                <label class="layui-form-label">有效期</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="sort" autocomplete="off" class="layui-input"
-                           lay-verify="sort" lay-vertype="tips">
+                    <input type="text" name="gmtValid" id="gmtValid" autocomplete="off"
+                           placeholder="yyyy-MM-dd" class="layui-input layui-disabled" disabled>
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">有效期</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="gmtValid" id="gmtValid" autocomplete="off" class="layui-input"
-                           placeholder="yyyy-MM-dd">
+                <label class="layui-form-label">激活<i class="iconfont icon-required"
+                                                     style="color: #f03f2d"></i></label>
+                <div class="layui-input-block">
+                    <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
+                           lay-filter="fgActiveSwitch" value="1" lay-text="已激活|未激活" class="layui-disabled" disabled>
                 </div>
             </div>
         </div>
@@ -140,12 +140,12 @@
                 </button>
                 #if($!{fgActive} == '0')
                     <button class="layui-btn layui-btn-warm" lay-submit="" lay-filter="activeOrg">
-                        <i class="iconfont icon-jihuo"></i> 激活
+                        <i class="iconfont icon-jihuo"></i> 申请激活
                     </button>
                 #end
                 #if($!{renewFlag} == 'true')
                     <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="renewOrg">
-                        <i class="iconfont icon-xuqitianshu"></i> 续期
+                        <i class="iconfont icon-xuqitianshu"></i> 申请续期
                     </button>
                 #end
 

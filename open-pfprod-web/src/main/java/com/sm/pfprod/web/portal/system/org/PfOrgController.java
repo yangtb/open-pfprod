@@ -43,6 +43,12 @@ public class PfOrgController extends BaseController {
         return "pages/system/org/org";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ORG_MG','ROLE_SUPER')")
+    @RequestMapping("/page/auth")
+    public String orgAuth() {
+        return "pages/system/org/orgAuth";
+    }
+
     @PreAuthorize("hasAnyRole('ROLE_ORG_MG', 'ROLE_ORG_DETAIL', 'ROLE_SUPER')")
     @RequestMapping("/form")
     public String form(String formType, Long idOrg, Model model) {

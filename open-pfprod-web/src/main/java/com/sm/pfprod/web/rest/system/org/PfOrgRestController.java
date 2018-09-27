@@ -6,6 +6,7 @@ import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.entity.SysOrg;
+import com.sm.pfprod.model.entity.SysOrgReg;
 import com.sm.pfprod.service.system.org.PfOrgService;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -98,6 +99,26 @@ public class PfOrgRestController {
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
         return pfOrgService.authOrg(dto) ? ResultObject.createSuccess("authOrg", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("authOrg", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
+
+    /**
+     * 申请激活
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_ORG_DETAIL','ROLE_SUPER')")
+    @RequestMapping(value = "/active", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject activeOrg(@RequestBody SysOrgReg dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdOrg() != null, "idOrg");
+        String currentUsername = CurrentUserUtils.getCurrentUsername();
+        dto.setApplyor(currentUsername);
+        dto.setCreator(currentUsername);
+        dto.setOperator(currentUsername);
+        return pfOrgService.activeOrg(dto) ? ResultObject.createSuccess("activeOrg", ResultObject.DATA_TYPE_OBJECT, true)
+                : ResultObject.create("activeOrg", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
 
 

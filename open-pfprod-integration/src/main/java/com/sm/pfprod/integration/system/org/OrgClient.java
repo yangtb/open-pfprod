@@ -3,6 +3,7 @@ package com.sm.pfprod.integration.system.org;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.param.pf.system.org.PfOrgParam;
 import com.sm.open.core.facade.model.param.pf.system.org.SysOrgParam;
+import com.sm.open.core.facade.model.param.pf.system.org.SysOrgRegParam;
 import com.sm.open.core.facade.model.result.pf.system.org.SysOrgResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
@@ -47,4 +48,9 @@ public class OrgClient {
     public CommonResult<SysOrgResult> selectOrgInfoById(Long idOrg) {
         return pfOrgFacade.selectOrgInfoById(idOrg);
     }
+
+    public CommonResult<Boolean> activeOrg(SysOrgRegParam param) {
+        return pfOrgFacade.activeOrg(param);
+    }
+
 }

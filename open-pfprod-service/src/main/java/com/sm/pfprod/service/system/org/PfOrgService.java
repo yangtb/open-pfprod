@@ -3,6 +3,7 @@ package com.sm.pfprod.service.system.org;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.dto.system.org.PfOrgDto;
 import com.sm.pfprod.model.entity.SysOrg;
+import com.sm.pfprod.model.entity.SysOrgReg;
 import com.sm.pfprod.model.result.PageResult;
 
 import java.util.List;
@@ -71,4 +72,14 @@ public interface PfOrgService {
      * @return
      */
     SysOrg selectOrgInfoById(Long idOrg);
+
+    /**
+     * 申请激活
+     *
+     * @param dto
+     * @return
+     */
+    boolean activeOrg(SysOrgReg dto);
+
+
 }
