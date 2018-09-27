@@ -14,6 +14,7 @@
         var basePath = '${basePath}';
         var contextPath = '${contextPath}';
         var formType = '${formType}';
+        var orgData = '$!{orgInfo}';
     </script>
 </head>
 
@@ -24,10 +25,25 @@
             <input name="idOrg" hidden>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">机构名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
-            <div class="layui-input-block">
-                <input type="text" name="name" autocomplete="off" class="layui-input"
-                       placeholder="请输入机构名称" lay-verify="required|name" lay-vertype="tips">
+            <div class="layui-inline">
+                <label class="layui-form-label">机构名称<i class="iconfont icon-required"
+                                                       style="color: #f03f2d"></i></label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" autocomplete="off" class="layui-input"
+                           placeholder="请输入机构名称" lay-verify="required|name" lay-vertype="tips"
+                    style="width: 520px">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">机构类型<i class="iconfont icon-required"
+                                                       style="color: #f03f2d"></i></label>
+                <div class="layui-input-inline">
+                    <select name="fgPlat" id="fgPlat" lay-verify="required" lay-vertype="tips">
+                        <option value="">请选择</option>
+                        <option value="0" selected>机构</option>
+                        <option value="1">平台</option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -62,18 +78,28 @@
                            lay-verify="e_mail" lay-vertype="tips">
                 </div>
             </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">激活<i class="iconfont icon-required"
+                                                     style="color: #f03f2d"></i></label>
+                <div class="layui-input-block">
+                    <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
+                           lay-filter="fgActiveSwitch" value="1" lay-text="已激活|未激活">
+                </div>
+            </div>
         </div>
 
         <div class="layui-form-item form-item-my">
             <div class="layui-inline">
-                <label class="layui-form-label">机构类型<i class="iconfont icon-required"
-                                                       style="color: #f03f2d"></i></label>
+                <label class="layui-form-label">创建人</label>
                 <div class="layui-input-inline">
-                    <select name="fgPlat" id="fgPlat" lay-verify="required" lay-vertype="tips">
-                        <option value="">请选择</option>
-                        <option value="0" selected>机构</option>
-                        <option value="1">平台</option>
-                    </select>
+                    <input type="text" name="creator" autocomplete="off" class="layui-input layui-disabled" disabled>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">排序</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="sort" autocomplete="off" class="layui-input"
+                           lay-verify="sort" lay-vertype="tips">
                 </div>
             </div>
             <div class="layui-inline">
@@ -87,18 +113,21 @@
 
         <div class="layui-form-item form-item-my">
             <div class="layui-inline">
-                <label class="layui-form-label">排序</label>
+                <label class="layui-form-label">创建时间</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="sort" autocomplete="off" class="layui-input"
-                           lay-verify="sort" lay-vertype="tips">
+                    <input type="text" name="gmtCreate" autocomplete="off" class="layui-input layui-disabled" disabled>
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">是否认证<i class="iconfont icon-required"
-                                                       style="color: #f03f2d"></i></label>
-                <div class="layui-input-block">
-                    <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
-                           lay-filter="fgActiveSwitch" value="1" lay-text="已认证|未认证">
+                <label class="layui-form-label">修改人</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="operator" autocomplete="off" class="layui-input layui-disabled" disabled>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">修改时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="gmtModify" autocomplete="off" class="layui-input layui-disabled" disabled>
                 </div>
             </div>
         </div>
@@ -109,6 +138,17 @@
                 <button class="layui-btn" lay-submit="" lay-filter="addOrg">
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
+                #if($!{fgActive} == '0')
+                    <button class="layui-btn layui-btn-warm" lay-submit="" lay-filter="activeOrg">
+                        <i class="iconfont icon-jihuo"></i> 激活
+                    </button>
+                #end
+                #if($!{renewFlag} == 'true')
+                    <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="renewOrg">
+                        <i class="iconfont icon-xuqitianshu"></i> 续期
+                    </button>
+                #end
+
                 #if(${formType} == 'add')
                     <button type="reset" class="layui-btn layui-btn-danger">
                         <i class="iconfont icon-reset"></i> 重置
@@ -123,6 +163,7 @@
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 <script src="${contextPath}/public/biz/js/orgFormController.js"></script>
+<script src="${contextPath}/public/common/js/moment.js"></script>
 <script>
     function fullForm(data) {
         $(document).ready(function(){
@@ -130,9 +171,19 @@
             layui.use('form',function(){
                 layui.form.render();
             });
-
         });
-    }
+    };
+
+    $(function(){
+        if (orgData) {
+            var formData = eval('(' + orgData + ')')
+            formData.gmtValid = moment(formData.gmtValid).format('YYYY-MM-DD');
+            formData.gmtCreate = moment(formData.gmtCreate).format('YYYY-MM-DD HH:mm:ss');
+            formData.gmtModify = moment(formData.gmtModify).format('YYYY-MM-DD HH:mm:ss');
+            fullForm(formData);
+        }
+    });
+
 </script>
 
 </body>

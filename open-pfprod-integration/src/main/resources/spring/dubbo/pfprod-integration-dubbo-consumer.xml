@@ -5,7 +5,10 @@
 	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <dubbo:consumer check="false" timeout="${dubbo.timeout}" />
-    
+
+    <!-- 首页服务 -->
+    <dubbo:reference id="pfHomeFacade" interface="com.sm.open.core.facade.pf.home.PfHomeFacade"/>
+
     <!-- 资媒服务 -->
     <dubbo:reference id="pfMediaFacade" interface="com.sm.open.core.facade.pf.biz.media.PfMediaFacade"/>
 

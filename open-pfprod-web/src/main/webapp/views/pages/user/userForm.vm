@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+    <link rel="stylesheet" href="${contextPath}/public/layui/expand/css/formSelects-v4.css"></script>
 
     <script>
         var formType = '${formType}';
@@ -38,9 +39,10 @@
             <div class="layui-inline">
                 <label class="layui-form-label">所属机构</label>
                 <div class="layui-input-inline">
-                    <select name="idOrg" lay-verify="required">
-                        <option value="1">超级管理员</option>
-                        <option value="2" selected="">普通用户</option>
+                    <select name="idOrg" xm-select="example9_1" xm-select-radio="">
+                        #foreach($element in $allOrg)
+                            <option value="$element.idOrg" data-flag="$element.fgActive">$element.name</option>
+                        #end
                     </select>
                 </div>
             </div>
@@ -96,7 +98,7 @@
                                                      style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
                     <select name="sex" lay-verify="required">
-                        <option value="0" >未选择</option>
+                        <option value="0">未选择</option>
                         <option value="1" selected="">男</option>
                         <option value="2">女</option>
                     </select>
@@ -145,7 +147,8 @@
     </form>
 </div>
 
-<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
+<script src="${contextPath}/public/layui/expand/formSelects-v4.js" type="text/javascript" charset="utf-8"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
@@ -166,6 +169,13 @@
     $(function () {
         var registerController = new RegisterController();
         registerController.init(publicKey);
+    });
+
+    layui.formSelects.btns('example9_1', []);
+    layui.formSelects.render('example9_1', {
+        template: function(name, value, selected, disabled){
+            return name + '<i class=\'iconfont icon-yirenzheng\' style=\'color: #f03f2d\'></i>';
+        }
     });
 </script>
 

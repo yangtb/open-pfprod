@@ -3,6 +3,7 @@ package com.sm.pfprod.web.portal.user.login;
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.service.system.org.PfOrgService;
 import com.sm.pfprod.service.user.login.PfUserService;
 import com.sm.pfprod.service.user.role.PfRoleService;
 import com.sm.pfprod.web.portal.BaseController;
@@ -31,6 +32,9 @@ public class PfUserController extends BaseController {
     @Resource
     private PfRoleService pfRoleService;
 
+    @Resource
+    private PfOrgService pfOrgService;
+
     @Resource(name = "rsaKeyPairQueue")
     private RsaKeyPairQueue rsaKeyPairQueue;
 
@@ -58,10 +62,12 @@ public class PfUserController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_USER_MG','ROLE_SUPER')")
     @RequestMapping("/page")
-    public String page() {
+    public String page(Model model) {
+        model.addAttribute("orgMap", pfOrgService.listAllOrgMap());
         return "pages/user/user";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_MODIFY_PASS','ROLE_SUPER')")
     @RequestMapping("/modifyPass")
     public String modifyPass(Model model, HttpServletRequest request) {
         RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
@@ -82,7 +88,7 @@ public class PfUserController extends BaseController {
             model.addAttribute("roles", pfRoleService.list());
         }
         // 机构处理
-
+        model.addAttribute("allOrg", pfOrgService.listAllOrg());
         return "pages/user/userForm";
     }
 

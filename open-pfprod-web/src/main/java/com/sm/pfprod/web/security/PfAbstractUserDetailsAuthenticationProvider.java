@@ -193,7 +193,7 @@ public abstract class PfAbstractUserDetailsAuthenticationProvider implements Aut
             if (!user.isAccountNonLocked()) {
                 logger.debug("用户账户被锁定");
                 throw new LockedException(messages.getMessage(
-                        "PfAbstractUserDetailsAuthenticationProvider.locked", "用户账户被锁定"));
+                        "PfAbstractUserDetailsAuthenticationProvider.locked", "用户账户暂被锁定"));
             }
             if (!user.isEnabled()) {
                 logger.debug("用户账户已注销或停用");

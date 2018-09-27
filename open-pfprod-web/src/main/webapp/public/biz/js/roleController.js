@@ -28,7 +28,7 @@ layui.config({
         ]] //设置表头
         , url: 'list'
         , limit: 15
-        , even: true
+        //, even: true
         , limits: [15, 30, 100]
         , page: true
         , where: {

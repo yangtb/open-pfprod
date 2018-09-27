@@ -56,7 +56,7 @@ public class PfOrgRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_ORG_EDIT','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_ORG_EDIT','ROLE_ORG_DETAIL','ROLE_SUPER')")
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject editOrg(@RequestBody SysOrg dto) {

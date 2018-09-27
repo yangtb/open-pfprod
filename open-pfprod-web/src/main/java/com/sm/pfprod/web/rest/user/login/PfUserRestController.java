@@ -171,7 +171,7 @@ public class PfUserRestController extends BaseController {
 
     @RequestMapping(value = "/register/add", method = RequestMethod.POST)
     @ResponseBody
-    public ResultObject registerUser(@RequestBody UserRegisterDto dto) {
+    public ResultObject registerUser(HttpServletRequest request, @RequestBody UserRegisterDto dto) {
         /* 参数校验 */
         Assert.isTrue(StringUtils.isNotBlank(dto.getEmail()), "email");
         Assert.isTrue(StringUtils.isNotBlank(dto.getEmailVercode()), "emailVercode");
@@ -179,6 +179,11 @@ public class PfUserRestController extends BaseController {
         Assert.isTrue(StringUtils.isNotBlank(dto.getPassword()), "password");
         Assert.isTrue(StringUtils.isNotBlank(dto.getPhone()), "phone");
         Assert.isTrue(StringUtils.isNotBlank(dto.getUsername()), "orgName");
+
+        RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
+        // 密码转化为明文
+        String plainPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getPassword());
+        dto.setPassword(plainPsw);
         return ResultObject.createSuccess("registerUser", ResultObject.DATA_TYPE_OBJECT,
                 pfUserService.registerUser(dto));
     }

@@ -24,13 +24,13 @@ layui.config({
             {field: 'email', width: 160, title: '邮箱'},
             {field: 'enabled', width: 70, title: '状态', templet: '#enabledTpl'},
             //{field: 'enabled', title:'状态', width:100, templet: '#switchTpl', unresize: true},
-            {
+            /*{
                 field: 'role_type',
                 width: 110,
                 title: '账户类型',
                 style: 'background-color: #5FB878; color: #fff;',
                 templet: '#roleTypeTpl'
-            },
+            },*/
             {field: 'gmt_create', width: 170, sort: true, title: '创建时间'},
             {field: 'gmt_modify', width: 170, sort: true, title: '修改时间'},
             {field: 'operator', width: 100, title: '操作人员'},

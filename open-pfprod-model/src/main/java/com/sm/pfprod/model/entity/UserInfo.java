@@ -30,6 +30,7 @@ public class UserInfo implements Serializable {
     private String      realName;       // 真实姓名
     private int         sex;            // 性别
     private String      remark;         // 备注
+    private Long        idOrg;          // 机构ID
     private Date        lastLoginTime;  // 最后登录时间
     private String      isDeleted;      // 删除标示，N未删除 Y-已删除
     private String      operator;       // 操作人员

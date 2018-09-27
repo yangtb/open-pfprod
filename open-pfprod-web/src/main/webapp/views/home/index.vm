@@ -5,14 +5,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="${basePath}/public/biz/img/logo/favicon.ico" rel="shortcut icon">
-    <title>${websiteName}</title>
+    <title>${homeInfo.websiteName}</title>
     <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
     <link rel="stylesheet" href="${contextPath}/public/layui/build/css/app.css" media="all">
     <link rel="stylesheet" href="${contextPath}/public/layui/build/css/themes/default.css" media="all" id="skin" kit-skin/>
     <script>
         var basePath = '${basePath}';
-        var isAnonymousUser='${isAnonymousUser}';
+        var isAnonymousUser='${homeInfo.anonymousUser}';
+        var fgActive= '$!{homeInfo.sysOrg.getFgActive()}';
+        var gmtValid = '$!{homeInfo.sysOrg.getGmtValid()}';
     </script>
 </head>
 
@@ -20,13 +22,13 @@
 <div class="layui-layout layui-layout-admin kit-layout-admin">
     <div class="layui-header">
         <div class="layui-logo" style="font-size:16px">
-            <i class="iconfont icon-yunpingtai"></i> ${websiteName}
+            <i class="iconfont icon-yunpingtai"></i> ${homeInfo.websiteName}
         </div>
-        <div class="layui-logo kit-logo-mobile">S</div>
+        <div class="layui-logo kit-logo-mobile">M</div>
 
         <ul class="layui-nav layui-layout-left kit-nav">
-            #if(!$topMenus.isEmpty())
-                #foreach($element in $topMenus)
+            #if(!$homeInfo.topMenus.isEmpty())
+                #foreach($element in $homeInfo.topMenus)
                     <li class="layui-nav-item">
                         <a href="javascript:;"
                            #if($element.groupList.isEmpty()) kit-target data-id='$!element.parentMenuId'
@@ -74,24 +76,29 @@
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a href="">
-                    <i class="iconfont icon-message"></i>消息<span class="layui-badge">9</span>
+                <a href="javascript:;">
+                    <i class="iconfont icon-message"></i>消息<span class="layui-badge">9</span></span>
                 </a>
             </li>
             <li class="layui-nav-item">
-                <a rel="full_screen">
-                    <i class="iconfont icon-quanping2"></i> 全屏
-                </a>
+                <a href="javascript:;"><i class="iconfont icon-quanping2"></i> 全屏</a>
             </li>
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="${basePath}/public/biz/img/0.jpg" class="layui-nav-img">$!username
+                    <img src="${basePath}/public/biz/img/0.jpg" class="layui-nav-img">$!homeInfo.username
                 </a>
-                #if(${isAnonymousUser} == false)
+                #if(${homeInfo.anonymousUser} == false)
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" kit-target
-                               data-options="{url:'${basePath}/user/userDetail',icon:'icon-wodeziliao',title:'基本资料',id:'9999'}">
+                               data-options="{url:'${basePath}/user/userDetail',icon:'icon-wodeziliao',title:'基本资料',id:'jbzl'}">
                             <i class="iconfont icon-wodeziliao"></i><span> 基本资料</span></a></dd>
+                        #if(${homeInfo.sysOrg})
+                            <dd>
+                                <a id="orgInfo" href="javascript:;" kit-target
+                                   data-options="{url:'${basePath}/pf/p/org/form?formType=edit&idOrg=$!{homeInfo.sysOrg.idOrg}',icon:'icon-organization',title:'机构资料',id:'jgzl'}">
+                                <i class="iconfont icon-organization"></i><span> 机构资料</span></a>
+                            </dd>
+                        #end
                         <dd id="modifyPass"><a href="javascript:;" data-title="修改密码">
                             <i class="iconfont icon-modifyPass"></i><span> 修改密码</span></a></dd>
                     </dl>
@@ -108,8 +115,8 @@
             <div class="kit-side-fold"><i class="iconfont icon-fold" aria-hidden="true"></i></div>
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
-                #if(!$leftMenus.isEmpty())
-                    #foreach($element in $leftMenus)
+                #if(!$homeInfo.leftMenus.isEmpty())
+                    #foreach($element in $homeInfo.leftMenus)
                     <li class="layui-nav-item #if(${velocityCount}==1)layui-nav-itemed#end">
                         <a href="javascript:;"
                             #if($element.groupList.isEmpty()) kit-target data-id='$!element.parentMenuId'
@@ -145,12 +152,12 @@
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        ${websiteCopyright}<a href="">(推荐使用IE9+,Firefox、Chrome 浏览器访问)</a>
+        ${homeInfo.websiteCopyright}<a href="">(推荐使用IE9+,Firefox、Chrome 浏览器访问)</a>
     </div>
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
-<script src="${contextPath}/public/common/js/jquery.min.js"></script>
+<script src="${contextPath}/public/common/js/moment.js"></script>
 <script src="${contextPath}/public/biz/js/indexController.js"></script>
 
 </body>

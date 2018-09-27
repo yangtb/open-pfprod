@@ -36,7 +36,7 @@ layui.config({
         var bizData = {};
         bizData.email = v_email;
         bizData.photoVercode = v_photoVercode;
-
+        var index = layer.msg('加载中', {icon: 16, time: 0});
         $.ajax({
             url: url,
             type: 'post',
@@ -44,6 +44,7 @@ layui.config({
             contentType: "application/json",
             data: JSON.stringify(bizData),
             success: function (data) {
+                layer.close(index);
                 if (data.code == 'photoVcodeError') {
                     $('#vercodeImage').attr("src", basePath + "/login/verificationCode" + "?d=" + new Date().getTime());
                     $('#photoVercode').focus();
@@ -60,6 +61,7 @@ layui.config({
                 }
             },
             error: function () {
+                layer.close(index);
                 common.errorMsg("邮件发送失败！请联系管理员");
                 return false;
             }
@@ -111,7 +113,7 @@ layui.config({
                     common.errorMsg(data.msg);
                     return false;
                 } else {
-                    layer.confirm('注册成功，我们将尽快审核并联系您，请您耐心等待！', {
+                    layer.confirm('注册成功，请尽快登录平台激活！', {
                         btn: ['知道了'] //按钮
                     }, function () {
                         if (window != top) {

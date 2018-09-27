@@ -5,6 +5,9 @@ import com.sm.pfprod.model.dto.system.org.PfOrgDto;
 import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.result.PageResult;
 
+import java.util.List;
+import java.util.Map;
+
 public interface PfOrgService {
 
     /**
@@ -14,6 +17,20 @@ public interface PfOrgService {
      * @return
      */
     PageResult listOrgs(PfOrgDto dto);
+
+    /**
+     * 查询所有机构
+     *
+     * @return
+     */
+    List<SysOrg> listAllOrg();
+
+    /**
+     * 查询所有机构
+     *
+     * @return Map
+     */
+    Map<Long, String> listAllOrgMap();
 
     /**
      * 新增机构
@@ -46,4 +63,12 @@ public interface PfOrgService {
      * @return
      */
     boolean authOrg(PfBachChangeStatusDto dto);
+
+    /**
+     * 根据id查询机构信息
+     *
+     * @param idOrg 机构id
+     * @return
+     */
+    SysOrg selectOrgInfoById(Long idOrg);
 }

@@ -17,7 +17,7 @@ layui.config({
         , height: 'full-68' //容器高度
         , cols: [[
             {checkbox: true, fixed: true},
-            {field: 'fgActive', width: 105, title: '认证状态', fixed: true, templet: '#fgActiveTpl'},
+            {field: 'fgActive', width: 60, title: '激活', fixed: true, templet: '#fgActiveIconTpl'},
             {field: 'name', width: 180, title: '机构名称', fixed: true},
             {field: 'gmtValid', width: 120, title: '有效期', templet: '#gmtValidTpl'},
             {field: 'phone', width: 150, title: '联系电话'},
@@ -83,9 +83,11 @@ layui.config({
 
     var _addOrEdit = function (formType, currentEditData) {
         if (formType == 'add') {
-            common.open('新增机构', 'form?formType=' + formType + '&orgType=sms', 700, 460);
+            var index = common.open('新增机构', 'form?formType=' + formType, 990, 460);
+            layer.full(index);
         } else {
-            common.open('编辑机构', 'form?formType=' + formType + '&orgType=' + currentEditData.orgType, 700, 460, _successFunction(currentEditData));
+            var index = common.open('编辑机构', 'form?formType=' + formType, 990, 460, _successFunction(currentEditData));
+            layer.full(index);
         }
     };
 

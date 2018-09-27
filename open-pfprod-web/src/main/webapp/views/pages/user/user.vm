@@ -58,8 +58,9 @@
         <div class="layui-input-inline">
             <select name="idOrg">
                 <option value="">所属机构</option>
-                <option value="sms">短信</option>
-                <option value="email">邮件</option>
+                #foreach($param in ${orgMap.keySet()})
+                    <option value="$param">${orgMap.get($param)}</option>
+                #end
             </select>
         </div>
         <div class="layui-inline">

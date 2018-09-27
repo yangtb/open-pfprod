@@ -68,10 +68,11 @@
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">菜单位置<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                <label class="layui-form-label">菜单位置</label>
                 <div class="layui-input-inline">
-                    <select name="position" lay-verify="required" lay-vertype="tips">
-                        <option value="left" selected>左侧</option>
+                    <select name="position">
+                        <option value="">未选择</option>
+                        <option value="left">左侧</option>
                         <option value="top">顶部</option>
                     </select>
                 </div>

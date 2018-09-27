@@ -50,13 +50,41 @@ layui.config({
     });
 
     $("#modifyPass").on('click', function () {
-        common.open('<i class="iconfont icon-modifyPass"></i>' + ' 修改密码', basePath + '/pf/p/user/modifyPass', 500, 280, null, '1');
+        common.open('<i class="iconfont icon-modifyPass"></i>' + ' 修改密码', basePath + '/pf/p/user/modifyPass', 450, 280, null, '1');
     });
 
     var url = basePath + '/openplatformlogout';
     $('#logout').on('click', function () {
         common.logOut('退出登录提示！', '你真的确定要退出系统吗？', url)
     })
+
+    if (fgActive == '0') {
+        $('#orgInfo').click();
+    } else {
+        if (moment(gmtValid).isBefore(moment().add(31, 'days').calendar())) {
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.8
+                ,id: 'notice_org_expired' //设定一个id，防止重复弹出
+                ,btn: ['火速续期', '残忍拒绝']
+                ,btnAlign: 'c'
+                ,moveType: 1 //拖拽模式，0或者1
+                ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">' +
+                    '尊敬的用户：<br><br>' +
+                    '您的平台试用将于' +moment(gmtValid).format('YYYY月MM月DD日') +'到期！<br><br>' +
+                    '为了不影响您的使用，请您尽快申请续期 ^_^</div>'
+                ,success: function(layero){
+                    //var btn = layero.find('.layui-layer-btn');
+                    $('.layui-layer-btn0').on('click', function () {
+                        $('#orgInfo').click();
+                    })
+                }
+            });
+        }
+    }
 
     if (isAnonymousUser == 'true') {
         layer.msg('您当前已进入游客模式！', {
@@ -72,6 +100,6 @@ layui.config({
                 }
             }
         });
-    }
+    };
 
 });

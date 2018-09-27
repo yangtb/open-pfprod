@@ -10,7 +10,7 @@ import java.util.List;
 
 @Setter
 @Getter
-@ToString
+@ToString(exclude = {"password"})
 public class RegisterDto implements Serializable {
 
     private static final long serialVersionUID = -6354572733503100572L;

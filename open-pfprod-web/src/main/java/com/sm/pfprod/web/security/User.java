@@ -1,6 +1,5 @@
 package com.sm.pfprod.web.security;
 
-import com.alibaba.fastjson.JSON;
 
 import java.io.Serializable;
 
@@ -11,6 +10,7 @@ import java.io.Serializable;
  * @Date 2017/9/2 22:54
  */
 public class User implements Serializable {
+
 	private static final long serialVersionUID = 6427496640721395199L;
 
 	/** 对应数据库的主键id */
@@ -30,6 +30,9 @@ public class User implements Serializable {
 	
 	/** 是否启用,1启用 0停用； */
 	private boolean enabled;
+
+	/** 当前用户所在机构id */
+	private Long idOrg;
 	
 	/** 用户头像 */
 	private String headPhoto;
@@ -45,11 +48,7 @@ public class User implements Serializable {
 	
 	/** 当前的终端类型：ANDROID:1；IOS:2；PC_BROWSER:3；服务器(SERVER):4；QQ:7；支付宝:8；微信:9；其他:6。 */
 	private Integer terminalType;
-	
-	public User(){
-		
-	}
-	
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -98,6 +97,14 @@ public class User implements Serializable {
 		this.enabled = enabled;
 	}
 
+	public Long getIdOrg() {
+		return idOrg;
+	}
+
+	public void setIdOrg(Long idOrg) {
+		this.idOrg = idOrg;
+	}
+
 	public String getHeadPhoto() {
 		return headPhoto;
 	}
@@ -137,10 +144,4 @@ public class User implements Serializable {
 	public void setTerminalType(Integer terminalType) {
 		this.terminalType = terminalType;
 	}
-
-	@Override
-	public String toString() {
-		return JSON.toJSONString(this);
-	}
-	
 }

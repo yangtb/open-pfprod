@@ -86,9 +86,7 @@ layui.config({
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
                     //刷新父页面table
-                    if (formType == 'edit') {
-                        parent.layui.common.refreshCurrentPage();
-                    } else {
+                    if (parent.layui) {
                         parent.layui.common.refreshCurrentPage();
                     }
                     return true;

@@ -1,6 +1,10 @@
 package com.sm.pfprod.web.portal.system.org;
 
+import com.alibaba.fastjson.JSON;
+import com.sm.open.care.core.enums.YesOrNoNum;
+import com.sm.open.care.core.utils.DateUtil;
 import com.sm.pfprod.model.dto.system.org.PfOrgDto;
+import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.system.org.PfOrgService;
 import com.sm.pfprod.web.portal.BaseController;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * @ClassName: PfOrgController
@@ -31,10 +36,19 @@ public class PfOrgController extends BaseController {
         return "pages/system/org/org";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ORG_MG','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_ORG_MG', 'ROLE_ORG_DETAIL', 'ROLE_SUPER')")
     @RequestMapping("/form")
-    public String form(String formType, Model model) {
+    public String form(String formType, Long idOrg, Model model) {
         model.addAttribute("formType", formType);
+        if (idOrg != null) {
+            SysOrg sysOrg = pfOrgService.selectOrgInfoById(idOrg);
+            model.addAttribute("orgInfo", JSON.toJSONString(sysOrg));
+            model.addAttribute("fgActive", sysOrg.getFgActive());
+            if (sysOrg.getFgActive().equals(YesOrNoNum.YES.getCode())) {
+                Date gmtValid = DateUtil.parseDate(sysOrg.getGmtValid());
+                model.addAttribute("renewFlag", gmtValid.before(DateUtil.addDate(gmtValid, 31)));
+            }
+        }
         return "pages/system/org/orgForm";
     }
 
