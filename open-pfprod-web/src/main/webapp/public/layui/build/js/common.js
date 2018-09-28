@@ -90,6 +90,43 @@ layui.define(['layer'], function (exports) {
             return false;
         },
 
+        commonParentFormPost: function (url, bizData, formType, tableId, msg) {
+            layer.load(1);
+            $.ajax({
+                url: url,
+                type: 'post',
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(bizData),
+                success: function (data) {
+                    layer.closeAll('loading');
+                    if (data.code != 0) {
+                        common.errorMsg(data.msg);
+                        return false;
+                    } else {
+                        common.sucMsg(msg + "成功");
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                        //刷新父页面table
+                        if (formType == 'edit') {
+                            parent.layui.common.refreshCurrentPage();
+                        } else {
+                            parent.layui.table.reload(tableId, {
+                                height: 'full-68'
+                            });
+                        }
+                        return true;
+                    }
+                },
+                error: function () {
+                    layer.closeAll('loading');
+                    common.errorMsg(msg + "失败");
+                    return false;
+                }
+            });
+            return false;
+        },
+
         /**退出*/
         logOut: function (title, text, url, type, dataType, data, callback) {
             parent.layer.confirm(text, {
