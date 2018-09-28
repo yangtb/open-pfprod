@@ -24,6 +24,7 @@ layui.config({
         }
 
         var url = basePath + "/pf/r/user/updatePsw";
+        layer.load(1);
         $.ajax({
             url: url,
             type: 'post',
@@ -31,6 +32,7 @@ layui.config({
             contentType: "application/json",
             data: JSON.stringify(data.field),
             success: function (data) {
+                layer.closeAll('loading');
                 if (data.code != 0) {
                     common.errorMsg(data.msg);
                     return false;
@@ -42,6 +44,7 @@ layui.config({
                 }
             },
             error: function () {
+                layer.closeAll('loading');
                 common.errorMsg("修改密码失败");
                 return false;
             }

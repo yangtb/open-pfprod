@@ -64,6 +64,7 @@ layui.define(['layer'], function (exports) {
         },
 
         commonPost: function (url, bizData, msg) {
+            layer.load(1);
             $.ajax({
                 url: url,
                 type: 'post',
@@ -71,6 +72,7 @@ layui.define(['layer'], function (exports) {
                 contentType: "application/json",
                 data: JSON.stringify(bizData),
                 success: function (data) {
+                    layer.closeAll('loading');
                     if (data.code != 0) {
                         common.errorMsg(data.msg);
                         return false;
@@ -80,6 +82,7 @@ layui.define(['layer'], function (exports) {
                     }
                 },
                 error: function () {
+                    layer.closeAll('loading');
                     common.errorMsg(msg + "失败");
                     return false;
                 }

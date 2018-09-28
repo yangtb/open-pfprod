@@ -124,6 +124,7 @@ layui.config({
         } else {
             data.status = '0';
         }
+        layer.load(1);
         $.ajax({
             url: basePath + '/pf/r/org/auth',
             type: 'post',
@@ -131,6 +132,7 @@ layui.config({
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function (data) {
+                layer.closeAll('loading');
                 if (data.code != 0) {
                     layer.tips(data.msg, obj.othis);
                     return false;
@@ -140,6 +142,7 @@ layui.config({
                 }
             },
             error: function () {
+                layer.closeAll('loading');
                 layer.tips("修改失败", obj.othis);
                 return false;
             }
@@ -182,6 +185,7 @@ layui.config({
     }
 
     var _commonAjax = function (index, url, reqData, msg) {
+        layer.load(1);
         $.ajax({
             url: url,
             type: 'post',
@@ -189,6 +193,7 @@ layui.config({
             contentType: "application/json",
             data: JSON.stringify(reqData),
             success: function (data) {
+                layer.closeAll('loading');
                 if (data.code != 0) {
                     common.errorMsg(data.msg);
                     return false;
@@ -202,6 +207,7 @@ layui.config({
                 }
             },
             error: function () {
+                layer.closeAll('loading');
                 common.errorMsg(msg + "失败");
                 return false;
             }

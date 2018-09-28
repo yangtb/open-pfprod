@@ -133,6 +133,7 @@ layui.config({
     });
 
     var _cancelRole = function (index, reqData, msg) {
+        layer.load(1);
         $.ajax({
             url: basePath + '/pf/r/role/cancel',
             type: 'post',
@@ -140,6 +141,7 @@ layui.config({
             contentType: "application/json",
             data: JSON.stringify(reqData),
             success: function (data) {
+                layer.closeAll('loading');
                 if (data.code != 0) {
                     common.errorMsg(data.msg);
                     return false;
@@ -153,6 +155,7 @@ layui.config({
                 }
             },
             error: function () {
+                layer.closeAll('loading');
                 common.errorMsg(msg + "失败");
                 return false;
             }
@@ -191,6 +194,7 @@ layui.config({
     });
 
     var _delRole = function (index, reqData) {
+        layer.load(1);
         $.ajax({
             url: basePath + '/pf/r/role/del',
             type: 'post',
@@ -198,6 +202,7 @@ layui.config({
             contentType: "application/json",
             data: JSON.stringify(reqData),
             success: function (data) {
+                layer.closeAll('loading');
                 if (data.code != 0) {
                     common.errorMsg(data.msg);
                     return false;
@@ -209,6 +214,7 @@ layui.config({
                 }
             },
             error: function () {
+                layer.closeAll('loading');
                 common.errorMsg("删除失败");
                 return false;
             }
@@ -239,6 +245,7 @@ layui.config({
     var _queryRoleZtree = function (roleId) {
         zTreeRoleId = roleId;
         var reqData = {roleId: roleId}
+        layer.load(1);
         $.ajax({
             url: basePath + '/pf/r/role/list/role/tree',
             type: 'post',
@@ -246,6 +253,7 @@ layui.config({
             contentType: "application/json",
             data: JSON.stringify(reqData),
             success: function (data) {
+                layer.closeAll('loading');
                 if (data.code != 0) {
                     return false;
                 } else {
@@ -255,6 +263,7 @@ layui.config({
                 }
             },
             error: function () {
+                layer.closeAll('loading');
                 return false;
             }
         });
@@ -275,6 +284,7 @@ layui.config({
     });
 
     var _saveRoleMenu = function (reqData) {
+        layer.load(1);
         $.ajax({
             url: basePath + '/pf/r/role/save/roleMenu',
             type: 'post',
@@ -282,6 +292,7 @@ layui.config({
             contentType: "application/json",
             data: JSON.stringify(reqData),
             success: function (data) {
+                layer.closeAll('loading');
                 if (data.code != 0) {
                     common.errorMsg(data.msg);
                     return false;
@@ -291,6 +302,7 @@ layui.config({
                 }
             },
             error: function () {
+                layer.closeAll('loading');
                 common.errorMsg("保存失败");
                 return false;
             }
@@ -338,12 +350,14 @@ layui.config({
     var zNodes = [];
 
     $(document).ready(function () {
+        layer.load(1);
         $.ajax({
             url: basePath + '/pf/r/role/list/tree',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",
             success: function (data) {
+                layer.closeAll('loading');
                 if (data.code != 0) {
                     return false;
                 } else {
@@ -353,6 +367,7 @@ layui.config({
                 }
             },
             error: function () {
+                layer.closeAll('loading');
                 return false;
             }
         });
