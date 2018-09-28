@@ -37,4 +37,14 @@ public class RegisterDto implements Serializable {
      */
     private Long        idOrg;
 
+    /**
+     * 当前登陆用户机构id
+     */
+    private Long currentUserOrgId;
+
+    /**
+     * 平台或超级管理员用户
+     */
+    private boolean platOrSuper;
+
 }

@@ -68,7 +68,7 @@ public class PfUserRestController extends BaseController {
 
         User user = SecurityContext.currentUser();
         dto.setOperator(user.getUsername());
-        if (!SysUserAuthUtils.isPlatOrSuper() && dto.getIdOrg().equals(user.getIdOrg())) {
+        if (!SysUserAuthUtils.isPlatOrSuper() && !dto.getIdOrg().equals(user.getIdOrg())) {
             throw new BizRuntimeException(ErrorCode.USER_AUTH_EXCEPTION, ErrorMessage.USER_AUTH_EXCEPTION_MSG);
         }
 
@@ -97,7 +97,7 @@ public class PfUserRestController extends BaseController {
 
         User user = SecurityContext.currentUser();
         dto.setOperator(user.getUsername());
-        if (!SysUserAuthUtils.isPlatOrSuper() && dto.getIdOrg().equals(user.getIdOrg())) {
+        if (!SysUserAuthUtils.isPlatOrSuper() && !dto.getIdOrg().equals(user.getIdOrg())) {
             throw new BizRuntimeException(ErrorCode.USER_AUTH_EXCEPTION, ErrorMessage.USER_AUTH_EXCEPTION_MSG);
         }
         return ResultObject.create("updateUser", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
@@ -116,8 +116,10 @@ public class PfUserRestController extends BaseController {
     public ResultObject freezeUser(@RequestBody PfCommonListDto dto) {
         /* 参数校验 */
         Assert.isTrue(dto != null || CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        dto.setCurrentUserOrgId(SecurityContext.currentUser().getIdOrg());
+        dto.setPlatOrSuper(SysUserAuthUtils.isPlatOrSuper());
         return ResultObject.create("freezeUser", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
-                ResultObject.DATA_TYPE_OBJECT, pfUserService.freezeUser(dto.getList()));
+                ResultObject.DATA_TYPE_OBJECT, pfUserService.freezeUser(dto));
     }
 
     /**
@@ -132,8 +134,10 @@ public class PfUserRestController extends BaseController {
     public ResultObject delUser(@RequestBody PfCommonListDto dto) {
         /* 参数校验 */
         Assert.isTrue(dto != null || CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        dto.setCurrentUserOrgId(SecurityContext.currentUser().getIdOrg());
+        dto.setPlatOrSuper(SysUserAuthUtils.isPlatOrSuper());
         return ResultObject.create("delUser", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
-                ResultObject.DATA_TYPE_OBJECT, pfUserService.delUser(dto.getList()));
+                ResultObject.DATA_TYPE_OBJECT, pfUserService.delUser(dto));
     }
 
     /**
@@ -176,6 +180,7 @@ public class PfUserRestController extends BaseController {
     public ResultObject resetPsw(HttpServletRequest request, @RequestBody RegisterDto dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getPassword() != null, "password");
+        dto.setPlatOrSuper(SysUserAuthUtils.isPlatOrSuper());
         RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
         // 密码转化为明文
         String plainPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getPassword());

@@ -1,5 +1,6 @@
 package com.sm.pfprod.integration.user.login;
 
+import com.sm.open.core.facade.model.param.pf.common.PfCommonListParam;
 import com.sm.open.core.facade.model.param.pf.user.PfUserParam;
 import com.sm.open.core.facade.model.param.pf.user.login.RegisterParam;
 import com.sm.open.core.facade.model.param.pf.user.login.UpdatePswParam;
@@ -36,13 +37,13 @@ public class LoginClient {
         return pfUserFacade.updateUser(param);
     }
 
-    public CommonResult<Boolean> delUser(List<Long> users) {
-        return pfUserFacade.delUser(users);
+    public CommonResult<Boolean> delUser(PfCommonListParam param) {
+        return pfUserFacade.delUser(param);
     }
 
 
-    public CommonResult<Boolean> freezeUser(List<Long> users) {
-        return pfUserFacade.freezeUser(users);
+    public CommonResult<Boolean> freezeUser(PfCommonListParam param) {
+        return pfUserFacade.freezeUser(param);
     }
 
 

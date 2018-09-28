@@ -2,6 +2,7 @@ package com.sm.pfprod.service.user.login.impl;
 
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
+import com.sm.open.core.facade.model.param.pf.common.PfCommonListParam;
 import com.sm.open.core.facade.model.param.pf.user.PfUserParam;
 import com.sm.open.core.facade.model.param.pf.user.login.RegisterParam;
 import com.sm.open.core.facade.model.param.pf.user.login.UpdatePswParam;
@@ -11,6 +12,7 @@ import com.sm.open.core.facade.model.result.pf.user.login.PfUsersResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.user.login.LoginClient;
+import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
 import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
@@ -57,8 +59,8 @@ public class PfUserServiceImpl implements PfUserService {
     }
 
     @Override
-    public boolean delUser(List<Long> users) {
-        CommonResult<Boolean> result = loginClient.delUser(users);
+    public boolean delUser(PfCommonListDto dto) {
+        CommonResult<Boolean> result = loginClient.delUser(BeanUtil.convert(dto, PfCommonListParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
@@ -66,8 +68,8 @@ public class PfUserServiceImpl implements PfUserService {
     }
 
     @Override
-    public boolean freezeUser(List<Long> users) {
-        CommonResult<Boolean> result = loginClient.freezeUser(users);
+    public boolean freezeUser(PfCommonListDto dto) {
+        CommonResult<Boolean> result = loginClient.freezeUser(BeanUtil.convert(dto, PfCommonListParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }

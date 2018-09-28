@@ -20,6 +20,18 @@ public class PfCommonListDto implements Serializable {
 
     private static final long serialVersionUID = 6005656188483189531L;
 
+    /**
+     * 业务主键集合
+     */
     private List<Long> list;
 
+    /**
+     * 当前用户机构id
+     */
+    private Long currentUserOrgId;
+
+    /**
+     * 平台或超级管理员用户
+     */
+    private boolean platOrSuper;
 }

@@ -14,7 +14,7 @@ public class SysUserAuthUtils {
      */
     public static boolean isPlatOrSuper() {
         User user = CurrentUserUtils.getCurrentUser();
-        if (user.getFgPlat().equals(YesOrNoNum.YES.getCode()) || SecurityContext.hasRole("ROLE_SUPER")) {
+        if (SecurityContext.hasRole("ROLE_SUPER") || user.getFgPlat().equals(YesOrNoNum.YES.getCode())) {
             return true;
         } else {
             return false;

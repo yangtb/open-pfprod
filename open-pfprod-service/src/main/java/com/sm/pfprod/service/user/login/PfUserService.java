@@ -1,6 +1,7 @@
 package com.sm.pfprod.service.user.login;
 
 
+import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
 import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
@@ -44,18 +45,18 @@ public interface PfUserService {
     /**
      * 删除用户
      *
-     * @param users 用户id集合
+     * @param dto 用户id集合
      * @return
      */
-    boolean delUser(List<Long> users);
+    boolean delUser(PfCommonListDto dto);
 
     /**
      * 删除用户
      *
-     * @param users 用户id集合
+     * @param dto 用户id集合
      * @return
      */
-    boolean freezeUser(List<Long> users);
+    boolean freezeUser(PfCommonListDto dto);
 
     /**
      * 修改密码
