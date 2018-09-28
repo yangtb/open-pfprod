@@ -19,6 +19,7 @@ layui.config({
                 return '角色编码最多32个字';
             }
         },
+        level: [/^[1-9]\d*$/, '级别必须是正整数'],
         resume: function (value) {
             if (value.length > 255) {
                 return '角色描述最多255个字';

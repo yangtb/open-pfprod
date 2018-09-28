@@ -17,7 +17,7 @@
     </script>
 </head>
 
-<body>
+<body class="body-my">
 <div class="wrapper-content">
     <form class="layui-form" id="roleform">
         <div hidden>
@@ -37,7 +37,13 @@
                        placeholder="请输入角色编码">
             </div>
         </div>
-
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色级别<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <div class="layui-input-block">
+                <input type="text" name="level" lay-verify="required|level" lay-vertype="tips" autocomplete="off" class="layui-input"
+                       placeholder="角色级别, 从1递增权限逐次减小">
+            </div>
+        </div>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">角色描述<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">

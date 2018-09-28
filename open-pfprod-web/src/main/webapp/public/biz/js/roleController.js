@@ -22,6 +22,7 @@ layui.config({
             {field: 'code', width: 100, title: '角色编码'},
             {field: 'resume', width: 200, title: '描述'},
             {field: 'state', width: 70, sort: true, templet: '#stateTpl', title: '状态'},
+            {field: 'level', width: 70, sort: true, title: '级别'},
             {field: 'operator', width: 100, title: '创建人'},
             {field: 'gmtCreate', width: 170, sort: true, title: '创建时间'},
             {fixed: 'right', width: 120, title: '操作', align: 'center', toolbar: '#viewTreeBar'}
@@ -55,9 +56,9 @@ layui.config({
 
     var _addOrEdit = function (formType, currentEditData) {
         if (formType == 'add') {
-            common.open('新增角色', 'form?formType=' + formType, 550, 330);
+            common.open('新增角色', 'form?formType=' + formType, 400, 380);
         } else {
-            common.open('编辑角色', 'form?formType=' + formType, 550, 330, _successFunction(currentEditData));
+            common.open('编辑角色', 'form?formType=' + formType, 400, 380, _successFunction(currentEditData));
         }
     };
 
