@@ -37,21 +37,22 @@
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">所属机构</label>
+                <label class="layui-form-label">所属机构<i class="iconfont icon-required"
+                                                       style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
-                    <select name="idOrg">
+                    <select name="idOrg" lay-verify="required" lay-vertype="tips">
                         <option value="">请选择</option>
                         <optgroup label="已认证">
                             #foreach($element in $allOrg)
                                 #if($element.fgActive == "1")
-                                    <option value="$element.idOrg">$element.name</option>
+                                    <option value="$element.idOrg" #if($formType=='add' && $!userOrgId==$element.idOrg)selected#end>$element.name</option>
                                 #end
                             #end
                         </optgroup>
                         <optgroup label="未认证">
                             #foreach($element in $allOrg)
                                 #if($element.fgActive == "0")
-                                    <option value="$element.idOrg">$element.name</option>
+                                    <option value="$element.idOrg" #if($formType=='add' && $!userOrgId==$element.idOrg)selected#end>$element.name</option>
                                 #end
                             #end
                         </optgroup>

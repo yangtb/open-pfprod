@@ -4,11 +4,13 @@ import com.sm.open.care.core.utils.rsa.RsaKeyPair;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.model.vo.role.PfRoleVo;
 import com.sm.pfprod.service.system.org.PfOrgService;
 import com.sm.pfprod.service.user.login.PfUserService;
 import com.sm.pfprod.service.user.role.PfRoleService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
+import com.sm.pfprod.web.security.SecurityContext;
 import com.sm.pfprod.web.security.User;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;
 import com.sm.pfprod.web.util.SysUserAuthUtils;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -97,11 +100,32 @@ public class PfUserController extends BaseController {
         RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
         model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
         // 角色处理
-        if (StringUtils.equals(formType, "edit")) {
-            model.addAttribute("roles", pfRoleService.listUserRole(userId));
+        if (SecurityContext.hasRole("ROLE_SUPER")) {
+            if (StringUtils.equals(formType, "edit")) {
+                model.addAttribute("roles", pfRoleService.listUserRole(userId));
+            } else {
+                model.addAttribute("roles", pfRoleService.list());
+            }
         } else {
-            model.addAttribute("roles", pfRoleService.list());
+            List<PfRoleVo> roleVos;
+            List<PfRoleVo> currentRoleVos = pfRoleService.listUserRole(CurrentUserUtils.getCurrentUserId());
+            // 当前用户拥有最大角色权限
+            int level = currentRoleVos.stream()
+                    .filter(pfRoleVo -> pfRoleVo.isChecked())
+                    .mapToInt(PfRoleVo::getLevel).min().getAsInt();
+
+            if (StringUtils.equals(formType, "edit")) {
+                roleVos = pfRoleService.listUserRole(userId).stream()
+                        .filter(pfRoleVo -> pfRoleVo.getLevel() >= level).collect(Collectors.toList());
+                model.addAttribute("roles", roleVos);
+            } else {
+                roleVos = pfRoleService.listUserRole(CurrentUserUtils.getCurrentUserId())
+                        .stream().filter(pfRoleVo -> pfRoleVo.getLevel() >= level).collect(Collectors.toList());
+                roleVos.forEach(pfRoleVo -> pfRoleVo.setChecked(false));
+                model.addAttribute("roles", roleVos);
+            }
         }
+
         // 机构处理
         User user = CurrentUserUtils.getCurrentUser();
         if (SysUserAuthUtils.isPlatOrSuper()) {
@@ -111,6 +135,7 @@ public class PfUserController extends BaseController {
                     .filter(sysOrg -> sysOrg.getIdOrg().equals(user.getIdOrg())).collect(Collectors.toList());
             model.addAttribute("allOrg", myOrgList);
         }
+        model.addAttribute("userOrgId", user.getIdOrg());
         return "pages/user/userForm";
     }
 
