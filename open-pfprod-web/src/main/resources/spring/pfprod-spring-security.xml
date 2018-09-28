@@ -15,8 +15,9 @@
     <http pattern="**.jpg" security="none"></http>
     <http pattern="**.png" security="none"></http>
 
-    <http pattern="/403.html" security="none"></http>
-    <http pattern="/404.html" security="none"></http>
+    <http pattern="/403" security="none"></http>
+    <http pattern="/404" security="none"></http>
+    <http pattern="/500" security="none"></http>
     <http pattern="/login/**" security="none"></http>
     <http pattern="/logout/success" security="none"></http>
     <!--<http pattern="/" security="none"></http>-->
@@ -43,7 +44,7 @@
                 class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint"/>
     <!-- 认证异常处理 -->
     <beans:bean id="accessDeniedHandler" class="com.sm.pfprod.web.security.PfAccessDeniedHandler">
-        <beans:property name="errorPage" value="/403.html"/>
+        <beans:property name="errorPage" value="/403"/>
     </beans:bean>
 
     <beans:bean id="loginAuthenticationFilter" class="com.sm.pfprod.web.security.PfLoginAuthenticationFilter">
