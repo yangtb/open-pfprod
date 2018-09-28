@@ -41,4 +41,8 @@
 
     <!-- 机构服务 -->
     <dubbo:reference id="pfOrgFacade" interface="com.sm.open.core.facade.pf.system.org.PfOrgFacade"/>
+
+    <!-- 疾病服务 -->
+    <dubbo:reference id="pfDiseaseFacade" interface="com.sm.open.core.facade.pf.biz.disease.PfDiseaseFacade"/>
+
 </beans>
