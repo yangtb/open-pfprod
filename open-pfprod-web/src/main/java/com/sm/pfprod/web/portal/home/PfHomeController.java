@@ -1,9 +1,7 @@
 package com.sm.pfprod.web.portal.home;
 
-import com.alibaba.fastjson.JSON;
 import com.sm.pfprod.model.dto.home.PfHomeDto;
 import com.sm.pfprod.model.vo.home.PfHomeVo;
-import com.sm.pfprod.model.vo.menu.PfMenuVo;
 import com.sm.pfprod.service.home.PfHomeService;
 import com.sm.pfprod.service.user.menu.PfMenuService;
 import com.sm.pfprod.web.portal.BaseController;
@@ -16,9 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @ClassName: PfHomeController
