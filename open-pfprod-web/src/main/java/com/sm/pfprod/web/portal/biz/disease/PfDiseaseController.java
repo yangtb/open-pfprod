@@ -25,11 +25,20 @@ public class PfDiseaseController extends BaseController {
     @Resource
     private PfDiseaseService pfDiseaseService;
 
-    @PreAuthorize("hasAnyRole('ROLE_BAS0030','ROLE_SUPER')")
+    /*@PreAuthorize("hasAnyRole('ROLE_BAS0030','ROLE_SUPER')")
     @RequestMapping("/catalogue/page")
     public String cataloguePage(Model model) {
         return "";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_BAS0030', 'ROLE_SUPER')")
+    @RequestMapping("/catalogue/form")
+    public String catalogueForm(String formType,  Model model) {
+        model.addAttribute("formType", formType);
+        return "pages/biz/disease/diseaseInfoForm";
+    }*/
+
+
 
     @PreAuthorize("hasAnyRole('ROLE_BAS0040','ROLE_SUPER')")
     @RequestMapping("/info/page")
@@ -39,17 +48,11 @@ public class PfDiseaseController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_BAS0040', 'ROLE_SUPER')")
     @RequestMapping("/info/form")
-    public String form(String formType,  Model model) {
+    public String infoForm(String formType,  Model model) {
         model.addAttribute("formType", formType);
         return "pages/biz/disease/diseaseInfoForm";
     }
 
-    /**
-     * 获取疾病信息列表
-     *
-     * @param dto
-     * @return
-     */
     @PreAuthorize("hasAnyRole('ROLE_BAS0040','ROLE_SUPER')")
     @RequestMapping(value = "/info/list")
     @ResponseBody

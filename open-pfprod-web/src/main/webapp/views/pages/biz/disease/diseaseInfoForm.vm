@@ -21,33 +21,33 @@
 <div class="wrapper-content">
     <form class="layui-form" id="diseaseInfoForm">
         <div hidden>
-            <input name="roleId" hidden>
+            <input name="idDie" hidden>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">疾病名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="required|name" lay-vertype="tips" autocomplete="off"
+                <input type="text" name="name" lay-verify="required|commonLength" lay-vertype="tips" autocomplete="off"
                        class="layui-input" placeholder="疾病名称">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">疾病目录</label>
             <div class="layui-input-block">
-                <input type="text" name="cdDieclass" autocomplete="off"
+                <input type="text" name="cdDieclass" autocomplete="off" lay-verify="commonLength" lay-vertype="tips"
                        class="layui-input" placeholder="疾病目录">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">ICD编码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <label class="layui-form-label">ICD编码</label>
             <div class="layui-input-block">
-                <input type="text" name="icd" lay-verify="required|icd" lay-vertype="tips" autocomplete="off"
+                <input type="text" name="icd" lay-verify="commonLength" lay-vertype="tips" autocomplete="off"
                        class="layui-input" placeholder="ICD编码">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">拼音码</label>
             <div class="layui-input-block">
-                <input type="text" name="pinyin" lay-verify="required|pinyin" lay-vertype="tips" autocomplete="off"
+                <input type="text" name="pinyin" lay-verify="commonLength" lay-vertype="tips" autocomplete="off"
                        class="layui-input" placeholder="拼音码">
             </div>
         </div>
@@ -56,7 +56,7 @@
                                                    style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
-                       lay-filter="fgActiveSwitch" value="1" lay-text="已激活|未激活" class="layui-disabled">
+                       lay-filter="fgActiveSwitch" value="1" lay-text="已激活|未激活">
             </div>
         </div>
 
@@ -83,6 +83,9 @@
     function fullForm(data) {
         $(document).ready(function () {
             $("#diseaseInfoForm").autofill(data);
+            layui.use('form',function(){
+                layui.form.render();
+            });
         });
 
     }
