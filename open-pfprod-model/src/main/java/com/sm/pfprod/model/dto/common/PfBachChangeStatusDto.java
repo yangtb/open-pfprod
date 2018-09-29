@@ -23,4 +23,9 @@ public class PfBachChangeStatusDto implements Serializable {
     private List<Long> list;
 
     private String status;
+
+    /**
+     * 修改人员
+     */
+    private String operator;
 }
