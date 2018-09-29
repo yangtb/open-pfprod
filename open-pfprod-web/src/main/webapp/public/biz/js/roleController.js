@@ -372,7 +372,7 @@ layui.config({
                 return false;
             }
         });
-        var bodyHeight = $(this).height() - $("#treeTitle").height() - 40;
+        var bodyHeight = $(this).height() - $("#treeTitle").height() - 31;
         $("#treeDiv").css("max-height", bodyHeight);
 
     });
