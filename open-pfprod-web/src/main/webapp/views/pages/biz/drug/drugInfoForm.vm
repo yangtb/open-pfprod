@@ -21,40 +21,40 @@
 <div class="wrapper-content">
     <form class="layui-form" id="drugInfoForm">
         <div hidden>
-            <input name="roleId" hidden>
+            <input name="idDrugs" hidden>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">药品名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="required|name" lay-vertype="tips" autocomplete="off"
+                <input type="text" name="name" lay-verify="required|commonLength" lay-vertype="tips" autocomplete="off"
                        class="layui-input" placeholder="药品名称">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">药品目录</label>
             <div class="layui-input-block">
-                <input type="text" name="cdDrugsclass" autocomplete="off"
+                <input type="text" name="cdDrugsclass" autocomplete="off" lay-verify="commonLength" lay-vertype="tips"
                        class="layui-input" placeholder="药品目录">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">药品规格<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <label class="layui-form-label">药品规格</label>
             <div class="layui-input-block">
-                <input type="text" name="spec" lay-verify="required|spec" lay-vertype="tips" autocomplete="off"
+                <input type="text" name="spec" lay-verify="commonLength" lay-vertype="tips" autocomplete="off"
                        class="layui-input" placeholder="药品规格">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">药品单位<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <label class="layui-form-label">药品单位</label>
             <div class="layui-input-block">
-                <input type="text" name="unit" lay-verify="required|unit" lay-vertype="tips" autocomplete="off"
+                <input type="text" name="unit" autocomplete="off" lay-verify="commonLength" lay-vertype="tips"
                        class="layui-input" placeholder="药品单位">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">拼音码</label>
             <div class="layui-input-block">
-                <input type="text" name="pinyin" lay-verify="required|pinyin" lay-vertype="tips" autocomplete="off"
+                <input type="text" name="pinyin" autocomplete="off" lay-verify="commonLength" lay-vertype="tips"
                        class="layui-input" placeholder="拼音码">
             </div>
         </div>
@@ -63,7 +63,7 @@
                                                    style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
-                       lay-filter="fgActiveSwitch" value="1" lay-text="已激活|未激活" class="layui-disabled">
+                        value="1" lay-text="已激活|未激活" >
             </div>
         </div>
 
@@ -85,11 +85,14 @@
 <script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<script src="${contextPath}/public/biz/js/drugInfoFormController.js.js"></script>
+<script src="${contextPath}/public/biz/js/drugInfoFormController.js"></script>
 <script>
     function fullForm(data) {
         $(document).ready(function () {
             $("#drugInfoForm").autofill(data);
+            layui.use('form',function(){
+                layui.form.render();
+            });
         });
 
     }

@@ -101,42 +101,6 @@ layui.config({
         _addOrEdit("edit", obj.data);
     });
 
-    //监听删除操作
-    form.on('switch(fgActiveCheckFilter)', function (obj) {
-        var reqData = new Array();
-        var data = {};
-        reqData.push(this.value);
-        data.list = reqData;
-        if (obj.elem.checked) {
-            data.status = '1';
-        } else {
-            data.status = '0';
-        }
-        layer.load(1);
-        $.ajax({
-            url: basePath + '/pf/r/org/auth',
-            type: 'post',
-            dataType: 'json',
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            success: function (data) {
-                layer.closeAll('loading');
-                if (data.code != 0) {
-                    layer.tips(data.msg, obj.othis);
-                    return false;
-                } else {
-                    layer.tips("修改成功", obj.othis);
-                    return true;
-                }
-            },
-            error: function () {
-                layer.closeAll('loading');
-                layer.tips("修改失败", obj.othis);
-                return false;
-            }
-        });
-    });
-
     $(".del").on('click', function () {
         var checkStatus = table.checkStatus('drugInfoTableId')
             , data = checkStatus.data;
@@ -148,7 +112,7 @@ layui.config({
     });
 
     var _authOrg = function (currentData) {
-        var url = basePath + '/pf/r/org/del';
+        var url = basePath + '/pf/r/drug/info/del';
         var reqData = new Array();
         var messageTitle = '';
         $.each(currentData, function (index, content) {
@@ -156,7 +120,7 @@ layui.config({
                 messageTitle += ', ';
             }
             messageTitle += '【' + content.name + '】';
-            reqData.push(content.idOrg);
+            reqData.push(content.idDrugs);
         });
         var data = {};
         data.list = reqData;

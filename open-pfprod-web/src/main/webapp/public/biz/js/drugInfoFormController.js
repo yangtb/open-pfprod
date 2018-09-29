@@ -7,25 +7,18 @@ layui.config({
         common = layui.common;
 
     form.verify({
-        name: function (value) {
+        commonLength: function (value) {
             if (value.length > 64) {
-                return '药品名称最多64个字';
-            }
-        },
-        icd: function (value) {
-            if (value.length > 64) {
-                return 'ICD码最多64个字';
-            }
-        },
-        pinyin: function (value) {
-            if (value.length > 64) {
-                return '拼音码最多64个字';
+                return '长度不能超过64个字';
             }
         }
     });
 
     //监听提交
     form.on('submit(addDrugInfo)', function (data) {
+        if (!data.field.fgActive) {
+            data.field.fgActive = '0';
+        }
         var url = basePath + '/pf/r/drug/info/';
         if (formType == 'add') {
             url += 'add';
