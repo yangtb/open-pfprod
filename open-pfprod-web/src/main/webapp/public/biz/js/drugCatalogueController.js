@@ -1,4 +1,3 @@
-
 layui.config({
     base: basePath + '/public/layui/build/js/'
 }).use(['layer', 'form', 'jquery', 'common'], function () {
@@ -330,10 +329,19 @@ layui.config({
             layer.tips('请先在左侧点击圈圈选择药品目录', '#addDrugInfo', {tips: 1});
             return false;
         }
-        common.open('新增药品信息', basePath + '/pf/p/drug/info/form?formType=add', 350, 430);
+        var currentEditData = {};
+        currentEditData.cdDrugsclass = $("#cd").val();
+        common.open('新增药品信息', basePath + '/pf/p/drug/info/form?formType=add', 350, 430, _successFunction(currentEditData));
         return false;
     });
 
+    var _successFunction = function (data) {
+        return function (layero, index) {
+            var iframe = window['layui-layer-iframe' + index];
+            //调用子页面的全局函数
+            iframe.fullForm(data);
+        }
+    };
 
 });
 

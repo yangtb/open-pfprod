@@ -1,7 +1,9 @@
 package com.sm.pfprod.web.portal.biz.drug;
 
 import com.sm.pfprod.model.dto.biz.drug.PfDrugInfoDto;
+import com.sm.pfprod.model.dto.common.PfCatalogueTreeDto;
 import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.model.vo.biz.drug.PfDrugZtreeVo;
 import com.sm.pfprod.service.biz.drug.PfDrugService;
 import com.sm.pfprod.web.portal.BaseController;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @ClassName: PfDiseaseController
@@ -47,6 +50,9 @@ public class PfDrugController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_BAS0060', 'ROLE_SUPER')")
     @RequestMapping("/info/form")
     public String form(String formType,  Model model) {
+        PfCatalogueTreeDto dto = new PfCatalogueTreeDto();
+        List<PfDrugZtreeVo> list =  pfDrugService.listDrugCatalogueTree(dto);
+        model.addAttribute("drugCatalogue", list);
         model.addAttribute("formType", formType);
         return "pages/biz/drug/drugInfoForm";
     }
