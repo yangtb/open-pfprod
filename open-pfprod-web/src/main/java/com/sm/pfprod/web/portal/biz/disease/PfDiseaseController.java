@@ -25,20 +25,18 @@ public class PfDiseaseController extends BaseController {
     @Resource
     private PfDiseaseService pfDiseaseService;
 
-    /*@PreAuthorize("hasAnyRole('ROLE_BAS0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_BAS0030','ROLE_SUPER')")
     @RequestMapping("/catalogue/page")
     public String cataloguePage(Model model) {
-        return "";
+        return "pages/biz/disease/diseaseCatalogue";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_BAS0030', 'ROLE_SUPER')")
     @RequestMapping("/catalogue/form")
     public String catalogueForm(String formType,  Model model) {
         model.addAttribute("formType", formType);
-        return "pages/biz/disease/diseaseInfoForm";
-    }*/
-
-
+        return "pages/biz/disease/diseaseCatalogue";
+    }
 
     @PreAuthorize("hasAnyRole('ROLE_BAS0040','ROLE_SUPER')")
     @RequestMapping("/info/page")
