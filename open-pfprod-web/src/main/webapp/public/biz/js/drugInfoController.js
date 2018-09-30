@@ -1,4 +1,3 @@
-
 layui.config({
     base: basePath + '/public/layui/build/js/'
 }).use(['table', 'form', 'jquery', 'common'], function () {
@@ -16,7 +15,8 @@ layui.config({
             {checkbox: true, fixed: true},
 
             {field: 'name', width: 180, title: '药品名称', fixed: true},
-            {field: 'cdDrugsclass', width: 150, title: '药品目录'},
+            {field: 'cdDrugsclass', width: 150, title: '药品目录',
+                style: 'background-color: #009688; color: #fff;', templet: '#cdDrugsclassTpl'},
             {field: 'spec', width: 150, title: '药品规格'},
             {field: 'unit', width: 100, title: '药品单位'},
             {field: 'pinyin', width: 120, title: '拼音助记符'},
@@ -51,8 +51,8 @@ layui.config({
             where: {
                 name: name,
                 fgActive: fgActive,
-                type : type,
-                queryCondition : queryCondition
+                type: type,
+                queryCondition: queryCondition
             }
             , height: 'full-68'
             , page: {

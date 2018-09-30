@@ -44,6 +44,9 @@ public class PfDrugController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_BAS0060','ROLE_SUPER')")
     @RequestMapping("/info/page")
     public String infoPage(Model model) {
+        PfCatalogueTreeDto dto = new PfCatalogueTreeDto();
+        List<PfDrugZtreeVo> list =  pfDrugService.listDrugCatalogueTree(dto);
+        model.addAttribute("drugCatalogue", list);
         return "pages/biz/drug/drugInfo";
     }
 
