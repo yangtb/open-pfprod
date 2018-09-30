@@ -26,6 +26,19 @@ public class PfDrugController extends BaseController {
     private PfDrugService pfDrugService;
 
     @PreAuthorize("hasAnyRole('ROLE_BAS0060','ROLE_SUPER')")
+    @RequestMapping("/catalogue/page")
+    public String cataloguePage(Model model) {
+        return "pages/biz/drug/drugCatalogue";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_BAS0060', 'ROLE_SUPER')")
+    @RequestMapping("/catalogue/form")
+    public String catalogueForm(String formType,  Model model) {
+        model.addAttribute("formType", formType);
+        return "pages/biz/drug/drugCatalogue";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_BAS0060','ROLE_SUPER')")
     @RequestMapping("/info/page")
     public String infoPage(Model model) {
         return "pages/biz/drug/drugInfo";
