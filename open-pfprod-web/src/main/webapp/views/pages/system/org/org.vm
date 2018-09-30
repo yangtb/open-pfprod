@@ -47,7 +47,7 @@
                 </select>
             </div>
             <div class="layui-input-inline" style="padding-left: 20px;">
-                <input type="checkbox" name="expired" title="临过期" lay-skin="primary"lay-filter="expiredFilter">
+                <input type="checkbox" name="expired" title="临过期" lay-skin="primary" lay-filter="expiredFilter">
             </div>
         </div>
         <div class="layui-inline">
