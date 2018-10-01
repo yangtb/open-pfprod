@@ -22,7 +22,7 @@ import java.util.List;
  * @Date 2018/9/28
  */
 @Controller
-@RequestMapping(value = "/pf/p/drug/")
+@RequestMapping(value = "/pf/p/drug")
 public class PfDrugController extends BaseController {
 
     @Resource
