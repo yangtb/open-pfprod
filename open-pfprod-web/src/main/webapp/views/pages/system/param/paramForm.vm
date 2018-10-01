@@ -27,7 +27,9 @@
         <div class="layui-form-item form-item-my5">
             <label class="layui-form-label">参数编码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <input type="text" name="paramCode" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="paramCode" lay-verify="required" autocomplete="off"
+                       class="layui-input #if(${formType} == 'edit')layui-disabled#end"
+                       #if(${formType} == 'edit')disabled#end>
             </div>
         </div>
 
