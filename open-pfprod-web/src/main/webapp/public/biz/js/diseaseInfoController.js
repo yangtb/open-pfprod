@@ -16,7 +16,8 @@ layui.config({
             {checkbox: true, fixed: true},
 
             {field: 'name', width: 180, title: '疾病名称', fixed: true},
-            {field: 'cdDieclass', width: 150, title: '疾病目录'},
+            //{field: 'cdDieclass', width: 150, title: '疾病目录'},
+            {field: 'cdDieclassText', width: 150, title: '疾病目录'},
             {field: 'icd', width: 150, title: 'ICD编码'},
             {field: 'pinyin', width: 150, title: '拼音助记符'},
             {field: 'fgActive', width: 60, title: '激活', templet: '#fgActiveIconTpl'},
@@ -81,9 +82,9 @@ layui.config({
 
     var _addOrEdit = function (formType, currentEditData) {
         if (formType == 'add') {
-            common.open('新增疾病信息', basePath + '/pf/p/disease/info/form?formType=' + formType, 400, 380);
+            common.open('新增疾病信息', basePath + '/pf/p/disease/info/form?formType=' + formType, 512, 380);
         } else {
-            common.open('编辑疾病信息', basePath + '/pf/p/disease/info/form?formType=' + formType, 400, 380, _successFunction(currentEditData));
+            common.open('编辑疾病信息', basePath + '/pf/p/disease/info/form?formType=' + formType, 512, 380, _successFunction(currentEditData));
         }
     };
 

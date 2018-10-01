@@ -31,7 +31,7 @@ layui.config({
     var setting = {
         view: {
             dblClickExpand: false,
-            showLine: false
+            showLine: true
         },
         check: {
             enable: true,
@@ -59,15 +59,11 @@ layui.config({
             contentType: "application/json",
             success: function (data) {
                 layer.closeAll('loading');
-                if (data.code != 0) {
-                    return false;
-                } else {
-                    zNodes = data.data;
-                    $.fn.zTree.init($("#diseaseCatalogueTree"), setting, zNodes);
-                    //初始化模糊搜索方法
-                    fuzzySearch('diseaseCatalogueTree', '#key', null, true);
-                    return true;
-                }
+                zNodes = data;
+                $.fn.zTree.init($("#diseaseCatalogueTree"), setting, zNodes);
+                //初始化模糊搜索方法
+                fuzzySearch('diseaseCatalogueTree', '#key', null, true);
+                return true;
             },
             error: function () {
                 layer.closeAll('loading');
@@ -116,7 +112,8 @@ layui.config({
 
     // tree query
     form.on('submit(diseaseSearchFilter)', function (data) {
-        layer.load(1);
+        layer.load(2);
+
         var fgActive;
         if (data.field.all) {
             fgActive = '-1';
@@ -218,6 +215,7 @@ layui.config({
             return;
         }
         $("#cdPar").val(cd);
+        $('#save').trigger('click');
     });
 
     $('#delCatalogue').on('click', function () {
@@ -333,10 +331,19 @@ layui.config({
             layer.tips('请先在左侧点击圈圈选择疾病目录', '#addDiseaseInfo', {tips: 1});
             return false;
         }
-        common.open('新增疾病信息', basePath + '/pf/p/disease/info/form?formType=add', 400, 380);
+        var currentEditData = {};
+        currentEditData.cdDieclass = $("#cd").val();
+        common.open('新增疾病信息', basePath + '/pf/p/disease/info/form?formType=third', 400, 380, _successFunction(currentEditData));
         return false;
     });
 
+    var _successFunction = function (data) {
+        return function (layero, index) {
+            var iframe = window['layui-layer-iframe' + index];
+            //调用子页面的全局函数
+            iframe.fullForm(data);
+        }
+    };
 
 });
 

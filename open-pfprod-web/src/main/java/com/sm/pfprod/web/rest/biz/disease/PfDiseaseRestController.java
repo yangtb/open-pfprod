@@ -44,9 +44,8 @@ public class PfDiseaseRestController {
     @PreAuthorize("hasAnyRole('ROLE_BAS0030','ROLE_SUPER')")
     @RequestMapping(value = "/catalogue/tree", method = RequestMethod.POST)
     @ResponseBody
-    public ResultObject listDiseaseCatalogueTree(PfCatalogueTreeDto dto) {
-        return ResultObject.createSuccess("listDiseaseCatalogueTree", ResultObject.DATA_TYPE_LIST,
-                pfDiseaseService.listDiseaseCatalogueTree(dto));
+    public Object listDiseaseCatalogueTree(PfCatalogueTreeDto dto) {
+        return pfDiseaseService.listDiseaseCatalogueTree(dto);
     }
 
     /**
