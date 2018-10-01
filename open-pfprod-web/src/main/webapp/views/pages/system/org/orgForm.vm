@@ -139,12 +139,12 @@
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
                 #if($!{fgActive} == '0')
-                    <button class="layui-btn layui-btn-warm" lay-submit="" lay-filter="activeOrg">
+                    <button class="layui-btn layui-btn-warm" id="activeOrg" lay-submit="" lay-filter="activeOrg">
                         <i class="iconfont icon-jihuo"></i> 申请激活
                     </button>
                 #end
                 #if($!{renewFlag} == 'true')
-                    <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="renewOrg">
+                    <button class="layui-btn layui-btn-normal" id="renewOrg" lay-submit="" lay-filter="renewOrg">
                         <i class="iconfont icon-xuqitianshu"></i> 申请续期
                     </button>
                 #end
