@@ -214,6 +214,7 @@ layui.config({
             return;
         }
         $("#cdPar").val(cd);
+        $('#save').trigger('click');
     });
 
     $('#delCatalogue').on('click', function () {
