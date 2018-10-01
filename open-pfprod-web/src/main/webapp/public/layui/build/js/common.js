@@ -63,7 +63,7 @@ layui.define(['layer'], function (exports) {
             return index;
         },
 
-        commonPost: function (url, bizData, msg) {
+        commonPost: function (url, bizData, msg, selectId) {
             layer.load(1);
             $.ajax({
                 url: url,
@@ -74,10 +74,18 @@ layui.define(['layer'], function (exports) {
                 success: function (data) {
                     layer.closeAll('loading');
                     if (data.code != 0) {
-                        common.errorMsg(data.msg);
+                        if (selectId) {
+                            layer.tips(data.msg, '#' + selectId, {tips: 1});
+                        } else {
+                            common.errorMsg(data.msg);
+                        }
                         return false;
                     } else {
-                        common.sucMsg(msg + "成功");
+                        if (selectId) {
+                            layer.tips(msg + "成功", '#' + selectId, {tips: 1});
+                        } else {
+                            common.errorMsg(msg + "成功");
+                        }
                         return true;
                     }
                 },
@@ -145,7 +153,7 @@ layui.define(['layer'], function (exports) {
         /**
          * 刷新table当前页
          */
-        refreshCurrentPage : function() {
+        refreshCurrentPage: function () {
             $(".layui-laypage-btn").click()
         }
     };
