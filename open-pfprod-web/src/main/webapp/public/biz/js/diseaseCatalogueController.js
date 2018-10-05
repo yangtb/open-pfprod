@@ -282,7 +282,7 @@ layui.config({
                     if (!refreshData.idDieclass) {
                         refreshData.idDieclass = data.data.toString();
                     }
-                    common.sucMsg("保存成功");
+                    common.sucChildMsg("保存成功");
 
                     if (formType == 'edit') {
                         var refreshNodes = [];
