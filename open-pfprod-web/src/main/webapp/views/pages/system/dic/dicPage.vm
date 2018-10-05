@@ -11,53 +11,15 @@
     <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
 
-    <script src="${contextPath}/public/biz/js/collapse.js"></script>
     <script>
         var basePath = '${basePath}';
     </script>
 
-    <style>
-        html, body {
-            margin: 0;
-            height: 100%;
-            width: 100%;
-            border: none;
-            overflow: hidden;
-        }
-
-        .main {
-            width: 100%;
-            height: 100%;
-            text-align: left;
-        }
-
-        .main_left {
-            margin: 0px 0px 10px 10px;
-            width: 250px;
-        }
-
-        .main_right {
-            margin: 10px 10px 10px 0px;
-            height: 100%;
-        }
-
-        .picBox {
-            width: 10px;
-            text-align: center;
-            background: url('${contextPath}/public/biz/img/right.gif') no-repeat center center
-
-        }
-
-        .main_left, .picBox {
-            float: left;
-            height: 100%;
-        }
-    </style>
 </head>
 
-<body>
-<div class="main">
-    <div class="main_left" id="frmTitle" name="fmTitle">
+<body class="wrapper-content">
+<div>
+    <div class="layui-col-xs3" style="padding-right: 5px;">
         <form class="layui-form">
             <div class="layui-inline">
                 <div class="layui-btn-group">
@@ -90,10 +52,7 @@
         </table>
     </div>
 
-    <div class="picBox" onclick="switchSysBar()" id="switchPoint">
-    </div>
-
-    <div class="main_right">
+    <div class="layui-col-xs9">
         <form class="layui-form">
             <div class="layui-inline">
                 <div class="layui-btn-group">

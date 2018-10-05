@@ -17,11 +17,11 @@ layui.config({
         , height: 'full-68' //容器高度
         , cols: [[
             {checkbox: true},
-            {field: 'dictName', width: 150, title: '字典名称'},
-            {fixed: 'right', width: 82, title: '操作', align: 'center', toolbar: '#dicBar'}
+            {field: 'dictName', title: '字典名称'},
+            {fixed: 'right', minWidth: 82, title: '操作', align: 'center', toolbar: '#dicBar'}
         ]] //设置表头
         , url: basePath + '/pf/p/dic/list'
-        , even: true
+        //, even: true
         , page: false
     });
 
