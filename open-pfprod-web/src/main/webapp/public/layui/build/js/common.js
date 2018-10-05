@@ -16,9 +16,14 @@ layui.define(['layer'], function (exports) {
             });
         },
 
-        /**成功 msg提示 */
+        /**成功 父页面msg提示 */
         sucMsg: function (text) {
             parent.layer.msg(text);
+        },
+
+        /**成功 msg提示 */
+        sucChildMsg: function (text) {
+            layer.msg(text);
         },
 
         toastTop: function (text) {
@@ -45,6 +50,52 @@ layui.define(['layer'], function (exports) {
                 icon: 3
             }, confirmFun)
         },
+
+        /**弹出层 - 视频*/
+        openTopVideo: function (title, url, width, height, sucBack, anim) {
+            var index = top.layui.layer.open({
+                title: title ? '<b>' + title + '</b>' : false,
+                //skin: 'layui-layer-molv', //样式类名
+                type: 2,
+                area: [width + 'px', height + 'px'],
+                anim: anim,
+                fixed: false, //不固定
+                //maxmin: true,
+                content: url,
+                shadeClose: true,
+                success: sucBack
+            });
+            return index;
+        },
+
+        /**弹出层 - 音频*/
+        openAudio: function (url) {
+            var index = layer.open({
+                type: 1,
+                title: false, //不显示标题
+                shadeClose: true,
+                closeBtn: 0, //不显示关闭按钮
+                //skin: 'layui-layer-lan',
+                area: ['350px', '110px'], //宽高
+                content: ' <div style="margin:25px ;">\n' +
+                    ' <audio controls=true>\n' +
+                    ' <source src=' + url + '.mp3 />\n' +
+                    ' <source src= ' + url + '.ogg />\n' +
+                    ' 你的浏览器不支持video标签。\n' +
+                    ' </audio>\n' +
+                    '</div>'
+            });
+            return index;
+        },
+
+        openPhoto: function (json) {
+            var index = layui.layer.photos({
+                photos: json
+                , anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+            });
+            return index;
+        },
+
 
         /**弹出层*/
         open: function (title, url, width, height, sucBack, anim) {
@@ -84,7 +135,7 @@ layui.define(['layer'], function (exports) {
                         if (selectId) {
                             layer.tips(msg + "成功", '#' + selectId, {tips: 1});
                         } else {
-                            common.errorMsg(msg + "成功");
+                            common.sucMsg(msg + "成功");
                         }
                         return true;
                     }
