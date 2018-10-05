@@ -333,7 +333,8 @@ layui.config({
         }
         var currentEditData = {};
         currentEditData.cdDieclass = $("#cd").val();
-        common.open('新增疾病信息', basePath + '/pf/p/disease/info/form?formType=third', 400, 380, _successFunction(currentEditData));
+        currentEditData.cdDieclassText = $("#name").val();
+        common.open('新增疾病信息', basePath + '/pf/p/disease/info/form?formType=third', 512, 380, _successFunction(currentEditData));
         return false;
     });
 

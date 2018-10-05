@@ -44,28 +44,18 @@
             </div>
         </div>
 
-        #if($formType == 'third')
-            <div class="layui-form-item">
-                <label class="layui-form-label">目录编码</label>
-                <div class="layui-input-block">
-                    <input type="text" name="cdDieclass" autocomplete="off" lay-verify="commonLength" lay-vertype="tips"
-                           class="layui-input layui-disabled" placeholder="疾病目录" disabled>
+        <div class="layui-form-item">
+            <label class="layui-form-label">疾病目录</label>
+            <div class="layui-input-block">
+                <div hidden>
+                    <input id="cdDieclass" name="cdDieclass" type="text" value="" class="layui-input" hidden/>
                 </div>
+                <input id="cdDieclassText" name="cdDieclassText" type="text" value="" class="layui-input" readonly/>
             </div>
-        #else
-            <div class="layui-form-item">
-                <label class="layui-form-label">疾病目录</label>
-                <div class="layui-input-block">
-                    <div hidden>
-                        <input id="cdDieclass" name="cdDieclass" type="text" value="" class="layui-input" hidden/>
-                    </div>
-                    <input id="cdDieclassText" name="cdDieclassText" type="text" value="" class="layui-input" readonly/>
-                </div>
-                <div id="menuContent" class="menuContent" style="display:none; position: absolute; z-index: 9999">
-                    <ul id="treeDemo" class="ztree" style="margin-top:0; width:370px; height: 200px;"></ul>
-                </div>
+            <div id="menuContent" class="menuContent" style="display:none; position: absolute; z-index: 9999">
+                <ul id="treeDemo" class="ztree" style="margin-top:0; width:370px; height: 200px;"></ul>
             </div>
-        #end
+        </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">ICD编码</label>

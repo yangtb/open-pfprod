@@ -83,7 +83,7 @@
                 <label class="layui-form-label">目录名称<i class="iconfont icon-required"
                                                        style="color: #f03f2d"></i></label>
                 <div class="layui-input-block">
-                    <input type="text" name="name" lay-verify="required|commonLength" lay-vertype="tips"
+                    <input type="text" name="name" id="name" lay-verify="required|commonLength" lay-vertype="tips"
                            autocomplete="off"
                            class="layui-input" placeholder="疾病名称">
                 </div>
