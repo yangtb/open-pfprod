@@ -111,7 +111,7 @@ layui.config({
         } else {
             data.status = 'Y';
         }
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: basePath + '/pf/r/message/updateStatus',
             type: 'post',
@@ -172,7 +172,7 @@ layui.config({
     }
 
     var _commonAjax = function (index, url, reqData, msg) {
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: url,
             type: 'post',

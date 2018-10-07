@@ -31,7 +31,7 @@ layui.config({
         if (!data.field.status) {
             data.field.status = "disabled";
         }
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: url,
             type: 'post',

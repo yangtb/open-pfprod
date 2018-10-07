@@ -35,7 +35,7 @@ layui.config({
         } else if (formType == 'edit') {
             url += 'edit';
         }
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: url,
             type: 'post',

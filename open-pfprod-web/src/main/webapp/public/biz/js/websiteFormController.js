@@ -13,7 +13,7 @@ layui.config({
         if (!data.field.logSwitch) {
             data.field.logSwitch = "N";
         }
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: url,
             type: 'post',

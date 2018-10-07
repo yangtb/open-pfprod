@@ -97,7 +97,7 @@ layui.config({
         field.clearPassword2 = '';
 
         var url = basePath + '/pf/r/user/register/add';
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: url,
             type: 'post',

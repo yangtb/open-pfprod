@@ -134,7 +134,7 @@ layui.config({
     });
 
     var _cancelRole = function (index, reqData, msg) {
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: basePath + '/pf/r/role/cancel',
             type: 'post',
@@ -195,7 +195,7 @@ layui.config({
     });
 
     var _delRole = function (index, reqData) {
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: basePath + '/pf/r/role/del',
             type: 'post',
@@ -246,7 +246,7 @@ layui.config({
     var _queryRoleZtree = function (roleId) {
         zTreeRoleId = roleId;
         var reqData = {roleId: roleId}
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: basePath + '/pf/r/role/list/role/tree',
             type: 'post',
@@ -285,7 +285,7 @@ layui.config({
     });
 
     var _saveRoleMenu = function (reqData) {
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: basePath + '/pf/r/role/save/roleMenu',
             type: 'post',
@@ -351,7 +351,7 @@ layui.config({
     var zNodes = [];
 
     $(document).ready(function () {
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: basePath + '/pf/r/role/list/tree',
             type: 'post',

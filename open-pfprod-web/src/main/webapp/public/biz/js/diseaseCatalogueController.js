@@ -51,7 +51,7 @@ layui.config({
 
     var zNodes = [];
     $(document).ready(function () {
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: basePath + '/pf/r/disease/catalogue/tree',
             type: 'post',
@@ -174,7 +174,7 @@ layui.config({
         pId = treeNode.pId;
         name = treeNode.name;
         bizData.idDieclass = idDieclass;
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: basePath + '/pf/r/disease/catalogue/detail',
             type: 'post',
@@ -266,7 +266,7 @@ layui.config({
         refreshData.name = data.field.name;
         refreshData.fgActive = data.field.fgActive;
 
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: basePath + '/pf/r/disease/catalogue/save',
             type: 'post',

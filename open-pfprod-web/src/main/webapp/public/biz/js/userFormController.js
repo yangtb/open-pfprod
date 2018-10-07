@@ -41,7 +41,7 @@ layui.config({
         }
 
         var url = basePath + "/pf/r/user/" + formType;
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: url,
             type: 'post',

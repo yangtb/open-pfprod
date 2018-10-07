@@ -255,7 +255,7 @@ layui.config({
     }
 
     var _commonAjax = function (index, url, reqData, msg, type) {
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: url,
             type: 'post',
@@ -301,7 +301,7 @@ layui.config({
     }
 
     $('.refreshCache').on('click', function () {
-        layer.load(1);
+        layer.load(2);
         $.ajax({
             url: basePath + '/pf/r/dic/refreshCache',
             type: 'post',

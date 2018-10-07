@@ -16,7 +16,7 @@ layui.config({
 
     //监听提交
     form.on('submit(resetPsw)', function (data) {
-        layer.load(1);
+        layer.load(2);
         var url = basePath + "/pf/r/user/resetPsw";
         $.ajax({
             url: url,
