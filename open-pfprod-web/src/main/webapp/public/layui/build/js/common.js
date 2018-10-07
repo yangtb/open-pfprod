@@ -1,7 +1,7 @@
 /**自定义模块*/
 layui.define(['layer'], function (exports) {
-    var $ = layui.jquery,
-        layer = layui.layer;
+    var $ = layui.jquery
+        , layer = layui.layer;
     var common = {
 
         /**错误msg提示 */
@@ -77,12 +77,14 @@ layui.define(['layer'], function (exports) {
                 closeBtn: 0, //不显示关闭按钮
                 //skin: 'layui-layer-lan',
                 area: ['350px', '110px'], //宽高
-                content: ' <div style="margin:25px ;">\n' +
+                content: '<div style="width: 350px;height: 110px;">\n' +
+                    '    <div style="position: relative;top: 50%;transform: translateY(-50%);text-align: center;">' +
                     ' <audio controls=true>\n' +
                     ' <source src=' + url + '.mp3 />\n' +
                     ' <source src= ' + url + '.ogg />\n' +
                     ' 你的浏览器不支持video标签。\n' +
                     ' </audio>\n' +
+                    '</div>\n' +
                     '</div>'
             });
             return index;
@@ -95,7 +97,6 @@ layui.define(['layer'], function (exports) {
             });
             return index;
         },
-
 
         /**弹出层*/
         open: function (title, url, width, height, sucBack, anim) {
@@ -115,7 +116,7 @@ layui.define(['layer'], function (exports) {
         },
 
         commonPost: function (url, bizData, msg, selectId) {
-            layer.load(1);
+            layer.load(2);
             $.ajax({
                 url: url,
                 type: 'post',
@@ -135,7 +136,7 @@ layui.define(['layer'], function (exports) {
                         if (selectId) {
                             layer.tips(msg + "成功", '#' + selectId, {tips: 1});
                         } else {
-                            common.sucMsg(msg + "成功");
+                            common.sucChildMsg(msg + "成功");
                         }
                         return true;
                     }
@@ -150,7 +151,7 @@ layui.define(['layer'], function (exports) {
         },
 
         commonParentFormPost: function (url, bizData, formType, tableId, msg) {
-            layer.load(1);
+            layer.load(2);
             $.ajax({
                 url: url,
                 type: 'post',
@@ -206,6 +207,26 @@ layui.define(['layer'], function (exports) {
          */
         refreshCurrentPage: function () {
             $(".layui-laypage-btn").click()
+        },
+
+        writeLocalStorage: function (key, value) {
+            if (!window.localStorage) {
+                alert("请使用最新的浏览器");
+            } else {
+                var storage = window.localStorage;
+                //写入a字段
+                storage[key] = value;
+            }
+        },
+
+        readLocalStorage: function (key) {
+            if (!window.localStorage) {
+                alert("请使用最新的浏览器");
+                return '';
+            } else {
+                var storage = window.localStorage;
+                return storage[key];
+            }
         }
     };
     exports('common', common)
