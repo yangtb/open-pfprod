@@ -47,4 +47,11 @@
 
     <!-- 药品服务 -->
     <dubbo:reference id="pfDrugFacade" interface="com.sm.open.core.facade.pf.biz.drug.PfDrugFacade"/>
+
+    <!-- 问诊服务 -->
+    <dubbo:reference id="pfInquisitionFacade" interface="com.sm.open.core.facade.pf.biz.inquisition.PfInquisitionFacade"/>
+
+    <!-- 上传服务 -->
+    <dubbo:reference id="pfUploadFacade" interface="com.sm.open.core.facade.pf.common.upload.PfUploadFacade"/>
+
 </beans>

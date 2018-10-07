@@ -2,6 +2,7 @@ package com.sm.pfprod.web.portal.common;
 
 import com.sm.pfprod.web.portal.BaseController;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -26,5 +27,10 @@ public class PfCommonController extends BaseController {
     @RequestMapping("/500")
     public String internalServerError() {
         return "error/500";
+    }
+
+    @RequestMapping("/video/form")
+    public String videoForm(Model model) {
+        return "pages/common/videoForm";
     }
 }
