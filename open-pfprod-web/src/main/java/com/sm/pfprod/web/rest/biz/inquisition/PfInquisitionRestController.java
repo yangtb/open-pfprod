@@ -56,7 +56,7 @@ public class PfInquisitionRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
     @RequestMapping(value = "/question/classify/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addQuestionClassify(@RequestBody BasInquesCa dto) {
@@ -74,7 +74,7 @@ public class PfInquisitionRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
     @RequestMapping(value = "/question/classify/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject editQuestionClassify(@RequestBody BasInquesCa dto) {
@@ -93,7 +93,7 @@ public class PfInquisitionRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
     @RequestMapping(value = "/question/classify/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delQuestionClassify(@RequestBody PfBachChangeStatusDto dto) {
@@ -110,7 +110,7 @@ public class PfInquisitionRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
     @RequestMapping(value = "/question/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addQuestion(@RequestBody BasInques dto) {
@@ -129,7 +129,7 @@ public class PfInquisitionRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
     @RequestMapping(value = "/question/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject editQuestion(@RequestBody BasInques dto) {
@@ -149,7 +149,7 @@ public class PfInquisitionRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
     @RequestMapping(value = "/question/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delQuestion(@RequestBody PfBachChangeStatusDto dto) {
@@ -166,7 +166,7 @@ public class PfInquisitionRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
     @RequestMapping(value = "/question/answer/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delAnswer(@RequestBody PfBachChangeStatusDto dto) {
@@ -183,7 +183,7 @@ public class PfInquisitionRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
     @RequestMapping(value = "/question/answer/save", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject saveAnswer(@RequestBody BasInquesAnswer dto) {

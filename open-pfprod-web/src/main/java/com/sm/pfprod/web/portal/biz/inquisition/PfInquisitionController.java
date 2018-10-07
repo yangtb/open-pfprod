@@ -25,34 +25,34 @@ public class PfInquisitionController extends BaseController {
     @Resource
     private PfInquisitionService pfInquisitionService;
 
-    @PreAuthorize("hasAnyRole('STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
     @RequestMapping("/question/page")
     public String cataloguePage(Model model) {
         return "pages/biz/inquisition/question";
     }
 
-    @PreAuthorize("hasAnyRole('STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
     @RequestMapping(value = "/question/list")
     @ResponseBody
     public PageResult listQuestion(PfInquisitionQuestionDto dto) {
         return pfInquisitionService.listQuestion(dto);
     }
 
-    @PreAuthorize("hasAnyRole('STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
     @RequestMapping("/question/form")
     public String form(String formType,  Model model) {
         model.addAttribute("formType", formType);
         return "pages/biz/inquisition/questionForm";
     }
 
-    @PreAuthorize("hasAnyRole('STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
     @RequestMapping("/question/answer/form")
     public String answerForm(Long idInques,  Model model) {
         model.addAttribute("idInques", idInques);
         return "pages/biz/inquisition/answerForm";
     }
 
-    @PreAuthorize("hasAnyRole('STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
     @RequestMapping("/question/answer/list")
     @ResponseBody
     public PageResult answerList(PfInquisitionQuestionDto dto) {
