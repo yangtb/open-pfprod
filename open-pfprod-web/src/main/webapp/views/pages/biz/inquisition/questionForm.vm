@@ -69,7 +69,7 @@
 <script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<script src="${contextPath}/public/biz/js/inquisitionQuestionFormController.js"></script>
+<script src="${contextPath}/public/biz/js/biz/inquisition/inquisitionQuestionFormController.js"></script>
 <script>
     function fullForm(data) {
         $(document).ready(function () {
