@@ -10,7 +10,9 @@ public enum SysDicGroupEnum {
 
     AREA_CODE("AREA_CODE", "城市编码"),
     SYS_PARAM_BIZ_MODUAL("SYS_PARAM_BIZ_MODULE", "系统参数-作用模块"),
-    BANNER_POSITION("BANNER_POSITION", "banner位");
+    BANNER_POSITION("BANNER_POSITION", "banner位"),
+    EXAM_WAYS("EXAM_WAYS", "检查方式"),
+    BODY_POSITION("BODY_POSITION", "检查题库");
 
     private String code;
     private String desc;
