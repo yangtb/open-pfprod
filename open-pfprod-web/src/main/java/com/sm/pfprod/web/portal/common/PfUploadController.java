@@ -7,7 +7,8 @@ import com.sm.pfprod.model.entity.BasMedia;
 import com.sm.pfprod.service.common.upload.PfUploadService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
-import com.sm.pfprod.web.util.oss.OSSUploadUtil;
+import com.sm.pfprod.web.util.oss.OssUploadUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -50,33 +51,19 @@ public class PfUploadController extends BaseController {
         String originalFilename = file.getOriginalFilename();
         String fileType = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
         // 上传oss
-        String url = "http://hsknowledgebase.oss-cn-hangzhou.aliyuncs.com/mytest/music.mp3";
         String fileName = UUID.randomUUID().toString().toUpperCase().replace("-", "");
-        //OSSUploadUtil.uploadFile(file, fileType, null, request, 1);
-        // todo 模拟进度条 begin
-        HttpSession session = request.getSession();
-
-        int a = 10;
-        while (true) {
-            int percent = (int) (a * 100.0 / 100);
-            session.setAttribute("upload_percent", percent);
-            session.setAttribute("upload_sum", 1);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println(session.getAttribute("upload_percent"));
-            a = a + 10;
-            if (a == 100) {
-                break;
-            }
+        String fileTypeNum = FileTypeUtil.getFileTypeEnum(fileType);
+        String url;
+        if (fileTypeNum.equals(FileTypeUtil.FileTypeEnum.IMG.getCode())) {
+            // 此处可选择没有进度条上传
+            url = OssUploadUtil.uploadFileProgress(file, fileType, null, request, 1);
+        } else {
+            url = OssUploadUtil.uploadFileProgress(file, fileType, null, request, 1);
         }
-        // todo end
-        LOGGER.warn("上传返回url : " + url);
+
         // 上传后url保存至数据库
         BasMedia dto = new BasMedia();
-        dto.setSdType(FileTypeUtil.getFileTypeEnum(fileType));
+        dto.setSdType(fileTypeNum);
         dto.setDes(originalFilename);
         dto.setName(fileName);
         dto.setFormat(fileType);
@@ -85,8 +72,10 @@ public class PfUploadController extends BaseController {
         dto.setCreator(CurrentUserUtils.getCurrentUsername());
         dto.setOperator(CurrentUserUtils.getCurrentUsername());
 
-        Long idMedia = pfUploadService.addBasMedia(dto);
-        dto.setIdMedia(idMedia);
+        if (StringUtils.isNotBlank(url)) {
+            Long idMedia = pfUploadService.addBasMedia(dto);
+            dto.setIdMedia(idMedia);
+        }
         return ResultObject.createSuccess("/uploadFile", ResultObject.DATA_TYPE_OBJECT, dto);
     }
 
