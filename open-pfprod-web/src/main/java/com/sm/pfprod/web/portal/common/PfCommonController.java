@@ -30,7 +30,8 @@ public class PfCommonController extends BaseController {
     }
 
     @RequestMapping("/video/form")
-    public String videoForm(Model model) {
+    public String videoForm(Model model, String path) {
+        model.addAttribute("path", path);
         return "pages/common/videoForm";
     }
 }

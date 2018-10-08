@@ -29,7 +29,8 @@
 <body class="body-my">
 <div>
     <div class="layui-row">
-                <div class="video" id="video" data-url="http://hsknowledgebase.oss-cn-hangzhou.aliyuncs.com/mytest/mda-hi263zhh0t77v9tx.mp4"
+                <div class="video" id="video"
+                     data-url="$!{path}"
                      style="width: 100%;"></div>
 
     </div>
