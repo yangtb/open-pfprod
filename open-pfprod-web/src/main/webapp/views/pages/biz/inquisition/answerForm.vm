@@ -27,7 +27,7 @@
     <div class="layui-col-xs8">
         <form class="layui-form" id="answerForm" style="padding-top: 10px">
             <div hidden>
-                <input name="idAnswer" hidden>
+                <input name="idAnswer" id="idAnswer" hidden>
                 <input name="idInques" id="idInques" hidden>
                 <input name="idMedia" id="idMedia" hidden>
                 <input name="sdType" id="sdType" hidden>
@@ -56,9 +56,9 @@
                     <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
                            value="1" lay-text="NO|OFF">
                     &nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="radioGroup" value="fgReason" title="是否需要说明理由">
-                    <input type="radio" name="radioGroup" value="fgBack" title="是否根据病人的回答反馈">
-                    <input type="radio" name="radioGroup" value="fgTag" title="标签">
+                    <input type="checkbox" name="fgReason" value="1" title="是否需要说明理由">
+                    <input type="checkbox" name="fgBack" value="1" title="是否根据病人的回答反馈">
+                    #*<input type="checkbox" value="1" title="标签">*#
                 </div>
             </div>
 
@@ -132,7 +132,7 @@
 <script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<script src="${contextPath}/public/biz/js/inquisitionAnswerController.js"></script>
+<script src="${contextPath}/public/biz/js/biz/inquisition/inquisitionAnswerController.js"></script>
 
 <script type="text/html" id="fgActiveTpl">
     {{#  if(d.fgActive == '1'){ }}

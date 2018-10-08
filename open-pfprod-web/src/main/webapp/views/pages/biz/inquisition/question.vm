@@ -89,7 +89,7 @@
 <script src="${contextPath}/public/ztree/js/jquery.ztree.excheck.js"></script>
 <script src="${contextPath}/public/ztree/js/jquery.ztree.exedit.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<script src="${contextPath}/public/biz/js/inquisitionQuestionController.js"></script>
+<script src="${contextPath}/public/biz/js/biz/inquisition/inquisitionQuestionController.js"></script>
 
 <script type="text/html" id="fgActiveTpl">
     <input type="checkbox" name="fgActive" value="{{d.idInques}}"
