@@ -54,4 +54,10 @@
     <!-- 上传服务 -->
     <dubbo:reference id="pfUploadFacade" interface="com.sm.open.core.facade.pf.common.upload.PfUploadFacade"/>
 
+    <!-- 检查服务 -->
+    <dubbo:reference id="pfCheckFacade" interface="com.sm.open.core.facade.pf.biz.check.PfCheckFacade"/>
+
+    <!-- 检验服务 -->
+    <dubbo:reference id="pfExamFacade" interface="com.sm.open.core.facade.pf.biz.exam.PfExamFacade"/>
+
 </beans>
