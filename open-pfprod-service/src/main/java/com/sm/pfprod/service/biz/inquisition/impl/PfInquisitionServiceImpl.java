@@ -123,8 +123,8 @@ public class PfInquisitionServiceImpl implements PfInquisitionService {
     }
 
     @Override
-    public boolean saveAnswer(BasInquesAnswer dto) {
-        CommonResult<Boolean> result = inquisitionClient.saveAnswer(BeanUtil.convert(dto, BasInquesAnswerParam.class));
+    public Long saveAnswer(BasInquesAnswer dto) {
+        CommonResult<Long> result = inquisitionClient.saveAnswer(BeanUtil.convert(dto, BasInquesAnswerParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }

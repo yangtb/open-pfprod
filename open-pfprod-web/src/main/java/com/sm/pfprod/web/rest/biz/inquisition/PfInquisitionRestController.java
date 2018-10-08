@@ -192,8 +192,8 @@ public class PfInquisitionRestController extends BaseController {
         Assert.isTrue(dto.getIdInques() != null, "idInques");
         dto.setCreator(CurrentUserUtils.getCurrentUsername());
         dto.setOperator(CurrentUserUtils.getCurrentUsername());
-        return pfInquisitionService.saveAnswer(dto) ? ResultObject.createSuccess("saveAnswer", ResultObject.DATA_TYPE_OBJECT, true)
-                : ResultObject.create("saveAnswer", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+        return ResultObject.createSuccess("saveAnswer", ResultObject.DATA_TYPE_OBJECT,
+                pfInquisitionService.saveAnswer(dto));
     }
 
 }

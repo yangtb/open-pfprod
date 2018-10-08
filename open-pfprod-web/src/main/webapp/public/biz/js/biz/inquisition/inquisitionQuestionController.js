@@ -239,7 +239,6 @@ layui.config({
                     var zNodes = [
                         {id: "0", name: "问诊分类", open: true}
                     ];
-                    //console.log(data.data);
                     zNodes = data.data;
                     $.fn.zTree.init($("#treeDemo"), setting, zNodes);
                     zTree = $.fn.zTree.getZTreeObj("treeDemo");
@@ -321,7 +320,6 @@ layui.config({
         var bizData = {};
         bizData.idInquesCa = treeNode.id;
         bizData.idInquesCaText = treeNode.name;
-        console.log(bizData)
         _addOrEdit("add", bizData);
     });
 

@@ -61,7 +61,7 @@ public class InquisitionClient {
         return pfInquisitionFacade.delAnswer(param);
     }
 
-    public CommonResult<Boolean> saveAnswer(BasInquesAnswerParam param) {
+    public CommonResult<Long> saveAnswer(BasInquesAnswerParam param) {
         return pfInquisitionFacade.saveAnswer(param);
     }
 
