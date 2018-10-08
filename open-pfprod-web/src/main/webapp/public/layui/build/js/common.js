@@ -52,9 +52,9 @@ layui.define(['layer'], function (exports) {
         },
 
         /**弹出层 - 视频*/
-        openTopVideo: function (title, url, width, height, sucBack, anim) {
+        openTopVideo: function (url, width, height, sucBack, anim) {
             var index = top.layui.layer.open({
-                title: title ? '<b>' + title + '</b>' : false,
+                title: false,
                 //skin: 'layui-layer-molv', //样式类名
                 type: 2,
                 area: [width + 'px', height + 'px'],
@@ -115,7 +115,7 @@ layui.define(['layer'], function (exports) {
             return index;
         },
 
-        commonPost: function (url, bizData, msg, selectId) {
+        commonPost: function (url, bizData, msg, selectId, callback) {
             layer.load(2);
             $.ajax({
                 url: url,
@@ -137,6 +137,9 @@ layui.define(['layer'], function (exports) {
                             layer.tips(msg + "成功", '#' + selectId, {tips: 1});
                         } else {
                             common.sucChildMsg(msg + "成功");
+                        }
+                        if (callback) {
+                            callback(data);
                         }
                         return true;
                     }
