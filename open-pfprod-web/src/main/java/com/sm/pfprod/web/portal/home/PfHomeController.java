@@ -1,12 +1,16 @@
 package com.sm.pfprod.web.portal.home;
 
+import com.sm.open.care.core.enums.YesOrNo;
 import com.sm.pfprod.model.dto.home.PfHomeDto;
+import com.sm.pfprod.model.entity.SysParam;
+import com.sm.pfprod.model.enums.SysParamEnum;
 import com.sm.pfprod.model.vo.home.PfHomeVo;
 import com.sm.pfprod.service.home.PfHomeService;
 import com.sm.pfprod.service.user.menu.PfMenuService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.security.SecurityContext;
+import com.sm.pfprod.web.util.ParamUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -25,10 +29,10 @@ import javax.annotation.Resource;
 public class PfHomeController extends BaseController {
 
     @Resource
-    private PfMenuService pfMenuService;
+    private PfHomeService pfHomeService;
 
     @Resource
-    private PfHomeService pfHomeService;
+    private ParamUtil paramUtil;
 
     /**
      * 网站名称
@@ -41,6 +45,9 @@ public class PfHomeController extends BaseController {
      */
     @Value("${website.copyright}")
     private String websiteCopyright;
+
+    @Value("${website.approve}")
+    private String websiteApprove;
 
     /**
      * 机构试用到期提醒
@@ -56,6 +63,14 @@ public class PfHomeController extends BaseController {
         homeDto.setAnonymousUser(SecurityContext.isAnonymousUser() ? true : false);
         homeDto.setUserId(SecurityContext.isAnonymousUser() ? null : CurrentUserUtils.getCurrentUserId());
         homeDto.setIdOrg(SecurityContext.isAnonymousUser() ? null : CurrentUserUtils.getCurrentUser().getIdOrg());
+
+        // 游客开关判断
+        if (SecurityContext.isAnonymousUser()) {
+            SysParam sysParam = paramUtil.getParamInfo(SysParamEnum.VISITOR_SWITCH.getCode());
+            if (sysParam == null || sysParam.getParamValue().equals(YesOrNo.NO.getCode())){
+                return "redirect:/login";
+            }
+        }
 
         PfHomeVo pfHomeVo = pfHomeService.selectHomeInfo(homeDto);
         if (pfHomeVo == null) {

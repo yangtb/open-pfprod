@@ -80,7 +80,9 @@
                 </div>
                 <div class="row row-mid" style="float: right; padding-right: 50px;">
                     <strong>
-                        <a href="${contextPath}/index" class="open-prod-link layui-hide-xs">游客登陆 </a>
+                        #if($!{visitorSwitch} == 'Y')
+                            <a href="${contextPath}/index" class="open-prod-link layui-hide-xs">游客登陆 </a>
+                        #end
                         <a href="${contextPath}/pf/p/user/register/page"class="open-prod-link layui-hide-xs">机构注册&raquo;</a>
                     </strong>
                 </div>
