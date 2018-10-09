@@ -123,9 +123,9 @@ layui.config({
     //监听提交
     form.on('submit(menuSearchFilter)', function (data) {
         if (data.field.status == 'enabled') {
-            $('.bach-invalid').html('<i class="iconfont icon-batch-reduce"></i>' + ' 批量停用');
+            $('#bach-invalid').html('<i class="iconfont icon-batch-reduce"></i>' + ' 批量停用');
         } else {
-            $('.bach-invalid').html('<i class="iconfont icon-icon-import"></i>' + ' 批量启用');
+            $('#bach-invalid').html('<i class="iconfont icon-icon-import"></i>' + ' 批量启用');
         }
         table.reload('menuTableId', {
             where: {
@@ -140,18 +140,18 @@ layui.config({
         });
     });
 
-    $('.add').on('click', function () {
+    $('#add').on('click', function () {
         _addOrEdit("add");
     });
 
-    $('.edit').on('click', function () {
+    $('#edit').on('click', function () {
         var currentData = _getCheckData();
         if (currentData.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#edit', {tips: 1});
             return;
         }
         if (currentData.length > 1) {
-            common.toastTop("请选中一行记录进行操作");
+            layer.tips('请选中一行记录进行操作', '#edit', {tips: 1});
             return;
         }
         _addOrEdit("edit", currentData[0]);
@@ -169,11 +169,11 @@ layui.config({
         return data;
     }
 
-    $('.bach-invalid').on('click', function () {
+    $('#bach-invalid').on('click', function () {
         var checkStatus = table.checkStatus('menuTableId')
             , data = checkStatus.data;
         if (data.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#bach-invalid', {tips: 1});
             return;
         }
         _changeMenu(data);
