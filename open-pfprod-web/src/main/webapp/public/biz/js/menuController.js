@@ -30,7 +30,7 @@ layui.config({
             {field: 'iconSource', width: 150, title: '图标', templet: '#imgTpl'},
             {field: 'status', width: 70, title: '状态', templet: '#statusTpl'},
             {field: 'gmtModify', width: 170, sort: true, title: '最后修改时间'},
-            {fixed: 'right', width: 150, title: '操作', align: 'center', toolbar: '#barDemo'}
+            {fixed: 'right', width: 160, title: '操作', align: 'center', toolbar: '#barDemo'}
         ]] //设置表头
         , url: basePath + '/pf/p/menu/list'
         , limit: 15
