@@ -149,7 +149,7 @@ layui.config({
         }
         var url = basePath + '/pf/r/exam/question/classify/edit';
         var bizData = {};
-        bizData.idInspectItemCa = treeNode.id;
+        bizData.idInspect = treeNode.id;
         bizData.name = treeNode.name;
         return common.commonPost(url, bizData, "修改");
     }
