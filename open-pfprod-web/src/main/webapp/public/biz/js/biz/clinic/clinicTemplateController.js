@@ -438,6 +438,10 @@ layui.config({
             layer.tips('请先选中一行记录', '#editTemplate', {tips: 1});
             return;
         }
+        if (data.length > 1) {
+            layer.tips('请选中一行记录进行编辑', '#editTemplate', {tips: 1});
+            return;
+        }
         _editTemplate(data[0].name, data[0].idDemo);
     });
 

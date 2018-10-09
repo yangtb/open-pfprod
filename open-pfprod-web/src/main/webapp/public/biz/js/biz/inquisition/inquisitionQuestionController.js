@@ -438,6 +438,10 @@ layui.config({
             layer.tips('请先选中一行记录', '#editAnswer', {tips: 1});
             return;
         }
+        if (data.length > 1) {
+            layer.tips('请选中一行记录进行编辑', '#editAnswer', {tips: 1});
+            return;
+        }
         _editAnswer(data[0].desInques, data[0].idInques);
     });
 
