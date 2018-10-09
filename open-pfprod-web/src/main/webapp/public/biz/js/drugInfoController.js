@@ -61,19 +61,19 @@ layui.config({
         });
     });
 
-    $('.add').on('click', function () {
+    $('#add').on('click', function () {
         _addOrEdit("add");
     });
 
-    $('.edit').on('click', function () {
+    $('#edit').on('click', function () {
         var checkStatus = table.checkStatus('drugInfoTableId')
             , data = checkStatus.data;
         if (data.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#edit', {tips: 1});
             return;
         }
         if (data.length > 1) {
-            common.toastTop("请选中一行记录进行编辑");
+            layer.tips('请选中一行记录进行编辑', '#edit', {tips: 1});
             return;
         }
         var currentEditData = data[0];
@@ -101,11 +101,11 @@ layui.config({
         _addOrEdit("edit", obj.data);
     });
 
-    $(".del").on('click', function () {
+    $("#del").on('click', function () {
         var checkStatus = table.checkStatus('drugInfoTableId')
             , data = checkStatus.data;
         if (data.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#del', {tips: 1});
             return;
         }
         _authOrg(data);
