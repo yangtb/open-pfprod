@@ -6,6 +6,7 @@ import com.sm.pfprod.model.dto.system.param.PfParamListDto;
 import com.sm.pfprod.model.entity.SysParam;
 import com.sm.pfprod.service.system.param.PfParamService;
 import com.sm.pfprod.web.security.CurrentUserUtils;
+import com.sm.pfprod.web.util.ParamUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,6 +30,9 @@ public class PfParamRestController {
 
     @Resource
     private PfParamService pfParamService;
+
+    @Resource
+    private ParamUtil paramUtil;
 
     /**
      * 新增参数
@@ -88,6 +92,19 @@ public class PfParamRestController {
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
         return ResultObject.create("changeStatus", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfParamService.changeStatus(dto));
+    }
+
+    /**
+     * 刷新缓存
+     *
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_PARAM_REFRESHCACHE','ROLE_SUPER')")
+    @RequestMapping(value = "/refreshCache", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject refreshCache() {
+        paramUtil.init();
+        return ResultObject.createSuccess("refreshCache", ResultObject.DATA_TYPE_OBJECT, true);
     }
 
 }

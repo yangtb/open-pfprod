@@ -186,12 +186,17 @@ layui.config({
                 return false;
             }
         });
-    }
+    };
 
     var _paramTableReload = function () {
         table.reload('paramTableId', {
             height: 'full-68'
         });
-    }
+    };
+
+    $('#refreshCache').on('click', function () {
+        common.commonPost(basePath + '/pf/r/param/refreshCache', null, '刷新缓存');
+    });
+
 });
 

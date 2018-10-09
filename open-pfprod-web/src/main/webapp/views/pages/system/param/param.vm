@@ -31,6 +31,9 @@
                 <button type="button" class="layui-btn" id="stop">
                     <i class="iconfont icon-stop"></i> 停用
                 </button>
+                <button type="button" class="layui-btn" id="refreshCache">
+                    <i class="iconfont icon-refresh"></i> 刷新缓存
+                </button>
             </div>
             <div class="layui-input-inline">
                 <input type="text" name="paramName" class="layui-input"
