@@ -22,13 +22,13 @@
     <form class="layui-form">
         <div class="layui-inline">
             <div class="layui-btn-group">
-                <button type="button" class="layui-btn add">
+                <button type="button" class="layui-btn" id="add">
                     <i class="iconfont icon-add"></i> 增加
                 </button>
-                <button type="button" class="layui-btn edit">
+                <button type="button" class="layui-btn" id="edit">
                     <i class="iconfont icon-edit"></i> 编辑
                 </button>
-                <button type="button" class="layui-btn stop">
+                <button type="button" class="layui-btn" id="stop">
                     <i class="iconfont icon-stop"></i> 停用
                 </button>
             </div>

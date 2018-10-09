@@ -50,11 +50,11 @@ layui.config({
     $('#edit').on('click', function () {
         var currentData = _getCheckData();
         if (currentData.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#edit', {tips: 1});
             return;
         }
         if (currentData.length > 1) {
-            common.toastTop("请选中一行记录进行操作");
+            layer.tips('请选中一行记录进行操作', '#edit', {tips: 1});
             return;
         }
         _addOrEdit("edit", currentData[0]);
@@ -69,7 +69,7 @@ layui.config({
     $('#del').on('click', function () {
         var currentData = _getCheckData();
         if (currentData.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#del', {tips: 1});
             return;
         }
         _delUser(currentData);
@@ -78,7 +78,7 @@ layui.config({
     $('#freeze').on('click', function () {
         var currentData = _getCheckData();
         if (currentData.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#freeze', {tips: 1});
             return;
         }
         _freezeUser(currentData);

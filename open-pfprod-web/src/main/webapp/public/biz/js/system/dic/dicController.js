@@ -98,18 +98,18 @@ layui.config({
         });
     };
 
-    $('.addDic').on('click', function () {
+    $('#addDic').on('click', function () {
         _addOrEditDic("add");
     });
 
-    $('.editDic').on('click', function () {
+    $('#editDic').on('click', function () {
         var currentData = _getDicCheckData();
         if (currentData.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#editDic', {tips: 1});
             return;
         }
         if (currentData.length > 1) {
-            common.toastTop("请选中一行记录进行操作");
+            layer.tips('请选中一行记录进行操作', '#editDic', {tips: 1});
             return;
         }
         _addOrEditDic("edit", currentData[0]);
@@ -139,9 +139,9 @@ layui.config({
         }
     }
 
-    $('.addEnum').on('click', function () {
+    $('#addEnum').on('click', function () {
         if (!_groupName && !_groupCode) {
-            common.toastTop("请先在左侧列表点击【详情】");
+            layer.tips('请先在左侧列表点击【详情】', '#addEnum', {tips: 1});
             return;
         }
         var data = {};
@@ -150,14 +150,14 @@ layui.config({
         _addOrEditEnum("add", data);
     });
 
-    $('.editEnum').on('click', function () {
+    $('#editEnum').on('click', function () {
         var currentData = _getEnumCheckData();
         if (currentData.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#editEnum', {tips: 1});
             return;
         }
         if (currentData.length > 1) {
-            common.toastTop("请选中一行记录进行操作");
+            layer.tips('请选中一行记录进行操作', '#editEnum', {tips: 1});
             return;
         }
         _addOrEditEnum("edit", currentData[0]);
@@ -194,11 +194,11 @@ layui.config({
         }
     });
 
-    $(".delDic").on('click', function () {
+    $("#delDic").on('click', function () {
         var checkStatus = table.checkStatus('dicTableId')
             , data = checkStatus.data;
         if (data.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#delDic', {tips: 1});
             return;
         }
         _delDic(data);
@@ -228,11 +228,11 @@ layui.config({
         })
     }
 
-    $(".delEnum").on('click', function () {
+    $("#delEnum").on('click', function () {
         var checkStatus = table.checkStatus('enumTableId')
             , data = checkStatus.data;
         if (data.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#delEnum', {tips: 1});
             return;
         }
         _delEnum(data);
@@ -308,7 +308,7 @@ layui.config({
         });
     }
 
-    $('.refreshCache').on('click', function () {
+    $('#refreshCache').on('click', function () {
         layer.load(2);
         $.ajax({
             url: basePath + '/pf/r/dic/refreshCache',

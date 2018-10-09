@@ -25,10 +25,10 @@
                #* <button type="button" class="layui-btn add">
                     <i class="iconfont icon-add"></i> 增加
                 </button>*#
-                <button type="button" class="layui-btn edit">
+                <button type="button" class="layui-btn" id="edit">
                     <i class="iconfont icon-edit"></i> 编辑
                 </button>
-                <button type="button" class="layui-btn del">
+                <button type="button" class="layui-btn" id="del">
                    <i class="iconfont icon-batch-del"></i> 删除
                 </button>
                #* <button type="button" class="layui-btn auth">

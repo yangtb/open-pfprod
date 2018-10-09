@@ -70,19 +70,19 @@ layui.config({
         }
     }
 
-    $('.add').on('click', function () {
+    $('#add').on('click', function () {
         _addOrEdit("add");
     });
 
-    $('.edit').on('click', function () {
+    $('#edit').on('click', function () {
         var checkStatus = table.checkStatus('roleTableId')
             , data = checkStatus.data;
         if (data.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#edit', {tips: 1});
             return;
         }
         if (data.length > 1) {
-            common.toastTop("请选中一行记录进行编辑");
+            layer.tips('请选中一行记录进行编辑', '#edit', {tips: 1});
             return;
         }
         var currentEditData = data[0];
@@ -94,11 +94,11 @@ layui.config({
         _addOrEdit("edit", obj.data);
     });
 
-    $('.cancel').on('click', function () {
+    $('#cancel').on('click', function () {
         var checkStatus = table.checkStatus('roleTableId')
             , data = checkStatus.data;
         if (data.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#cancel', {tips: 1});
             return;
         }
         var state = $("select[name='state']").val();
@@ -164,11 +164,11 @@ layui.config({
     }
 
 
-    $('.del').on('click', function () {
+    $('#del').on('click', function () {
         var checkStatus = table.checkStatus('roleTableId')
             , data = checkStatus.data;
         if (data.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#del', {tips: 1});
             return;
         }
         var reqData = new Array();
@@ -272,13 +272,13 @@ layui.config({
 
     $('#saveSet').on('click', function () {
         if (!zTreeRoleId) {
-            common.toastTip('rt', "请点击左侧【查看权限】按钮")
+            layer.tips('请点击左侧【查看权限】按钮', '#saveSet', {tips: 1});
             return;
         }
         var reqData = {};
         reqData.roleMenus = _getCheckedAllZtree(zTreeRoleId);
         if (reqData.roleMenus.length == 0) {
-            common.errorMsg("请先选择角色权限", 'rt');
+            layer.tips('请先选择角色权限', '#saveSet', {tips: 1});
             return;
         }
         _saveRoleMenu(reqData);

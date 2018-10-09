@@ -22,13 +22,13 @@
     <form class="layui-form">
         <div class="layui-inline">
             <div class="layui-btn-group">
-                <button type="button" class="layui-btn edit">
+                <button type="button" class="layui-btn" id="edit">
                     <i class="iconfont icon-edit"></i> 编辑
                 </button>
-                <button type="button" class="layui-btn auth">
+                <button type="button" class="layui-btn" id="auth">
                     <i class="iconfont icon-renzheng"></i> 认证
                 </button>
-                <button type="button" class="layui-btn reject">
+                <button type="button" class="layui-btn" id="reject">
                     <i class="iconfont icon-dianzidanjudanjuxitong-"></i> 驳回
                 </button>
             </div>

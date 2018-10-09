@@ -42,9 +42,9 @@ layui.config({
     //监听提交
     form.on('submit(paramSearchFilter)', function (data) {
         if (data.field.status == 'enabled') {
-            $('.stop').html('<i class="iconfont icon-stop"></i>' + ' 停用');
+            $('#stop').html('<i class="iconfont icon-stop"></i>' + ' 停用');
         } else {
-            $('.stop').html('<i class="iconfont icon-save"></i>' + ' 启用');
+            $('#stop').html('<i class="iconfont icon-save"></i>' + ' 启用');
         }
         table.reload('paramTableId', {
             where: {
@@ -71,18 +71,18 @@ layui.config({
         _changeParam(data);
     }
 
-    $('.add').on('click', function () {
+    $('#add').on('click', function () {
         _addOrEdit("add");
     });
 
-    $('.edit').on('click', function () {
+    $('#edit').on('click', function () {
         var currentData = _getCheckData();
         if (currentData.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#edit', {tips: 1});
             return;
         }
         if (currentData.length > 1) {
-            common.toastTop("请选中一行记录进行操作");
+            layer.tips('请选中一行记录进行操作', '#edit', {tips: 1});
             return;
         }
         _addOrEdit("edit", currentData[0]);
@@ -116,11 +116,11 @@ layui.config({
         }
     }
 
-    $(".stop").on('click', function () {
+    $("#stop").on('click', function () {
         var checkStatus = table.checkStatus('paramTableId')
             , data = checkStatus.data;
         if (data.length == 0) {
-            common.toastTop("请先选中一行记录");
+            layer.tips('请先选中一行记录', '#stop', {tips: 1});
             return;
         }
         _changeParam(data);
@@ -146,7 +146,7 @@ layui.config({
             data.status = 'enabled';
         }
 
-        var msg = $('.stop').text();
+        var msg = $('#stop').text();
         layer.confirm('真的要' + msg + '参数' + name + '么？', {
             title: msg + '参数提示',
             resize: false,
