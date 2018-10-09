@@ -17,8 +17,8 @@ layui.config({
         , height: 'full-68' //容器高度
         , cols: [[
             {checkbox: true},
-            {field: 'dictName', minWidth: 125, title: '字典名称'},
-            {fixed: 'right', title: '操作', align: 'center', toolbar: '#dicBar'}
+            {field: 'dictName', title: '字典名称'},
+            {fixed: 'right', title: '操作', width: 85, align: 'center', toolbar: '#dicBar'}
         ]] //设置表头
         , url: basePath + '/pf/p/dic/list'
         //, even: true
@@ -69,6 +69,14 @@ layui.config({
         });
     });
 
+    //监听行双击事件
+    table.on('rowDouble(dicTableFilter)', function (obj) {
+        _addOrEditDic("edit", obj.data);
+    });
+    table.on('rowDouble(enumTableFilter)', function (obj) {
+        _addOrEditEnum("edit", obj.data);
+    });
+
     var _groupName = null,
         _groupCode = null;
     //监听工具条
@@ -88,7 +96,7 @@ layui.config({
             },
             height: 'full-68'
         });
-    }
+    };
 
     $('.addDic').on('click', function () {
         _addOrEditDic("add");
