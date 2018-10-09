@@ -178,7 +178,7 @@
 <script src="${contextPath}/public/ztree/js/jquery.ztree.exhide.js"></script>
 <script src="${contextPath}/public/ztree/js/fuzzysearch.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<script src="${contextPath}/public/biz/js/drugCatalogueController.js"></script>
+<script src="${contextPath}/public/biz/js/biz/drug/drugCatalogueController.js"></script>
 
 </body>
 </html>

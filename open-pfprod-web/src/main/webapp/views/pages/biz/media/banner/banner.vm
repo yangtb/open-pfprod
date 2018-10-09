@@ -78,7 +78,7 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
-<script src="${contextPath}/public/biz/js/bannerController.js"></script>
+<script src="${contextPath}/public/biz/js/biz/media/bannerController.js"></script>
 
 <script type="text/html" id="bannerBar">
     <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>

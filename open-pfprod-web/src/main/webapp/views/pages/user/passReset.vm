@@ -60,8 +60,8 @@
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 <script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
-<script src="${contextPath}/public/biz/js/loginController.js"></script>
-<script src="${contextPath}/public/biz/js/resetPassFormController.js"></script>
+<script src="${contextPath}/public/biz/js/user/login/loginController.js"></script>
+<script src="${contextPath}/public/biz/js/user/pass/resetPassFormController.js"></script>
 
 <script>
     function fullForm(data) {

@@ -95,7 +95,7 @@
 
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
-<script src="${contextPath}/public/biz/js/dicController.js"></script>
+<script src="${contextPath}/public/biz/js/system/dic/dicController.js"></script>
 
 <script type="text/html" id="dicBar">
     <a class="layui-btn layui-btn-xs" lay-event="detail"><i class="iconfont icon-detail"></i> 详情</a>

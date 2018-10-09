@@ -76,7 +76,7 @@
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<script src="${contextPath}/public/biz/js/noticeFormController.js"></script>
+<script src="${contextPath}/public/biz/js/system/notice/noticeFormController.js"></script>
 <!-- 加载编辑器的容器 -->
 <script id="noticeContentEditor" name="noticeContent" type="text/plain">
         这里写你的初始化内容

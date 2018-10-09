@@ -61,7 +61,7 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
-<script src="${contextPath}/public/biz/js/paramController.js"></script>
+<script src="${contextPath}/public/biz/js/system/param/paramController.js"></script>
 
 <script type="text/html" id="paramBar">
     <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>

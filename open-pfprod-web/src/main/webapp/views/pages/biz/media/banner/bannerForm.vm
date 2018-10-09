@@ -104,7 +104,7 @@
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 <script src="${contextPath}/public/common/js/js-pinyin.js"></script>
-<script src="${contextPath}/public/biz/js/dicEnumFormController.js"></script>
+<script src="${contextPath}/public/biz/js/system/dic/dicEnumFormController.js"></script>
 
 <script>
     function fullForm(data) {

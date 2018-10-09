@@ -121,7 +121,7 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
-<script src="${contextPath}/public/biz/js/messageFormController.js"></script>
+<script src="${contextPath}/public/biz/js/system/message/messageFormController.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 

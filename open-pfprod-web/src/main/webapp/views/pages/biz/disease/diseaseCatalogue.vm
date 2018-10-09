@@ -192,7 +192,7 @@
 <script src="${contextPath}/public/ztree/js/jquery.ztree.exhide.js"></script>
 <script src="${contextPath}/public/ztree/js/fuzzysearch.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<script src="${contextPath}/public/biz/js/diseaseCatalogueController.js"></script>
+<script src="${contextPath}/public/biz/js/biz/disease/diseaseCatalogueController.js"></script>
 
 </body>
 </html>

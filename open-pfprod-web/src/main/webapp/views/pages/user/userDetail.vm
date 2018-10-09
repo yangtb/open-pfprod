@@ -109,7 +109,7 @@
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<script src="${contextPath}/public/biz/js/userFormController.js"></script>
+<script src="${contextPath}/public/biz/js/user/userFormController.js"></script>
 <script>
     var formType = '${formType}';
     var publicKey = '${publicKey}';

@@ -136,7 +136,7 @@
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
-<script src="${contextPath}/public/biz/js/emailFormController.js"></script>
+<script src="${contextPath}/public/biz/js/system/set/emailFormController.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 <!-- 加载编辑器的容器 -->
 <script id="container" name="content" type="text/plain">

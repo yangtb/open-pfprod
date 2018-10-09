@@ -63,8 +63,8 @@
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
-<script src="${contextPath}/public/biz/js/modifyPassController.js"></script>
-<script src="${contextPath}/public/biz/js/modifyPassFormController.js"></script>
+<script src="${contextPath}/public/biz/js/user/pass/modifyPassController.js"></script>
+<script src="${contextPath}/public/biz/js/user/pass/modifyPassFormController.js"></script>
 
 <script>
     $(function () {

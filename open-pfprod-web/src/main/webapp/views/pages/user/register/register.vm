@@ -115,8 +115,8 @@
 <script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
-<script src="${contextPath}/public/biz/js/registerFormController.js"></script>
-<script src="${contextPath}/public/biz/js/registerController.js"></script>
+<script src="${contextPath}/public/biz/js/user/register/registerFormController.js"></script>
+<script src="${contextPath}/public/biz/js/user/register/registerController.js"></script>
 <script>
     $(function () {
         var registerController = new RegisterController();

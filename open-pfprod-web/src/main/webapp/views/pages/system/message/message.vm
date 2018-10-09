@@ -68,7 +68,7 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
-<script src="${contextPath}/public/biz/js/messageController.js"></script>
+<script src="${contextPath}/public/biz/js/system/message/messageController.js"></script>
 
 <script type="text/html" id="templateBar">
     <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>
