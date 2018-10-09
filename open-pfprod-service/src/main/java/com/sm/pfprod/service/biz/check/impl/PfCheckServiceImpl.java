@@ -10,7 +10,6 @@ import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
 import com.sm.open.core.facade.model.result.pf.biz.check.BasBodyCheckResult;
 import com.sm.open.core.facade.model.result.pf.biz.check.BasBodyResultResult;
-import com.sm.open.core.facade.model.result.pf.biz.inquisition.BasInquesResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.biz.check.CheckClient;
