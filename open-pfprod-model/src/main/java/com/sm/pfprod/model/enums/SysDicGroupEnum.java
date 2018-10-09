@@ -13,7 +13,7 @@ public enum SysDicGroupEnum {
     BANNER_POSITION("BANNER_POSITION", "banner位"),
     EXAM_WAYS("EXAM_WAYS", "检查方式"),
     BODY_POSITION("BODY_POSITION", "检查题库"),
-    CLINIC_TEMPLET_TAG("CLINIC_TEMPLET_TAG", "模板标签");
+    CLINIC_TEMPLATE_TAG("CLINIC_TEMPLATE_TAG", "模板标签");
 
     private String code;
     private String desc;

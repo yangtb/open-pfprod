@@ -54,7 +54,7 @@ public class PfClinicTemplateController extends BaseController {
     @RequestMapping("/template/tag/form")
     public String tagForm(Long idDemo, Model model) {
         model.addAttribute("idDemo", idDemo);
-        model.addAttribute("tags", enumUtil.getEnumMap(SysDicGroupEnum.CLINIC_TEMPLET_TAG.getCode()));
+        model.addAttribute("tags", enumUtil.getEnumMap(SysDicGroupEnum.CLINIC_TEMPLATE_TAG.getCode()));
         return "pages/biz/clinic/templateTagForm";
     }
 
