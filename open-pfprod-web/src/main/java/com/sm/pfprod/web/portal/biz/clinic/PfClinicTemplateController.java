@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 
 /**
- * @ClassName: PfClinicTempletController
- * @Description: 
+ * @ClassName: PfClinicTemplateController
+ * @Description: 临床模板定义controller
  * @Author yangtongbin
  * @Date 2018/10/8
  */
