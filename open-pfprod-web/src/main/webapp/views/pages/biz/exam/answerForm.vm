@@ -19,12 +19,12 @@
 
 <body>
 <div style="margin: 0px 10px 0px 10px">
-    <div class="layui-col-xs4">
+    <div class="layui-col-xs5">
         <table id="answerTable" lay-filter="answerTableFilter">
         </table>
     </div>
 
-    <div class="layui-col-xs8">
+    <div class="layui-col-xs7">
         <form class="layui-form" id="answerForm" style="padding-top: 10px">
             <div hidden>
                 <input name="idResult" id="idResult" hidden>
@@ -33,16 +33,26 @@
                 <input name="sdType" id="sdType" hidden>
             </div>
 
-
             <div class="layui-form-item form-item-my">
                 <div class="layui-inline">
                     <label class="layui-form-label">结果值<i class="iconfont icon-required"
                                                           style="color: #f03f2d"></i></label>
                     <div class="layui-input-block">
-                        <input type="text" name="desResult" autocomplete="off" class="layui-input"
+                        <input type="text" name="valResult" autocomplete="off" class="layui-input"
                                placeholder="结果值" lay-verify="required|desResult" lay-vertype="tips">
                     </div>
                 </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">结果说明</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="desResult" autocomplete="off" class="layui-input"
+                               placeholder="结果说明" lay-verify="desResult" lay-vertype="tips">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-form-item form-item-my">
                 <div class="layui-inline">
                     <label class="layui-form-label">费用</label>
                     <div class="layui-input-block">
@@ -59,12 +69,11 @@
                 </div>
             </div>
 
-
             <div class="layui-form-item form-item-my">
                 <label class="layui-form-label">专家解读</label>
                 <div class="layui-input-block">
                 <textarea name="desExpert" class="layui-textarea" lay-verify="desResult" lay-vertype="tips"
-                          placeholder="请输入专家解读"></textarea>
+                          placeholder="请输入专家解读" style="width: 441px;"></textarea>
                 </div>
             </div>
 
