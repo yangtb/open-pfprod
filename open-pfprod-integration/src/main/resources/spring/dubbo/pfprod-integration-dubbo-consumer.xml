@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:consumer check="false" timeout="${dubbo.timeout}" />
+    <dubbo:consumer check="false" timeout="${dubbo.timeout}"/>
 
     <!-- 首页服务 -->
     <dubbo:reference id="pfHomeFacade" interface="com.sm.open.core.facade.pf.home.PfHomeFacade"/>
@@ -49,7 +49,8 @@
     <dubbo:reference id="pfDrugFacade" interface="com.sm.open.core.facade.pf.biz.drug.PfDrugFacade"/>
 
     <!-- 问诊服务 -->
-    <dubbo:reference id="pfInquisitionFacade" interface="com.sm.open.core.facade.pf.biz.inquisition.PfInquisitionFacade"/>
+    <dubbo:reference id="pfInquisitionFacade"
+                     interface="com.sm.open.core.facade.pf.biz.inquisition.PfInquisitionFacade"/>
 
     <!-- 上传服务 -->
     <dubbo:reference id="pfUploadFacade" interface="com.sm.open.core.facade.pf.common.upload.PfUploadFacade"/>
@@ -59,5 +60,9 @@
 
     <!-- 检验服务 -->
     <dubbo:reference id="pfExamFacade" interface="com.sm.open.core.facade.pf.biz.exam.PfExamFacade"/>
+
+    <!-- 临床模板服务 -->
+    <dubbo:reference id="pfClinicTemplateFacade"
+                     interface="com.sm.open.core.facade.pf.biz.clinic.PfClinicTemplateFacade"/>
 
 </beans>
