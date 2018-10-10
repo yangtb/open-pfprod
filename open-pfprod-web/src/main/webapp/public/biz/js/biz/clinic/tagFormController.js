@@ -10,11 +10,11 @@ layui.config({
     table.render({
         elem: '#tagTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'tagTableId'
-        , height: 'full-30' //容器高度
+        , height: 'full-85' //容器高度
         , cols: [[
             {type: 'radio'},
             {field: 'fgActive', minWidth: 73, title: '状态', templet: '#fgActiveTpl'},
-            {field: 'name', minWidth: 150, title: '标签名称'},
+            {field: 'name', minWidth: 130, title: '标签名称'},
             {fixed: 'right', title: '操作', align: 'center', toolbar: '#tagBar'}
         ]] //设置表头
         , url: basePath + '/pf/p/clinic/template/tag/list'
@@ -88,7 +88,7 @@ layui.config({
             where: {
                 idDemo: idDemo
             },
-            height: 'full-30'
+            height: 'full-85'
         });
     };
 
