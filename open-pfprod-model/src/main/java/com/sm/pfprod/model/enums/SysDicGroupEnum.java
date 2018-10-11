@@ -13,7 +13,9 @@ public enum SysDicGroupEnum {
     BANNER_POSITION("BANNER_POSITION", "banner位"),
     EXAM_WAYS("EXAM_WAYS", "检查方式"),
     BODY_POSITION("BODY_POSITION", "检查题库"),
-    CLINIC_TEMPLATE_TAG("CLINIC_TEMPLATE_TAG", "模板标签");
+    CLINIC_TEMPLATE_TAG("CLINIC_TEMPLATE_TAG", "模板标签"),
+    CASE_HISTORY_LEVEL("CASE_HISTORY_LEVEL", "病历级别"),
+    CASE_HISTORY_USE("CASE_HISTORY_USE", "病历用途");
 
     private String code;
     private String desc;
