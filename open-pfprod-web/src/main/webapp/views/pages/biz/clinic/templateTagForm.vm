@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>$!{formType}</title>
+    <title>编辑模板</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,132 +19,146 @@
 
 <body>
 <div style="margin: 0px 10px 0px 10px">
-    <div class="layui-col-xs4" style="padding-right: 10px;">
-        <table id="tagTable" lay-filter="tagTableFilter">
-        </table>
-    </div>
-
-    <div class="layui-col-xs8">
-        <div class="layui-tab">
-            <ul class="layui-tab-title">
-                <li class="layui-this">标签定义</li>
-                <li>文本</li>
-            </ul>
-            <div class="layui-tab-content">
-                <div class="layui-tab-item layui-show">
-                    <form class="layui-form" id="tagForm" style="padding-top: 10px">
-                        <div hidden>
-                            <input name="idTag" id="idTag" hidden>
-                            <input name="idDemo" id="idDemo" hidden>
-                        </div>
-
-                        <div class="layui-form-item">
-                            <div class="layui-inline">
-                                <label class="layui-form-label">标签名称<i class="iconfont icon-required"
-                                                                       style="color: #f03f2d"></i></label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="name" lay-verify="required" lay-vertype="tips"
-                                           autocomplete="off" class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-inline">
-                                <label class="layui-form-label">标签类别<i class="iconfont icon-required"
-                                                                       style="color: #f03f2d"></i></label>
-                                <div class="layui-input-inline">
-                                    <select name="sdTag" id="sdTag" lay-verify="required" lay-vertype="tips">
-                                        <option value="">请选择</option>
-                                        #foreach($param in ${tags.keySet()})
-                                            <option value="$!param">$!{tags.get($param)}</option>
-                                        #end
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="layui-form-item">
-                            <div class="layui-inline">
-                                <label class="layui-form-label">状态<i class="iconfont icon-required"
-                                                                     style="color: #f03f2d"></i></label>
-                                <div class="layui-input-block">
-                                    <input type="checkbox" checked="1" name="fgActive" lay-skin="switch"
-                                           value="1" lay-text="NO|OFF">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="checkbox" name="fgShowExec" value="1" title="执行时是否需要显示">
-                                </div>
-                            </div>
-                            <div class="layui-inline">
-                                <label class="layui-form-label">排序<i class="iconfont icon-required"
-                                                                     style="color: #f03f2d"></i></label>
-                                <input type="text" name="sort" autocomplete="off" class="layui-input"
-                                       placeholder="排序" lay-verify="required|sort" lay-vertype="tips"
-                                       style="width: 120px;">
-                            </div>
-                        </div>
-
-
-                        <div class="layui-form-item">
-                            <div class="layui-inline">
-                                <label class="layui-form-label">创建人</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="creator" autocomplete="off"
-                                           class="layui-input layui-disabled"
-                                           disabled>
-                                </div>
-                            </div>
-                            <div class="layui-inline">
-                                <label class="layui-form-label">创建时间</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="gmtCreate" autocomplete="off"
-                                           class="layui-input layui-disabled"
-                                           disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <div class="layui-inline">
-                                <label class="layui-form-label">修改人</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="operator" autocomplete="off"
-                                           class="layui-input layui-disabled"
-                                           disabled>
-                                </div>
-                            </div>
-                            <div class="layui-inline">
-                                <label class="layui-form-label">修改时间</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="gmtModify" autocomplete="off"
-                                           class="layui-input layui-disabled"
-                                           disabled>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item">
-                            <div class="layui-input-block">
-                                <button id="add" type="button" class="layui-btn">
-                                    <i class="layui-icon layui-icon-add-1"></i>增加
-                                </button>
-                                <button id="save" class="layui-btn" lay-submit="" lay-filter="saveTag">
-                                    <i class="iconfont icon-save-copy"></i> 保存
-                                </button>
-                                <button id="reset" type="reset" class="layui-btn layui-btn-danger">
-                                    <i class="iconfont icon-reset"></i> 重置
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">标签定义</li>
+            <li>评估标准</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-col-xs4" style="padding-right: 10px;">
+                    <table id="tagTable" lay-filter="tagTableFilter">
+                    </table>
                 </div>
-                <div class="layui-tab-item">
-                    <blockquote class="layui-elem-quote">
-                        暂无扩展属性<br>
-                        <i class="iconfont icon-xiaolian" style="font-size:2rem; "></i>
-                    </blockquote>
+
+                <div class="layui-col-xs8">
+                    <div class="layui-tab">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">标签定义</li>
+                            <li>文本</li>
+                        </ul>
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show">
+                                <form class="layui-form" id="tagForm" style="padding-top: 10px">
+                                    <div hidden>
+                                        <input name="idTag" id="idTag" hidden>
+                                        <input name="idDemo" id="idDemo" hidden>
+                                    </div>
+
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">标签名称<i class="iconfont icon-required"
+                                                                                   style="color: #f03f2d"></i></label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="name" lay-verify="required" lay-vertype="tips"
+                                                       autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">标签类别<i class="iconfont icon-required"
+                                                                                   style="color: #f03f2d"></i></label>
+                                            <div class="layui-input-inline">
+                                                <select name="sdTag" id="sdTag" lay-verify="required" lay-vertype="tips">
+                                                    <option value="">请选择</option>
+                                                    #foreach($param in ${tags.keySet()})
+                                                        <option value="$!param">$!{tags.get($param)}</option>
+                                                    #end
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">状态<i class="iconfont icon-required"
+                                                                                 style="color: #f03f2d"></i></label>
+                                            <div class="layui-input-block">
+                                                <input type="checkbox" checked="1" name="fgActive" lay-skin="switch"
+                                                       value="1" lay-text="NO|OFF">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input type="checkbox" name="fgShowExec" value="1" title="执行时是否需要显示">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">排序<i class="iconfont icon-required"
+                                                                                 style="color: #f03f2d"></i></label>
+                                            <input type="text" name="sort" autocomplete="off" class="layui-input"
+                                                   placeholder="排序" lay-verify="required|sort" lay-vertype="tips"
+                                                   style="width: 120px;">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">创建人</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="creator" autocomplete="off"
+                                                       class="layui-input layui-disabled"
+                                                       disabled>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">创建时间</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="gmtCreate" autocomplete="off"
+                                                       class="layui-input layui-disabled"
+                                                       disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">修改人</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="operator" autocomplete="off"
+                                                       class="layui-input layui-disabled"
+                                                       disabled>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">修改时间</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="gmtModify" autocomplete="off"
+                                                       class="layui-input layui-disabled"
+                                                       disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button id="add" type="button" class="layui-btn">
+                                                <i class="layui-icon layui-icon-add-1"></i>增加
+                                            </button>
+                                            <button id="save" class="layui-btn" lay-submit="" lay-filter="saveTag">
+                                                <i class="iconfont icon-save-copy"></i> 保存
+                                            </button>
+                                            <button id="reset" type="reset" class="layui-btn layui-btn-danger">
+                                                <i class="iconfont icon-reset"></i> 重置
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="layui-tab-item">
+                                <blockquote class="layui-elem-quote">
+                                    暂无扩展属性<br>
+                                    <i class="iconfont icon-xiaolian" style="font-size:2rem; "></i>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+            <div class="layui-tab-item">
+                评估标准
+            </div>
         </div>
-
     </div>
+
 
 </div>
 
