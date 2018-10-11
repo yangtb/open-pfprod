@@ -127,14 +127,22 @@ layui.define(['layer'], function (exports) {
                     layer.closeAll('loading');
                     if (data.code != 0) {
                         if (selectId) {
-                            layer.tips(data.msg, '#' + selectId, {tips: 1});
+                            if (typeof(selectId) == 'string') {
+                                layer.tips(data.msg, '#' + selectId, {tips: 1});
+                            } else {
+                                layer.tips(data.msg, selectId);
+                            }
                         } else {
                             common.errorMsg(data.msg);
                         }
                         return false;
                     } else {
                         if (selectId) {
-                            layer.tips(msg + "成功", '#' + selectId, {tips: 1});
+                            if (typeof(selectId) == 'string') {
+                                layer.tips(msg + "成功", '#' + selectId, {tips: 1});
+                            } else {
+                                layer.tips(msg + "成功", selectId);
+                            }
                         } else {
                             common.sucChildMsg(msg + "成功");
                         }
