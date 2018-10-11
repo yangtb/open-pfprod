@@ -65,4 +65,9 @@
     <dubbo:reference id="pfClinicTemplateFacade"
                      interface="com.sm.open.core.facade.pf.biz.clinic.PfClinicTemplateFacade"/>
 
+    <!-- 病历库服务 -->
+    <dubbo:reference id="pfCaseHistoryFacade"
+                     interface="com.sm.open.core.facade.pf.biz.casehistory.PfCaseHistoryFacade"/>
+
+
 </beans>

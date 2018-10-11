@@ -130,4 +130,23 @@ public class PfClinicTemplateServiceImpl implements PfClinicTemplateService {
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
+
+    @Override
+    public List<BasDemo> listAllBasDemo() {
+        CommonResult<List<BasDemoResult>> result = clinicTemplateClient.listAllBasDemo();
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), BasDemo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<BasDemoTag> listTagByIdDemo(Long idDemo) {
+        CommonResult<List<BasDemoTagResult>> result = clinicTemplateClient.listTagByIdDemo(idDemo);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), BasDemoTag.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
 }

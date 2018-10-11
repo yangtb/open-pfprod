@@ -104,4 +104,20 @@ public interface PfClinicTemplateService {
      * @return
      */
     Long saveTag(BasDemoTag dto);
+
+    /**
+     * 查询所有病历模板
+     *
+     * @return
+     */
+    List<BasDemo> listAllBasDemo();
+
+    /**
+     * 根据idDemo查询模板标签
+     *
+     * @param idDemo
+     * @return
+     */
+    List<BasDemoTag> listTagByIdDemo(Long idDemo);
+
 }

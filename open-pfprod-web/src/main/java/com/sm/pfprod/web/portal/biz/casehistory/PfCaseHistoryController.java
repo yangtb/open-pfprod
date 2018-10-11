@@ -1,8 +1,10 @@
 package com.sm.pfprod.web.portal.biz.casehistory;
 
+import com.sm.pfprod.model.dto.biz.casehistory.PfCaseHistoryDto;
 import com.sm.pfprod.model.dto.biz.clinic.PfClinicTemplateDto;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.service.biz.casehistory.PfCaseHistoryService;
 import com.sm.pfprod.service.biz.clinic.PfClinicTemplateService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.util.EnumUtil;
@@ -25,27 +27,46 @@ import javax.annotation.Resource;
 public class PfCaseHistoryController extends BaseController {
 
     @Resource
+    private PfCaseHistoryService pfCaseHistoryService;
+
+    @Resource
+    private EnumUtil enumUtil;
+
+    @Resource
     private PfClinicTemplateService pfClinicTemplateService;
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/page")
     public String cataloguePage(Model model) {
+        model.addAttribute("caseHistoryLevel", enumUtil.getEnumMap(SysDicGroupEnum.CASE_HISTORY_LEVEL.getCode()));
+        model.addAttribute("caseHistoryUse", enumUtil.getEnumMap(SysDicGroupEnum.CASE_HISTORY_USE.getCode()));
         return "pages/biz/casehistory/caseHistoryTemplate";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "/template/list")
     @ResponseBody
-    public PageResult listTemplate(PfClinicTemplateDto dto) {
-        return pfClinicTemplateService.listTemplate(dto);
+    public PageResult listTemplate(PfCaseHistoryDto dto) {
+        return pfCaseHistoryService.listTemplate(dto);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @RequestMapping("/template/form")
+    public String form(String formType, Model model) {
+        model.addAttribute("formType", formType);
+        model.addAttribute("baseDemo", pfClinicTemplateService.listAllBasDemo());
+        model.addAttribute("caseHistoryLevel", enumUtil.getEnumMap(SysDicGroupEnum.CASE_HISTORY_LEVEL.getCode()));
+        model.addAttribute("caseHistoryUse", enumUtil.getEnumMap(SysDicGroupEnum.CASE_HISTORY_USE.getCode()));
+        return "pages/biz/casehistory/caseHistoryTemplateForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
     @RequestMapping("/form")
-    public String form(String formType, Model model) {
-        model.addAttribute("formType", formType);
-        return "pages/biz/casehistory/caseHistoryTemplateForm";
+    public String tagForm(Long idMedicalrec, Long idDemo, Model model) {
+        model.addAttribute("idMedicalrec", idMedicalrec);
+        model.addAttribute("idDemo", idDemo);
+        model.addAttribute("tags", pfClinicTemplateService.listTagByIdDemo(idDemo));
+        return "pages/biz/casehistory/templateTagForm";
     }
-
 
 }

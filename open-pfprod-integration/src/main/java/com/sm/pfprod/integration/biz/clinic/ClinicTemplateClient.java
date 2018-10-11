@@ -6,6 +6,8 @@ import com.sm.open.core.facade.model.param.pf.biz.clinic.BasDemoTagParam;
 import com.sm.open.core.facade.model.param.pf.biz.clinic.PfClinicTemplateParam;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
+import com.sm.open.core.facade.model.result.pf.biz.clinic.BasDemoResult;
+import com.sm.open.core.facade.model.result.pf.biz.clinic.BasDemoTagResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PageResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
@@ -64,5 +66,14 @@ public class ClinicTemplateClient {
     public CommonResult<Long> saveTag(BasDemoTagParam param) {
         return pfClinicTemplateFacade.saveTag(param);
     }
+
+    public CommonResult<List<BasDemoResult>> listAllBasDemo() {
+        return pfClinicTemplateFacade.listAllBasDemo();
+    }
+
+    public CommonResult<List<BasDemoTagResult>> listTagByIdDemo(Long idDemo) {
+        return pfClinicTemplateFacade.listTagByIdDemo(idDemo);
+    }
+
 
 }
