@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>编辑模板</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '$!{basePath}';
+        var contextPath = '$!{contextPath}';
+        var idDemo = '$!{idDemo}';
+    </script>
+</head>
+
+<body>
+<div style="margin: 0px 10px 0px 10px">
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            #if(!$tags.isEmpty())
+                #foreach($!element in $!tags)
+                    <li #if($velocityCount == 1) class="layui-this"#end>$!element.name</li>
+                #end
+            #end
+        </ul>
+    <div class="layui-tab-content">
+        #if(!$tags.isEmpty())
+            #foreach($!element in $!tags)
+                    <div class="layui-tab-item #if($velocityCount == 1) layui-show"#end">
+                $!element.name
+            </div>
+            #end
+        #else
+            <blockquote class="layui-elem-quote">
+                暂无模板<br>
+                <i class="iconfont icon-xiaolian" style="font-size:2rem; "></i>
+            </blockquote>
+        #end
+    </div>
+</div>
+
+
+</div>
+
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.all.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.formautofill.js"></script>
+<script src="$!{contextPath}/public/biz/js/biz/casehistory/tagFormController.js"></script>
+
+<script type="text/html" id="fgActiveTpl">
+    {{#  if(d.fgActive == '1'){ }}
+    <span class="label label-info">启用</span>
+    {{#  } else { }}
+    <span class="label label-danger">停用</span>
+    {{#  } }}
+</script>
+
+<script type="text/html" id="tagBar">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="layui-icon layui-icon-delete"></i></a>
+</script>
+
+</body>
+</html>
