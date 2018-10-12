@@ -16,7 +16,7 @@
 
 <body class="childrenBody">
 <div style="text-align: center; padding:8% 0;">
-    <i class="iconfont icon-404" style="line-height:20rem; font-size:20rem; color: #393D50;"></i>
+    <i class="iconfont icon-404" style="line-height:18rem; font-size:18rem; color: #393D50;"></i>
     <p style="font-size: 20px; font-weight: 300; color: #999;">页面未找到！抱歉，页面好像去火星了~</p>
 </div>
 </body>
