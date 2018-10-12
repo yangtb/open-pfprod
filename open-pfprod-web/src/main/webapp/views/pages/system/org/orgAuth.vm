@@ -76,14 +76,15 @@
 
 <script type="text/html" id="sdRegTpl">
     {{#  if(d.sdReg == 0){ }}
-    <span class="label layui-bg-orange">未处理</span>
+    <button class="layui-btn layui-btn-warm layui-btn-xs">未处理</button>
     {{#  } }}
     {{#  if(d.sdReg == 1){ }}
-    <span class="label layui-bg-green">认证</span>
+    <button class="layui-btn layui-btn-xs">认证</button>
     {{#  } }}
     {{#  if(d.sdReg == 2){ }}
-    <span class="label layui-bg-red">驳回</span>
+    <button class="layui-btn layui-btn-danger layui-btn-xs">驳回</button>
     {{#  } }}
+
 </script>
 
 </body>

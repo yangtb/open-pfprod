@@ -53,9 +53,9 @@
 
 <script type="text/html" id="fgActiveTpl">
     {{#  if(d.fgActive == '1'){ }}
-    <span class="label label-info">启用</span>
+    <button class="layui-btn layui-btn-normal layui-btn-xs">启用</button>
     {{#  } else { }}
-    <span class="label label-danger">停用</span>
+    <button class="layui-btn layui-btn-danger layui-btn-xs">停用</button>
     {{#  } }}
 </script>
 

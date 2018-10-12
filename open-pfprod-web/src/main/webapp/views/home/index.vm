@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="${contextPath}/public/layui/build/css/themes/default.css" media="all" id="skin" kit-skin/>
     <script>
         var basePath = '${basePath}';
-        var isAnonymousUser='${homeInfo.anonymousUser}';
+        var isAnonymousUser='$!{homeInfo.anonymousUser}';
         var fgActive= '$!{homeInfo.sysOrg.getFgActive()}';
         var gmtValid = '$!{homeInfo.sysOrg.getGmtValid()}';
         var orgExpiryNoticeDay = '$!{orgExpiryNoticeDay}';
@@ -93,9 +93,9 @@
                 </a>
                 #if(${homeInfo.anonymousUser} == false)
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" kit-target
+                        #*<dd><a href="javascript:;" kit-target
                                data-options="{url:'${basePath}/user/userDetail',icon:'icon-wodeziliao',title:'基本资料',id:'jbzl'}">
-                            <i class="iconfont icon-wodeziliao"></i><span> 基本资料</span></a></dd>
+                            <i class="iconfont icon-wodeziliao"></i><span> 基本资料</span></a></dd>*#
                         #if(${homeInfo.sysOrg})
                             <dd>
                                 <a id="orgInfo" href="javascript:;" kit-target
