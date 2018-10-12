@@ -9,6 +9,7 @@ import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.system.org.PfOrgService;
 import com.sm.pfprod.web.portal.BaseController;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -58,7 +59,7 @@ public class PfOrgController extends BaseController {
             SysOrg sysOrg = pfOrgService.selectOrgInfoById(idOrg);
             model.addAttribute("orgInfo", JSON.toJSONString(sysOrg));
             model.addAttribute("fgActive", sysOrg.getFgActive());
-            if (sysOrg.getFgActive().equals(YesOrNoNum.YES.getCode())) {
+            if (sysOrg.getFgActive().equals(YesOrNoNum.YES.getCode()) && StringUtils.isNotBlank(sysOrg.getGmtValid())) {
                 Date gmtValid = DateUtil.parseDate(sysOrg.getGmtValid());
                 model.addAttribute("renewFlag", gmtValid.before(DateUtil.addDate(gmtValid, orgExpiryNoticeDay)));
             }

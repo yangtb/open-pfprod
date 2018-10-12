@@ -11,9 +11,9 @@
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
 
     <script>
-        var basePath = '${basePath}';
-        var contextPath = '${contextPath}';
-        var formType = '${formType}';
+        var basePath = '$!{basePath}';
+        var contextPath = '$!{contextPath}';
+        var formType = '$!formType}';
         var orgData = '$!{orgInfo}';
     </script>
 </head>
@@ -177,7 +177,10 @@
     $(function(){
         if (orgData) {
             var formData = eval('(' + orgData + ')')
-            formData.gmtValid = moment(formData.gmtValid).format('YYYY-MM-DD');
+            console.log(formData.gmtValid)
+            if (formData.gmtValid) {
+                formData.gmtValid = moment(formData.gmtValid).format('YYYY-MM-DD');
+            }
             formData.gmtCreate = moment(formData.gmtCreate).format('YYYY-MM-DD HH:mm:ss');
             formData.gmtModify = moment(formData.gmtModify).format('YYYY-MM-DD HH:mm:ss');
             fullForm(formData);
