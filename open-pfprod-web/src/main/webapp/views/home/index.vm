@@ -82,7 +82,10 @@
                 </a>
             </li>
             <li class="layui-nav-item">
-                <a href="javascript:;"><i class="iconfont icon-quanping2"></i> 全屏</a>
+                <a id="fullScreen" href="javascript:;"><i class="iconfont icon-quanping"></i> 全屏</a>
+                <a id="exitScreen" href="javascript:;" style="display: none;">
+                    <i class="iconfont icon-tuichuquanping"></i> 退出全屏
+                </a>
             </li>
             <li class="layui-nav-item">
                 <a href="javascript:;">
