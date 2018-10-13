@@ -33,9 +33,7 @@ public class GlobalExceptionResolver {
             BizRuntimeException bizEx = (BizRuntimeException) e;
             return ResultObject.create(requestUrl, bizEx.getErrorCode(), bizEx.getMessage());
         } else if (e instanceof AccessDeniedException) {
-            // 1:判断是否是ajax请求
-            if (request.getHeader("x-requested-with") != null
-                    && "XMLHttpRequest".equalsIgnoreCase(request.getHeader("x-requested-with"))) {
+            if (isAjaxReq(request)) {
                 return ResultObject.create(requestUrl, ErrorCode.ERROR_NET_150001, "没有访问权限");
             }
             // 无权限异常抛到上层
@@ -44,6 +42,17 @@ public class GlobalExceptionResolver {
             LOGGER.info("【GlobalExceptionResolver】服务器内部错误, url:{}, msg:{}", requestUrl, e.getMessage());
             return ResultObject.create(requestUrl, ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
         }
+    }
+
+    /**
+     * 判断是否是ajax请求
+     *
+     * @param request
+     * @return
+     */
+    private boolean isAjaxReq(HttpServletRequest request) {
+        return request.getHeader("x-requested-with") != null
+                && "XMLHttpRequest".equalsIgnoreCase(request.getHeader("x-requested-with"));
     }
 
 }
