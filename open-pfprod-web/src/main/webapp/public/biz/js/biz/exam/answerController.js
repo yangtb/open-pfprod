@@ -19,7 +19,7 @@ layui.config({
             {type: 'radio'},
             {field: 'fgActive', minWidth: 73, title: '状态', templet: '#fgActiveTpl'},
             {field: 'valResult', minWidth: 90, title: '结果值'},
-            {field: 'desResult', minWidth: 130, title: '说明'},
+            {field: 'desResult', minWidth: 110, title: '说明'},
             {fixed: 'right', title: '操作', align: 'center', toolbar: '#examAnswer'}
         ]] //设置表头
         , url: basePath + '/pf/p/exam/question/answer/list'
