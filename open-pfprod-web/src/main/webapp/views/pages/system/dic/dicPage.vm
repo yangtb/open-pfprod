@@ -14,6 +14,9 @@
     <script>
         var basePath = '${basePath}';
     </script>
+    <style>
+        table{padding-bottom: 2px;}
+    </style>
 
 </head>
 
@@ -48,6 +51,7 @@
                 </div>
             </div>
         </form>
+
         <table id="dicTable" lay-filter="dicTableFilter">
         </table>
     </div>
