@@ -41,11 +41,9 @@
     background-color: #5bc0de
 }
 
-
 .label-warning {
     background-color: #f0ad4e
 }
-
 
 .label-danger {
     background-color: #FF5722
@@ -53,4 +51,9 @@
 
 .label-width-my {
     width: 100px;
+}
+
+.layui-upload-img {
+    width: 92px;
+    height: 92px;
 }

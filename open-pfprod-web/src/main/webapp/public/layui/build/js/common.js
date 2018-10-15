@@ -98,9 +98,40 @@ layui.define(['layer'], function (exports) {
             return index;
         },
 
+        openSinglePhoto: function (imgPath) {
+            layui.layer.photos({
+                photos: {
+                    title: "查看图片",
+                    data: [{
+                        src: imgPath
+                    }]
+                },
+                shade: .01,
+                closeBtn: 1,
+                anim: 5
+            })
+        },
+
         /**弹出层*/
         open: function (title, url, width, height, sucBack, anim) {
             var index = layui.layer.open({
+                title: '<b>' + title + '</b>',
+                //skin: 'layui-layer-molv', //样式类名
+                type: 2,
+                area: [width + 'px', height + 'px'],
+                anim: anim,
+                fixed: false, //不固定
+                maxmin: true,
+                content: url,
+                shadeClose: true,
+                success: sucBack
+            });
+            return index;
+        },
+
+        /**弹出层*/
+        openParent: function (title, url, width, height, sucBack, anim) {
+            var index = parent.layui.layer.open({
                 title: '<b>' + title + '</b>',
                 //skin: 'layui-layer-molv', //样式类名
                 type: 2,
