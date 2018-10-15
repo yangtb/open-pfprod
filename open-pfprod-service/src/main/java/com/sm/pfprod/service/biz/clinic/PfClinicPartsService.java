@@ -7,6 +7,8 @@ import com.sm.pfprod.model.entity.BasEvaAsse;
 import com.sm.pfprod.model.entity.BasMedAsse;
 import com.sm.pfprod.model.result.PageResult;
 
+import java.util.List;
+
 /**
  * @ClassName: PfClinicPartsService
  * @Description: 临床模板组件定义
@@ -110,4 +112,25 @@ public interface PfClinicPartsService {
      * @return
      */
     boolean delAlgorithm(PfBachChangeStatusDto dto);
+
+    /**
+     * all所有组件
+     *
+     * @return
+     */
+    List<BasMedAsse> listAllPart();
+
+    /**
+     * all评估表列表
+     *
+     * @return
+     */
+    List<BasEvaAsse> listAllSheet();
+
+    /**
+     * all算法
+     *
+     * @return
+     */
+    List<BasAlgorithm> listAllAlgorithm();
 }

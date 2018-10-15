@@ -23,6 +23,7 @@ import com.sm.pfprod.service.biz.clinic.PfClinicPartsService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service("pfClinicPartsService")
 public class PfClinicPartsServiceImpl implements PfClinicPartsService {
@@ -134,6 +135,33 @@ public class PfClinicPartsServiceImpl implements PfClinicPartsService {
         CommonResult<Boolean> result = clinicPartsClient.delAlgorithm(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<BasMedAsse> listAllPart() {
+        CommonResult<List<BasMedAsseResult>> result = clinicPartsClient.listAllPart();
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), BasMedAsse.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<BasEvaAsse> listAllSheet() {
+        CommonResult<List<BasEvaAsseResult>> result = clinicPartsClient.listAllSheet();
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), BasEvaAsse.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<BasAlgorithm> listAllAlgorithm() {
+        CommonResult<List<BasAlgorithmResult>> result = clinicPartsClient.listAllAlgorithm();
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), BasAlgorithm.class);
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
