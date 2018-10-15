@@ -70,7 +70,7 @@ layui.config({
                 return false;
             }
         });
-        var bodyHeight = $(this).height() - $("#treeTitle").height();
+        var bodyHeight = $(this).height() - $("#treeTitle").height() - 20;
         $("#treeDiv").css("min-height", bodyHeight);
         $("#treeDiv").css("max-height", bodyHeight);
     });
@@ -281,7 +281,7 @@ layui.config({
                     if (!refreshData.idDrugsclass) {
                         refreshData.idDrugsclass = data.data.toString();
                     }
-                    common.sucMsg("保存成功");
+                    common.sucChildMsg("保存成功");
 
                     if (formType == 'edit') {
                         var refreshNodes = [];

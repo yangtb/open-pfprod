@@ -70,7 +70,7 @@ layui.config({
                 return false;
             }
         });
-        var bodyHeight = $(this).height() - $("#treeTitle").height();
+        var bodyHeight = $(this).height() - $("#treeTitle").height() - 20;
         $("#treeDiv").css("min-height", bodyHeight);
         $("#treeDiv").css("max-height", bodyHeight);
     });
