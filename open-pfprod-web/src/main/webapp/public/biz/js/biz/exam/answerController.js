@@ -116,20 +116,7 @@ layui.config({
         }
         var sdType = $('#sdType').val();
         if (sdType == '1') {
-            var json = {
-                //"title": "", //相册标题
-                //"id": 123, //相册id
-                "start": 0, //初始显示的图片序号，默认0
-                "data": [   //相册包含的图片，数组格式
-                    {
-                        //"alt": "图片名",
-                        //"pid": 666, //图片id
-                        "src": path, //原图地址
-                        "thumb": "" //缩略图地址
-                    }
-                ]
-            };
-            common.openPhoto(json)
+            common.openSinglePhoto(path);
         } else if (sdType == '2') {
             common.openAudio(path.substring(0, path.lastIndexOf(".")));
         } else if (sdType == '3') {
