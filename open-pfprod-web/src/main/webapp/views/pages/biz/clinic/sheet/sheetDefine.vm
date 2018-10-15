@@ -44,7 +44,7 @@
 
             <div class="layui-input-inline">
                 <input type="text" name="name" autocomplete="off" class="layui-input"
-                       placeholder="请输入组件名称">
+                       placeholder="请输入评估表名称">
             </div>
         </div>
         <div class="layui-inline">
