@@ -34,6 +34,10 @@ layui.config({
     });
 
     form.on('submit(emailTo)', function (data) {
+        if (!data.field.recipients) {
+            layer.tips("请填写收件人邮箱", '#recipients', {tips: 1});
+            return false;
+        }
         var url = basePath + '/pf/r/set/email/send';
         return common.commonPost(url, data.field, "发送");
     });

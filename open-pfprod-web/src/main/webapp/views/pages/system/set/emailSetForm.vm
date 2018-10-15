@@ -86,7 +86,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">收件人邮箱</label>
                 <div class="layui-input-block" style="max-width: 400px">
-                    <input name="recipients" lay-verify="pass" autocomplete="off" class="layui-input" type="text"
+                    <input name="recipients" id="recipients" lay-verify="pass" autocomplete="off" class="layui-input" type="text"
                            placeholder="多个请用英文';'隔开" lay-verify="required" lay-vertype="tips">
                 </div>
             </div>
