@@ -56,7 +56,7 @@ public class PfUploadController extends BaseController {
         String url;
         if (fileTypeNum.equals(FileTypeUtil.FileTypeEnum.IMG.getCode())) {
             // 此处可选择没有进度条上传
-            url = OssUploadUtil.uploadFileProgress(file, fileType, null, request, 1);
+            url = OssUploadUtil.uploadFile(file, fileType, null, request, 1);
         } else {
             url = OssUploadUtil.uploadFileProgress(file, fileType, null, request, 1);
         }
