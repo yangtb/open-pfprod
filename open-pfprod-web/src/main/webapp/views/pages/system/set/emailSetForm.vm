@@ -100,9 +100,9 @@
 
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">邮件模板</label>
-                <div class="layui-input-block" style="max-width:800px;">
-                    <textarea placeholder="请输入内容" name="content" id="container" style="border:0;padding:0;width: 100%;">
-                        <p style="margin-top: 5px; text-indent: 2em;">
+                <div class="layui-input-block">
+                <textarea id="emailContent" name="content" style="display: none;">
+                    <p style="margin-top: 5px; text-indent: 2em;">
     <p style="margin-top: 5px; text-indent: 2em;">
     <span style="font-size: 14px;">尊敬的用户：</span>
 </p>
@@ -118,7 +118,7 @@
 <p>
     <span style="font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ——&nbsp;${websiteName}</span>
 </p>
-                    </textarea>
+                </textarea>
                 </div>
             </div>
 
@@ -138,21 +138,6 @@
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/biz/js/system/set/emailFormController.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<!-- 加载编辑器的容器 -->
-<script id="container" name="content" type="text/plain">
-        这里写你的初始化内容
-</script>
-<!-- 配置文件 -->
-<script src="${contextPath}/public/common/ueditor/ueditor.config.js"></script>
-<!-- 编辑器源码文件 -->
-<script src="${contextPath}/public/common/ueditor/ueditor.all.js"></script><!-- 编辑器源码文件 -->
-<script src="${contextPath}/public/common/ueditor/lang/zh-cn/zh-cn.js"></script>
-
-<!-- 实例化编辑器 -->
-<script type="text/javascript">
-    var ue = UE.getEditor('container');
-</script>
-
 
 <script>
     var data = eval(${emailInfo});
