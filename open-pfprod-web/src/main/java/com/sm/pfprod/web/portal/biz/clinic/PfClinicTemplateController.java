@@ -1,8 +1,8 @@
 package com.sm.pfprod.web.portal.biz.clinic;
 
 import com.sm.pfprod.model.dto.biz.clinic.PfClinicTemplateDto;
-import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.service.biz.clinic.PfClinicPartsService;
 import com.sm.pfprod.service.biz.clinic.PfClinicTemplateService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.util.EnumUtil;
@@ -28,6 +28,9 @@ public class PfClinicTemplateController extends BaseController {
     private PfClinicTemplateService pfClinicTemplateService;
 
     @Resource
+    private PfClinicPartsService pfClinicPartsService;
+
+    @Resource
     private EnumUtil enumUtil;
 
     @PreAuthorize("hasAnyRole('ROLE_STD0020','ROLE_SUPER')")
@@ -51,17 +54,47 @@ public class PfClinicTemplateController extends BaseController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
-    @RequestMapping("/template/tag/form")
-    public String tagForm(Long idDemo, Model model) {
+    @RequestMapping("/template/tag/caseHistory/form")
+    public String caseHistoryForm(Long idDemo, Model model) {
         model.addAttribute("idDemo", idDemo);
-        model.addAttribute("tags", enumUtil.getEnumMap(SysDicGroupEnum.CLINIC_TEMPLATE_TAG.getCode()));
-        return "pages/biz/clinic/templateTagForm";
+        model.addAttribute("parts", pfClinicPartsService.listAllPart());
+        return "pages/biz/clinic/tagCaseHistoryForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
-    @RequestMapping("/template/tag/list")
+    @RequestMapping("/template/tag/sheet/form")
+    public String sheetForm(Long idDemo, Model model) {
+        model.addAttribute("idDemo", idDemo);
+        model.addAttribute("sheets", pfClinicPartsService.listAllSheet());
+        return "pages/biz/clinic/tagSheetForm";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @RequestMapping("/template/tag/dimension/form")
+    public String dimensionForm(Long idDemo, Model model) {
+        model.addAttribute("idDemo", idDemo);
+        model.addAttribute("algorithms", pfClinicPartsService.listAllAlgorithm());
+        return "pages/biz/clinic/tagDimensionForm";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @RequestMapping("/template/tag/form")
+    public String tagForm(Long idDemo, Model model) {
+        model.addAttribute("idDemo", idDemo);
+        return "pages/biz/clinic/clinicTagForm";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @RequestMapping("/template/tag/sheet/list")
     @ResponseBody
-    public PageResult listTag(PfClinicTemplateDto dto) {
-        return pfClinicTemplateService.listTag(dto);
+    public PageResult listSheetTag(PfClinicTemplateDto dto) {
+        return pfClinicTemplateService.listSheetTag(dto);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @RequestMapping("/template/tag/caseHistory/list")
+    @ResponseBody
+    public PageResult listCaseHistoryTag(PfClinicTemplateDto dto) {
+        return pfClinicTemplateService.listCaseHistoryTag(dto);
     }
 }

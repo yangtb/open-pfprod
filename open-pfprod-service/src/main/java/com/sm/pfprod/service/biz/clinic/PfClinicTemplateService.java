@@ -2,9 +2,7 @@ package com.sm.pfprod.service.biz.clinic;
 
 import com.sm.pfprod.model.dto.biz.clinic.PfClinicTemplateDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
-import com.sm.pfprod.model.entity.BasDemo;
-import com.sm.pfprod.model.entity.BasDemoCa;
-import com.sm.pfprod.model.entity.BasDemoTag;
+import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.PfCommonZtreeVo;
 
@@ -82,28 +80,52 @@ public interface PfClinicTemplateService {
     boolean delTemplate(PfBachChangeStatusDto dto);
 
     /**
-     * 标签列表
+     * 病历标签列表
      *
      * @param dto
      * @return
      */
-    PageResult listTag(PfClinicTemplateDto dto);
+    PageResult listCaseHistoryTag(PfClinicTemplateDto dto);
 
     /**
-     * 删除标签信息
+     * 删除病历标签信息
      *
      * @param dto
      * @return
      */
-    boolean delTag(PfBachChangeStatusDto dto);
+    boolean delCaseHistoryTag(PfBachChangeStatusDto dto);
 
     /**
-     * 保存标签信息
+     * 保存病历标签信息
      *
      * @param dto
      * @return
      */
-    Long saveTag(BasDemoTag dto);
+    Long saveCaseHistoryTag(BasMedicalTag dto);
+
+    /**
+     * 评估标签列表
+     *
+     * @param dto
+     * @return
+     */
+    PageResult listSheetTag(PfClinicTemplateDto dto);
+
+    /**
+     * 删除评估标签信息
+     *
+     * @param dto
+     * @return
+     */
+    boolean delSheetTag(PfBachChangeStatusDto dto);
+
+    /**
+     * 保存评估标签信息
+     *
+     * @param dto
+     * @return
+     */
+    Long saveSheetTag(BasEvaTag dto);
 
     /**
      * 查询所有病历模板
@@ -120,4 +142,34 @@ public interface PfClinicTemplateService {
      */
     List<BasDemoTag> listTagByIdDemo(Long idDemo);
 
+    /**
+     * 评估维度树
+     *
+     * @return
+     */
+    List<PfCommonZtreeVo> listDimensionTree();
+
+    /**
+     * 删除评估维度
+     *
+     * @param dto
+     * @return
+     */
+    boolean delDimensionTag(PfBachChangeStatusDto dto);
+
+    /**
+     * 保存评估维度
+     *
+     * @param dto
+     * @return
+     */
+    Long saveDimensionTag(BasDemoAsses dto);
+
+    /**
+     * 根据id查询评估维度信息
+     *
+     * @param idDimemsion
+     * @return
+     */
+    BasDemoAsses selectDimensionTagInfo(Long idDimemsion);
 }

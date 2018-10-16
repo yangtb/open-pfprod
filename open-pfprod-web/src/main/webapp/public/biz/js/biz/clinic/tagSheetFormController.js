@@ -4,20 +4,23 @@ layui.config({
     var $ = layui.$
         , table = layui.table
         , form = layui.form
+        , upload = layui.upload
         , common = layui.common;
 
     //执行渲染
     table.render({
         elem: '#tagTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'tagTableId'
-        , height: 'full-85' //容器高度
+        , height: 'full-20' //容器高度
         , cols: [[
-            {type: 'radio'},
-            {field: 'fgActive', minWidth: 73, title: '状态', templet: '#fgActiveTpl'},
-            {field: 'name', minWidth: 130, title: '标签名称'},
+            {type: 'radio', fixed: true},
+            {field: 'sort', title: '', width: 40},
+            {field: 'path', width: 60, title: 'logo', align: 'center', templet: '#imgTpl'},
+            {field: 'name', width: 100, title: '标签名称'},
+            {field: 'fgActive', width: 60, title: '状态', align: 'center', templet: '#fgActiveTpl'},
             {fixed: 'right', title: '操作', align: 'center', toolbar: '#tagBar'}
         ]] //设置表头
-        , url: basePath + '/pf/p/clinic/template/tag/list'
+        , url: basePath + '/pf/p/clinic/template/tag/sheet/list'
         , where: {
             idDemo: idDemo,
         }
@@ -36,15 +39,17 @@ layui.config({
     $('#add').on('click', function () {
         $('#reset').click();
         $('#save').click();
+        $('#demo1').attr('src', basePath + '/public/biz/img/photo-default.png'); //图片链接
     });
 
     form.on('submit(saveTag)', function (data) {
         if (!data.field.fgActive) {
             data.field.fgActive = '0';
         }
+        data.field.fgShowMake = data.field.fgShowMake ? '1' : '0';
         data.field.fgShowExec = data.field.fgShowExec ? '1' : '0';
         data.field.idDemo = idDemo;
-        common.commonPost(basePath + '/pf/r/clinic/template/tag/save', data.field, '保存', '', _callBack);
+        common.commonPost(basePath + '/pf/r/clinic/template/tag/sheet/save', data.field, '保存', '', _callBack);
         return false;
     });
 
@@ -62,7 +67,7 @@ layui.config({
     });
 
     var _delTag = function (currentData) {
-        var url = basePath + '/pf/r/clinic/template/tag/del';
+        var url = basePath + '/pf/r/clinic/template/tag/sheet/del';
         var reqData = new Array();
         var name = '【' + currentData.name + '】';
         reqData.push(currentData.idTag);
@@ -88,7 +93,7 @@ layui.config({
             where: {
                 idDemo: idDemo
             },
-            height: 'full-85'
+            height: 'full-20'
         });
     };
 
@@ -98,6 +103,34 @@ layui.config({
         layui.use('form', function () {
             layui.form.render();
         });
+        $('#demo1').attr('src', obj.data.path ? obj.data.path : basePath + '/public/biz/img/photo-default.png'); //图片链接
+    });
+
+    upload.render({
+        elem: '#test3'
+        , url: basePath + '/upload'
+        , field: 'file'
+        , accept: 'images' //普通文件
+        , exts: 'jpg|png|bmp|jpeg'
+        , before: function (obj) {
+            layer.msg('正在上传图片', {icon: 16, shade: 0.01});
+            //预读本地文件示例，不支持ie8
+            obj.preview(function (index, file, result) {
+                $('#demo1').attr('src', result); //图片链接
+            });
+        }
+        , done: function (res) {
+            $('#partPath').val(res.data.path);
+            $('#idMediaPart').val(res.data.idMedia);
+            layer.closeAll('loading');
+        }
+        , error: function () {
+            layer.closeAll('loading');
+        }
+    });
+
+    $('#demo1').on('click', function () {
+        common.openSinglePhoto($('#demo1')[0].src);
     });
 
 });

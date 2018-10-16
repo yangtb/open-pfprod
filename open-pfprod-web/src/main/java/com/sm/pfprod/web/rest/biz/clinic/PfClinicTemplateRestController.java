@@ -4,10 +4,9 @@ import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
+import com.sm.pfprod.model.dto.biz.clinic.PfClinicDimensionDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
-import com.sm.pfprod.model.entity.BasDemo;
-import com.sm.pfprod.model.entity.BasDemoCa;
-import com.sm.pfprod.model.entity.BasDemoTag;
+import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.service.biz.clinic.PfClinicTemplateService;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -156,36 +155,134 @@ public class PfClinicTemplateRestController {
     }
 
     /**
-     * 删除答案信息
+     * 删除评估标签
      *
      * @param dto
      * @return
      */
     @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
-    @RequestMapping(value = "/template/tag/del", method = RequestMethod.POST)
+    @RequestMapping(value = "/template/tag/sheet/del", method = RequestMethod.POST)
     @ResponseBody
-    public ResultObject delTag(@RequestBody PfBachChangeStatusDto dto) {
+    public ResultObject delSheetTag(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
         dto.setOperator(CurrentUserUtils.getCurrentUsername());
-        return pfClinicTemplateService.delTag(dto) ? ResultObject.createSuccess("delTag", ResultObject.DATA_TYPE_OBJECT, true)
-                : ResultObject.create("delTag", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+        return pfClinicTemplateService.delSheetTag(dto) ? ResultObject.createSuccess("delSheetTag", ResultObject.DATA_TYPE_OBJECT, true)
+                : ResultObject.create("delSheetTag", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
 
     /**
-     * 保存答案信息
+     * 保存评估标签信息
      *
      * @param dto
      * @return
      */
     @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
-    @RequestMapping(value = "/template/tag/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/template/tag/sheet/save", method = RequestMethod.POST)
     @ResponseBody
-    public ResultObject saveTag(@RequestBody BasDemoTag dto) {
+    public ResultObject saveSheetTag(@RequestBody BasEvaTag dto) {
         /* 参数校验 */
         dto.setCreator(CurrentUserUtils.getCurrentUsername());
         dto.setOperator(CurrentUserUtils.getCurrentUsername());
-        return ResultObject.createSuccess("saveTag", ResultObject.DATA_TYPE_OBJECT,
-                pfClinicTemplateService.saveTag(dto));
+        return ResultObject.createSuccess("saveSheetTag", ResultObject.DATA_TYPE_OBJECT,
+                pfClinicTemplateService.saveSheetTag(dto));
     }
+
+    /**
+     * 删除病历标签
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @RequestMapping(value = "/template/tag/caseHistory/del", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject delCaseHistoryTag(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return pfClinicTemplateService.delCaseHistoryTag(dto) ? ResultObject.createSuccess("delCaseHistoryTag", ResultObject.DATA_TYPE_OBJECT, true)
+                : ResultObject.create("delCaseHistoryTag", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
+
+    /**
+     * 保存病历标签信息
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @RequestMapping(value = "/template/tag/caseHistory/save", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject saveCaseHistoryTag(@RequestBody BasMedicalTag dto) {
+        /* 参数校验 */
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("saveCaseHistoryTag", ResultObject.DATA_TYPE_OBJECT,
+                pfClinicTemplateService.saveCaseHistoryTag(dto));
+    }
+
+    /**
+     * 评估维度树
+     *
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @RequestMapping(value = "/template/tag/dimension/classify/tree", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject listDimensionTree() {
+        return ResultObject.createSuccess("listDimensionTree", ResultObject.DATA_TYPE_LIST,
+                pfClinicTemplateService.listDimensionTree());
+    }
+
+    /**
+     * 删除评估维度
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @RequestMapping(value = "/template/tag/dimension/del", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject delDimensionTag(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return pfClinicTemplateService.delDimensionTag(dto) ? ResultObject.createSuccess("delDimensionTag", ResultObject.DATA_TYPE_OBJECT, true)
+                : ResultObject.create("delDimensionTag", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
+
+    /**
+     * 保存评估维度
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @RequestMapping(value = "/template/tag/dimension/save", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject saveDimensionTag(@RequestBody BasDemoAsses dto) {
+        /* 参数校验 */
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("saveDimensionTag", ResultObject.DATA_TYPE_OBJECT,
+                pfClinicTemplateService.saveDimensionTag(dto));
+    }
+
+    /**
+     * 根据id查询评估维度信息
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @RequestMapping(value = "/select/tag/dimensionInfo", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject selectDimensionTagInfo(@RequestBody PfClinicDimensionDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdDimemsion() != null, "idDimemsion");
+        return ResultObject.createSuccess("selectDimensionTagInfo", ResultObject.DATA_TYPE_OBJECT,
+                pfClinicTemplateService.selectDimensionTagInfo(dto.getIdDimemsion()));
+    }
+
 }

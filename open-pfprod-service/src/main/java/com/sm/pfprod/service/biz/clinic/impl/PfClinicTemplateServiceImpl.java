@@ -2,22 +2,16 @@ package com.sm.pfprod.service.biz.clinic.impl;
 
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
-import com.sm.open.core.facade.model.param.pf.biz.clinic.BasDemoCaParam;
-import com.sm.open.core.facade.model.param.pf.biz.clinic.BasDemoParam;
-import com.sm.open.core.facade.model.param.pf.biz.clinic.BasDemoTagParam;
-import com.sm.open.core.facade.model.param.pf.biz.clinic.PfClinicTemplateParam;
+import com.sm.open.core.facade.model.param.pf.biz.clinic.*;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
-import com.sm.open.core.facade.model.result.pf.biz.clinic.BasDemoResult;
-import com.sm.open.core.facade.model.result.pf.biz.clinic.BasDemoTagResult;
+import com.sm.open.core.facade.model.result.pf.biz.clinic.*;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.biz.clinic.ClinicTemplateClient;
 import com.sm.pfprod.model.dto.biz.clinic.PfClinicTemplateDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
-import com.sm.pfprod.model.entity.BasDemo;
-import com.sm.pfprod.model.entity.BasDemoCa;
-import com.sm.pfprod.model.entity.BasDemoTag;
+import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.PfCommonZtreeVo;
 import com.sm.pfprod.service.biz.clinic.PfClinicTemplateService;
@@ -105,8 +99,8 @@ public class PfClinicTemplateServiceImpl implements PfClinicTemplateService {
     }
 
     @Override
-    public PageResult listTag(PfClinicTemplateDto dto) {
-        PfPageResult<BasDemoTagResult> result = clinicTemplateClient.listTag(BeanUtil.convert(dto, PfClinicTemplateParam.class));
+    public PageResult listCaseHistoryTag(PfClinicTemplateDto dto) {
+        PfPageResult<BasMedicalTagVoResult> result = clinicTemplateClient.listCaseHistoryTag(BeanUtil.convert(dto, PfClinicTemplateParam.class));
         if (result == null) {
             return null;
         }
@@ -114,8 +108,8 @@ public class PfClinicTemplateServiceImpl implements PfClinicTemplateService {
     }
 
     @Override
-    public boolean delTag(PfBachChangeStatusDto dto) {
-        CommonResult<Boolean> result = clinicTemplateClient.delTag(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
+    public boolean delCaseHistoryTag(PfBachChangeStatusDto dto) {
+        CommonResult<Boolean> result = clinicTemplateClient.delCaseHistoryTag(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
@@ -123,8 +117,35 @@ public class PfClinicTemplateServiceImpl implements PfClinicTemplateService {
     }
 
     @Override
-    public Long saveTag(BasDemoTag dto) {
-        CommonResult<Long> result = clinicTemplateClient.saveTag(BeanUtil.convert(dto, BasDemoTagParam.class));
+    public Long saveCaseHistoryTag(BasMedicalTag dto) {
+        CommonResult<Long> result = clinicTemplateClient.saveCaseHistoryTag(BeanUtil.convert(dto, BasMedicalTagParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult listSheetTag(PfClinicTemplateDto dto) {
+        PfPageResult<BasEvaTagVoResult> result = clinicTemplateClient.listSheetTag(BeanUtil.convert(dto, PfClinicTemplateParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public boolean delSheetTag(PfBachChangeStatusDto dto) {
+        CommonResult<Boolean> result = clinicTemplateClient.delSheetTag(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public Long saveSheetTag(BasEvaTag dto) {
+        CommonResult<Long> result = clinicTemplateClient.saveSheetTag(BeanUtil.convert(dto, BasEvaTagParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
@@ -145,6 +166,42 @@ public class PfClinicTemplateServiceImpl implements PfClinicTemplateService {
         CommonResult<List<BasDemoTagResult>> result = clinicTemplateClient.listTagByIdDemo(idDemo);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convertList(result.getContent(), BasDemoTag.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<PfCommonZtreeVo> listDimensionTree() {
+        CommonResult<List<PfCommonZtreeResult>> result = clinicTemplateClient.listDimensionTree();
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfCommonZtreeVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean delDimensionTag(PfBachChangeStatusDto dto) {
+        CommonResult<Boolean> result = clinicTemplateClient.delDimensionTag(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public Long saveDimensionTag(BasDemoAsses dto) {
+        CommonResult<Long> result = clinicTemplateClient.saveDimensionTag(BeanUtil.convert(dto, BasDemoAssesParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public BasDemoAsses selectDimensionTagInfo(Long idDimemsion) {
+        CommonResult<BasDemoAssesResult> result = clinicTemplateClient.selectDimensionTagInfo(idDimemsion);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), BasDemoAsses.class);
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }

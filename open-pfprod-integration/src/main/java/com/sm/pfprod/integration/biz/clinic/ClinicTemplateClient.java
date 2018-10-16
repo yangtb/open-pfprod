@@ -1,15 +1,12 @@
 package com.sm.pfprod.integration.biz.clinic;
 
-import com.sm.open.core.facade.model.param.pf.biz.clinic.BasDemoCaParam;
-import com.sm.open.core.facade.model.param.pf.biz.clinic.BasDemoParam;
-import com.sm.open.core.facade.model.param.pf.biz.clinic.BasDemoTagParam;
-import com.sm.open.core.facade.model.param.pf.biz.clinic.PfClinicTemplateParam;
+import com.sm.open.core.facade.model.param.pf.biz.clinic.*;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
+import com.sm.open.core.facade.model.result.pf.biz.clinic.BasDemoAssesResult;
 import com.sm.open.core.facade.model.result.pf.biz.clinic.BasDemoResult;
 import com.sm.open.core.facade.model.result.pf.biz.clinic.BasDemoTagResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
-import com.sm.open.core.facade.model.rpc.PageResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.open.core.facade.pf.biz.clinic.PfClinicTemplateFacade;
 import org.springframework.stereotype.Component;
@@ -55,16 +52,28 @@ public class ClinicTemplateClient {
         return pfClinicTemplateFacade.delTemplate(param);
     }
 
-    public PfPageResult listTag(PfClinicTemplateParam param) {
-        return pfClinicTemplateFacade.listTag(param);
+    public PfPageResult listCaseHistoryTag(PfClinicTemplateParam param) {
+        return pfClinicTemplateFacade.listCaseHistoryTag(param);
     }
 
-    public CommonResult<Boolean> delTag(PfBachChangeStatusParam param) {
-        return pfClinicTemplateFacade.delTag(param);
+    public CommonResult<Boolean> delCaseHistoryTag(PfBachChangeStatusParam param) {
+        return pfClinicTemplateFacade.delCaseHistoryTag(param);
     }
 
-    public CommonResult<Long> saveTag(BasDemoTagParam param) {
-        return pfClinicTemplateFacade.saveTag(param);
+    public CommonResult<Long> saveCaseHistoryTag(BasMedicalTagParam param) {
+        return pfClinicTemplateFacade.saveCaseHistoryTag(param);
+    }
+
+    public PfPageResult listSheetTag(PfClinicTemplateParam param) {
+        return pfClinicTemplateFacade.listSheetTag(param);
+    }
+
+    public CommonResult<Boolean> delSheetTag(PfBachChangeStatusParam param) {
+        return pfClinicTemplateFacade.delSheetTag(param);
+    }
+
+    public CommonResult<Long> saveSheetTag(BasEvaTagParam param) {
+        return pfClinicTemplateFacade.saveSheetTag(param);
     }
 
     public CommonResult<List<BasDemoResult>> listAllBasDemo() {
@@ -75,5 +84,18 @@ public class ClinicTemplateClient {
         return pfClinicTemplateFacade.listTagByIdDemo(idDemo);
     }
 
+    public CommonResult<List<PfCommonZtreeResult>> listDimensionTree() {
+        return pfClinicTemplateFacade.listDimensionTree();
+    }
 
+    public CommonResult<Boolean> delDimensionTag(PfBachChangeStatusParam param) {
+        return pfClinicTemplateFacade.delDimensionTag(param);
+    }
+
+    public CommonResult<Long> saveDimensionTag(BasDemoAssesParam param) {
+        return pfClinicTemplateFacade.saveDimensionTag(param);
+    }
+    public CommonResult<BasDemoAssesResult> selectDimensionTagInfo(Long idDimemsion){
+        return pfClinicTemplateFacade.selectDimensionTagInfo(idDimemsion);
+    }
 }
