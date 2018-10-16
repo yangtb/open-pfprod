@@ -53,8 +53,9 @@ public class PfOrgController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_ORG_MG', 'ROLE_ORG_DETAIL', 'ROLE_SUPER')")
     @RequestMapping("/form")
-    public String form(String formType, Long idOrg, Model model) {
+    public String form(String formType, Long idOrg, String position, Model model) {
         model.addAttribute("formType", formType);
+        model.addAttribute("position", position);
         if (idOrg != null) {
             SysOrg sysOrg = pfOrgService.selectOrgInfoById(idOrg);
             model.addAttribute("orgInfo", JSON.toJSONString(sysOrg));

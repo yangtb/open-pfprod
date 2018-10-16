@@ -15,6 +15,7 @@
         var contextPath = '$!{contextPath}';
         var formType = '$!{formType}';
         var orgData = '$!{orgInfo}';
+        var position = '$!{position}';
     </script>
 </head>
 
@@ -177,7 +178,6 @@
     $(function(){
         if (orgData) {
             var formData = eval('(' + orgData + ')')
-            console.log(formData.gmtValid)
             if (formData.gmtValid) {
                 formData.gmtValid = moment(formData.gmtValid).format('YYYY-MM-DD');
             }

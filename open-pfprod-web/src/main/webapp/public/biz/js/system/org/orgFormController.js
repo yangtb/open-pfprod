@@ -85,11 +85,13 @@ layui.config({
                     return false;
                 } else {
                     common.sucMsg("保存成功");
-                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                    parent.layer.close(index); //再执行关闭
-                    //刷新父页面table
-                    if (parent.layui) {
-                        parent.layui.common.refreshCurrentPage();
+                    if (position != 'index') {
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                        //刷新父页面table
+                        if (parent.layui) {
+                            parent.layui.common.refreshCurrentPage();
+                        }
                     }
                     return true;
                 }
