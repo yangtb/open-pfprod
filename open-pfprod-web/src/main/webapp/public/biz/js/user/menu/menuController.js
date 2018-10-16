@@ -38,7 +38,7 @@ layui.config({
         , limits: [15, 30, 100]
         , page: true
         , where: {
-            status : $("select[name='status']").val()
+            status: $("select[name='status']").val()
         },
     });
 
@@ -158,7 +158,7 @@ layui.config({
     });
 
     //监听行双击事件
-    table.on('rowDouble(menuTableFilter)', function(obj){
+    table.on('rowDouble(menuTableFilter)', function (obj) {
         _addOrEdit("edit", obj.data);
     });
 
@@ -207,7 +207,13 @@ layui.config({
             },
             height: 'full-68'
         });
-    }
+    };
+
+    $('#menuName').bind('keypress', function (event) {
+        if (event.keyCode == "13") {
+            $('#menuQuery').click();
+        }
+    });
 
 });
 
