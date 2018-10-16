@@ -94,7 +94,6 @@ layui.config({
 
     function zTreeOnClick(event, treeId, treeNode) {
         var pNode = treeNode.getParentNode();
-        console.log(pNode)
         parentName = pNode != null ? pNode.name : null;
         parentId = pNode != null ? pNode.id : null;
         currentNodeId = treeNode.id;
@@ -257,7 +256,6 @@ layui.config({
     $('#del').on('click', function () {
         var treeObj = $.fn.zTree.getZTreeObj("treeDemo"),
             nodes = treeObj.getSelectedNodes();
-        console.log(nodes)
         if (!nodes[0]) {
             layer.tips('请在左侧选择要删除的目录', '#del', {tips: 1});
             return;
