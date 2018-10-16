@@ -82,6 +82,19 @@ public class PfClinicPartsRestController {
     }
 
     /**
+     * 所有组件信息
+     *
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0010','ROLE_SUPER')")
+    @RequestMapping(value = "/part/all")
+    public ResultObject allPart() {
+        /* 参数校验 */
+        return ResultObject.createSuccess("allPart", ResultObject.DATA_TYPE_OBJECT,
+                pfClinicPartsService.listAllPart());
+    }
+
+    /**
      * 停用、启用组件信息
      *
      * @param dto
