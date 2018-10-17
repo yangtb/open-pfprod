@@ -127,9 +127,11 @@ layui.config({
         } else {
             $('#bach-invalid').html('<i class="iconfont icon-icon-import"></i>' + ' 批量启用');
         }
+        var queryType = $("select[name='queryType']").val();
         table.reload('menuTableId', {
             where: {
-                name: data.field.menuName,
+                name: queryType == 1 ? data.field.keyword : null,
+                parentCode : queryType == 2 ? data.field.keyword : null,
                 level: data.field.menuLevel,
                 status: data.field.status
             }
@@ -196,12 +198,14 @@ layui.config({
     }
 
     var _tableReload = function () {
-        var name = $("input[name='menuName']").val();
+        var queryType = $("select[name='queryType']").val();
+        var keyword = $("input[name='keyword']").val();
         var level = $("select[name='menuLevel']").val();
         var status = $("select[name='status']").val();
         table.reload('menuTableId', {
             where: {
-                name: name,
+                name: queryType == 1 ? keyword : null,
+                parentCode : queryType == 2 ? keyword : null,
                 level: level,
                 status: status
             },
@@ -209,7 +213,7 @@ layui.config({
         });
     };
 
-    $('#menuName').bind('keypress', function (event) {
+    $('#keyword').bind('keypress', function (event) {
         if (event.keyCode == "13") {
             $('#menuQuery').click();
         }

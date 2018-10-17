@@ -32,9 +32,15 @@
                     <i class="iconfont icon-batch-reduce"></i> 批量停用
                 </button>
             </div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <select name="queryType">
+                    <option value="1" selected>菜单名称</option>
+                    <option value="2">父编码</option>
+                </select>
+            </div>
             <div class="layui-input-inline">
-                <input type="text" name="menuName" id="menuName" class="layui-input" autocomplete="off"
-                       placeholder="请输入菜单名称">
+                <input type="text" name="keyword" id="keyword" class="layui-input" autocomplete="off"
+                       placeholder="请输入关键字">
             </div>
             <div class="layui-input-inline" style="width: 100px;">
                 <select name="menuLevel">
