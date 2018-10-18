@@ -11,8 +11,8 @@
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
 
     <script>
-        var formType = '${formType}';
-        var basePath = '${basePath}';
+        var formType = '$!{formType}';
+        var basePath = '$!{basePath}';
     </script>
 </head>
 
@@ -24,9 +24,18 @@
         </div>
 
         <div class="layui-form-item">
+            <label class="layui-form-label">公告标题<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <div class="layui-input-block">
+                <input type="text" name="noticeTitle" lay-verify="required|title"
+                       lay-vertype="tips" autocomplete="off" class="layui-input"
+                       placeholder="请输入公告标题">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
             <label class="layui-form-label">公告类型<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <select name="noticeType" lay-verify="required">
+                <select name="noticeType" lay-verify="required" lay-vertype="tips">
                     <option value="1" selected>系统公告</option>
                     <option value="2">活动公告</option>
                 </select>
@@ -34,18 +43,9 @@
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">公告标题<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
-            <div class="layui-input-block">
-                <input type="text" name="noticeTitle" lay-verify="required|title" autocomplete="off" class="layui-input"
-                       placeholder="请输入公告标题">
-            </div>
-        </div>
-
-        <div class="layui-form-item">
             <label class="layui-form-label">公告内容<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                    <textarea id="noticeContentEditor" name="noticeContent" placeholder="请输入内容"
-                              style="border:0;padding:0;width: 100%; height: 300px">
+                <textarea id="noticeContent" name="noticeContent">
                 </textarea>
             </div>
         </div>
@@ -58,11 +58,6 @@
                 <button type="button" class="layui-btn" id="preview">
                     <i class="iconfont icon-look2"></i> 预览
                 </button>
-                #if(${formType} == 'edit')
-                    <button type="button" class="layui-btn" id="refresh">
-                        <i class="iconfont icon-refresh"></i> 刷新
-                    </button>
-                #end
                 #if(${formType} == 'add')
                     <button type="reset" class="layui-btn layui-btn-danger">
                         <i class="iconfont icon-reset"></i> 重置
@@ -74,48 +69,26 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="${contextPath}/public/biz/js/system/notice/noticeFormController.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<script src="${contextPath}/public/biz/js/system/notice/noticeFormController.js"></script>
-<!-- 加载编辑器的容器 -->
-<script id="noticeContentEditor" name="noticeContent" type="text/plain">
-        这里写你的初始化内容
 
-</script>
-<!-- 配置文件 -->
-<script src="${contextPath}/public/common/ueditor/ueditor.config.js"></script>
-<!-- 编辑器源码文件 -->
-<script src="${contextPath}/public/common/ueditor/ueditor.all.js"></script><!-- 编辑器源码文件 -->
-<script src="${contextPath}/public/common/ueditor/lang/zh-cn/zh-cn.js"></script>
-
-<!-- 实例化编辑器 -->
-<script type="text/javascript">
-    var ue = UE.getEditor('noticeContentEditor');
-</script>
 <script>
     function fullForm(data) {
+
         $(document).ready(function () {
+            layui.use('layedit', function () {
+                var layedit = layui.layedit;
+                //构建一个默认的编辑器
+                var editIndex = layedit.build('noticeContent');
+            });
+
             $("#noticeForm").autofill(data);
             layui.use('form', function () {
                 layui.form.render();
             });
         });
-        //对编辑器的操作最好在编辑器ready之后再做
-        ue.ready(function() {
-            //设置编辑器的内容
-            ue.setContent(data.noticeContent);
-        });
     }
-
-    /*if (formType == 'edit') {
-        layui.use('layedit',function() {
-            var layedit = layui.layedit;
-            //构建一个默认的编辑器
-            var editIndex = layedit.build('noticeContentEditor', {
-                height: 150
-            });
-        });
-    }*/
 
 </script>
 

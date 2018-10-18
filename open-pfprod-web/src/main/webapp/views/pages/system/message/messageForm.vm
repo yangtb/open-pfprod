@@ -103,7 +103,7 @@
                         <label class="layui-form-label">模板内容<i class="iconfont icon-required"
                                                                style="color: #f03f2d"></i></label>
                         <div class="layui-input-block">
-                            <textarea id="emailContent" name="content" lay-verify="required" style="display: none;">
+                            <textarea id="emailContent" name="content" style="display: none;">
                             </textarea>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
         $(document).ready(function () {
             layui.use(['layedit'], function () {
                 layui.form.render();
-                var index = layui.layedit.build('emailContent'); //建立编辑器
+                var editIndex = layui.layedit.build('emailContent'); //建立编辑器
             });
             if (data.templateType == 'email') {
                 $("#emailform").autofill(data);

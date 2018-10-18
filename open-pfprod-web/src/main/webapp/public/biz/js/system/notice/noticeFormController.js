@@ -3,10 +3,13 @@
  */
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['form', 'layer', 'jquery', 'common'], function () {
+}).use(['form', 'layer', 'jquery', 'layedit', 'common'], function () {
     var $ = layui.$,
         form = layui.form,
+        layedit = layui.layedit,
         common = layui.common;
+
+    var editIndex = layedit.build('noticeContent'); //建立编辑器
 
     //自定义验证规则
     form.verify({
@@ -21,13 +24,9 @@ layui.config({
         var data = {};
         data.noticeTitle = $("input[name='noticeTitle']").val();
         data.noticeType = $("select[name='noticeType']").val();
-        data.noticeContent = UE.getEditor('noticeContentEditor').getContent(); //获取html
+        data.noticeContent = formType == 'add' ? layedit.getContent(editIndex) : $('#noticeContent').val();
         var index = common.open('公告预览', basePath + '/pf/p/notice/detail', 880, 430, _successFunction(data));
         layer.full(index);
-    });
-
-    $("#refresh").on('click', function () {
-        window.location.reload();
     });
 
     var _successFunction = function (data) {
@@ -40,16 +39,16 @@ layui.config({
 
     //监听提交
     form.on('submit(addNotice)', function (data) {
-        if (!UE.getEditor('noticeContentEditor').getContent()) {
+        if (formType == 'add') {
+            data.field.noticeContent = layedit.getContent(editIndex);
+        } else if (formType == 'edit') {
+            data.field.noticeContent = $('#noticeContent').val();
+        }
+        if (!data.field.noticeContent.trim()) {
             common.errorMsg("请填写公告内容");
             return false;
         }
-        var url = basePath + '/pf/r/notice/';
-        if (formType == 'add') {
-            url += 'add';
-        } else if (formType == 'edit') {
-            url += 'edit';
-        }
+        var url = basePath + '/pf/r/notice/'+ formType;
         layer.load(2);
         $.ajax({
             url: url,

@@ -58,7 +58,7 @@
             <div>
                 <p class="notice-content-title">尊敬的用户：</p>
                 <br>
-                <div id="noticeContent">
+                <div id="noticeContentPreview">
 
                 </div>
             </div>
@@ -90,7 +90,7 @@
             if (data.operator) {
                 $("#operator").html('发布者：' + data.operator);
             }
-            $("#noticeContent").html(data.noticeContent);
+            $("#noticeContentPreview").html(data.noticeContent);
         });
     }
 </script>
