@@ -284,7 +284,7 @@ layui.config({
             {field: 'fgActive', width: 100, title: '状态', templet: '#fgActiveTpl'},
             {field: 'desInques', width: 350, title: '内容'},
             {field: 'gmtCreate', width: 170, sort: true, title: '创建时间'},
-            {field: 'operator', width: 100, title: '创建人'},
+            {field: 'creator', width: 100, title: '创建人'},
             {fixed: 'right', width: 180, title: '操作', align: 'center', toolbar: '#inquisitionQuestion'}
         ]] //设置表头
         //, url: basePath + '/pf/p/inquisition/question/list'

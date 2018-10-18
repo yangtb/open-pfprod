@@ -286,7 +286,7 @@ layui.config({
             {field: 'sdBody', width: 120, title: '所属体位', templet: '#sdBodyTpl'},
             {field: 'desBody', width: 140, title: '检查部位描述'},
             {field: 'gmtCreate', width: 170, sort: true, title: '创建时间'},
-            {field: 'operator', width: 100, title: '创建人'},
+            {field: 'creator', width: 100, title: '创建人'},
             {fixed: 'right', width: 180, title: '操作', align: 'center', toolbar: '#question'}
         ]] //设置表头
         //, url: basePath + '/pf/p/check/question/list'
