@@ -3,11 +3,13 @@ package com.sm.pfprod.web.rest.biz.exam;
 import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
+import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.entity.BasInspectCa;
 import com.sm.pfprod.model.entity.BasInspectItem;
 import com.sm.pfprod.model.entity.BasItemResult;
+import com.sm.pfprod.model.enums.OperationTypeEnum;
 import com.sm.pfprod.service.biz.exam.PfExamService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
@@ -147,8 +149,27 @@ public class PfExamRestController extends BaseController {
         /* 参数校验 */
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
         dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        dto.setStatus(YesOrNoNum.YES.getCode());
         return pfExamService.delQuestion(dto) ? ResultObject.createSuccess("delQuestion", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("delQuestion", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
+
+    /**
+     * 停用、启用
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @RequestMapping(value = "/question/updateStatus", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject updateQuestionStatus(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        dto.setOperationType(OperationTypeEnum.UPDATE_STATUS.getCode());
+        return pfExamService.delQuestion(dto) ? ResultObject.createSuccess("updateQuestionStatus", ResultObject.DATA_TYPE_OBJECT, true)
+                : ResultObject.create("updateQuestionStatus", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
 
     /**

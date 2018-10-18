@@ -86,7 +86,7 @@
 <script src="${contextPath}/public/biz/js/biz/check/questionController.js"></script>
 
 <script type="text/html" id="fgActiveTpl">
-    <input type="checkbox" name="fgActive" value="{{d.idInques}}"
+    <input type="checkbox" name="fgActive" value="{{d.idBody}}"
            lay-skin="switch" lay-text="启用|停用" lay-filter="fgActiveCheckFilter" {{ d.fgActive== '1' ? 'checked' : '' }}>
 </script>
 

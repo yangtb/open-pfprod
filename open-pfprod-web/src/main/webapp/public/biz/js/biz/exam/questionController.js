@@ -458,5 +458,22 @@ layui.config({
         _tableReload(v_idInspect, data.field.naItem);
     });
 
+    //监听删除操作
+    form.on('switch(fgActiveCheckFilter)', function (obj) {
+        var reqData = new Array();
+        var data = {}, msg;
+        reqData.push(this.value);
+        data.list = reqData;
+        if (obj.elem.checked) {
+            data.status = '1';
+            msg = '启用';
+        } else {
+            data.status = '0';
+            msg = '停用';
+        }
+
+        common.commonPost(basePath + '/pf/r/exam/question/updateStatus', data, msg, obj.othis);
+    });
+
 });
 
