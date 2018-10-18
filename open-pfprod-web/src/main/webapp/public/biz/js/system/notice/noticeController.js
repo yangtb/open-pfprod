@@ -65,6 +65,11 @@ layui.config({
         });
     });
 
+    //监听行双击事件
+    table.on('rowDouble(noticeTableFilter)', function (obj) {
+        _addOrEdit("edit", obj.data);
+    });
+
     $('.add').on('click', function () {
         _addOrEdit("add");
     });
