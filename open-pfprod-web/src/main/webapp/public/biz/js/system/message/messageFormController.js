@@ -3,11 +3,16 @@
  */
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['form', 'layer', 'jquery', 'element', 'common'], function () {
+}).use(['form', 'layer', 'jquery', 'element','layedit', 'common'], function () {
     var $ = layui.$
         , form = layui.form
-        , common = layui.common
-        , element = layui.element;
+        , element = layui.element
+        , layedit = layui.layedit
+        , common = layui.common;
+
+    /*var index = layedit.build('emailContent'); //建立编辑器
+    var body = "<b>hello Layui</b>";
+    layedit.setContent(index,body);*/
 
     element.tabChange('templateTab', templateType);
 
@@ -30,10 +35,10 @@ layui.config({
 
     //监听提交
     form.on('submit(addEmail)', function (data) {
-        if (!UE.getEditor('contentEditor').getContent()) {
+        /*if (!UE.getEditor('contentEditor').getContent()) {
             common.errorMsg("请填写邮件模板内容");
             return false;
-        }
+        }*/
         return _postTemplateData(data);
     });
 
@@ -76,6 +81,9 @@ layui.config({
             }
         });
         return false;
-    }
+    };
+
 });
+
+
 
