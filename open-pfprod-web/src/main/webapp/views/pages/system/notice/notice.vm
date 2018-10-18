@@ -62,8 +62,8 @@
 <script src="$!{contextPath}/public/biz/js/system/notice/noticeController.js"></script>
 
 <script type="text/html" id="noticeBar">
-    <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>
-    <a class="layui-btn layui-btn-xs" lay-event="detail"><i class="iconfont icon-look2"></i> 详情</a>
+    <button class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</button>
+    <button class="layui-btn layui-btn-xs" lay-event="detail"><i class="iconfont icon-look2"></i> 详情</button>
 </script>
 
 <script type="text/html" id="noticeTypeTpl">
