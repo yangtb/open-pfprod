@@ -14,11 +14,6 @@
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
 </head>
 
-<style type="text/css">
-    .ztree li span.button.switch.level0 {visibility:hidden; width:1px;}
-    .ztree li ul.level0 {padding:0; background:none;}
-</style>
-
 <script>
     var basePath = '${basePath}';
     var contextPath = '${contextPath}';
