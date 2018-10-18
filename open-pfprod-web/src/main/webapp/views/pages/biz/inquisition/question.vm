@@ -29,12 +29,12 @@
 </div>
 
 <div class="wrapper-content">
-    <div class="layui-col-xs2">
+    <div class="layui-col-xs3">
         <div id="treeDiv" style="overflow:auto; border: 1px solid #cccccc">
             <ul id="treeDemo" class="ztree"></ul>
         </div>
     </div>
-    <div class="layui-col-xs10" style="padding-left: 10px;">
+    <div class="layui-col-xs9" style="padding-left: 10px;">
         <form class="layui-form">
             <div class="layui-inline">
                 <div class="layui-btn-group">
