@@ -9,7 +9,21 @@ layui.config({
         layedit = layui.layedit,
         common = layui.common;
 
-    var editIndex = layedit.build('noticeContent'); //建立编辑器
+    var editIndex = layedit.build('noticeContent', {
+        tool: [
+            'strong' //加粗
+            , 'italic' //斜体
+            , 'underline' //下划线
+            , 'del' //删除线
+            , '|' //分割线
+            , 'left' //左对齐
+            , 'center' //居中对齐
+            , 'right' //右对齐
+            , 'link' //超链接
+            , 'unlink' //清除链接
+            , 'face' //表情
+        ]
+    }); //建立编辑器
 
     //自定义验证规则
     form.verify({
@@ -48,7 +62,7 @@ layui.config({
             common.errorMsg("请填写公告内容");
             return false;
         }
-        var url = basePath + '/pf/r/notice/'+ formType;
+        var url = basePath + '/pf/r/notice/' + formType;
         layer.load(2);
         $.ajax({
             url: url,
