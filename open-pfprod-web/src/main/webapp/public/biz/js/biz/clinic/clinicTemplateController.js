@@ -282,8 +282,8 @@ layui.config({
         , cols: [[
             {checkbox: true, fixed: true},
             {field: 'fgActive', width: 100, title: '状态', templet: '#fgActiveTpl'},
-            {field: 'name', width: 260, title: '模板名称'},
-            {field: 'gmtCreate', width: 170, sort: true, title: '创建时间'},
+            {field: 'name', minWidth: 250, title: '模板名称'},
+            {field: 'gmtCreate', minWidth: 170, sort: true, title: '创建时间'},
             {field: 'operator', width: 100, title: '创建人'},
             {fixed: 'right', width: 180, title: '操作', align: 'center', toolbar: '#template'}
         ]] //设置表头

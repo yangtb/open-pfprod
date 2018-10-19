@@ -50,8 +50,8 @@
                 <select name="sdAsses" id="sdAsses" autocomplete="off" lay-verify="required|commonLength"
                         lay-vertype="tips" placeholder="请选择算法类型 ">
                     <option value="">请选择</option>
-                    #foreach($!param in $!{algorithmDefine.keySet()})
-                        <option value="$!param">${algorithmDefine.get($!param)}</option>
+                    #foreach($!param in $!{algorithmDefine})
+                        <option value="$!param.dictCode">${param.dictName}</option>
                     #end
                 </select>
 

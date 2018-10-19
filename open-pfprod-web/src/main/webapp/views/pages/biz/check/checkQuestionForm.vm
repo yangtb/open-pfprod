@@ -30,8 +30,8 @@
                 <select name="cdCheck" autocomplete="off" lay-verify="required" lay-vertype="tips"
                         lay-vertype="tips" placeholder="检查方式">
                     <option value="">请选择</option>
-                    #foreach($param in ${examWays.keySet()})
-                        <option value="$!param">${examWays.get($param)}</option>
+                    #foreach($param in ${examWays})
+                        <option value="$!param.dictCode">${param.dictName}</option>
                     #end
                 </select>
             </div>
@@ -43,8 +43,8 @@
                 <select name="sdBody" autocomplete="off" lay-verify="required" lay-vertype="tips"
                         lay-vertype="tips" placeholder="所属体位">
                     <option value="">请选择</option>
-                    #foreach($param in ${bodyPosition.keySet()})
-                        <option value="$!param">${bodyPosition.get($param)}</option>
+                    #foreach($param in ${bodyPosition})
+                        <option value="$!param.dictCode">${param.dictName}</option>
                     #end
                 </select>
             </div>

@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 基础_病历_评估表定义
+ * 基础_病例_评估表定义
  *
  * @author author
  */

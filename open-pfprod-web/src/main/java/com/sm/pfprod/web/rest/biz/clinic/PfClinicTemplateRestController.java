@@ -189,7 +189,7 @@ public class PfClinicTemplateRestController {
     }
 
     /**
-     * 删除病历标签
+     * 删除病例标签
      *
      * @param dto
      * @return
@@ -206,7 +206,7 @@ public class PfClinicTemplateRestController {
     }
 
     /**
-     * 保存病历标签信息
+     * 保存病例标签信息
      *
      * @param dto
      * @return

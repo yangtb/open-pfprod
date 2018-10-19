@@ -14,7 +14,7 @@ layui.config({
         , cols: [[
             {checkbox: true, fixed: true},
             {field: 'fgActive', width: 100, title: '状态',fixed: true, templet: '#fgActiveTpl'},
-            {field: 'name', width: 150, title: '算法名称'},
+            {field: 'name', minWidth: 160, title: '算法名称'},
             {field: 'descript', width: 150, title: '算法描述'},
             {field: 'sdAsses', width: 120, title: '算法类型', templet: '#sdAssesTpl'},
             {field: 'script', width: 160, title: '嵌入代码'},
@@ -180,7 +180,6 @@ layui.config({
             data.status = '0';
             msg = '停用';
         }
-        console.log(obj.othis)
         common.commonPost(basePath + '/pf/r/clinic/algorithm/updateStatus', data, msg, obj.othis);
     });
 

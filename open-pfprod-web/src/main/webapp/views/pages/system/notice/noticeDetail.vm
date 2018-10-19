@@ -40,6 +40,7 @@
     </style>
     <script>
         var basePath = '${basePath}';
+        var formType = '';
     </script>
 </head>
 
@@ -75,7 +76,6 @@
 <script>
     function fullForm(data) {
         $(document).ready(function () {
-            console.log(data)
             $("#noticeTitle").html(data.noticeTitle);
             var noticeTypeName = '';
             if (data.noticeType == 1) {

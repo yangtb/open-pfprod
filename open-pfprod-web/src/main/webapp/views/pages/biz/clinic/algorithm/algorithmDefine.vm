@@ -78,9 +78,9 @@
 
 
 <script type="text/html" id="sdAssesTpl">
-        #foreach($!param in $!{algorithmDefine.keySet()})
-        {{#  if(d.sdAsses == '$!param'){ }}
-            $!{algorithmDefine.get($!param)}
+        #foreach($!param in $!{algorithmDefine})
+        {{#  if(d.sdAsses == '$!param.dictCode'){ }}
+            $!{param.dictName}
         {{#  } else { }}
 
         {{#  } }}

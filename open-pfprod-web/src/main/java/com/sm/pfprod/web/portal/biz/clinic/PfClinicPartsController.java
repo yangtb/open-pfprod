@@ -33,7 +33,7 @@ public class PfClinicPartsController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_CLINIC0010','ROLE_SUPER')")
     @RequestMapping("/part/page")
     public String partPage(Model model) {
-        model.addAttribute("importType", enumUtil.getEnumMap(SysDicGroupEnum.IMPORT_TYPE.getCode()));
+        model.addAttribute("importType", enumUtil.getEnumList(SysDicGroupEnum.IMPORT_TYPE.getCode()));
         return "pages/biz/clinic/parts/partDefine";
     }
 
@@ -48,14 +48,14 @@ public class PfClinicPartsController extends BaseController {
     @RequestMapping("/part/form")
     public String partForm(String formType, Model model) {
         model.addAttribute("formType", formType);
-        model.addAttribute("importType", enumUtil.getEnumMap(SysDicGroupEnum.IMPORT_TYPE.getCode()));
+        model.addAttribute("importType", enumUtil.getEnumList(SysDicGroupEnum.IMPORT_TYPE.getCode()));
         return "pages/biz/clinic/parts/partDefineForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_CLINIC0020','ROLE_SUPER')")
     @RequestMapping("/sheet/page")
     public String sheetPage(Model model) {
-        model.addAttribute("importType", enumUtil.getEnumMap(SysDicGroupEnum.IMPORT_TYPE.getCode()));
+        model.addAttribute("importType", enumUtil.getEnumList(SysDicGroupEnum.IMPORT_TYPE.getCode()));
         return "pages/biz/clinic/sheet/sheetDefine";
     }
 
@@ -70,14 +70,14 @@ public class PfClinicPartsController extends BaseController {
     @RequestMapping("/sheet/form")
     public String sheetForm(String formType, Model model) {
         model.addAttribute("formType", formType);
-        model.addAttribute("importType", enumUtil.getEnumMap(SysDicGroupEnum.IMPORT_TYPE.getCode()));
+        model.addAttribute("importType", enumUtil.getEnumList(SysDicGroupEnum.IMPORT_TYPE.getCode()));
         return "pages/biz/clinic/sheet/sheetDefineForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_CLINIC0020','ROLE_SUPER')")
     @RequestMapping("/algorithm/page")
     public String algorithmPage(Model model) {
-        model.addAttribute("algorithmDefine", enumUtil.getEnumMap(SysDicGroupEnum.ALGORITHM_DEFINE.getCode()));
+        model.addAttribute("algorithmDefine", enumUtil.getEnumList(SysDicGroupEnum.ALGORITHM_DEFINE.getCode()));
         return "pages/biz/clinic/algorithm/algorithmDefine";
     }
 
@@ -92,7 +92,7 @@ public class PfClinicPartsController extends BaseController {
     @RequestMapping("/algorithm/form")
     public String algorithmForm(String formType, Model model) {
         model.addAttribute("formType", formType);
-        model.addAttribute("algorithmDefine", enumUtil.getEnumMap(SysDicGroupEnum.ALGORITHM_DEFINE.getCode()));
+        model.addAttribute("algorithmDefine", enumUtil.getEnumList(SysDicGroupEnum.ALGORITHM_DEFINE.getCode()));
         return "pages/biz/clinic/algorithm/algorithmDefineForm";
     }
 }

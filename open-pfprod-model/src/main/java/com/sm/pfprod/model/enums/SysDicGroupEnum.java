@@ -14,15 +14,16 @@ public enum SysDicGroupEnum {
     EXAM_WAYS("EXAM_WAYS", "检查方式"),
     BODY_POSITION("BODY_POSITION", "检查题库"),
     CLINIC_TEMPLATE_TAG("CLINIC_TEMPLATE_TAG", "模板标签"),
-    CASE_HISTORY_LEVEL("CASE_HISTORY_LEVEL", "病历级别"),
-    CASE_HISTORY_USE("CASE_HISTORY_USE", "病历用途"),
+    CASE_HISTORY_LEVEL("CASE_HISTORY_LEVEL", "病例级别"),
+    CASE_HISTORY_USE("CASE_HISTORY_USE", "病例用途"),
     IMPORT_TYPE("IMPORT_TYPE", "嵌入类型"),
-    ALGORITHM_DEFINE("ALGORITHM_DEFINE", "算法定义");
+    ALGORITHM_DEFINE("ALGORITHM_DEFINE", "算法定义"),
+    CASE_PART_PAGE("CASE_PART_PAGE", "病例组件页面");
 
     private String code;
     private String desc;
 
-    private SysDicGroupEnum(String code, String desc) {
+    SysDicGroupEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }

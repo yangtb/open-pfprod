@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>图片定义</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
+    <script>
+        var basePath = '$!{basePath}';
+        var contextPath = '$!{contextPath}';
+        var idMedCase = '$!{idMedCase}';
+    </script>
+
+</head>
+
+<body class="body-my">
+<div class="wrapper-content">
+    <form class="layui-form" id="kbPartForm" lay-filter="kbPartFilter">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">专家图片</label>
+            <div class="layui-input-inline">
+                <input id="partPath" name="path" placeholder="请上传标签图片" autocomplete="off"
+                       class="layui-input layui-disabled" disabled>
+            </div>
+            <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传</button>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+                <img class="layui-upload-img-bg" id="demo1" style="cursor: pointer;"
+                     src="$!{contextPath}/public/biz/img/parts/expert.jpg">
+            </div>
+        </div>
+
+        <div class="layui-form-item ">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="addKbPart">
+                    <i class="iconfont icon-save-copy"></i> 保存
+                </button>
+                <button class="layui-btn" lay-submit="" lay-filter="saveAsKbPart">
+                    <i class="iconfont icon-lingcunwei"></i> 另存
+                </button>
+                <button id="reset" type="reset" class="layui-btn layui-btn-danger">
+                    <i class="iconfont icon-reset"></i> 重置
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.all.js"></script>
+<script src="$!{contextPath}/public/biz/js/biz/kb/part/kbPicFormController.js"></script>
+
+
+</body>
+</html>

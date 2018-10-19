@@ -85,9 +85,9 @@
 </script>
 
 <script type="text/html" id="sdEvaAsseTpl">
-        #foreach($!param in $!{importType.keySet()})
-        {{#  if(d.sdEvaAsse == '$!param'){ }}
-            $!{importType.get($!param)}
+        #foreach($!param in $!{importType})
+        {{#  if(d.sdEvaAsse == '$!param.dictCode'){ }}
+            $!{param.dictName}
         {{#  } else { }}
 
         {{#  } }}

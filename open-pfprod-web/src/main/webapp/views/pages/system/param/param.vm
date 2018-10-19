@@ -76,9 +76,9 @@
 </script>
 
 <script type="text/html" id="bizModuleTpl">
-    #foreach($param in ${modualMap.keySet()})
-    {{#  if(d.bizModule == '$param'){ }}
-    <span class="label label-info">${modualMap.get($param)}</span>
+    #foreach($!param in ${modelList})
+    {{#  if(d.bizModule == '$!param.dictCode'){ }}
+    <span class="label label-info">${param.dictName}</span>
     {{#  } }}
     #end
 </script>

@@ -35,7 +35,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">结果内容<i class="iconfont icon-required"
                                                        style="color: #f03f2d"></i></label>
-                <div class="layui-input-block">
+                <div class="layui-input-block my-input-width">
                     <input type="text" name="desResult" autocomplete="off" class="layui-input"
                            placeholder="请输入结果内容" lay-verify="required|desAnswer" lay-vertype="tips">
                 </div>
@@ -43,7 +43,7 @@
 
             <div class="layui-form-item">
                 <label class="layui-form-label">专家解读</label>
-                <div class="layui-input-block">
+                <div class="layui-input-block my-input-width">
                 <textarea name="desExpert" class="layui-textarea" lay-verify="desAnswer" lay-vertype="tips"
                           placeholder="请输入专家解读"></textarea>
                 </div>
@@ -55,7 +55,6 @@
                 <div class="layui-input-block">
                     <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
                            value="1" lay-text="NO|OFF">
-                    &nbsp;&nbsp;&nbsp;
                     <input type="checkbox" name="fgReason" value="1" title="是否需要说明理由">
                     <input type="checkbox" name="fgBack" value="1" title="是否根据病人的回答反馈">
                     #*<input type="checkbox" value="1" title="标签">*#
@@ -64,7 +63,7 @@
 
             <div class="layui-form-item">
                 <label class="layui-form-label">多媒体</label>
-                <div class="layui-input-inline" style="vertical-align: middle;">
+                <div class="layui-input-inline" style="vertical-align: middle;width: 257px;">
                     <input id="path" name="path" placeholder="请上传文件" autocomplete="off"
                            class="layui-input layui-disabled" disabled>
                     <div id="uploadProgress" style="padding-top: 15px;display: none;">
@@ -74,7 +73,7 @@
                     </div>
 
                 </div>
-                <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
+                <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传</button>
                 <button type="button" class="layui-btn" id="preview"><i class="iconfont icon-look1"></i> 预览</button>
             </div>
 

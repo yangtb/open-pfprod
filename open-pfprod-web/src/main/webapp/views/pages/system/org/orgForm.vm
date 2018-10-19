@@ -25,46 +25,34 @@
         <div hidden>
             <input name="idOrg" hidden>
         </div>
-        <div class="layui-form-item">
+        <div class="layui-form-item form-item-my5">
             <div class="layui-inline">
                 <label class="layui-form-label">机构名称<i class="iconfont icon-required"
                                                        style="color: #f03f2d"></i></label>
-                <div class="layui-input-block">
+                <div class="layui-input-block" style="width: 514px">
                     <input type="text" name="name" autocomplete="off" class="layui-input"
-                           placeholder="请输入机构名称" lay-verify="required|name" lay-vertype="tips"
-                    style="width: 520px">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">机构类型<i class="iconfont icon-required"
-                                                       style="color: #f03f2d"></i></label>
-                <div class="layui-input-inline">
-                    <select name="fgPlat" id="fgPlat" lay-verify="required" lay-vertype="tips">
-                        <option value="">请选择</option>
-                        <option value="0" selected>机构</option>
-                        <option value="1">平台</option>
-                    </select>
+                           placeholder="请输入机构名称" lay-verify="required|name" lay-vertype="tips">
                 </div>
             </div>
         </div>
 
-        <div class="layui-form-item layui-form-text">
+        <div class="layui-form-item layui-form-text form-item-my5">
             <label class="layui-form-label">描述</label>
-            <div class="layui-input-block">
+            <div class="layui-input-block" style="width: 514px;">
                 <textarea name="des" class="layui-textarea" placeholder="请输入机构描述"
                           lay-verify="des" lay-vertype="tips"></textarea>
             </div>
         </div>
 
-        <div class="layui-form-item layui-form-text">
+        <div class="layui-form-item layui-form-text form-item-my5">
             <label class="layui-form-label">联系地址</label>
-            <div class="layui-input-block">
+            <div class="layui-input-block" style="width: 514px;">
                 <input type="text" name="addr" autocomplete="off" class="layui-input"
                        placeholder="请输入联系地址" lay-verify="addr" lay-vertype="tips">
             </div>
         </div>
 
-        <div class="layui-form-item form-item-my">
+        <div class="layui-form-item form-item-my5">
             <div class="layui-inline">
                 <label class="layui-form-label">联系电话</label>
                 <div class="layui-input-inline">
@@ -79,20 +67,22 @@
                            lay-verify="e_mail" lay-vertype="tips">
                 </div>
             </div>
-            <div class="layui-inline">
+            <div class="layui-inline" style="display: none">
                 <label class="layui-form-label">排序</label>
                 <div class="layui-input-inline">
                     <input type="text" name="sort" autocomplete="off" class="layui-input"
-                           lay-verify="sort" lay-vertype="tips">
+                           lay-verify="sort" lay-vertype="tips" value="999">
                 </div>
             </div>
         </div>
 
-        <div class="layui-form-item form-item-my">
+        <div class="layui-form-item form-item-my5">
             <div class="layui-inline">
-                <label class="layui-form-label">创建人</label>
+                <label class="layui-form-label">激活<i class="iconfont icon-required"
+                                                     style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
-                    <input type="text" name="creator" autocomplete="off" class="layui-input layui-disabled" disabled>
+                    <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
+                           lay-filter="fgActiveSwitch" value="1" lay-text="已激活|未激活" class="layui-disabled" disabled>
                 </div>
             </div>
             <div class="layui-inline">
@@ -102,23 +92,25 @@
                            placeholder="yyyy-MM-dd" class="layui-input layui-disabled" disabled>
                 </div>
             </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">激活<i class="iconfont icon-required"
-                                                     style="color: #f03f2d"></i></label>
-                <div class="layui-input-block">
-                    <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
-                           lay-filter="fgActiveSwitch" value="1" lay-text="已激活|未激活" class="layui-disabled" disabled>
-                </div>
-            </div>
+
         </div>
 
-        <div class="layui-form-item form-item-my">
+        <div class="layui-form-item form-item-my5">
+            <div class="layui-inline">
+                <label class="layui-form-label">创建人</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="creator" autocomplete="off" class="layui-input layui-disabled" disabled>
+                </div>
+            </div>
             <div class="layui-inline">
                 <label class="layui-form-label">创建时间</label>
                 <div class="layui-input-inline">
                     <input type="text" name="gmtCreate" autocomplete="off" class="layui-input layui-disabled" disabled>
                 </div>
             </div>
+        </div>
+
+        <div class="layui-form-item form-item-my5">
             <div class="layui-inline">
                 <label class="layui-form-label">修改人</label>
                 <div class="layui-input-inline">

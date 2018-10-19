@@ -56,8 +56,8 @@
                     <select name="sdEvaAsse" id="sdEvaAsse" autocomplete="off" lay-verify="required|commonLength"
                             lay-vertype="tips" >
                         <option value="">请选择嵌入类型</option>
-                        #foreach($param in ${importType.keySet()})
-                            <option value="$!param">${importType.get($!param)}</option>
+                        #foreach($param in ${importType})
+                            <option value="$!param.dictCode">${param.dictName}</option>
                         #end
                     </select>
 

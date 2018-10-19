@@ -78,9 +78,9 @@
 
 
 <script type="text/html" id="sdMedAsseTpl">
-    #foreach($!param in $!{importType.keySet()})
-    {{#  if(d.sdMedAsse == $!param){ }}
-        $!{importType.get($!param)}
+    #foreach($!param in $!{importType})
+    {{#  if(d.sdMedAsse == $!param.dictCode){ }}
+        $!{param.dictName}
     {{#  } else { }}
 
     {{#  } }}

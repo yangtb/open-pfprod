@@ -91,9 +91,9 @@
 </script>
 
 <script type="text/html" id="cdCheckTpl">
-    #foreach($param in ${examWays.keySet()})
-    {{#  if(d.cdCheck == $!param){ }}
-        $!{examWays.get($param)}
+    #foreach($param in ${examWays})
+    {{#  if(d.cdCheck == $!param.dictCode){ }}
+        $!{param.dictName}
     {{#  } else { }}
 
     {{#  } }}
@@ -101,9 +101,9 @@
 </script>
 
 <script type="text/html" id="sdBodyTpl">
-    #foreach($param in ${bodyPosition.keySet()})
-    {{#  if(d.sdBody == $!param){ }}
-        $!{bodyPosition.get($param)}
+    #foreach($param in ${bodyPosition})
+    {{#  if(d.sdBody == $!param.dictCode){ }}
+        $!{param.dictName}
     {{#  } else { }}
 
     {{#  } }}

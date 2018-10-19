@@ -5,7 +5,6 @@ import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.biz.clinic.PfClinicPartsService;
 import com.sm.pfprod.service.biz.clinic.PfClinicTemplateService;
 import com.sm.pfprod.web.portal.BaseController;
-import com.sm.pfprod.web.util.EnumUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +29,6 @@ public class PfClinicTemplateController extends BaseController {
     @Resource
     private PfClinicPartsService pfClinicPartsService;
 
-    @Resource
-    private EnumUtil enumUtil;
 
     @PreAuthorize("hasAnyRole('ROLE_STD0020','ROLE_SUPER')")
     @RequestMapping("/template/page")

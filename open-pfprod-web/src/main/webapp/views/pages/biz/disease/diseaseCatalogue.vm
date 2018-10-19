@@ -74,7 +74,7 @@
             </div>
         </div>
     </div>
-    <div class="layui-col-xs7" style="padding-left: 10px">
+    <div class="layui-col-xs7" style="padding-left: 10px; padding-top: 20px;">
         <form class="layui-form" id="diseaseCatalogueForm">
             <div hidden>
                 <input name="idDieclass" hidden>
@@ -82,7 +82,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">目录名称<i class="iconfont icon-required"
                                                        style="color: #f03f2d"></i></label>
-                <div class="layui-input-block">
+                <div class="layui-input-block" style="width: 440px;">
                     <input type="text" name="name" id="name" lay-verify="required|commonLength" lay-vertype="tips"
                            autocomplete="off"
                            class="layui-input" placeholder="疾病名称">
@@ -91,33 +91,38 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">目录编码<i class="iconfont icon-required"
                                                        style="color: #f03f2d"></i></label>
-                <div class="layui-input-block">
+                <div class="layui-input-block" style="width: 440px;">
                     <input type="text" name="cd" id="cd" autocomplete="off" lay-verify="commonLength" lay-vertype="tips"
                            class="layui-input" placeholder="疾病目录">
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">上级编码</label>
-                <div class="layui-input-block">
+                <div class="layui-input-block" style="width: 440px;">
                     <input type="text" name="cdPar" id="cdPar" lay-verify="commonLength" lay-vertype="tips" autocomplete="off"
                            class="layui-input" placeholder="上级编码">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">ICD编码_起</label>
-                <div class="layui-input-block">
-                    <input type="text" name="icdB" lay-verify="commonLength" lay-vertype="tips" autocomplete="off"
-                           class="layui-input" placeholder="ICD编码_起">
+                <div class="layui-inline">
+                    <label class="layui-form-label">ICD编码_起</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="icdB" lay-verify="commonLength" lay-vertype="tips" autocomplete="off"
+                               class="layui-input" placeholder="ICD编码_起">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">ICD编码_终</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="icdE" lay-verify="commonLength" lay-vertype="tips" autocomplete="off"
+                               class="layui-input" placeholder="ICD编码_终">
+                    </div>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">ICD编码_终</label>
-                <div class="layui-input-block">
-                    <input type="text" name="icdE" lay-verify="commonLength" lay-vertype="tips" autocomplete="off"
-                           class="layui-input" placeholder="ICD编码_终">
-                </div>
+
             </div>
-            <div class="layui-form-item layui-form-text">
+            <div class="layui-form-item">
                 <div class="layui-inline">
                     <label class="layui-form-label">排序</label>
                     <div class="layui-input-block">

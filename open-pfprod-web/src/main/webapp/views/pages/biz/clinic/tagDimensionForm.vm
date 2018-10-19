@@ -42,7 +42,7 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">维度名称<i class="iconfont icon-required"
                                                            style="color: #f03f2d"></i></label>
-                    <div class="layui-input-inline">
+                    <div class="layui-input-inline" style="width: 514px;">
                         <input type="text" name="name" id="name" lay-verify="required|name" lay-vertype="tips"
                                autocomplete="off" class="layui-input">
                     </div>
@@ -57,8 +57,8 @@
                     <label class="layui-form-label">权重<i class="iconfont icon-required"
                                                          style="color: #f03f2d"></i></label>
                     <div class="layui-input-inline" style="padding-top: 15px;">
-                        #*<input type="text" name="weight" id="weight" lay-verify="required" lay-vertype="tips"
-                               autocomplete="off" class="layui-input" placeholder="请输入权重">*#
+                    #*<input type="text" name="weight" id="weight" lay-verify="required" lay-vertype="tips"
+                           autocomplete="off" class="layui-input" placeholder="请输入权重">*#
                         <div class="demo-slider" id="weightSlider"></div>
                     </div>
                 </div>
@@ -74,8 +74,10 @@
             <div class="layui-form-item form-item-my5">
                 <label></label>
                 <div class="layui-input-block">
-                    <input type="radio" name="fgSystemAlgorithm" value="1" title="系统得分" lay-filter="fgSystemAlgorithmFilter" checked>
-                    <input type="radio" name="fgSystemAlgorithm" value="2" title="主观得分" lay-filter="fgSystemAlgorithmFilter">
+                    <input type="radio" name="fgSystemAlgorithm" value="1" title="系统得分"
+                           lay-filter="fgSystemAlgorithmFilter" checked>
+                    <input type="radio" name="fgSystemAlgorithm" value="2" title="主观得分"
+                           lay-filter="fgSystemAlgorithmFilter">
                 </div>
             </div>
 
@@ -179,21 +181,23 @@
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn" id="addParent">
-                        <i class="layui-icon layui-icon-add-1"></i>目录
-                    </button>
-                    <button type="button" class="layui-btn" id="addChild">
-                        <i class="layui-icon layui-icon-add-1"></i>子目录
-                    </button>
-                    <button id="save" class="layui-btn" lay-submit="" lay-filter="saveTag">
-                        <i class="iconfont icon-save-copy"></i> 保存
-                    </button>
-                    <button type="button" class="layui-btn layui-bg-red" id="del">
-                        <i class="layui-icon layui-icon-delete"></i>删除
-                    </button>
-                    <button id="reset" type="reset" class="layui-btn layui-btn-danger">
-                        <i class="iconfont icon-reset"></i> 重置
-                    </button>
+                    <div class="layui-btn-group">
+                        <button type="button" class="layui-btn" id="addParent">
+                            <i class="layui-icon layui-icon-add-1"></i>目录
+                        </button>
+                        <button type="button" class="layui-btn" id="addChild">
+                            <i class="layui-icon layui-icon-add-1"></i>子目录
+                        </button>
+                        <button id="save" class="layui-btn" lay-submit="" lay-filter="saveTag">
+                            <i class="iconfont icon-save-copy"></i> 保存
+                        </button>
+                        <button type="button" class="layui-btn layui-bg-red" id="del">
+                            <i class="layui-icon layui-icon-delete"></i>删除
+                        </button>
+                        <button id="reset" type="reset" class="layui-btn layui-btn-danger">
+                            <i class="iconfont icon-reset"></i> 重置
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>

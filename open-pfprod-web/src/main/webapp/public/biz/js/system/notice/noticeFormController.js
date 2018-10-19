@@ -9,21 +9,22 @@ layui.config({
         layedit = layui.layedit,
         common = layui.common;
 
-    var editIndex = layedit.build('noticeContent', {
-        tool: [
-            'strong' //加粗
-            , 'italic' //斜体
-            , 'underline' //下划线
-            , 'del' //删除线
-            , '|' //分割线
-            , 'left' //左对齐
-            , 'center' //居中对齐
-            , 'right' //右对齐
-            , 'link' //超链接
-            , 'unlink' //清除链接
-            , 'face' //表情
-        ]
-    }); //建立编辑器
+       var editIndex = layedit.build('noticeContent', {
+            tool: [
+                'strong' //加粗
+                , 'italic' //斜体
+                , 'underline' //下划线
+                , 'del' //删除线
+                , '|' //分割线
+                , 'left' //左对齐
+                , 'center' //居中对齐
+                , 'right' //右对齐
+                , 'link' //超链接
+                , 'unlink' //清除链接
+                , 'face' //表情
+            ]
+        }); //建立编辑器
+
 
     //自定义验证规则
     form.verify({
@@ -38,7 +39,7 @@ layui.config({
         var data = {};
         data.noticeTitle = $("input[name='noticeTitle']").val();
         data.noticeType = $("select[name='noticeType']").val();
-        data.noticeContent = formType == 'add' ? layedit.getContent(editIndex) : $('#noticeContent').val();
+        data.noticeContent = layedit.getContent(editIndex);
         var index = common.open('公告预览', basePath + '/pf/p/notice/detail', 880, 430, _successFunction(data));
         layer.full(index);
     });
@@ -56,7 +57,7 @@ layui.config({
         if (formType == 'add') {
             data.field.noticeContent = layedit.getContent(editIndex);
         } else if (formType == 'edit') {
-            data.field.noticeContent = $('#noticeContent').val();
+            data.field.noticeContent = layedit.getContent(editIndex);
         }
         if (!data.field.noticeContent.trim()) {
             common.errorMsg("请填写公告内容");

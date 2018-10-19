@@ -32,14 +32,14 @@ public class PfBannerController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_BANNER_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String page(Model model) {
-        model.addAttribute("bannerPosition", enumUtil.getEnumMap(SysDicGroupEnum.BANNER_POSITION.getCode()));
+        model.addAttribute("bannerPosition", enumUtil.getEnumList(SysDicGroupEnum.BANNER_POSITION.getCode()));
         return "pages/biz/media/banner/banner";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_BANNER_MG','ROLE_SUPER')")
     @RequestMapping("/form")
     public String form(String formType, Model model) {
-        model.addAttribute("areaCode", enumUtil.getEnumMap(SysDicGroupEnum.AREA_CODE.getCode()));
+        model.addAttribute("areaCode", enumUtil.getEnumList(SysDicGroupEnum.AREA_CODE.getCode()));
         model.addAttribute("formType", formType);
         return "pages/biz/media/banner/bannerForm";
     }

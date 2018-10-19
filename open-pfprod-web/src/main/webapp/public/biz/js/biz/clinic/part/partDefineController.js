@@ -14,11 +14,11 @@ layui.config({
         , cols: [[
             {checkbox: true, fixed: true},
             {field: 'fgActive', width: 100, title: '状态',fixed: true, templet: '#fgActiveTpl'},
-            {field: 'cdMedAsse', width: 100, title: '组件编码'},
+            {field: 'cdMedAsse', minWidth: 100, title: '组件编码'},
             {field: 'name', width: 150, title: '组件名称'},
             {field: 'descript', width: 150, title: '组件描述'},
             {field: 'sdMedAsse', width: 120, title: '嵌入类型', templet: '#sdMedAsseTpl'},
-            {field: 'script', width: 160, title: '嵌入代码'},
+            {field: 'script', minWidth: 160, title: '嵌入代码'},
             {field: 'gmtCreate', width: 170, sort: true, title: '创建时间'},
             {field: 'operator', width: 100, title: '创建人'},
             {fixed: 'right', width: 120, title: '操作', align: 'center', toolbar: '#partDefine'}
@@ -181,7 +181,6 @@ layui.config({
             data.status = '0';
             msg = '停用';
         }
-        console.log(obj.othis)
         common.commonPost(basePath + '/pf/r/clinic/part/updateStatus', data, msg, obj.othis);
     });
 

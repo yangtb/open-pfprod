@@ -15,10 +15,10 @@ layui.config({
             {checkbox: true, fixed: true},
             {field: 'fgActive', width: 100, title: '状态', fixed: true, templet: '#fgActiveTpl'},
             {field: 'cdEvaAsse', width: 100, title: '组件编码'},
-            {field: 'name', width: 150, title: '评估表名称'},
+            {field: 'name', minWidth: 160, title: '评估表名称'},
             {field: 'descript', width: 150, title: '评估表描述'},
             {field: 'sdEvaAsse', width: 120, title: '嵌入类型', templet: '#sdEvaAsseTpl'},
-            {field: 'script', width: 160, title: '嵌入代码'},
+            {field: 'script', minWidth: 160, title: '嵌入代码'},
             {field: 'fgGroup', width: 90, title: '等效评估', align: 'center', templet: '#fgGroupIconTpl'},
             {field: 'scoreUpper', width: 90, title: '上限分值', align: 'right'},
             {field: 'scoreLower', width: 90, title: '下限分值', align: 'right'},
@@ -185,7 +185,6 @@ layui.config({
             data.status = '0';
             msg = '停用';
         }
-        console.log(obj.othis)
         common.commonPost(basePath + '/pf/r/clinic/sheet/updateStatus', data, msg, obj.othis);
     });
 

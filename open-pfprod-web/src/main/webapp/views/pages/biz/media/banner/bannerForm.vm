@@ -2,18 +2,18 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>${formType}banner</title>
+    <title>$!{formType}banner</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
-    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
-    <link rel="stylesheet" href="${contextPath}/public/layui/expand/css/formSelects-v4.css"></script>
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/expand/css/formSelects-v4.css"></script>
 
     <script>
-        var basePath = '${basePath}';
-        var formType = '${formType}';
+        var basePath = '$!{basePath}';
+        var formType = '$!{formType}';
     </script>
 
 </head>
@@ -89,7 +89,7 @@
                 <button class="layui-btn" lay-submit="" lay-filter="addMenu">
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
-                #if(${formType} == 'add')
+                #if($!{formType} == 'add')
                     <button type="reset" class="layui-btn layui-btn-danger">
                         <i class="iconfont icon-reset"></i> 重置
                     </button>
@@ -99,12 +99,12 @@
     </form>
 </div>
 
-<script src="${contextPath}/public/layui/plugins/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
-<script src="${contextPath}/public/layui/expand/formSelects-v4.js" type="text/javascript" charset="utf-8"></script>
-<script src="${contextPath}/public/common/js/jquery.min.js"></script>
-<script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<script src="${contextPath}/public/common/js/js-pinyin.js"></script>
-<script src="${contextPath}/public/biz/js/system/dic/dicEnumFormController.js"></script>
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+<script src="$!{contextPath}/public/layui/expand/formSelects-v4.js" type="text/javascript" charset="utf-8"></script>
+<script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.formautofill.js"></script>
+<script src="$!{contextPath}/public/common/js/js-pinyin.js"></script>
+<script src="$!{contextPath}/public/biz/js/system/dic/dicEnumFormController.js"></script>
 
 <script>
     function fullForm(data) {
@@ -147,8 +147,8 @@
     formSelects.data('cityCodeSelects', 'local', {
         arr: [
             {"name": "全国", "value": -1, "selected": "selected"},
-            #foreach($param in ${areaCode.keySet()})
-                {"name": "${areaCode.get($param)}", "value": $param},
+            #foreach($param in $!{areaCode})
+                {"name": "$!{param.dictName}", "value": $param.dictCode},
             #end
         ]
     });

@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 知识库_病历
+ * 知识库_病例
  *
  * @author author
  */
@@ -21,12 +21,12 @@ public class FaqMedicalrec implements Serializable {
 
     /**
      * 主键
-     * 病历id
+     * 病例id
      */
     private Long idMedicalrec;
 
     /**
-     * 病历名称
+     * 病例名称
      */
     private String name;
 
@@ -41,17 +41,17 @@ public class FaqMedicalrec implements Serializable {
     private Long idMedicalrecCa;
 
     /**
-     * 病历归属
+     * 病例归属
      */
     private Long idOrg;
 
     /**
-     * 病历级别 : 1 初级 2 中级 3 高级
+     * 病例级别 : 1 初级 2 中级 3 高级
      */
     private String sdLevel;
 
     /**
-     * 病历用途 : 1 训练病历 2 测试病历
+     * 病例用途 : 1 训练病例 2 测试病例
      */
     private String sdUse;
 

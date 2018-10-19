@@ -45,6 +45,7 @@ public class ParamUtil {
      * 构造方法 从数据库读取枚举值
      */
     public void init() {
+        allParams.clear();
         List<SysParam> allParam = pfParamService.listAllParam();
         if (CollectionUtils.isEmpty(allParam)) {
             return;

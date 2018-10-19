@@ -3,28 +3,30 @@
  */
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['form', 'layer', 'jquery', 'element','layedit', 'common'], function () {
+}).use(['form', 'layer', 'jquery', 'element', 'layedit', 'common'], function () {
     var $ = layui.$
         , form = layui.form
         , element = layui.element
         , layedit = layui.layedit
         , common = layui.common;
 
-    var editIndex = layedit.build('emailContent',{
-        tool: [
-            'strong' //加粗
-            ,'italic' //斜体
-            ,'underline' //下划线
-            ,'del' //删除线
-            ,'|' //分割线
-            ,'left' //左对齐
-            ,'center' //居中对齐
-            ,'right' //右对齐
-            ,'link' //超链接
-            ,'unlink' //清除链接
-            ,'face' //表情
-        ]
-    }); //建立编辑器
+    if (formType == 'add') {
+         editIndex = layedit.build('emailContent', {
+            tool: [
+                'strong' //加粗
+                , 'italic' //斜体
+                , 'underline' //下划线
+                , 'del' //删除线
+                , '|' //分割线
+                , 'left' //左对齐
+                , 'center' //居中对齐
+                , 'right' //右对齐
+                , 'link' //超链接
+                , 'unlink' //清除链接
+                , 'face' //表情
+            ]
+        }); //建立编辑器
+    };
 
     element.tabChange('templateTab', templateType);
 
@@ -47,11 +49,8 @@ layui.config({
 
     //监听提交
     form.on('submit(addEmail)', function (data) {
-        if (formType == 'add') {
-            data.field.emailContent = layedit.getContent(editIndex);
-        } else if (formType == 'edit') {
-            data.field.emailContent = $('#emailContent').val();
-        }
+        data.field.emailContent = layedit.getContent(editIndex);
+        alert(data.field.emailContent)
         if (!data.field.emailContent.trim()) {
             common.errorMsg("请填写邮件模板内容");
             return false;
@@ -60,6 +59,7 @@ layui.config({
     });
 
     var _postTemplateData = function (data) {
+        console.log(JSON.stringify(data.field))
         var url = basePath + '/pf/r/message/' + formType;
         layer.load(2);
         $.ajax({

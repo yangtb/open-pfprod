@@ -42,12 +42,12 @@ public class BasMedicalTag implements Serializable {
     private Long idDemo;
 
     /**
-     * 病历组件编码
+     * 病例组件编码
      */
     private String cdMedAsse;
 
     /**
-     * 制作病历时是否显示
+     * 制作病例时是否显示
      */
     private String fgShowMake;
 

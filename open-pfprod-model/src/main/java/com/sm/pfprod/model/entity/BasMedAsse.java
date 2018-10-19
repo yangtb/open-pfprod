@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 基础_病历_组件定义
+ * 基础_病例_组件定义
  *
  * @author author
  */
@@ -21,22 +21,22 @@ public class BasMedAsse implements Serializable {
 
     /**
      * 主键
-     * 病历组件id
+     * 病例组件id
      */
     private Long idMedAsse;
 
     /**
-     * 病历组件编码
+     * 病例组件编码
      */
     private String cdMedAsse;
 
     /**
-     * 病历组件名称
+     * 病例组件名称
      */
     private String name;
 
     /**
-     * 病历组件描述
+     * 病例组件描述
      */
     private String descript;
 
@@ -46,7 +46,7 @@ public class BasMedAsse implements Serializable {
     private String sdMedAsse;
 
     /**
-     * 病历组件嵌入代码
+     * 病例组件嵌入代码
      */
     private String script;
 

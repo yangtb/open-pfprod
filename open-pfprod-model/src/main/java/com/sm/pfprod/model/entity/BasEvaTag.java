@@ -46,7 +46,7 @@ public class BasEvaTag implements Serializable {
     private String cdEvaAsse;
 
     /**
-     * 制作病历时是否显示
+     * 制作病例时是否显示
      */
     private String fgShowMake;
 

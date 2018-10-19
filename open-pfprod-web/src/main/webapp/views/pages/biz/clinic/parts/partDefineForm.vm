@@ -50,8 +50,8 @@
                 <select name="sdMedAsse" id="sdMedAsse" autocomplete="off" lay-verify="required|commonLength"
                         lay-vertype="tips" placeholder="请选择嵌入类型">
                     <option value="">请选择</option>
-                    #foreach($param in ${importType.keySet()})
-                        <option value="$!param">${importType.get($!param)}</option>
+                    #foreach($param in ${importType})
+                        <option value="$!param.dictCode">${param.dictName}</option>
                     #end
                 </select>
 

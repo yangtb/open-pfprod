@@ -56,7 +56,7 @@
 
             <div class="layui-form-item form-item-my5">
                 <label class="layui-form-label">标签Logo</label>
-                <div class="layui-input-inline">
+                <div class="layui-input-inline" style="width: 419px;">
                     <input id="partPath" name="path" placeholder="请上传标签图片" autocomplete="off"
                            class="layui-input layui-disabled" disabled>
                 </div>
@@ -65,7 +65,7 @@
             <div class="layui-form-item form-item-my5">
                 <label class="layui-form-label"></label>
                 <div class="layui-input-block">
-                    <img class="layui-upload-img" id="demo1"
+                    <img class="layui-upload-img" id="demo1" style="cursor: pointer;"
                          src="$!{contextPath}/public/biz/img/photo-default.png">
 
                 </div>
