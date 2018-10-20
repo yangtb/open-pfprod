@@ -14,29 +14,31 @@
         var basePath = '$!{basePath}';
         var contextPath = '$!{contextPath}';
         var idMedCase = '$!{idMedCase}';
-        var formType = '$!{formType}';
     </script>
 
 </head>
 
 <body class="body-my">
 <div class="wrapper-content">
-    <form class="layui-form layui-form-pane" id="kbPartForm" lay-filter="kbPartFilter">
-
+    <form class="layui-form layui-form-pane" id="kbPartTextForm" lay-filter="kbPartTextFilter">
+        <div hidden>
+            <input name="idMedCase" hidden>
+        </div>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">文本<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <textarea placeholder="请输入文本" class="layui-textarea" name="desc"
+                <textarea placeholder="请输入文本" class="layui-textarea" name="content"
+                          lay-verify="required" lay-vertype="tips"
                           style="height: 200px;"></textarea>
             </div>
         </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="addKbPart">
+                <button class="layui-btn" lay-submit="" lay-filter="addKbPartText">
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
-                <button class="layui-btn" lay-submit="" lay-filter="saveAsKbPart">
+                <button class="layui-btn" lay-submit="" lay-filter="saveAsKbPartText">
                     <i class="iconfont icon-lingcunwei"></i> 另存
                 </button>
                 <button id="reset" type="reset" class="layui-btn layui-btn-danger">
@@ -48,7 +50,8 @@
 
 </div>
 
-<script src="$!{contextPath}/public/layui/plugins/layui/layui.all.js"></script>
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="$!{contextPath}/public/biz/js/biz/kb/part/kbTextFormController.js"></script>
 
 
 </body>

@@ -1,43 +1,78 @@
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['form', 'layer', 'jquery', 'common'], function () {
+}).use(['form', 'jquery', 'upload', 'common'], function () {
     var $ = layui.$
         , form = layui.form
+        , upload = layui.upload
         , common = layui.common;
 
-
-    form.verify({
-        commonLength: function (value) {
-            if (value.length > 64) {
-                return '长度不能超过64个字';
+    var selectUrl = basePath + '/pf/r/kb/part/pic/select';
+    var bizData = {};
+    bizData.idMedCase = idMedCase;
+    layer.load(2);
+    $.ajax({
+        url: selectUrl,
+        type: 'post',
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify(bizData),
+        success: function (data) {
+            layer.closeAll('loading');
+            if (data.code != 0) {
+                common.errorMsg(data.msg);
+                return false;
+            } else {
+                form.val("kbPartPicFilter", data.data);
+                $('#expertImg').attr('src', data.data.path);
+                return true;
             }
         },
-        descript: function (value) {
-            if (value && value.length > 255) {
-                return '长度不能超过255个字';
-            }
+        error: function () {
+            layer.closeAll('loading');
+            common.errorMsg("查询失败");
+            return false;
         }
     });
 
-    //监听提交
-    form.on('submit(addKbPart)', function (data) {
-        if (!data.field.fgActive) {
-            data.field.fgActive = '0';
+    upload.render({
+        elem: '#uploadImg'
+        , url: basePath + '/upload'
+        , field: 'file'
+        , accept: 'images' //普通文件
+        , exts: 'jpg|png|bmp|jpeg'
+        , before: function (obj) {
+            layer.msg('正在上传图片', {icon: 16, shade: 0.01});
+            //预读本地文件示例，不支持ie8
+            obj.preview(function (index, file, result) {
+                $('#expertImg').attr('src', result);
+            });
         }
-        var url = basePath + '/pf/r/kb/part/';
-        if (formType == 'add') {
-            url += 'add';
-        } else if (formType == 'edit') {
-            url += 'edit';
+        , done: function (res) {
+            $('#kbPartPicPath').val(res.data.path);
+            $('#idMedia').val(res.data.idMedia);
+            layer.closeAll('loading');
         }
-        return common.commonParentFormPost(url, data.field, formType, 'kbPartTableId', '保存');
+        , error: function () {
+            layer.closeAll('loading');
+        }
     });
 
-    $('#demo1').on('click', function () {
-        window.parent.openPhoto($('#demo1')[0].src);
+    form.on('submit(addKbPartPic)', function (data) {
+        data.field.idMedCase = idMedCase;
+        var url = basePath + '/pf/r/kb/part/pic/save';
+        return common.commonPost(url, data.field, '保存');
     });
 
-})
-    ;
 
+    form.on('submit(saveAsKbPartPic)', function (data) {
+        data.field.idMedCase = idMedCase;
+        var url = basePath + '/pf/r/kb/part/pic/save';
+        return common.commonPost(url, data.field, '另存');
+    });
+
+    $('#expertImg').on('click', function () {
+        window.parent.openPhoto($('#expertImg')[0].src);
+    });
+
+});
 

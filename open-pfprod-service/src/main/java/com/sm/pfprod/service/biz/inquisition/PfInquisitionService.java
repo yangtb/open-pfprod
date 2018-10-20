@@ -2,6 +2,7 @@ package com.sm.pfprod.service.biz.inquisition;
 
 import com.sm.pfprod.model.dto.biz.inquisition.PfInquisitionQuestionDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfCommonSearchDto;
 import com.sm.pfprod.model.entity.BasInques;
 import com.sm.pfprod.model.entity.BasInquesAnswer;
 import com.sm.pfprod.model.entity.BasInquesCa;
@@ -104,4 +105,12 @@ public interface PfInquisitionService {
      * @return
      */
     Long saveAnswer(BasInquesAnswer dto);
+
+    /**
+     * 问诊问题列表搜索
+     *
+     * @param dto
+     * @return
+     */
+    PageResult searchQuestion(PfCommonSearchDto dto);
 }

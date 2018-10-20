@@ -75,9 +75,9 @@ layui.config({
 
     var _addOrEdit = function (formType, currentEditData) {
         if (formType == 'add') {
-            common.open('新增病历组件', basePath + '/pf/p/clinic/part/form?formType=' + formType, 430, 435);
+            common.open('新增病例组件', basePath + '/pf/p/clinic/part/form?formType=' + formType, 430, 435);
         } else {
-            common.open('编辑病历组件', basePath + '/pf/p/clinic/part/form?formType=' + formType, 430, 435, _successFunction(currentEditData));
+            common.open('编辑病例组件', basePath + '/pf/p/clinic/part/form?formType=' + formType, 430, 435, _successFunction(currentEditData));
         }
     };
 
@@ -119,7 +119,7 @@ layui.config({
         data.list = reqData;
         data.status = '1';
         layer.confirm('确定删除' + messageTitle + '么？', {
-            title: '删除病历组件提示',
+            title: '删除病例组件提示',
             resize: false,
             btn: ['确定', '取消'],
             btnAlign: 'c',

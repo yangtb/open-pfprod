@@ -14,15 +14,16 @@
         var basePath = '$!{basePath}';
         var contextPath = '$!{contextPath}';
         var idMedCase = '$!{idMedCase}';
-        var formType = '$!{formType}';
     </script>
 
 </head>
 
 <body class="body-my">
 <div class="wrapper-content">
-    <form class="layui-form layui-form-pane" id="kbPartForm" lay-filter="kbPartFilter">
-
+    <form class="layui-form layui-form-pane" id="kbPartPatForm" lay-filter="kbPartPatFilter">
+        <div hidden>
+            <input name="idMedCase" hidden>
+        </div>
         <div class="layui-form-item form-item-my5">
             <label class="layui-form-label">姓名<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-inline">
@@ -34,17 +35,20 @@
         <div class="layui-form-item form-item-my5">
             <label class="layui-form-label">性别<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-inline">
-                <input name="descript" autocomplete="off" class="layui-input"
-                       lay-verify="descript" lay-vertype="tips"
-                       placeholder="请输入性别">
+                <select name="sex" autocomplete="off" lay-verify="required" lay-vertype="tips">
+                    <option value="">请选择性别</option>
+                    #foreach($element in $sexList)
+                        <option value="$element.dictCode">$element.dictName</option>
+                    #end
+                </select>
             </div>
         </div>
 
         <div class="layui-form-item form-item-my5">
             <label class="layui-form-label">年龄<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-inline">
-                <input name="descript" autocomplete="off" class="layui-input"
-                       lay-verify="descript" lay-vertype="tips"
+                <input name="age" autocomplete="off" class="layui-input"
+                       lay-verify="required|age" lay-vertype="tips"
                        placeholder="请输入年龄">
             </div>
         </div>
@@ -52,17 +56,18 @@
         <div class="layui-form-item layui-form-text form-item-my5">
             <label class="layui-form-label">患者主诉<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <textarea placeholder="请输入患者主诉" class="layui-textarea" name="desc"
+                <textarea placeholder="请输入患者主诉" class="layui-textarea" name="complaint"
+                          lay-verify="required" lay-vertype="tips"
                           style="height: 150px;"></textarea>
             </div>
         </div>
 
         <div class="layui-form-item form-item-my5">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="addKbPart">
+                <button class="layui-btn" lay-submit="" lay-filter="addKbPartPat">
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
-                <button class="layui-btn" lay-submit="" lay-filter="saveAsKbPart">
+                <button class="layui-btn" lay-submit="" lay-filter="saveAsKbPartPat">
                     <i class="iconfont icon-lingcunwei"></i> 另存
                 </button>
                 <button id="reset" type="reset" class="layui-btn layui-btn-danger">
@@ -73,7 +78,8 @@
     </form>
 </div>
 
-<script src="$!{contextPath}/public/layui/plugins/layui/layui.all.js"></script>
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="$!{contextPath}/public/biz/js/biz/kb/part/kbPatFormController.js"></script>
 
 
 </body>

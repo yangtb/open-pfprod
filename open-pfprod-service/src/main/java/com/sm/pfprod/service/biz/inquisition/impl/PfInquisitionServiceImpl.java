@@ -7,14 +7,17 @@ import com.sm.open.core.facade.model.param.pf.biz.inquisition.BasInquesCaParam;
 import com.sm.open.core.facade.model.param.pf.biz.inquisition.BasInquesParam;
 import com.sm.open.core.facade.model.param.pf.biz.inquisition.PfInquisitionQuestionParam;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
+import com.sm.open.core.facade.model.param.pf.common.PfCommonSearchParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
 import com.sm.open.core.facade.model.result.pf.biz.inquisition.BasInquesAnswerResult;
 import com.sm.open.core.facade.model.result.pf.biz.inquisition.BasInquesResult;
+import com.sm.open.core.facade.model.result.pf.biz.inquisition.BasInquesSearchResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.biz.inquisition.InquisitionClient;
 import com.sm.pfprod.model.dto.biz.inquisition.PfInquisitionQuestionDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfCommonSearchDto;
 import com.sm.pfprod.model.entity.BasInques;
 import com.sm.pfprod.model.entity.BasInquesAnswer;
 import com.sm.pfprod.model.entity.BasInquesCa;
@@ -129,5 +132,14 @@ public class PfInquisitionServiceImpl implements PfInquisitionService {
             return result.getContent();
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult searchQuestion(PfCommonSearchDto dto) {
+        PfPageResult<BasInquesSearchResult> result = inquisitionClient.searchQuestion(BeanUtil.convert(dto, PfCommonSearchParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
     }
 }

@@ -282,10 +282,10 @@ layui.config({
         , cols: [[
             {checkbox: true, fixed: true},
             {field: 'fgActive', width: 100, title: '状态', templet: '#fgActiveTpl'},
-            {field: 'chtName', width: 260, title: '病历模板'},
-            {field: 'sdLevel', width: 100, title: '病历级别', templet: '#sdLevelTpl'},
-            {field: 'sdUse', width: 100, title: '病历用途', templet: '#sdUseTpl'},
-            {field: 'name', width: 160, title: '病历名称'},
+            {field: 'chtName', width: 260, title: '病例模板'},
+            {field: 'sdLevel', width: 100, title: '病例级别', templet: '#sdLevelTpl'},
+            {field: 'sdUse', width: 100, title: '病例用途', templet: '#sdUseTpl'},
+            {field: 'name', width: 160, title: '病例名称'},
             {field: 'orgName', width: 170, title: '归属机构'},
             {
                 field: 'count', width: 100, title: '使用次数',
@@ -348,9 +348,9 @@ layui.config({
 
     var _addOrEdit = function (formType, currentEditData) {
         if (formType == 'add') {
-            common.open('新增病历模板', basePath + '/pf/p/case/history/template/form?formType=' + formType, 430, 435, _successFunction(currentEditData));
+            common.open('新增病例模板', basePath + '/pf/p/case/history/template/form?formType=' + formType, 430, 435, _successFunction(currentEditData));
         } else {
-            common.open('编辑病历模板', basePath + '/pf/p/case/history/template/form?formType=' + formType, 430, 435, _successFunction(currentEditData));
+            common.open('编辑病例模板', basePath + '/pf/p/case/history/template/form?formType=' + formType, 430, 435, _successFunction(currentEditData));
         }
     };
 
@@ -386,7 +386,7 @@ layui.config({
         var data = {};
         data.list = reqData;
         data.status = '1';
-        layer.confirm('确定删除病历模板部位描述' + messageTitle + '么？', {
+        layer.confirm('确定删除病例模板部位描述' + messageTitle + '么？', {
             title: '删除提示',
             resize: false,
             btn: ['确定', '取消'],
@@ -470,7 +470,7 @@ layui.config({
     });
 
     var _editTemplate = function (title, id, idDemo) {
-        var index = common.open('编辑病历 -> ' + '<span style="color: red">' + title + '</span>',
+        var index = common.open('编辑病例 -> ' + '<span style="color: red">' + title + '</span>',
             basePath + '/pf/p/case/history/form?idMedicalrec=' + id + '&idDemo=' + idDemo, 900, 460);
         layer.full(index);
     };

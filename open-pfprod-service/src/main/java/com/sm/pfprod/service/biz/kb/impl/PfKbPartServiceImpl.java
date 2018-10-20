@@ -2,19 +2,16 @@ package com.sm.pfprod.service.biz.kb.impl;
 
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
-import com.sm.open.core.facade.model.param.pf.biz.kb.part.FaqMedCaseParam;
-import com.sm.open.core.facade.model.param.pf.biz.kb.part.PfMedCaseParam;
-import com.sm.open.core.facade.model.param.pf.biz.kb.part.PfPartCommonParam;
+import com.sm.open.core.facade.model.param.pf.biz.kb.part.*;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
-import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseInquesListResult;
-import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseResult;
+import com.sm.open.core.facade.model.result.pf.biz.kb.part.*;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.biz.kb.KbPartClient;
 import com.sm.pfprod.model.dto.biz.kb.part.PfMedCaseDto;
 import com.sm.pfprod.model.dto.biz.kb.part.PfPartCommonDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
-import com.sm.pfprod.model.entity.FaqMedCase;
+import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.biz.kb.PfKbPartService;
 import org.springframework.stereotype.Service;
@@ -70,6 +67,78 @@ public class PfKbPartServiceImpl implements PfKbPartService {
             return null;
         }
         return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public Long saveFaqMedCaseInques(FaqMedCaseInquesList dto) {
+        CommonResult<Long> result = kbPartClient.saveFaqMedCaseInques(BeanUtil.convert(dto, FaqMedCaseInquesListParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean delFaqMedCaseInques(PfBachChangeStatusDto dto) {
+        CommonResult<Boolean> result = kbPartClient.delFaqMedCaseInques(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean saveKbText(FaqMedCaseText dto) {
+        CommonResult<Boolean> result = kbPartClient.saveKbText(BeanUtil.convert(dto, FaqMedCaseTextParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public FaqMedCaseText selectKbText(Long idMedCase) {
+        CommonResult<FaqMedCaseTextResult> result = kbPartClient.selectKbText(idMedCase);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), FaqMedCaseText.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean saveKbPic(FaqMedCasePic dto) {
+        CommonResult<Boolean> result = kbPartClient.saveKbPic(BeanUtil.convert(dto, FaqMedCasePicParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public FaqMedCasePic selectKbPic(Long idMedCase) {
+        CommonResult<FaqMedCasePicResult> result = kbPartClient.selectKbPic(idMedCase);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), FaqMedCasePic.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean saveKbPat(FaqMedCasePatient dto) {
+        CommonResult<Boolean> result = kbPartClient.saveKbPat(BeanUtil.convert(dto, FaqMedCasePatientParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public FaqMedCasePatient selectKbPat(Long idMedCase) {
+        CommonResult<FaqMedCasePatientResult> result = kbPartClient.selectKbPat(idMedCase);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), FaqMedCasePatient.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
 }

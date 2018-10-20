@@ -1,5 +1,9 @@
 package com.sm.pfprod.model.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 
 /**
@@ -7,6 +11,9 @@ import java.io.Serializable;
  *
  * @author yangtongbin
  */
+@Setter
+@Getter
+@ToString
 public class FaqMedCaseInquesList implements Serializable {
 
     private static final long serialVersionUID = 1539933191243L;

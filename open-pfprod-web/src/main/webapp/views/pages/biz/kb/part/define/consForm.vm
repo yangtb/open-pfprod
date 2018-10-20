@@ -25,27 +25,34 @@
     </div>
 
     <div class="layui-col-xs7">
-        <form class="layui-form" id="answerForm" style="padding-top: 10px">
+        <form class="layui-form" id="consForm" style="padding-top: 10px">
             <div hidden>
-                <input name="idAnswer" id="idAnswer" hidden>
+                <input name="idMedCaseList" id="idMedCaseList" hidden>
+                <input name="idInquesCa" id="idInquesCa" hidden>
                 <input name="idInques" id="idInques" hidden>
                 <input name="idMedia" id="idMedia" hidden>
-                <input name="sdType" id="sdType" hidden>
             </div>
             <div class="layui-form-item form-item-my5">
-                <label class="layui-form-label">答案内容<i class="iconfont icon-required"
+                <label class="layui-form-label">问题<i class="iconfont icon-required"
                                                        style="color: #f03f2d"></i></label>
                 <div class="layui-input-block my-input-width">
-                    <input type="text" name="desAnswer" id="desAnswer" autocomplete="off" class="layui-input"
-                           placeholder="请输入答案内容" lay-verify="required|desAnswer" lay-vertype="tips">
+                    <input type="text" name="desInques" id="desInques" autocomplete="off" class="layui-input layui-disabled"
+                           placeholder="请输入答案内容" lay-verify="required|desAnswer" lay-vertype="tips"
+                           style="display:inline-block;width:382px;vertical-align:middle;
+                           margin-right:-5px;border: 1px solid #C9C9C9;" disabled>
+                    <button type="button" class="layui-btn layui-btn-primary" id="searchAnswer">
+                        <i class="layui-icon layui-icon-search"></i>
+                    </button>
                 </div>
             </div>
 
             <div class="layui-form-item form-item-my5">
-                <label class="layui-form-label">专家解读</label>
+                <label class="layui-form-label">答案<i class="iconfont icon-required"
+                                                     style="color: #f03f2d"></i></label>
                 <div class="layui-input-block my-input-width">
-                <textarea name="desExpert" class="layui-textarea" lay-verify="desAnswer" lay-vertype="tips"
-                          placeholder="请输入专家解读"></textarea>
+                    <select name="idAnswer" id="idAnswer" autocomplete="off" lay-verify="required" lay-vertype="tips">
+                        <option value="">请选择答案</option>
+                    </select>
                 </div>
             </div>
 
@@ -58,6 +65,14 @@
             </div>
 
             <div class="layui-form-item form-item-my5">
+                <label class="layui-form-label">专家解读</label>
+                <div class="layui-input-block my-input-width">
+                <textarea name="desExpert" class="layui-textarea" lay-verify="desAnswer" lay-vertype="tips"
+                          placeholder="请输入专家解读"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
                 <label class="layui-form-label">多媒体</label>
                 <div class="layui-input-inline" style="vertical-align: middle;width: 257px;">
                     <input id="path" name="path" placeholder="请上传文件" autocomplete="off"
@@ -73,49 +88,16 @@
                 <button type="button" class="layui-btn" id="preview"><i class="iconfont icon-look1"></i> 预览</button>
             </div>
 
-            <div class="layui-form-item form-item-my5">
-                <div class="layui-inline">
-                    <label class="layui-form-label">创建人</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="creator" autocomplete="off" class="layui-input layui-disabled"
-                               disabled>
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">创建时间</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="gmtCreate" autocomplete="off" class="layui-input layui-disabled"
-                               disabled>
-                    </div>
-                </div>
-            </div>
-            <div class="layui-form-item form-item-my5">
-                <div class="layui-inline">
-                    <label class="layui-form-label">修改人</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="operator" autocomplete="off" class="layui-input layui-disabled"
-                               disabled>
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">修改时间</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="gmtModify" autocomplete="off" class="layui-input layui-disabled"
-                               disabled>
-                    </div>
-                </div>
-            </div>
-
-            <div class="layui-form-item form-item-my5">
+            <div class="layui-form-item">
                 <div class="layui-input-block">
                     <div class="layui-btn-group">
                         <button id="add" type="button" class="layui-btn">
                             <i class="layui-icon layui-icon-add-1"></i>增加
                         </button>
-                        <button id="save" class="layui-btn" lay-submit="" lay-filter="saveAnswer">
+                        <button id="save" class="layui-btn" lay-submit="" lay-filter="saveCons">
                             <i class="iconfont icon-save-copy"></i> 保存
                         </button>
-                        <button class="layui-btn" lay-submit="" lay-filter="saveAsKbPart">
+                        <button class="layui-btn" lay-submit="" lay-filter="saveAsCons">
                             <i class="iconfont icon-lingcunwei"></i> 另存
                         </button>
                         <button id="reset" type="reset" class="layui-btn layui-btn-danger">
@@ -130,24 +112,19 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.formautofill.js"></script>
 <script src="${contextPath}/public/biz/js/biz/kb/part/kbConsFormController.js"></script>
 
-<script type="text/html" id="fgActiveTpl">
-    {{#  if(d.fgActive == '1'){ }}
-    <button class="layui-btn layui-btn-normal layui-btn-xs">启用</button>
-    {{#  } else { }}
-    <button class="layui-btn layui-btn-danger layui-btn-xs">停用</button>
-    {{#  } }}
-</script>
 
 <script type="text/html" id="partConsBar">
     <div class="layui-btn-group">
         <button class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" title="删除">
             <i class="layui-icon layui-icon-delete"></i></button>
-        <button class="layui-btn layui-btn-xs" lay-event="del" title="恢复默认">
+        <button class="layui-btn layui-btn-xs" lay-event="reset" title="恢复默认">
             <i class="iconfont icon-reset"></i></button>
         {{# if(d.fgCarried == '1'){ }}
-        <button class="layui-btn layui-btn-xs" lay-event="del" title="自定义">
+        <button class="layui-btn layui-btn-xs" lay-event="edit" title="自定义">
             <i class="iconfont icon-edit"></i></button>
         {{# } else { }}
         {{# } }}

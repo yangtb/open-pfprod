@@ -1,36 +1,50 @@
 
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['form', 'layer', 'jquery', 'common'], function () {
+}).use(['form', 'jquery', 'common'], function () {
     var $ = layui.$,
         form = layui.form,
         common = layui.common;
 
-    form.verify({
-        commonLength: function (value) {
-            if (value.length > 64) {
-                return '长度不能超过64个字';
+    var selectUrl = basePath + '/pf/r/kb/part/text/select';
+    var bizData  = {};
+    bizData.idMedCase = idMedCase;
+    layer.load(2);
+    $.ajax({
+        url: selectUrl,
+        type: 'post',
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify(bizData),
+        success: function (data) {
+            layer.closeAll('loading');
+            if (data.code != 0) {
+                common.errorMsg(data.msg);
+                return false;
+            } else {
+                form.val("kbPartTextFilter", data.data);
+                return true;
             }
         },
-        descript : function (value) {
-            if (value && value.length > 255) {
-                return '长度不能超过255个字';
-            }
+        error: function () {
+            layer.closeAll('loading');
+            common.errorMsg("查询失败");
+            return false;
         }
     });
 
-    //监听提交
-    form.on('submit(addKbPart)', function (data) {
-        if (!data.field.fgActive) {
-            data.field.fgActive = '0';
-        }
-        var url = basePath + '/pf/r/kb/part/';
-        if (formType == 'add') {
-            url += 'add';
-        } else if (formType == 'edit') {
-            url += 'edit';
-        }
-        return common.commonParentFormPost(url, data.field, formType, 'kbPartTableId', '保存');
+
+    form.on('submit(addKbPartText)', function (data) {
+        data.field.idMedCase = idMedCase;
+        var url = basePath + '/pf/r/kb/part/text/save';
+        return common.commonPost(url, data.field, '保存');
+    });
+
+
+    form.on('submit(saveAsKbPartText)', function (data) {
+        data.field.idMedCase = idMedCase;
+        var url = basePath + '/pf/r/kb/part/text/save';
+        return common.commonPost(url, data.field, '另存');
     });
 
 });

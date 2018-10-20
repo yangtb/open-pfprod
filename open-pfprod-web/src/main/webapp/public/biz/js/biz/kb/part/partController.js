@@ -83,9 +83,9 @@ layui.config({
 
     var _addOrEdit = function (formType, currentEditData) {
         if (formType == 'add') {
-            common.open('新增病历组件用例', basePath + '/pf/p/kb/part/form?formType=' + formType, 420, 320);
+            common.open('新增病例组件用例', basePath + '/pf/p/kb/part/form?formType=' + formType, 420, 320);
         } else {
-            common.open('编辑病历组件用例', basePath + '/pf/p/kb/part/form?formType=' + formType, 420, 320, _successFunction(currentEditData));
+            common.open('编辑病例组件用例', basePath + '/pf/p/kb/part/form?formType=' + formType, 420, 320, _successFunction(currentEditData));
         }
     };
 

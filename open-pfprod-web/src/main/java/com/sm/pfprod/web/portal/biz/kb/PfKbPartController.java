@@ -3,10 +3,14 @@ package com.sm.pfprod.web.portal.biz.kb;
 import com.alibaba.fastjson.JSON;
 import com.sm.pfprod.model.dto.biz.kb.part.PfMedCaseDto;
 import com.sm.pfprod.model.dto.biz.kb.part.PfPartCommonDto;
+import com.sm.pfprod.model.dto.common.PfCommonSearchDto;
+import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.biz.clinic.PfClinicPartsService;
+import com.sm.pfprod.service.biz.inquisition.PfInquisitionService;
 import com.sm.pfprod.service.biz.kb.PfKbPartService;
 import com.sm.pfprod.web.portal.BaseController;
+import com.sm.pfprod.web.util.EnumUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +34,12 @@ public class PfKbPartController extends BaseController {
 
     @Resource
     private PfKbPartService pfKbPartService;
+
+    @Resource
+    private PfInquisitionService pfInquisitionService;
+
+    @Resource
+    private EnumUtil enumUtil;
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/page")
@@ -89,6 +99,7 @@ public class PfKbPartController extends BaseController {
     @RequestMapping("/define/pat/form")
     public String patForm(Model model, String idMedCase) {
         model.addAttribute("idMedCase", idMedCase);
+        model.addAttribute("sexList", enumUtil.getEnumList(SysDicGroupEnum.SEX.getCode()));
         return "pages/biz/kb/part/define/patForm";
     }
 
@@ -112,4 +123,12 @@ public class PfKbPartController extends BaseController {
         model.addAttribute("idMedCase", idMedCase);
         return "pages/biz/kb/part/define/examForm";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping(value = "/cons/search")
+    @ResponseBody
+    public PageResult searchQuestion(PfCommonSearchDto dto) {
+        return pfInquisitionService.searchQuestion(dto);
+    }
+
 }

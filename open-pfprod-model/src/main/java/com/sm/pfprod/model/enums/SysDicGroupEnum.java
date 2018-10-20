@@ -8,6 +8,7 @@ package com.sm.pfprod.model.enums;
  */
 public enum SysDicGroupEnum {
 
+    SEX("SEX", "性别"),
     AREA_CODE("AREA_CODE", "城市编码"),
     SYS_PARAM_BIZ_MODUAL("SYS_PARAM_BIZ_MODULE", "系统参数-作用模块"),
     BANNER_POSITION("BANNER_POSITION", "banner位"),

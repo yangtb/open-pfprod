@@ -20,6 +20,63 @@
 <body>
 <div style="margin: 0px 10px 0px 10px">
     <div class="layui-col-xs5">
+        <form class="layui-form layui-form-pane" id="uploadForm" style="padding-top: 10px;">
+            <div class="layui-form-item form-item-my5">
+                <label class="layui-form-label">正面照</label>
+                <div class="layui-input-inline" style="vertical-align: middle;">
+                    <input id="path" name="path" placeholder="请上传文件" autocomplete="off"
+                           class="layui-input layui-disabled" disabled>
+                </div>
+                <div class="layui-btn-group">
+                <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i></button>
+                <button type="button" class="layui-btn" id="preview"><i class="iconfont icon-look1"></i></button>
+                </div>
+            </div>
+            <div class="layui-form-item form-item-my5">
+                <label class="layui-form-label">背面照</label>
+                <div class="layui-input-inline" style="vertical-align: middle;">
+                    <input id="path" name="path" placeholder="请上传文件" autocomplete="off"
+                           class="layui-input layui-disabled" disabled>
+                </div>
+                <div class="layui-btn-group">
+                    <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i></button>
+                    <button type="button" class="layui-btn" id="preview"><i class="iconfont icon-look1"></i></button>
+                </div>
+            </div>
+            <div class="layui-form-item form-item-my5">
+                <label class="layui-form-label">头部照</label>
+                <div class="layui-input-inline" style="vertical-align: middle;">
+                    <input id="path" name="path" placeholder="请上传文件" autocomplete="off"
+                           class="layui-input layui-disabled" disabled>
+                </div>
+                <div class="layui-btn-group">
+                    <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i></button>
+                    <button type="button" class="layui-btn" id="preview"><i class="iconfont icon-look1"></i></button>
+                </div>
+            </div>
+            <div class="layui-form-item form-item-my5">
+                <label class="layui-form-label">胸部照</label>
+                <div class="layui-input-inline" style="vertical-align: middle;">
+                    <input id="path" name="path" placeholder="请上传文件" autocomplete="off"
+                           class="layui-input layui-disabled" disabled>
+                </div>
+                <div class="layui-btn-group">
+                    <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i></button>
+                    <button type="button" class="layui-btn" id="preview"><i class="iconfont icon-look1"></i></button>
+                </div>
+            </div>
+            <div class="layui-form-item form-item-my5">
+                <label class="layui-form-label">腹部照</label>
+                <div class="layui-input-inline" style="vertical-align: middle;">
+                    <input id="path" name="path" placeholder="请上传文件" autocomplete="off"
+                           class="layui-input layui-disabled" disabled>
+                </div>
+                <div class="layui-btn-group">
+                    <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i></button>
+                    <button type="button" class="layui-btn" id="preview"><i class="iconfont icon-look1"></i></button>
+                </div>
+            </div>
+        </form>
         <table id="partConsTable" lay-filter="partConsTableFilter">
         </table>
     </div>
