@@ -30,7 +30,9 @@
                 <input id="kbPartPicPath" name="path" placeholder="请上传标签图片" autocomplete="off"
                        class="layui-input layui-disabled" disabled>
             </div>
-            <button type="button" class="layui-btn" id="uploadImg"><i class="layui-icon"></i>上传</button>
+            <button type="button" class="layui-btn layui-btn-primary" id="uploadImg">
+                <i class="layui-icon" style="color: #009688; font-weight: bold">&#xe608;</i>上传
+            </button>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label"></label>
@@ -46,7 +48,7 @@
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
                 <button class="layui-btn" lay-submit="" lay-filter="saveAsKbPartPic">
-                    <i class="iconfont icon-lingcunwei"></i> 另存
+                    <i class="iconfont icon-lingcunwei"></i> 重载
                 </button>
                 <button id="reset" type="reset" class="layui-btn layui-btn-danger">
                     <i class="iconfont icon-reset"></i> 重置

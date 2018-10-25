@@ -106,7 +106,6 @@ public class PfKbPartRestController {
         Assert.isTrue(StringUtils.isNotBlank(dto.getDesInques()), "desInques");
         Assert.isTrue(dto.getIdAnswer() != null, "idAnswer");
         Assert.isTrue(StringUtils.isNotBlank(dto.getDesAnswer()), "desAnswer");
-        Assert.isTrue(dto.getIdMedia() != null, "idMedia");
         Assert.isTrue(dto.getFgCarried() != null, "fgCarried");
         return ResultObject.createSuccess("saveFaqMedCaseInques", ResultObject.DATA_TYPE_OBJECT,
                 pfKbPartService.saveFaqMedCaseInques(dto));
@@ -126,6 +125,40 @@ public class PfKbPartRestController {
         dto.setOperator(CurrentUserUtils.getCurrentUsername());
         return pfKbPartService.delFaqMedCaseInques(dto) ? ResultObject.createSuccess("delFaqMedCaseInques", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("delFaqMedCaseInques", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
+
+    /**
+     * 自定义问诊
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/cons/custom")
+    public ResultObject customFaqMedCaseInques(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        dto.setOperationType(OperationTypeEnum.UPDATE_STATUS.getCode());
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("delFaqMedCaseInques", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.delFaqMedCaseInques(dto));
+    }
+
+    /**
+     * 重载检验项目
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/cons/reset")
+    public ResultObject resetKbCons(@RequestBody FaqMedCaseInquesList dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedCaseList() != null, "idMedCaseList");
+        Assert.isTrue(dto.getIdInques() != null, "idInques");
+        Assert.isTrue(dto.getIdAnswer() != null, "idAnswer");
+        return ResultObject.createSuccess("resetKbCons", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.resetKbCons(dto));
     }
 
     /**
@@ -221,6 +254,168 @@ public class PfKbPartRestController {
         Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
         return ResultObject.createSuccess("selectKbPat", ResultObject.DATA_TYPE_OBJECT,
                 pfKbPartService.selectKbPat(dto.getIdMedCase()));
+    }
+
+
+    /**
+     * 保存检验项目
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/exam/save")
+    public ResultObject saveExam(@RequestBody FaqMedCaseInspectList dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
+
+        Assert.isTrue(dto.getFgCarried() != null, "fgCarried");
+        return ResultObject.createSuccess("saveExam", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.saveExam(dto));
+    }
+
+    /**
+     * 删除检验项目
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/exam/del")
+    public ResultObject delKbExam(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("delKbExam", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.delKbExam(dto));
+    }
+
+
+    /**
+     * 自定义检验项目
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/exam/custom")
+    public ResultObject customKbExam(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        dto.setOperationType(OperationTypeEnum.UPDATE_STATUS.getCode());
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("customKbExam", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.delKbExam(dto));
+    }
+
+    /**
+     * 重载检验项目
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/exam/reset")
+    public ResultObject resetKbExam(@RequestBody FaqMedCaseInspectList dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedCaseList() != null, "idMedCaseList");
+        return ResultObject.createSuccess("resetKbExam", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.resetKbExam(dto));
+    }
+
+    /**
+     * 保存检查
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/check/save")
+    public ResultObject saveCheck(@RequestBody FaqMedCaseBodyList dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
+        Assert.isTrue(dto.getFgCarried() != null, "fgCarried");
+        return ResultObject.createSuccess("saveCheck", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.saveCheck(dto));
+    }
+
+    /**
+     * 删除检查
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/check/del")
+    public ResultObject delKbCheck(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("delKbCheck", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.delKbCheck(dto));
+    }
+
+
+    /**
+     * 自定义检查
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/check/custom")
+    public ResultObject customKbCheck(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        dto.setOperationType(OperationTypeEnum.UPDATE_STATUS.getCode());
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("customKbCheck", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.delKbCheck(dto));
+    }
+
+    /**
+     * 重载检查
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/check/reset")
+    public ResultObject resetKbCheck(@RequestBody FaqMedCaseBodyList dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedCaseList() != null, "idMedCaseList");
+        return ResultObject.createSuccess("resetKbCheck", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.resetKbCheck(dto));
+    }
+
+    /**
+     * 保存检查图片
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/check/pic/save")
+    public ResultObject saveFaqMedCaseBody(@RequestBody FaqMedCaseBody dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
+        return ResultObject.createSuccess("saveFaqMedCaseBody", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.saveFaqMedCaseBody(dto));
+    }
+
+    /**
+     * 获取检查图片
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/check/pic/select")
+    public ResultObject selectFaqMedCaseBody(@RequestBody FaqMedCaseBody dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
+        return ResultObject.createSuccess("selectFaqMedCaseBody", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.selectFaqMedCaseBody(dto.getIdMedCase()));
     }
 
 }

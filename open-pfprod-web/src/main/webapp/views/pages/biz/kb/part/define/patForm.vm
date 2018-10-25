@@ -68,7 +68,7 @@
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
                 <button class="layui-btn" lay-submit="" lay-filter="saveAsKbPartPat">
-                    <i class="iconfont icon-lingcunwei"></i> 另存
+                    <i class="iconfont icon-lingcunwei"></i> 重载
                 </button>
                 <button id="reset" type="reset" class="layui-btn layui-btn-danger">
                     <i class="iconfont icon-reset"></i> 重置

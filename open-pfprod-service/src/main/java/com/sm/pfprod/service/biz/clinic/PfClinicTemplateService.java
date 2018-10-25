@@ -5,6 +5,8 @@ import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.PfCommonZtreeVo;
+import com.sm.pfprod.model.vo.biz.clinic.PfAssessTagVo;
+import com.sm.pfprod.model.vo.biz.clinic.PfCaseHistoryTagVo;
 
 import java.util.List;
 
@@ -172,4 +174,21 @@ public interface PfClinicTemplateService {
      * @return
      */
     BasDemoAsses selectDimensionTagInfo(Long idDimemsion);
+
+    /**
+     * 所有病历标签
+     *
+     * @param idDemo
+     * @return
+     */
+    List<PfCaseHistoryTagVo> listAllCaseHistoryTag(Long idDemo);
+
+    /**
+     * 所有评估表
+     *
+     * @param idDemo
+     * @return
+     */
+    List<PfAssessTagVo> listAllAssessTag(Long idDemo);
+
 }

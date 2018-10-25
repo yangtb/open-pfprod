@@ -88,6 +88,15 @@ public class PfKbPartServiceImpl implements PfKbPartService {
     }
 
     @Override
+    public FaqMedCaseInquesList resetKbCons(FaqMedCaseInquesList dto) {
+        CommonResult<FaqMedCaseInquesListResult> result = kbPartClient.resetKbCons(BeanUtil.convert(dto, FaqMedCaseInquesListParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), FaqMedCaseInquesList.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
     public boolean saveKbText(FaqMedCaseText dto) {
         CommonResult<Boolean> result = kbPartClient.saveKbText(BeanUtil.convert(dto, FaqMedCaseTextParam.class));
         if (result != null && result.getIsSuccess()) {
@@ -137,6 +146,96 @@ public class PfKbPartServiceImpl implements PfKbPartService {
         CommonResult<FaqMedCasePatientResult> result = kbPartClient.selectKbPat(idMedCase);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convert(result.getContent(), FaqMedCasePatient.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult listExams(PfPartCommonDto dto) {
+        PfPageResult<FaqMedCaseInspectListResult> result = kbPartClient.listExams(BeanUtil.convert(dto, PfPartCommonParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public Long saveExam(FaqMedCaseInspectList dto) {
+        CommonResult<Long> result = kbPartClient.saveExam(BeanUtil.convert(dto, FaqMedCaseInspectListParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean delKbExam(PfBachChangeStatusDto dto) {
+        CommonResult<Boolean> result = kbPartClient.delKbExam(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public FaqMedCaseInspectList resetKbExam(FaqMedCaseInspectList dto) {
+        CommonResult<FaqMedCaseInspectListResult> result = kbPartClient.resetKbExam(BeanUtil.convert(dto, FaqMedCaseInspectListParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), FaqMedCaseInspectList.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult listChecks(PfPartCommonDto dto) {
+        PfPageResult<FaqMedCaseBodyListResult> result = kbPartClient.listChecks(BeanUtil.convert(dto, PfPartCommonParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public Long saveCheck(FaqMedCaseBodyList dto) {
+        CommonResult<Long> result = kbPartClient.saveCheck(BeanUtil.convert(dto, FaqMedCaseBodyListparam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean delKbCheck(PfBachChangeStatusDto dto) {
+        CommonResult<Boolean> result = kbPartClient.delKbCheck(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public FaqMedCaseBodyList resetKbCheck(FaqMedCaseBodyList dto) {
+        CommonResult<FaqMedCaseBodyListResult> result = kbPartClient.resetKbCheck(BeanUtil.convert(dto, FaqMedCaseBodyListparam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), FaqMedCaseBodyList.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean saveFaqMedCaseBody(FaqMedCaseBody dto) {
+        CommonResult<Boolean> result = kbPartClient.saveFaqMedCaseBody(BeanUtil.convert(dto, FaqMedCaseBodyParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public FaqMedCaseBody selectFaqMedCaseBody(Long idMedCase) {
+        CommonResult<FaqMedCaseBodyResult> result = kbPartClient.selectFaqMedCaseBody(idMedCase);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), FaqMedCaseBody.class);
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }

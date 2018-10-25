@@ -1,12 +1,11 @@
 package com.sm.pfprod.web.portal.biz.kb;
 
-import com.sm.pfprod.model.dto.biz.kb.casehistory.PfCaseHistoryDto;
-import com.sm.pfprod.model.enums.SysDicGroupEnum;
+import com.alibaba.fastjson.JSON;
+import com.sm.pfprod.model.dto.biz.kb.assess.PfEvaCaseDto;
 import com.sm.pfprod.model.result.PageResult;
-import com.sm.pfprod.service.biz.kb.PfCaseHistoryService;
-import com.sm.pfprod.service.biz.clinic.PfClinicTemplateService;
+import com.sm.pfprod.service.biz.clinic.PfClinicPartsService;
+import com.sm.pfprod.service.biz.kb.PfKbAssessService;
 import com.sm.pfprod.web.portal.BaseController;
-import com.sm.pfprod.web.util.EnumUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,48 +23,42 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping(value = "/pf/p/kb/assess")
 public class PfKbAssessController extends BaseController {
+    @Resource
+    private PfClinicPartsService pfClinicPartsService;
 
     @Resource
-    private PfCaseHistoryService pfCaseHistoryService;
+    private PfKbAssessService pfKbAssessService;
 
-    @Resource
-    private EnumUtil enumUtil;
-
-    @Resource
-    private PfClinicTemplateService pfClinicTemplateService;
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/page")
-    public String cataloguePage(Model model) {
-        model.addAttribute("caseHistoryLevel", enumUtil.getEnumList(SysDicGroupEnum.CASE_HISTORY_LEVEL.getCode()));
-        model.addAttribute("caseHistoryUse", enumUtil.getEnumList(SysDicGroupEnum.CASE_HISTORY_USE.getCode()));
-        return "pages/biz/casehistory/caseHistoryTemplate";
+    public String partPage(Model model) {
+        model.addAttribute("assesses", pfClinicPartsService.listAllSheet());
+        return "pages/biz/kb/assess/assessTemplate";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
-    @RequestMapping(value = "/template/list")
+    @RequestMapping(value = "/list")
     @ResponseBody
-    public PageResult listTemplate(PfCaseHistoryDto dto) {
-        return pfCaseHistoryService.listTemplate(dto);
+    public PageResult listKbAssess(PfEvaCaseDto dto) {
+        return pfKbAssessService.listKbAssess(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
-    @RequestMapping("/template/form")
-    public String form(String formType, Model model) {
-        model.addAttribute("formType", formType);
-        model.addAttribute("baseDemo", pfClinicTemplateService.listAllBasDemo());
-        model.addAttribute("caseHistoryLevel", enumUtil.getEnumList(SysDicGroupEnum.CASE_HISTORY_LEVEL.getCode()));
-        model.addAttribute("caseHistoryUse", enumUtil.getEnumList(SysDicGroupEnum.CASE_HISTORY_USE.getCode()));
-        return "pages/biz/casehistory/caseHistoryTemplateForm";
-    }
-
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/form")
-    public String tagForm(Long idMedicalrec, Long idDemo, Model model) {
-        model.addAttribute("idMedicalrec", idMedicalrec);
-        model.addAttribute("idDemo", idDemo);
-        model.addAttribute("tags", pfClinicTemplateService.listTagByIdDemo(idDemo));
-        return "pages/biz/casehistory/templateTagForm";
+    public String form(Model model, String formType) {
+        model.addAttribute("formType", formType);
+        model.addAttribute("assesses", pfClinicPartsService.listAllSheet());
+        return "pages/biz/kb/assess/assessForm";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping("/useCase/form")
+    public String partForm(Model model, String cdMedAsse, Long idMedCase) {
+        model.addAttribute("cdMedAsse", cdMedAsse);
+        model.addAttribute("idMedCase", idMedCase);
+        model.addAttribute("parts", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllPart())));
+        return "pages/biz/kb/assess/assessUseCaseForm";
     }
 
 }

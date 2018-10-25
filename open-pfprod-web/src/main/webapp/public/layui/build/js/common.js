@@ -168,14 +168,16 @@ layui.define(['layer'], function (exports) {
                         }
                         return false;
                     } else {
-                        if (selectId) {
-                            if (typeof(selectId) == 'string') {
-                                layer.tips(msg + "成功", '#' + selectId, {tips: 1});
+                        if (msg) {
+                            if (selectId) {
+                                if (typeof(selectId) == 'string') {
+                                    layer.tips(msg + "成功", '#' + selectId, {tips: 1});
+                                } else {
+                                    layer.tips(msg + "成功", selectId);
+                                }
                             } else {
-                                layer.tips(msg + "成功", selectId);
+                                common.sucChildMsg(msg + "成功");
                             }
-                        } else {
-                            common.sucChildMsg(msg + "成功");
                         }
                         if (callback) {
                             callback(data);
@@ -269,7 +271,22 @@ layui.define(['layer'], function (exports) {
                 var storage = window.localStorage;
                 return storage[key];
             }
-        }
+        },
+
+        setFormStatus: function (status, arr) {
+            if (status == '0') {
+                $.each(arr, function (index, value) {
+                    $('#' + value).addClass("layui-disabled");
+                    $('#' + value).attr("disabled", "true");
+                });
+            } else {
+                $.each(arr, function (index, value) {
+                    $('#' + value).removeClass("layui-disabled");
+                    $('#' + value).removeAttr("disabled", "true");
+                });
+            }
+        },
+
     };
     exports('common', common)
 })

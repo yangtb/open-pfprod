@@ -72,8 +72,9 @@
     <dubbo:reference id="pfCaseHistoryFacade"
                      interface="com.sm.open.core.facade.pf.biz.kb.PfCaseHistoryFacade"/>
 
-
     <!-- 临床组件服务 -->
     <dubbo:reference id="pfClinicPartsFacade" interface="com.sm.open.core.facade.pf.biz.clinic.PfClinicPartsFacade"/>
 
+    <!-- 评估组件服务 -->
+    <dubbo:reference id="pfKbAssessFacade" interface="com.sm.open.core.facade.pf.biz.kb.PfKbAssessFacade"/>
 </beans>

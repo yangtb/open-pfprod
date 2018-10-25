@@ -178,6 +178,19 @@ public class PfClinicPartsRestController {
     }
 
     /**
+     * 所有评估组件列表
+     *
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0010','ROLE_SUPER')")
+    @RequestMapping(value = "/sheet/all")
+    public ResultObject allSheet() {
+        /* 参数校验 */
+        return ResultObject.createSuccess("allSheet", ResultObject.DATA_TYPE_OBJECT,
+                pfClinicPartsService.listAllSheet());
+    }
+
+    /**
      * 新增算法信息
      *
      * @param dto

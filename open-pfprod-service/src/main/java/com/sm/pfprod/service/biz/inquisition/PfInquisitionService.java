@@ -113,4 +113,5 @@ public interface PfInquisitionService {
      * @return
      */
     PageResult searchQuestion(PfCommonSearchDto dto);
+
 }

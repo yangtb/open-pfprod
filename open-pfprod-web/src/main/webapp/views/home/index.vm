@@ -27,8 +27,8 @@
         <div class="layui-header">
             <!-- 头部区域 -->
             <ul class="layui-nav layui-layout-left">
-                <li class="layui-nav-item layadmin-flexible" lay-unselect>
-                    <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+                <li class="layui-nav-item layadmin-flexible"  lay-unselect>
+                    <a href="javascript:;" layadmin-event="flexible" id="spreadMenu" title="侧边伸缩">
                         <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
                     </a>
                 </li>
@@ -184,8 +184,15 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/moment.js"></script>
 <script src="${contextPath}/public/biz/js/index/indexLayuiController.js"></script>
+
+<script>
+    function spreadMenu() {
+        $('#spreadMenu').click();
+    }
+</script>
 
 </body>
 </html>

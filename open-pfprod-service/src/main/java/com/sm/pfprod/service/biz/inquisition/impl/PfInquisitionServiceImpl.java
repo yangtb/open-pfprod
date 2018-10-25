@@ -142,4 +142,5 @@ public class PfInquisitionServiceImpl implements PfInquisitionService {
         }
         return BeanUtil.convert(result, PageResult.class);
     }
+
 }

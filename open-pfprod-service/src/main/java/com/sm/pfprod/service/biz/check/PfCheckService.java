@@ -3,6 +3,7 @@ package com.sm.pfprod.service.biz.check;
 import com.sm.pfprod.model.dto.biz.check.PfCheckQuestionDto;
 import com.sm.pfprod.model.dto.biz.inquisition.PfInquisitionQuestionDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfCommonSearchDto;
 import com.sm.pfprod.model.entity.BasBody;
 import com.sm.pfprod.model.entity.BasBodyCa;
 import com.sm.pfprod.model.entity.BasBodyResult;
@@ -105,4 +106,12 @@ public interface PfCheckService {
      * @return
      */
     Long saveAnswer(BasBodyResult dto);
+
+    /**
+     * 检查列表搜索
+     *
+     * @param dto
+     * @return
+     */
+    PageResult searchCheck(PfCommonSearchDto dto);
 }

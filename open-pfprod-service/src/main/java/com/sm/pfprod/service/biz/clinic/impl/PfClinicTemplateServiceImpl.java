@@ -14,6 +14,8 @@ import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.PfCommonZtreeVo;
+import com.sm.pfprod.model.vo.biz.clinic.PfAssessTagVo;
+import com.sm.pfprod.model.vo.biz.clinic.PfCaseHistoryTagVo;
 import com.sm.pfprod.service.biz.clinic.PfClinicTemplateService;
 import org.springframework.stereotype.Service;
 
@@ -202,6 +204,24 @@ public class PfClinicTemplateServiceImpl implements PfClinicTemplateService {
         CommonResult<BasDemoAssesResult> result = clinicTemplateClient.selectDimensionTagInfo(idDimemsion);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convert(result.getContent(), BasDemoAsses.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<PfCaseHistoryTagVo> listAllCaseHistoryTag(Long idDemo) {
+        CommonResult<List<PfCaseHistoryTagResult>> result = clinicTemplateClient.listAllCaseHistoryTag(idDemo);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfCaseHistoryTagVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<PfAssessTagVo> listAllAssessTag(Long idDemo) {
+        CommonResult<List<PfAssessTagResult>> result = clinicTemplateClient.listAllAssessTag(idDemo);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfAssessTagVo.class);
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }

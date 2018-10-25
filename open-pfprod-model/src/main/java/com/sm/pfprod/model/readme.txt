@@ -1,4 +1,4 @@
-com.alipayeco.medicalpfcore.model包下全部定义：
+包下全部定义：
 1、接口模型					api
 2、常量模式					constant
 3、数据传输模型（入参、出参）	dto

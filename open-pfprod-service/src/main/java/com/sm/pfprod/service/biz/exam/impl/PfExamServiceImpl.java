@@ -7,16 +7,17 @@ import com.sm.open.core.facade.model.param.pf.biz.exam.BasInspectItemParam;
 import com.sm.open.core.facade.model.param.pf.biz.exam.BasItemResultParam;
 import com.sm.open.core.facade.model.param.pf.biz.exam.PfExamQuestionParam;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
+import com.sm.open.core.facade.model.param.pf.common.PfCommonSearchParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
+import com.sm.open.core.facade.model.result.pf.biz.exam.BasExamSearchResult;
 import com.sm.open.core.facade.model.result.pf.biz.exam.BasInspectItemResult;
 import com.sm.open.core.facade.model.result.pf.biz.exam.BasItemResultResult;
-import com.sm.open.core.facade.model.result.pf.biz.inquisition.BasInquesAnswerResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.biz.exam.ExamClient;
 import com.sm.pfprod.model.dto.biz.exam.PfExamQuestionDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
-import com.sm.pfprod.model.entity.BasInquesCa;
+import com.sm.pfprod.model.dto.common.PfCommonSearchDto;
 import com.sm.pfprod.model.entity.BasInspectCa;
 import com.sm.pfprod.model.entity.BasInspectItem;
 import com.sm.pfprod.model.entity.BasItemResult;
@@ -131,5 +132,14 @@ public class PfExamServiceImpl implements PfExamService {
             return result.getContent();
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult searchExam(PfCommonSearchDto dto) {
+        PfPageResult<BasExamSearchResult> result = examClient.searchExam(BeanUtil.convert(dto, PfCommonSearchParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
     }
 }

@@ -27,7 +27,7 @@ public class GlobalExceptionResolver {
 
     @ResponseBody
     @ExceptionHandler(Exception.class)
-    public ResultObject GlobalExceptionResolver(HttpServletRequest request, Exception e) {
+    public ResultObject globalExceptionResolver(HttpServletRequest request, Exception e) {
         String requestUrl = request.getServletPath();
         if (e instanceof BizRuntimeException) {
             BizRuntimeException bizEx = (BizRuntimeException) e;

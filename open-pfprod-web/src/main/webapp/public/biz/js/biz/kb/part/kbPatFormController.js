@@ -5,33 +5,39 @@ layui.config({
         form = layui.form,
         common = layui.common;
 
-    var selectUrl = basePath + '/pf/r/kb/part/pat/select';
-    var bizData = {};
-    bizData.idMedCase = idMedCase;
-    layer.load(2);
-    $.ajax({
-        url: selectUrl,
-        type: 'post',
-        dataType: 'json',
-        contentType: "application/json",
-        data: JSON.stringify(bizData),
-        success: function (data) {
-            layer.closeAll('loading');
-            if (data.code != 0) {
-                common.errorMsg(data.msg);
-                return false;
-            } else {
-                form.val("kbPartPatFilter", data.data);
-                return true;
-            }
-        },
-        error: function () {
-            layer.closeAll('loading');
-            common.errorMsg("查询失败");
-            return false;
-        }
-    });
+    init();
 
+    function init() {
+        if (!idMedCase) {
+            return;
+        }
+        var selectUrl = basePath + '/pf/r/kb/part/pat/select';
+        var bizData = {};
+        bizData.idMedCase = idMedCase;
+        layer.load(2);
+        $.ajax({
+            url: selectUrl,
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    common.errorMsg(data.msg);
+                    return false;
+                } else {
+                    form.val("kbPartPatFilter", data.data);
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                common.errorMsg("查询失败");
+                return false;
+            }
+        });
+    };
 
     form.verify({
         commonLength: function (value) {
@@ -59,7 +65,7 @@ layui.config({
     form.on('submit(saveAsKbPartPat)', function (data) {
         data.field.idMedCase = idMedCase;
         var url = basePath + '/pf/r/kb/part/pat/save';
-        return common.commonPost(url, data.field, '另存');
+        return common.commonPost(url, data.field, '重载');
     });
 
 });

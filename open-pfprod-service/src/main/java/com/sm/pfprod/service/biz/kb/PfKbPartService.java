@@ -1,6 +1,5 @@
 package com.sm.pfprod.service.biz.kb;
 
-import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseInquesListResult;
 import com.sm.pfprod.model.dto.biz.kb.part.PfMedCaseDto;
 import com.sm.pfprod.model.dto.biz.kb.part.PfPartCommonDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
@@ -72,6 +71,14 @@ public interface PfKbPartService {
     boolean delFaqMedCaseInques(PfBachChangeStatusDto dto);
 
     /**
+     * 重载咨询问题
+     *
+     * @param dto
+     * @return
+     */
+    FaqMedCaseInquesList resetKbCons(FaqMedCaseInquesList dto);
+
+    /**
      * 组件 - add文本
      *
      * @param dto
@@ -118,4 +125,85 @@ public interface PfKbPartService {
      * @return
      */
     FaqMedCasePatient selectKbPat(Long idMedCase);
+
+    /**
+     * 检验列表
+     *
+     * @param dto
+     * @return
+     */
+    PageResult listExams(PfPartCommonDto dto);
+
+    /**
+     * 保存检验问题
+     *
+     * @param dto
+     * @return
+     */
+    Long saveExam(FaqMedCaseInspectList dto);
+
+    /**
+     * 删除检验组件用例
+     *
+     * @param dto
+     * @return
+     */
+    boolean delKbExam(PfBachChangeStatusDto dto);
+
+    /**
+     * 重载检验项目
+     *
+     * @param dto
+     * @return
+     */
+    FaqMedCaseInspectList resetKbExam(FaqMedCaseInspectList dto);
+
+    /**
+     * 检查列表
+     *
+     * @param dto
+     * @return
+     */
+    PageResult listChecks(PfPartCommonDto dto);
+
+    /**
+     * 保存检查
+     *
+     * @param dto
+     * @return
+     */
+    Long saveCheck(FaqMedCaseBodyList dto);
+
+    /**
+     * 删除检查
+     *
+     * @param dto
+     * @return
+     */
+    boolean delKbCheck(PfBachChangeStatusDto dto);
+
+    /**
+     * 重载检查
+     *
+     * @param dto
+     * @return
+     */
+    FaqMedCaseBodyList resetKbCheck(FaqMedCaseBodyList dto);
+
+    /**
+     * 保存检查图片
+     *
+     * @param dto
+     * @return
+     */
+    boolean saveFaqMedCaseBody(FaqMedCaseBody dto);
+
+    /**
+     * 查询检查图片
+     *
+     * @param idMedCase
+     * @return
+     */
+    FaqMedCaseBody selectFaqMedCaseBody(Long idMedCase);
+
 }

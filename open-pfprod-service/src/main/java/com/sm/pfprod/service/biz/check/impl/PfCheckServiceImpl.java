@@ -7,14 +7,18 @@ import com.sm.open.core.facade.model.param.pf.biz.check.BasBodyParam;
 import com.sm.open.core.facade.model.param.pf.biz.check.BasBodyResultParam;
 import com.sm.open.core.facade.model.param.pf.biz.check.PfCheckQuestionParam;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
+import com.sm.open.core.facade.model.param.pf.common.PfCommonSearchParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
 import com.sm.open.core.facade.model.result.pf.biz.check.BasBodyCheckResult;
 import com.sm.open.core.facade.model.result.pf.biz.check.BasBodyResultResult;
+import com.sm.open.core.facade.model.result.pf.biz.check.BasCheckSearchResult;
+import com.sm.open.core.facade.model.result.pf.biz.exam.BasExamSearchResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.biz.check.CheckClient;
 import com.sm.pfprod.model.dto.biz.check.PfCheckQuestionDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfCommonSearchDto;
 import com.sm.pfprod.model.entity.BasBody;
 import com.sm.pfprod.model.entity.BasBodyCa;
 import com.sm.pfprod.model.entity.BasBodyResult;
@@ -129,5 +133,14 @@ public class PfCheckServiceImpl implements PfCheckService {
             return result.getContent();
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult searchCheck(PfCommonSearchDto dto) {
+        PfPageResult<BasCheckSearchResult> result = checkClient.searchCheck(BeanUtil.convert(dto, PfCommonSearchParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
     }
 }

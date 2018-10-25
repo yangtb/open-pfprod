@@ -18,7 +18,6 @@ layui.config({
             bottomPage = appendTabContent(partList[i]);
         }
     }
-    console.log(bottomPage)
     $('#bottomPage').html(bottomPage);
 
     //$('#tabTitle').html(tabTitle);

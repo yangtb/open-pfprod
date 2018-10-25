@@ -55,9 +55,6 @@ layui.config({
             //, even: true
             , limits: [15, 30, 100]
             , page: true
-            , where: {
-                cdMedAsse: default_cdMedAsse
-            }
         });
     };
 

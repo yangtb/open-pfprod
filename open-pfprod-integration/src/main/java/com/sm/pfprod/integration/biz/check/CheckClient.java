@@ -5,8 +5,10 @@ import com.sm.open.core.facade.model.param.pf.biz.check.BasBodyParam;
 import com.sm.open.core.facade.model.param.pf.biz.check.BasBodyResultParam;
 import com.sm.open.core.facade.model.param.pf.biz.check.PfCheckQuestionParam;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
+import com.sm.open.core.facade.model.param.pf.common.PfCommonSearchParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
 import com.sm.open.core.facade.model.result.pf.biz.check.BasBodyResultResult;
+import com.sm.open.core.facade.model.result.pf.biz.check.BasCheckSearchResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.open.core.facade.pf.biz.check.PfCheckFacade;
@@ -65,4 +67,7 @@ public class CheckClient {
         return pfCheckFacade.saveAnswer(param);
     }
 
+    public PfPageResult<BasCheckSearchResult> searchCheck(PfCommonSearchParam param) {
+        return pfCheckFacade.searchCheck(param);
+    }
 }

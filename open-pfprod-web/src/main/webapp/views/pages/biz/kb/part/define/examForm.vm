@@ -6,74 +6,200 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
-    <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
 
     <script>
-        var basePath = '$!{basePath}';
-        var contextPath = '$!{contextPath}';
+        var basePath = '${basePath}';
+        var contextPath = '${contextPath}';
         var idMedCase = '$!{idMedCase}';
-        var formType = '$!{formType}';
     </script>
-
 </head>
 
-<body class="body-my">
-<div class="wrapper-content">
-    <form class="layui-form layui-form-pane" id="kbPartForm" lay-filter="kbPartFilter">
+<body>
+<div style="margin: 0px 10px 0px 10px">
+    <div class="layui-col-xs5">
+        <table id="partExamTable" lay-filter="partExamTableFilter">
+        </table>
+    </div>
 
-        <div class="layui-form-item form-item-my5">
-            <label class="layui-form-label">姓名<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
-            <div class="layui-input-inline">
-                <input name="name" autocomplete="off" class="layui-input"
-                       placeholder="请输入姓名" lay-verify="required|commonLength" lay-vertype="tips">
+    <div class="layui-col-xs7">
+        <form class="layui-form" id="examForm" lay-filter="examFormFilter" style="padding-top: 10px" disabled="true">
+            <div hidden>
+                <input name="idMedCaseList" id="idMedCaseList" hidden>
+                <input name="idInspect" hidden>
+                <input name="idInspectItem" hidden>
+                <input name="idMedia" id="idMedia" hidden>
+                <input name="sdType" id="sdType" hidden>
+                <input name="fgCarried" id="fgCarried" hidden>
             </div>
-        </div>
 
-        <div class="layui-form-item form-item-my5">
-            <label class="layui-form-label">性别<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
-            <div class="layui-input-inline">
-                <input name="descript" autocomplete="off" class="layui-input"
-                       lay-verify="descript" lay-vertype="tips"
-                       placeholder="请输入性别">
+            <div class="layui-form-item form-item-my5">
+                <label class="layui-form-label">项目名称<i class="iconfont icon-required"
+                                                       style="color: #f03f2d"></i></label>
+                <div class="layui-input-block my-input-width">
+                    <input type="text" name="naItem" id="naItem" autocomplete="off" class="layui-input"
+                           placeholder="请输入项目名称" lay-verify="required|naItem" lay-vertype="tips"
+                           style="display:inline-block;width:382px;vertical-align:middle;
+                           margin-right:-5px;border: 1px solid #C9C9C9;">
+                    <button type="button" class="layui-btn layui-btn-primary" id="searchAnswer">
+                        <i class="layui-icon layui-icon-search"></i>
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <div class="layui-form-item form-item-my5">
-            <label class="layui-form-label">年龄<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
-            <div class="layui-input-inline">
-                <input name="descript" autocomplete="off" class="layui-input"
-                       lay-verify="descript" lay-vertype="tips"
-                       placeholder="请输入年龄">
+            <div class="layui-form-item form-item-my">
+                <div class="layui-inline">
+                    <label class="layui-form-label">缩写</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="naShort" id="naShort" autocomplete="off" class="layui-input"
+                               placeholder="缩写">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">参考范围<i class="iconfont icon-required"
+                                                           style="color: #f03f2d"></i></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="desStand" id="desStand" autocomplete="off" class="layui-input"
+                               lay-verify="required|desStand" lay-vertype="tips"
+                               placeholder="参考范围">
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="layui-form-item layui-form-text form-item-my5">
-            <label class="layui-form-label">患者主诉<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
-            <div class="layui-input-block">
-                <textarea placeholder="请输入患者主诉" class="layui-textarea" name="desc"></textarea>
+            <div class="layui-form-item form-item-my">
+                <div class="layui-inline">
+                    <label class="layui-form-label">结果<i class="iconfont icon-required"
+                                                         style="color: #f03f2d"></i></label>
+                    <div class="layui-input-block" style="width: 158px;">
+                        <div class="mySelect">
+                            <select name="idResult" id="idResult" autocomplete="off" lay-verify="required"
+                                    lay-vertype="tips"
+                                    lay-filter="idResultSelectFilter" readonly="">
+                                <option value="">请选择结果值</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">结果说明</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="desResult" id="desResult" autocomplete="off" class="layui-input"
+                               placeholder="结果说明" lay-verify="desResult" lay-vertype="tips">
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="layui-form-item form-item-my5">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="addKbPart">
-                    <i class="iconfont icon-save-copy"></i> 保存
-                </button>
-                <button class="layui-btn" lay-submit="" lay-filter="saveAsKbPart">
-                    <i class="iconfont icon-lingcunwei"></i> 另存
-                </button>
-                <button id="reset" type="reset" class="layui-btn layui-btn-danger">
-                    <i class="iconfont icon-reset"></i> 重置
-                </button>
+
+            <div class="layui-form-item form-item-my">
+                <div class="layui-inline">
+                    <label class="layui-form-label">费用</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="costMoney" id="costMoney" autocomplete="off" class="layui-input"
+                               placeholder="费用" lay-verify="vDecimal" lay-vertype="tips">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">消耗时间(m)</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="costTime" id="costTime" autocomplete="off" class="layui-input"
+                               placeholder="消耗时间" lay-verify="vDecimal" lay-vertype="tips">
+                    </div>
+                </div>
             </div>
-        </div>
-    </form>
+
+            <div class="layui-form-item form-item-my">
+                <div class="layui-inline">
+                    <label class="layui-form-label"></label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="fgShow" id="fgShow" value="1" title="结果是否在医嘱前展示">
+                    </div>
+                </div>
+                <div class="layui-inline">
+
+                </div>
+            </div>
+
+            <div class="layui-form-item form-item-my">
+                <div class="layui-inline">
+                    <label class="layui-form-label"></label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="fgReason" id="fgReason" value="1" title="是否需要说明理由">
+                        <input type="checkbox" id="fgBack"
+                               name="fgBack" value="1" title="是否根据病人的回答反馈">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">专家解读</label>
+                <div class="layui-input-block">
+                <textarea name="desExpert" class="layui-textarea" id="desExpert" lay-verify="desResult"
+                          lay-vertype="tips"
+                          placeholder="请输入专家解读" style="width: 441px;"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">多媒体</label>
+                <div class="layui-input-inline" style="vertical-align: middle; width: 257px;">
+                    <input id="path" name="path" placeholder="请上传文件" autocomplete="off"
+                           class="layui-input layui-disabled" disabled>
+                    <div id="uploadProgress" style="padding-top: 15px;display: none;">
+                        <div class="layui-progress" lay-showpercent="true" lay-filter="demo">
+                            <div class="layui-progress-bar layui-bg-blue" lay-percent="0%"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <button type="button" class="layui-btn layui-btn-primary" id="test3"><i class="layui-icon" style="color: #009688; font-weight: bold">&#xe608;</i>上传</button>
+                <button type="button" class="layui-btn layui-btn-primary" id="preview"><i class="iconfont icon-look1" style="color: #009688; font-weight: bold"></i> 预览</button>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <div class="layui-btn-group">
+                        <button id="add" type="button" class="layui-btn">
+                            <i class="layui-icon layui-icon-add-1"></i>增加
+                        </button>
+                        <button id="save" class="layui-btn" lay-submit="" lay-filter="saveExam">
+                            <i class="iconfont icon-save-copy"></i> 保存
+                        </button>
+                        <button class="layui-btn" lay-submit="" lay-filter="saveAsExam">
+                            <i class="iconfont icon-lingcunwei"></i> 重载
+                        </button>
+                        <button id="reset" type="reset" class="layui-btn layui-btn-danger">
+                            <i class="iconfont icon-reset"></i> 重置
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
 </div>
 
-<script src="$!{contextPath}/public/layui/plugins/layui/layui.all.js"></script>
+<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.formautofill.js"></script>
+<script src="${contextPath}/public/biz/js/biz/kb/part/kbExamFormController.js"></script>
 
+
+<script type="text/html" id="partExamBar">
+    <div class="layui-btn-group">
+        <button class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" title="删除">
+            <i class="layui-icon layui-icon-delete"></i></button>
+        <button class="layui-btn layui-btn-xs" lay-event="reset" title="恢复默认">
+            <i class="iconfont icon-reset"></i></button>
+        {{# if(d.fgCarried == '0'){ }}
+        <button class="layui-btn layui-btn-xs" lay-event="edit" title="自定义">
+            <i class="iconfont icon-edit"></i>
+        </button>
+        {{# } else { }}
+        {{# } }}
+    </div>
+</script>
 
 </body>
 </html>

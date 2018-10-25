@@ -5,8 +5,9 @@ import com.sm.open.core.facade.model.param.pf.biz.exam.BasInspectItemParam;
 import com.sm.open.core.facade.model.param.pf.biz.exam.BasItemResultParam;
 import com.sm.open.core.facade.model.param.pf.biz.exam.PfExamQuestionParam;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
+import com.sm.open.core.facade.model.param.pf.common.PfCommonSearchParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
-import com.sm.open.core.facade.model.result.pf.biz.exam.BasInspectItemResult;
+import com.sm.open.core.facade.model.result.pf.biz.exam.BasExamSearchResult;
 import com.sm.open.core.facade.model.result.pf.biz.exam.BasItemResultResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
@@ -66,4 +67,7 @@ public class ExamClient {
         return pfExamFacade.saveAnswer(param);
     }
 
+    public PfPageResult<BasExamSearchResult> searchExam(PfCommonSearchParam param) {
+        return pfExamFacade.searchExam(param);
+    }
 }

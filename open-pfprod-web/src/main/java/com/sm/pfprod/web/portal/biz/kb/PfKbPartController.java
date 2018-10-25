@@ -6,7 +6,9 @@ import com.sm.pfprod.model.dto.biz.kb.part.PfPartCommonDto;
 import com.sm.pfprod.model.dto.common.PfCommonSearchDto;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.service.biz.check.PfCheckService;
 import com.sm.pfprod.service.biz.clinic.PfClinicPartsService;
+import com.sm.pfprod.service.biz.exam.PfExamService;
 import com.sm.pfprod.service.biz.inquisition.PfInquisitionService;
 import com.sm.pfprod.service.biz.kb.PfKbPartService;
 import com.sm.pfprod.web.portal.BaseController;
@@ -37,6 +39,12 @@ public class PfKbPartController extends BaseController {
 
     @Resource
     private PfInquisitionService pfInquisitionService;
+
+    @Resource
+    private PfExamService pfExamService;
+
+    @Resource
+    private PfCheckService pfCheckService;
 
     @Resource
     private EnumUtil enumUtil;
@@ -72,7 +80,6 @@ public class PfKbPartController extends BaseController {
         model.addAttribute("parts", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllPart())));
         return "pages/biz/kb/part/partUseCaseForm";
     }
-
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping(value = "/cons/list")
@@ -114,6 +121,8 @@ public class PfKbPartController extends BaseController {
     @RequestMapping("/define/check/form")
     public String checkForm(Model model, String idMedCase) {
         model.addAttribute("idMedCase", idMedCase);
+        model.addAttribute("examWays", enumUtil.getEnumList(SysDicGroupEnum.EXAM_WAYS.getCode()));
+        model.addAttribute("bodyPosition", enumUtil.getEnumList(SysDicGroupEnum.BODY_POSITION.getCode()));
         return "pages/biz/kb/part/define/checkForm";
     }
 
@@ -129,6 +138,34 @@ public class PfKbPartController extends BaseController {
     @ResponseBody
     public PageResult searchQuestion(PfCommonSearchDto dto) {
         return pfInquisitionService.searchQuestion(dto);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping(value = "/exam/list")
+    @ResponseBody
+    public PageResult listExams(PfPartCommonDto dto) {
+        return pfKbPartService.listExams(dto);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping(value = "/exam/search")
+    @ResponseBody
+    public PageResult searchExam(PfCommonSearchDto dto) {
+        return pfExamService.searchExam(dto);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping(value = "/check/list")
+    @ResponseBody
+    public PageResult listChecks(PfPartCommonDto dto) {
+        return pfKbPartService.listChecks(dto);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping(value = "/check/search")
+    @ResponseBody
+    public PageResult searchCheck(PfCommonSearchDto dto) {
+        return pfCheckService.searchCheck(dto);
     }
 
 }

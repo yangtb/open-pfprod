@@ -17,7 +17,9 @@
 		</Console >
 
 		<!-- 默认日志 -->
-		<RollingRandomAccessFile name="default" immediateFlush="false" append="true" fileName="${log4j2.log.basepath}/defaultLog.log" filePattern="${log4j2.log.basepath}/%d{yyyy-MM-dd}/defaultLog-%i.log">
+		<RollingRandomAccessFile name="default" immediateFlush="false" append="true"
+								 fileName="${log4j2.log.basepath}/${app.name}.log"
+								 filePattern="${log4j2.log.basepath}/%d{yyyy-MM-dd}/${app.name}-%i.log">
 			<PatternLayout pattern="${FILE_LOG_PATTERN}" />
 			<Policies>
 				<!-- TimeBased Triggering Policy 基于时间的触发策略。该策略主要是完成周期性的log文件封存工作。有两个参数：
@@ -29,19 +31,23 @@
 		</RollingRandomAccessFile>
 
 		<!-- 失败日志 -->
-		<RollingRandomAccessFile name="error" immediateFlush="false" append="true" fileName="${log4j2.log.basepath}/error.log" filePattern="${log4j2.log.basepath}/error_%d{yyyy-MM-dd}.log">
+		<RollingRandomAccessFile name="error" immediateFlush="false" append="true"
+								 fileName="${log4j2.log.basepath}/error.log"
+								 filePattern="${log4j2.log.basepath}/error_%d{yyyy-MM-dd}.log">
 			<Filters>
 				<ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
 			</Filters>
-			<PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %p [%t] [%c{1}:%L] - %msg%n" />
+			<PatternLayout pattern="${FILE_LOG_PATTERN}" />
 			<Policies>
 				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
 			</Policies>
 		</RollingRandomAccessFile>
 
 		<!-- 监控日志 -->
-		<RollingRandomAccessFile name="monitor" immediateFlush="false" append="true" fileName="${log4j2.log.basepath}/monitor.log" filePattern="${log4j2.log.basepath}/monitor_%d{yyyy-MM-dd}.log">
-			<PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %p [%t] [%c{1}:%L] - %msg%n" />
+		<RollingRandomAccessFile name="monitor" immediateFlush="false" append="true"
+								 fileName="${log4j2.log.basepath}/monitor.log"
+								 filePattern="${log4j2.log.basepath}/monitor_%d{yyyy-MM-dd}.log">
+			<PatternLayout pattern="${FILE_LOG_PATTERN}" />
 			<Policies>
 				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
 			</Policies>
@@ -63,5 +69,18 @@
 			<appender-ref ref="default" />
 			<appender-ref ref="error" />
 		</asyncLogger>
+
+		<Logger name="org.springframework.core" level="error" additivity="false">
+			<appender-ref ref="console" />
+			<appender-ref ref="error" />
+		</Logger>
+		<Logger name="com.alibaba.dubbo" level="error" additivity="false">
+			<appender-ref ref="console" />
+			<appender-ref ref="error" />
+		</Logger>
+		<Logger name="org.apache.zookeeper" level="error" additivity="false">
+			<appender-ref ref="console" />
+			<appender-ref ref="error" />
+		</Logger>
 	</Loggers>
 </configuration>

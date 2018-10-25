@@ -3,9 +3,7 @@ package com.sm.pfprod.integration.biz.clinic;
 import com.sm.open.core.facade.model.param.pf.biz.clinic.*;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
-import com.sm.open.core.facade.model.result.pf.biz.clinic.BasDemoAssesResult;
-import com.sm.open.core.facade.model.result.pf.biz.clinic.BasDemoResult;
-import com.sm.open.core.facade.model.result.pf.biz.clinic.BasDemoTagResult;
+import com.sm.open.core.facade.model.result.pf.biz.clinic.*;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.open.core.facade.pf.biz.clinic.PfClinicTemplateFacade;
@@ -97,5 +95,13 @@ public class ClinicTemplateClient {
     }
     public CommonResult<BasDemoAssesResult> selectDimensionTagInfo(Long idDimemsion){
         return pfClinicTemplateFacade.selectDimensionTagInfo(idDimemsion);
+    }
+
+    public CommonResult<List<PfCaseHistoryTagResult>> listAllCaseHistoryTag(Long idDemo) {
+        return pfClinicTemplateFacade.listAllCaseHistoryTag(idDemo);
+    }
+
+    public CommonResult<List<PfAssessTagResult>> listAllAssessTag(Long idDemo) {
+        return pfClinicTemplateFacade.listAllAssessTag(idDemo);
     }
 }

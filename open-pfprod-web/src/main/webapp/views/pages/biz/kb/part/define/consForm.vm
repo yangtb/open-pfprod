@@ -25,21 +25,23 @@
     </div>
 
     <div class="layui-col-xs7">
-        <form class="layui-form" id="consForm" style="padding-top: 10px">
+        <form class="layui-form" id="consForm" lay-filter="consFormFilter" style="padding-top: 10px">
             <div hidden>
                 <input name="idMedCaseList" id="idMedCaseList" hidden>
                 <input name="idInquesCa" id="idInquesCa" hidden>
                 <input name="idInques" id="idInques" hidden>
                 <input name="idMedia" id="idMedia" hidden>
+                <input name="sdType" id="sdType" hidden>
+                <input name="fgCarried" id="fgCarried" hidden>
             </div>
             <div class="layui-form-item form-item-my5">
                 <label class="layui-form-label">问题<i class="iconfont icon-required"
-                                                       style="color: #f03f2d"></i></label>
+                                                     style="color: #f03f2d"></i></label>
                 <div class="layui-input-block my-input-width">
-                    <input type="text" name="desInques" id="desInques" autocomplete="off" class="layui-input layui-disabled"
+                    <input type="text" name="desInques" id="desInques" autocomplete="off" class="layui-input"
                            placeholder="请输入答案内容" lay-verify="required|desAnswer" lay-vertype="tips"
                            style="display:inline-block;width:382px;vertical-align:middle;
-                           margin-right:-5px;border: 1px solid #C9C9C9;" disabled>
+                           margin-right:-5px;border: 1px solid #C9C9C9;">
                     <button type="button" class="layui-btn layui-btn-primary" id="searchAnswer">
                         <i class="layui-icon layui-icon-search"></i>
                     </button>
@@ -50,24 +52,27 @@
                 <label class="layui-form-label">答案<i class="iconfont icon-required"
                                                      style="color: #f03f2d"></i></label>
                 <div class="layui-input-block my-input-width">
-                    <select name="idAnswer" id="idAnswer" autocomplete="off" lay-verify="required" lay-vertype="tips">
-                        <option value="">请选择答案</option>
-                    </select>
+                    <div class="mySelect">
+                        <select name="idAnswer" id="idAnswer" autocomplete="off" lay-verify="required"
+                                lay-vertype="tips" lay-filter="idAnswerSelectFilter">
+                            <option value="">请选择答案</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
             <div class="layui-form-item layui-form-text form-item-my5">
                 <label class="layui-form-label"></label>
                 <div class="layui-input-block">
-                    <input type="checkbox" name="fgReason" value="1" title="是否需要说明理由">
-                    <input type="checkbox" name="fgBack" value="1" title="是否根据病人的回答反馈">
+                    <input type="checkbox" name="fgReason" id="fgReason" value="1" title="是否需要说明理由">
+                    <input type="checkbox" name="fgBack" id="fgBack" value="1" title="是否根据病人的回答反馈">
                 </div>
             </div>
 
             <div class="layui-form-item form-item-my5">
                 <label class="layui-form-label">专家解读</label>
                 <div class="layui-input-block my-input-width">
-                <textarea name="desExpert" class="layui-textarea" lay-verify="desAnswer" lay-vertype="tips"
+                <textarea name="desExpert" id="desExpert" class="layui-textarea" lay-verify="desAnswer" lay-vertype="tips"
                           placeholder="请输入专家解读"></textarea>
                 </div>
             </div>
@@ -84,8 +89,8 @@
                     </div>
 
                 </div>
-                <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传</button>
-                <button type="button" class="layui-btn" id="preview"><i class="iconfont icon-look1"></i> 预览</button>
+                <button type="button" class="layui-btn layui-btn-primary" id="test3"><i class="layui-icon" style="color: #009688; font-weight: bold">&#xe608;</i>上传</button>
+                <button type="button" class="layui-btn layui-btn-primary" id="preview"><i class="iconfont icon-look1" style="color: #009688; font-weight: bold"></i> 预览</button>
             </div>
 
             <div class="layui-form-item">
@@ -98,7 +103,7 @@
                             <i class="iconfont icon-save-copy"></i> 保存
                         </button>
                         <button class="layui-btn" lay-submit="" lay-filter="saveAsCons">
-                            <i class="iconfont icon-lingcunwei"></i> 另存
+                            <i class="iconfont icon-lingcunwei"></i> 重载
                         </button>
                         <button id="reset" type="reset" class="layui-btn layui-btn-danger">
                             <i class="iconfont icon-reset"></i> 重置
@@ -123,9 +128,10 @@
             <i class="layui-icon layui-icon-delete"></i></button>
         <button class="layui-btn layui-btn-xs" lay-event="reset" title="恢复默认">
             <i class="iconfont icon-reset"></i></button>
-        {{# if(d.fgCarried == '1'){ }}
+        {{# if(d.fgCarried == '0'){ }}
         <button class="layui-btn layui-btn-xs" lay-event="edit" title="自定义">
-            <i class="iconfont icon-edit"></i></button>
+            <i class="iconfont icon-edit"></i>
+        </button>
         {{# } else { }}
         {{# } }}
     </div>

@@ -81,7 +81,7 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">使用次数</label>
                     <div class="layui-input-block">
-                        <input name="count" autocomplete="off" class="layui-input">
+                        <input name="count" autocomplete="off" class="layui-input layui-disabled" disabled>
                     </div>
                 </div>
             </div>

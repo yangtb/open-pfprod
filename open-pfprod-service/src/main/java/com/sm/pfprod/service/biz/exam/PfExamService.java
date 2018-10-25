@@ -2,6 +2,7 @@ package com.sm.pfprod.service.biz.exam;
 
 import com.sm.pfprod.model.dto.biz.exam.PfExamQuestionDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfCommonSearchDto;
 import com.sm.pfprod.model.entity.BasInspectCa;
 import com.sm.pfprod.model.entity.BasInspectItem;
 import com.sm.pfprod.model.entity.BasItemResult;
@@ -104,4 +105,12 @@ public interface PfExamService {
      * @return
      */
     Long saveAnswer(BasItemResult dto);
+
+    /**
+     * 检验项目列表搜索
+     *
+     * @param dto
+     * @return
+     */
+    PageResult searchExam(PfCommonSearchDto dto);
 }

@@ -73,8 +73,8 @@
                     </div>
 
                 </div>
-                <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传</button>
-                <button type="button" class="layui-btn" id="preview"><i class="iconfont icon-look1"></i> 预览</button>
+                <button type="button" class="layui-btn layui-btn-primary" id="test3"><i class="layui-icon" style="color: #009688; font-weight: bold">&#xe608;</i>上传</button>
+                <button type="button" class="layui-btn layui-btn-primary" id="preview"><i class="iconfont icon-look1" style="color: #009688; font-weight: bold"></i> 预览</button>
             </div>
 
             <div class="layui-form-item">
