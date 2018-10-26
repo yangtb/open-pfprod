@@ -103,7 +103,7 @@
 <script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
 <script src="${contextPath}/public/biz/js/user/login/loginController.js"></script>
 <script src="${contextPath}/public/bootstrap/js/bootstrap.min.js"></script>
-<script src="${contextPath}/public/biz/js/user/login/login.js?t=${now}"></script>
+<script src="${contextPath}/public/biz/js/user/login/login.js"></script>
 
 </body>
 </html>
