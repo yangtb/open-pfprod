@@ -17,7 +17,7 @@
 		</Console >
 
 		<!-- 默认日志 -->
-		<RollingRandomAccessFile name="default" immediateFlush="false" append="true"
+		<RollingRandomAccessFile name="default" immediateFlush="true" append="true"
 								 fileName="${log4j2.log.basepath}/${app.name}.log"
 								 filePattern="${log4j2.log.basepath}/%d{yyyy-MM-dd}/${app.name}-%i.log">
 			<PatternLayout pattern="${FILE_LOG_PATTERN}" />
