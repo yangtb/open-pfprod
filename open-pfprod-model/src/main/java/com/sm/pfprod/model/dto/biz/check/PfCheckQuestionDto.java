@@ -29,4 +29,9 @@ public class PfCheckQuestionDto extends PageParam implements Serializable {
      */
     private String desBody;
 
+    /**
+     * 搜索关键字
+     */
+    private String keywords;
+
 }

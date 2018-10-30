@@ -65,28 +65,28 @@
 
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">等效评估<i class="iconfont icon-required"
-                                                 style="color: #f03f2d"></i></label>
+                                                   style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <input type="checkbox" checked="" name="fgGroup" lay-skin="switch"
                        value="1" lay-text="NO|OFF">
             </div>
 
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">状态<i class="iconfont icon-required"
-                                                 style="color: #f03f2d"></i></label>
-            <div class="layui-input-block">
-                <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
-                       value="1" lay-text="NO|OFF">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">状态<i class="iconfont icon-required"
+                                                     style="color: #f03f2d"></i></label>
+                <div class="layui-input-block">
+                    <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
+                           value="1" lay-text="NO|OFF">
+                </div>
             </div>
-        </div>
 
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="addKbAssess">
-                    <i class="iconfont icon-save-copy"></i> 保存
-                </button>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="addKbAssess">
+                        <i class="iconfont icon-save-copy"></i> 保存
+                    </button>
+                </div>
             </div>
-        </div>
     </form>
 </div>
 

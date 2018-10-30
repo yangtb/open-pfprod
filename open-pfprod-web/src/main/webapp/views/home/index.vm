@@ -191,7 +191,9 @@
 
 <script>
     function spreadMenu() {
-        $('#spreadMenu').click();
+        if (!$('div').is('.layadmin-side-shrink')) {
+            $('#spreadMenu').click();
+        }
     }
 </script>
 

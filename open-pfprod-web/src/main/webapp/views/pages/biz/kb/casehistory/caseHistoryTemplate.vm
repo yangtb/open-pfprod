@@ -116,5 +116,13 @@
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="editTemplate"><i class="layui-icon layui-icon-edit"></i>编辑病历</a>
 </script>
 
+<script>
+    function openPhoto(url) {
+        layui.use('common', function () {
+            layui.common.openSinglePhoto(url);;
+        });
+    }
+</script>
+
 </body>
 </html>

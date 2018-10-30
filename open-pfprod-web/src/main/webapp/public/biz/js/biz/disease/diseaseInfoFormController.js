@@ -77,6 +77,7 @@ layui.config({
         var cityObj = $("#cdDieclassText");
         cityObj.attr("value", v);
         $("#cdDieclass").attr("value", v_id);
+        hideMenu();
     };
 
     function showMenu() {

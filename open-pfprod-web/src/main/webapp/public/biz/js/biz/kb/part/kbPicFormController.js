@@ -78,7 +78,11 @@ layui.config({
     });
 
     $('#expertImg').on('click', function () {
-        window.parent.openPhoto($('#expertImg')[0].src);
+        if (window.parent.openPhoto) {
+            window.parent.openPhoto($('#expertImg')[0].src);
+        } else {
+            common.openSinglePhoto($('#expertImg')[0].src);
+        }
     });
 
 });

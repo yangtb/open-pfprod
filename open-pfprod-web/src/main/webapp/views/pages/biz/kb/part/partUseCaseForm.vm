@@ -110,7 +110,7 @@
 
         function openPhoto(url) {
             layui.use('common', function () {
-                layui.common.openSinglePhoto(url);;
+                layui.common.openSinglePhoto(url);
             });
         }
     </script>

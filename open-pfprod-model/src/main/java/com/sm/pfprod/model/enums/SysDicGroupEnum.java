@@ -19,7 +19,14 @@ public enum SysDicGroupEnum {
     CASE_HISTORY_USE("CASE_HISTORY_USE", "病例用途"),
     IMPORT_TYPE("IMPORT_TYPE", "嵌入类型"),
     ALGORITHM_DEFINE("ALGORITHM_DEFINE", "算法定义"),
-    CASE_PART_PAGE("CASE_PART_PAGE", "病例组件页面");
+    CASE_PART_PAGE("CASE_PART_PAGE", "病例组件页面"),
+    SD_EVA("SD_EVA", "评估阶段"),
+    SD_EVA_ORDER("SD_EVA_ORDER", "评估类别"),
+    SD_NURS_ROUT("SD_NURS_ROUT", "护理常规"),
+    CD_NURS_LEVEL("CD_NURS_LEVEL", "护理级别"),
+    SD_DIET("SD_DIET", "饮食"),
+    SD_POSITION("SD_POSITION", "体位");
+
 
     private String code;
     private String desc;

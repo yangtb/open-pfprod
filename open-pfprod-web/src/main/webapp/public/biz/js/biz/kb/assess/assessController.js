@@ -119,6 +119,7 @@ layui.config({
             _addOrEdit("edit", data);
         }
         if (obj.event === 'editUseCase') {
+            console.log(data)
             _editUseCase(data);
         }
     });
@@ -154,8 +155,14 @@ layui.config({
     });
 
     var _editUseCase = function (data) {
-        var index = common.open('组件用例维护 -> ' + '<span style="color: red">' + data.name + '</span>',
-            basePath + '/pf/p/kb/assess/useCase/form?cdEvaAsse=' + data.cdEvaAsse + '&idMedCase=' + data.idMedCase, 900, 460, _successFillUseCase(data));
+        var url = basePath;
+        if (!data.script) {
+            url += '/pf/p/kb/assess/common/page';
+        } else {
+            url = url + data.script;
+        }
+        url += '?cdEvaAsse=' + data.cdEvaAsse + '&idEvaCase=' + data.idEvaCase + '&showForm=1';
+        var index = common.open('组件用例维护 -> ' + '<span style="color: red">' + data.name + '</span>', url, 900, 460, _successFillUseCase(data));
         layer.full(index);
     };
 

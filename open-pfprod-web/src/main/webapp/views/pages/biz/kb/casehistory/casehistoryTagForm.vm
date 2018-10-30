@@ -36,7 +36,9 @@
                             #if(!$tags.isEmpty())
                                 #foreach($!element in $!tags)
                                     #if($!element.fgShowMake == '1')
-                                        <li id="tag-$!element.cdMedAsse" class="layui-row-xs3" data-url="$!{basePath}$!element.script">
+                                        <li id="med-$!element.cdMedAsse" class="layui-row-xs3"
+                                            data-type="med"
+                                            data-url="$!{basePath}$!element.script">
                                             <a href="javascript:;">
                                                 <img style="display: inline-block; width: 40px; height: 40px;"
                                                      src="$!element.path">
@@ -52,24 +54,25 @@
                     <div class="layui-col-xs11" style="padding-left: 5px;">
                         <form class="layui-form layui-form-pane" id="caseForm">
                             <div hidden>
-                                <input name="idMedCaseList" id="idMedCaseList" hidden>
+
                             </div>
                             <div class="layui-form-item form-item-my5">
                                 <label class="layui-form-label">选择用例</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="desInques" id="desInques" autocomplete="off"
-                                           class="layui-input layui-disabled"
-                                           placeholder="请选择用例" lay-verify="required|desAnswer" lay-vertype="tips"
+                                    <input type="text" name="caseName" id="caseName" autocomplete="off"
+                                           class="layui-input"
+                                           placeholder="请选择用例"
                                            style="display:inline-block;width:250px;vertical-align:middle;
                            margin-right:-5px;border: 1px solid #C9C9C9;" disabled>
-                                    <button type="button" class="layui-btn layui-btn-primary" id="searchAnswer">
+                                    <button type="button" class="layui-btn layui-btn-primary" id="searchCase">
                                         <i class="layui-icon layui-icon-search"></i>
                                     </button>
                                     <div class="layui-btn-group">
-                                        <button id="addCase" type="button" class="layui-btn">
+                                        <a lay-href="${basePath}/pf/p/kb/part/page" class="layui-btn">
                                             <i class="layui-icon layui-icon-add-1"></i>新增用例
-                                        </button>
-                                        <button id="saveCase" class="layui-btn" lay-submit="" lay-filter="saveCase">
+                                        </a>
+
+                                        <button id="editCase" class="layui-btn" type="button">
                                             <i class="iconfont icon-edit"></i> 编辑用例
                                         </button>
                                     </div>
@@ -79,9 +82,9 @@
                             </div>
 
                         </form>
-                        <iframe id="caseHistoryTag" class='layui-col-xs12' frameborder="0" style="margin: 0px 0px 0px -10px ;"
-                                 scrolling="no">
-
+                        <iframe id="caseHistoryTag" class='layui-col-xs12' frameborder="0"
+                                style="margin: 0px 0px 0px -10px ;"
+                                scrolling="no">
                         </iframe>
                     </div>
                 </div>
@@ -93,7 +96,9 @@
                             #if(!$tags.isEmpty())
                                 #foreach($!element in $!assessTags)
                                     #if($!element.fgShowMake == '1')
-                                        <li id="tag-$!element.cdEvaAsse" class="layui-row-xs3" data-url="$!{basePath}$!element.script">
+                                        <li id="tag-$!element.cdEvaAsse" class="layui-row-xs3"
+                                            data-type="eva"
+                                            data-url="$!{basePath}$!element.script">
                                             <a href="javascript:;">
                                                 <img style="display: inline-block; width: 40px; height: 40px;"
                                                      src="$!element.path">
@@ -108,25 +113,22 @@
 
                     <div class="layui-col-xs11" style="padding-left: 5px;">
                         <form class="layui-form layui-form-pane" id="caseForm">
-                            <div hidden>
-                                <input name="idMedCaseList" id="idMedCaseList" hidden>
-                            </div>
                             <div class="layui-form-item form-item-my5">
                                 <label class="layui-form-label">选择用例</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="desInques" id="desInques" autocomplete="off"
+                                    <input type="text" name="assessName" id="assessName" autocomplete="off"
                                            class="layui-input layui-disabled"
-                                           placeholder="请选择用例" lay-verify="required|desAnswer" lay-vertype="tips"
+                                           placeholder="请选择用例"
                                            style="display:inline-block;width:250px;vertical-align:middle;
                            margin-right:-5px;border: 1px solid #C9C9C9;" disabled>
-                                    <button type="button" class="layui-btn layui-btn-primary" id="searchAnswer">
+                                    <button type="button" class="layui-btn layui-btn-primary" id="searchAssess">
                                         <i class="layui-icon layui-icon-search"></i>
                                     </button>
                                     <div class="layui-btn-group">
-                                        <button id="addCase" type="button" class="layui-btn">
+                                        <a lay-href="${basePath}/pf/p/kb/assess/page" class="layui-btn">
                                             <i class="layui-icon layui-icon-add-1"></i>新增用例
-                                        </button>
-                                        <button id="saveCase" class="layui-btn" lay-submit="" lay-filter="saveCase">
+                                        </a>
+                                        <button id="editAssess" type="button" class="layui-btn" >
                                             <i class="iconfont icon-edit"></i> 编辑用例
                                         </button>
                                     </div>
@@ -134,10 +136,10 @@
                                 </div>
                             </div>
                         </form>
-                        <iframe id="assessTag" class='layui-col-xs12' frameborder="0" style="margin: 0px 0px 0px -10px ;"
-                                scrolling="no">
 
-                        </iframe>
+                        <iframe name="assessTag" width="100%" frameborder=0 height="100%"
+                                id="assessTag" onload="this.height=assessTag.document.body.scrollHeight+20"></iframe>
+
                     </div>
                 </div>
             </div>
@@ -147,7 +149,9 @@
 </div>
 
 <script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="$!{contextPath}/public/layui/build/js/tableSelect.js"></script>
 <script src="$!{contextPath}/public/biz/js/biz/kb/casehistory/caseHistoryTabController.js"></script>
+
 
 </body>
 </html>
