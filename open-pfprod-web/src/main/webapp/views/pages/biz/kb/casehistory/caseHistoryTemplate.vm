@@ -23,9 +23,9 @@
 
 #*右键菜单*#
 <div id="rMenu" class="wrap-ms-right">
-    <li id="m_add" class="ms-item"><i class="layui-icon layui-icon-add-1"></i>添加分类</li>
-    <li id="m_edit" class="ms-item"><i class="layui-icon layui-icon-edit"></i>修改分类</li>
-    <li id="m_del" class="ms-item"><i class="layui-icon layui-icon-delete"></i>删除分类</li>
+    <li id="m_add" class="ms-item"><i class="layui-icon layui-icon-add-1"></i>添加</li>
+    <li id="m_edit" class="ms-item"><i class="layui-icon layui-icon-edit"></i>修改</li>
+    <li id="m_del" class="ms-item"><i class="layui-icon layui-icon-delete"></i>删除</li>
 </div>
 
 <div class="wrapper-content">
