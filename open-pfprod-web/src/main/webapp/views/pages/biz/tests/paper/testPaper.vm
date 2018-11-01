@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="layui-inline">
-                <button type="button" class="layui-btn" id="editAnswer">
+                <button type="button" class="layui-btn layui-btn-normal" id="editAnswer">
                     <i class="iconfont icon-tiku2"></i> 试题清单
                 </button>
             </div>
