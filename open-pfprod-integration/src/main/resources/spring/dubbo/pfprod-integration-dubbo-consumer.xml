@@ -77,4 +77,8 @@
 
     <!-- 评估组件服务 -->
     <dubbo:reference id="pfKbAssessFacade" interface="com.sm.open.core.facade.pf.biz.kb.PfKbAssessFacade"/>
+
+    <!-- 试卷定义服务 -->
+    <dubbo:reference id="pfTestPaperFacade" interface="com.sm.open.core.facade.pf.biz.tests.PfTestPaperFacade"/>
+
 </beans>

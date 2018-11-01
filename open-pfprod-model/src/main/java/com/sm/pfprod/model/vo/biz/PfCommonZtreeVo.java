@@ -30,6 +30,14 @@ public class PfCommonZtreeVo implements Serializable {
      */
     private boolean open;
     /**
+     * 不显示复选框
+     */
+    private boolean nocheck;
+    /**
+     * 是否选中
+     */
+    private boolean checked;
+    /**
      * 扩展字段
      */
     private String ext;
