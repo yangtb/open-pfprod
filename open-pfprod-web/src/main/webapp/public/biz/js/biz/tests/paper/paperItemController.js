@@ -31,11 +31,16 @@ layui.config({
     var zTree;
     $(document).ready(function () {
         layer.load(2);
+
+        var bizData = {
+            extId: idTestpaper
+        };
         $.ajax({
             url: basePath + '/pf/r/tests/paper/tree',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",
+            data: JSON.stringify(bizData),
             success: function (data) {
                 layer.closeAll('loading');
                 if (data.code != 0) {
@@ -80,7 +85,14 @@ layui.config({
             {checkbox: true, fixed: true},
             {field: 'name', width: 160, title: '病例', fixed: true},
             {field: 'sdLevel', width: 100, title: '病例级别', templet: "#sdLevelTpl"},
-            {field: 'sort', width: 120, title: '排序(可编辑)', sort: true, edit: 'text', style: 'text-align:right'},
+            {
+                field: 'sort',
+                width: 120,
+                title: '排序(<span style="color: red;font-weight: bold">可编辑</span>)',
+                sort: true,
+                edit: 'text',
+                style: 'text-align:right'
+            },
             {field: 'sdUse', width: 100, title: '病例用途', templet: "#sdUseTpl"},
             {field: 'orgName', width: 170, title: '归属机构'},
             {

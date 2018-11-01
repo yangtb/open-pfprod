@@ -33,4 +33,9 @@ public class PfCatalogueTreeDto implements Serializable {
      * 机构id
      */
     private String idOrg;
+
+    /**
+     * 扩展id
+     */
+    private Long extId;
 }

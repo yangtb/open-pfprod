@@ -184,7 +184,7 @@ public class PfTestPaperRestController {
      */
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @PostMapping(value = "/tree")
-    public ResultObject listCaseTree(PfCatalogueTreeDto dto) {
+    public ResultObject listCaseTree(@RequestBody PfCatalogueTreeDto dto) {
         return ResultObject.createSuccess("listCaseTree", ResultObject.DATA_TYPE_LIST,
                 pfTestPaperService.listCaseTree(dto));
     }
