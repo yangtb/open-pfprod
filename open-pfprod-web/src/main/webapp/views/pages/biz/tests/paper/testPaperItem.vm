@@ -43,7 +43,7 @@
         <form class="layui-form">
             <div class="layui-inline">
                 <div class="layui-input-inline">
-                    <button id="batchDel" type="button" class="layui-btn">
+                    <button id="batchDel" type="button" class="layui-btn layui-btn-danger">
                         <i class="iconfont icon-batch-del"></i> 删除试题
                     </button>
                     <button id="refresh" type="button" class="layui-btn">
