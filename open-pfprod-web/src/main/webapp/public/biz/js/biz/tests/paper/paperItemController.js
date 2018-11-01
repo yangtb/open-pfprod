@@ -80,7 +80,7 @@ layui.config({
             {checkbox: true, fixed: true},
             {field: 'name', width: 160, title: '病例', fixed: true},
             {field: 'sdLevel', width: 100, title: '病例级别', templet: "#sdLevelTpl"},
-            {field: 'sort', width: 90, title: '排序', sort: true},
+            {field: 'sort', width: 120, title: '排序(可编辑)', sort: true, edit: 'text', style: 'text-align:right'},
             {field: 'sdUse', width: 100, title: '病例用途', templet: "#sdUseTpl"},
             {field: 'orgName', width: 170, title: '归属机构'},
             {
@@ -140,6 +140,28 @@ layui.config({
             currentData.push(data)
             _delPaperItem(currentData);
         }
+    });
+
+    //监听单元格编辑
+    table.on('edit(questionTableFilter)', function (obj) {
+        var value = obj.value //得到修改后的值
+            , data = obj.data //得到所在行所有键值
+            , field = obj.field; //得到字段
+
+        if (!value) {
+            layer.msg('排序字段不能为空');
+            return;
+        }
+        if (!value.match(/^[1-9]\d*$/)) {
+            layer.msg('排序必须是正整数');
+            return;
+        }
+        var bizData = {
+            idTestpaperMedicalrec: data.idTestpaperMedicalrec,
+            sort: value
+        };
+        var url = basePath + '/pf/r/tests/paper/item/update/sort';
+        common.commonPost(url, bizData, '修改排序', '', '');
     });
 
     // 删除
