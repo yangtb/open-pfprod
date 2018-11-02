@@ -4,7 +4,7 @@ layui.config({
     index: 'lib/index' //主入口模块
 }).use(['index', 'element', 'jquery', 'common'], function () {
 
-    var  $ = layui.$
+    var $ = layui.$
         , element = layui.element
         , common = layui.common;
 
@@ -15,7 +15,7 @@ layui.config({
         for (var i = 0; i < li.length; i++) {
             li[i].addEventListener('click', function () {
                 setPartType(this.getAttribute('id'));
-                loadIframe(this.getAttribute('data-url'), this.getAttribute('data-type'));
+                loadIframe(this.getAttribute('data-url'), this.getAttribute('data-type'),  this.getAttribute('data-cd'));
             });
         }
     };
@@ -26,20 +26,8 @@ layui.config({
         partType = type;
     }
 
-    function loadIframe(dataUrl, type) {
-        if (dataUrl === basePath || !dataUrl) {
-            return;
-        }
-        if (type == 'med') {
-            $('#caseHistoryTag').attr('src', dataUrl + '?idMedCase=');
-        }
-        if (type == 'eva') {
-            $('#assessTag').attr('src', dataUrl + '?showForm=0');
-        }
-    };
 
     var medCurrentData;
-
     var tableSelect = layui.tableSelect;
     tableSelect.render({
         elem: '#searchCase',
@@ -136,7 +124,7 @@ layui.config({
             } else {
                 url = url + selectData.script;
             }
-            url += '?cdEvaAsse=' + selectData.cdEvaAsse + '&idEvaCase=' + selectData.idEvaCase + '&showForm=1';
+            url += '?cdEvaAsse=' + selectData.cdEvaAsse + '&idEvaCase=' + selectData.idEvaCase + '&showForm=0';
             $('#assessTag').attr('src', url);
         }
     });
@@ -157,13 +145,13 @@ layui.config({
             url = url + data.script;
         }
         var index = layui.layer.open({
-            title: '组件用例维护 -> ' + '<span style="color: red">' + data.name + '</span>',
+            title: '组件用例维护 【' + '<span style="color: red">' + data.name + '</span>】',
             type: 2,
             area: ['900px', '460px'],
             //anim: anim,
             fixed: false, //不固定
             maxmin: true,
-            content: url + '?cdEvaAsse=' + data.cdEvaAsse + '&idEvaCase=' + data.idEvaCase + '&showForm=1',
+            content: url + '?cdEvaAsse=' + data.cdEvaAsse + '&idEvaCase=' + data.idEvaCase + '&showForm=0',
             shadeClose: true,
             success: _successFillUseCaseAssess(data)
         });
@@ -178,6 +166,23 @@ layui.config({
         }
     };
 
+
+    function loadIframe(dataUrl, type, cd) {
+        if (dataUrl === basePath || !dataUrl) {
+            return;
+        }
+        var medUrl = medCurrentData ? '?cdMedAsse=' + cd + '&idMedCase=' + medCurrentData.idMedCase : '?idMedCase=';
+        var evaUrl = evaCurrentData ? '?cdEvaAsse=' + cd + '&idEvaCase=' + evaCurrentData.idEvaCase + '&showForm=0' : '?showForm=0';
+        if (type == 'med') {
+            $('#caseHistoryTag').attr('src', dataUrl + medUrl);
+        }
+        if (type == 'eva') {
+            $('#assessTag').attr('src', dataUrl + evaUrl);
+
+        }
+    };
+
+
     FrameWH();
 
     function FrameWH() {
@@ -188,14 +193,6 @@ layui.config({
     $(window).resize(function () {
         FrameWH();
     });
-
-    /*element.on('tab(tagTabFilter)', function (data) {
-        if (data.index == 1) {
-            if (!$("#assessTag").attr("src")) {
-                $('#assessTag').attr('src', basePath + '/pf/p/case/history/tag/assess/form?idDemo=' + idDemo);
-            }
-        }
-    });*/
 
 
 });

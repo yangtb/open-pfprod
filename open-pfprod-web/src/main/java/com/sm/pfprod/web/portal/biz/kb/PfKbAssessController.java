@@ -76,7 +76,8 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/common/page")
-    public String commonPage(Model model, String cdEvaAsse, Long idEvaCase) {
+    public String commonPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm) {
+        model.addAttribute("showForm", showForm);
         model.addAttribute("cdEvaAsse", cdEvaAsse);
         model.addAttribute("idEvaCase", idEvaCase);
         model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));

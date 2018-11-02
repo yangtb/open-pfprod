@@ -51,7 +51,9 @@
 
 
     <script>
-        $('#topform').html(getAssesssFormHtml());
+        if ($!{showForm} == 1) {
+            $('#topform').html(getAssesssFormHtml());
+        }
 
         function fullForm(data) {
             $(document).ready(function () {

@@ -37,7 +37,7 @@
                                 #foreach($!element in $!tags)
                                     #if($!element.fgShowMake == '1')
                                         <li id="med-$!element.cdMedAsse" class="layui-row-xs3"
-                                            data-type="med"
+                                            data-type="med" data-cd="$!element.cdMedAsse"
                                             data-url="$!{basePath}$!element.script">
                                             <a href="javascript:;">
                                                 <img style="display: inline-block; width: 40px; height: 40px;"
@@ -97,7 +97,7 @@
                                 #foreach($!element in $!assessTags)
                                     #if($!element.fgShowMake == '1')
                                         <li id="tag-$!element.cdEvaAsse" class="layui-row-xs3"
-                                            data-type="eva"
+                                            data-type="eva" data-cd="$!element.cdEvaAsse"
                                             data-url="$!{basePath}$!element.script">
                                             <a href="javascript:;">
                                                 <img style="display: inline-block; width: 40px; height: 40px;"
