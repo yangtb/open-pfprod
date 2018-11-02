@@ -60,6 +60,15 @@ public class PfTestPaperServiceImpl implements PfTestPaperService {
     }
 
     @Override
+    public List<ExmTestpaper> listAllPaper(PfTestPaperDto dto) {
+        CommonResult<List<ExmTestpaperResult>> result = testPaperClient.listAllPaper(BeanUtil.convert(dto, PfTestPaperParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), ExmTestpaper.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
     public PageResult listPaper(PfTestPaperDto dto) {
         PfPageResult<ExmTestpaperResult> result = testPaperClient.listPaper(BeanUtil.convert(dto, PfTestPaperParam.class));
         if (result == null) {
