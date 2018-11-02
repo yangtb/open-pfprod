@@ -35,6 +35,8 @@ layui.config({
         var data = obj.data;
         if (obj.event === 'edit') {
             _addOrEdit("edit", data);
+        } if (obj.event === 'addPlanDetail') {
+            _addPlanDetail(data.naTestplan, data.idTestplan);
         }
     });
 
@@ -191,6 +193,27 @@ layui.config({
         }
         common.commonPost(basePath + '/pf/r/test/plan/updateStatus', data, msg, obj.othis);
     });
+
+
+    $('#addPlanDetail').on('click', function () {
+        var checkStatus = table.checkStatus('planTableId')
+            , data = checkStatus.data;
+        if (data.length == 0) {
+            layer.tips('请先选中一行记录', '#addPlanDetail', {tips: 1});
+            return;
+        }
+        if (data.length > 1) {
+            layer.tips('请选中一行记录进行编辑', '#addPlanDetail', {tips: 1});
+            return;
+        }
+        _addPlanDetail(data[0].naTestplan, data[0].idTestplan);
+    });
+
+    var _addPlanDetail = function (title, id) {
+        var index = common.open('【' + '<span style="color: red">' + title + '</span>】计划明细',
+            basePath + '/pf/p/test/plan/tag/form?idTestplan=' + id, 900, 460);
+        layer.full(index);
+    };
 
 });
 

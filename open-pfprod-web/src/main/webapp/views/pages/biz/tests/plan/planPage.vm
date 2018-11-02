@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="layui-inline">
-            <button type="button" class="layui-btn layui-btn-normal" id="editAnswer">
+            <button type="button" class="layui-btn layui-btn-normal" id="addPlanDetail">
                 <i class="iconfont icon-jihua-copy"></i> 计划明细
             </button>
         </div>
@@ -66,7 +66,7 @@
 
 <script type="text/html" id="plan">
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>
-    <button type="button" class="layui-btn layui-btn-normal layui-btn-xs" id="editAnswer">
+    <button type="button" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="addPlanDetail">
         <i class="iconfont icon-jihua-copy"></i> 计划明细
     </button>
 </script>

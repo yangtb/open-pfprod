@@ -71,5 +71,28 @@ public class PfTestPlanController extends BaseController {
         return pfTestPlanService.listPlans(dto);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @RequestMapping("/tag/form")
+    public String tagForm(Long idTestplan, Model model) {
+        model.addAttribute("idTestplan", idTestplan);
+        return "pages/biz/tests/plan/planTagForm";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping("/item/page")
+    public String testPlanItem(Model model, Long idTestplan) {
+        model.addAttribute("idTestplan", idTestplan);
+        model.addAttribute("caseHistoryLevel", enumUtil.getEnumList(SysDicGroupEnum.CASE_HISTORY_LEVEL.getCode()));
+        model.addAttribute("caseHistoryUse", enumUtil.getEnumList(SysDicGroupEnum.CASE_HISTORY_USE.getCode()));
+        return "pages/biz/tests/plan/testPlanItem";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @RequestMapping(value = "/item/list")
+    @ResponseBody
+    public PageResult listPlanItem(PfTestPlanDto dto) {
+        return pfTestPlanService.listPlanItem(dto);
+    }
+
 
 }

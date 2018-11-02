@@ -19,4 +19,19 @@ public class PfTestPlanDto extends PageParam implements Serializable {
      */
     private String naTestplan;
 
+    /**
+     * 测试计划ID
+     */
+    private Long idTestplan;
+
+    /**
+     * 机构ID
+     */
+    private Long idOrg;
+
+    /**
+     * 搜索关键字
+     */
+    private String keywords;
+
 }

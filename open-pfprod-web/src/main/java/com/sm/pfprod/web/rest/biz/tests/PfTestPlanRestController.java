@@ -5,8 +5,11 @@ import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.open.care.core.utils.Assert;
+import com.sm.pfprod.model.dto.biz.tests.PfAddCaseDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfCatalogueTreeDto;
 import com.sm.pfprod.model.entity.ExmTestplan;
+import com.sm.pfprod.model.entity.ExmTestplanMedicalrec;
 import com.sm.pfprod.model.enums.OperationTypeEnum;
 import com.sm.pfprod.service.biz.tests.PfTestPlanService;
 import com.sm.pfprod.web.security.CurrentUserUtils;
@@ -96,5 +99,70 @@ public class PfTestPlanRestController {
         dto.setOperationType(OperationTypeEnum.UPDATE_STATUS.getCode());
         return pfTestPlanService.delPlan(dto) ? ResultObject.createSuccess("updatePlanStatus", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("updatePlanStatus", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
+
+    /**
+     * 试题病例tree
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PostMapping(value = "/tree")
+    public ResultObject listCaseTree(@RequestBody PfCatalogueTreeDto dto) {
+        return ResultObject.createSuccess("listCaseTree", ResultObject.DATA_TYPE_LIST,
+                pfTestPlanService.listCaseTree(dto));
+    }
+
+    /**
+     * 添加试题清单
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @RequestMapping(value = "/item/add", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject addPlanItem(@RequestBody PfAddCaseDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        Assert.isTrue(dto.getIdTestplan() != null, "idTestplan");
+        return ResultObject.createSuccess("addPlanItem", ResultObject.DATA_TYPE_OBJECT,
+                pfTestPlanService.addPlanItem(dto));
+    }
+
+    /**
+     * 删除试题
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @RequestMapping(value = "/item/del", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject delPlanItem(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        dto.setStatus(YesOrNoNum.YES.getCode());
+        return pfTestPlanService.delPlanItem(dto) ? ResultObject.createSuccess("delPlanItem", ResultObject.DATA_TYPE_OBJECT, true)
+                : ResultObject.create("delPlanItem", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
+
+    /**
+     * 修改试题排序
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @RequestMapping(value = "/item/update/sort", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject updatePaperItemSort(@RequestBody ExmTestplanMedicalrec dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestplanMedicalrec() != null, "idTestplanMedicalrec");
+        Assert.isTrue(dto.getSort() != null, "sort");
+        return ResultObject.createSuccess("updatePlanItemSort", ResultObject.DATA_TYPE_OBJECT,
+                pfTestPlanService.updatePlanItemSort(dto));
     }
 }

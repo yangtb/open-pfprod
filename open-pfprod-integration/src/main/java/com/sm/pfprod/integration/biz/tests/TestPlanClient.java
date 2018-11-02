@@ -1,14 +1,19 @@
 package com.sm.pfprod.integration.biz.tests;
 
+import com.sm.open.core.facade.model.param.pf.biz.tests.paper.PfAddCaseParam;
+import com.sm.open.core.facade.model.param.pf.biz.tests.plan.ExmTestplanMedicalrecParam;
 import com.sm.open.core.facade.model.param.pf.biz.tests.plan.ExmTestplanParam;
 import com.sm.open.core.facade.model.param.pf.biz.tests.plan.PfTestPlanParam;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
+import com.sm.open.core.facade.model.param.pf.common.PfCatalogueTreeParam;
+import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.open.core.facade.pf.biz.tests.PfTestPlanFacade;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Component
 public class TestPlanClient {
@@ -28,4 +33,23 @@ public class TestPlanClient {
         return pfTestPlanFacade.delPlan(param);
     }
 
+    public CommonResult<List<PfCommonZtreeResult>> listCaseTree(PfCatalogueTreeParam param) {
+        return pfTestPlanFacade.listCaseTree(param);
+    }
+
+    public PfPageResult listPlanItem(PfTestPlanParam param) {
+        return pfTestPlanFacade.listPlanItem(param);
+    }
+
+    public CommonResult<Boolean> addPlanItem(PfAddCaseParam param) {
+        return pfTestPlanFacade.addPlanItem(param);
+    }
+
+    public CommonResult<Boolean> delPlanItem(PfBachChangeStatusParam param) {
+        return pfTestPlanFacade.delPlanItem(param);
+    }
+
+    public CommonResult<Boolean> updatePlanItemSort(ExmTestplanMedicalrecParam param) {
+        return pfTestPlanFacade.updatePlanItemSort(param);
+    }
 }
