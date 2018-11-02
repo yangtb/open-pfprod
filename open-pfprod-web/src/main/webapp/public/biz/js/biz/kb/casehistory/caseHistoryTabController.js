@@ -70,7 +70,7 @@ layui.config({
 
     var _editUseCase = function (data) {
         var index = layui.layer.open({
-            title: '组件用例维护 -> ' + '<span style="color: red">' + data.name + '</span>',
+            title: '组件用例维护 【' + '<span style="color: red">' + data.name + '</span>】',
             type: 2,
             area: ['900px', '460px'],
             //anim: anim,

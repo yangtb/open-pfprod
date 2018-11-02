@@ -471,7 +471,7 @@ layui.config({
 
     var _editTemplate = function (title, id, idDemo) {
         parent.spreadMenu();
-        var index = common.open('临床病历维护 -> ' + '<span style="color: red">' + title + '</span>',
+        var index = common.open('临床病历维护 【' + '<span style="color: red">' + title + '</span>】',
             basePath + '/pf/p/case/history/form?idMedicalrec=' + id + '&idDemo=' + idDemo, 900, 460);
         layer.full(index);
     };

@@ -446,7 +446,7 @@ layui.config({
     });
 
     var _editTemplate = function (title, id) {
-        var index = common.open('编辑模板 -> ' + '<span style="color: red">' + title + '</span>',
+        var index = common.open('编辑模板 【' + '<span style="color: red">' + title + '</span>】',
             basePath + '/pf/p/clinic/template/tag/form?idDemo=' + id, 900, 460);
         layer.full(index);
     };

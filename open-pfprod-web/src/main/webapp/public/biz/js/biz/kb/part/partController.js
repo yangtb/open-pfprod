@@ -141,7 +141,7 @@ layui.config({
     });
 
     var _editUseCase = function (data) {
-        var index = common.open('组件用例维护 -> ' + '<span style="color: red">' + data.name + '</span>',
+        var index = common.open('组件用例维护 【' + '<span style="color: red">' + data.name + '</span>】',
             basePath + '/pf/p/kb/part/useCase/form?cdMedAsse=' + data.cdMedAsse + '&idMedCase=' + data.idMedCase, 900, 460, _successFillUseCase(data));
         layer.full(index);
     };
