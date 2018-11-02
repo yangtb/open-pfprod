@@ -11,7 +11,7 @@ layui.config({
             }
         },
         desTestpaper: function (value) {
-            if (value.length > 255) {
+            if (value && value.length > 255) {
                 return '长度不能超过255个字';
             }
         }

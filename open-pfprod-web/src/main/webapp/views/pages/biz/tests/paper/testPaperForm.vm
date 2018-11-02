@@ -34,7 +34,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">试卷描述</label>
             <div class="layui-input-block">
-                <textarea name="desTestpaper" lay-verify="required|desTestpaper" lay-vertype="tips" class="layui-textarea"
+                <textarea name="desTestpaper" lay-verify="desTestpaper" class="layui-textarea"
                           placeholder="试卷描述"></textarea>
             </div>
         </div>
