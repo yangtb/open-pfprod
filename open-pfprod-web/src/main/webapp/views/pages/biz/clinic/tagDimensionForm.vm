@@ -74,9 +74,9 @@
             <div class="layui-form-item form-item-my5">
                 <label></label>
                 <div class="layui-input-block">
-                    <input type="radio" name="fgSystemAlgorithm" value="0" title="系统得分"
+                    <input type="radio" name="fgSystemAlgorithm" value="1" title="系统得分"
                            lay-filter="fgSystemAlgorithmFilter" checked>
-                    <input type="radio" name="fgSystemAlgorithm" value="1" title="主观得分"
+                    <input type="radio" name="fgSystemAlgorithm" value="0" title="主观得分"
                            lay-filter="fgSystemAlgorithmFilter">
                 </div>
             </div>
