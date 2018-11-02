@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>组件定义</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '$!{basePath}';
+    </script>
+</head>
+
+<body>
+
+<div class="wrapper-content">
+    <form class="layui-form">
+        <div class="layui-inline">
+            <div class="layui-btn-group">
+                <button type="button" class="layui-btn" id="add">
+                    <i class="iconfont icon-add"></i> 增加
+                </button>
+                <button type="button" class="layui-btn" id="edit">
+                    <i class="iconfont icon-edit"></i> 编辑
+                </button>
+                <button type="button" class="layui-btn layui-btn-danger" id="del">
+                    <i class="iconfont icon-batch-del"></i> 删除
+                </button>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button type="button" class="layui-btn layui-btn-normal" id="editAnswer">
+                <i class="iconfont icon-jihua-copy"></i> 计划明细
+            </button>
+        </div>
+        <div class="layui-inline">
+
+            <div class="layui-input-inline">
+                <input type="text" name="naTestplan" autocomplete="off" class="layui-input"
+                       placeholder="测试计划名称">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn" lay-submit lay-filter="planSearchFilter">
+                    <i class="iconfont icon-query"></i> 查询
+                </button>
+                <button type="reset" class="layui-btn layui-btn-primary">
+                    <i class="iconfont icon-reset"></i> 重置
+                </button>
+            </div>
+        </div>
+    </form>
+    <table id="planTable" lay-filter="planTableFilter">
+    </table>
+
+</div>
+
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.all.js"></script>
+<script src="$!{contextPath}/public/biz/js/biz/tests/plan/planController.js"></script>
+
+<script type="text/html" id="plan">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>
+    <button type="button" class="layui-btn layui-btn-normal layui-btn-xs" id="editAnswer">
+        <i class="iconfont icon-jihua-copy"></i> 计划明细
+    </button>
+</script>
+
+
+<script type="text/html" id="fgActiveTpl">
+    <input type="checkbox" name="fgActive" value="{{d.idTestplan}}"
+           lay-skin="switch" lay-text="启用|停用" lay-filter="fgActiveCheckFilter" {{ d.fgActive== '1' ? 'checked' : '' }}>
+</script>
+
+
+<script type="text/html" id="sdTestPlanTpl">
+    #foreach($!param in $!{sdTestPlan})
+    {{#  if(d.sdTestplan == '$!param.dictCode'){ }}
+    <button class="layui-btn layui-btn-xs" style="background-color: $!{param.extValue};">$!{param.dictName}</button>
+    {{#  } else { }}
+
+    {{#  } }}
+    #end
+</script>
+
+</body>
+
+</html>

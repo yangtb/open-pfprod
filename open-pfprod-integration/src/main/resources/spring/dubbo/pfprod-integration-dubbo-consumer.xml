@@ -81,4 +81,7 @@
     <!-- 试卷定义服务 -->
     <dubbo:reference id="pfTestPaperFacade" interface="com.sm.open.core.facade.pf.biz.tests.PfTestPaperFacade"/>
 
+    <!-- 测试计划服务 -->
+    <dubbo:reference id="pfTestPlanFacade" interface="com.sm.open.core.facade.pf.biz.tests.PfTestPlanFacade"/>
+
 </beans>

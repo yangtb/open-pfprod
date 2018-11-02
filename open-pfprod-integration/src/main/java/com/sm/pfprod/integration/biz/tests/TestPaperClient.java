@@ -4,6 +4,7 @@ import com.sm.open.core.facade.model.param.pf.biz.tests.paper.*;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.param.pf.common.PfCatalogueTreeParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
+import com.sm.open.core.facade.model.result.pf.biz.tests.paper.ExmTestpaperResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.open.core.facade.pf.biz.tests.PfTestPaperFacade;
@@ -28,6 +29,10 @@ public class TestPaperClient {
 
     public CommonResult<Boolean> delPaperClassify(PfBachChangeStatusParam param) {
         return pfTestPaperFacade.delPaperClassify(param);
+    }
+
+    public CommonResult<List<ExmTestpaperResult>> listAllPaper(PfTestPaperParam param) {
+        return pfTestPaperFacade.listAllPaper(param);
     }
 
     public PfPageResult listPaper(PfTestPaperParam param) {
