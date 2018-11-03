@@ -123,9 +123,9 @@
 
 <script type="text/html" id="enabledTpl">
     {{#  if(d.enabled == 1){ }}
-    <span class="label label-info">正常</span>
+    <button class="layui-btn layui-btn-xs">正常</button>
     {{#  } else { }}
-    <span class="label label-danger">锁定</span>
+    <button class="layui-btn layui-btn-xs layui-btn-danger">锁定</button>
     {{#  } }}
 </script>
 
