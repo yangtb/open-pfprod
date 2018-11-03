@@ -11,6 +11,7 @@ import com.sm.open.core.facade.model.param.pf.common.PfCatalogueTreeParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
 import com.sm.open.core.facade.model.result.pf.biz.tests.plan.ExmTestplanMedicalrecResult;
 import com.sm.open.core.facade.model.result.pf.biz.tests.plan.ExmTestplanResult;
+import com.sm.open.core.facade.model.result.pf.biz.tests.plan.ExmTestplanStudentResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.biz.tests.TestPlanClient;
@@ -100,6 +101,42 @@ public class PfTestPlanServiceImpl implements PfTestPlanService {
     @Override
     public boolean updatePlanItemSort(ExmTestplanMedicalrec dto) {
         CommonResult<Boolean> result = testPlanClient.updatePlanItemSort(BeanUtil.convert(dto, ExmTestplanMedicalrecParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<PfCommonZtreeVo> listStudentTree(PfCatalogueTreeDto dto) {
+        CommonResult<List<PfCommonZtreeResult>> result = testPlanClient.listStudentTree(BeanUtil.convert(dto, PfCatalogueTreeParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfCommonZtreeVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult listPlanStudent(PfTestPlanDto dto) {
+        PfPageResult<ExmTestplanStudentResult> result = testPlanClient.listPlanStudent(BeanUtil.convert(dto, PfTestPlanParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public boolean addPlanStudent(PfAddCaseDto dto) {
+        CommonResult<Boolean> result = testPlanClient.addPlanStudent(BeanUtil.convert(dto, PfAddCaseParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean delPlanStudent(PfBachChangeStatusDto dto) {
+        CommonResult<Boolean> result = testPlanClient.delPlanStudent(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }

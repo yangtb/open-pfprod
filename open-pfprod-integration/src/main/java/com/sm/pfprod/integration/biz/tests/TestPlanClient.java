@@ -52,4 +52,20 @@ public class TestPlanClient {
     public CommonResult<Boolean> updatePlanItemSort(ExmTestplanMedicalrecParam param) {
         return pfTestPlanFacade.updatePlanItemSort(param);
     }
+
+    public CommonResult<List<PfCommonZtreeResult>> listStudentTree(PfCatalogueTreeParam param) {
+        return pfTestPlanFacade.listStudentTree(param);
+    }
+
+    public PfPageResult listPlanStudent(PfTestPlanParam param) {
+        return pfTestPlanFacade.listPlanStudent(param);
+    }
+
+    public CommonResult<Boolean> addPlanStudent(PfAddCaseParam param) {
+        return pfTestPlanFacade.addPlanStudent(param);
+    }
+
+    public CommonResult<Boolean> delPlanStudent(PfBachChangeStatusParam param) {
+        return pfTestPlanFacade.delPlanStudent(param);
+    }
 }

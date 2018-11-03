@@ -165,4 +165,53 @@ public class PfTestPlanRestController {
         return ResultObject.createSuccess("updatePlanItemSort", ResultObject.DATA_TYPE_OBJECT,
                 pfTestPlanService.updatePlanItemSort(dto));
     }
+
+    /**
+     * 班级-学生tree
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PostMapping(value = "/student/tree")
+    public ResultObject listStudentTree(@RequestBody PfCatalogueTreeDto dto) {
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        return ResultObject.createSuccess("listStudentTree", ResultObject.DATA_TYPE_LIST,
+                pfTestPlanService.listStudentTree(dto));
+    }
+
+    /**
+     * 添加计划学生
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @RequestMapping(value = "/student/add", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject addPlanStudent(@RequestBody PfAddCaseDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        Assert.isTrue(dto.getIdTestplan() != null, "idTestplan");
+        return ResultObject.createSuccess("addPlanStudent", ResultObject.DATA_TYPE_OBJECT,
+                pfTestPlanService.addPlanStudent(dto));
+    }
+
+    /**
+     * 删除计划学生
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @RequestMapping(value = "/student/del", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject delPlanStudent(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        dto.setStatus(YesOrNoNum.YES.getCode());
+        return pfTestPlanService.delPlanStudent(dto) ? ResultObject.createSuccess("delPlanStudent", ResultObject.DATA_TYPE_OBJECT, true)
+                : ResultObject.create("delPlanStudent", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
 }

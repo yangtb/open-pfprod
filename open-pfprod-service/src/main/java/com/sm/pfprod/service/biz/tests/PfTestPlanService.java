@@ -83,4 +83,36 @@ public interface PfTestPlanService {
      */
     boolean updatePlanItemSort(ExmTestplanMedicalrec dto);
 
+    /**
+     * 班级-学生tree
+     *
+     * @param dto
+     * @return
+     */
+    List<PfCommonZtreeVo> listStudentTree(PfCatalogueTreeDto dto);
+
+    /**
+     * 学生列表
+     *
+     * @param dto
+     * @return
+     */
+    PageResult listPlanStudent(PfTestPlanDto dto);
+
+    /**
+     * 添加计划学生
+     *
+     * @param dto
+     * @return
+     */
+    boolean addPlanStudent(PfAddCaseDto dto);
+
+    /**
+     * 删除计划学生
+     *
+     * @param dto
+     * @return
+     */
+    boolean delPlanStudent(PfBachChangeStatusDto dto);
+
 }

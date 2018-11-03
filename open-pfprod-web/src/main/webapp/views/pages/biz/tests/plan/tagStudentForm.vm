@@ -26,9 +26,9 @@
         <form class="layui-form" style="padding-bottom: 10px; text-align: right;">
             <div class="layui-inline">
                 <div class="layui-input-inline">
-                    <button type="reset" class="layui-btn">
+                   #* <button type="reset" class="layui-btn">
                         已选（ <label id="checkCount" style="color: #FFB800;">0</label> ）
-                    </button>
+                    </button>*#
                     <button id="add" type="button" class="layui-btn">
                         <i class="layui-icon layui-icon-add-1"></i>添加
                     </button>
@@ -63,13 +63,28 @@
 <script src="$!{contextPath}/public/ztree/js/jquery.ztree.excheck.js"></script>
 <script src="$!{contextPath}/public/ztree/js/jquery.ztree.exedit.js"></script>
 <script src="$!{contextPath}/public/common/js/jquery.formautofill.js"></script>
-<script src="$!{contextPath}/public/biz/js/biz/tests/plan/planItemController.js"></script>
+<script src="$!{contextPath}/public/biz/js/biz/tests/plan/planStudentController.js"></script>
 
 
 <script type="text/html" id="question">
     <a class="layui-btn layui-btn-normal layui-btn-xs layui-btn-danger" lay-event="del">
         <i class="layui-icon layui-icon-delete"></i>删除
     </a>
+</script>
+
+<script type="text/html" id="sdTestPlanTpl">
+    {{#  if(!d.sdTestplan){ }}
+        <button class="layui-btn layui-btn-xs" style="background-color: #5FB878;">计划</button>
+    {{#  } else { }}
+        #foreach($!param in $!{sdTestPlan})
+        {{#  if(d.sdTestplan == '$!param.dictCode'){ }}
+        <button class="layui-btn layui-btn-xs" style="background-color: $!{param.extValue};">$!{param.dictName}</button>
+        {{#  } else { }}
+
+        {{#  } }}
+        #end
+    {{#  } }}
+
 </script>
 
 </body>
