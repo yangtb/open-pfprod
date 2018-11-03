@@ -1,10 +1,12 @@
 package com.sm.pfprod.web.portal.user.login;
 
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
+import com.sm.pfprod.model.dto.system.grade.PfGradeDto;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.role.PfRoleVo;
+import com.sm.pfprod.service.system.grade.PfGradeService;
 import com.sm.pfprod.service.system.org.PfOrgService;
 import com.sm.pfprod.service.user.login.PfUserService;
 import com.sm.pfprod.service.user.role.PfRoleService;
@@ -43,6 +45,9 @@ public class PfUserController extends BaseController {
 
     @Resource
     private PfOrgService pfOrgService;
+
+    @Resource
+    private PfGradeService pfGradeService;
 
     @Resource(name = "rsaKeyPairQueue")
     private RsaKeyPairQueue rsaKeyPairQueue;
@@ -136,6 +141,10 @@ public class PfUserController extends BaseController {
             model.addAttribute("allOrg", myOrgList);
         }
         model.addAttribute("userOrgId", user.getIdOrg());
+
+        /*PfGradeDto dto = new PfGradeDto();
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        model.addAttribute("grades", pfGradeService.listAllGrades(dto));*/
         return "pages/user/userForm";
     }
 
