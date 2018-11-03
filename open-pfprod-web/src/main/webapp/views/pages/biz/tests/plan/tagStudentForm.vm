@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>测试试题</title>
+    <title>测试学生</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -21,7 +21,7 @@
 
 <body class="body-my">
 
-<div class="wrapper-content" style="margin-top: -10px;">
+<div>
     <div class="layui-col-xs3">
         <form class="layui-form" style="padding-bottom: 10px; text-align: right;">
             <div class="layui-inline">
@@ -44,7 +44,7 @@
             <div class="layui-inline">
                 <div class="layui-input-inline">
                     <button id="batchDel" type="button" class="layui-btn layui-btn-danger">
-                        <i class="iconfont icon-batch-del"></i> 删除试题
+                        <i class="iconfont icon-batch-del"></i> 删除
                     </button>
                     <button id="refresh" type="button" class="layui-btn">
                         <i class="iconfont icon-refresh"></i> 刷新
@@ -70,26 +70,6 @@
     <a class="layui-btn layui-btn-normal layui-btn-xs layui-btn-danger" lay-event="del">
         <i class="layui-icon layui-icon-delete"></i>删除
     </a>
-</script>
-
-<script type="text/html" id="sdLevelTpl">
-        #foreach($param in ${caseHistoryLevel})
-        {{#  if(d.sdLevel == $!param.dictCode){ }}
-            $!{param.dictName}
-        {{#  } else { }}
-
-        {{#  } }}
-        #end
-</script>
-
-<script type="text/html" id="sdUseTpl">
-        #foreach($param in ${caseHistoryUse})
-        {{#  if(d.sdUse == $!param.dictCode){ }}
-            $!{param.dictName}
-        {{#  } else { }}
-
-        {{#  } }}
-        #end
 </script>
 
 </body>

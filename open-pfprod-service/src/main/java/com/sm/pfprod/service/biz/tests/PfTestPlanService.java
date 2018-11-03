@@ -2,10 +2,8 @@ package com.sm.pfprod.service.biz.tests;
 
 import com.sm.pfprod.model.dto.biz.tests.PfAddCaseDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestPlanDto;
-import com.sm.pfprod.model.dto.biz.tests.PfTestPlanDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.dto.common.PfCatalogueTreeDto;
-import com.sm.pfprod.model.entity.ExmTestpaperMedicalrec;
 import com.sm.pfprod.model.entity.ExmTestplan;
 import com.sm.pfprod.model.entity.ExmTestplanMedicalrec;
 import com.sm.pfprod.model.result.PageResult;

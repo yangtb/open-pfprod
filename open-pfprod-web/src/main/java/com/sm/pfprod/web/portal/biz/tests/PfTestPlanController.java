@@ -84,7 +84,21 @@ public class PfTestPlanController extends BaseController {
         model.addAttribute("idTestplan", idTestplan);
         model.addAttribute("caseHistoryLevel", enumUtil.getEnumList(SysDicGroupEnum.CASE_HISTORY_LEVEL.getCode()));
         model.addAttribute("caseHistoryUse", enumUtil.getEnumList(SysDicGroupEnum.CASE_HISTORY_USE.getCode()));
-        return "pages/biz/tests/plan/testPlanItem";
+        return "pages/biz/tests/plan/tagTestPlanItem";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @RequestMapping("/tag/student/page")
+    public String tagStudentPage(Long idTestplan, Model model) {
+        model.addAttribute("idTestplan", idTestplan);
+        return "pages/biz/tests/plan/tagStudentForm";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @RequestMapping("/tag/detail/page")
+    public String tagDetailPage(Long idTestplan, Model model) {
+        model.addAttribute("idTestplan", idTestplan);
+        return "pages/biz/tests/plan/tagDetailForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
