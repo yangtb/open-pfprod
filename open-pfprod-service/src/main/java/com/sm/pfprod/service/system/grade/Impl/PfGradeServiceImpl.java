@@ -23,6 +23,7 @@ import com.sm.pfprod.service.system.grade.PfGradeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class PfGradeServiceImpl implements PfGradeService {
@@ -37,6 +38,15 @@ public class PfGradeServiceImpl implements PfGradeService {
             return null;
         }
         return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public List<SysClass> listAllGrades(PfGradeDto dto) {
+        CommonResult<List<SysClassResult>> result = gradeClient.listAllGrades(BeanUtil.convert(dto, PfGradeParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), SysClass.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
     @Override

@@ -5,8 +5,9 @@ import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.dto.system.grade.PfGradeDto;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.entity.SysClass;
-import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.result.PageResult;
+
+import java.util.List;
 
 /**
  * @ClassName: PfGradeService
@@ -23,6 +24,14 @@ public interface PfGradeService {
      * @return
      */
     PageResult listGrades(PfGradeDto dto);
+
+    /**
+     * 查询所有班级
+     *
+     * @param dto
+     * @return
+     */
+    List<SysClass> listAllGrades(PfGradeDto dto);
 
     /**
      * 新增班级
