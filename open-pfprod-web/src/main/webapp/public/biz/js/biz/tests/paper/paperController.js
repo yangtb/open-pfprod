@@ -293,6 +293,7 @@ layui.config({
             {field: 'creator', width: 100, title: '创建人'},
             {fixed: 'right', width: 180, title: '操作', align: 'center', toolbar: '#question'}
         ]] //设置表头
+        , url: basePath + '/pf/p/tests/paper/list'
         , limit: 15
         //, even: true
         , limits: [15, 30, 100]
