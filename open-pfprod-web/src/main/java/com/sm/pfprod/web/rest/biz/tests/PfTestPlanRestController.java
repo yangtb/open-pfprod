@@ -214,4 +214,21 @@ public class PfTestPlanRestController {
         return pfTestPlanService.delPlanStudent(dto) ? ResultObject.createSuccess("delPlanStudent", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("delPlanStudent", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
+
+    /**
+     * 生成计划
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @RequestMapping(value = "/detail/generate", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject generatePlan(@RequestBody PfAddCaseDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestplan() != null, "idTestplan");
+        return ResultObject.createSuccess("addPlanStudent", ResultObject.DATA_TYPE_OBJECT,
+                pfTestPlanService.generatePlan(dto.getIdTestplan()));
+    }
+
 }

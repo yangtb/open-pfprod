@@ -68,4 +68,13 @@ public class TestPlanClient {
     public CommonResult<Boolean> delPlanStudent(PfBachChangeStatusParam param) {
         return pfTestPlanFacade.delPlanStudent(param);
     }
+
+    public PfPageResult listPlanDetail(PfTestPlanParam param) {
+        return pfTestPlanFacade.listPlanDetail(param);
+    }
+
+    public CommonResult<Boolean> generatePlan(Long idTestplan) {
+        return pfTestPlanFacade.generatePlan(idTestplan);
+    }
+
 }

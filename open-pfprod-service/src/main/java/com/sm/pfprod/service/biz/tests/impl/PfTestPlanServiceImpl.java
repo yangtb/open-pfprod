@@ -9,6 +9,7 @@ import com.sm.open.core.facade.model.param.pf.biz.tests.plan.PfTestPlanParam;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.param.pf.common.PfCatalogueTreeParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
+import com.sm.open.core.facade.model.result.pf.biz.tests.plan.ExmTestplanDetailResult;
 import com.sm.open.core.facade.model.result.pf.biz.tests.plan.ExmTestplanMedicalrecResult;
 import com.sm.open.core.facade.model.result.pf.biz.tests.plan.ExmTestplanResult;
 import com.sm.open.core.facade.model.result.pf.biz.tests.plan.ExmTestplanStudentResult;
@@ -137,6 +138,24 @@ public class PfTestPlanServiceImpl implements PfTestPlanService {
     @Override
     public boolean delPlanStudent(PfBachChangeStatusDto dto) {
         CommonResult<Boolean> result = testPlanClient.delPlanStudent(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult listPlanDetail(PfTestPlanDto dto) {
+        PfPageResult<ExmTestplanDetailResult> result = testPlanClient.listPlanDetail(BeanUtil.convert(dto, PfTestPlanParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public boolean generatePlan(Long idTestplan) {
+        CommonResult<Boolean> result = testPlanClient.generatePlan(idTestplan);
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }

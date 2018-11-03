@@ -115,4 +115,20 @@ public interface PfTestPlanService {
      */
     boolean delPlanStudent(PfBachChangeStatusDto dto);
 
+    /**
+     * 计划明细列表
+     *
+     * @param dto
+     * @return
+     */
+    PageResult listPlanDetail(PfTestPlanDto dto);
+
+    /**
+     * 生成计划
+     *
+     * @param idTestplan
+     * @return
+     */
+    boolean generatePlan(Long idTestplan);
+
 }

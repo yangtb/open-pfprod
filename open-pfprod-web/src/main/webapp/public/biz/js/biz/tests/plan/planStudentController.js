@@ -84,7 +84,7 @@ layui.config({
             {checkbox: true, fixed: true},
             {field: 'studentName', width: 160, title: '学生姓名', fixed: true},
             {field: 'phoneNo', width: 160, title: '联系方式', fixed: true},
-            {field: 'sdLevel', width: 120, title: '计划状态', templet: '#sdTestPlanTpl'},
+            {field: 'planStatus', width: 120, title: '计划状态', templet: '#sdTestPlanTpl'},
 
             {fixed: 'right', width: 100, title: '操作', align: 'center', toolbar: '#question'}
         ]] //设置表头

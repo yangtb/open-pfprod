@@ -99,6 +99,8 @@ public class PfTestPlanController extends BaseController {
     @RequestMapping("/tag/detail/page")
     public String tagDetailPage(Long idTestplan, Model model) {
         model.addAttribute("idTestplan", idTestplan);
+        model.addAttribute("caseHistoryLevel", enumUtil.getEnumList(SysDicGroupEnum.CASE_HISTORY_LEVEL.getCode()));
+        model.addAttribute("sdTestPlan", enumUtil.getEnumList(SysDicGroupEnum.SD_TESTPLAN.getCode()));
         return "pages/biz/tests/plan/tagDetailForm";
     }
 
@@ -114,6 +116,13 @@ public class PfTestPlanController extends BaseController {
     @ResponseBody
     public PageResult listPlanStudent(PfTestPlanDto dto) {
         return pfTestPlanService.listPlanStudent(dto);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @RequestMapping(value = "/detail/list")
+    @ResponseBody
+    public PageResult listPlanDetail(PfTestPlanDto dto) {
+        return pfTestPlanService.listPlanDetail(dto);
     }
 
 

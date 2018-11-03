@@ -73,18 +73,13 @@
 </script>
 
 <script type="text/html" id="sdTestPlanTpl">
-    {{#  if(!d.sdTestplan){ }}
-        <button class="layui-btn layui-btn-xs" style="background-color: #5FB878;">计划</button>
+    #foreach($!param in $!{sdTestPlan})
+    {{#  if(d.planStatus == '$!param.dictCode'){ }}
+    <button class="layui-btn layui-btn-xs" style="background-color: $!{param.extValue};">$!{param.dictName}</button>
     {{#  } else { }}
-        #foreach($!param in $!{sdTestPlan})
-        {{#  if(d.sdTestplan == '$!param.dictCode'){ }}
-        <button class="layui-btn layui-btn-xs" style="background-color: $!{param.extValue};">$!{param.dictName}</button>
-        {{#  } else { }}
 
-        {{#  } }}
-        #end
     {{#  } }}
-
+    #end
 </script>
 
 </body>
