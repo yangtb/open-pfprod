@@ -32,7 +32,7 @@ public class PfCatalogueTreeDto implements Serializable {
     /**
      * 机构id
      */
-    private String idOrg;
+    private Long idOrg;
 
     /**
      * 扩展id
