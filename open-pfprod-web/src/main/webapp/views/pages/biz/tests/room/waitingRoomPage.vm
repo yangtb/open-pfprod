@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>模拟候诊室</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/style/admin.css" media="all">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '${basePath}';
+    </script>
+    <style>
+        table {
+            padding-bottom: 2px;
+        }
+        .layui-table-tool {
+            position: relative;
+            z-index: 890;
+            width: 100%;
+            /* min-height: 50px; */
+            /* line-height: 30px; */
+            padding: 10px 15px;
+            border-width: 0 0 1px;
+        }
+    </style>
+
+</head>
+
+<body class="wrapper-content">
+<div>
+    <form class="layui-form">
+        <div class="layui-inline">
+            <div class="layui-btn-group">
+                <button type="button" class="layui-btn" id="addEnum" style="background-color: #7A84F7">
+                    <i class="iconfont icon-yishenggerenjiezhen"></i> 接诊
+                </button>
+            </div>
+        </div>
+        <div class="layui-input-inline" style="width: 100px;">
+            <select name="queryType">
+                <option value="1" selected>病例名称</option>
+                <option value="2">测试计划</option>
+                <option value="3">测试试卷</option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <input type="text" name="keyword" id="keyword" class="layui-input" autocomplete="off"
+                   placeholder="请输入关键字">
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn" lay-submit lay-filter="enumSearchFilter">
+                    <i class="iconfont icon-query"></i> 查询
+                </button>
+                <button id="exam" type="button" class="layui-btn layui-btn-normal"
+                        lay-href="${basePath}/pf/p/waiting/room/exam/page">
+                        <i class="iconfont icon-monikaoshi"></i>模拟就诊
+                </button>
+                <div hidden>
+                    <button id="mock" type="button" class="layui-btn layui-btn-normal">
+                        <a lay-href="${basePath}/pf/p/waiting/room/exam/page">模拟练习</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="layui-col-xs4" style="padding-right: 5px;">
+        <table id="dicTable" lay-filter="dicTableFilter">
+        </table>
+    </div>
+
+    <div class="layui-col-xs8">
+        <table id="enumTable" lay-filter="enumTableFilter">
+        </table>
+    </div>
+</div>
+
+
+<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="${contextPath}/public/biz/js/biz/tests/room/waitingRoomController.js"></script>
+
+<script type="text/html" id="dicBar">
+    <a class="layui-btn layui-btn-xs" lay-event="detail"><i class="iconfont icon-detail"></i> 详情</a>
+</script>
+
+<script type="text/html" id="enumBar">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>
+</script>
+
+<script type="text/html" id="toolbarDemo1">
+    <div style="text-align: center;">候诊室</div>
+</script>
+<script type="text/html" id="toolbarDemo2">
+    <div style="text-align: center;">接诊列表</div>
+</script>
+
+</body>
+
+</html>

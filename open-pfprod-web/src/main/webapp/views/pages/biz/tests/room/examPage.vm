@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>模拟候诊</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '${basePath}';
+    </script>
+
+</head>
+
+<body class="wrapper-content">
+<div>
+    <form class="layui-form">
+        <div class="layui-inline">
+            <i class="iconfont icon-kaishi-copy"></i>
+        </div>
+
+        <div class="layui-inline">
+            <fieldset class="layui-elem-field">
+                <div class="layui-field-box">
+                    <div style="float: left">
+                        <i class="iconfont icon-xuesheng" style="line-height:4rem; font-size:4rem; color: #393D50;"></i>
+                    </div>
+
+                    <div>
+                        韩梅梅 | 女 | 上海复旦医学院 | 三年二班 | 学生
+                    </div>
+
+                </div>
+            </fieldset>
+        </div>
+        <div class="layui-inline">
+            <fieldset class="layui-elem-field">
+                <div class="layui-field-box">
+                    <i class="iconfont icon-shijuan3"></i>
+                    消化科黄金级试卷-左腹疼痛
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="layui-inline">
+            <i class="iconfont icon-kaishi-copy"></i>
+        </div>
+    </form>
+</div>
+
+
+<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+
+</body>
+
+</html>

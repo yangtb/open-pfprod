@@ -87,4 +87,8 @@
     <!-- 班级服务 -->
     <dubbo:reference id="pfGradeFacade" interface="com.sm.open.core.facade.pf.system.grade.PfGradeFacade"/>
 
+    <!-- 模拟就诊服务 -->
+    <dubbo:reference id="pfTestWaitingRoomFacade"
+                   interface="com.sm.open.core.facade.pf.biz.tests.PfTestWaitingRoomFacade"/>
+
 </beans>
