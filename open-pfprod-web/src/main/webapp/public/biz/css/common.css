@@ -66,3 +66,19 @@
 .my-input-width{
     width: 440px;
 }
+
+.active {
+    background: #6fc2fd;
+    border: 1px solid #6fc2fd;
+}
+
+.aside-link {
+    display: block;
+    margin: 0 auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.aside-link:hover {
+    background: #9dcdf6;
+}

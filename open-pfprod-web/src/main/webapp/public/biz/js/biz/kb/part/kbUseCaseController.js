@@ -45,7 +45,7 @@ layui.config({
             result = '<iframe id="iframe' + part.cdMedAsse + '" class="layui-col-xs12" frameborder="0" ';
 
             if (part.cdMedAsse == cdMedAsse) {
-                result += 'src="' + basePath + part.script + '?idMedCase=' + idMedCase + '"';
+                result += 'src="' + basePath + part.script + '?idMedCase=' + idMedCase + '&showBtn=1"';
             }
             result += '></iframe>';
         } else {

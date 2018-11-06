@@ -161,7 +161,7 @@ layui.config({
         } else {
             url = url + data.script;
         }
-        url += '?cdEvaAsse=' + data.cdEvaAsse + '&idEvaCase=' + data.idEvaCase + '&showForm=1';
+        url += '?cdEvaAsse=' + data.cdEvaAsse + '&idEvaCase=' + data.idEvaCase + '&showForm=1&showBtn=1';
         var index = common.open('组件用例维护 【' + '<span style="color: red">' + data.name + '</span>】', url, 900, 460, _successFillUseCase(data));
         layer.full(index);
     };

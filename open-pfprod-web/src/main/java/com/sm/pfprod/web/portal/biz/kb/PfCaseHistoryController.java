@@ -70,8 +70,8 @@ public class PfCaseHistoryController extends BaseController {
     public String tagForm(Long idMedicalrec, Long idDemo, Model model) {
         model.addAttribute("idMedicalrec", idMedicalrec);
         model.addAttribute("idDemo", idDemo);
-        model.addAttribute("tags", JSON.parseArray(JSON.toJSONString(pfClinicTemplateService.listAllCaseHistoryTag(idDemo))));
-        model.addAttribute("assessTags", JSON.parseArray(JSON.toJSONString(pfClinicTemplateService.listAllAssessTag(idDemo))));
+        model.addAttribute("tags", JSON.parseArray(JSON.toJSONString(pfCaseHistoryService.listAllCaseHistoryTag(idDemo))));
+        model.addAttribute("assessTags", JSON.parseArray(JSON.toJSONString(pfCaseHistoryService.listAllAssessTag(idDemo))));
         return "pages/biz/kb/casehistory/casehistoryTagForm";
     }
 

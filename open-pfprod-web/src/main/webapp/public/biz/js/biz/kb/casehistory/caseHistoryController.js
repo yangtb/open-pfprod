@@ -295,7 +295,7 @@ layui.config({
             {field: 'operator', width: 100, title: '创建人'},
             {fixed: 'right', width: 180, title: '操作', align: 'center', toolbar: '#template'}
         ]] //设置表头
-        //, url: basePath + '/pf/p/case/history/template/list'
+        , url: basePath + '/pf/p/case/history/template/list'
         , limit: 15
         //, even: true
         , limits: [15, 30, 100]

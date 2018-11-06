@@ -1,5 +1,6 @@
 package com.sm.pfprod.model.vo.biz.clinic;
 
+import com.sm.pfprod.model.entity.FaqEvaTag;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,7 +10,7 @@ import java.io.Serializable;
 @Setter
 @Getter
 @ToString
-public class PfAssessTagVo implements Serializable {
+public class PfAssessTagVo extends FaqEvaTag implements Serializable {
 
     private static final long serialVersionUID = -4057393469549135787L;
 

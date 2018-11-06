@@ -5,6 +5,9 @@ import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.PfCommonZtreeVo;
+import com.sm.pfprod.model.vo.biz.clinic.PfAssessTagVo;
+import com.sm.pfprod.model.vo.biz.clinic.PfCaseHistoryTagVo;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -79,5 +82,37 @@ public interface PfCaseHistoryService {
      */
     boolean delTemplate(PfBachChangeStatusDto dto);
 
+    /**
+     * 保存病例标签
+     *
+     * @param dto
+     * @return
+     */
+    Long saveMedTag(FaqMedTag dto);
+
+
+    /**
+     * 保存评估标签
+     *
+     * @param dto
+     * @return
+     */
+    Long saveEvaTag(FaqEvaTag dto);
+
+    /**
+     * 所有病历标签
+     *
+     * @param idDemo
+     * @return
+     */
+    List<PfCaseHistoryTagVo> listAllCaseHistoryTag(Long idDemo);
+
+    /**
+     * 所有评估表
+     *
+     * @param idDemo
+     * @return
+     */
+    List<PfAssessTagVo> listAllAssessTag(Long idDemo);
 
 }

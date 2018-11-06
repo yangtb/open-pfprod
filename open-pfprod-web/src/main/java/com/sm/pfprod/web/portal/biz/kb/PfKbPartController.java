@@ -90,21 +90,24 @@ public class PfKbPartController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/text/form")
-    public String textForm(Model model, String idMedCase) {
+    public String textForm(Model model, String idMedCase, String showBtn) {
+        model.addAttribute("showBtn", showBtn);
         model.addAttribute("idMedCase", idMedCase);
         return "pages/biz/kb/part/define/textForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/pic/form")
-    public String picForm(Model model, String idMedCase) {
+    public String picForm(Model model, String idMedCase, String showBtn) {
+        model.addAttribute("showBtn", showBtn);
         model.addAttribute("idMedCase", idMedCase);
         return "pages/biz/kb/part/define/picForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/pat/form")
-    public String patForm(Model model, String idMedCase) {
+    public String patForm(Model model, String idMedCase, String showBtn) {
+        model.addAttribute("showBtn", showBtn);
         model.addAttribute("idMedCase", idMedCase);
         model.addAttribute("sexList", enumUtil.getEnumList(SysDicGroupEnum.SEX.getCode()));
         return "pages/biz/kb/part/define/patForm";
@@ -112,14 +115,16 @@ public class PfKbPartController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/cons/form")
-    public String consForm(Model model, String idMedCase) {
+    public String consForm(Model model, String idMedCase, String showBtn) {
+        model.addAttribute("showBtn", showBtn);
         model.addAttribute("idMedCase", idMedCase);
         return "pages/biz/kb/part/define/consForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/check/form")
-    public String checkForm(Model model, String idMedCase) {
+    public String checkForm(Model model, String idMedCase, String showBtn) {
+        model.addAttribute("showBtn", showBtn);
         model.addAttribute("idMedCase", idMedCase);
         model.addAttribute("examWays", enumUtil.getEnumList(SysDicGroupEnum.EXAM_WAYS.getCode()));
         model.addAttribute("bodyPosition", enumUtil.getEnumList(SysDicGroupEnum.BODY_POSITION.getCode()));
@@ -128,7 +133,8 @@ public class PfKbPartController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/exam/form")
-    public String examForm(Model model, String idMedCase) {
+    public String examForm(Model model, String idMedCase, String showBtn) {
+        model.addAttribute("showBtn", showBtn);
         model.addAttribute("idMedCase", idMedCase);
         return "pages/biz/kb/part/define/examForm";
     }

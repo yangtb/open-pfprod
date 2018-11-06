@@ -78,19 +78,22 @@
                             </div>
                         </div>
 
-                        <button type="button" id="addAnswerBtn" class="layui-btn layui-btn-sm">添加等效答案</button>
+                        <button type="button" id="addAnswerBtn" class="layui-btn layui-btn-sm"
+                                #if($!{showBtn} != 1)style="visibility:hidden"#end>添加等效答案
+                        </button>
+
                         <table id="answerTable" lay-filter="answerTableFilter">
                         </table>
 
                         <div class="layui-form-item">
-                            <div class="layui-input-block">
+                            <div class="layui-input-block" #if($!{showBtn} != 1)style="visibility:hidden"#end>
                                 <button id="add" type="button" class="layui-btn">
                                     <i class="layui-icon layui-icon-add-1"></i>增加
                                 </button>
                                 <button id="save" class="layui-btn" lay-submit="" lay-filter="saveAnswer">
                                     <i class="iconfont icon-save-copy"></i> 保存
                                 </button>
-                                <button type="button" id="saveAs" class="layui-btn" >
+                                <button type="button" id="saveAs" class="layui-btn">
                                     <i class="iconfont icon-lingcunwei"></i> 重载
                                 </button>
                                 <div hidden>
@@ -141,14 +144,16 @@
     </script>
 
 
-    #*<script type="text/html" id="toolbarDemo">
-        <div class="layui-btn-container">
-            <button type="button" id="addAnswerBtn" class="layui-btn layui-btn-sm"*##* lay-event="addAnswer"*##*>添加等效答案</button>
-        </div>
-    </script>*#
+#*<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button type="button" id="addAnswerBtn" class="layui-btn layui-btn-sm"*##* lay-event="addAnswer"*##*>添加等效答案</button>
+    </div>
+</script>*#
 
     <script>
-        if ($!{showForm} == 1) {
+        if ($!{showForm} == 1
+        )
+        {
             $('#topform').html(getAssesssFormHtml());
         }
 

@@ -5,6 +5,8 @@ import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.entity.FaqEvaTag;
+import com.sm.pfprod.model.entity.FaqMedTag;
 import com.sm.pfprod.model.entity.FaqMedicalrec;
 import com.sm.pfprod.model.entity.FaqMedicalrecCa;
 import com.sm.pfprod.model.enums.OperationTypeEnum;
@@ -22,7 +24,7 @@ import javax.annotation.Resource;
 
 /**
  * @ClassName: PfCaseHistoryRestController
- * @Description: 临床比例库rest
+ * @Description: 临床病例库rest
  * @Author yangtongbin
  * @Date 2018/10/10
  */
@@ -165,4 +167,40 @@ public class PfCaseHistoryRestController {
         return pfCaseHistoryService.delTemplate(dto) ? ResultObject.createSuccess("updateTemplateStatus", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("updateTemplateStatus", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
+
+    /**
+     * 保存病例标签
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PostMapping(value = "/med/tag/save")
+    public ResultObject saveMedTag(@RequestBody FaqMedTag dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedicalrec() != null, "idMedicalrec");
+        Assert.isTrue(dto.getIdTag() != null, "idTag");
+        Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
+        return ResultObject.createSuccess("saveMedTag", ResultObject.DATA_TYPE_OBJECT,
+                pfCaseHistoryService.saveMedTag(dto));
+    }
+
+    /**
+     * 保存评估标签
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PostMapping(value = "/med/eva/save")
+    public ResultObject saveEvaTag(@RequestBody FaqEvaTag dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedicalrec() != null, "idMedicalrec");
+        Assert.isTrue(dto.getIdTag() != null, "idTag");
+        Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
+        return ResultObject.createSuccess("saveEvaTag", ResultObject.DATA_TYPE_OBJECT,
+                pfCaseHistoryService.saveEvaTag(dto));
+    }
+
+
 }

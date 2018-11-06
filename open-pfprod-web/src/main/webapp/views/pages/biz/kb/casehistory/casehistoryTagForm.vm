@@ -16,7 +16,9 @@
         var basePath = '$!{basePath}';
         var contextPath = '$!{contextPath}';
         var idDemo = '$!{idDemo}';
+        var idMedicalrec = '$!{idMedicalrec}';
         var tags = '$!{tags}'
+        var assessTags = '$!{assessTags}';
     </script>
 </head>
 
@@ -28,21 +30,25 @@
             <li class="layui-this">临床病例</li>
             <li>评估表</li>
         </ul>
-        <div class="layui-tab-content">
+        <div class="layui-tab-content" style="margin-left: -10px;">
             <div class="layui-tab-item layui-show">
                 <div class="layadmin-shortcut">
-                    <div class="layui-col-xs1" style="border-right: 1px solid #2F4056">
-                        <ul class="layui-row layui-col-space10">
+                    <div class="layui-col-xs1" >
+                        <ul class="layui-row">
                             #if(!$tags.isEmpty())
                                 #foreach($!element in $!tags)
                                     #if($!element.fgShowMake == '1')
-                                        <li id="med-$!element.cdMedAsse" class="layui-row-xs3"
-                                            data-type="med" data-cd="$!element.cdMedAsse"
-                                            data-url="$!{basePath}$!element.script">
+                                        <li id="med-$!element.cdMedAsse"
+                                            class="layui-row-xs3 aside-link caseTag"
+                                            data-type="med"
+                                            data-index="$!{velocityCount}">
                                             <a href="javascript:;">
                                                 <img style="display: inline-block; width: 40px; height: 40px;"
                                                      src="$!element.path">
-                                                <cite>$!element.name</cite>
+                                                <cite style="padding-right: 2px;">
+                                                    $!element.name<span id="med-dot-bg$!element.idTag" class="layui-badge-dot
+                                                    #if($!element.idMedTag)layui-bg-green #else layui-bg-orange #end" style="float: right;"></span>
+                                                </cite>
                                             </a>
                                         </li>
                                     #end
@@ -51,7 +57,7 @@
                         </ul>
                     </div>
 
-                    <div class="layui-col-xs11" style="padding-left: 5px;">
+                    <div class="layui-col-xs11" style="border-left: 1px solid #2F4056; padding-left: 5px;">
                         <form class="layui-form layui-form-pane" id="caseForm">
                             <div hidden>
 
@@ -91,18 +97,22 @@
             </div>
             <div class="layui-tab-item">
                 <div class="layadmin-shortcut">
-                    <div class="layui-col-xs1" style="border-right: 1px solid #2F4056">
-                        <ul class="layui-row layui-col-space10">
+                    <div class="layui-col-xs1">
+                        <ul class="layui-row">
                             #if(!$tags.isEmpty())
                                 #foreach($!element in $!assessTags)
                                     #if($!element.fgShowMake == '1')
-                                        <li id="tag-$!element.cdEvaAsse" class="layui-row-xs3"
-                                            data-type="eva" data-cd="$!element.cdEvaAsse"
-                                            data-url="$!{basePath}$!element.script">
+                                        <li id="tag-$!element.cdEvaAsse"
+                                            class="layui-row-xs3 aside-link assessTag"
+                                            data-type="eva"
+                                            data-index="$!{velocityCount}">
                                             <a href="javascript:;">
                                                 <img style="display: inline-block; width: 40px; height: 40px;"
                                                      src="$!element.path">
-                                                <cite>$!element.name</cite>
+                                                <cite style="padding-right: 2px;">
+                                                    $!element.name<span id="eva-dot-bg$!element.idTag" class="layui-badge-dot
+                                                    #if($!element.idEvaTag)layui-bg-green #else layui-bg-orange #end" style="float: right;"></span>
+                                                </cite>
                                             </a>
                                         </li>
                                     #end
@@ -111,7 +121,7 @@
                         </ul>
                     </div>
 
-                    <div class="layui-col-xs11" style="padding-left: 5px;">
+                    <div class="layui-col-xs11" style="border-left: 1px solid #2F4056; padding-left: 5px;">
                         <form class="layui-form layui-form-pane" id="caseForm">
                             <div class="layui-form-item form-item-my5">
                                 <label class="layui-form-label">选择用例</label>
@@ -128,7 +138,7 @@
                                         <a lay-href="${basePath}/pf/p/kb/assess/page" class="layui-btn">
                                             <i class="layui-icon layui-icon-add-1"></i>新增用例
                                         </a>
-                                        <button id="editAssess" type="button" class="layui-btn" >
+                                        <button id="editAssess" type="button" class="layui-btn">
                                             <i class="iconfont icon-edit"></i> 编辑用例
                                         </button>
                                     </div>
@@ -138,6 +148,7 @@
                         </form>
 
                         <iframe name="assessTag" width="100%" frameborder=0 height="100%"
+                                style="margin: 0px 0px 0px -10px;"
                                 id="assessTag" onload="this.height=assessTag.document.body.scrollHeight+20"></iframe>
 
                     </div>
@@ -145,6 +156,20 @@
             </div>
         </div>
     </div>
+
+    <div class="layui-form-item layui-layout-admin">
+        <div class="layui-input-block">
+            <div class="layui-footer" style="left: 0;">
+                <button class="layui-btn" id="save">
+                    <i class="iconfont icon-save-copy"></i> 保存
+                </button>
+                <button class="layui-btn" id="saveAs">
+                    <i class="iconfont icon-lingcunwei"></i> 重载
+                </button>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 

@@ -2,21 +2,29 @@ package com.sm.pfprod.service.biz.kb.impl;
 
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
+import com.sm.open.core.facade.model.param.pf.biz.clinic.FaqEvaTagParam;
+import com.sm.open.core.facade.model.param.pf.biz.clinic.FaqMedTagParam;
 import com.sm.open.core.facade.model.param.pf.biz.kb.casehistory.FaqMedicalrecCaParam;
 import com.sm.open.core.facade.model.param.pf.biz.kb.casehistory.FaqMedicalrecParam;
 import com.sm.open.core.facade.model.param.pf.biz.kb.casehistory.PfCaseHistoryParam;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
+import com.sm.open.core.facade.model.result.pf.biz.clinic.PfAssessTagResult;
+import com.sm.open.core.facade.model.result.pf.biz.clinic.PfCaseHistoryTagResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.casehistory.FaqMedicalrecResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.biz.kb.CaseHistoryClient;
 import com.sm.pfprod.model.dto.biz.kb.casehistory.PfCaseHistoryDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.entity.FaqEvaTag;
+import com.sm.pfprod.model.entity.FaqMedTag;
 import com.sm.pfprod.model.entity.FaqMedicalrec;
 import com.sm.pfprod.model.entity.FaqMedicalrecCa;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.PfCommonZtreeVo;
+import com.sm.pfprod.model.vo.biz.clinic.PfAssessTagVo;
+import com.sm.pfprod.model.vo.biz.clinic.PfCaseHistoryTagVo;
 import com.sm.pfprod.service.biz.kb.PfCaseHistoryService;
 import org.springframework.stereotype.Service;
 
@@ -97,6 +105,42 @@ public class PfCaseHistoryServiceImpl implements PfCaseHistoryService {
         CommonResult<Boolean> result = caseHistoryClient.delTemplate(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public Long saveMedTag(FaqMedTag dto) {
+        CommonResult<Long> result = caseHistoryClient.saveMedTag(BeanUtil.convert(dto, FaqMedTagParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public Long saveEvaTag(FaqEvaTag dto) {
+        CommonResult<Long> result = caseHistoryClient.saveEvaTag(BeanUtil.convert(dto, FaqEvaTagParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<PfCaseHistoryTagVo> listAllCaseHistoryTag(Long idDemo) {
+        CommonResult<List<PfCaseHistoryTagResult>> result = caseHistoryClient.listAllCaseHistoryTag(idDemo);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfCaseHistoryTagVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<PfAssessTagVo> listAllAssessTag(Long idDemo) {
+        CommonResult<List<PfAssessTagResult>> result = caseHistoryClient.listAllAssessTag(idDemo);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfAssessTagVo.class);
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }

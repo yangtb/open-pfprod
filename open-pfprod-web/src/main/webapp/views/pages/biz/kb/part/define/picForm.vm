@@ -44,6 +44,7 @@
 
         <div class="layui-form-item ">
             <div class="layui-input-block">
+                #if($!{showBtn} == 1)
                 <button class="layui-btn" lay-submit="" lay-filter="addKbPartPic">
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
@@ -53,6 +54,7 @@
                 <button id="reset" type="reset" class="layui-btn layui-btn-danger">
                     <i class="iconfont icon-reset"></i> 重置
                 </button>
+                #end
             </div>
         </div>
     </form>

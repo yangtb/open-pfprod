@@ -96,6 +96,7 @@
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <div class="layui-btn-group">
+                    #if($!{showBtn} == 1)
                         <button id="add" type="button" class="layui-btn">
                             <i class="layui-icon layui-icon-add-1"></i>增加
                         </button>
@@ -108,6 +109,7 @@
                         <button id="reset" type="reset" class="layui-btn layui-btn-danger">
                             <i class="iconfont icon-reset"></i> 重置
                         </button>
+                    #end
                     </div>
                 </div>
             </div>

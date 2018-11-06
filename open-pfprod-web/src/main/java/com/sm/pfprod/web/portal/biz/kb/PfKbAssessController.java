@@ -87,7 +87,8 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/referral/page")
-    public String referralPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm) {
+    public String referralPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
+        model.addAttribute("showBtn", showBtn);
         model.addAttribute("showForm", showForm);
         model.addAttribute("cdEvaAsse", cdEvaAsse);
         model.addAttribute("idEvaCase", idEvaCase);
@@ -108,7 +109,8 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/diagnosis/page")
-    public String diagnosisPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm) {
+    public String diagnosisPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
+        model.addAttribute("showBtn", showBtn);
         model.addAttribute("showForm", showForm);
         model.addAttribute("cdEvaAsse", cdEvaAsse);
         model.addAttribute("idEvaCase", idEvaCase);
@@ -120,7 +122,8 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/reason/page")
-    public String reasonPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm) {
+    public String reasonPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
+        model.addAttribute("showBtn", showBtn);
         model.addAttribute("showForm", showForm);
         model.addAttribute("cdEvaAsse", cdEvaAsse);
         model.addAttribute("idEvaCase", idEvaCase);
@@ -131,7 +134,8 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/cover/page")
-    public String coverPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm) {
+    public String coverPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
+        model.addAttribute("showBtn", showBtn);
         model.addAttribute("showForm", showForm);
         model.addAttribute("cdEvaAsse", cdEvaAsse);
         model.addAttribute("idEvaCase", idEvaCase);
@@ -142,7 +146,8 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/must/page")
-    public String mustPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm) {
+    public String mustPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
+        model.addAttribute("showBtn", showBtn);
         model.addAttribute("showForm", showForm);
         model.addAttribute("cdEvaAsse", cdEvaAsse);
         model.addAttribute("idEvaCase", idEvaCase);
@@ -153,7 +158,8 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/effciency/page")
-    public String effciencyPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm) {
+    public String effciencyPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
+        model.addAttribute("showBtn", showBtn);
         model.addAttribute("showForm", showForm);
         model.addAttribute("cdEvaAsse", cdEvaAsse);
         model.addAttribute("idEvaCase", idEvaCase);
@@ -164,7 +170,8 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/order/page")
-    public String orderPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm) {
+    public String orderPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
+        model.addAttribute("showBtn", showBtn);
         model.addAttribute("showForm", showForm);
         model.addAttribute("cdEvaAsse", cdEvaAsse);
         model.addAttribute("idEvaCase", idEvaCase);

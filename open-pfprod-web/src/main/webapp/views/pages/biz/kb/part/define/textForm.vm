@@ -29,21 +29,23 @@
             <div class="layui-input-block">
                 <textarea placeholder="请输入文本" class="layui-textarea" name="content"
                           lay-verify="required" lay-vertype="tips"
-                          style="height: 200px;"></textarea>
+                          style="height: 260px;"></textarea>
             </div>
         </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="addKbPartText">
-                    <i class="iconfont icon-save-copy"></i> 保存
-                </button>
-                <button class="layui-btn" lay-submit="" lay-filter="saveAsKbPartText">
-                    <i class="iconfont icon-lingcunwei"></i> 重载
-                </button>
-                <button id="reset" type="reset" class="layui-btn layui-btn-danger">
-                    <i class="iconfont icon-reset"></i> 重置
-                </button>
+                #if($!{showBtn} == 1)
+                    <button class="layui-btn" lay-submit="" lay-filter="addKbPartText">
+                        <i class="iconfont icon-save-copy"></i> 保存
+                    </button>
+                    <button class="layui-btn" lay-submit="" lay-filter="saveAsKbPartText">
+                        <i class="iconfont icon-lingcunwei"></i> 重载
+                    </button>
+                    <button id="reset" type="reset" class="layui-btn layui-btn-danger">
+                        <i class="iconfont icon-reset"></i> 重置
+                    </button>
+                #end
             </div>
         </div>
     </form>
