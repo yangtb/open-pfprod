@@ -55,7 +55,7 @@
         <div class="layui-inline">
             <div class="layui-input-inline">
                 <button type="button" class="layui-btn" lay-submit lay-filter="drugInfoSearchFilter">
-                    <i class="iconfont icon-query"></i> 查询
+                    <i class="iconfont icon-yaopinxinxichaxun"></i> 查询
                 </button>
                 <button type="reset" class="layui-btn layui-btn-primary">
                     <i class="iconfont icon-reset"></i> 重置
