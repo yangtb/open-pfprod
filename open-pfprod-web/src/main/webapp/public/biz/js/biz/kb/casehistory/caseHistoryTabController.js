@@ -29,7 +29,7 @@ layui.config({
         currentCdEvaAsse = '',
         currentIdMedCase = '',
         currentIdEvaCase = '',
-        currentMedIndex = '',
+        currentIndex = '',
         currentType = '';
 
     var caseli = document.querySelectorAll(".caseTag"),
@@ -55,6 +55,7 @@ layui.config({
     };
 
     element.on('tab(tagTabFilter)', function (data) {
+        currentType = data.index == 0 ? 'med' : 'eva';
         if (!$("#assessTag").attr("src")) {
             currentCdEvaAsse = assessTagList[0].cdEvaAsse;
             assessli[0].click();
@@ -65,7 +66,7 @@ layui.config({
 
     function loadIframe(type, dataIndex) {
         currentType = type;
-        currentMedIndex = dataIndex;
+        currentIndex = dataIndex;
 
         if (type == 'med') {
             var dataUrl = basePath + caseTagList[dataIndex].script,
@@ -76,7 +77,7 @@ layui.config({
                 return;
             }
             var medUrl = dataCase ? '?idMedCase=' + dataCase : '?idMedCase=';
-            $('#caseName').val('');
+            $('#caseName').val(caseTagList[dataIndex].caseName);
             currentMedIdTag = idTag;
             currentIdMedCase = dataCase;
             currentCdMedAsse = cd;
@@ -92,7 +93,7 @@ layui.config({
                 return;
             }
             var evaUrl = dataCase ? '?cdEvaAsse=' + cd + '&idEvaCase=' + dataCase + '&showForm=0' : '?showForm=0';
-            $('#assessName').val('');
+            $('#assessName').val(assessTagList[dataIndex].caseName);
             currentEvaIdTag = idTag;
             currentIdEvaCase = dataCase;
             currentCdEvaAsse = cd;
@@ -126,7 +127,20 @@ layui.config({
                 }
             },
             done: function (elem, data) {
+                if (!data) {
+                    return;
+                }
                 var selectData = data.data[0];
+                if (currentCdMedAsse != selectData.cdMedAsse) {
+                    var idx = '';
+                    caseTagList.map(function (item, index) {
+                        if (item.cdMedAsse === selectData.cdMedAsse) idx = index;
+                    })
+                    $('#med-' + selectData.cdMedAsse).addClass("active").siblings().removeClass("active");
+                    currentMedIdTag = caseTagList[idx].idTag;
+                    currentCdMedAsse = caseTagList[idx].cdMedAsse;
+                    currentIndex = idx;
+                }
                 currentIdMedCase = selectData.idMedCase;
                 $('#caseName').val(selectData.name);
                 if (!selectData.script) {
@@ -162,7 +176,20 @@ layui.config({
                 }
             },
             done: function (elem, data) {
+                if (!data) {
+                    return;
+                }
                 var selectData = data.data[0];
+                if (currentCdMedAsse != selectData.cdEvaAsse) {
+                    var idx = '';
+                    assessTagList.map(function (item, index) {
+                        if (item.cdEvaAsse === selectData.cdEvaAsse) idx = index;
+                    })
+                    $('#eva-' + selectData.cdEvaAsse).addClass("active").siblings().removeClass("active");
+                    currentEvaIdTag = assessTagList[idx].idTag;
+                    currentCdEvaAsse = assessTagList[idx].cdEvaAsse;
+                    currentIndex = idx;
+                }
                 currentIdEvaCase = selectData.idEvaCase;
                 $('#assessName').val(selectData.name);
 
@@ -210,6 +237,10 @@ layui.config({
         return _commonAjax(url, bizData, '保存', currentType);
     });
 
+    $('#saveAs').on('click', function () {
+        layer.tips('正在开发。。。', '#saveAs', {tips: 1});
+    });
+
     var _commonAjax = function (url, reqData, msg, type) {
         layer.load(2);
         $.ajax({
@@ -226,12 +257,12 @@ layui.config({
                 } else {
                     layer.msg(msg + "成功");
                     if (type == 'med') {
-                        caseTagList[currentMedIndex].idMedCase = currentIdMedCase;
+                        caseTagList[currentIndex].idMedCase = currentIdMedCase;
                         $('#med-dot-bg' + currentMedIdTag).removeClass('layui-bg-orange')
                             .addClass('layui-bg-green');
                     } else if (type == 'eva') {
-                        assessTagList[currentMedIndex].idEvaCase = currentIdEvaCase;
-                        $('#eva-dot-bg' + currentMedIdTag).removeClass('layui-bg-orange')
+                        assessTagList[currentIndex].idEvaCase = currentIdEvaCase;
+                        $('#eva-dot-bg' + currentEvaIdTag).removeClass('layui-bg-orange')
                             .addClass('layui-bg-green');
                     }
                     return true;
@@ -245,44 +276,54 @@ layui.config({
         });
     };
 
-    /*$('#editCase').on('click', function () {
-        if (!medCurrentData) {
+    $('#editCase').on('click', function () {
+        if (!currentIdMedCase && !currentCdMedAsse) {
             layer.tips('请先选择用例', '#editCase', {tips: 1});
         }
-        _editUseCase(medCurrentData);
+        _editUseCase();
     });
 
-    var _editUseCase = function (data) {
+    var _editUseCase = function () {
+        var url = basePath;
+        if (!caseTagList[currentIndex].script) {
+            return;
+        } else {
+            url = url + caseTagList[currentIndex].script;
+        }
         var index = layui.layer.open({
-            title: '组件用例维护 【' + '<span style="color: red">' + data.name + '</span>】',
+            title: '组件用例维护 【' + '<span style="color: red">' + $('#caseName').val() + '</span>】',
             type: 2,
             area: ['900px', '460px'],
             //anim: anim,
             fixed: false, //不固定
             maxmin: true,
-            content: basePath + '/pf/p/kb/part/useCase/form?cdMedAsse=' + currentCdMedAsse + '&idMedCase=' + currentIdMedCase,
-            shadeClose: true
+            content: url + '?&idMedCase=' + currentIdMedCase + '&showForm=0',
+            shadeClose: true,
+            zIndex: layer.zIndex, //重点1
+            success: function (layero) {
+                layer.setTop(layero); //重点2
+            }
         });
         layer.full(index);
     };
 
 
     $('#editAssess').on('click', function () {
-        if (!currentIdEvaCase) {
+        if (!currentIdEvaCase && !currentCdEvaAsse) {
             layer.tips('请先选择用例', '#editAssess', {tips: 1});
         }
-        _editUseCaseAssess(currentIdEvaCase);
+        _editUseCaseAssess();
     });
 
-    var _editUseCaseAssess = function (data) {
+    var _editUseCaseAssess = function () {
         var url = basePath;
-        if (!data.script) {
+        if (!assessTagList[currentIndex].script) {
             url += '/pf/p/kb/assess/common/page';
         } else {
-            url = url + data.script;
+            url = url + assessTagList[currentIndex].script;
         }
         var index = layui.layer.open({
-            title: '组件用例维护 【' + '<span style="color: red">' + data.name + '</span>】',
+            title: '组件用例维护 【' + '<span style="color: red">' + $('#assessName').val() + '</span>】',
             type: 2,
             area: ['900px', '460px'],
             //anim: anim,
@@ -292,7 +333,7 @@ layui.config({
             shadeClose: true
         });
         layer.full(index);
-    };*/
+    };
 
 });
 

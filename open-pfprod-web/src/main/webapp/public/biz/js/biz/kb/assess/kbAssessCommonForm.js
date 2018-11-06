@@ -31,9 +31,9 @@ function getAssesssFormHtml() {
     '                <div class="layui-inline">\n' +
     '                    <label class="layui-form-label">用例名称<i class="iconfont icon-required"\n' +
     '                                                           style="color: #f03f2d"></i></label>\n' +
-    '                    <div class="layui-input-block">\n' +
+    '                    <div class="layui-input-block" disabled>\n' +
     '                        <input name="name" autocomplete="off" class="layui-input"\n' +
-    '                               placeholder="请输入用例名称" lay-verify="required|commonLength" lay-vertype="tips">\n' +
+    '                               placeholder="请输入用例名称" lay-verify="required|commonLength" lay-vertype="tips" disabled>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '                <div class="layui-inline">\n' +
@@ -41,15 +41,15 @@ function getAssesssFormHtml() {
     '                    <div class="layui-input-block">\n' +
     '                        <input name="descript" autocomplete="off" class="layui-input"\n' +
     '                               lay-verify="descript" lay-vertype="tips"\n' +
-    '                               placeholder="请输入用例描述">\n' +
+    '                               placeholder="请输入用例描述" disabled>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '                <div class="layui-inline">\n' +
     '                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n' +
     '                    <input type="checkbox" checked="" name="fgActive" lay-skin="switch"\n' +
-    '                           value="1" lay-text="启用|停用">\n' +
+    '                           value="1" lay-text="启用|停用" disabled>\n' +
     '                    &nbsp;&nbsp;&nbsp;\n' +
-    '                    <input type="checkbox" name="fgGroup" value="1" title="等效评估">\n' +
+    '                    <input type="checkbox" name="fgGroup" value="1" title="等效评估" disabled>\n' +
     '                </div>\n' +
     '            </div>\n' +
     '\n' +
@@ -58,7 +58,7 @@ function getAssesssFormHtml() {
     '                    <label class="layui-form-label">组件类型<i class="iconfont icon-required"\n' +
     '                                                           style="color: #f03f2d"></i></label>\n' +
     '                    <div class="layui-input-block" style="width: 158px;">\n' +
-    '                        <select name="cdEvaAsse" autocomplete="off">\n' +
+    '                        <select name="cdEvaAsse" autocomplete="off" disabled>\n' +
     '                            <option value="">请选择组件类型</option>\n' +
                                     optionStr +
     '                        </select>\n' +
@@ -66,18 +66,14 @@ function getAssesssFormHtml() {
     '                </div>\n' +
     '                <div class="layui-inline">\n' +
     '                    <label class="layui-form-label">用例归属</label>\n' +
-    '                    <div class="layui-input-block" style="width: 158px;">\n' +
-    '                        <select name="fgPlat" id="fgPlat" lay-verify="required" lay-vertype="tips" disabled>\n' +
-    '                            <option value="">请选择</option>\n' +
-    '                            <option value="0">机构</option>\n' +
-    '                            <option value="1">平台</option>\n' +
-    '                        </select>\n' +
+    ' <div class="layui-input-block">' +
+        '                            <input name="orgName" autocomplete="off" class="layui-input" disabled>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '                <div class="layui-inline">\n' +
     '                    <label class="layui-form-label">使用次数</label>\n' +
     '                    <div class="layui-input-block">\n' +
-    '                        <input name="count" autocomplete="off" class="layui-input">\n' +
+    '                        <input name="count" autocomplete="off" class="layui-input" disabled>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '            </div>\n' +
@@ -86,7 +82,7 @@ function getAssesssFormHtml() {
     '                    <label class="layui-form-label">上限分值</label>\n' +
     '                    <div class="layui-input-block">\n' +
     '                        <input name="scoreUpper" autocomplete="off" class="layui-input"\n' +
-    '                               placeholder="请输入上限分值" lay-verify="required|commonLength" lay-vertype="tips">\n' +
+    '                               placeholder="请输入上限分值" lay-verify="required|commonLength" lay-vertype="tips" disabled>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '                <div class="layui-inline">\n' +
@@ -94,7 +90,7 @@ function getAssesssFormHtml() {
     '                    <div class="layui-input-block">\n' +
     '                        <input name="scoreLower" autocomplete="off" class="layui-input"\n' +
     '                               lay-verify="descript" lay-vertype="tips"\n' +
-    '                               placeholder="请输入下限分值">\n' +
+    '                               placeholder="请输入下限分值" disabled>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '                <div class="layui-inline">\n' +
@@ -102,7 +98,7 @@ function getAssesssFormHtml() {
     '                    <div class="layui-input-block">\n' +
     '                        <input name="scoreDefault" autocomplete="off" class="layui-input"\n' +
     '                               lay-verify="descript" lay-vertype="tips"\n' +
-    '                               placeholder="请输入默认分值">\n' +
+    '                               placeholder="请输入默认分值" disabled>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '            </div>\n' +

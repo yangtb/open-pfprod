@@ -31,6 +31,11 @@ public class FaqMedTag implements Serializable {
     private Long idMedicalrec;
 
     /**
+     * 所属病历名称
+     */
+    private String caseName;
+
+    /**
      * 标签id
      */
     private Long idTag;

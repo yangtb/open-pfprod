@@ -69,18 +69,16 @@
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">用例归属</label>
-                    <div class="layui-input-block" style="width: 158px;">
-                        <select name="fgPlat" id="fgPlat" lay-verify="required" lay-vertype="tips" disabled>
-                            <option value="">请选择</option>
-                            <option value="0">机构</option>
-                            <option value="1">平台</option>
-                        </select>
+                    <div class="layui-input-block">
+                        <div class="layui-input-block">
+                            <input name="orgName" autocomplete="off" class="layui-input" disabled>
+                        </div>
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">使用次数</label>
                     <div class="layui-input-block">
-                        <input name="count" autocomplete="off" class="layui-input">
+                        <input name="count" autocomplete="off" class="layui-input" disabled>
                     </div>
                 </div>
             </div>
@@ -89,7 +87,7 @@
                     <label class="layui-form-label">上限分值</label>
                     <div class="layui-input-block">
                         <input name="scoreUpper" autocomplete="off" class="layui-input"
-                               placeholder="请输入上限分值" lay-verify="required|commonLength" lay-vertype="tips">
+                               placeholder="请输入上限分值" lay-verify="required|commonLength" lay-vertype="tips" disabled>
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -97,7 +95,7 @@
                     <div class="layui-input-block">
                         <input name="scoreLower" autocomplete="off" class="layui-input"
                                lay-verify="descript" lay-vertype="tips"
-                               placeholder="请输入下限分值">
+                               placeholder="请输入下限分值" disabled>
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -105,7 +103,7 @@
                     <div class="layui-input-block">
                         <input name="scoreDefault" autocomplete="off" class="layui-input"
                                lay-verify="descript" lay-vertype="tips"
-                               placeholder="请输入默认分值">
+                               placeholder="请输入默认分值" disabled>
                     </div>
                 </div>
             </div>

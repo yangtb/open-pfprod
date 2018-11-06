@@ -31,6 +31,11 @@ public class FaqEvaTag implements Serializable {
     private Long idMedicalrec;
 
     /**
+     * 所属病历名称
+     */
+    private String caseName;
+
+    /**
      * 模板标签id
      */
     private Long idTag;

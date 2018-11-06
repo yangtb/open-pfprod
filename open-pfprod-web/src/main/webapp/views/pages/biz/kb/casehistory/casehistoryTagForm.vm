@@ -27,31 +27,30 @@
     <div class="layui-tab layui-tab-brief layui-col-xs12" lay-filter="tagTabFilter"
          style="margin: 0px">
         <ul class="layui-tab-title">
-            <li class="layui-this">临床病例</li>
-            <li>评估表</li>
+            <li class="layui-this" lay-id="med">临床病例</li>
+            <li lay-id="eva">评估表</li>
         </ul>
         <div class="layui-tab-content" style="margin-left: -10px;">
             <div class="layui-tab-item layui-show">
                 <div class="layadmin-shortcut">
-                    <div class="layui-col-xs1" >
+                    <div class="layui-col-xs1">
                         <ul class="layui-row">
                             #if(!$tags.isEmpty())
                                 #foreach($!element in $!tags)
-                                    #if($!element.fgShowMake == '1')
-                                        <li id="med-$!element.cdMedAsse"
-                                            class="layui-row-xs3 aside-link caseTag"
-                                            data-type="med"
-                                            data-index="$!{velocityCount}">
-                                            <a href="javascript:;">
-                                                <img style="display: inline-block; width: 40px; height: 40px;"
-                                                     src="$!element.path">
-                                                <cite style="padding-right: 2px;">
-                                                    $!element.name<span id="med-dot-bg$!element.idTag" class="layui-badge-dot
-                                                    #if($!element.idMedTag)layui-bg-green #else layui-bg-orange #end" style="float: right;"></span>
-                                                </cite>
-                                            </a>
-                                        </li>
-                                    #end
+                                    <li id="med-$!element.cdMedAsse"
+                                        class="layui-row-xs3 aside-link caseTag"
+                                        data-type="med"
+                                        data-index="$!{velocityCount}">
+                                        <a href="javascript:;">
+                                            <img style="display: inline-block; width: 40px; height: 40px;"
+                                                 src="$!element.path">
+                                            <cite style="padding-right: 2px;">
+                                                $!element.name<span id="med-dot-bg$!element.idTag" class="layui-badge-dot
+                                                    #if($!element.idMedTag)layui-bg-green #else layui-bg-orange #end"
+                                                                    style="float: right;"></span>
+                                            </cite>
+                                        </a>
+                                    </li>
                                 #end
                             #end
                         </ul>
@@ -78,9 +77,9 @@
                                             <i class="layui-icon layui-icon-add-1"></i>新增用例
                                         </a>
 
-                                        <button id="editCase" class="layui-btn" type="button">
+                                        #*<button id="editCase" class="layui-btn" type="button">
                                             <i class="iconfont icon-edit"></i> 编辑用例
-                                        </button>
+                                        </button>*#
                                     </div>
 
                                 </div>
@@ -101,21 +100,20 @@
                         <ul class="layui-row">
                             #if(!$tags.isEmpty())
                                 #foreach($!element in $!assessTags)
-                                    #if($!element.fgShowMake == '1')
-                                        <li id="tag-$!element.cdEvaAsse"
-                                            class="layui-row-xs3 aside-link assessTag"
-                                            data-type="eva"
-                                            data-index="$!{velocityCount}">
-                                            <a href="javascript:;">
-                                                <img style="display: inline-block; width: 40px; height: 40px;"
-                                                     src="$!element.path">
-                                                <cite style="padding-right: 2px;">
-                                                    $!element.name<span id="eva-dot-bg$!element.idTag" class="layui-badge-dot
-                                                    #if($!element.idEvaTag)layui-bg-green #else layui-bg-orange #end" style="float: right;"></span>
-                                                </cite>
-                                            </a>
-                                        </li>
-                                    #end
+                                    <li id="eva-$!element.cdEvaAsse"
+                                        class="layui-row-xs3 aside-link assessTag"
+                                        data-type="eva"
+                                        data-index="$!{velocityCount}">
+                                        <a href="javascript:;">
+                                            <img style="display: inline-block; width: 40px; height: 40px;"
+                                                 src="$!element.path">
+                                            <cite style="padding-right: 2px;">
+                                                $!element.name<span id="eva-dot-bg$!element.idTag" class="layui-badge-dot
+                                                    #if($!element.idEvaTag)layui-bg-green #else layui-bg-orange #end"
+                                                                    style="float: right;"></span>
+                                            </cite>
+                                        </a>
+                                    </li>
                                 #end
                             #end
                         </ul>
@@ -138,9 +136,9 @@
                                         <a lay-href="${basePath}/pf/p/kb/assess/page" class="layui-btn">
                                             <i class="layui-icon layui-icon-add-1"></i>新增用例
                                         </a>
-                                        <button id="editAssess" type="button" class="layui-btn">
+                                        #*<button id="editAssess" type="button" class="layui-btn">
                                             <i class="iconfont icon-edit"></i> 编辑用例
-                                        </button>
+                                        </button>*#
                                     </div>
 
                                 </div>
@@ -164,7 +162,7 @@
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
                 <button class="layui-btn" id="saveAs">
-                    <i class="iconfont icon-lingcunwei"></i> 重载
+                    <i class="iconfont icon-lingcunwei"></i> 病历重载
                 </button>
             </div>
         </div>

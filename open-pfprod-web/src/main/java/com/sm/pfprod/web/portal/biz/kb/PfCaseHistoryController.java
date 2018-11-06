@@ -40,7 +40,7 @@ public class PfCaseHistoryController extends BaseController {
     @Resource
     private PfClinicTemplateService pfClinicTemplateService;
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
     @RequestMapping("/page")
     public String cataloguePage(Model model) {
         model.addAttribute("caseHistoryLevel", enumUtil.getEnumList(SysDicGroupEnum.CASE_HISTORY_LEVEL.getCode()));
@@ -48,14 +48,14 @@ public class PfCaseHistoryController extends BaseController {
         return "pages/biz/kb/casehistory/caseHistoryTemplate";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/list")
     @ResponseBody
     public PageResult listTemplate(PfCaseHistoryDto dto) {
         return pfCaseHistoryService.listTemplate(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040', 'ROLE_SUPER')")
     @RequestMapping("/template/form")
     public String form(String formType, Model model) {
         model.addAttribute("formType", formType);
@@ -65,7 +65,7 @@ public class PfCaseHistoryController extends BaseController {
         return "pages/biz/kb/casehistory/caseHistoryTemplateForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040', 'ROLE_SUPER')")
     @RequestMapping("/form")
     public String tagForm(Long idMedicalrec, Long idDemo, Model model) {
         model.addAttribute("idMedicalrec", idMedicalrec);
@@ -75,7 +75,7 @@ public class PfCaseHistoryController extends BaseController {
         return "pages/biz/kb/casehistory/casehistoryTagForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040', 'ROLE_SUPER')")
     @RequestMapping("/tag/caseHistory/form")
     public String tagCaseHistoryForm(Long idMedicalrec, Long idDemo, Model model) {
         model.addAttribute("idMedicalrec", idMedicalrec);
@@ -84,7 +84,7 @@ public class PfCaseHistoryController extends BaseController {
         return "pages/biz/kb/casehistory/tagCaseHistoryForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040', 'ROLE_SUPER')")
     @RequestMapping("/tag/assess/form")
     public String tagSheetForm(Long idMedicalrec, Long idDemo, Model model) {
         model.addAttribute("idMedicalrec", idMedicalrec);
