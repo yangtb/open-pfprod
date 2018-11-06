@@ -51,6 +51,11 @@ public class BasMedAsse implements Serializable {
     private String script;
 
     /**
+     * 嵌入代码_病例执行
+     */
+    private String scriptExec;
+
+    /**
      * 0 未激活 1 已激活
      */
     private String fgActive;

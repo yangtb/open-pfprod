@@ -18,7 +18,8 @@ layui.config({
             {field: 'name', width: 150, title: '组件名称'},
             {field: 'descript', width: 150, title: '组件描述'},
             {field: 'sdMedAsse', width: 120, title: '嵌入类型', templet: '#sdMedAsseTpl'},
-            {field: 'script', minWidth: 160, title: '嵌入代码'},
+            {field: 'script', minWidth: 160, title: '病历组件嵌入代码'},
+            {field: 'scriptExec', minWidth: 160, title: '病历执行嵌入代码'},
             {field: 'gmtCreate', width: 170, sort: true, title: '创建时间'},
             {field: 'operator', width: 100, title: '创建人'},
             {fixed: 'right', width: 120, title: '操作', align: 'center', toolbar: '#partDefine'}

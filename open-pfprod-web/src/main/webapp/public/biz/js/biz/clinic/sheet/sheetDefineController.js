@@ -7,7 +7,7 @@ layui.config({
         , common = layui.common;
 
     //执行渲染
-        table.render({
+    table.render({
         elem: '#sheetDefineTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'sheetDefineTableId'
         , height: 'full-68' //容器高度
@@ -18,7 +18,8 @@ layui.config({
             {field: 'name', minWidth: 160, title: '评估表名称'},
             {field: 'descript', width: 150, title: '评估表描述'},
             {field: 'sdEvaAsse', width: 120, title: '嵌入类型', templet: '#sdEvaAsseTpl'},
-            {field: 'script', minWidth: 160, title: '嵌入代码'},
+            {field: 'script', minWidth: 160, title: '病历组件嵌入代码'},
+            {field: 'scriptExec', minWidth: 160, title: '病历执行嵌入代码'},
             {field: 'fgGroup', width: 90, title: '等效评估', align: 'center', templet: '#fgGroupIconTpl'},
             {field: 'scoreUpper', width: 90, title: '上限分值', align: 'right'},
             {field: 'scoreLower', width: 90, title: '下限分值', align: 'right'},
