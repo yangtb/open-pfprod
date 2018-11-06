@@ -300,5 +300,16 @@ public class PfKbAssessRestController {
                 pfKbAssessService.saveOrder(dto));
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping(value = "/common/del")
+    public ResultObject delCommonAssess(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getExtType()), "extType");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("delAssess", ResultObject.DATA_TYPE_OBJECT,
+                pfKbAssessService.delCommonAssess(dto));
+    }
+
 
 }

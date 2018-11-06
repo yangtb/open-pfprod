@@ -22,7 +22,7 @@ layui.config({
         , url: basePath + '/pf/p/kb/assess/referral/list'
         , where: {
             idEvaCase: idEvaCase,
-            cdEvaAsse : cdEvaAsse
+            cdEvaAsse: cdEvaAsse
         }
         , page: false
     });
@@ -44,7 +44,7 @@ layui.config({
         _postReload(bizData);
     });
 
-    var _postReload = function(bizData) {
+    var _postReload = function (bizData) {
         //layer.load(2);
         $.ajax({
             url: basePath + '/pf/r/kb/assess/referral/list',
@@ -209,7 +209,7 @@ layui.config({
         table.reload('kbTableId', {
             where: {
                 idEvaCase: idEvaCase,
-                cdEvaAsse : cdEvaAsse
+                cdEvaAsse: cdEvaAsse
             }
         });
     };
@@ -221,6 +221,27 @@ layui.config({
         });
         $('#save').click();
     });
+
+    //监听工具条
+    table.on('tool(kbTableFilter)', function (obj) {
+        var data = obj.data;
+        if (obj.event === 'del') {
+
+            layer.confirm('真的要删除评估项【' + data.itemName + '】么？', function (index) {
+                var url = basePath + '/pf/r/kb/assess/common/del';
+                var reqData = new Array();
+                reqData.push(obj.data.idEvaCaseItem);
+                var data = {};
+                data.list = reqData;
+                data.status = '1';
+                data.extType = 'referral';
+                common.commonPost(url, data, '删除');
+                obj.del();
+            });
+
+        }
+    });
+
 
 
     $('#saveAs').on('click', function () {

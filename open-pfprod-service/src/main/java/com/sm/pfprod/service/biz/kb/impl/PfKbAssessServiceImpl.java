@@ -312,4 +312,13 @@ public class PfKbAssessServiceImpl implements PfKbAssessService {
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
+
+    @Override
+    public boolean delCommonAssess(PfBachChangeStatusDto dto) {
+        CommonResult<Boolean> result = kbAssessClient.delCommonAssess(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
 }

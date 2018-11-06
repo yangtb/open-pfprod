@@ -38,4 +38,9 @@ public class PfBachChangeStatusDto implements Serializable {
      * 扩展ID，公用
      */
     private Long extId;
+
+    /**
+     * 扩展类型
+     */
+    private String extType;
 }

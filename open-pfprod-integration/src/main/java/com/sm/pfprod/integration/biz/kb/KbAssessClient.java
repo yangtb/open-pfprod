@@ -138,4 +138,9 @@ public class KbAssessClient {
     public CommonResult<Long> saveOrder(PfAssessOrderParam param) {
         return pfKbAssessFacade.saveOrder(param);
     }
+
+    public CommonResult<Boolean> delCommonAssess(PfBachChangeStatusParam param) {
+        return pfKbAssessFacade.delCommonAssess(param);
+    }
+
 }

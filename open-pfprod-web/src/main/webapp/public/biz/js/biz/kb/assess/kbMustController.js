@@ -277,6 +277,26 @@ layui.config({
         $('#save').click();
     });
 
+    //监听工具条
+    table.on('tool(kbTableFilter)', function (obj) {
+        var data = obj.data;
+        if (obj.event === 'del') {
+
+            layer.confirm('真的要删除评估项【' + data.itemName + '】么？', function (index) {
+                var url = basePath + '/pf/r/kb/assess/common/del';
+                var reqData = new Array();
+                reqData.push(obj.data.idEvaCaseItem);
+                var data = {};
+                data.list = reqData;
+                data.status = '1';
+                data.extType = 'must';
+                common.commonPost(url, data, '删除');
+                obj.del();
+            });
+
+        }
+    });
+
 
     $('#saveAs').on('click', function () {
         layer.tips('正在开发...', '#saveAs', {tips: 1});
