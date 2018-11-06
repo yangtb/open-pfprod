@@ -202,7 +202,7 @@ layui.config({
         });
         var data = {};
         data.list = reqData;
-        layer.confirm('确定删除清单' + messageTitle + '么？', {
+        layer.confirm('确定删除试题' + messageTitle + '么？', {
             title: '删除提示',
             resize: false,
             btn: ['确定', '取消'],
