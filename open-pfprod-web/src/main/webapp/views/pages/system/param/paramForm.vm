@@ -54,7 +54,7 @@
             <div class="layui-input-block">
                 <select name="bizModule" lay-verify="required">
                     #foreach($param in $!{modelList})
-                        <option value="$!param.dictCode">$!param.dictName}</option>
+                        <option value="$!param.dictCode">$!param.dictName</option>
                     #end
                 </select>
             </div>
