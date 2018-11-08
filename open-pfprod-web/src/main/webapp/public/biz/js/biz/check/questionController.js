@@ -282,16 +282,15 @@ layui.config({
         , cols: [[
             {checkbox: true, fixed: true},
             {field: 'fgActive', width: 100, title: '状态', templet: '#fgActiveTpl'},
-            {field: 'cdCheck', width: 120, title: '检查方式', templet: '#cdCheckTpl'},
+            {field: 'idBodyCaText', width: 120, title: '检查方式'},
             {field: 'sdBody', width: 120, title: '所属体位', templet: '#sdBodyTpl'},
             {field: 'desBody', width: 140, title: '检查部位描述'},
             {field: 'gmtCreate', width: 170, sort: true, title: '创建时间'},
             {field: 'creator', width: 100, title: '创建人'},
             {fixed: 'right', width: 180, title: '操作', align: 'center', toolbar: '#question'}
         ]] //设置表头
-        //, url: basePath + '/pf/p/check/question/list'
+        , url: basePath + '/pf/p/check/question/list'
         , limit: 15
-        //, even: true
         , limits: [15, 30, 100]
         , page: true
     });

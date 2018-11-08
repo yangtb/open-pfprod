@@ -25,19 +25,6 @@
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">检查方式<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
-            <div class="layui-input-block">
-                <select name="cdCheck" autocomplete="off" lay-verify="required" lay-vertype="tips"
-                        lay-vertype="tips" placeholder="检查方式">
-                    <option value="">请选择</option>
-                    #foreach($param in ${examWays})
-                        <option value="$!param.dictCode">${param.dictName}</option>
-                    #end
-                </select>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
             <label class="layui-form-label">所属体位<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <select name="sdBody" autocomplete="off" lay-verify="required" lay-vertype="tips"
@@ -55,6 +42,17 @@
             <div class="layui-input-block">
                 <textarea name="desBody" lay-verify="required|desBody" lay-vertype="tips" class="layui-textarea"
                           placeholder="检查部位描述"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">检查方式<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <div class="layui-input-block">
+                <div hidden>
+                    <input name="cdCheck" hidden>
+                </div>
+                <input type="text" name="idBodyCaText" autocomplete="off" class="layui-input layui-disabled"
+                       placeholder="检查方式" disabled>
             </div>
         </div>
 
