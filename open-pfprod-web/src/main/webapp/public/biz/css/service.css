@@ -1,0 +1,212 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body, html {
+  color: #000000;
+  font-size: 16px;
+}
+ul, li {
+  list-style: none;
+}
+.service-wrapper {
+  width: 100%;
+  height: 780px;
+  background: #ffffff;
+  overflow: scroll;
+}
+.service-box {
+  padding-bottom: 20px;
+}
+.progress-box {
+  width: 100%;
+  height: 30px;
+}
+.item-box {
+  width: 400px;
+  height: 30px;
+  line-height: 30px;
+  float: right;
+  margin-right: 100px;
+}
+.middle {
+  color: green;
+}
+.end {
+  color: red;
+}
+.progress-item {
+  width: 100px;
+  text-align: center;
+  display: inline-block;
+}
+.other-side {
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.official-details {
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top: 20px;
+  height: 40px;
+  border: 1px dashed #5FB878;
+  position: relative;
+  border-radius: 8px;
+}
+.details-text {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+}
+.official-text {
+  width: 100%;
+  line-height: 40px;
+  text-indent: 10px;
+}
+.doctor-details {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 15px;
+}
+.details-select {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 10px;
+}
+.doctor-avatar {
+  margin-left: 5px;
+}
+.doctor-response {
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 20px;
+  position: relative;
+  background: #f5f6f7;
+  border-radius: 5px;
+  text-indent: 15px;
+}
+.doctor-response::before {
+  content: '';
+  width: 0px;
+  height: 0px;
+  border-top: 10px transparent solid;
+  border-left: 11px transparent solid;
+  border-right: 13px #f5f6f7 solid;
+  border-bottom: 10px transparent solid;
+  position: absolute;
+  right: 100%;
+  top: 5px;
+}
+
+/* 患者样式 */
+.patient {
+  height: 100px;
+  margin-bottom: 30px;
+  position: relative;
+}
+.patient-avatar {
+  margin-right: 15px;
+}
+.patient-details {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 40px;
+  line-height: 40px;
+  margin-right: 20px;
+  text-indent: 15px;
+  border-radius: 5px;
+  position: relative;
+}
+.patient-response {
+  background: #19e683;
+  height: 40px;
+  line-height: 40px;
+  margin-right: 20px;
+  text-align: left;
+  text-indent: 10px;
+  border-radius: 5px;
+  padding: 0 20px;
+  position: relative;
+}
+.patient-response::after {
+  display: inline-block;
+  content: '';
+  width: 0px;
+  height: 0px;
+  border-top: 10px solid transparent;
+  border-left: 11px solid  #19e683;
+  border-right: 13px solid  transparent;
+  border-bottom: 10px solid transparent;
+  position: absolute;
+  top: 5px;
+  right: -23px;
+}
+.patient-img-response {
+  height: 250px;
+  margin-bottom: 95px;;
+  position: relative;
+}
+.patient-img-avatar {
+  position: absolute;
+  right: 15px;
+  top: 0;
+}
+.response-img {
+  margin-right: 70px;
+}
+.img-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.voice-box {
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  margin-right: 20px;
+  background: #19e683;
+  position: relative;
+  border-radius: 5px;
+}
+.voice-box::after{
+  display: inline-block;
+  content: '';
+  width: 0px;
+  height: 0px;
+  border-top: 10px solid transparent;
+  border-left: 11px solid  #19e683;
+  border-right: 13px solid  transparent;
+  border-bottom: 10px solid transparent;
+  position: absolute;
+  left: 100%;
+  top: 5px;
+}
+.time {
+  margin-right: 5px;
+}
+.text {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  position: absolute;
+  top: -35px;
+  right: 100px;
+}
+.sound-icon {
+  width: 32px;
+  height: 32px;
+  background: url(../images/voice.png) no-repeat center / cover;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  outline: none;
+}

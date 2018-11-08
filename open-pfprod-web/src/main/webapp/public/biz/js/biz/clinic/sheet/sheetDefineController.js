@@ -19,7 +19,7 @@ layui.config({
             {field: 'descript', width: 150, title: '评估表描述'},
             {field: 'sdEvaAsse', width: 120, title: '嵌入类型', templet: '#sdEvaAsseTpl'},
             {field: 'script', minWidth: 160, title: '病历组件嵌入代码'},
-            {field: 'scriptExec', minWidth: 160, title: '病历执行嵌入代码'},
+            /*{field: 'scriptExec', minWidth: 160, title: '病历执行嵌入代码'},*/
             {field: 'fgGroup', width: 90, title: '等效评估', align: 'center', templet: '#fgGroupIconTpl'},
             {field: 'scoreUpper', width: 90, title: '上限分值', align: 'right'},
             {field: 'scoreLower', width: 90, title: '下限分值', align: 'right'},
@@ -80,9 +80,9 @@ layui.config({
 
     var _addOrEdit = function (formType, currentEditData) {
         if (formType == 'add') {
-            common.open('新增评估表组件', basePath + '/pf/p/clinic/sheet/form?formType=' + formType, 670, 430);
+            common.open('新增评估表组件', basePath + '/pf/p/clinic/sheet/form?formType=' + formType, 670, 370);
         } else {
-            common.open('编辑评估表组件', basePath + '/pf/p/clinic/sheet/form?formType=' + formType, 670, 430, _successFunction(currentEditData));
+            common.open('编辑评估表组件', basePath + '/pf/p/clinic/sheet/form?formType=' + formType, 670, 370, _successFunction(currentEditData));
         }
     };
 

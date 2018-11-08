@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>模拟候诊</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" href="${contextPath}/public/biz/css/exam.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '${basePath}';
+        var idMedCase = '1';
+    </script>
+
+</head>
+
+<body>
+<div class="index-wrapper">
+    <!-- 头部 -->
+    <header>
+        <div class="header-left">
+            <a href="javascript:;;" class="start-btn">
+                <span class="start-text">开始</span>
+                <img class="icon" src="${contextPath}/public/biz/img/exam/start.png" alt=""
+                     style="width: 105px; height: 100px;">
+            </a>
+            <div class="user-details">
+                <img src="${contextPath}/public/biz/img/exam/degree-1.png" alt="" class="details-icon"
+                     style="width: 105px; height: 100px;">
+                <div class="msg">
+                    <p class="users">
+                        <span class="users-item">韩梅梅</span>
+                        <span class="users-item">女</span>
+                        <span class="users-item">上海复旦医学院</span>
+                        <span class="users-item">三年二班</span>
+                        <span class="users-item no-border">学生</span>
+                    </p>
+                    <p class="msg-mail">
+                    #*<img src="${contextPath}/public/biz/img/exam/email.png" alt="" style="width: 32px; height: 32px;">*#
+                        <i class="iconfont icon-youjian"
+                           style="color: #1E9FFF;"></i>&nbsp;<span>Hanmeimei@google.com</span>
+                    </p>
+                    <p class="msg-tel">
+                    #*<img src="${contextPath}/public/biz/img/exam/tel.png" alt="" style="width: 32px; height: 32px;">*#
+                        <i class="iconfont icon-shouji1" style="color: #01AAED;"></i>&nbsp;<span>13311668898</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="right-main">
+                <img src="${contextPath}/public/biz/img/exam/paper1.png" alt="" class="details-icon"
+                     style="width: 122px; height: 100px;">
+                <div class="paper-details">
+                    <p class="details-header">消化科黄金级试卷-左腹疼痛</p>
+                    <p class="details-text">
+                        <span class="details-head">出题机构：复旦儿科医学院</span>
+                        <span class="time">开始时间：2018-10-27 13:15:00</span>
+                    </p>
+                    <p class="details-text">
+                        <span class="details-head">出题人：达尔文</span>
+                        <span class="time">完成时间：2018-10-27 14:22:00</span>
+                    </p>
+                </div>
+            </div>
+            <a href="javascript:;;" class="start-btn end-btn">
+                <span class="start-text">交卷</span>
+                <img class="end-icon" src="${contextPath}/public/biz/img/exam/end.png" alt=""
+                     style="width: 105px; height: 100px;">
+            </a>
+        </div>
+    </header>
+    <!-- /头部 -->
+    <!-- 主体 -->
+    <section>
+        <!-- 左边内容 -->
+        <aside>
+            <ul>
+                #if(!$tags.isEmpty())
+                    #foreach($!element in $!tags)
+                        <li class="aside-item">
+                            <a href="javascript:;" class="aside-link">
+                                <img class="aside-icon" style="width: 50px; height: 50px;" src="$!element.path">
+                                <span class="item-text">$!element.name</span>
+                            </a>
+                        <li>
+                    #end
+                #end
+            </ul>
+        </aside>
+        <!-- /左边内容 -->
+        <!-- 中间内容 -->
+        <div class="main">
+            <div>
+                <iframe id="test" src="${contextPath}/pf/p/waiting/room/test/pat/page" frameborder="0" scrolling="no"
+                        class='layui-col-xs12' style="height: 800px;"></iframe>
+            </div>
+        </div>
+        <!-- /中间内容 -->
+    </section>
+    <!-- /主体 -->
+</div>
+
+<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $("ul li").click(function () {
+            $(this).addClass("active").siblings().removeClass("active");
+        })
+    })
+
+    FrameWH();
+
+    function FrameWH() {
+        var ifm = document.getElementById("test");
+        ifm.height = document.documentElement.clientHeight;
+    }
+
+    $(window).resize(function () {
+        FrameWH();
+    });
+</script>
+</body>
+
+
+</html>

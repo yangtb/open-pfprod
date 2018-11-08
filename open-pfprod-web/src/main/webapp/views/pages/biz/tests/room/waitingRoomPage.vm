@@ -28,6 +28,9 @@
             padding: 10px 15px;
             border-width: 0 0 1px;
         }
+        .layui-table-tool-temp {
+            /* padding-right: 120px; */
+        }
     </style>
 
 </head>

@@ -1,4 +1,3 @@
-
 layui.config({
     base: basePath + '/public/layui/build/js/'
 }).use(['form', 'layer', 'jquery', 'common'], function () {
@@ -12,14 +11,14 @@ layui.config({
                 return '长度不能超过64个字';
             }
         },
-        descript : function (value) {
+        descript: function (value) {
             if (value && value.length > 255) {
                 return '长度不能超过255个字';
             }
         },
         // 页签嵌入，则嵌入代码必填
-        script : function (value) {
-            if ($('#sdMedAsse').val() == '21' && !value) {
+        script: function (value) {
+            if ($('#sdMedAsse').val() == '21' && !$('#script').val() && !$('#scriptExec').val()) {
                 return '请输入嵌入代码';
             }
         }
