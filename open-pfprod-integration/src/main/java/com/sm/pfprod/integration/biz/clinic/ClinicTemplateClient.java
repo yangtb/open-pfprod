@@ -82,8 +82,8 @@ public class ClinicTemplateClient {
         return pfClinicTemplateFacade.listTagByIdDemo(idDemo);
     }
 
-    public CommonResult<List<PfCommonZtreeResult>> listDimensionTree() {
-        return pfClinicTemplateFacade.listDimensionTree();
+    public CommonResult<List<PfCommonZtreeResult>> listDimensionTree(Long idDemo) {
+        return pfClinicTemplateFacade.listDimensionTree(idDemo);
     }
 
     public CommonResult<Boolean> delDimensionTag(PfBachChangeStatusParam param) {

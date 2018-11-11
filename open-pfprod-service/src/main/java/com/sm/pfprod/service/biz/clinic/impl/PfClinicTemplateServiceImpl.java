@@ -173,8 +173,8 @@ public class PfClinicTemplateServiceImpl implements PfClinicTemplateService {
     }
 
     @Override
-    public List<PfCommonZtreeVo> listDimensionTree() {
-        CommonResult<List<PfCommonZtreeResult>> result = clinicTemplateClient.listDimensionTree();
+    public List<PfCommonZtreeVo> listDimensionTree(Long idDemo) {
+        CommonResult<List<PfCommonZtreeResult>> result = clinicTemplateClient.listDimensionTree(idDemo);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convertList(result.getContent(), PfCommonZtreeVo.class);
         }

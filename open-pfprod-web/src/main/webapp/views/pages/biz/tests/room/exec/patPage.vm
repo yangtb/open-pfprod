@@ -7,7 +7,6 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="${contextPath}/public/biz/css/imageMagnify.css">
 
     <script>
@@ -35,6 +34,14 @@
             border-right: none;
             padding-right: 0;
         }
+
+        .img-my {
+            max-width: 460px;
+            max-height: 680px;
+            min-height: 460px;
+            vertical-align: middle;
+        }
+
     </style>
 
 </head>
@@ -44,45 +51,42 @@
 <div class="msg">
     <p>
         患者信息：
-        <span class="users-item">韩梅梅</span>
-        <span class="users-item">女</span>
-        <span class="users-item no-border">28岁</span>
+        <span class="users-item">$!{patInfo.name}</span>
+        <span class="users-item">$!{patInfo.sexStr}</span>
+        <span class="users-item no-border">$!{patInfo.age}岁</span>
     </p>
 </div>
 <p class="msg-mail" style="margin-left: 10px; font-size: 18px;">
     患者主诉：
-    <span style=" text-decoration: underline">
-    患者，女性，28岁。因车祸撞伤腹部，患者主诉疼痛难忍，伴恶心、呕吐，X线腹透可见膈下游离气体，拟诊断为胃肠道穿孔。
-</span>
+    <span style="text-decoration: underline">
+        $!{patInfo.complaint}
+    </span>
 </p>
 
 <div class="imgdet wrap" style="margin-left: 10px;">
     <div class="imglist">
         <ul>
             <li class="active">
-                <img src="${contextPath}/public/biz/img/shu.jpg" alt="">
+                <img src="$!{patInfo.frontPhotoUrl}" alt="">
             </li>
             <li>
-                <img src="http://hsknowledgebase.hsyuntai.com/BD51ACFB1CAB46D9A54F0D89122217ED.jpg" alt="">
+                <img src="$!{patInfo.backPhotoUrl}" alt="">
             </li>
         </ul>
     </div>
     <div class="imgpart">
         <div class="pic">
-            <img src="${contextPath}/public/biz/img/shu.jpg" alt="">
+            <img src="$!{patInfo.frontPhotoUrl}" class="img-my" alt="">
             <div class="magnify"></div>
         </div>
 
         <div class="bigpic">
-            <img src="${contextPath}/public/biz/img/shu.jpg" alt="">
+            <img src="$!{patInfo.frontPhotoUrl}" alt="">
         </div>
     </div>
 </div>
 
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
-<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
-<script src="${contextPath}/public/biz/js/biz/tests/room/exec/patInfoController.js"></script>
-
 <script src="${contextPath}/public/biz/js/common/imagemagnify.js" type="text/javascript"></script>
 </body>
 

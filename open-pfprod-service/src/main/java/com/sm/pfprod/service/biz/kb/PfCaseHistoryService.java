@@ -103,16 +103,18 @@ public interface PfCaseHistoryService {
      * 所有病历标签
      *
      * @param idDemo
+     * @param idMedicalrec
      * @return
      */
-    List<PfCaseHistoryTagVo> listAllCaseHistoryTag(Long idDemo);
+    List<PfCaseHistoryTagVo> listAllCaseHistoryTag(Long idDemo, Long idMedicalrec);
 
     /**
      * 所有评估表
      *
      * @param idDemo
+     * @param idMedicalrec
      * @return
      */
-    List<PfAssessTagVo> listAllAssessTag(Long idDemo);
+    List<PfAssessTagVo> listAllAssessTag(Long idDemo, Long idMedicalrec);
 
 }

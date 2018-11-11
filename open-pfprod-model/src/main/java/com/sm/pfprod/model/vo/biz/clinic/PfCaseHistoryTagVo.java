@@ -18,7 +18,14 @@ public class PfCaseHistoryTagVo extends FaqMedTag implements Serializable {
     private String name;
     private String cdMedAsse;
     private String path;
+    /**
+     * 病历组件嵌入代码
+     */
     private String script;
+    /**
+     * 嵌入代码_病例执行
+     */
+    private String scriptExec;
     /**
      * 制作病例时是否显示
      */

@@ -88,7 +88,7 @@
 
                         </form>
                         <iframe id="caseHistoryTag" class='layui-col-xs12' frameborder="0"
-                                style="margin: 0px 0px 0px -10px ;"
+                                style="margin: 0px 0px 0px -10px; height: 550px;"
                                 scrolling="no">
                         </iframe>
                     </div>
@@ -146,8 +146,8 @@
                         </form>
 
                         <iframe name="assessTag" width="100%" frameborder=0 height="100%"
-                                style="margin: 0px 0px 0px -10px;"
-                                id="assessTag" onload="this.height=assessTag.document.body.scrollHeight+20"></iframe>
+                                style="margin: 0px 0px 0px -10px; height: 650px;"
+                                id="assessTag"></iframe>
 
                     </div>
                 </div>

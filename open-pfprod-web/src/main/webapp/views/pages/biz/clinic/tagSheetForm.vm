@@ -73,7 +73,7 @@
                 </div>
                 <div class="layui-input-block">
                     <input type="checkbox" name="fgShowMake" value="1" title="制作病历时是否显示">
-                    <input type="checkbox" name="fgShowExec" value="1" title="执行时是否显示">
+                    #*<input type="checkbox" name="fgShowExec" value="1" title="执行时是否显示">*#
                 </div>
             </div>
 

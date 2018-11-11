@@ -61,11 +61,15 @@ layui.config({
     var zTree;
     $(document).ready(function () {
         layer.load(2);
+        var bizData = {
+            idDemo: idDemo
+        }
         $.ajax({
             url: basePath + '/pf/r/clinic/template/tag/dimension/classify/tree',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",
+            data: JSON.stringify(bizData),
             success: function (data) {
                 layer.closeAll('loading');
                 if (data.code != 0) {

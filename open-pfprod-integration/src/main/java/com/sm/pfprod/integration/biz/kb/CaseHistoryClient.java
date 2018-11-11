@@ -64,12 +64,12 @@ public class CaseHistoryClient {
         return pfCaseHistoryFacade.saveEvaTag(param);
     }
 
-    public CommonResult<List<PfCaseHistoryTagResult>> listAllCaseHistoryTag(Long idDemo) {
-        return pfCaseHistoryFacade.listAllCaseHistoryTag(idDemo);
+    public CommonResult<List<PfCaseHistoryTagResult>> listAllCaseHistoryTag(Long idDemo, Long idMedicalrec) {
+        return pfCaseHistoryFacade.listAllCaseHistoryTag(idDemo, idMedicalrec);
     }
 
-    public CommonResult<List<PfAssessTagResult>> listAllAssessTag(Long idDemo) {
-        return pfCaseHistoryFacade.listAllAssessTag(idDemo);
+    public CommonResult<List<PfAssessTagResult>> listAllAssessTag(Long idDemo, Long idMedicalrec) {
+        return pfCaseHistoryFacade.listAllAssessTag(idDemo, idMedicalrec);
     }
 
 }

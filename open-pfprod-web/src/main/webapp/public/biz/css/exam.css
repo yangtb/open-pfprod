@@ -116,8 +116,9 @@ header {
 .time {
   display: inline-block;
   width: 190px;
-  text-align: right;
+  text-align: left;
   margin-left: 10px;
+  padding-right: 5px;
 }
 .details-head {
   width: 160px;

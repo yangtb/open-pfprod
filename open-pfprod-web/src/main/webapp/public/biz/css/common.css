@@ -82,3 +82,7 @@
 .aside-link:hover {
     background: #9dcdf6;
 }
+
+.display-my{
+    display: none;
+}

@@ -146,8 +146,10 @@ layui.define(['layer'], function (exports) {
             return index;
         },
 
-        commonPost: function (url, bizData, msg, selectId, callback) {
-            layer.load(2);
+        commonPost: function (url, bizData, msg, selectId, callback, loadFlag) {
+            if (loadFlag == true) {
+                layer.load(2);
+            }
             $.ajax({
                 url: url,
                 type: 'post',

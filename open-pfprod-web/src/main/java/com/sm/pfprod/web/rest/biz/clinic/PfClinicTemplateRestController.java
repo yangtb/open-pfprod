@@ -230,9 +230,11 @@ public class PfClinicTemplateRestController {
     @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
     @RequestMapping(value = "/template/tag/dimension/classify/tree", method = RequestMethod.POST)
     @ResponseBody
-    public ResultObject listDimensionTree() {
+    public ResultObject listDimensionTree(@RequestBody PfClinicDimensionDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdDemo() != null, "idDemo");
         return ResultObject.createSuccess("listDimensionTree", ResultObject.DATA_TYPE_LIST,
-                pfClinicTemplateService.listDimensionTree());
+                pfClinicTemplateService.listDimensionTree(dto.getIdDemo()));
     }
 
     /**

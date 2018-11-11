@@ -1,10 +1,10 @@
 package com.sm.pfprod.web.util;
 
-import com.alibaba.fastjson.JSON;
 import com.sm.pfprod.model.entity.SysDictionary;
 import com.sm.pfprod.model.vo.dic.PfDicCache;
 import com.sm.pfprod.model.vo.dic.PfEnum;
 import com.sm.pfprod.service.system.dic.PfDicService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -26,6 +26,28 @@ public class EnumUtil {
     private PfDicService pfDicService;
 
     public static Map<String, PfEnum> allEnums = new HashMap<>();
+
+    /**
+     * 获取指定枚举类型 指定枚举值的显示值
+     *
+     * @param groupCode 枚举类型
+     * @param dictCode  枚举值
+     * @return
+     */
+    public String getEnumTxt(String groupCode, String dictCode) {
+        if (allEnums.isEmpty()) {
+            init();
+        }
+        List<PfDicCache> dicCaches = allEnums.get(groupCode).getDicCacheList();
+        String txt = null;
+        for (PfDicCache pfDicCache : dicCaches) {
+            if (pfDicCache.getDictCode().equals(dictCode)) {
+                txt = pfDicCache.getDictName();
+                break;
+            }
+        }
+        return StringUtils.isBlank(txt) ? dictCode : txt;
+    }
 
     /**
      * 获得指定类型的枚举

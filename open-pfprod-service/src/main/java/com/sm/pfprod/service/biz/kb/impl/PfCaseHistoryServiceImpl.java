@@ -128,8 +128,8 @@ public class PfCaseHistoryServiceImpl implements PfCaseHistoryService {
     }
 
     @Override
-    public List<PfCaseHistoryTagVo> listAllCaseHistoryTag(Long idDemo) {
-        CommonResult<List<PfCaseHistoryTagResult>> result = caseHistoryClient.listAllCaseHistoryTag(idDemo);
+    public List<PfCaseHistoryTagVo> listAllCaseHistoryTag(Long idDemo, Long idMedicalrec) {
+        CommonResult<List<PfCaseHistoryTagResult>> result = caseHistoryClient.listAllCaseHistoryTag(idDemo, idMedicalrec);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convertList(result.getContent(), PfCaseHistoryTagVo.class);
         }
@@ -137,8 +137,8 @@ public class PfCaseHistoryServiceImpl implements PfCaseHistoryService {
     }
 
     @Override
-    public List<PfAssessTagVo> listAllAssessTag(Long idDemo) {
-        CommonResult<List<PfAssessTagResult>> result = caseHistoryClient.listAllAssessTag(idDemo);
+    public List<PfAssessTagVo> listAllAssessTag(Long idDemo, Long idMedicalrec) {
+        CommonResult<List<PfAssessTagResult>> result = caseHistoryClient.listAllAssessTag(idDemo, idMedicalrec);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convertList(result.getContent(), PfAssessTagVo.class);
         }

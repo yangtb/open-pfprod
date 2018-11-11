@@ -19,4 +19,9 @@ public class PfClinicDimensionDto implements Serializable {
      */
     private Long idDimemsion;
 
+    /**
+     * 模板id
+     */
+    private Long idDemo;
+
 }

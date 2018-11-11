@@ -8,7 +8,7 @@ layui.config({
         , element = layui.element
         , common = layui.common;
 
-    FrameWH();
+    /*FrameWH();
 
     function FrameWH() {
         var ifm = document.getElementById("caseHistoryTag");
@@ -17,7 +17,7 @@ layui.config({
 
     $(window).resize(function () {
         FrameWH();
-    });
+    });*/
 
     var tableSelect = layui.tableSelect;
     var caseTagList = eval('(' + tags + ')');

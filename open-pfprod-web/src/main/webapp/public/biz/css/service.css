@@ -27,7 +27,7 @@ ul, li {
   height: 30px;
   line-height: 30px;
   float: right;
-  margin-right: 100px;
+  /*margin-right: 100px;*/
 }
 .middle {
   color: green;
@@ -150,6 +150,7 @@ ul, li {
 }
 .patient-img-response {
   height: 250px;
+  margin-top: 15px;
   margin-bottom: 95px;;
   position: relative;
 }
@@ -200,11 +201,12 @@ ul, li {
   right: 100px;
 }
 .sound-icon {
-  width: 32px;
+  width: 145px;
   height: 32px;
-  background: url(../images/voice.png) no-repeat center / cover;
+  background: no-repeat center / cover;
   position: absolute;
-  right: 20px;
+  text-align: right;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   border: none;

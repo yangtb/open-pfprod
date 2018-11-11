@@ -65,8 +65,8 @@
     <div class="layui-col-xs5">
         <div class="layui-row">
             <div class="layui-col-xs6">
-                <div class="layui-form layui-form-item">
-                    <div class="layui-input-inline" style="text-align: center;">
+                <div class="layui-form" style="text-align: center">
+                    <div class="layui-input-inline">
                         <input type="radio" name="photo" value="1" title="正面" checked="">
                         <input type="radio" name="photo" value="2" title="背面">
                     </div>

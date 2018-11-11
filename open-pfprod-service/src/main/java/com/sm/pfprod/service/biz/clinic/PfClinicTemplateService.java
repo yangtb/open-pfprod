@@ -147,9 +147,10 @@ public interface PfClinicTemplateService {
     /**
      * 评估维度树
      *
+     * @param idDemo
      * @return
      */
-    List<PfCommonZtreeVo> listDimensionTree();
+    List<PfCommonZtreeVo> listDimensionTree(Long idDemo);
 
     /**
      * 删除评估维度
