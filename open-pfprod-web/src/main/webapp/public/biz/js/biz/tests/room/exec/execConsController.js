@@ -51,6 +51,9 @@ layui.config({
         return false;
     });
 
+    // 显示专家解读
+    var showExpertFlag = false;
+
     function queryQa() {
         var bizData = {
             idTestexecResult: idTestexecResult
@@ -67,7 +70,7 @@ layui.config({
                     common.errorMsg(data.msg);
                     return false;
                 } else {
-                    qaHtml(data.data, false);
+                    qaHtml(data.data, showExpertFlag);
                     return true;
                 }
             },
@@ -118,7 +121,7 @@ layui.config({
             html += '<li class="patient-img-response" style="height: 190px;">\n' +
                 '       <p class="text" style="right: 70px;">' + data.desAnswer + '</p>\n' +
                 '       <p class="img-box">\n' +
-                '           <img class="response-img" id="patientImg' + data.idAnswer + '"  src="' + data.path + '" alt="" style="width: 400px; height: 250px;"' +
+                '           <img class="response-img" id="patientImg' + data.idAnswer + '"  src="' + data.path + '" alt="" style="width: 400px; height: 250px;cursor: pointer;"' +
                 '               onclick="openMedia(' + data.sdType + ',' + data.idAnswer + ')">\n' +
                 '           <img class="patient-img-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
                 '       </p>\n' +
@@ -130,7 +133,7 @@ layui.config({
                 '           <span class="time">12"</span>\n' +
                 '           <p class="voice-box">\n' +
                 '               <audio class="patient-voice" id="patientVoice' + data.idAnswer + '" src="' + data.path + '"></audio>\n' +
-                '               <button class="sound-icon" onclick="control(' + data.idAnswer + ')"><i class="iconfont icon-shengyin"></i></button>\n' +
+                '               <button class="sound-icon" style="cursor: pointer;" onclick="control(' + data.idAnswer + ')"><i class="iconfont icon-shengyin"></i></button>\n' +
                 '           </p>\n' +
                 '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
                 '       </div>\n' +
@@ -142,7 +145,7 @@ layui.config({
                 '           <span class="time">12"</span>\n' +
                 '           <p class="voice-box">\n' +
                 '               <audio class="patient-voice" id="patientVideo' + data.idAnswer + '" src="' + data.path + '"></audio>\n' +
-                '               <button class="sound-icon" onclick="openMedia(' + data.sdType + ',' + data.idAnswer + ')"><i class="iconfont icon-11"></i></button>\n' +
+                '               <button class="sound-icon" style="cursor: pointer;" onclick="openMedia(' + data.sdType + ',' + data.idAnswer + ')"><i class="iconfont icon-11"></i></button>\n' +
                 '           </p>\n' +
                 '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
                 '       </div>\n' +
@@ -179,7 +182,7 @@ layui.config({
             html += '<li class="patient-img-response">\n' +
                 '       <p class="text" style="right: 70px;">' + data.desAnswer + '</p>\n' +
                 '       <p class="img-box">\n' +
-                '           <img class="response-img" id="patientImg' + data.idAnswer + '"  src="' + data.path + '" alt="" style="width: 400px; height: 250px;"' +
+                '           <img class="response-img" id="patientImg' + data.idAnswer + '"  src="' + data.path + '" alt="" style="width: 400px; height: 250px;cursor: pointer;"' +
                 '               onclick="openMedia(' + data.sdType + ',' + data.idAnswer + ')">\n' +
                 '           <img class="patient-img-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
                 '       </p>\n' +
@@ -195,7 +198,7 @@ layui.config({
                 '           <span class="time">12"</span>\n' +
                 '           <p class="voice-box">\n' +
                 '               <audio class="patient-voice" id="patientVoice' + data.idAnswer + '" src="' + data.path + '"></audio>\n' +
-                '               <button class="sound-icon" onclick="control(' + data.idAnswer + ')"><i class="iconfont icon-shengyin"></i></button>\n' +
+                '               <button class="sound-icon" style="cursor: pointer;" onclick="control(' + data.idAnswer + ')"><i class="iconfont icon-shengyin"></i></button>\n' +
                 '           </p>\n' +
                 '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
                 '       </div>\n' +
@@ -211,7 +214,7 @@ layui.config({
                 '           <span class="time">12"</span>\n' +
                 '           <p class="voice-box">\n' +
                 '               <audio class="patient-voice" id="patientVideo' + data.idAnswer + '" src="' + data.path + '"></audio>\n' +
-                '               <button class="sound-icon" onclick="openMedia(' + data.sdType + ',' + data.idAnswer + ')"><i class="iconfont icon-11"></i></button>\n' +
+                '               <button class="sound-icon" style="cursor: pointer;" onclick="openMedia(' + data.sdType + ',' + data.idAnswer + ')"><i class="iconfont icon-11"></i></button>\n' +
                 '           </p>\n' +
                 '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
                 '       </div>\n' +
@@ -226,4 +229,68 @@ layui.config({
     }
 
 });
+
+
+
+
+function control(idAnswer) {
+    var audio = document.querySelector('#patientVoice' + idAnswer);
+    if (audio !== null) {
+        //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+        if (audio.paused) {
+            audio.play();//audio.play();// 这个就是播放
+        } else {
+            audio.pause();// 这个就是暂停
+        }
+    }
+}
+
+/**
+ * 打开多媒体
+ */
+function openMedia(sdType, idAnswer) {
+    layui.use('common', function () {
+        if (sdType == '1') {
+            var path = $('#patientImg' + idAnswer).attr('src');
+            layui.common.openSinglePhoto(path);
+        }
+        else if (sdType == '3') {
+            var path = $('#patientVideo' + idAnswer).attr('src');
+            layui.common.openTopVideo(basePath + '/video/form?path=' + path, 890, 504);
+        }
+    });
+}
+
+function checkQa(obj) {
+    var reqData = new Array();
+    reqData.push(obj.value);
+
+    var data = {};
+    data.list = reqData;
+
+    data.status = obj.checked ? '1' : '0';
+    $.ajax({
+        url: basePath + '/pf/r/waiting/room/cons/qa/status',
+        type: 'post',
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (data) {
+            layer.closeAll('loading');
+            if (data.code != 0) {
+                layui.use('common', function () {
+                    layui.common.errorMsg(data.msg);
+                });
+                return false;
+            }
+        },
+        error: function () {
+            layer.closeAll('loading');
+            layui.use('common', function () {
+                layui.common.errorMsg("线索标记失败");
+            });
+            return false;
+        }
+    });
+}
 

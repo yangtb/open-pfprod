@@ -6,7 +6,9 @@ import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.entity.ExmMedResultBody;
 import com.sm.pfprod.model.entity.ExmMedResultInques;
+import com.sm.pfprod.model.entity.ExmMedResultInspect;
 import com.sm.pfprod.model.entity.ExmTestexec;
 import com.sm.pfprod.service.biz.tests.PfTestWaitingRoomService;
 import com.sm.pfprod.web.portal.BaseController;
@@ -119,7 +121,124 @@ public class PfTestWaitingRoomRestController extends BaseController {
                 pfTestWaitingRoomService.listConsQa(dto));
     }
 
+    /**
+     * 获取检查图片
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/check/qa/pic")
+    public ResultObject selectPic(@RequestBody PfTestExamTagDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedicalrec() != null, "idMedicalrec");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getCdMedAsse()), "cdMedAsse");
+        return ResultObject.createSuccess("selectPic", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.selectPic(dto));
+    }
 
+    /**
+     * 检查 - 问题
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/check/qa/save")
+    @ResponseBody
+    public ResultObject saveCheckQa(@RequestBody ExmMedResultBody dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        Assert.isTrue(dto.getIdBody() != null, "idBody");
+        Assert.isTrue(dto.getIdMedCaseList() != null, "idMedCaseList");
+
+        return ResultObject.createSuccess("saveCheckQa", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.saveCheckQa(dto));
+    }
+
+    /**
+     * 检查-线索标志
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/check/qa/status")
+    @ResponseBody
+    public ResultObject updateCheckStatus(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return pfTestWaitingRoomService.updateCheckStatus(dto) ? ResultObject.createSuccess("updateCheckStatus", ResultObject.DATA_TYPE_OBJECT, true)
+                : ResultObject.create("updateCheckStatus", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
+
+    /**
+     * 检查-问答列表
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/check/qa/list")
+    @ResponseBody
+    public ResultObject listCheckQa(@RequestBody PfTestExamTagDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("listCheckQa", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.listCheckQa(dto));
+    }
+
+    /**
+     * 检验 - 问题
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/exam/qa/save")
+    @ResponseBody
+    public ResultObject saveExamQa(@RequestBody ExmMedResultInspect dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        Assert.isTrue(dto.getIdMedCaseList() != null, "idMedCaseList");
+
+        return ResultObject.createSuccess("saveExamQa", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.saveExamQa(dto));
+    }
+
+    /**
+     * 检验-线索标志
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/exam/qa/status")
+    @ResponseBody
+    public ResultObject updateExamStatus(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return pfTestWaitingRoomService.updateExamStatus(dto) ? ResultObject.createSuccess("updateExamStatus", ResultObject.DATA_TYPE_OBJECT, true)
+                : ResultObject.create("updateExamStatus", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
+
+    /**
+     * 检验-问答列表
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/exam/qa/list")
+    @ResponseBody
+    public ResultObject listExamQa(@RequestBody PfTestExamTagDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("listExamQa", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.listExamQa(dto));
+    }
 
 
 }

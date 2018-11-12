@@ -126,7 +126,6 @@ public class PfKbPartController extends BaseController {
     public String checkForm(Model model, String idMedCase, String showBtn) {
         model.addAttribute("showBtn", showBtn);
         model.addAttribute("idMedCase", idMedCase);
-        model.addAttribute("examWays", enumUtil.getEnumList(SysDicGroupEnum.EXAM_WAYS.getCode()));
         model.addAttribute("bodyPosition", enumUtil.getEnumList(SysDicGroupEnum.BODY_POSITION.getCode()));
         return "pages/biz/kb/part/define/checkForm";
     }

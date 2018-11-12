@@ -106,8 +106,19 @@ public class PfTestWaitingRoomController extends BaseController {
     public String checkPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
         model.addAttribute("cdMedAsse", dto.getCdMedAsse());
+        model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
+        // 位置
+        model.addAttribute("bodyPosition", enumUtil.getEnumList(SysDicGroupEnum.BODY_POSITION.getCode()));
         return "pages/biz/tests/room/exec/checkPage";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @RequestMapping(value = "/test/check/list")
+    @ResponseBody
+    public PageResult listTestCheck(PfTestExamTagDto dto) {
+        return pfTestWaitingRoomService.listTestCheck(dto);
+    }
+
 
     /**
      * 页签-检验
@@ -120,7 +131,15 @@ public class PfTestWaitingRoomController extends BaseController {
     public String examPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
         model.addAttribute("cdMedAsse", dto.getCdMedAsse());
+        model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
         return "pages/biz/tests/room/exec/examPage";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @RequestMapping(value = "/test/exam/list")
+    @ResponseBody
+    public PageResult listTestExam(PfTestExamTagDto dto) {
+        return pfTestWaitingRoomService.listTestExam(dto);
     }
 
     /**
@@ -133,6 +152,8 @@ public class PfTestWaitingRoomController extends BaseController {
     @RequestMapping("/test/referral/page")
     public String referralPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("cdMedAsse", dto.getCdMedAsse());
+        model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
         return "pages/biz/tests/room/exec/referralPage";
     }
 
@@ -146,6 +167,8 @@ public class PfTestWaitingRoomController extends BaseController {
     @RequestMapping("/test/summary/page")
     public String summaryPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("cdMedAsse", dto.getCdMedAsse());
+        model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
         return "pages/biz/tests/room/exec/summaryPage";
     }
 
@@ -159,6 +182,8 @@ public class PfTestWaitingRoomController extends BaseController {
     @RequestMapping("/test/orders/page")
     public String ordersPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("cdMedAsse", dto.getCdMedAsse());
+        model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
         return "pages/biz/tests/room/exec/ordersPage";
     }
 
@@ -172,6 +197,8 @@ public class PfTestWaitingRoomController extends BaseController {
     @RequestMapping("/test/assess/page")
     public String testAssessPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("cdMedAsse", dto.getCdMedAsse());
+        model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
         return "pages/biz/tests/room/assess/testAssessPage";
     }
 

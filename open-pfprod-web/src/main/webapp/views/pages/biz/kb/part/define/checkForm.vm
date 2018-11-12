@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/expand/css/formSelects-v4.css">
 
     <script>
         var basePath = '${basePath}';
@@ -97,12 +98,10 @@
                     <label class="layui-form-label">检查方式<i class="iconfont icon-required"
                                                            style="color: #f03f2d"></i></label>
                     <div class="layui-input-block" style="width: 158px;">
-                        <select name="cdCheck" id="cdCheck" autocomplete="off" lay-verify="required" lay-vertype="tips"
-                                lay-vertype="tips" placeholder="检查方式">
+                        <select name="cdCheck" id="cdCheck" xm-select="cdCheckSelect" xm-select-search="" xm-select-radio=""
+                                xm-select-height="25px" placeholder="检查方式"
+                                lay-verify="required" lay-vertype="tips">
                             <option value="">请选择</option>
-                            #foreach($param in ${examWays})
-                                <option value="$!param.dictCode">${param.dictName}</option>
-                            #end
                         </select>
                     </div>
                 </div>
@@ -192,6 +191,8 @@
 <script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
 <script src="$!{contextPath}/public/common/js/jquery.formautofill.js"></script>
 <script src="${contextPath}/public/biz/js/biz/kb/part/kbCheckFormController.js"></script>
+<script src="$!{contextPath}/public/common/js/js-pinyin.js"></script>
+
 
 <script type="text/html" id="fgActiveTpl">
     {{#  if(d.fgActive == '1'){ }}

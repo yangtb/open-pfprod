@@ -60,7 +60,6 @@
 <script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
 <script src="$!{contextPath}/public/biz/js/biz/tests/room/exec/execConsController.js"></script>
-<script src="$!{contextPath}/public/biz/js/biz/tests/room/exec/execCons.js"></script>
 
 <script type="text/html" id="qaTpl">
     <input type="checkbox" name="qa" value="{{d.idInques}}-{{d.idMedCaseList}}"

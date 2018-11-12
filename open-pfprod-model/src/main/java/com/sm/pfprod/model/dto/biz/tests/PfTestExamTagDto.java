@@ -38,4 +38,9 @@ public class PfTestExamTagDto implements Serializable {
      */
     private String fgShowExecFinsh;
 
+    /**
+     * 检查部位
+     */
+    private String sdBody;
+
 }
