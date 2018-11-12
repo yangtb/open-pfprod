@@ -59,7 +59,7 @@ public class PfDiseaseController extends BaseController {
         return "pages/biz/disease/diseaseInfoForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_BAS0040','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_BAS0040', 'ROLE_EXM0030' ,'ROLE_SUPER')")
     @RequestMapping(value = "/info/list")
     @ResponseBody
     public PageResult listDiseaseInfo(PfDiseaseInfoDto dto) {
