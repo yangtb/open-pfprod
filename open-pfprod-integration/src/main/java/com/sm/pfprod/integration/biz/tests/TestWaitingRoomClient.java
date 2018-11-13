@@ -97,4 +97,12 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.listExamQa(param);
     }
 
+    public CommonResult<Long> saveReferral(ExmMedResultReferralParam param) {
+        return pfTestWaitingRoomFacade.saveReferral(param);
+    }
+
+    public CommonResult<List<ExmMedResultReferralResult>> listReferral(PfTestExamTagParam param) {
+        return pfTestWaitingRoomFacade.listReferral(param);
+    }
+
 }

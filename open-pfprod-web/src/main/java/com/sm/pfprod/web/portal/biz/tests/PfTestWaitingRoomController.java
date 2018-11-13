@@ -158,6 +158,19 @@ public class PfTestWaitingRoomController extends BaseController {
     }
 
     /**
+     * 页签-拟诊form
+     *
+     * @param model
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @RequestMapping("/test/referral/form")
+    public String referralForm(Model model, PfTestExamTagDto dto) {
+        model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
+        return "pages/biz/tests/room/exec/referralForm";
+    }
+
+    /**
      * 页签-病史小结
      *
      * @param model

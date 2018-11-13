@@ -171,4 +171,20 @@ public interface PfTestWaitingRoomService {
      * @return
      */
     List<PfWaitingRoomExamVo> listExamQa(PfTestExamTagDto dto);
+
+    /**
+     * 拟诊 - 保存
+     *
+     * @param dto
+     * @return
+     */
+    Long saveReferral(ExmMedResultReferral dto);
+
+    /**
+     * 已添加拟诊
+     *
+     * @param dto
+     * @return
+     */
+    List<ExmMedResultReferral> listReferral(PfTestExamTagDto dto);
 }

@@ -6,10 +6,7 @@ import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
-import com.sm.pfprod.model.entity.ExmMedResultBody;
-import com.sm.pfprod.model.entity.ExmMedResultInques;
-import com.sm.pfprod.model.entity.ExmMedResultInspect;
-import com.sm.pfprod.model.entity.ExmTestexec;
+import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.service.biz.tests.PfTestWaitingRoomService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
@@ -240,5 +237,58 @@ public class PfTestWaitingRoomRestController extends BaseController {
                 pfTestWaitingRoomService.listExamQa(dto));
     }
 
+    /**
+     * 拟诊 - 保存
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/referral/save")
+    @ResponseBody
+    public ResultObject saveReferral(@RequestBody ExmMedResultReferral dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getSdEvaReferral()), "sdEvaReferral");
+        Assert.isTrue(dto.getIdDie() != null, "id_die");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getReasonIn()), "reasonIn");
+
+        return ResultObject.createSuccess("saveReferral", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.saveReferral(dto));
+    }
+
+    /**
+     * 拟诊 - 排除
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/referral/out")
+    @ResponseBody
+    public ResultObject outReferral(@RequestBody ExmMedResultReferral dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResultReferral() != null, "idTestexecResultReferral");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getReasonOut()), "reasonOut");
+
+        return ResultObject.createSuccess("outReferral", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.saveReferral(dto));
+    }
+
+    /**
+     * 拟诊-列表
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/referral/list")
+    @ResponseBody
+    public ResultObject listReferral(@RequestBody PfTestExamTagDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("listReferral", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.listReferral(dto));
+    }
 
 }

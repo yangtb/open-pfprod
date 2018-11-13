@@ -78,7 +78,6 @@
                 <textarea name="other" placeholder="" class="layui-textarea" style="min-height: 50px;"></textarea>
             </div>
         </div>
-
     </form>
 
 
