@@ -6,6 +6,8 @@ import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.service.biz.tests.PfTestWaitingRoomService;
 import com.sm.pfprod.web.portal.BaseController;
@@ -289,6 +291,73 @@ public class PfTestWaitingRoomRestController extends BaseController {
         Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
         return ResultObject.createSuccess("listReferral", ResultObject.DATA_TYPE_LIST,
                 pfTestWaitingRoomService.listReferral(dto));
+    }
+
+    /**
+     * 医嘱 - 查询
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/orders/select")
+    @ResponseBody
+    public ResultObject selectOrders(@RequestBody ExmMedResultOrder dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("selectOrders", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.selectOrders(dto.getIdTestexecResult()));
+    }
+
+    /**
+     * 医嘱-保存
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/orders/save")
+    @ResponseBody
+    public ResultObject saveOrders(@RequestBody ExmMedResultOrder dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("saveOrders", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.saveOrder(dto));
+    }
+
+    /**
+     * 医嘱-保存药品
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/orders/drugs/save")
+    @ResponseBody
+    public ResultObject saveDrugs(@RequestBody PfCommonListDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        Assert.isTrue(dto.getExtId() != null, "extId");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getExtType()), "extType");
+        return ResultObject.createSuccess("saveDrugs", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.saveDrugs(dto));
+    }
+
+    /**
+     * 医嘱-删除用药
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/orders/drugs/del")
+    @ResponseBody
+    public ResultObject delDrugs(@RequestBody PfChangeStatusDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getId() != null, "id");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getType()), "type");
+        return ResultObject.createSuccess("delDrugs", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.delDrugs(dto.getType(), dto.getId()));
     }
 
 }

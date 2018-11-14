@@ -179,7 +179,7 @@ public class PfKbAssessController extends BaseController {
         model.addAttribute("sdNursRout", JSON.parseArray(JSON.toJSONString(enumUtil.getEnumList(SysDicGroupEnum.SD_NURS_ROUT.getCode()))));
         model.addAttribute("cdNursLevel", JSON.parseArray(JSON.toJSONString(enumUtil.getEnumList(SysDicGroupEnum.CD_NURS_LEVEL.getCode()))));
         model.addAttribute("sdDiet", JSON.parseArray(JSON.toJSONString(enumUtil.getEnumList(SysDicGroupEnum.SD_DIET.getCode()))));
-        model.addAttribute("sdPosition", JSON.parseArray(JSON.toJSONString(enumUtil.getEnumList(SysDicGroupEnum.SD_POSITION.getCode()))));
+        model.addAttribute("sdPosition", JSON.parseArray(JSON.toJSONString(enumUtil.getEnumList(SysDicGroupEnum.BODY_POSITION.getCode()))));
         model.addAttribute("sheets", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllSheet())));
         return "pages/biz/kb/assess/define/assessOrder";
     }

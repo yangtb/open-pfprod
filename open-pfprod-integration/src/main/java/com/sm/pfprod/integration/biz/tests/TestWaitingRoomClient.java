@@ -2,6 +2,7 @@ package com.sm.pfprod.integration.biz.tests;
 
 import com.sm.open.core.facade.model.param.pf.biz.tests.room.*;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
+import com.sm.open.core.facade.model.param.pf.common.PfCommonListParam;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseBodyResult;
 import com.sm.open.core.facade.model.result.pf.biz.tests.room.*;
 import com.sm.open.core.facade.model.result.pf.biz.tests.room.paper.PfTestPaperResult;
@@ -103,6 +104,30 @@ public class TestWaitingRoomClient {
 
     public CommonResult<List<ExmMedResultReferralResult>> listReferral(PfTestExamTagParam param) {
         return pfTestWaitingRoomFacade.listReferral(param);
+    }
+
+    public CommonResult<ExmMedResultOrderResult> selectOrders(Long idTestexecResult) {
+        return pfTestWaitingRoomFacade.selectOrders(idTestexecResult);
+    }
+
+    public CommonResult<Long> saveOrder(ExmMedResultOrderParam param) {
+        return pfTestWaitingRoomFacade.saveOrder(param);
+    }
+
+    public CommonResult<Boolean> saveDrugs(PfCommonListParam param) {
+        return pfTestWaitingRoomFacade.saveDrugs(param);
+    }
+
+    public PfPageResult listLongDrugs(Long idTestexecResultOrder) {
+        return pfTestWaitingRoomFacade.listLongDrugs(idTestexecResultOrder);
+    }
+
+    public PfPageResult listShortDrugs(Long idTestexecResultOrder) {
+        return pfTestWaitingRoomFacade.listShortDrugs(idTestexecResultOrder);
+    }
+
+    public CommonResult<Boolean> delDrugs(String type, Long id) {
+        return pfTestWaitingRoomFacade.delDrugs(type, id);
     }
 
 }

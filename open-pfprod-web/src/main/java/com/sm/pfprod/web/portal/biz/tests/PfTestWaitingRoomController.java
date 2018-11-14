@@ -3,6 +3,7 @@ package com.sm.pfprod.web.portal.biz.tests;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestWatingRoomDto;
+import com.sm.pfprod.model.entity.ExmMedResultOrder;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.test.PfWaitingRoomPatVo;
@@ -194,10 +195,26 @@ public class PfTestWaitingRoomController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
     @RequestMapping("/test/orders/page")
     public String ordersPage(Model model, PfTestExamTagDto dto) {
-        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
-        model.addAttribute("cdMedAsse", dto.getCdMedAsse());
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
+        model.addAttribute("sdNursRout", enumUtil.getEnumList(SysDicGroupEnum.SD_NURS_ROUT.getCode()));
+        model.addAttribute("cdNursLevel", enumUtil.getEnumList(SysDicGroupEnum.CD_NURS_LEVEL.getCode()));
+        model.addAttribute("sdDiet", enumUtil.getEnumList(SysDicGroupEnum.SD_DIET.getCode()));
+        model.addAttribute("sdPosition", enumUtil.getEnumList(SysDicGroupEnum.BODY_POSITION.getCode()));
         return "pages/biz/tests/room/exec/ordersPage";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @RequestMapping(value = "/test/orders/drug/long/list")
+    @ResponseBody
+    public PageResult listLongDrugs(Long idTestexecResultOrder) {
+        return pfTestWaitingRoomService.listLongDrugs(idTestexecResultOrder);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @RequestMapping(value = "/test/orders/drug/short/list")
+    @ResponseBody
+    public PageResult listShortDrugs(Long idTestexecResultOrder) {
+        return pfTestWaitingRoomService.listShortDrugs(idTestexecResultOrder);
     }
 
     /**

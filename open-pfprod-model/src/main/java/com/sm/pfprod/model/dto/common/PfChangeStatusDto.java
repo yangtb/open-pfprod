@@ -37,4 +37,9 @@ public class PfChangeStatusDto implements Serializable {
      * 修改人员
      */
     private String operator;
+
+    /**
+     * 类型
+     */
+    private String type;
 }

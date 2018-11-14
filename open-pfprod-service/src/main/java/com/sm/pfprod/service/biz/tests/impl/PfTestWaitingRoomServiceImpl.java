@@ -4,6 +4,7 @@ import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
 import com.sm.open.core.facade.model.param.pf.biz.tests.room.*;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
+import com.sm.open.core.facade.model.param.pf.common.PfCommonListParam;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseBodyListResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseBodyResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseInquesListResult;
@@ -17,6 +18,7 @@ import com.sm.pfprod.model.dto.biz.tests.PfTestExamDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestWatingRoomDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.test.*;
@@ -218,6 +220,60 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
         CommonResult<List<ExmMedResultReferralResult>> result = testWaitingRoomClient.listReferral(BeanUtil.convert(dto, PfTestExamTagParam.class));
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convertList(result.getContent(), ExmMedResultReferral.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public ExmMedResultOrder selectOrders(Long idTestexecResult) {
+        CommonResult<ExmMedResultOrderResult> result = testWaitingRoomClient.selectOrders(idTestexecResult);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), ExmMedResultOrder.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public Long saveOrder(ExmMedResultOrder dto) {
+        CommonResult<Long> result = testWaitingRoomClient.saveOrder(BeanUtil.convert(dto, ExmMedResultOrderParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public String saveDrugs(PfCommonListDto dto) {
+        CommonResult<Boolean> result = testWaitingRoomClient.saveDrugs(BeanUtil.convert(dto, PfCommonListParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return dto.getExtType();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult listShortDrugs(Long idTestexecResultOrder) {
+        PfPageResult<ExmMedResultOrderShortDrugs> result = testWaitingRoomClient.listShortDrugs(idTestexecResultOrder);
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public PageResult listLongDrugs(Long idTestexecResultOrder) {
+        PfPageResult<ExmMedResultOrderLogDrugsResult> result = testWaitingRoomClient.listLongDrugs(idTestexecResultOrder);
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public boolean delDrugs(String type, Long id) {
+        CommonResult<Boolean> result = testWaitingRoomClient.delDrugs(type, id);
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }

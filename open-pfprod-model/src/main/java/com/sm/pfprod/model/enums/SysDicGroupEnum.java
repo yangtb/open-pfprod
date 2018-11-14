@@ -25,7 +25,6 @@ public enum SysDicGroupEnum {
     SD_NURS_ROUT("SD_NURS_ROUT", "护理常规"),
     CD_NURS_LEVEL("CD_NURS_LEVEL", "护理级别"),
     SD_DIET("SD_DIET", "饮食"),
-    SD_POSITION("SD_POSITION", "体位"),
     SD_TESTPLAN("SD_TESTPLAN", "计划状态");
 
 
