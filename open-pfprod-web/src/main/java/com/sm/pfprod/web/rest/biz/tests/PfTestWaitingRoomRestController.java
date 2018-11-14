@@ -18,6 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @ClassName: PfTestWaitingRoomController
@@ -359,5 +360,103 @@ public class PfTestWaitingRoomRestController extends BaseController {
         return ResultObject.createSuccess("delDrugs", ResultObject.DATA_TYPE_OBJECT,
                 pfTestWaitingRoomService.delDrugs(dto.getType(), dto.getId()));
     }
+
+    /**
+     * 保存诊断
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/summary/diagnosis/save")
+    @ResponseBody
+    public ResultObject saveDiagnosis(@RequestBody ExmMedResultDiagnosis dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        Assert.isTrue(dto.getIdDie() != null, "idDie");
+        return ResultObject.createSuccess("saveDiagnosis", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.saveDiagnosis(dto));
+    }
+
+    /**
+     * 删除诊断
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/summary/diagnosis/del")
+    @ResponseBody
+    public ResultObject delDiagnosis(@RequestBody ExmMedResultDiagnosis dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResultDiagnosis() != null, "idTestexecResultDiagnosis");
+        return ResultObject.createSuccess("delDiagnosis", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.delDiagnosis(dto.getIdTestexecResultDiagnosis()));
+    }
+
+    /**
+     * 保存诊断小结
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/summary/save")
+    @ResponseBody
+    public ResultObject saveSummary(@RequestBody ExmMedResultSummary dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("saveSummary", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.saveSummary(dto));
+    }
+
+    /**
+     * 保存确诊理由
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/summary/die/reason/save")
+    @ResponseBody
+    public ResultObject saveDieReason(@RequestBody List<ExmMedResultDieReason> dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto), "dto");
+        return ResultObject.createSuccess("saveDieReason", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.saveDieReason(dto));
+    }
+
+    /**
+     * 删除确诊理由
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/summary/reason/del")
+    @ResponseBody
+    public ResultObject delDieReason(@RequestBody ExmMedResultDieReason dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdDieReason() != null, "idDieReason");
+        return ResultObject.createSuccess("delDieReason", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.delDieReason(dto.getIdDieReason()));
+    }
+
+    /**
+     * 查询诊断、诊断小结
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/summary/diagnosis/select")
+    @ResponseBody
+    public ResultObject selectDiagnosis(@RequestBody PfTestExamTagDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("selectDiagnosis", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.selectDiagnosis(dto.getIdTestexecResult()));
+    }
+
 
 }

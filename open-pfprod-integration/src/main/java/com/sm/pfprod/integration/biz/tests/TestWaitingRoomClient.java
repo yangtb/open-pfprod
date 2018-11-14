@@ -130,4 +130,36 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.delDrugs(type, id);
     }
 
+    public CommonResult<Long> saveDiagnosis(ExmMedResultDiagnosisParam param) {
+        return pfTestWaitingRoomFacade.saveDiagnosis(param);
+    }
+
+    public CommonResult<Boolean> delDiagnosis(Long idTestexecResultDiagnosis) {
+        return pfTestWaitingRoomFacade.delDiagnosis(idTestexecResultDiagnosis);
+    }
+
+    public CommonResult<Long> saveSummary(ExmMedResultSummaryParam param) {
+        return pfTestWaitingRoomFacade.saveSummary(param);
+    }
+
+    public CommonResult<Boolean> saveDieReason(List<ExmMedResultDieReasonParam> param) {
+        return pfTestWaitingRoomFacade.saveDieReason(param);
+    }
+
+    public CommonResult<Boolean> delDieReason(Long idDieReason) {
+        return pfTestWaitingRoomFacade.delDieReason(idDieReason);
+    }
+
+    public CommonResult<PfWaitingRoomDiagnosisResult> selectDiagnosis(Long idTestexecResult) {
+        return pfTestWaitingRoomFacade.selectDiagnosis(idTestexecResult);
+    }
+
+    public CommonResult<List<PfWaitingRoomDieReasonResult>> listReadyDieReason(Long idTestexecResult) {
+        return pfTestWaitingRoomFacade.listReadyDieReason(idTestexecResult);
+    }
+
+    public PfPageResult listDieReason(Long idTestexecResultDiagnosis) {
+        return pfTestWaitingRoomFacade.listDieReason(idTestexecResultDiagnosis);
+    }
+
 }

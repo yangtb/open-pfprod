@@ -6,6 +6,7 @@ import com.sm.pfprod.model.dto.biz.tests.PfTestWatingRoomDto;
 import com.sm.pfprod.model.entity.ExmMedResultOrder;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.model.vo.biz.test.PfWaitingRoomDieReasonVo;
 import com.sm.pfprod.model.vo.biz.test.PfWaitingRoomPatVo;
 import com.sm.pfprod.model.vo.biz.test.paper.PfTestPaperVo;
 import com.sm.pfprod.service.biz.tests.PfTestWaitingRoomService;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @ClassName: PfTestWaitingRoomController
@@ -180,10 +182,36 @@ public class PfTestWaitingRoomController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
     @RequestMapping("/test/summary/page")
     public String summaryPage(Model model, PfTestExamTagDto dto) {
-        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
-        model.addAttribute("cdMedAsse", dto.getCdMedAsse());
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
+        model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         return "pages/biz/tests/room/exec/summaryPage";
+    }
+
+    /**
+     * 查询确诊理由
+     *
+     * @param idTestexecResultDiagnosis
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @RequestMapping(value = "/test/die/reason/list")
+    @ResponseBody
+    public PageResult listDieReason(Long idTestexecResultDiagnosis) {
+        return pfTestWaitingRoomService.listDieReason(idTestexecResultDiagnosis);
+    }
+
+    /**
+     * 查询已做问诊、检查、检验
+     *
+     * @param
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @RequestMapping(value = "/test/die/ready/reason/list")
+    @ResponseBody
+    public PageResult listReadyDieReason(Long idTestexecResult) {
+        List<PfWaitingRoomDieReasonVo> dieReasonVos = pfTestWaitingRoomService.listReadyDieReason(idTestexecResult);
+        return PageResult.create(dieReasonVos);
     }
 
     /**

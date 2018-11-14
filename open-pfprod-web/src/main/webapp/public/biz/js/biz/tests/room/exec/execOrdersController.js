@@ -48,7 +48,9 @@ layui.config({
             , page: false
         });
 
-        controlBtn();
+        if ($('#idTestexecResultOrder').val()) {
+            controlBtn();
+        }
         tableSelectRender();
     }
 

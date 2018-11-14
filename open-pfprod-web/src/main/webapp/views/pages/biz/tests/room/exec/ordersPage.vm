@@ -94,9 +94,9 @@
                 <button class="layui-btn" id="addOrders" lay-submit="" lay-filter="addOrders">
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
-                <button type="reset" class="layui-btn layui-btn-danger">
+                #*<button type="reset" class="layui-btn layui-btn-danger">
                     <i class="iconfont icon-reset"></i> 重置
-                </button>
+                </button>*#
             </div>
         </div>
     </form>
@@ -121,11 +121,11 @@
     <script src="${contextPath}/public/biz/js/biz/tests/room/exec/execOrdersController.js"></script>
 
     <script type="text/html" id="toolbarShort">
-        <button class="layui-btn layui-btn-sm" id="addDrugBtn"><i
+        <button class="layui-btn layui-btn-sm layui-btn-disabled" id="addDrugBtn" disabled><i
                 class="layui-icon layui-icon-add-1"></i>临时用药
     </script>
     <script type="text/html" id="toolbarLong">
-        <button class="layui-btn layui-btn-sm" id="addLongDrugBtn"><i
+        <button class="layui-btn layui-btn-sm layui-btn-disabled" id="addLongDrugBtn" disabled><i
                 class="layui-icon layui-icon-add-1"></i>长期用药
     </script>
 

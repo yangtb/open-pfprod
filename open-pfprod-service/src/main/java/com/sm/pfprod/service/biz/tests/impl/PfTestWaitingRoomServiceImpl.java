@@ -278,4 +278,77 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
+    @Override
+    public Long saveDiagnosis(ExmMedResultDiagnosis dto) {
+        CommonResult<Long> result = testWaitingRoomClient.saveDiagnosis(BeanUtil.convert(dto, ExmMedResultDiagnosisParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean delDiagnosis(Long idTestexecResultDiagnosis) {
+        CommonResult<Boolean> result = testWaitingRoomClient.delDiagnosis(idTestexecResultDiagnosis);
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public Long saveSummary(ExmMedResultSummary dto) {
+        CommonResult<Long> result = testWaitingRoomClient.saveSummary(BeanUtil.convert(dto, ExmMedResultSummaryParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean saveDieReason(List<ExmMedResultDieReason> dto) {
+        CommonResult<Boolean> result = testWaitingRoomClient.saveDieReason(BeanUtil.convertList(dto, ExmMedResultDieReasonParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean delDieReason(Long idDieReason) {
+        CommonResult<Boolean> result = testWaitingRoomClient.delDieReason(idDieReason);
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PfWaitingRoomDiagnosisVo selectDiagnosis(Long idTestexecResult) {
+        CommonResult<PfWaitingRoomDiagnosisResult> result = testWaitingRoomClient.selectDiagnosis(idTestexecResult);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), PfWaitingRoomDiagnosisVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<PfWaitingRoomDieReasonVo> listReadyDieReason(Long idTestexecResult) {
+        CommonResult<List<PfWaitingRoomDieReasonResult>> result = testWaitingRoomClient.listReadyDieReason(idTestexecResult);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfWaitingRoomDieReasonVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult listDieReason(Long idTestexecResultDiagnosis) {
+        PfPageResult<PfWaitingRoomDieReasonResult> result = testWaitingRoomClient.listDieReason(idTestexecResultDiagnosis);
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+
 }

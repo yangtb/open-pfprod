@@ -238,4 +238,70 @@ public interface PfTestWaitingRoomService {
      */
     boolean delDrugs(String type, Long id);
 
+    /**
+     * 保存诊断
+     *
+     * @param dto
+     * @return
+     */
+    Long saveDiagnosis(ExmMedResultDiagnosis dto);
+
+    /**
+     * 删除诊断
+     *
+     * @param idTestexecResultDiagnosis 主键
+     * @return
+     */
+    boolean delDiagnosis(Long idTestexecResultDiagnosis);
+
+    /**
+     * 保存诊断小结
+     *
+     * @param dto
+     * @return
+     */
+    Long saveSummary(ExmMedResultSummary dto);
+
+    /**
+     * 保存确诊理由
+     *
+     * @param dto
+     * @return
+     */
+    boolean saveDieReason(List<ExmMedResultDieReason> dto);
+
+    /**
+     * 删除确诊理由
+     *
+     * @param idDieReason 主键
+     * @return
+     */
+    boolean delDieReason(Long idDieReason);
+
+    /**
+     * 查询诊断、诊断小结
+     *
+     * @param idTestexecResult 病历结果ID
+     * @return
+     */
+    PfWaitingRoomDiagnosisVo selectDiagnosis(Long idTestexecResult);
+
+    /**
+     * 查询已做问诊、检查、检验
+     *
+     * @return
+     */
+    List<PfWaitingRoomDieReasonVo> listReadyDieReason(Long idTestexecResult);
+
+    /**
+     * 查询确诊理由
+     *
+     * @param idTestexecResultDiagnosis
+     * @return
+     */
+    PageResult listDieReason(Long idTestexecResultDiagnosis);
+
+
+
+
 }
