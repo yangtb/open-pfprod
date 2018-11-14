@@ -77,7 +77,7 @@
 
 <script type="text/html" id="sdEvaTpl">
         #foreach($param in ${sdEva})
-        {{#  if(d.sdEva == $!param.dictCode){ }}
+        {{#  if(d.sdEvaEffciency == $!param.dictCode){ }}
             $!{param.dictName}
         {{#  } else { }}
 
