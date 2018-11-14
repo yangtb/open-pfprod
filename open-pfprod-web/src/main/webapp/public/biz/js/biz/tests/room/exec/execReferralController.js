@@ -61,6 +61,19 @@ layui.config({
         });
     };
 
+    //监听行双击事件
+    table.on('rowDouble(diseaseInfoTableFilter)', function (obj) {
+        var data = obj.data;
+        var bizData = {
+            idTestexecResult: idTestexecResult,
+            idDie: data.idDie,
+            idDieText: data.name
+        }
+        var y = $(this).offset().top;
+        var x = $(this).offset().left;
+        _addOrEdit("add", bizData, x, y);
+    });
+
     //监听工具条
     table.on('tool(diseaseInfoTableFilter)', function (obj) {
         var data = obj.data;
@@ -103,7 +116,7 @@ layui.config({
 
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
     initReferralList();
 });
 
@@ -236,7 +249,11 @@ function referralForm(index, data) {
         '                        <label class="layui-form-label">排除原因</label>\n' +
         '                        <div class="layui-input-block">\n' +
         '                    <textarea id="reasonOut' + data.idTestexecResultReferral + '" lay-verify="required" lay-vertype="tips"\n' +
-        '                              class="layui-textarea" placeholder="请输入排除原因" style="min-height: 50px;">' + data.reasonOut + '</textarea>\n' +
+        '                              class="layui-textarea" placeholder="请输入排除原因" style="min-height: 50px;"';
+    if (data.fgExclude == '1') {
+        html += 'disabled';
+    }
+    html += '>' + data.reasonOut + '</textarea>\n' +
         '                        </div>\n' +
         '                    </div>\n' +
         '\n' +
