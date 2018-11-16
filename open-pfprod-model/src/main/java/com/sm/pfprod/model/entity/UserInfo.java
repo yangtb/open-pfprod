@@ -28,7 +28,7 @@ public class UserInfo implements Serializable {
     private String      roleType;       // 用户角色类型：1超级管理员，2普通管理员
     private String      roleDesc;       // 管理员角色描述
     private String      realName;       // 真实姓名
-    private int         sex;            // 性别
+    private Integer         sex;            // 性别
     private String      remark;         // 备注
     private Long        idOrg;          // 机构ID
     private Date        lastLoginTime;  // 最后登录时间

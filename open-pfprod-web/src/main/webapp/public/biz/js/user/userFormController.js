@@ -24,6 +24,11 @@ layui.config({
 
     //监听提交
     form.on('submit(addUser)', function (data) {
+        if (!data.field.sex) {
+            $('#sex').focus();
+            layer.tips('请选择性别', '#sex', {tips: 1});
+            return false;
+        }
         var roles = new Array();
         $("input:checkbox[name='role']:checked").each(function () {
             roles.push($(this).val());

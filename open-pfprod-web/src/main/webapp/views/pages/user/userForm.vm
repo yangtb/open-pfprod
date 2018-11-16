@@ -111,9 +111,9 @@
                 <label class="layui-form-label">性别<i class="iconfont icon-required"
                                                      style="color: #f03f2d"></i></label>
                 <div class="layui-input-inline">
-                    <select name="sex" lay-verify="required">
-                        <option value="0">未选择</option>
-                        <option value="1" selected="">男</option>
+                    <select name="sex" id="sex" lay-verify="required" lay-vertype="tips">
+                        <option value="">请选择</option>
+                        <option value="1">男</option>
                         <option value="2">女</option>
                     </select>
                 </div>

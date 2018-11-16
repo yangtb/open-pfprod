@@ -28,7 +28,7 @@ public class RegisterDto implements Serializable {
     private boolean     enabled;        // 是否锁定
     @JSONField(name = "real_name")
     private String      realName;       // 真实姓名
-    private int         sex;            // 性别
+    private Integer         sex;            // 性别
     private String      remark;         // 备注
     private List<Long>  roles;          // 用户角色
     private String      operator;       // 操作人员
