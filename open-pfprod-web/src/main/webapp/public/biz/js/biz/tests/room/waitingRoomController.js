@@ -19,6 +19,7 @@ layui.config({
         , height: 'full-68' //容器高度
         , cols: [[
             {type: 'radio', fixed: true},
+            {type: 'numbers', title: 'R'},
             {field: 'status', width: 90, title: '接诊状态', templet: '#statusTpl'},
             {field: 'patName', width: 90, title: '患者姓名'},
             {field: 'patSex', width: 70, title: '性别', templet: '#sexTpl'},
@@ -48,18 +49,24 @@ layui.config({
         , defaultToolbar: []
         , height: 'full-68' //容器高度
         , cols: [[
-            {checkbox: true, fixed: true},
-            //{field: 'id', width: 60, title: 'ID', fixed: true},
-            {field: 'groupName', width: 150, title: '字典名称'},
-            {field: 'roomtName', width: 150, title: '枚举名称'},
-            {field: 'roomtCode', width: 150, title: '枚举编码'},
-            {field: 'sortNum', width: 70, sort: true, title: '排序'},
-            {field: 'remark', width: 150, title: '备注'},
-            {field: 'gmtCreate', width: 170, sort: true, title: '添加时间'},
-            {field: 'operator', width: 120, title: '最后修改人'},
-            {fixed: 'right', width: 100, title: '操作', align: 'center', toolbar: '#enumBar'}
+            //{checkbox: true, fixed: true},
+            {type: 'numbers', title: 'R'},
+            {field: 'status', width: 90, title: '接诊状态', templet: '#statusTpl'},
+            {field: 'receiveDate', width: 170, title: '接诊时间'},
+            {field: 'receiveConsumingTime', width: 120, align: 'right', title: '接诊耗时(m)'},
+            {field: 'patName', width: 100, title: '患者姓名'},
+            {field: 'patSex', width: 150, title: '性别', templet: '#sexTpl'},
+            {field: 'age', width: 80, sort: true, align: 'right', title: '年龄'},
+            {field: 'receiveDoc', width: 120, title: '病例'},
+            {field: 'medicalrecName', width: 120, title: '接诊医师'},
+            {field: 'naTestplan', width: 170, title: '测试计划'},
+            {field: 'naTestpaper', width: 170, title: '试卷'},
+            {field: 'score', width: 120, title: '评分'},
+            {field: 'ch', width: 120, title: '称号'},
+            {field: 'AssessTeacher', width: 120, title: '评估老师'},
+            {field: 'AssessDate', width: 170, title: '评估日期'}
         ]] //设置表头
-        , url: basePath + '/pf/p/room/enum/list'
+        , url: basePath + '/pf/p/waiting/room/receive/list'
         , limit: 15
         , even: true
         , limits: [15, 30, 100]
@@ -67,20 +74,16 @@ layui.config({
     });
 
     //监听提交
-    form.on('submit(roomSearchFilter)', function (data) {
+    form.on('submit(enumSearchFilter)', function (data) {
+        var queryType = data.field.queryType;
+        if (queryType == 1) {
+
+        }
         table.reload('roomTableId', {
             where: {
-                roomName: data.field.roomName
-            },
-            height: 'full-68'
-        });
-    });
-
-    //监听提交
-    form.on('submit(enumSearchFilter)', function (data) {
-        table.reload('enumTableId', {
-            where: {
-                enumName: data.field.enumName
+                medicalrecName: data.field.queryType == '1' ? data.field.keyword : '',
+                naTestplan: data.field.queryType == '2' ? data.field.keyword : '',
+                naTestpaper: data.field.queryType == '3' ? data.field.keyword : ''
             },
             height: 'full-68'
         });
@@ -115,6 +118,9 @@ layui.config({
         $('#test').click();
     }
 
+    $('#exam').on('click', function () {
+        layer.tips('暂未开放', '#exam', {tips: 1});
+    });
 
 });
 

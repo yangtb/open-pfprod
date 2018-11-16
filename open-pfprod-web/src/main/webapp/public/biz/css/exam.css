@@ -86,6 +86,7 @@ header {
   margin-top: 8px;
 }
 .msg-mail, .msg-tel {
+  padding-top: 5px;
   height: 32px;
   display: flex;
   align-items: center;

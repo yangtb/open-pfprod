@@ -36,6 +36,11 @@ public class ExmMedResultInspect implements Serializable {
     private Long idMedCaseList;
 
     /**
+     * 检验项目ID
+     */
+    private Long idInspectItem;
+
+    /**
      * 线索标记
      */
     private String fgClue;

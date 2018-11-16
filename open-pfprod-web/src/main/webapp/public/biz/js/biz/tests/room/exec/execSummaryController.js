@@ -181,7 +181,8 @@ layui.config({
                 idDieReason: content.idDieReason,
                 idTestexecResultDiagnosis: $('#idTestexecResultDiagnosis').val(),
                 sdEvaEffciency: content.sdEvaEffciency,
-                idMedCaseList: content.id
+                idMedCaseList: content.id,
+                extId: content.extId
             }
             reqData.push(bizData);
         });

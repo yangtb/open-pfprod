@@ -89,7 +89,8 @@ layui.config({
             where: {
                 idMedicalrec: idMedicalrec,
                 cdMedAsse: cdMedAsse,
-                sdBody: sdBody
+                sdBody: sdBody,
+                idTestexecResult : idTestexecResult
             }
         });
     };

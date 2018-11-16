@@ -273,6 +273,7 @@ public class PfTestWaitingRoomController extends BaseController {
     @RequestMapping(value = "/receive/list")
     @ResponseBody
     public PageResult listReceivePat(PfTestWatingRoomDto dto) {
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
         return pfTestWaitingRoomService.listReceivePat(dto);
     }
 

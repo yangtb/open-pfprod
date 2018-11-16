@@ -21,7 +21,8 @@ layui.config({
         , url: basePath + '/pf/p/waiting/room/test/exam/list'
         , where: {
             idMedicalrec: idMedicalrec,
-            cdMedAsse: cdMedAsse
+            cdMedAsse: cdMedAsse,
+            idTestexecResult : idTestexecResult
         }
         , page: false
     });
@@ -29,9 +30,12 @@ layui.config({
 
     form.on('checkbox(qaCheckFilter)', function (obj) {
         var qaValue = this.value;
+        var qaArr = qaValue.split("-");
         var data = {
             idTestexecResult: idTestexecResult,
             idMedCaseList: qaValue,
+            idInspectItem: qaArr[0],
+            idMedCaseList: qaArr[1],
             fgValid: obj.elem.checked ? '0' : '1'
         }
         console.log(data)

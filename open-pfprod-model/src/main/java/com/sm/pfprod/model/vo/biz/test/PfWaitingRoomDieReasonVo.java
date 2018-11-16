@@ -22,7 +22,7 @@ public class PfWaitingRoomDieReasonVo implements Serializable {
     private String sdEvaEffciency;
 
     /**
-     * 阶段对应问诊、检查、检验ID
+     * 明细id
      */
     private Long id;
 
@@ -30,6 +30,11 @@ public class PfWaitingRoomDieReasonVo implements Serializable {
      * 阶段对应问诊、检查、检验名称
      */
     private String idText;
+
+    /**
+     * 对应问诊、检查、检验ID
+     */
+    private Long extId;
 
 
 }

@@ -60,7 +60,7 @@
 <script src="${contextPath}/public/biz/js/biz/tests/room/exec/execExamController.js"></script>
 
 <script type="text/html" id="qaTpl">
-    <input type="checkbox" name="qa" value="{{d.idMedCaseList}}"
+    <input type="checkbox" name="qa" value="{{d.idInspectItem}}-{{d.idMedCaseList}}"
            lay-skin="primary" lay-filter="qaCheckFilter" {{ d.extQa== true ? 'checked' : '' }}>
 </script>
 

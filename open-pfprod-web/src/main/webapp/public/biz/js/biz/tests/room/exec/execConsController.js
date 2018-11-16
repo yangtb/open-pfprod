@@ -21,7 +21,8 @@ layui.config({
         , url: basePath + '/pf/p/waiting/room/test/cons/list'
         , where: {
             idMedicalrec: idMedicalrec,
-            cdMedAsse: cdMedAsse
+            cdMedAsse: cdMedAsse,
+            idTestexecResult : idTestexecResult
         }
         , page: false
     });
