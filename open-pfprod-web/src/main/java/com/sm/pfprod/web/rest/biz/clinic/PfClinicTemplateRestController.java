@@ -38,7 +38,7 @@ public class PfClinicTemplateRestController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/classify/tree", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject listClassifyTree() {
@@ -52,7 +52,7 @@ public class PfClinicTemplateRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/classify/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addClassify(@RequestBody BasDemoCa dto) {
@@ -70,7 +70,7 @@ public class PfClinicTemplateRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040', 'ROLE_SUPER')")
     @RequestMapping(value = "/template/classify/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject editClassify(@RequestBody BasDemoCa dto) {
@@ -89,7 +89,7 @@ public class PfClinicTemplateRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/classify/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delClassify(@RequestBody PfBachChangeStatusDto dto) {
@@ -106,7 +106,7 @@ public class PfClinicTemplateRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addTemplate(@RequestBody BasDemo dto) {
@@ -124,7 +124,7 @@ public class PfClinicTemplateRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040', 'ROLE_SUPER')")
     @RequestMapping(value = "/template/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject editTemplate(@RequestBody BasDemo dto) {
@@ -143,7 +143,7 @@ public class PfClinicTemplateRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delQuestion(@RequestBody PfBachChangeStatusDto dto) {
@@ -160,7 +160,7 @@ public class PfClinicTemplateRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/tag/sheet/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delSheetTag(@RequestBody PfBachChangeStatusDto dto) {
@@ -177,7 +177,7 @@ public class PfClinicTemplateRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/tag/sheet/save", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject saveSheetTag(@RequestBody BasEvaTag dto) {
@@ -194,7 +194,7 @@ public class PfClinicTemplateRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/tag/caseHistory/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delCaseHistoryTag(@RequestBody PfBachChangeStatusDto dto) {
@@ -211,7 +211,7 @@ public class PfClinicTemplateRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/tag/caseHistory/save", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject saveCaseHistoryTag(@RequestBody BasMedicalTag dto) {
@@ -227,7 +227,7 @@ public class PfClinicTemplateRestController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/tag/dimension/classify/tree", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject listDimensionTree(@RequestBody PfClinicDimensionDto dto) {
@@ -243,7 +243,7 @@ public class PfClinicTemplateRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/tag/dimension/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delDimensionTag(@RequestBody PfBachChangeStatusDto dto) {
@@ -260,7 +260,7 @@ public class PfClinicTemplateRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/tag/dimension/save", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject saveDimensionTag(@RequestBody BasDemoAsses dto) {
@@ -277,7 +277,7 @@ public class PfClinicTemplateRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/select/tag/dimensionInfo", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject selectDimensionTagInfo(@RequestBody PfClinicDimensionDto dto) {

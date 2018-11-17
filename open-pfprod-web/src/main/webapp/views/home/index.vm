@@ -94,7 +94,7 @@
                         <dl class="layui-nav-child">
                             #if(${homeInfo.sysOrg})
                                 <dd>
-                                    <a lay-href="${basePath}/pf/p/org/form?formType=edit&position=index&idOrg=$!{homeInfo.sysOrg.idOrg}">
+                                    <a id="orgInfo" lay-href="${basePath}/pf/p/org/form?formType=edit&position=index&idOrg=$!{homeInfo.sysOrg.idOrg}">
                                         <i class="iconfont icon-organization"></i><span> 机构资料</a>
                                 </dd>
                             #end

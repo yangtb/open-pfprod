@@ -42,45 +42,53 @@ layui.config({
 
     if (fgActive == '0') {
         $('#orgInfo').click();
-    } else {
-        var msg;
         if (moment(gmtValid).isBefore(new Date())) {
-            msg = "您的平台试用已到期！";
-        } else {
+            var msg = "您的平台试用已到期！";
+            noticeOrgExpiredWidow(msg);
+        }
+
+    }
+    if (fgActive && fgActive != '0') {
+        var msg;
+        if (!moment(gmtValid).isBefore(new Date())) {
             msg = '您的平台试用将于' + moment(gmtValid).format('YYYY月MM月DD日') + '到期！';
         }
         if (moment(gmtValid).isBefore(moment().add(orgExpiryNoticeDay, 'days').calendar())) {
-            layer.open({
-                type: 1
-                ,
-                title: false //不显示标题栏
-                ,
-                closeBtn: false
-                ,
-                area: '300px;'
-                ,
-                shade: 0.8
-                ,
-                id: 'notice_org_expired' //设定一个id，防止重复弹出
-                ,
-                btn: ['火速续期', '残忍拒绝']
-                ,
-                btnAlign: 'c'
-                ,
-                moveType: 1 //拖拽模式，0或者1
-                ,
-                content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">' +
-                    '尊敬的用户：<br><br>' + msg + '<br><br>' +
-                    '为了不影响您的使用，请您尽快申请续期 ^_^</div>'
-                ,
-                success: function (layero) {
-                    //var btn = layero.find('.layui-layer-btn');
-                    $('.layui-layer-btn0').on('click', function () {
-                        $('#orgInfo').click();
-                    })
-                }
-            });
+            noticeOrgExpiredWidow(msg);
         }
+    }
+
+    function noticeOrgExpiredWidow(msg) {
+        layer.open({
+            type: 1
+            ,
+            title: false //不显示标题栏
+            ,
+            closeBtn: false
+            ,
+            area: '300px;'
+            ,
+            shade: 0.8
+            ,
+            id: 'notice_org_expired' //设定一个id，防止重复弹出
+            ,
+            btn: ['火速续期', '残忍拒绝']
+            ,
+            btnAlign: 'c'
+            ,
+            moveType: 1 //拖拽模式，0或者1
+            ,
+            content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">' +
+                '尊敬的用户：<br><br>' + msg + '<br><br>' +
+                '为了不影响您的使用，请您尽快申请续期 ^_^</div>'
+            ,
+            success: function (layero) {
+                //var btn = layero.find('.layui-layer-btn');
+                $('.layui-layer-btn0').on('click', function () {
+                    $('#orgInfo').click();
+                })
+            }
+        });
     }
 
     if (isAnonymousUser == 'true') {

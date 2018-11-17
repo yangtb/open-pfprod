@@ -160,7 +160,7 @@ public class PfExamRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0050','ROLE_SUPER')")
     @RequestMapping(value = "/question/updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject updateQuestionStatus(@RequestBody PfBachChangeStatusDto dto) {

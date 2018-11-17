@@ -127,7 +127,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030', 'ROLE_SUPER')")
     @PostMapping(value = "/check/qa/pic")
     public ResultObject selectPic(@RequestBody PfTestExamTagDto dto) {
         /* 参数校验 */

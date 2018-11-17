@@ -33,7 +33,7 @@ public class PfTestPlanRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020','ROLE_SUPER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addPlan(@RequestBody ExmTestplan dto) {
@@ -53,7 +53,7 @@ public class PfTestPlanRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020', 'ROLE_SUPER')")
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject editPlan(@RequestBody ExmTestplan dto) {
@@ -71,7 +71,7 @@ public class PfTestPlanRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020','ROLE_SUPER')")
     @RequestMapping(value = "/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delPlan(@RequestBody PfBachChangeStatusDto dto) {
@@ -89,7 +89,7 @@ public class PfTestPlanRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020','ROLE_SUPER')")
     @RequestMapping(value = "/updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject updatePlanStatus(@RequestBody PfBachChangeStatusDto dto) {
@@ -120,7 +120,7 @@ public class PfTestPlanRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020', 'ROLE_SUPER')")
     @RequestMapping(value = "/item/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addPlanItem(@RequestBody PfAddCaseDto dto) {
@@ -137,7 +137,7 @@ public class PfTestPlanRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020','ROLE_SUPER')")
     @RequestMapping(value = "/item/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delPlanItem(@RequestBody PfBachChangeStatusDto dto) {
@@ -155,7 +155,7 @@ public class PfTestPlanRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020', 'ROLE_SUPER')")
     @RequestMapping(value = "/item/update/sort", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject updatePaperItemSort(@RequestBody ExmTestplanMedicalrec dto) {
@@ -172,7 +172,7 @@ public class PfTestPlanRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020','ROLE_SUPER')")
     @PostMapping(value = "/student/tree")
     public ResultObject listStudentTree(@RequestBody PfCatalogueTreeDto dto) {
         dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
@@ -186,7 +186,7 @@ public class PfTestPlanRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020', 'ROLE_SUPER')")
     @RequestMapping(value = "/student/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addPlanStudent(@RequestBody PfAddCaseDto dto) {
@@ -203,7 +203,7 @@ public class PfTestPlanRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020','ROLE_SUPER')")
     @RequestMapping(value = "/student/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delPlanStudent(@RequestBody PfBachChangeStatusDto dto) {
@@ -221,7 +221,7 @@ public class PfTestPlanRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020', 'ROLE_SUPER')")
     @RequestMapping(value = "/detail/generate", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject generatePlan(@RequestBody PfAddCaseDto dto) {

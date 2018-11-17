@@ -43,14 +43,14 @@ public class PfTestPlanController extends BaseController {
     @Resource
     private EnumUtil enumUtil;
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020','ROLE_SUPER')")
     @RequestMapping("/page")
     public String planPage(Model model) {
         model.addAttribute("sdTestPlan", enumUtil.getEnumList(SysDicGroupEnum.SD_TESTPLAN.getCode()));
         return "pages/biz/tests/plan/planPage";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020','ROLE_SUPER')")
     @RequestMapping("/form")
     public String planForm(Model model, String formType) {
         model.addAttribute("formType", formType);
@@ -64,21 +64,21 @@ public class PfTestPlanController extends BaseController {
         return "pages/biz/tests/plan/planForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020','ROLE_SUPER')")
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listPlan(PfTestPlanDto dto) {
         return pfTestPlanService.listPlans(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020', 'ROLE_SUPER')")
     @RequestMapping("/tag/form")
     public String tagForm(Long idTestplan, Model model) {
         model.addAttribute("idTestplan", idTestplan);
         return "pages/biz/tests/plan/planTagForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020','ROLE_SUPER')")
     @RequestMapping("/item/page")
     public String testPlanItem(Model model, Long idTestplan) {
         model.addAttribute("idTestplan", idTestplan);
@@ -104,21 +104,21 @@ public class PfTestPlanController extends BaseController {
         return "pages/biz/tests/plan/tagDetailForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020','ROLE_SUPER')")
     @RequestMapping(value = "/item/list")
     @ResponseBody
     public PageResult listPlanItem(PfTestPlanDto dto) {
         return pfTestPlanService.listPlanItem(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020','ROLE_SUPER')")
     @RequestMapping(value = "/student/list")
     @ResponseBody
     public PageResult listPlanStudent(PfTestPlanDto dto) {
         return pfTestPlanService.listPlanStudent(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020','ROLE_SUPER')")
     @RequestMapping(value = "/detail/list")
     @ResponseBody
     public PageResult listPlanDetail(PfTestPlanDto dto) {

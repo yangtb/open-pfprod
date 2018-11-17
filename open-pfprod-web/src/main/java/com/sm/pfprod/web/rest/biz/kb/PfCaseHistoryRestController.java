@@ -40,7 +40,7 @@ public class PfCaseHistoryRestController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
     @PostMapping(value = "/classify/tree")
     public ResultObject listClassifyTree() {
         return ResultObject.createSuccess("listClassifyTree", ResultObject.DATA_TYPE_LIST,
@@ -53,7 +53,7 @@ public class PfCaseHistoryRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
     @PostMapping(value = "/classify/add")
     public ResultObject addClassify(@RequestBody FaqMedicalrecCa dto) {
         /* 参数校验 */
@@ -70,7 +70,7 @@ public class PfCaseHistoryRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040', 'ROLE_SUPER')")
     @PostMapping(value = "/classify/edit")
     public ResultObject editClassify(@RequestBody FaqMedicalrecCa dto) {
         /* 参数校验 */
@@ -88,7 +88,7 @@ public class PfCaseHistoryRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
     @PostMapping(value = "/classify/del")
     public ResultObject delClassify(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
@@ -104,7 +104,7 @@ public class PfCaseHistoryRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
     @PostMapping(value = "/template/add")
     public ResultObject addTemplate(@RequestBody FaqMedicalrec dto) {
         /* 参数校验 */
@@ -122,7 +122,7 @@ public class PfCaseHistoryRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040', 'ROLE_SUPER')")
     @PostMapping(value = "/template/edit")
     public ResultObject editTemplate(@RequestBody FaqMedicalrec dto) {
         /* 参数校验 */
@@ -141,7 +141,7 @@ public class PfCaseHistoryRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/del")
     public ResultObject delTemplate(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
@@ -157,7 +157,7 @@ public class PfCaseHistoryRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/updateStatus")
     public ResultObject updateTemplateStatus(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
@@ -174,7 +174,7 @@ public class PfCaseHistoryRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
     @PostMapping(value = "/med/tag/save")
     public ResultObject saveMedTag(@RequestBody FaqMedTag dto) {
         /* 参数校验 */
@@ -191,7 +191,7 @@ public class PfCaseHistoryRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
     @PostMapping(value = "/med/eva/save")
     public ResultObject saveEvaTag(@RequestBody FaqEvaTag dto) {
         /* 参数校验 */

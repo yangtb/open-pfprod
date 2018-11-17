@@ -86,7 +86,7 @@ public class PfClinicPartsRestController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_CLINIC0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0010','ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping(value = "/part/all")
     public ResultObject allPart() {
         /* 参数校验 */
@@ -182,7 +182,7 @@ public class PfClinicPartsRestController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_CLINIC0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0020','ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/sheet/all")
     public ResultObject allSheet() {
         /* 参数校验 */
@@ -196,7 +196,7 @@ public class PfClinicPartsRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_CLINIC0020','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0030','ROLE_SUPER')")
     @PostMapping(value = "/algorithm/add")
     public ResultObject addAlgorithm(@RequestBody BasAlgorithm dto) {
         /* 参数校验 */
@@ -212,7 +212,7 @@ public class PfClinicPartsRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_CLINIC0020', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0030', 'ROLE_SUPER')")
     @PostMapping(value = "/algorithm/edit")
     public ResultObject editAlgorithm(@RequestBody BasAlgorithm dto) {
         /* 参数校验 */
@@ -228,7 +228,7 @@ public class PfClinicPartsRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_CLINIC0020','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0030','ROLE_SUPER')")
     @RequestMapping(value = "/algorithm/del")
     public ResultObject delAlgorithm(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
@@ -244,7 +244,7 @@ public class PfClinicPartsRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_CLINIC0020','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0030','ROLE_SUPER')")
     @RequestMapping(value = "/algorithm/updateStatus")
     public ResultObject updateAlgorithmStatus(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */

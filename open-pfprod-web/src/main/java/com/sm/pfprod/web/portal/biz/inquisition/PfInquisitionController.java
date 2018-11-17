@@ -31,7 +31,7 @@ public class PfInquisitionController extends BaseController {
         return "pages/biz/inquisition/question";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/question/list")
     @ResponseBody
     public PageResult listQuestion(PfInquisitionQuestionDto dto) {

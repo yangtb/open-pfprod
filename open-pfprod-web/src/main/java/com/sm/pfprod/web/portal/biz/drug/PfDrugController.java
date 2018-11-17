@@ -60,7 +60,7 @@ public class PfDrugController extends BaseController {
         return "pages/biz/drug/drugInfoForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_BAS0060','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_BAS0060','ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/info/list")
     @ResponseBody
     public PageResult listDrugInfo(PfDrugInfoDto dto) {

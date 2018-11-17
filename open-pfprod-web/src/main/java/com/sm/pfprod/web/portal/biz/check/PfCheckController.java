@@ -38,7 +38,7 @@ public class PfCheckController extends BaseController {
         return "pages/biz/check/checkQuestion";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/question/list")
     @ResponseBody
     public PageResult listQuestion(PfCheckQuestionDto dto) {
@@ -48,7 +48,6 @@ public class PfCheckController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_STD0030', 'ROLE_SUPER')")
     @RequestMapping("/question/form")
     public String form(String formType, Model model) {
-        //model.addAttribute("examWays", enumUtil.getEnumList(SysDicGroupEnum.EXAM_WAYS.getCode()));
         model.addAttribute("bodyPosition", enumUtil.getEnumList(SysDicGroupEnum.BODY_POSITION.getCode()));
         model.addAttribute("formType", formType);
         return "pages/biz/check/checkQuestionForm";

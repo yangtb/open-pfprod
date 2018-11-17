@@ -43,21 +43,21 @@ public class PfKbAssessController extends BaseController {
     private EnumUtil enumUtil;
 
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/page")
     public String partPage(Model model) {
         model.addAttribute("assesses", pfClinicPartsService.listAllSheet());
         return "pages/biz/kb/assess/assessTemplate";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listKbAssess(PfEvaCaseDto dto) {
         return pfKbAssessService.listKbAssess(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/form")
     public String form(Model model, String formType) {
         model.addAttribute("formType", formType);
@@ -65,7 +65,7 @@ public class PfKbAssessController extends BaseController {
         return "pages/biz/kb/assess/assessForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/useCase/form")
     public String partForm(Model model, String cdEvaAsse, Long idEvaCase) {
         model.addAttribute("cdEvaAsse", cdEvaAsse);
@@ -74,7 +74,7 @@ public class PfKbAssessController extends BaseController {
         return "pages/biz/kb/assess/assessUseCaseForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/common/page")
     public String commonPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm) {
         model.addAttribute("showForm", showForm);
@@ -85,7 +85,7 @@ public class PfKbAssessController extends BaseController {
         return "pages/biz/kb/assess/define/assessCommon";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/referral/page")
     public String referralPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
         model.addAttribute("showBtn", showBtn);
@@ -97,7 +97,7 @@ public class PfKbAssessController extends BaseController {
         return "pages/biz/kb/assess/define/assessReferral";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/common/answer/page")
     public String commonAnswerPage(Model model, String cdEvaAsse, Long idEvaCase, String sdEva) {
         model.addAttribute("cdEvaAsse", cdEvaAsse);
@@ -107,7 +107,7 @@ public class PfKbAssessController extends BaseController {
         return "pages/biz/kb/assess/define/addCommonAnswer";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/diagnosis/page")
     public String diagnosisPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
         model.addAttribute("showBtn", showBtn);
@@ -120,7 +120,7 @@ public class PfKbAssessController extends BaseController {
     }
 
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/reason/page")
     public String reasonPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
         model.addAttribute("showBtn", showBtn);
@@ -132,7 +132,7 @@ public class PfKbAssessController extends BaseController {
         return "pages/biz/kb/assess/define/assessReason";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/cover/page")
     public String coverPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
         model.addAttribute("showBtn", showBtn);
@@ -144,7 +144,7 @@ public class PfKbAssessController extends BaseController {
         return "pages/biz/kb/assess/define/assessCover";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/must/page")
     public String mustPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
         model.addAttribute("showBtn", showBtn);
@@ -156,7 +156,7 @@ public class PfKbAssessController extends BaseController {
         return "pages/biz/kb/assess/define/assessMust";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/effciency/page")
     public String effciencyPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
         model.addAttribute("showBtn", showBtn);
@@ -168,7 +168,7 @@ public class PfKbAssessController extends BaseController {
         return "pages/biz/kb/assess/define/assessEffciency";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/order/page")
     public String orderPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
         model.addAttribute("showBtn", showBtn);
@@ -184,7 +184,7 @@ public class PfKbAssessController extends BaseController {
         return "pages/biz/kb/assess/define/assessOrder";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/referral/answer/page")
     public String referralPage1(Model model, Long idEvaCaseItem, String sdEva) {
         model.addAttribute("idEvaCaseItem", idEvaCaseItem);
@@ -196,49 +196,49 @@ public class PfKbAssessController extends BaseController {
         return "pages/biz/kb/assess/define/addReferralAnswer";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/referral/list")
     @ResponseBody
     public PageResult listKbReferral(PfAssessCommonDto dto) {
         return pfKbAssessService.listKbReferral(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/diagnosis/list")
     @ResponseBody
     public PageResult listKbDiagnosis(PfAssessCommonDto dto) {
         return pfKbAssessService.listKbDiagnosis(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/reason/list")
     @ResponseBody
     public PageResult listKbReason(PfAssessCommonDto dto) {
         return pfKbAssessService.listKbReason(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/cover/list")
     @ResponseBody
     public PageResult listKbCover(PfAssessCommonDto dto) {
         return pfKbAssessService.listKbCover(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/must/list")
     @ResponseBody
     public PageResult listKbMust(PfAssessCommonDto dto) {
         return pfKbAssessService.listKbMust(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/effciency/list")
     @ResponseBody
     public PageResult listKbEffciency(PfAssessCommonDto dto) {
         return pfKbAssessService.listKbEffciency(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/order/list")
     @ResponseBody
     public PageResult listKbOrder(PfAssessCommonDto dto) {

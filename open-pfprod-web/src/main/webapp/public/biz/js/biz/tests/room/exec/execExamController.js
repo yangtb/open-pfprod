@@ -16,6 +16,7 @@ layui.config({
         , cols: [[
             {type: 'numbers', title: 'R'},
             {field: 'naItem', minWidth: 150, title: '检验项目'},
+            {field: 'idDie', width: 100, title: '拟诊', templet: '#nzTpl'},
             {field: 'qa', width: 60, title: '提问', fixed: 'right', align: 'center', templet: '#qaTpl'}
         ]] //设置表头
         , url: basePath + '/pf/p/waiting/room/test/exam/list'
@@ -29,6 +30,8 @@ layui.config({
 
 
     form.on('checkbox(qaCheckFilter)', function (obj) {
+        alert(this.value)
+        return false;
         var qaValue = this.value;
         var qaArr = qaValue.split("-");
         var data = {

@@ -44,7 +44,7 @@ public class PfTestPaperRestController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010','ROLE_SUPER')")
     @PostMapping(value = "/classify/tree")
     public ResultObject listPaperClassifyTree() {
         return ResultObject.createSuccess("listPaperClassifyTree", ResultObject.DATA_TYPE_LIST,
@@ -57,7 +57,7 @@ public class PfTestPaperRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010','ROLE_SUPER')")
     @PostMapping(value = "/classify/add")
     public ResultObject addPaperClassify(@RequestBody ExmTestpaperCa dto) {
         /* 参数校验 */
@@ -75,7 +75,7 @@ public class PfTestPaperRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010', 'ROLE_SUPER')")
     @PostMapping(value = "/classify/edit")
     public ResultObject editPaperClassify(@RequestBody ExmTestpaperCa dto) {
         /* 参数校验 */
@@ -93,7 +93,7 @@ public class PfTestPaperRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010','ROLE_SUPER')")
     @PostMapping(value = "/classify/del")
     public ResultObject delPaperClassify(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
@@ -109,7 +109,7 @@ public class PfTestPaperRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010','ROLE_SUPER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addPaper(@RequestBody ExmTestpaper dto) {
@@ -128,7 +128,7 @@ public class PfTestPaperRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010', 'ROLE_SUPER')")
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject editPaper(@RequestBody ExmTestpaper dto) {
@@ -147,7 +147,7 @@ public class PfTestPaperRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010','ROLE_SUPER')")
     @RequestMapping(value = "/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delPaper(@RequestBody PfBachChangeStatusDto dto) {
@@ -165,7 +165,7 @@ public class PfTestPaperRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010','ROLE_SUPER')")
     @RequestMapping(value = "/updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject updatePaperStatus(@RequestBody PfBachChangeStatusDto dto) {
@@ -195,7 +195,7 @@ public class PfTestPaperRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010', 'ROLE_SUPER')")
     @RequestMapping(value = "/item/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addPaperInfo(@RequestBody PfAddCaseDto dto) {
@@ -212,7 +212,7 @@ public class PfTestPaperRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010','ROLE_SUPER')")
     @RequestMapping(value = "/item/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delPaperItem(@RequestBody PfBachChangeStatusDto dto) {
@@ -230,7 +230,7 @@ public class PfTestPaperRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010', 'ROLE_SUPER')")
     @RequestMapping(value = "/item/update/sort", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject updatePaperItemSort(@RequestBody ExmTestpaperMedicalrec dto) {

@@ -35,13 +35,13 @@ public class PfTestPaperController extends BaseController {
     @Resource
     private EnumUtil enumUtil;
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010','ROLE_SUPER')")
     @RequestMapping("/page")
     public String paperPage() {
         return "pages/biz/tests/paper/testPaper";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010','ROLE_SUPER')")
     @RequestMapping("/form")
     public String paperForm(Model model, String formType) {
         model.addAttribute("formType", formType);
@@ -50,7 +50,7 @@ public class PfTestPaperController extends BaseController {
         return "pages/biz/tests/paper/testPaperForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010','ROLE_SUPER')")
     @RequestMapping("/item/page")
     public String testPaperItem(Model model, Long idTestpaper) {
         model.addAttribute("idTestpaper", idTestpaper);
@@ -59,14 +59,14 @@ public class PfTestPaperController extends BaseController {
         return "pages/biz/tests/paper/testPaperItem";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010','ROLE_SUPER')")
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listQuestion(PfTestPaperDto dto) {
         return pfTestPaperService.listPaper(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0010','ROLE_SUPER')")
     @RequestMapping(value = "/item/list")
     @ResponseBody
     public PageResult listPaperItem(PfTestPaperDto dto) {

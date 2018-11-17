@@ -74,21 +74,21 @@ public class PfClinicPartsController extends BaseController {
         return "pages/biz/clinic/sheet/sheetDefineForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_CLINIC0020','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0030','ROLE_SUPER')")
     @RequestMapping("/algorithm/page")
     public String algorithmPage(Model model) {
         model.addAttribute("algorithmDefine", enumUtil.getEnumList(SysDicGroupEnum.ALGORITHM_DEFINE.getCode()));
         return "pages/biz/clinic/algorithm/algorithmDefine";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_CLINIC0020','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0030','ROLE_SUPER')")
     @RequestMapping(value = "/algorithm/list")
     @ResponseBody
     public PageResult listAlgorithm(PfClinicPartsDto dto) {
         return pfClinicPartsService.listAlgorithm(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_CLINIC0020', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0030', 'ROLE_SUPER')")
     @RequestMapping("/algorithm/form")
     public String algorithmForm(String formType, Model model) {
         model.addAttribute("formType", formType);

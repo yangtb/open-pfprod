@@ -30,27 +30,27 @@ public class PfClinicTemplateController extends BaseController {
     private PfClinicPartsService pfClinicPartsService;
 
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0020','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping("/template/page")
     public String cataloguePage(Model model) {
         return "pages/biz/clinic/clinicTemplate";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0020','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
     @RequestMapping(value = "/template/list")
     @ResponseBody
     public PageResult listTemplate(PfClinicTemplateDto dto) {
         return pfClinicTemplateService.listTemplate(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040', 'ROLE_SUPER')")
     @RequestMapping("/template/form")
     public String form(String formType, Model model) {
         model.addAttribute("formType", formType);
         return "pages/biz/clinic/clinicTemplateForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040', 'ROLE_SUPER')")
     @RequestMapping("/template/tag/caseHistory/form")
     public String caseHistoryForm(Long idDemo, Model model) {
         model.addAttribute("idDemo", idDemo);
@@ -58,7 +58,7 @@ public class PfClinicTemplateController extends BaseController {
         return "pages/biz/clinic/tagCaseHistoryForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040', 'ROLE_SUPER')")
     @RequestMapping("/template/tag/sheet/form")
     public String sheetForm(Long idDemo, Model model) {
         model.addAttribute("idDemo", idDemo);
@@ -66,7 +66,7 @@ public class PfClinicTemplateController extends BaseController {
         return "pages/biz/clinic/tagSheetForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040', 'ROLE_SUPER')")
     @RequestMapping("/template/tag/dimension/form")
     public String dimensionForm(Long idDemo, Model model) {
         model.addAttribute("idDemo", idDemo);
@@ -74,21 +74,21 @@ public class PfClinicTemplateController extends BaseController {
         return "pages/biz/clinic/tagDimensionForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040', 'ROLE_SUPER')")
     @RequestMapping("/template/tag/form")
     public String tagForm(Long idDemo, Model model) {
         model.addAttribute("idDemo", idDemo);
         return "pages/biz/clinic/clinicTagForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040', 'ROLE_SUPER')")
     @RequestMapping("/template/tag/sheet/list")
     @ResponseBody
     public PageResult listSheetTag(PfClinicTemplateDto dto) {
         return pfClinicTemplateService.listSheetTag(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040', 'ROLE_SUPER')")
     @RequestMapping("/template/tag/caseHistory/list")
     @ResponseBody
     public PageResult listCaseHistoryTag(PfClinicTemplateDto dto) {

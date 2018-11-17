@@ -39,7 +39,7 @@ public class PfKbAssessRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @PostMapping(value = "/add")
     public ResultObject addKbAssess(@RequestBody FaqEvaCase dto) {
         /* 参数校验 */
@@ -59,7 +59,7 @@ public class PfKbAssessRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020', 'ROLE_SUPER')")
     @PostMapping(value = "/edit")
     public ResultObject editKbAssess(@RequestBody FaqEvaCase dto) {
         /* 参数校验 */
@@ -79,7 +79,7 @@ public class PfKbAssessRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/updateStatus")
     public ResultObject updateKbAssessStatus(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
@@ -90,7 +90,7 @@ public class PfKbAssessRestController {
                 : ResultObject.create("updateKbAssessStatus", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/referral/list")
     public ResultObject listReferral(@RequestBody PfAssessCommonDto dto) {
         /* 参数校验 */
@@ -100,7 +100,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.listReferral(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/referral/del")
     public ResultObject delReferral(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
@@ -110,7 +110,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.delReferral(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/referral/save")
     public ResultObject saveReferral(@RequestBody PfAssessReferralDto dto) {
         /* 参数校验 */
@@ -121,7 +121,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.saveReferral(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/diagnosis/list")
     public ResultObject listDiagnosisAnswer(@RequestBody PfAssessCommonDto dto) {
         /* 参数校验 */
@@ -131,7 +131,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.listDiagnosisAnswer(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/diagnosis/del")
     public ResultObject delDiagnosis(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
@@ -141,7 +141,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.delDiagnosis(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/diagnosis/save")
     public ResultObject saveDiagnosis(@RequestBody PfAssessDiagnosisDto dto) {
         /* 参数校验 */
@@ -153,7 +153,7 @@ public class PfKbAssessRestController {
     }
 
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/reason/list")
     public ResultObject listReasonAnswer(@RequestBody PfAssessCommonDto dto) {
         /* 参数校验 */
@@ -163,7 +163,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.listReasonAnswer(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/reason/del")
     public ResultObject delReason(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
@@ -173,7 +173,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.delReason(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/reason/save")
     public ResultObject saveReason(@RequestBody PfAssessReasonDto dto) {
         /* 参数校验 */
@@ -184,7 +184,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.saveReason(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/cover/list")
     public ResultObject listCoverAnswer(@RequestBody PfAssessCommonDto dto) {
         /* 参数校验 */
@@ -194,7 +194,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.listCoverAnswer(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/cover/del")
     public ResultObject delCover(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
@@ -204,7 +204,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.delCover(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/cover/save")
     public ResultObject saveCover(@RequestBody PfAssessCoverDto dto) {
         /* 参数校验 */
@@ -215,7 +215,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.saveCover(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/must/list")
     public ResultObject listMustAnswer(@RequestBody PfAssessCommonDto dto) {
         /* 参数校验 */
@@ -225,7 +225,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.listMustAnswer(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/must/del")
     public ResultObject delMust(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
@@ -235,7 +235,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.delMust(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/must/save")
     public ResultObject saveMust(@RequestBody PfAssessMustDto dto) {
         /* 参数校验 */
@@ -246,7 +246,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.saveMust(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/effciency/del")
     public ResultObject delEffciency(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
@@ -256,7 +256,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.delEffciency(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/effciency/save")
     public ResultObject saveEffciency(@RequestBody PfAssessEffciencyDto dto) {
         /* 参数校验 */
@@ -269,7 +269,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.saveEffciency(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/order/list")
     public ResultObject listOrderAnswer(@RequestBody PfAssessCommonDto dto) {
         /* 参数校验 */
@@ -279,7 +279,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.listOrderAnswer(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/order/del")
     public ResultObject delOrder(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */
@@ -289,7 +289,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.delOrder(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/order/save")
     public ResultObject saveOrder(@RequestBody PfAssessOrderDto dto) {
         /* 参数校验 */
@@ -300,7 +300,7 @@ public class PfKbAssessRestController {
                 pfKbAssessService.saveOrder(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/common/del")
     public ResultObject delCommonAssess(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */

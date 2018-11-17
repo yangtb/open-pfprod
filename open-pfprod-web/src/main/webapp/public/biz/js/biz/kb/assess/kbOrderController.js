@@ -129,7 +129,7 @@ layui.config({
 
     $('#addAnswerBtn').on('click', function () {
         if (!$('#sdEvaType').val()) {
-            layer.tips('请先选择评估阶段', '#addAnswerBtn', {tips: 1});
+            layer.tips('请先选择评估类别', '#addAnswerBtn', {tips: 1});
             return false;
         }
     });

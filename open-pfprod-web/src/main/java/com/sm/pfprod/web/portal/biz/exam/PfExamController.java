@@ -31,14 +31,14 @@ public class PfExamController extends BaseController {
         return "pages/biz/exam/question";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0050','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0050','ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/question/list")
     @ResponseBody
     public PageResult listQuestion(PfExamQuestionDto dto) {
         return pfExamService.listQuestion(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0050', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0050','ROLE_SUPER')")
     @RequestMapping("/question/form")
     public String form(String formType, Model model) {
         model.addAttribute("formType", formType);
