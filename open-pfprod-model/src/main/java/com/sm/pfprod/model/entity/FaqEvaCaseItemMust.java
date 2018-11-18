@@ -34,6 +34,11 @@ public class FaqEvaCaseItemMust implements Serializable {
     private String sdEvaMust;
 
     /**
+     * 疾病id
+     */
+    private Long idDie;
+
+    /**
      * 覆盖检查_问诊
      */
     private Long idInques;

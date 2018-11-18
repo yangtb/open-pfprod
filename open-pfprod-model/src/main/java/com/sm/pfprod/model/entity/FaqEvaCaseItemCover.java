@@ -39,6 +39,11 @@ public class FaqEvaCaseItemCover implements Serializable {
     private Long idDie;
 
     /**
+     * 疾病text
+     */
+    private String idDieText;
+
+    /**
      * 鉴定检查_问诊
      */
     private String idInques;

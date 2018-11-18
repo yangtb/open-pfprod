@@ -36,6 +36,11 @@ public class ExmMedResultInspect implements Serializable {
     private Long idMedCaseList;
 
     /**
+     * 拟诊id
+     */
+    private Long idDie;
+
+    /**
      * 检验项目ID
      */
     private Long idInspectItem;

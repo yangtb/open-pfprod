@@ -2,36 +2,73 @@ layui.config({
     base: basePath + '/public/layui/build/js/'
 }).extend({
     ckplayer: 'ckplayer/ckplayer'
-}).use(['table', 'jquery', 'form', 'common'], function () {
+}).use(['table', 'jquery', 'form', 'common', 'tableSelect'], function () {
     var $ = layui.$
         , table = layui.table
         , form = layui.form
-        , common = layui.common;
+        , common = layui.common
+        , tableSelect = layui.tableSelect;
 
     //执行渲染
     table.render({
-        elem: '#partConsTable' //指定原始表格元素选择器（推荐id选择器）
-        , id: 'partConsTableId'
+        elem: '#examTable' //指定原始表格元素选择器（推荐id选择器）
+        , id: 'examTableId'
         , height: '734' //容器高度
         , cols: [[
             {type: 'numbers', title: 'R'},
             {field: 'naItem', minWidth: 150, title: '检验项目'},
-            {field: 'idDie', width: 100, title: '拟诊', templet: '#nzTpl'},
+            {field: 'idDieText', width: 140, title: '拟诊', toolbar: '#nzTpl'},
             {field: 'qa', width: 60, title: '提问', fixed: 'right', align: 'center', templet: '#qaTpl'}
         ]] //设置表头
         , url: basePath + '/pf/p/waiting/room/test/exam/list'
         , where: {
             idMedicalrec: idMedicalrec,
             cdMedAsse: cdMedAsse,
-            idTestexecResult : idTestexecResult
+            idTestexecResult: idTestexecResult
         }
         , page: false
+        , done: function (res, curr, count) {
+            $.each(res.data, function (i, item) {
+                tableSelectRender(item.idMedCaseList);
+            });
+        }
     });
 
+    function tableSelectRender(id) {
+        tableSelect.render({
+            elem: '#nz' + id,
+            checkedKey: 'nzId' + id,
+            searchKey: 'keywords',
+            table: {
+                url: basePath + '/pf/p/disease/info/list'
+                , cols: [[
+                    {type: 'radio', fixed: true},
+                    {field: 'name', minWidth: 160, title: '疾病名称'},
+                    {field: 'cdDieclassText', minWidth: 120, title: '疾病目录'},
+                    {field: 'icd', width: 80, title: 'ICD'}
+                ]] //设置表头
+                , limits: [10, 20, 50]
+                , page: true
+            },
+            done: function (elem, data) {
+                var selectData = data.data[0];
+                $('#nz' + id).attr('data-index', selectData.idDie)
+                $('#nz' + id).text(selectData.name);
+                // if check
+                if ($('#nz' + id).attr('data-qa-check') == 'true') {
+                    var bizData = {
+                        idTestexecResult: idTestexecResult,
+                        idMedCaseList: id,
+                        idDie : selectData.idDie
+                    }
+                    var url = basePath + '/pf/r/waiting/room/exam/qa/edit';
+                    common.commonPost(url, bizData, null, null, null, false);
+                }
+            }
+        });
+    };
 
     form.on('checkbox(qaCheckFilter)', function (obj) {
-        alert(this.value)
-        return false;
         var qaValue = this.value;
         var qaArr = qaValue.split("-");
         var data = {
@@ -39,9 +76,10 @@ layui.config({
             idMedCaseList: qaValue,
             idInspectItem: qaArr[0],
             idMedCaseList: qaArr[1],
-            fgValid: obj.elem.checked ? '0' : '1'
+            fgValid: obj.elem.checked ? '0' : '1',
+            idDie: $('#nz' + qaArr[1]).attr('data-index')
         }
-        console.log(data)
+        $('#nz' + qaArr[1]).attr('data-qa-check', 'true');
         var url = basePath + '/pf/r/waiting/room/exam/qa/save';
         common.commonPost(url, data, null, null, null, false);
     });
@@ -243,8 +281,6 @@ layui.config({
 });
 
 
-
-
 function control(idResult) {
     var audio = document.querySelector('#patientVoice' + idResult);
     if (audio !== null) {
@@ -308,7 +344,7 @@ function checkQa(obj) {
     });
 };
 
-function onError(obj){
+function onError(obj) {
     obj.src = basePath + '/public/biz/img/tupianjiazaishibai.png';
 }
 

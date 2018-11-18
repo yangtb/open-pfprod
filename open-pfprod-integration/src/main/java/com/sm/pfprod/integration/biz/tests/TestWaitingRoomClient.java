@@ -72,6 +72,10 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.saveCheckQa(param);
     }
 
+    public CommonResult<Boolean> editCheckQa(ExmMedResultBodyParam param) {
+        return pfTestWaitingRoomFacade.editCheckQa(param);
+    }
+
     public CommonResult<Boolean> updateCheckStatus(PfBachChangeStatusParam param) {
         return pfTestWaitingRoomFacade.updateCheckStatus(param);
     }
@@ -80,14 +84,16 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.listCheckQa(param);
     }
 
-
     public PfPageResult listTestExam(PfTestExamTagParam param) {
         return pfTestWaitingRoomFacade.listTestExam(param);
     }
 
-
     public CommonResult<Long> saveExamQa(ExmMedResultInspectParam param) {
         return pfTestWaitingRoomFacade.saveExamQa(param);
+    }
+
+    public CommonResult<Boolean> editExamQa(ExmMedResultInspectParam param) {
+        return pfTestWaitingRoomFacade.editExamQa(param);
     }
 
     public CommonResult<Boolean> updateExamStatus(PfBachChangeStatusParam param) {

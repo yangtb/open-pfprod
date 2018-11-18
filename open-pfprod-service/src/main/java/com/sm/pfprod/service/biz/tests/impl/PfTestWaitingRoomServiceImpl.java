@@ -153,6 +153,15 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     }
 
     @Override
+    public boolean editCheckQa(ExmMedResultBody dto) {
+        CommonResult<Boolean> result = testWaitingRoomClient.editCheckQa(BeanUtil.convert(dto, ExmMedResultBodyParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
     public boolean updateCheckStatus(PfBachChangeStatusDto dto) {
         CommonResult<Boolean> result = testWaitingRoomClient.updateCheckStatus(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
         if (result != null && result.getIsSuccess()) {
@@ -182,6 +191,15 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     @Override
     public Long saveExamQa(ExmMedResultInspect dto) {
         CommonResult<Long> result = testWaitingRoomClient.saveExamQa(BeanUtil.convert(dto, ExmMedResultInspectParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean editExamQa(ExmMedResultInspect dto) {
+        CommonResult<Boolean> result = testWaitingRoomClient.editExamQa(BeanUtil.convert(dto, ExmMedResultInspectParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }

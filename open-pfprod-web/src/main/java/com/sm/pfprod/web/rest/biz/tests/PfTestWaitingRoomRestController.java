@@ -157,6 +157,24 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
+     * 检查 - 编辑问题
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/check/qa/edit")
+    @ResponseBody
+    public ResultObject editCheckQa(@RequestBody ExmMedResultBody dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        Assert.isTrue(dto.getIdMedCaseList() != null, "idMedCaseList");
+
+        return ResultObject.createSuccess("editCheckQa", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.editCheckQa(dto));
+    }
+
+    /**
      * 检查-线索标志
      *
      * @param dto
@@ -205,6 +223,23 @@ public class PfTestWaitingRoomRestController extends BaseController {
 
         return ResultObject.createSuccess("saveExamQa", ResultObject.DATA_TYPE_OBJECT,
                 pfTestWaitingRoomService.saveExamQa(dto));
+    }
+
+    /**
+     * 检验 - 编辑问题
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/exam/qa/edit")
+    @ResponseBody
+    public ResultObject editExamQa(@RequestBody ExmMedResultInspect dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        Assert.isTrue(dto.getIdMedCaseList() != null, "idMedCaseList");
+        return ResultObject.createSuccess("editExamQa", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.editExamQa(dto));
     }
 
     /**

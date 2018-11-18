@@ -2,11 +2,12 @@ layui.config({
     base: basePath + '/public/layui/build/js/'
 }).extend({
     ckplayer: 'ckplayer/ckplayer'
-}).use(['table', 'jquery', 'form', 'common'], function () {
+}).use(['table', 'jquery', 'form', 'common', 'tableSelect'], function () {
     var $ = layui.$
         , table = layui.table
         , form = layui.form
-        , common = layui.common;
+        , common = layui.common
+        , tableSelect = layui.tableSelect;
 
 
     //执行渲染
@@ -16,14 +17,54 @@ layui.config({
         , height: '395' //容器高度
         , cols: [[
             {type: 'numbers', title: 'R'},
-            {field: 'desBody', minWidth: 150, title: '检查项'},
+            {field: 'desBody', minWidth: 140, title: '检查项'},
             {field: 'cdCheckText', width: 90, title: '检查方式'},
+            {field: 'idDieText', width: 90, title: '拟诊', toolbar: '#nzTpl'},
             {field: 'qa', width: 60, title: '提问', fixed: 'right', align: 'center', templet: '#qaTpl'}
         ]] //设置表头
         , url: basePath + '/pf/p/waiting/room/test/check/list'
         , data: []
         , page: false
+        , done: function (res, curr, count) {
+            $.each(res.data, function (i, item) {
+                tableSelectRender(item.idMedCaseList);
+            });
+        }
     });
+
+    function tableSelectRender(id) {
+        tableSelect.render({
+            elem: '#nz' + id,
+            checkedKey: 'nzId' + id,
+            searchKey: 'keywords',
+            table: {
+                url: basePath + '/pf/p/disease/info/list'
+                , cols: [[
+                    {type: 'radio', fixed: true},
+                    {field: 'name', minWidth: 160, title: '疾病名称'},
+                    {field: 'cdDieclassText', minWidth: 120, title: '疾病目录'},
+                    {field: 'icd', width: 80, title: 'ICD'}
+                ]] //设置表头
+                , limits: [10, 20, 50]
+                , page: true
+            },
+            done: function (elem, data) {
+                var selectData = data.data[0];
+                $('#nz' + id).attr('data-index', selectData.idDie)
+                $('#nz' + id).text(selectData.name);
+                // if check
+                if ($('#nz' + id).attr('data-qa-check') == 'true') {
+                    var bizData = {
+                        idTestexecResult: idTestexecResult,
+                        idMedCaseList: id,
+                        idDie : selectData.idDie
+                    }
+                    var url = basePath + '/pf/r/waiting/room/check/qa/edit';
+                    common.commonPost(url, bizData, null, null, null, false);
+                }
+            }
+        });
+    };
 
     var photoData;
     // 页面加载完成查询问答
@@ -103,8 +144,10 @@ layui.config({
             idTestexecResult: idTestexecResult,
             idBody: qaArr[0],
             idMedCaseList: qaArr[1],
-            fgValid: obj.elem.checked ? '0' : '1'
+            fgValid: obj.elem.checked ? '0' : '1',
+            idDie: $('#nz' + qaArr[1]).attr('data-index')
         }
+        $('#nz' + qaArr[1]).attr('data-qa-check', 'true');
         var url = basePath + '/pf/r/waiting/room/check/qa/save';
         common.commonPost(url, data, null, null, null, false);
     });

@@ -77,6 +77,18 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">疾病</label>
+                                <div class="layui-input-block">
+                                    <div hidden>
+                                        <input type="text" name="idDie" id="idDie" autocomplete="off"
+                                               autocomplete="off" class="layui-input" hidden>
+                                    </div>
+                                    <input type="text" name="idDieText" id="idDieText" autocomplete="off"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+
+                            </div>
                         </div>
 
                         <button type="button" id="addAnswerBtn" class="layui-btn layui-btn-sm"

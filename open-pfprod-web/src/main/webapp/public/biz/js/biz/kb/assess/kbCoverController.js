@@ -235,6 +235,28 @@ layui.config({
         });
     };
 
+    tableSelect.render({
+        elem: '#idDieText',
+        checkedKey: 'idDieTextId',
+        searchKey: 'keywords',
+        table: {
+            url: basePath + '/pf/p/disease/info/list'
+            , cols: [[
+                {type: 'radio', fixed: true},
+                {field: 'name', minWidth: 160, title: '疾病名称'},
+                {field: 'cdDieclassText', minWidth: 120, title: '疾病目录'},
+                {field: 'icd', width: 80, title: 'ICD'}
+            ]] //设置表头
+            , limits: [10, 20, 50]
+            , page: true
+        },
+        done: function (elem, data) {
+            var selectData = data.data[0];
+            $('#idDie').val(selectData.idDie);
+            $('#idDieText').val(selectData.name);
+        }
+    });
+
     //监听提交
     form.on('submit(saveAnswer)', function (data) {
 

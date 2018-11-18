@@ -19,21 +19,6 @@
         var idTestexecResult = '$!{idTestexecResult}';
     </script>
 
-    <style>
-        /* 防止下拉框的下拉列表被隐藏---必须设置--- */
-        .layui-table-cell {
-            overflow: visible !important;
-        }
-
-        /* 使得下拉框与单元格刚好合适 */
-        td .layui-form-select {
-            margin-top: -10px;
-            margin-left: -15px;
-            margin-right: -15px;
-        }
-
-    </style>
-
 </head>
 
 <body class="wrapper-content">
@@ -47,7 +32,7 @@
                 </button>
             </div>
         </form>
-        <table id="partConsTable" lay-filter="partConsTableFilter">
+        <table id="examTable" lay-filter="examTableFilter">
         </table>
     </div>
 
@@ -79,11 +64,15 @@
 </script>
 
 <script type="text/html" id="nzTpl">
-    <select name="queryType">
-        <option value="">请选择</option>
-        <option value="1">拟诊1</option>
-        <option value="2">拟诊2</option>
-    </select>
+    <a href="javascript:;" class="layui-table-link" id="nz{{d.idMedCaseList}}"
+       data-index="{{ d.idDie ? d.idDie : '' }}"
+       data-qa-check="{{ d.extQa== true ? true : false }}" lay-event="add">
+        {{# if(d.idDie){ }}
+        {{d.idDieText}}
+        {{# } else { }}
+        点击选择
+        {{# } }}
+    </a>
 </script>
 
 
