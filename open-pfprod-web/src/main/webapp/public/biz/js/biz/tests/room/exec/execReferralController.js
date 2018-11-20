@@ -17,17 +17,16 @@ layui.config({
             {field: 'icd', width: 80, title: 'ICD'},
             {field: 'qa', width: 100, title: '', fixed: 'right', align: 'center', templet: '#qaTpl'}
         ]] //设置表头
-        //, url: basePath + '/pf/p/disease/info/list'
-        , limit: 20
+        , url: basePath + '/pf/p/disease/info/list'
+        , limit: 25
         , page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
             layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
             //,curr: 5 //设定初始在第 5 页
             , groups: 1 //只显示 1 个连续页码
             , first: false //不显示首页
             , last: false //不显示尾页
-            , limits: [20, 30, 100]
+            , limits: [25, 30, 100]
         }
-        , data: []
     });
 
     //监听提交
