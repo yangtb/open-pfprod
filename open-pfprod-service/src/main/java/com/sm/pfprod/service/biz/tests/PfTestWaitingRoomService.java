@@ -1,5 +1,6 @@
 package com.sm.pfprod.service.biz.tests;
 
+import com.sm.pfprod.model.dto.biz.tests.PfTestEvaDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestWatingRoomDto;
@@ -8,6 +9,8 @@ import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.test.*;
+import com.sm.pfprod.model.vo.biz.test.eva.PfEvaExecVo;
+import com.sm.pfprod.model.vo.biz.test.eva.PfExecLogVo;
 import com.sm.pfprod.model.vo.biz.test.paper.PfTestPaperVo;
 
 import java.util.List;
@@ -43,6 +46,14 @@ public interface PfTestWaitingRoomService {
      * @return
      */
     PfTestPaperVo selectTestPaperInfo(PfTestExamDto dto);
+
+    /**
+     * 获取试卷信息
+     *
+     * @param dto
+     * @return
+     */
+    PfTestPaperVo selectTestPaper(PfTestExamDto dto);
 
     /**
      * 开始考试
@@ -317,7 +328,60 @@ public interface PfTestWaitingRoomService {
      */
     PageResult listDieReason(Long idTestexecResultDiagnosis);
 
+    /**
+     * 查询病历评估得分
+     *
+     * @param idTestexecResult
+     * @return
+     */
+    List<PfEvaExecVo> selectScore(Long idTestexecResult);
 
+    /**
+     * 查询病历评估
+     *
+     * @param dto
+     * @return
+     */
+    List<PfEvaExecVo> listEva(PfTestEvaDto dto);
 
+    /**
+     * 查询评估日志
+     *
+     * @param idTestexecResult
+     * @return
+     */
+    List<ExmEvaLog> listEvaLog(Long idTestexecResult);
+
+    /**
+     * 病历评估
+     *
+     * @param idTestexecResult
+     * @return
+     */
+    boolean medEva(Long idTestexecResult);
+
+    /**
+     * 修改得分
+     *
+     * @param dto
+     * @return
+     */
+    boolean editEva(ExmEvaDimension dto);
+
+    /**
+     * 查询病例执行日志
+     *
+     * @param idTestexecResult
+     * @return
+     */
+    List<PfExecLogVo> listExecLog(Long idTestexecResult);
+
+    /**
+     * 评估结果
+     *
+     * @param idTestexecResult
+     * @return
+     */
+    ExmEvaResult selectEvaResult(Long idTestexecResult);
 
 }

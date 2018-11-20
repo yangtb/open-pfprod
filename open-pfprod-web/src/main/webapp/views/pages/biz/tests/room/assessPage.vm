@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>模拟候诊室</title>
+    <title>模拟评估列表</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -68,9 +68,13 @@
                         lay-href="" style="display: none">
                     <i class="iconfont icon-monikaoshi"></i><span id="patName"></span>：模拟就诊
                 </button>
+                <button id="testAssess" type="button" class="layui-btn layui-btn-normal"
+                        lay-href="" style="display: none">
+                    <i class="iconfont icon-monikaoshi"></i><span id="patNameAssess"></span>：模拟评估
+                </button>
                 <button id="exam" type="button" class="layui-btn layui-btn-normal"
                         #*lay-href="${basePath}/pf/p/waiting/room/exam/page"*#>
-                    <i class="iconfont icon-monikaoshi"></i>模拟就诊
+                    <i class="iconfont icon-monikaoshi"></i>模拟评估
                 </button>
                 <div hidden>
                     <button id="mock" type="button" class="layui-btn layui-btn-normal">
@@ -93,7 +97,7 @@
 
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
-<script src="${contextPath}/public/biz/js/biz/tests/room/waitingRoomController.js"></script>
+<script src="${contextPath}/public/biz/js/biz/tests/room/assessController.js"></script>
 
 <script type="text/html" id="roomBar">
     <a class="layui-btn layui-btn-xs" lay-event="detail"><i class="iconfont icon-detail"></i> 详情</a>

@@ -245,6 +245,13 @@ public class PfTestWaitingRoomController extends BaseController {
         return pfTestWaitingRoomService.listShortDrugs(idTestexecResultOrder);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @RequestMapping("/assess/page")
+    public String assessPage(Model model) {
+        model.addAttribute("sexEnum", enumUtil.getEnumList(SysDicGroupEnum.SEX.getCode()));
+        return "pages/biz/tests/room/assessPage";
+    }
+
     /**
      * 模拟评估
      *
@@ -253,10 +260,18 @@ public class PfTestWaitingRoomController extends BaseController {
      */
     @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
     @RequestMapping("/test/assess/page")
-    public String testAssessPage(Model model, PfTestExamTagDto dto) {
+    public String testAssessPage(Model model, PfTestExamDto dto) {
+        model.addAttribute("idTestplanDetail", dto.getIdTestplanDetail());
+        model.addAttribute("idTestplan", dto.getIdTestplan());
+        model.addAttribute("idDemo", dto.getIdDemo());
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
-        model.addAttribute("cdMedAsse", dto.getCdMedAsse());
+        model.addAttribute("idTestpaper",  dto.getIdTestpaper());
+        model.addAttribute("idStudent", dto.getIdStudent());
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
+
+        PfTestPaperVo pfTestPaperVo = pfTestWaitingRoomService.selectTestPaper(dto);
+        pfTestPaperVo.getStudentInfo().setSex(enumUtil.getEnumTxt(SysDicGroupEnum.SEX.getCode(), pfTestPaperVo.getStudentInfo().getSex()));
+        model.addAttribute("examInfo", pfTestPaperVo);
         return "pages/biz/tests/room/assess/testAssessPage";
     }
 

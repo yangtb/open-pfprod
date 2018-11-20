@@ -14,6 +14,11 @@ public class PfTestReceivePatVo implements Serializable {
     private static final long serialVersionUID = 7805306448357333809L;
 
     /**
+     * 执行结果id
+     */
+    private Long idTestexecResult;
+
+    /**
      * 接诊状态
      */
     private String status;

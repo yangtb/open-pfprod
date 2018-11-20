@@ -4,14 +4,17 @@ import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
+import com.sm.pfprod.model.dto.biz.tests.PfTestEvaDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.dto.common.PfChangeStatusDto;
 import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
+import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.service.biz.tests.PfTestWaitingRoomService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
+import com.sm.pfprod.web.util.EnumUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,6 +35,9 @@ public class PfTestWaitingRoomRestController extends BaseController {
 
     @Resource
     private PfTestWaitingRoomService pfTestWaitingRoomService;
+
+    @Resource
+    private EnumUtil enumUtil;
 
     /**
      * 开始执行
@@ -64,6 +70,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
     public ResultObject endExam(@RequestBody ExmTestexec dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getIdTestexec() != null, "idTestexec");
+        Assert.isTrue(dto.getIdTestplanDetail() != null, "idTestplanDetail");
 
         dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
         return ResultObject.createSuccess("startExam", ResultObject.DATA_TYPE_OBJECT, pfTestWaitingRoomService.endExam(dto));
@@ -491,6 +498,122 @@ public class PfTestWaitingRoomRestController extends BaseController {
         Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
         return ResultObject.createSuccess("selectDiagnosis", ResultObject.DATA_TYPE_OBJECT,
                 pfTestWaitingRoomService.selectDiagnosis(dto.getIdTestexecResult()));
+    }
+
+    /**
+     * 查询病历评估得分
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
+    @PostMapping(value = "/eva/score/select")
+    @ResponseBody
+    public ResultObject selectScore(@RequestBody PfTestEvaDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("selectScore", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.selectScore(dto.getIdTestexecResult()));
+    }
+
+    /**
+     * 查询病历评估
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
+    @PostMapping(value = "/eva/list")
+    @ResponseBody
+    public ResultObject listEva(@RequestBody PfTestEvaDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("listEva", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.listEva(dto));
+    }
+
+    /**
+     * 查询病历评估日志
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
+    @PostMapping(value = "/eva/log/list")
+    @ResponseBody
+    public ResultObject listEvaLog(@RequestBody PfTestEvaDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("listEvaLog", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.listEvaLog(dto.getIdTestexecResult()));
+    }
+
+    /**
+     * 病历评估
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/med/eva")
+    @ResponseBody
+    public ResultObject medEva(@RequestBody PfTestEvaDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("medEva", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.medEva(dto.getIdTestexecResult()));
+    }
+
+    /**
+     * 修改得分
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/eva/edit")
+    @ResponseBody
+    public ResultObject editEva(@RequestBody ExmEvaDimension dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResultDimension() != null, "idTestexecResultDimension");
+        Assert.isTrue(dto.getScoreDimemsion() != null, "scoreDimemsion");
+        return ResultObject.createSuccess("editEva", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.editEva(dto));
+    }
+
+    /**
+     * 查询病例执行日志
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
+    @PostMapping(value = "/exec/log/list")
+    @ResponseBody
+    public ResultObject listExecLog(@RequestBody PfTestEvaDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("listExecLog", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.listExecLog(dto.getIdTestexecResult()));
+    }
+
+    /**
+     * 查询病例评估结果
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
+    @PostMapping(value = "/eva/result/select")
+    @ResponseBody
+    public ResultObject selectEvaResult(@RequestBody PfTestEvaDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        ExmEvaResult exmEvaResult = pfTestWaitingRoomService.selectEvaResult(dto.getIdTestexecResult());
+        if (exmEvaResult != null) {
+            exmEvaResult.setSdTitleDic(enumUtil.getEnumTxt(SysDicGroupEnum.EXM_EVAR_ESULT.getCode(), exmEvaResult.getSdTitle()));
+        }
+        return ResultObject.createSuccess("listExecLog", ResultObject.DATA_TYPE_OBJECT, exmEvaResult);
     }
 
 

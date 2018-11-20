@@ -122,5 +122,21 @@ layui.config({
         layer.tips('暂未开放', '#exam', {tips: 1});
     });
 
+    //监听行双击事件
+    table.on('rowDouble(enumTableFilter)', function (obj) {
+        setAttrAssess(obj.data)
+    });
+
+    function setAttrAssess(data) {
+        $('#testAssess').attr('lay-href',
+            basePath + '/pf/p/waiting/room/test/assess/page?idTestplanDetail=' + data.idTestplanDetail
+            + '&idDemo=' + data.idDemo + '&idTestplan=' + data.idTestplan + '&idStudent=' + data.idStudent
+            + '&idTestpaper=' + data.idTestpaper + '&idMedicalrec=' + data.idMedicalrec
+            + '&idTestexecResult=' + data.idTestexecResult);
+        $('#patNameAssess').text(data.patName);
+        $('#testAssess').click();
+    };
+
+
 });
 

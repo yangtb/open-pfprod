@@ -5,6 +5,10 @@ import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.param.pf.common.PfCommonListParam;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseBodyResult;
 import com.sm.open.core.facade.model.result.pf.biz.tests.room.*;
+import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.ExmEvaLogResult;
+import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.ExmEvaResultResult;
+import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.PfEvaExecResult;
+import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.PfExecLogResult;
 import com.sm.open.core.facade.model.result.pf.biz.tests.room.paper.PfTestPaperResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
@@ -30,6 +34,10 @@ public class TestWaitingRoomClient {
 
     public CommonResult<PfTestPaperResult> selectTestPaperInfo(PfTestExamParam param) {
         return pfTestWaitingRoomFacade.selectTestPaperInfo(param);
+    }
+
+    public CommonResult<PfTestPaperResult> selectTestPaper(PfTestExamParam param) {
+        return pfTestWaitingRoomFacade.selectTestPaper(param);
     }
 
     public CommonResult<PfWaitingRoomStartResult> startExam(ExmTestexecParam param) {
@@ -166,6 +174,34 @@ public class TestWaitingRoomClient {
 
     public PfPageResult listDieReason(Long idTestexecResultDiagnosis) {
         return pfTestWaitingRoomFacade.listDieReason(idTestexecResultDiagnosis);
+    }
+
+    public CommonResult<List<PfEvaExecResult>> listEva(PfTestEvaParam param) {
+        return pfTestWaitingRoomFacade.listEva(param);
+    }
+
+    public CommonResult<List<PfEvaExecResult>> selectScore(Long idTestexecResult) {
+        return pfTestWaitingRoomFacade.selectScore(idTestexecResult);
+    }
+
+    public CommonResult<List<ExmEvaLogResult>> listEvaLog(Long idTestexecResult) {
+        return pfTestWaitingRoomFacade.listEvaLog(idTestexecResult);
+    }
+
+    public CommonResult<Boolean> medEva(Long idTestexecResult) {
+        return pfTestWaitingRoomFacade.medEva(idTestexecResult);
+    }
+
+    public CommonResult<Boolean> editEva(ExmEvaDimensionParam param) {
+        return pfTestWaitingRoomFacade.editEva(param);
+    }
+
+    public CommonResult<List<PfExecLogResult>> listExecLog(Long idTestexecResult) {
+        return pfTestWaitingRoomFacade.listExecLog(idTestexecResult);
+    }
+
+    public CommonResult<ExmEvaResultResult> selectEvaResult(Long idTestexecResult) {
+        return pfTestWaitingRoomFacade.selectEvaResult(idTestexecResult);
     }
 
 }

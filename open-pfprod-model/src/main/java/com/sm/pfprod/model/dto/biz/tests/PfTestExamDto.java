@@ -13,6 +13,8 @@ public class PfTestExamDto implements Serializable {
 
     private static final long serialVersionUID = -5117680801912785399L;
 
+    private Long idTestexecResult;
+
     /**
      * 测试明细ID
      */

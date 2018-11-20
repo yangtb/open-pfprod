@@ -78,6 +78,7 @@ layui.config({
             var url = basePath + '/pf/r/waiting/room/end';
             var bizData = {
                 idTestexec: $('#idTestexec').val(),
+                idTestplanDetail : idTestplanDetail,
                 sdTestexec: '2'
             };
             common.commonPost(url, bizData, '', null, _endCallback);

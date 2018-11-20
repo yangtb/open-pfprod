@@ -10,10 +10,15 @@ import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseBodyResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseInquesListResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseInspectListResult;
 import com.sm.open.core.facade.model.result.pf.biz.tests.room.*;
+import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.ExmEvaLogResult;
+import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.ExmEvaResultResult;
+import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.PfEvaExecResult;
+import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.PfExecLogResult;
 import com.sm.open.core.facade.model.result.pf.biz.tests.room.paper.PfTestPaperResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.biz.tests.TestWaitingRoomClient;
+import com.sm.pfprod.model.dto.biz.tests.PfTestEvaDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestWatingRoomDto;
@@ -22,6 +27,8 @@ import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.test.*;
+import com.sm.pfprod.model.vo.biz.test.eva.PfEvaExecVo;
+import com.sm.pfprod.model.vo.biz.test.eva.PfExecLogVo;
 import com.sm.pfprod.model.vo.biz.test.paper.PfTestPaperVo;
 import com.sm.pfprod.service.biz.tests.PfTestWaitingRoomService;
 import org.springframework.stereotype.Service;
@@ -56,6 +63,15 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     @Override
     public PfTestPaperVo selectTestPaperInfo(PfTestExamDto dto) {
         CommonResult<PfTestPaperResult> result = testWaitingRoomClient.selectTestPaperInfo(BeanUtil.convert(dto, PfTestExamParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return PfTestPaperBeanUtil.convert(result.getContent());
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PfTestPaperVo selectTestPaper(PfTestExamDto dto) {
+        CommonResult<PfTestPaperResult> result = testWaitingRoomClient.selectTestPaper(BeanUtil.convert(dto, PfTestExamParam.class));
         if (result != null && result.getIsSuccess()) {
             return PfTestPaperBeanUtil.convert(result.getContent());
         }
@@ -366,6 +382,69 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
             return null;
         }
         return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public List<PfEvaExecVo> selectScore(Long idTestexecResult) {
+        CommonResult<List<PfEvaExecResult>> result = testWaitingRoomClient.selectScore(idTestexecResult);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfEvaExecVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<PfEvaExecVo> listEva(PfTestEvaDto dto) {
+        CommonResult<List<PfEvaExecResult>> result = testWaitingRoomClient.listEva(BeanUtil.convert(dto, PfTestEvaParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfEvaExecVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<ExmEvaLog> listEvaLog(Long idTestexecResult) {
+        CommonResult<List<ExmEvaLogResult>> result = testWaitingRoomClient.listEvaLog(idTestexecResult);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), ExmEvaLog.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean medEva(Long idTestexecResult) {
+        CommonResult<Boolean> result = testWaitingRoomClient.medEva(idTestexecResult);
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean editEva(ExmEvaDimension dto) {
+        CommonResult<Boolean> result = testWaitingRoomClient.editEva(BeanUtil.convert(dto, ExmEvaDimensionParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<PfExecLogVo> listExecLog(Long idTestexecResult) {
+        CommonResult<List<PfExecLogResult>> result = testWaitingRoomClient.listExecLog(idTestexecResult);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfExecLogVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public ExmEvaResult selectEvaResult(Long idTestexecResult) {
+        CommonResult<ExmEvaResultResult> result = testWaitingRoomClient.selectEvaResult(idTestexecResult);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), ExmEvaResult.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
 
