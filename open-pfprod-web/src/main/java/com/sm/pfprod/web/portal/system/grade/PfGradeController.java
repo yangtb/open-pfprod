@@ -56,6 +56,7 @@ public class PfGradeController extends BaseController {
     @RequestMapping(value = "/student/list")
     @ResponseBody
     public PageResult listStudents(PfGradeDto dto) {
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
         return pfGradeService.listStudents(dto);
     }
 
