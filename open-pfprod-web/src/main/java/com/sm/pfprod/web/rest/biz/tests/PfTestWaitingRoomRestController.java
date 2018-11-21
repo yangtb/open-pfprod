@@ -485,6 +485,22 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
+     * 查询诊断、确诊理由
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/diagnosis/select")
+    @ResponseBody
+    public ResultObject selectAllDiagnosis(@RequestBody PfTestExamTagDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("selectAllDiagnosis", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.selectAllDiagnosis(dto.getIdTestexecResult()));
+    }
+
+    /**
      * 查询诊断、诊断小结
      *
      * @param dto

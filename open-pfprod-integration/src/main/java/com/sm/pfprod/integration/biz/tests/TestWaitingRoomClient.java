@@ -164,6 +164,10 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.delDieReason(idDieReason);
     }
 
+    public CommonResult<List<PfDiagnosisResult>> selectAllDiagnosis(Long idTestexecResult) {
+        return pfTestWaitingRoomFacade.selectAllDiagnosis(idTestexecResult);
+    }
+
     public CommonResult<PfWaitingRoomDiagnosisResult> selectDiagnosis(Long idTestexecResult) {
         return pfTestWaitingRoomFacade.selectDiagnosis(idTestexecResult);
     }

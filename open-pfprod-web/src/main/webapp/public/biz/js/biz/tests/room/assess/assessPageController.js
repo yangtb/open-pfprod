@@ -85,7 +85,6 @@ layui.config({
                     appendScoreHtml(data.data)
                     // 加载评估列表
                     listEva(data.data);
-                    setPjResult();
                     return true;
                 }
             },
@@ -311,7 +310,9 @@ layui.config({
                     layer.msg(data.msg, {icon: 5});
                     return false;
                 } else {
-                    $('#pjResult').text(data.data.sdTitleDic);
+                    if (data.data && data.data.sdTitleDic){
+                        $('#pjResult').text(data.data.sdTitleDic);
+                    }
                     return true;
                 }
             },

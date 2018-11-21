@@ -358,6 +358,15 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     }
 
     @Override
+    public List<PfDiagnosisVo> selectAllDiagnosis(Long idTestexecResult) {
+        CommonResult<List<PfDiagnosisResult>> result = testWaitingRoomClient.selectAllDiagnosis(idTestexecResult);
+        if (result != null && result.getIsSuccess()) {
+            return PfTestPaperBeanUtil.convertZdList(result.getContent());
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
     public PfWaitingRoomDiagnosisVo selectDiagnosis(Long idTestexecResult) {
         CommonResult<PfWaitingRoomDiagnosisResult> result = testWaitingRoomClient.selectDiagnosis(idTestexecResult);
         if (result != null && result.getIsSuccess()) {
