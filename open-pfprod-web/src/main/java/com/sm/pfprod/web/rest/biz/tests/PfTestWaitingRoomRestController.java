@@ -501,19 +501,20 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
-     * 查询病历评估得分
+     * 查询病历评估平均得分
      *
      * @param dto
      * @return
      */
     @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
-    @PostMapping(value = "/eva/score/select")
+    @PostMapping(value = "/eva/avg/score/select")
     @ResponseBody
-    public ResultObject selectScore(@RequestBody PfTestEvaDto dto) {
+    public ResultObject selectAvgScore(@RequestBody PfTestEvaDto dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
-        return ResultObject.createSuccess("selectScore", ResultObject.DATA_TYPE_LIST,
-                pfTestWaitingRoomService.selectScore(dto.getIdTestexecResult()));
+        Assert.isTrue(dto.getIdMedicalrec() != null, "idMedicalrec");
+        return ResultObject.createSuccess("selectAvgScore", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.selectScore(dto.getIdTestexecResult(), dto.getIdMedicalrec()));
     }
 
     /**

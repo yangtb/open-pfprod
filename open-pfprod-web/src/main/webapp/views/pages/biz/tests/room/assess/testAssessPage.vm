@@ -276,7 +276,7 @@
 
 
 <script type="text/html" id="scoreDimemsionTpl">
-    {{#  if(d.fgSystemAlgorithm == '0' && d.idTestexecResultDimension){ }}
+    {{#  if(d.fgSystemAlgorithm == '0'){ }}
     <input type="text" autocomplete="off" class="layui-input"
            id="dimension-{{d.idTestexecResultDimension}}" value="{{d.scoreDimemsion}}"
            onkeypress="updateScore(this, {{d.idTestexecResultDimension}})"

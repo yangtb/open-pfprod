@@ -24,4 +24,9 @@ public class PfTestEvaDto implements Serializable {
      */
     private Long idTestexecResultDimension;
 
+    /**
+     * 病例id
+     */
+    private Long idMedicalrec;
+
 }

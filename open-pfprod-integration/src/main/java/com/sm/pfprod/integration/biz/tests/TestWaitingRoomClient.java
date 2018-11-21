@@ -180,8 +180,8 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.listEva(param);
     }
 
-    public CommonResult<List<PfEvaExecResult>> selectScore(Long idTestexecResult) {
-        return pfTestWaitingRoomFacade.selectScore(idTestexecResult);
+    public CommonResult<List<PfEvaExecResult>> selectScore(Long idTestexecResult, Long idMedicalrec) {
+        return pfTestWaitingRoomFacade.selectScore(idTestexecResult, idMedicalrec);
     }
 
     public CommonResult<List<ExmEvaLogResult>> listEvaLog(Long idTestexecResult) {

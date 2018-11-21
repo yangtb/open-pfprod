@@ -249,6 +249,7 @@ public class PfTestWaitingRoomController extends BaseController {
     @RequestMapping("/assess/page")
     public String assessPage(Model model) {
         model.addAttribute("sexEnum", enumUtil.getEnumList(SysDicGroupEnum.SEX.getCode()));
+        model.addAttribute("exmEvaResult", enumUtil.getEnumList(SysDicGroupEnum.EXM_EVAR_ESULT.getCode()));
         return "pages/biz/tests/room/assessPage";
     }
 

@@ -385,8 +385,8 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     }
 
     @Override
-    public List<PfEvaExecVo> selectScore(Long idTestexecResult) {
-        CommonResult<List<PfEvaExecResult>> result = testWaitingRoomClient.selectScore(idTestexecResult);
+    public List<PfEvaExecVo> selectScore(Long idTestexecResult, Long idMedicalrec) {
+        CommonResult<List<PfEvaExecResult>> result = testWaitingRoomClient.selectScore(idTestexecResult, idMedicalrec);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convertList(result.getContent(), PfEvaExecVo.class);
         }

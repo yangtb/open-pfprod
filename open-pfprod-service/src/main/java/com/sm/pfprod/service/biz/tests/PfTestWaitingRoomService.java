@@ -332,9 +332,10 @@ public interface PfTestWaitingRoomService {
      * 查询病历评估得分
      *
      * @param idTestexecResult
+     * @param idMedicalrec
      * @return
      */
-    List<PfEvaExecVo> selectScore(Long idTestexecResult);
+    List<PfEvaExecVo> selectScore(Long idTestexecResult, Long idMedicalrec);
 
     /**
      * 查询病历评估

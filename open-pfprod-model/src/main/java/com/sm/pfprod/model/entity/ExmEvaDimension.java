@@ -55,4 +55,13 @@ public class ExmEvaDimension implements Serializable {
      */
     private BigDecimal weightScoreDimemsion;
 
+    private BigDecimal scoreMax;
+
+    private BigDecimal weightScoreMax;
+
+    /**
+     * 平均得分
+     */
+    private BigDecimal avgScore;
+
 }

@@ -60,9 +60,9 @@ layui.config({
             {field: 'receiveDoc', width: 120, title: '病例'},
             {field: 'medicalrecName', width: 120, title: '接诊医师'},
             {field: 'naTestplan', width: 170, title: '测试计划'},
-            {field: 'naTestpaper', width: 170, title: '试卷'},
+            {field: 'naTestpaper', width: 170, title: '试卷', templet: '#naTestpaperTpl'},
             {field: 'score', width: 120, title: '评分'},
-            {field: 'ch', width: 120, title: '称号'},
+            {field: 'ch', width: 120, title: '称号', templet: '#chTpl'},
             {field: 'AssessTeacher', width: 120, title: '评估老师'},
             {field: 'AssessDate', width: 170, title: '评估日期'}
         ]] //设置表头
@@ -76,14 +76,12 @@ layui.config({
     //监听提交
     form.on('submit(enumSearchFilter)', function (data) {
         var queryType = data.field.queryType;
-        if (queryType == 1) {
-
-        }
-        table.reload('roomTableId', {
+        table.reload('enumTableId', {
             where: {
-                medicalrecName: data.field.queryType == '1' ? data.field.keyword : '',
-                naTestplan: data.field.queryType == '2' ? data.field.keyword : '',
-                naTestpaper: data.field.queryType == '3' ? data.field.keyword : ''
+                fgAsses : data.field.fgAsses,
+                medicalrecName: queryType == '1' ? data.field.keyword : '',
+                naTestplan: queryType == '2' ? data.field.keyword : '',
+                naTestpaper: queryType == '3' ? data.field.keyword : ''
             },
             height: 'full-68'
         });

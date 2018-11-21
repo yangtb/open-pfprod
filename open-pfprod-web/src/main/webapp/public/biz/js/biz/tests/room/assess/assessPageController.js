@@ -70,7 +70,7 @@ layui.config({
             idTestexecResult: idTestexecResult
         };
         $.ajax({
-            url: basePath + '/pf/r/waiting/room/eva/score/select',
+            url: basePath + '/pf/r/waiting/room/eva/list',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",
@@ -96,14 +96,22 @@ layui.config({
         });
     }
 
+    var parData = [];
+
     function appendScoreHtml(data) {
+        parData = [];
+        $.each(data, function (i, item) {
+            if (!item.parDimemsion) {
+                parData.push(item)
+            }
+        });
         var titleHtml = '', scoreHtml = '';
         var totalScore = 0;
-        if (data.length == 0) {
+        if (parData.length == 0) {
             defaultHtml();
             return;
         }
-        $.each(data, function (i, item) {
+        $.each(parData, function (i, item) {
             titleHtml += '<th>' + item.pgItem + '</th>';
             scoreHtml += '<td>' + item.weightScoreDimemsion + '</td>';
             if (i == 1) {
@@ -144,47 +152,10 @@ layui.config({
         $('#score').append(scoreHtml);
     }
 
-    function listEva(parentData) {
-        var bizData = {
-            idTestexecResult: idTestexecResult
-        };
-        $.ajax({
-            url: basePath + '/pf/r/waiting/room/eva/list',
-            type: 'post',
-            dataType: 'json',
-            contentType: "application/json",
-            data: JSON.stringify(bizData),
-            success: function (data) {
-                layer.closeAll('loading');
-                if (data.code != 0) {
-                    layer.msg(data.msg, {icon: 5});
-                    return false;
-                } else {
-                    tableRender(dataMerge(parentData, data.data));
-                    evaLog();
-                    setPjResult()
-                    return true;
-                }
-            },
-            error: function () {
-                layer.closeAll('loading');
-                return false;
-            }
-        });
-    }
-
-    function dataMerge(parentData, childData) {
-        var data = [];
-        $.each(parentData, function (i, item) {
-            data.push(item);
-            var parentDimemsion = item.parDimemsion ? item.parDimemsion : item.idDimemsion;
-            $.each(childData, function (j, childItem) {
-                if (childItem.parDimemsion == parentDimemsion) {
-                    data.push(childItem);
-                }
-            });
-        });
-        return data;
+    function listEva(data) {
+        tableRender(data);
+        evaLog();
+        setPjResult();
     }
 
     function tableRender(list) {
@@ -353,6 +324,48 @@ layui.config({
 
 
     function loadChart() {
+        var textData = [], personalData = [],  avgData = [];
+        var bizData = {
+            idTestexecResult: idTestexecResult,
+            idMedicalrec : idMedicalrec
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/eva/avg/score/select',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    layer.msg(data.msg, {icon: 5});
+                    return false;
+                } else {
+                    $.each(data.data, function (i, item) {
+                        avgData.push(item.avgScore);
+                    })
+                    $.each(parData, function (i, item) {
+                        textData.push({
+                            text : item.pgItem,
+                            max : item.weightScoreMax
+                        });
+                        personalData.push(item.weightScoreDimemsion);
+                    })
+                    showChart(textData, personalData, avgData);
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                return false;
+            }
+        });
+    }
+
+    function showChart(textData, personalData, avgData) {
+        console.log(textData)
+        console.log(personalData)
+        console.log(avgData)
         var dom = document.getElementById("container");
         var myChart = echarts.init(dom, 'macarons');
         var option = {
@@ -375,13 +388,7 @@ layui.config({
             calculable: true,
             polar: [
                 {
-                    indicator: [
-                        {text: '诊断表现得分', max: 100},
-                        {text: '临床思维得分', max: 100},
-                        {text: '医嘱得分', max: 100},
-                        {text: '病历书写得分', max: 100},
-                        {text: '知识掌握得分', max: 100},
-                    ],
+                    indicator: textData,
                     radius: 200
                 }
             ],
@@ -398,13 +405,14 @@ layui.config({
                     },
                     data: [
                         {
-                            value: [97, 42, 88, 94, 90],
+                            value: personalData,
                             name: '个人成绩'
                         },
                         {
-                            value: [97, 32, 74, 95, 88],
+                            value: avgData,
                             name: '团队成绩'
-                        }
+                        },
+
                     ]
                 }
             ]
