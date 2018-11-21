@@ -31,20 +31,20 @@ public class PfGradeController extends BaseController {
     @Resource
     private EnumUtil enumUtil;
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_SYSTEM_CLASS_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String gradePage(Model model) {
         return "pages/system/grade/classPage";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_SYSTEM_CLASS_MG','ROLE_SUPER')")
     @RequestMapping("/form")
     public String gradeForm(Model model, String formType) {
         model.addAttribute("formType", formType);
         return "pages/system/grade/gradeForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_SYSTEM_CLASS_MG','ROLE_SUPER')")
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listGrades(PfGradeDto dto) {
@@ -52,14 +52,14 @@ public class PfGradeController extends BaseController {
         return pfGradeService.listGrades(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_SYSTEM_CLASS_MG','ROLE_SUPER')")
     @RequestMapping(value = "/student/list")
     @ResponseBody
     public PageResult listStudents(PfGradeDto dto) {
         return pfGradeService.listStudents(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_SYSTEM_CLASS_MG','ROLE_SUPER')")
     @RequestMapping(value = "/student/search/list")
     @ResponseBody
     public PageResult listUsStudents(PfUserDto dto) {

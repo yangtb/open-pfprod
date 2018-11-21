@@ -32,7 +32,7 @@ public class PfGradeRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_SYSTEM_CLASS_MG','ROLE_SUPER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addGrade(@RequestBody SysClass dto) {
@@ -51,7 +51,7 @@ public class PfGradeRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_SYSTEM_CLASS_MG', 'ROLE_SUPER')")
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject editGrade(@RequestBody SysClass dto) {
@@ -69,7 +69,7 @@ public class PfGradeRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_SYSTEM_CLASS_MG','ROLE_SUPER')")
     @RequestMapping(value = "/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject delGrade(@RequestBody PfBachChangeStatusDto dto) {
@@ -87,7 +87,7 @@ public class PfGradeRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_SYSTEM_CLASS_MG','ROLE_SUPER')")
     @RequestMapping(value = "/updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject updateGradeStatus(@RequestBody PfBachChangeStatusDto dto) {
@@ -105,7 +105,7 @@ public class PfGradeRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_SYSTEM_CLASS_MG', 'ROLE_SUPER')")
     @RequestMapping(value = "/student/add", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject addStudent(@RequestBody PfCommonListDto dto) {
@@ -122,7 +122,7 @@ public class PfGradeRestController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_SYSTEM_CLASS_MG','ROLE_SUPER')")
     @RequestMapping(value = "/student/del", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject deStudent(@RequestBody PfBachChangeStatusDto dto) {
