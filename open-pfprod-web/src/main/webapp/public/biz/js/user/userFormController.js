@@ -26,7 +26,7 @@ layui.config({
     form.on('submit(addUser)', function (data) {
         if (!data.field.sex) {
             $('#sex').focus();
-            layer.tips('请选择性别', '#sex', {tips: 1});
+            common.errorMsg("请选择性别");
             return false;
         }
         var roles = new Array();
