@@ -18,4 +18,14 @@ public class PfUserDto extends PageParam implements Serializable {
     private String conditionValue;
     private Long idOrg;
 
+    /**
+     * 获取用户id
+     */
+    private Long userId;
+
+    /**
+     * 超级管理员
+     */
+    private boolean isSuper;
+
 }

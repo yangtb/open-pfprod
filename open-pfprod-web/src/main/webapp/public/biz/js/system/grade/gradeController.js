@@ -38,9 +38,9 @@ layui.config({
         , cols: [[
             {checkbox: true, fixed: true},
             //{field: 'id', width: 60, title: 'ID', fixed: true},
-            {field: 'realName', width: 100, title: '学生姓名'},
-            {field: 'className', width: 120, title: '班级名称'},
-            {field: 'sex', width: 70, sort: true, title: '性别', templet: '#sexTpl'},
+            {field: 'realName', width: 120, title: '学生姓名'},
+            {field: 'className', width: 140, title: '班级名称'},
+            {field: 'sex', width: 70, title: '性别', templet: '#sexTpl'},
             {field: 'phoneNo', width: 150, title: '电话'},
             {field: 'email', width: 200, title: '邮箱'},
             {fixed: 'right', width: 100, title: '操作', align: 'center', toolbar: '#studentBar'}
@@ -96,13 +96,6 @@ layui.config({
 
     });
 
-    // 获取编辑行数据
-    var _getGradeCheckData = function () {
-        var checkStatus = table.checkStatus('gradeTableId')
-            , data = checkStatus.data;
-        return data;
-    }
-
     var _addOrEditGrade = function (formType, currentEditData) {
         if (formType == 'add') {
             common.open('新增班级', basePath + '/pf/p/class/form?formType=' + formType, 400, 210);
@@ -119,7 +112,18 @@ layui.config({
         }
     };
 
-    table.on('radio(gradeTableFilter)', function (obj) {
+    //单击行选中radio
+    table.on('row(gradeTableFilter)', function (obj) {
+        obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');//选中行样式
+        obj.tr.find('input[lay-type="layTableRadio"]').prop("checked", true);
+        form.render('radio');
+        rowClick(obj)
+    });
+
+    var currentGradeRowData = [];
+
+    function rowClick(obj) {
+        currentGradeRowData.push(obj.data);
         table.reload('studentTableId', {
             url: basePath + '/pf/p/class/student/list'
             , where: {
@@ -153,8 +157,12 @@ layui.config({
                 _addStudent(data.data);
             }
         });
+    }
 
-    });
+    // 获取编辑行数据
+    var _getGradeCheckData = function () {
+        return currentGradeRowData;
+    }
 
     $('#addStudent').on('click', function () {
         var checkStatus = table.checkStatus('gradeTableId')
@@ -167,8 +175,7 @@ layui.config({
 
     function _addStudent(data) {
         // 学生列表刷新
-        var checkStatus = table.checkStatus('gradeTableId')
-            , gradeData = checkStatus.data[0];
+        var gradeData = currentGradeRowData;
         var idClass = gradeData.idClass;
 
         if (data.length == 0) {
@@ -186,8 +193,7 @@ layui.config({
     };
 
     function _studentCallback() {
-        var checkStatus = table.checkStatus('gradeTableId')
-            , gradeData = checkStatus.data[0];
+        var gradeData = currentGradeRowData;
         var idClass = gradeData.idClass;
 
         table.reload('studentTableId', {

@@ -143,9 +143,11 @@
             <label class="layui-form-label">用户角色</label>
             <div class="layui-input-block">
                 #foreach($role in $!roles)
-                    <input type="checkbox" name="role" value="$!role.roleId"
-                           lay-skin="primary" title="$!role.name"
-                           #if($!role.checked == true)checked#end>
+                    #if($role.level != 0)
+                        <input type="checkbox" name="role" value="$!role.roleId"
+                               lay-skin="primary" title="$!role.name"
+                               #if($!role.checked == true)checked#end>
+                    #end
                 #end
             </div>
         </div>

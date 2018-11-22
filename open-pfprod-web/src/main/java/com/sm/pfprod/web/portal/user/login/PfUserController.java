@@ -1,7 +1,6 @@
 package com.sm.pfprod.web.portal.user.login;
 
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
-import com.sm.pfprod.model.dto.system.grade.PfGradeDto;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.result.PageResult;
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -121,11 +119,11 @@ public class PfUserController extends BaseController {
 
             if (StringUtils.equals(formType, "edit")) {
                 roleVos = pfRoleService.listUserRole(userId).stream()
-                        .filter(pfRoleVo -> pfRoleVo.getLevel() >= level).collect(Collectors.toList());
+                        .filter(pfRoleVo -> pfRoleVo.getLevel() > level).collect(Collectors.toList());
                 model.addAttribute("roles", roleVos);
             } else {
                 roleVos = pfRoleService.listUserRole(CurrentUserUtils.getCurrentUserId())
-                        .stream().filter(pfRoleVo -> pfRoleVo.getLevel() >= level).collect(Collectors.toList());
+                        .stream().filter(pfRoleVo -> pfRoleVo.getLevel() > level).collect(Collectors.toList());
                 roleVos.forEach(pfRoleVo -> pfRoleVo.setChecked(false));
                 model.addAttribute("roles", roleVos);
             }
@@ -141,10 +139,6 @@ public class PfUserController extends BaseController {
             model.addAttribute("allOrg", myOrgList);
         }
         model.addAttribute("userOrgId", user.getIdOrg());
-
-        /*PfGradeDto dto = new PfGradeDto();
-        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
-        model.addAttribute("grades", pfGradeService.listAllGrades(dto));*/
         return "pages/user/userForm";
     }
 
@@ -177,6 +171,8 @@ public class PfUserController extends BaseController {
         if (!SysUserAuthUtils.isPlatOrSuper()) {
             dto.setIdOrg(user.getIdOrg());
         }
+        dto.setUserId(user.getUserId());
+        dto.setSuper(SysUserAuthUtils.isSuper());
         return pfUserService.listUsers(dto);
     }
 }

@@ -20,4 +20,13 @@ public class SysUserAuthUtils {
             return false;
         }
     }
+
+    /**
+     * 超级管理员
+     *
+     * @return
+     */
+    public static boolean isSuper() {
+        return SecurityContext.hasRole("ROLE_SUPER") ? true : false;
+    }
 }

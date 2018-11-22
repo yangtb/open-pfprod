@@ -17,8 +17,8 @@ layui.config({
         , cols: [[
             {checkbox: true, fixed: true},
             //{field: 'user_id', width: 80, hidden: true, title: 'ID'},
-            {field: 'user_name', width: 100, title: '账号', fixed: true},
-            {field: 'real_name', width: 100, title: '姓名'},
+            {field: 'user_name', width: 130, title: '账号', fixed: true},
+            {field: 'real_name', width: 140, title: '姓名'},
             {field: 'sex', width: 70, templet: '#sexTpl', title: '性别'},
             {field: 'phone_no', width: 120, title: '手机号'},
             {field: 'email', width: 160, title: '邮箱'},
