@@ -97,14 +97,29 @@ layui.config({
         });
     };
 
-    table.on('radio(tagTableFilter)', function (obj) {
+    //单击行选中radio
+    table.on('row(tagTableFilter)', function(obj){
+        obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');//选中行样式
+        obj.tr.find('input[lay-type="layTableRadio"]').prop("checked",true);
+        form.render('radio');
+
         $('#reset').click();
         $("#tagForm").autofill(obj.data);
         layui.use('form', function () {
             layui.form.render();
         });
         $('#demo1').attr('src', obj.data.path ? obj.data.path : basePath + '/public/biz/img/photo-default.png'); //图片链接
+
     });
+
+    /*table.on('radio(tagTableFilter)', function (obj) {
+        $('#reset').click();
+        $("#tagForm").autofill(obj.data);
+        layui.use('form', function () {
+            layui.form.render();
+        });
+        $('#demo1').attr('src', obj.data.path ? obj.data.path : basePath + '/public/biz/img/photo-default.png'); //图片链接
+    });*/
 
     upload.render({
         elem: '#test3'
