@@ -6,7 +6,6 @@ import com.sm.pfprod.model.entity.SysParam;
 import com.sm.pfprod.model.enums.SysParamEnum;
 import com.sm.pfprod.model.vo.home.PfHomeVo;
 import com.sm.pfprod.service.home.PfHomeService;
-import com.sm.pfprod.service.user.menu.PfMenuService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.security.SecurityContext;
@@ -81,6 +80,7 @@ public class PfHomeController extends BaseController {
         pfHomeVo.setWebsiteName(websiteName);
         pfHomeVo.setWebsiteCopyright(websiteCopyright);
         model.addAttribute("homeInfo", pfHomeVo);
+        model.addAttribute("showOrgPage", SecurityContext.hasRole("ROLE_OM"));
         model.addAttribute("orgExpiryNoticeDay", orgExpiryNoticeDay);
         return "/home/index";
     }
