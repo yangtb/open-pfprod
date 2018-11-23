@@ -1,6 +1,7 @@
 package com.sm.pfprod.web.security;
 
 import com.alibaba.fastjson.JSON;
+import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.pfprod.model.entity.UserInfo;
 import com.sm.pfprod.service.user.login.PfUserService;
 import com.sm.pfprod.service.user.security.AuthorityService;
@@ -91,7 +92,7 @@ public class PfUserDetailsService implements UserDetailsService, InitializingBea
     protected PfUserDetails createUserDetails(UserInfo user) {
         PfUserDetails ud = new PfUserDetails();
         BeanUtils.copyProperties(user, ud);
-        ud.setAccountNonExpired(true);
+        ud.setAccountNonExpired(user.getFgActive().equals(YesOrNoNum.YES.getCode()) ? true : false);
         ud.setAccountNonLocked(true);
         ud.setCredentialsNonExpired(true);
         return ud;

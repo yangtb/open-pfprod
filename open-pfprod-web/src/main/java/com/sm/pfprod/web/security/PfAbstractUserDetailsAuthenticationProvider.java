@@ -201,9 +201,9 @@ public abstract class PfAbstractUserDetailsAuthenticationProvider implements Aut
                         "PfAbstractUserDetailsAuthenticationProvider.disabled", "账户已注销或停用"));
             }
             if (!user.isAccountNonExpired()) {
-                logger.debug("用户账户已过期");
+                logger.debug("用户账户所在机构已过期");
                 throw new AccountExpiredException(messages.getMessage(
-                        "PfAbstractUserDetailsAuthenticationProvider.expired", "用户账户已过期"));
+                        "PfAbstractUserDetailsAuthenticationProvider.expired", "您所在机构已过试用期，请联系管理员"));
             }
         }
     }
