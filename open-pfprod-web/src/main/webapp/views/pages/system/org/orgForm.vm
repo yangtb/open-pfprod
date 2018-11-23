@@ -16,6 +16,7 @@
         var formType = '$!{formType}';
         var orgData = '$!{orgInfo}';
         var position = '$!{position}';
+        var renewFlag = '$!{renewFlag}';
     </script>
 </head>
 

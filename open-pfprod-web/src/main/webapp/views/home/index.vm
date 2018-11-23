@@ -18,6 +18,7 @@
         var fgActive = '$!{homeInfo.sysOrg.getFgActive()}';
         var gmtValid = '$!{homeInfo.sysOrg.getGmtValid()}';
         var orgExpiryNoticeDay = '$!{orgExpiryNoticeDay}';
+        var expireNotice = '$!{homeInfo.expireNotice}';
     </script>
 
 </head>

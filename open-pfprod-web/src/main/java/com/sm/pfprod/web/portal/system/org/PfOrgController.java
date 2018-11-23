@@ -6,11 +6,13 @@ import com.sm.open.care.core.utils.DateUtil;
 import com.sm.pfprod.model.dto.system.org.PfOrgAuthDto;
 import com.sm.pfprod.model.dto.system.org.PfOrgDto;
 import com.sm.pfprod.model.entity.SysOrg;
+import com.sm.pfprod.model.entity.SysParam;
+import com.sm.pfprod.model.enums.SysParamEnum;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.system.org.PfOrgService;
 import com.sm.pfprod.web.portal.BaseController;
+import com.sm.pfprod.web.util.ParamUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,11 +35,13 @@ public class PfOrgController extends BaseController {
     @Resource
     private PfOrgService pfOrgService;
 
+    @Resource
+    private ParamUtil paramUtil;
+
     /**
      * 机构试用到期提醒
      */
-    @Value("${org.expiry.notice.day}")
-    private int orgExpiryNoticeDay = 30;
+    private static int ORG_EXPIRY_NOTICE_DEFAULT_DAY = 3;
 
     @PreAuthorize("hasAnyRole('ROLE_ORG_MG','ROLE_SUPER')")
     @RequestMapping("/page")
@@ -62,7 +66,7 @@ public class PfOrgController extends BaseController {
             model.addAttribute("fgActive", sysOrg.getFgActive());
             if (sysOrg.getFgActive().equals(YesOrNoNum.YES.getCode()) && StringUtils.isNotBlank(sysOrg.getGmtValid())) {
                 Date gmtValid = DateUtil.parseDate(sysOrg.getGmtValid());
-                model.addAttribute("renewFlag", gmtValid.before(DateUtil.addDate(gmtValid, orgExpiryNoticeDay)));
+                model.addAttribute("renewFlag", gmtValid.before(DateUtil.addDate(gmtValid, getOrgExpiryNoticeDay())));
             }
         }
         return "pages/system/org/orgForm";
@@ -80,7 +84,8 @@ public class PfOrgController extends BaseController {
     public PageResult listOrgs(PfOrgDto dto) {
         // 临过期
         if (dto.isExpired()) {
-            dto.setGmtValid(DateUtil.date2Str(DateUtil.addDate(new Date(), orgExpiryNoticeDay)));
+
+            dto.setGmtValid(DateUtil.date2Str(DateUtil.addDate(new Date(), getOrgExpiryNoticeDay())));
         }
         return pfOrgService.listOrgs(dto);
     }
@@ -98,5 +103,15 @@ public class PfOrgController extends BaseController {
         return pfOrgService.listAuthOrg(dto);
     }
 
+
+    private int getOrgExpiryNoticeDay() {
+        SysParam sysParam = paramUtil.getParamInfo(SysParamEnum.EXPIRE_NOTICE_DAY.getCode());
+        int orgExpiryNoticeDay = ORG_EXPIRY_NOTICE_DEFAULT_DAY;
+        if (sysParam != null) {
+            orgExpiryNoticeDay = StringUtils.isBlank(sysParam.getParamValue()) ?
+                    ORG_EXPIRY_NOTICE_DEFAULT_DAY : Integer.valueOf(sysParam.getParamValue());
+        }
+        return orgExpiryNoticeDay;
+    }
 
 }

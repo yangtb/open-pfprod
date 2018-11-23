@@ -15,6 +15,10 @@ layui.config({
         min: 0
     });
 
+    if (renewFlag == 'true') {
+        layer.tips('点击续期', '#renewOrg', {tips: 1});
+    }
+
     //Form自定义验证规则
     form.verify({
         name: function (value) {

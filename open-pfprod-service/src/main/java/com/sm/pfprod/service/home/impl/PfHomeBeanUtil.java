@@ -20,6 +20,7 @@ public class PfHomeBeanUtil {
         homeVo.setAnonymousUser(result.isAnonymousUser());
         homeVo.setWebsiteName(result.getWebsiteName());
         homeVo.setWebsiteCopyright(result.getWebsiteCopyright());
+        homeVo.setExpireNotice(result.getExpireNotice());
         return homeVo;
     }
 }

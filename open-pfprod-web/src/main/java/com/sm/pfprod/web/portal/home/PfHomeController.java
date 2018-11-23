@@ -10,6 +10,7 @@ import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.security.SecurityContext;
 import com.sm.pfprod.web.util.ParamUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -48,11 +49,7 @@ public class PfHomeController extends BaseController {
     @Value("${website.approve}")
     private String websiteApprove;
 
-    /**
-     * 机构试用到期提醒
-     */
-    @Value("${org.expiry.notice.day}")
-    private int orgExpiryNoticeDay = 30;
+    private static int ORG_EXPIRY_NOTICE_DEFAULT_DAY = 3;
 
     @PreAuthorize("isAnonymous() || isAuthenticated()")
     @RequestMapping("/index")
@@ -66,7 +63,7 @@ public class PfHomeController extends BaseController {
         // 游客开关判断
         if (SecurityContext.isAnonymousUser()) {
             SysParam sysParam = paramUtil.getParamInfo(SysParamEnum.VISITOR_SWITCH.getCode());
-            if (sysParam == null || sysParam.getParamValue().equals(YesOrNo.NO.getCode())){
+            if (sysParam == null || sysParam.getParamValue().equals(YesOrNo.NO.getCode())) {
                 return "redirect:/login";
             }
         }
@@ -81,7 +78,11 @@ public class PfHomeController extends BaseController {
         pfHomeVo.setWebsiteCopyright(websiteCopyright);
         model.addAttribute("homeInfo", pfHomeVo);
         model.addAttribute("showOrgPage", SecurityContext.hasRole("ROLE_OM"));
-        model.addAttribute("orgExpiryNoticeDay", orgExpiryNoticeDay);
+        SysParam sysParam = paramUtil.getParamInfo(SysParamEnum.EXPIRE_NOTICE_DAY.getCode());
+        if (sysParam != null) {
+            model.addAttribute("orgExpiryNoticeDay",
+                    StringUtils.isBlank(sysParam.getParamValue()) ? ORG_EXPIRY_NOTICE_DEFAULT_DAY : sysParam.getParamValue());
+        }
         return "/home/index";
     }
 

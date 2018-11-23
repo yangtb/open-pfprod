@@ -40,21 +40,22 @@ layui.config({
         })
     })
 
-    if (fgActive == '0') {
-        $('#orgInfo').click();
-        if (moment(gmtValid).isBefore(new Date())) {
-            var msg = "您的平台试用已到期！";
-            noticeOrgExpiredWidow(msg);
-        }
+    if (expireNotice == '1') {
+        if (fgActive == '0') {
+            if (moment(gmtValid).isBefore(new Date())) {
+                var msg = "您的平台试用已到期！";
+                noticeOrgExpiredWidow(msg);
+            }
 
-    }
-    if (fgActive && fgActive != '0') {
-        var msg;
-        if (!moment(gmtValid).isBefore(new Date())) {
-            msg = '您的平台试用将于' + moment(gmtValid).format('YYYY月MM月DD日') + '到期！';
         }
-        if (moment(gmtValid).isBefore(moment().add(orgExpiryNoticeDay, 'days').calendar())) {
-            noticeOrgExpiredWidow(msg);
+        if (fgActive && fgActive != '0') {
+            var msg;
+            if (!moment(gmtValid).isBefore(new Date())) {
+                msg = '您的平台试用将于' + moment(gmtValid).format('YYYY月MM月DD日') + '到期！';
+            }
+            if (moment(gmtValid).isBefore(moment().add(orgExpiryNoticeDay, 'days').calendar())) {
+                noticeOrgExpiredWidow(msg);
+            }
         }
     }
 

@@ -10,12 +10,13 @@ public enum SysParamEnum {
 
     ORG_TRIAL_SWITCH("orgTrialSwitch", "是否开启机构试用"),
     ORG_EXPIRY_DAY("orgExpiryDay", "机构试用有效期"),
-    VISITOR_SWITCH("visitorSwitch","是否开启游客功能");
+    VISITOR_SWITCH("visitorSwitch","是否开启游客功能"),
+    EXPIRE_NOTICE_DAY("expireNoticeDay", "机构使用到期提醒天数");
 
     private String code;
     private String desc;
 
-    private SysParamEnum(String code, String desc) {
+    SysParamEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }
