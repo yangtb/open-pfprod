@@ -17,7 +17,7 @@ html, body {
   overflow: scroll;
 }
 header {
-  width: 1200px;
+  min-width: 1200px;
   height: 100px;
   padding: 10px 0;
   border-bottom: 1px dashed #999999;

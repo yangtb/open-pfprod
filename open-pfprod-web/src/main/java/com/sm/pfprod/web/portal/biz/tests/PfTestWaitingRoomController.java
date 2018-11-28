@@ -271,7 +271,9 @@ public class PfTestWaitingRoomController extends BaseController {
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
 
         PfTestPaperVo pfTestPaperVo = pfTestWaitingRoomService.selectTestPaper(dto);
-        pfTestPaperVo.getStudentInfo().setSex(enumUtil.getEnumTxt(SysDicGroupEnum.SEX.getCode(), pfTestPaperVo.getStudentInfo().getSex()));
+        if (pfTestPaperVo.getStudentInfo() != null) {
+            pfTestPaperVo.getStudentInfo().setSex(enumUtil.getEnumTxt(SysDicGroupEnum.SEX.getCode(), pfTestPaperVo.getStudentInfo().getSex()));
+        }
         model.addAttribute("examInfo", pfTestPaperVo);
         return "pages/biz/tests/room/assess/testAssessPage";
     }
