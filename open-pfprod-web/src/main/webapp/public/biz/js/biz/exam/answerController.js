@@ -140,6 +140,7 @@ layui.config({
         data.field.fgBack = data.field.fgBack ? '1' : '0';
         data.field.fgTag = data.field.fgTag ? '1' : '0';
         data.field.fgShow = data.field.fgShow ? '1' : '0';
+        data.field.fgDefault = data.field.fgDefault ? '1' : '0';
 
         data.field.idInspectItem = idInspectItem;
         common.commonPost(basePath + '/pf/r/exam/question/answer/save', data.field, '保存', '', _callBack);
@@ -162,11 +163,12 @@ layui.config({
     var _delAnswer = function (currentData) {
         var url = basePath + '/pf/r/exam/question/answer/del';
         var reqData = new Array();
-        var name = '【' + currentData.desResult + '】';
+        var name = '【' + currentData.valResult + '】';
         reqData.push(currentData.idResult);
         var data = {};
         data.list = reqData;
         data.status = '1';
+        data.extId = currentData.idInspectItem;
 
         layer.confirm('真的要删除结果值：' + name + '么？', {
             title: '删除结果内容提示',

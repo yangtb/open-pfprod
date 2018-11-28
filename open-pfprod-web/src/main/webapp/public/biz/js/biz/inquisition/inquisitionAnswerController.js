@@ -130,6 +130,7 @@ layui.config({
         data.field.fgReason = data.field.fgReason ? '1' : '0';
         data.field.fgBack = data.field.fgBack ? '1' : '0';
         data.field.fgTag = data.field.fgTag ? '1' : '0';
+        data.field.fgDefault = data.field.fgDefault ? '1' : '0';
         data.field.idInques = idInques;
         common.commonPost(basePath + '/pf/r/inquisition/question/answer/save', data.field, '保存', '', _callBack);
         return false;
@@ -156,6 +157,7 @@ layui.config({
         var data = {};
         data.list = reqData;
         data.status = '1';
+        data.extId = currentData.idInques;
 
         layer.confirm('真的要删除答案内容：' + name + '么？', {
             title: '删除答案内容提示',

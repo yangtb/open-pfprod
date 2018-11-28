@@ -83,16 +83,17 @@
                 <div class="layui-input-block">
                     <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
                            value="1" lay-text="NO|OFF">
-                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;
                     <input type="checkbox" name="fgShow" value="1" title="结果是否在医嘱前展示">
                     <input type="checkbox" name="fgReason" value="1" title="是否需要说明理由">
                 </div>
             </div>
 
             <div class="layui-form-item form-item-my5">
-                <label class="layui-form-label" style="padding-right: 90px;"></label>
+                <label class="layui-form-label" style="padding-right: 88px;"></label>
                 <input type="checkbox"
                        name="fgBack" value="1" title="是否根据病人的回答反馈">
+                <input type="checkbox" name="fgDefault" value="1" title="默认答案">
             #*<input type="radio" name="radioGroup" value="fgTag" title="标签">*#
             </div>
 
