@@ -102,6 +102,8 @@ layui.config({
         elem: '#partCheckTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'partCheckTableId'
         , height: '335' //容器高度
+        , toolbar: '#toolbarCheck'
+        , defaultToolbar: []
         , cols: [[
             {type: 'radio'},
             {field: 'desBody', minWidth: 150, title: '部位描述'},
@@ -448,6 +450,14 @@ layui.config({
         });
         return val;
     };
+
+    table.on('toolbar(partCheckTableFilter)', function (obj) {
+        switch (obj.event) {
+            case 'bachAddCheckAnswer':
+                common.openParent('体格检查选择', basePath + '/pf/p/kb/part/define/check/bach/add/page?idMedCase=' + idMedCase, 800, 480);
+                break;
+        }
+    });
 
 });
 

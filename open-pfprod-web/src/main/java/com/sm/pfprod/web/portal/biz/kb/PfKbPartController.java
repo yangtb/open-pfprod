@@ -173,4 +173,25 @@ public class PfKbPartController extends BaseController {
         return pfCheckService.searchCheck(dto);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping("/define/cons/bach/add/page")
+    public String consBachAdd(Model model, String idMedCase) {
+        model.addAttribute("idMedCase", idMedCase);
+        return "pages/biz/kb/part/define/consBachAdd";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping("/define/check/bach/add/page")
+    public String checkBachAdd(Model model, String idMedCase) {
+        model.addAttribute("idMedCase", idMedCase);
+        model.addAttribute("bodyPosition", enumUtil.getEnumList(SysDicGroupEnum.BODY_POSITION.getCode()));
+        return "pages/biz/kb/part/define/checkBachAdd";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping("/define/exam/bach/add/page")
+    public String examBachAdd(Model model, String idMedCase) {
+        model.addAttribute("idMedCase", idMedCase);
+        return "pages/biz/kb/part/define/examBachAdd";
+    }
 }

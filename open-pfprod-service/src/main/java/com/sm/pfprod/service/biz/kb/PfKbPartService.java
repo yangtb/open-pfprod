@@ -3,6 +3,7 @@ package com.sm.pfprod.service.biz.kb;
 import com.sm.pfprod.model.dto.biz.kb.part.PfMedCaseDto;
 import com.sm.pfprod.model.dto.biz.kb.part.PfPartCommonDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 
@@ -205,5 +206,29 @@ public interface PfKbPartService {
      * @return
      */
     FaqMedCaseBody selectFaqMedCaseBody(Long idMedCase);
+
+    /**
+     * 批量添加问诊
+     *
+     * @param dto
+     * @return
+     */
+    boolean bachAddCons(PfCommonListDto dto);
+
+    /**
+     * 批量添加体格检查
+     *
+     * @param dto
+     * @return
+     */
+    boolean bachAddCheck(PfCommonListDto dto);
+
+    /**
+     * 批量添加辅助检查
+     *
+     * @param dto
+     * @return
+     */
+    boolean bachAddExam(PfCommonListDto dto);
 
 }

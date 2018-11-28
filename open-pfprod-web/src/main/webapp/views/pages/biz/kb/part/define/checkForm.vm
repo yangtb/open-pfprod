@@ -217,5 +217,14 @@
     </div>
 </script>
 
+<script type="text/html" id="toolbarCheck">
+    <div class="layui-btn-container">
+        <button type="button" id="bachAddCheckAnswer" class="layui-btn layui-btn-sm layui-btn-normal"
+                lay-event="bachAddCheckAnswer">
+            <i class="iconfont icon-icon-import"></i> 批量添加体格检查
+        </button>
+    </div>
+</script>
+
 </body>
 </html>

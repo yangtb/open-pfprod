@@ -5,6 +5,7 @@ import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.enums.OperationTypeEnum;
 import com.sm.pfprod.service.biz.kb.PfKbPartService;
@@ -416,6 +417,54 @@ public class PfKbPartRestController {
         Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
         return ResultObject.createSuccess("selectFaqMedCaseBody", ResultObject.DATA_TYPE_OBJECT,
                 pfKbPartService.selectFaqMedCaseBody(dto.getIdMedCase()));
+    }
+
+    /**
+     * 批量添加问诊
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/cons/bach/add")
+    public ResultObject bachAddCons(@RequestBody PfCommonListDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        Assert.isTrue(dto.getExtId() != null, "extId");
+        return pfKbPartService.bachAddCons(dto) ? ResultObject.createSuccess("bachAddCons", ResultObject.DATA_TYPE_OBJECT, true)
+                : ResultObject.create("bachAddCons", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
+
+    /**
+     * 批量添加体格检查
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/check/bach/add")
+    public ResultObject bachAddCheck(@RequestBody PfCommonListDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        Assert.isTrue(dto.getExtId() != null, "extId");
+        return pfKbPartService.bachAddCheck(dto) ? ResultObject.createSuccess("bachAddCheck", ResultObject.DATA_TYPE_OBJECT, true)
+                : ResultObject.create("bachAddCheck", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
+
+    /**
+     * 批量添加辅助检查
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @PostMapping(value = "/exam/bach/add")
+    public ResultObject bachAddExam(@RequestBody PfCommonListDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        Assert.isTrue(dto.getExtId() != null, "extId");
+        return pfKbPartService.bachAddExam(dto) ? ResultObject.createSuccess("bachAddExam", ResultObject.DATA_TYPE_OBJECT, true)
+                : ResultObject.create("bachAddExam", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
 
 }

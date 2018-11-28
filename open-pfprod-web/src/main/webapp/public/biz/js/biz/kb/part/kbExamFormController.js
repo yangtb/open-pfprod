@@ -68,6 +68,8 @@ layui.config({
         elem: '#partExamTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'partExamTableId'
         , height: '465' //容器高度
+        , toolbar: '#toolbarExam'
+        , defaultToolbar: []
         , cols: [[
             {type: 'radio'},
             {field: 'naItem', minWidth: 150, title: '项目'},
@@ -317,6 +319,14 @@ layui.config({
         common.setFormStatus(data.fgCarried, formIdArr);
         form.render();
     };
+
+    table.on('toolbar(partExamTableFilter)', function (obj) {
+        switch (obj.event) {
+            case 'bachAddExamAnswer':
+                common.openParent('辅助检查选择', basePath + '/pf/p/kb/part/define/exam/bach/add/page?idMedCase=' + idMedCase, 800, 480);
+                break;
+        }
+    });
 
 });
 

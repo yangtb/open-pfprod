@@ -68,10 +68,12 @@ layui.config({
     table.render({
         elem: '#partConsTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'partConsTableId'
-        , height: '330' //容器高度
+        , height: 'full-20' //容器高度
+        , toolbar: '#toolbarCons'
+        , defaultToolbar: []
         , cols: [[
             {type: 'radio'},
-            {field: 'desInques', minWidth: 150, title: '问题'},
+            {field: 'desInques', minWidth: 145, title: '问题'},
             {field: 'desAnswer', minWidth: 110, title: '答案'},
             {fixed: 'right', title: '操作', minWidth: 110, align: 'left', toolbar: '#partConsBar'}
         ]] //设置表头
@@ -281,7 +283,7 @@ layui.config({
             where: {
                 idMedCase: idMedCase
             }
-            , height: '330'
+            , height: 'full-20'
         });
     };
 
@@ -299,6 +301,14 @@ layui.config({
         common.setFormStatus(data.fgCarried, formIdArr);
         form.render();
     };
+
+    table.on('toolbar(partConsTableFilter)', function (obj) {
+        switch (obj.event) {
+            case 'bachAddConsAnswer':
+                common.openParent('问诊选择', basePath + '/pf/p/kb/part/define/cons/bach/add/page?idMedCase=' + idMedCase, 800, 480);
+                break;
+        }
+    });
 
 });
 

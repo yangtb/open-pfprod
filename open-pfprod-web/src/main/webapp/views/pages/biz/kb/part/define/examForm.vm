@@ -203,5 +203,14 @@
     </div>
 </script>
 
+<script type="text/html" id="toolbarExam">
+    <div class="layui-btn-container">
+        <button type="button" id="bachAddExamAnswer" class="layui-btn layui-btn-sm layui-btn-normal"
+                lay-event="bachAddExamAnswer">
+            <i class="iconfont icon-icon-import"></i> 批量添加辅助检查
+        </button>
+    </div>
+</script>
+
 </body>
 </html>
