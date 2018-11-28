@@ -13,7 +13,7 @@ layui.config({
         , element = layui.element
         , tableSelect = layui.tableSelect;
 
-    var formIdArr = new Array('searchAnswer', 'desInques', 'idAnswer', 'fgReason', 'fgBack', 'desExpert', 'test3');
+    var formIdArr = new Array('searchAnswer', 'desInques', 'idAnswer', 'desAnswer', 'fgReason', 'fgBack', 'desExpert', 'test3');
     var initFormData = {};
     tableSelect.render({
         elem: '#searchAnswer',
@@ -35,7 +35,6 @@ layui.config({
 
             var answerList = initFormData.answerList;
             $("#idAnswer").empty();
-            $('#idAnswer').append("<option value=\"\">请选择结果值</option>");
             for (var i = 0; i < answerList.length; i++) {
                 $('#idAnswer').append("<option value='" + answerList[i].idAnswer + "'>" + answerList[i].desAnswer + "</option>");
             }
@@ -58,9 +57,12 @@ layui.config({
 
     //监听工具条
     form.on('select(idAnswerSelectFilter)', function (data) {
-        var selectedIndex = $("#idAnswer").get(0).selectedIndex;
-        fillResult(initFormData.answerList[selectedIndex - 1]);
         form.render();
+        var selectedIndex = $("#idAnswer").get(0).selectedIndex;
+        if (initFormData.answerList) {
+            fillResult(initFormData.answerList[selectedIndex]);
+            form.render();
+        }
     });
 
 
@@ -184,7 +186,6 @@ layui.config({
         data.field.fgReason = data.field.fgReason ? '1' : '0';
         data.field.fgBack = data.field.fgBack ? '1' : '0';
         data.field.idMedCase = idMedCase;
-        data.field.desAnswer = $('#idAnswer').text();
         if (!data.field.fgCarried) {
             data.field.fgCarried = '0';
         }

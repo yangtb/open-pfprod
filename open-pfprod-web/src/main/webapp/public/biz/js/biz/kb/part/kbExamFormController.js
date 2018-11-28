@@ -13,7 +13,7 @@ layui.config({
         , element = layui.element
         , tableSelect = layui.tableSelect;
 
-    var formIdArr = new Array('searchAnswer', 'naItem', 'desStand', 'naShort', 'idResult', 'desResult', 'costMoney', 'costTime', 'fgShow', 'fgReason', 'fgBack', 'desExpert', 'test3');
+    var formIdArr = new Array('searchAnswer', 'naItem', 'desStand', 'naShort', 'idResult', 'valResult' ,'desResult', 'costMoney', 'costTime', 'fgShow', 'fgReason', 'fgBack', 'desExpert', 'test3');
     var initFormData = {};
     tableSelect.render({
         elem: '#searchAnswer',
@@ -35,7 +35,7 @@ layui.config({
 
             var examList = data.data[0].examList;
             $("#idResult").empty();
-            $('#idResult').append("<option value=\"\">请选择结果值</option>");
+            //$('#idResult').append("<option value=\"\">请选择结果值</option>");
             for (var i = 0; i < examList.length; i++) {
                 $('#idResult').append("<option value='" + examList[i].idResult + "'>" + examList[i].valResult + "</option>");
             }
@@ -59,8 +59,10 @@ layui.config({
     //监听工具条
     form.on('select(idResultSelectFilter)', function (data) {
         var selectedIndex = $("#idResult").get(0).selectedIndex;
-        fillResult(initFormData.examList[selectedIndex - 1]);
-        form.render();
+        if (initFormData.examList) {
+            fillResult(initFormData.examList[selectedIndex]);
+            form.render();
+        }
     });
 
     //执行渲染
@@ -202,7 +204,6 @@ layui.config({
         data.field.fgBack = data.field.fgBack ? '1' : '0';
         data.field.fgShow = data.field.fgShow ? '1' : '0';
         data.field.idMedCase = idMedCase;
-        data.field.valResult = $("#idResult option:selected").text();
         if (!data.field.fgCarried) {
             data.field.fgCarried = '0';
         }
@@ -318,6 +319,7 @@ layui.config({
         $("#examForm").autofill(data);
         common.setFormStatus(data.fgCarried, formIdArr);
         form.render();
+        editSelect();
     };
 
     table.on('toolbar(partExamTableFilter)', function (obj) {
@@ -327,6 +329,12 @@ layui.config({
                 break;
         }
     });
+
+    function editSelect() {
+        console.log(11)
+        console.log($('.mySelect').find('input'))
+        $('.mySelect').find('input').attr("readonly", false)
+    }
 
 });
 

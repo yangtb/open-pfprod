@@ -61,7 +61,6 @@
                 <input name="idMedCaseList" id="idMedCaseList" hidden>
                 <input name="idBody" id="idBody" hidden>
                 <input name="idBodyCa" id="idBodyCa" hidden>
-                <input name="desResult" id="desResult" hidden>
                 <input name="idMedia" id="idMedia" hidden>
                 <input name="sdType" id="sdType" hidden>
             </div>
@@ -107,26 +106,29 @@
                 </div>
             </div>
 
-            <div class="layui-form-item">
+            <div class="layui-form-item form-item-my">
                 <label class="layui-form-label">结果内容<i class="iconfont icon-required"
                                                        style="color: #f03f2d"></i></label>
                 <div class="layui-input-block my-input-width">
-                    <div class="mySelect">
+                    <div>
                         <select name="idResult" id="idResult" autocomplete="off" lay-verify="required"
                                 lay-vertype="tips"
-                                lay-filter="idBodySelectFilter" readonly="">
-                            <option value="">请选择结果内容</option>
+                                lay-filter="idBodySelectFilter"
+                                style="width:100%;height:30px;width: 158px;">
                         </select>
+                        <input name="desResult" id="desResult" type="text" autocomplete="off"
+                               style="left:2px; width: 90%;height:26px;position: relative;top: -32px;padding-left: 5px; border: 0px"/>
+
                     </div>
                 </div>
             </div>
 
-            <div class="layui-form-item">
+            <div class="layui-form-item" style="margin-top: -10px;">
                 <div class="layui-inline">
                     <label class="layui-form-label"></label>
                     <div class="layui-input-block">
-                        <input type="checkbox" name="fgReason" value="1" title="是否需要说明理由">
-                        <input type="checkbox" name="fgBack" value="1" title="是否根据病人的回答反馈">
+                        <input type="checkbox" name="fgReason" id="fgReason" value="1" title="是否需要说明理由">
+                        <input type="checkbox" name="fgBack" id="fgBack" value="1" title="是否根据病人的回答反馈">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -137,7 +139,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">专家解读</label>
                 <div class="layui-input-block my-input-width">
-                <textarea name="desExpert" class="layui-textarea" lay-verify="desAnswer" lay-vertype="tips"
+                <textarea name="desExpert" id="desExpert" class="layui-textarea" lay-verify="desAnswer" lay-vertype="tips"
                           placeholder="请输入专家解读"></textarea>
                 </div>
             </div>

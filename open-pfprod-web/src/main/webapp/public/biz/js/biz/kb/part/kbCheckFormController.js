@@ -4,7 +4,7 @@ layui.config({
     ckplayer: 'ckplayer/ckplayer'
     , Magnifier: 'js/Magnifier'
     , Event: 'js/Event'
-    ,formSelects: 'formSelects-v4'
+    , formSelects: 'formSelects-v4'
 }).use(['table', 'form', 'upload', 'jquery', 'element', 'tableSelect', 'formSelects', 'common'], function () {
     var $ = layui.$
         , table = layui.table
@@ -49,7 +49,7 @@ layui.config({
         });
     }
 
-    var formIdArr = new Array('searchAnswer', 'desBody', 'sdBody', 'cdCheck', 'idResult', 'fgReason', 'fgBack', 'desExpert', 'test3');
+    var formIdArr = new Array('searchAnswer', 'desBody', 'sdBody', 'cdCheck', 'idResult', 'desResult', 'fgReason', 'fgBack', 'desExpert', 'test3');
     var initFormData = {};
     tableSelect.render({
         elem: '#searchAnswer',
@@ -70,7 +70,6 @@ layui.config({
             initFormData = data.data[0];
             var checkList = data.data[0].checkList;
             $("#idResult").empty();
-            $('#idResult').append("<option value=\"\">请选择结果内容</option>");
             for (var i = 0; i < checkList.length; i++) {
                 $('#idResult').append("<option value='" + checkList[i].idResult + "'>" + checkList[i].desResult + "</option>");
             }
@@ -94,7 +93,10 @@ layui.config({
     //监听工具条
     form.on('select(idBodySelectFilter)', function (data) {
         var selectedIndex = $("#idResult").get(0).selectedIndex;
-        fillResult(initFormData.checkList[selectedIndex - 1]);
+        if (initFormData.checkList) {
+            fillResult(initFormData.checkList[selectedIndex]);
+            form.render();
+        }
     });
 
     //执行渲染
@@ -261,7 +263,7 @@ layui.config({
 
     $('#add').on('click', function () {
         $("#idResult").empty();
-        common.setFormStatus('1', formIdArr);
+        setFormStatus('1', formIdArr);
         $('#reset').click();
         $('#save').click();
     });
@@ -271,7 +273,6 @@ layui.config({
         data.field.fgBack = data.field.fgBack ? '1' : '0';
         data.field.fgShow = data.field.fgShow ? '1' : '0';
         data.field.idMedCase = idMedCase;
-        data.field.valResult = $("#idResult option:selected").text();
         if (!data.field.fgCarried) {
             data.field.fgCarried = '0';
         }
@@ -338,7 +339,7 @@ layui.config({
         obj.update({
             fgCarried: data.status
         });
-        common.setFormStatus(data.status, formIdArr);
+        setFormStatus(data.status, formIdArr);
         $('#fgCarried').val(data.status);
         form.render();
     };
@@ -386,7 +387,7 @@ layui.config({
 
         $("#checkForm").autofill(data);
         formSelects.value('cdCheckSelect', [data.cdCheck]);
-        common.setFormStatus(data.fgCarried, formIdArr);
+        setFormStatus(data.fgCarried, formIdArr);
         form.render();
     };
 
@@ -458,6 +459,22 @@ layui.config({
                 break;
         }
     });
+
+    function setFormStatus(status, arr) {
+        if (status == '0') {
+            $.each(arr, function (index, value) {
+                $('#' + value).addClass("layui-disabled");
+                $('#' + value).attr("disabled", "true");
+                formSelects.disabled('cdCheckSelect');
+            });
+        } else {
+            $.each(arr, function (index, value) {
+                $('#' + value).removeClass("layui-disabled");
+                $('#' + value).removeAttr("disabled", "true");
+                formSelects.undisabled('cdCheckSelect');
+            });
+        }
+    };
 
 });
 

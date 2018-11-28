@@ -73,16 +73,19 @@
                     <label class="layui-form-label">结果<i class="iconfont icon-required"
                                                          style="color: #f03f2d"></i></label>
                     <div class="layui-input-block" style="width: 158px;">
-                        <div class="mySelect">
+                        <div>
                             <select name="idResult" id="idResult" autocomplete="off" lay-verify="required"
                                     lay-vertype="tips"
-                                    lay-filter="idResultSelectFilter" readonly="">
-                                <option value="">请选择结果值</option>
+                                    lay-filter="idResultSelectFilter"
+                                    style="width:100%;height:30px;width: 158px;">
                             </select>
+                            <input name="valResult" id="valResult" type="text" autocomplete="off"
+                                   style="left:2px; width: 120px;height:26px;position: relative;top: -32px;padding-left: 5px; border: 0px"/>
+
                         </div>
                     </div>
                 </div>
-                <div class="layui-inline">
+                <div class="layui-inline" style="margin-top: -20px;">
                     <label class="layui-form-label">结果说明</label>
                     <div class="layui-input-block">
                         <input type="text" name="desResult" id="desResult" autocomplete="off" class="layui-input"
@@ -92,7 +95,7 @@
             </div>
 
 
-            <div class="layui-form-item form-item-my">
+            <div class="layui-form-item form-item-my" style="margin-top: -20px;">
                 <div class="layui-inline">
                     <label class="layui-form-label">费用</label>
                     <div class="layui-input-block">
@@ -153,27 +156,32 @@
                     </div>
 
                 </div>
-                <button type="button" class="layui-btn layui-btn-primary" id="test3"><i class="layui-icon" style="color: #009688; font-weight: bold">&#xe608;</i>上传</button>
-                <button type="button" class="layui-btn layui-btn-primary" id="preview"><i class="iconfont icon-look1" style="color: #009688; font-weight: bold"></i> 预览</button>
+                <button type="button" class="layui-btn layui-btn-primary" id="test3"><i class="layui-icon"
+                                                                                        style="color: #009688; font-weight: bold">&#xe608;</i>上传
+                </button>
+                <button type="button" class="layui-btn layui-btn-primary" id="preview"><i class="iconfont icon-look1"
+                                                                                          style="color: #009688; font-weight: bold"></i>
+                    预览
+                </button>
             </div>
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <div class="layui-btn-group">
-                    #if($!{showBtn} == 1)
-                        <button id="add" type="button" class="layui-btn">
-                            <i class="layui-icon layui-icon-add-1"></i>增加
-                        </button>
-                        <button id="save" class="layui-btn" lay-submit="" lay-filter="saveExam">
-                            <i class="iconfont icon-save-copy"></i> 保存
-                        </button>
-                        <button class="layui-btn" lay-submit="" lay-filter="saveAsExam">
-                            <i class="iconfont icon-lingcunwei"></i> 重载
-                        </button>
-                        <button id="reset" type="reset" class="layui-btn layui-btn-danger">
-                            <i class="iconfont icon-reset"></i> 重置
-                        </button>
-                    #end
+                        #if($!{showBtn} == 1)
+                            <button id="add" type="button" class="layui-btn">
+                                <i class="layui-icon layui-icon-add-1"></i>增加
+                            </button>
+                            <button id="save" class="layui-btn" lay-submit="" lay-filter="saveExam">
+                                <i class="iconfont icon-save-copy"></i> 保存
+                            </button>
+                            <button class="layui-btn" lay-submit="" lay-filter="saveAsExam">
+                                <i class="iconfont icon-lingcunwei"></i> 重载
+                            </button>
+                            <button id="reset" type="reset" class="layui-btn layui-btn-danger">
+                                <i class="iconfont icon-reset"></i> 重置
+                            </button>
+                        #end
                     </div>
                 </div>
             </div>
