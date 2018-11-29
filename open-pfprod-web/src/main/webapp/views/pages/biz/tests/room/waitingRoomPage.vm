@@ -142,9 +142,17 @@
         {{#  } else { }}
             {{d.naTestpaper}}
         {{#  } }}
-
 </script>
 
+<script type="text/html" id="chTpl">
+        #foreach($param in ${exmEvaResult})
+        {{#  if(d.ch == $!param.dictCode){ }}
+            $!{param.dictName}
+        {{#  } else { }}
+
+        {{#  } }}
+        #end
+</script>
 
 </body>
 

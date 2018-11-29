@@ -27,7 +27,7 @@ layui.config({
         return common.commonParentFormPost(url, data.field, formType, 'diseaseInfoTableId', '保存');
     });
 
-    var setting = {
+    /*var setting = {
         async: {
             enable: true,
             //contentType: "application/json",
@@ -55,7 +55,28 @@ layui.config({
         }
     };
 
-    var zNodes = eval(nodeData);
+    var zNodes = eval(nodeData);*/
+
+    var setting = {
+        view: {
+            dblClickExpand: false,
+            showLine: true
+        },
+        check: {
+            enable: true,
+            chkStyle: "radio",
+            radioType: "all"
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            onClick: onClick,
+            onCheck: onCheck
+        }
+    };
 
     function onClick(e, treeId, treeNode) {
         var zTree = $.fn.zTree.getZTreeObj("treeDemo");
@@ -74,8 +95,7 @@ layui.config({
         }
         if (v.length > 0) v = v.substring(0, v.length - 1);
         if (v_id.length > 0) v_id = v_id.substring(0, v_id.length - 1);
-        var cityObj = $("#cdDieclassText");
-        cityObj.attr("value", v);
+        $("#cdDieclassText").val(v);
         $("#cdDieclass").attr("value", v_id);
         hideMenu();
     };
@@ -102,8 +122,28 @@ layui.config({
         }
     };
 
-    $(document).ready(function () {
+    /*$(document).ready(function () {
         $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+    });*/
+    var zNodes = [];
+    $(document).ready(function () {
+        layer.load(2);
+        $.ajax({
+            url: basePath + "/pf/r/disease/catalogue/tree",
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (data) {
+                layer.closeAll('loading');
+                zNodes = data;
+                $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                return true;
+            },
+            error: function () {
+                layer.closeAll('loading');
+                return false;
+            }
+        });
     });
 
     $('#cdDieclassText').on('click', function () {

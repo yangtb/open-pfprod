@@ -62,7 +62,7 @@ layui.config({
             {field: 'naTestplan', width: 170, title: '测试计划'},
             {field: 'naTestpaper', width: 170, title: '试卷'},
             {field: 'score', width: 120, title: '评分'},
-            {field: 'ch', width: 120, title: '称号'},
+            {field: 'ch', width: 120, title: '称号', templet: '#chTpl'},
             {field: 'AssessTeacher', width: 120, title: '评估老师'},
             {field: 'AssessDate', width: 170, title: '评估日期'}
         ]] //设置表头
