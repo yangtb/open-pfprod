@@ -9,12 +9,81 @@ layui.config({
         , common = layui.common
         , tableSelect = layui.tableSelect;
 
+    $(document).ready(function () {
+        var bodyHeight = $(this).height() - 422;
+        $("#treeDemo").css("min-height", bodyHeight);
+        $("#treeDemo").css("max-height", bodyHeight);
+    });
+
+    //********************zTree***********************
+    var setting = {
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        view: {
+            dblClickExpand: false
+        },
+        callback: {
+            onClick: zTreeOnClick
+        }
+    };
+
+    var zTree;
+    $(document).ready(function () {
+        layer.load(2);
+        $.ajax({
+            url: basePath + '/pf/r/check/question/classify/tree',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    common.errorMsg(data.msg);
+                    return false;
+                } else {
+                    var zNodes = data.data;
+                    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                    zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                return false;
+            }
+        });
+    });
+
+    function zTreeOnClick(event, treeId, treeNode) {
+        _tableReload(treeNode.id, null);
+    };
+
+    function _tableReload(extItemId, keyword) {
+        table.reload('partConsTableId', {
+            where: {
+                idMedicalrec: idMedicalrec,
+                cdMedAsse: cdMedAsse,
+                idTestexecResult : idTestexecResult,
+                sdBody : '',
+                extItemId: extItemId,
+                keyword: keyword
+            }
+            , height: '390'
+        });
+    }
+
+    $('#queryBtn').on('click', function () {
+        _tableReload(null, $('#keyword').val())
+    });
 
     //执行渲染
     table.render({
         elem: '#partConsTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'partConsTableId'
-        , height: '395' //容器高度
+        , height: '390' //容器高度
         , cols: [[
             {type: 'numbers', title: 'R'},
             {field: 'desBody', minWidth: 140, title: '检查项'},
@@ -24,7 +93,14 @@ layui.config({
         ]] //设置表头
         , url: basePath + '/pf/p/waiting/room/test/check/list'
         , data: []
-        , page: false
+        , limit: 20
+        , page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+            layout: ['limit', 'count', 'prev', 'page', 'next'] //自定义分页布局
+            , groups: 1 //只显示 1 个连续页码
+            , first: false //不显示首页
+            , last: false //不显示尾页
+            , limits: [20, 30, 50]
+        }
         , done: function (res, curr, count) {
             $.each(res.data, function (i, item) {
                 tableSelectRender(item.idMedCaseList);
@@ -131,7 +207,9 @@ layui.config({
                 idMedicalrec: idMedicalrec,
                 cdMedAsse: cdMedAsse,
                 sdBody: sdBody,
-                idTestexecResult : idTestexecResult
+                idTestexecResult : idTestexecResult,
+                extItemId: null,
+                keyword: ''
             }
         });
     };

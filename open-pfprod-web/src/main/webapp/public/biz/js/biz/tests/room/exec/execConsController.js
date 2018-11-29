@@ -8,6 +8,58 @@ layui.config({
         , form = layui.form
         , common = layui.common;
 
+    $(document).ready(function () {
+        var bodyHeight = $(this).height() - 78;
+        $("#treeDemo").css("min-height", bodyHeight);
+        $("#treeDemo").css("max-height", bodyHeight);
+    });
+
+    //********************zTree***********************
+    var setting = {
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        view: {
+            dblClickExpand: false
+        },
+        callback: {
+            onClick: zTreeOnClick
+        }
+    };
+
+    var zTree;
+    $(document).ready(function () {
+        layer.load(2);
+        $.ajax({
+            url: basePath + '/pf/r/inquisition/question/classify/tree',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    common.errorMsg(data.msg);
+                    return false;
+                } else {
+                    var zNodes = data.data;
+                    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                    zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                return false;
+            }
+        });
+    });
+
+    function zTreeOnClick(event, treeId, treeNode) {
+        _tableReload(treeNode.id, null);
+    };
+
     //执行渲染
     table.render({
         elem: '#partConsTable' //指定原始表格元素选择器（推荐id选择器）
@@ -22,11 +74,34 @@ layui.config({
         , where: {
             idMedicalrec: idMedicalrec,
             cdMedAsse: cdMedAsse,
-            idTestexecResult : idTestexecResult
+            idTestexecResult: idTestexecResult
         }
-        , page: false
+        , limit: 20
+        , page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+            layout: ['limit', 'count', 'prev', 'page', 'next'] //自定义分页布局
+            , groups: 1 //只显示 1 个连续页码
+            , first: false //不显示首页
+            , last: false //不显示尾页
+            , limits: [20, 30, 50]
+        }
     });
 
+    function _tableReload(extItemId, keyword) {
+        table.reload('partConsTableId', {
+            where: {
+                idMedicalrec: idMedicalrec,
+                cdMedAsse: cdMedAsse,
+                idTestexecResult: idTestexecResult,
+                extItemId: extItemId,
+                keyword: keyword
+            }
+            , height: '734'
+        });
+    }
+
+    $('#queryBtn').on('click', function () {
+        _tableReload(null, $('#keyword').val())
+    });
 
     form.on('checkbox(qaCheckFilter)', function (obj) {
         var qaValue = this.value;
@@ -232,8 +307,6 @@ layui.config({
 });
 
 
-
-
 function control(idAnswer) {
     var audio = document.querySelector('#patientVoice' + idAnswer);
     if (audio !== null) {
@@ -254,8 +327,7 @@ function openMedia(sdType, idAnswer) {
         if (sdType == '1') {
             var path = $('#patientImg' + idAnswer).attr('src');
             layui.common.openSinglePhoto(path);
-        }
-        else if (sdType == '3') {
+        } else if (sdType == '3') {
             var path = $('#patientVideo' + idAnswer).attr('src');
             layui.common.openTopVideo(basePath + '/video/form?path=' + path, 890, 504);
         }

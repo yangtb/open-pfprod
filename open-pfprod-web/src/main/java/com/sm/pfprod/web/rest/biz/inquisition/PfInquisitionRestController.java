@@ -6,7 +6,6 @@ import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
-import com.sm.pfprod.model.dto.common.PfCatalogueTreeDto;
 import com.sm.pfprod.model.entity.BasInques;
 import com.sm.pfprod.model.entity.BasInquesAnswer;
 import com.sm.pfprod.model.entity.BasInquesCa;
@@ -44,7 +43,7 @@ public class PfInquisitionRestController extends BaseController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_EXM0030','ROLE_SUPER')")
     @RequestMapping(value = "/question/classify/tree", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject listQuestionClassifyTree() {
