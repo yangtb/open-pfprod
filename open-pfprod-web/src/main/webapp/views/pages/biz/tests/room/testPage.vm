@@ -27,60 +27,68 @@
 <div class="index-wrapper">
     <!-- 头部 -->
     <header>
-        <div class="header-left">
-            <a href="javascript:;;" class="start-btn" id="startBtn">
-                <span class="start-text">开始</span>
-                <img class="icon" src="${contextPath}/public/biz/img/exam/start.png" alt=""
-                     style="width: 105px; height: 100px;">
-            </a>
-            <div class="user-details">
-                <img src="${contextPath}/public/biz/img/exam/degree-1.png" alt="" class="details-icon"
-                     style="width: 105px; height: 100px;">
-                <div class="msg">
-                    <p class="users">
-                        <span class="users-item">$!examInfo.studentInfo.realName</span>
-                        <span class="users-item">$!examInfo.studentInfo.sex</span>
-                        <span class="users-item">$!examInfo.studentInfo.orgName</span>
-                        <span class="users-item">$!examInfo.studentInfo.className</span>
-                        <span class="users-item no-border">学生</span>
-                    </p>
-                    <p class="msg-mail">
-                    #*<img src="${contextPath}/public/biz/img/exam/email.png" alt="" style="width: 32px; height: 32px;">*#
-                        <i class="iconfont icon-youjian"
-                           style="color: #1E9FFF;"></i>&nbsp;<span>$!examInfo.studentInfo.email</span>
-                    </p>
-                    <p class="msg-tel">
-                    #*<img src="${contextPath}/public/biz/img/exam/tel.png" alt="" style="width: 32px; height: 32px;">*#
-                        <i class="iconfont icon-shouji1"
-                           style="color: #01AAED;"></i>&nbsp;<span>$!examInfo.studentInfo.phoneNo</span>
-                    </p>
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="header-left">
+                    <a href="javascript:;;" class="start-btn" id="startBtn">
+                        <span class="start-text">开始</span>
+                        <img class="icon" src="${contextPath}/public/biz/img/exam/start.png" alt=""
+                             style="width: 78px; height: 75px;">
+                    </a>
+                    <div class="user-details">
+                        <img src="${contextPath}/public/biz/img/exam/degree-1.png" alt="" class="details-icon"
+                             style="width: 80px; height: 75px;">
+                        <div class="msg">
+                            <p class="users">
+                                <span class="users-item">$!examInfo.studentInfo.realName</span>
+                                <span class="users-item">$!examInfo.studentInfo.sex</span>
+                                <span class="users-item">$!examInfo.studentInfo.orgName</span>
+                                <span class="users-item">$!examInfo.studentInfo.className</span>
+                                <span class="users-item no-border">学生</span>
+                            </p>
+                            <p class="msg-mail">
+                            #*<img src="${contextPath}/public/biz/img/exam/email.png" alt="" style="width: 32px; height: 32px;">*#
+                                <i class="iconfont icon-youjian"
+                                   style="color: #1E9FFF;"></i>&nbsp;<span>$!examInfo.studentInfo.email</span>
+                            </p>
+                            <p class="msg-tel">
+                            #*<img src="${contextPath}/public/biz/img/exam/tel.png" alt="" style="width: 32px; height: 32px;">*#
+                                <i class="iconfont icon-shouji1"
+                                   style="color: #01AAED;"></i>&nbsp;<span>$!examInfo.studentInfo.phoneNo</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="header-right">
+                    <div class="right-main">
+                        <img src="${contextPath}/public/biz/img/exam/paper1.png" alt="" class="details-icon"
+                             style="width: 80px; height: 75px;">
+                        <div class="paper-details">
+                            <input id="idTestexec" value="$!examInfo.paperInfo.idTestexec" hidden>
+                            <input id="idTestexecResult" value="$!examInfo.paperInfo.idTestexecResult" hidden>
+                            <p class="details-header">$!examInfo.paperInfo.testPaperName</p>
+                            <p class="details-text">
+                                <span class="details-head">出题机构：$!examInfo.paperInfo.orgName</span>
+                                <span class="time">开始时间：<span id="beginTime">$!examInfo.paperInfo.beginTimeStr</span></span>
+                            </p>
+                            <p class="details-text">
+                                <span class="details-head">出题人：$!examInfo.paperInfo.paperCreator</span>
+                                <span class="time">完成时间：<span id="endTime">$!examInfo.paperInfo.endTimeStr</span></span>
+                            </p>
+                        </div>
+                    </div>
+                    <a href="javascript:;;" class="start-btn end-btn" id="endBtn">
+                        <span class="start-text">交卷</span>
+                        <img class="end-icon" src="${contextPath}/public/biz/img/exam/end.png" alt=""
+                             style="width: 78px; height: 75px;">
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="header-right">
-            <div class="right-main">
-                <img src="${contextPath}/public/biz/img/exam/paper1.png" alt="" class="details-icon"
-                     style="width: 122px; height: 100px;">
-                <div class="paper-details">
-                    <input id="idTestexec" value="$!examInfo.paperInfo.idTestexec" hidden>
-                    <input id="idTestexecResult" value="$!examInfo.paperInfo.idTestexecResult" hidden>
-                    <p class="details-header">$!examInfo.paperInfo.testPaperName</p>
-                    <p class="details-text">
-                        <span class="details-head">出题机构：$!examInfo.paperInfo.orgName</span>
-                        <span class="time">开始时间：<span id="beginTime">$!examInfo.paperInfo.beginTimeStr</span></span>
-                    </p>
-                    <p class="details-text">
-                        <span class="details-head">出题人：$!examInfo.paperInfo.paperCreator</span>
-                        <span class="time">完成时间：<span id="endTime">$!examInfo.paperInfo.endTimeStr</span></span>
-                    </p>
-                </div>
-            </div>
-            <a href="javascript:;;" class="start-btn end-btn" id="endBtn">
-                <span class="start-text">交卷</span>
-                <img class="end-icon" src="${contextPath}/public/biz/img/exam/end.png" alt=""
-                     style="width: 105px; height: 100px;">
-            </a>
-        </div>
+
+
     </header>
     <!-- /头部 -->
     <!-- 主体 -->
