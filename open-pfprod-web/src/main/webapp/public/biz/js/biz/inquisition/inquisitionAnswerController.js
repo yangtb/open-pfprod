@@ -182,7 +182,15 @@ layui.config({
         });
     };
 
-    table.on('radio(answerTableFilter)', function (obj) {
+    //单击行选中radio
+    table.on('row(answerTableFilter)', function (obj) {
+        obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');//选中行样式
+        obj.tr.find('input[lay-type="layTableRadio"]').prop("checked", true);
+        form.render('radio');
+        rowClick(obj)
+    });
+
+    function rowClick(obj) {
         if (!obj.data.desExpert) {
             obj.data.desExpert = "";
         }
@@ -191,7 +199,7 @@ layui.config({
         layui.use('form', function () {
             layui.form.render();
         });
-    });
+    };
 
 });
 
