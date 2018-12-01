@@ -58,8 +58,15 @@ layui.config({
         });
     };
 
-    table.on('radio(tagTableFilter)', function (obj) {
+    //单击行选中radio
+    table.on('row(tagTableFilter)', function (obj) {
+        obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');//选中行样式
+        obj.tr.find('input[lay-type="layTableRadio"]').prop("checked", true);
+        form.render('radio');
+        rowClick(obj)
+    });
 
+    function rowClick(obj) {
         table.reload('kbAssessTableId', {
             url: basePath + '/pf/p/kb/assess/list'
             , where: {
@@ -70,7 +77,7 @@ layui.config({
                 curr: 1 //重新从第 1 页开始
             }
         });
-    });
+    };
 
     $('#add').on('click', function () {
         _addOrEdit("add");
