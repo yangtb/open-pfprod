@@ -126,7 +126,6 @@ layui.config({
             _addOrEdit("edit", data);
         }
         if (obj.event === 'editUseCase') {
-            console.log(data)
             _editUseCase(data);
         }
     });

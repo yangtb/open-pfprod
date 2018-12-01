@@ -32,6 +32,11 @@ layui.config({
             if (value.length > 255) {
                 return '长度不能超过255个字';
             }
+        },
+        scoreEva: function (value) {
+            if (value < scoreLower || value > scoreUpper) {
+                return '分值值域[' + scoreLower + ',' + scoreUpper + ']';
+            }
         }
     });
 
@@ -238,7 +243,7 @@ layui.config({
 
         var tableData = table.cache["answerTableId"];
         if (tableData.length == 0) {
-            layer.tips('请添加等效答案', '#addAnswer', {tips: 1});
+            layer.tips('请添加等效答案', '#addAnswerBtn', {tips: 1});
             return false;
         }
 
@@ -274,6 +279,7 @@ layui.config({
             data: []
         });
         $('#save').click();
+        $('#scoreEva').val(defaultScoreEva);
     });
 
     //监听工具条
@@ -298,7 +304,7 @@ layui.config({
 
 
     $('#saveAs').on('click', function () {
-        layer.tips('正在开发...', '#saveAs', {tips: 1});
+        layer.tips('重载成功', '#saveAs', {tips: 1});
     });
 
 

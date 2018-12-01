@@ -55,7 +55,7 @@
                                 <label class="layui-form-label">分值<i class="iconfont icon-required"
                                                                      style="color: #f03f2d"></i></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="scoreEva" data-fill="" lay-verify="required"
+                                    <input type="text" name="scoreEva" id="scoreEva" lay-verify="required|scoreEva"
                                            lay-vertype="tips"
                                            autocomplete="off" class="layui-input">
                                 </div>
@@ -157,12 +157,19 @@
             $('#topform').html(getAssesssFormHtml());
         }
 
+        var defaultScoreEva,
+                scoreUpper,
+                scoreLower;
+
         function fullForm(data) {
             $(document).ready(function () {
                 $("#useCaseForm").autofill(data);
                 layui.use('form', function () {
                     layui.form.render();
                 });
+                defaultScoreEva = data.scoreDefault;
+                scoreUpper = data.scoreUpper;
+                scoreLower = data.scoreLower;
             });
         };
 

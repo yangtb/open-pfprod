@@ -394,7 +394,6 @@ function checkQa(obj) {
     data.list = reqData;
 
     data.status = obj.checked ? '1' : '0';
-    console.log(data)
     $.ajax({
         url: basePath + '/pf/r/waiting/room/exam/qa/status',
         type: 'post',
