@@ -3,6 +3,7 @@ package com.sm.pfprod.web.rest.biz.kb;
 import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
+import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.dto.common.PfCommonListDto;
@@ -429,8 +430,11 @@ public class PfKbPartRestController {
     @PostMapping(value = "/cons/bach/add")
     public ResultObject bachAddCons(@RequestBody PfCommonListDto dto) {
         /* 参数校验 */
-        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        if (dto.getExtType().equals(YesOrNoNum.NO.getCode())) {
+            Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        }
         Assert.isTrue(dto.getExtId() != null, "extId");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getExtType()), "extType");
         return pfKbPartService.bachAddCons(dto) ? ResultObject.createSuccess("bachAddCons", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("bachAddCons", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
@@ -445,8 +449,11 @@ public class PfKbPartRestController {
     @PostMapping(value = "/check/bach/add")
     public ResultObject bachAddCheck(@RequestBody PfCommonListDto dto) {
         /* 参数校验 */
-        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        if (dto.getExtType().equals(YesOrNoNum.NO.getCode())) {
+            Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        }
         Assert.isTrue(dto.getExtId() != null, "extId");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getExtType()), "extType");
         return pfKbPartService.bachAddCheck(dto) ? ResultObject.createSuccess("bachAddCheck", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("bachAddCheck", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
@@ -461,8 +468,11 @@ public class PfKbPartRestController {
     @PostMapping(value = "/exam/bach/add")
     public ResultObject bachAddExam(@RequestBody PfCommonListDto dto) {
         /* 参数校验 */
-        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        if (dto.getExtType().equals(YesOrNoNum.NO.getCode())) {
+            Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        }
         Assert.isTrue(dto.getExtId() != null, "extId");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getExtType()), "extType");
         return pfKbPartService.bachAddExam(dto) ? ResultObject.createSuccess("bachAddExam", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("bachAddExam", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }

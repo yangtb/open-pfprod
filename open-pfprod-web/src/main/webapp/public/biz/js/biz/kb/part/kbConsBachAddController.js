@@ -111,7 +111,8 @@ layui.config({
         var url = basePath + '/pf/r/kb/part/cons/bach/add';
         var bizData = {
             list: reqData,
-            extId: idMedCase
+            extId: idMedCase,
+            extType : '0'
         }
         common.commonPost(url, bizData, '添加', 'add', successBachAddCallback)
     });

@@ -154,6 +154,10 @@
                 lay-event="bachAddConsAnswer">
             <i class="iconfont icon-icon-import"></i> 批量添加问诊
         </button>
+        <button type="button" id="allAddConsAnswer" class="layui-btn layui-btn-sm layui-btn-normal"
+                lay-event="allAddConsAnswer">
+            <i class="iconfont icon-all"></i> 全部引入
+        </button>
     </div>
 </script>
 

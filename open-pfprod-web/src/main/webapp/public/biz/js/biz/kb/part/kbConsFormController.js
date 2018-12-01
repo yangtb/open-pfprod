@@ -4,13 +4,14 @@ layui.config({
     ckplayer: 'ckplayer/ckplayer'
     , Magnifier: 'js/Magnifier'
     , Event: 'js/Event'
-}).use(['table', 'form', 'upload', 'jquery', 'element', 'tableSelect', 'common'], function () {
+}).use(['table', 'form', 'upload', 'jquery', 'element', 'tableSelect', 'common', 'layer'], function () {
     var $ = layui.$
         , table = layui.table
         , form = layui.form
         , upload = layui.upload
         , common = layui.common
         , element = layui.element
+        , layer = layui.layer
         , tableSelect = layui.tableSelect;
 
     var formIdArr = new Array('searchAnswer', 'desInques', 'idAnswer', 'desAnswer', 'fgReason', 'fgBack', 'desExpert', 'test3');
@@ -83,7 +84,15 @@ layui.config({
         , where: {
             idMedCase: idMedCase
         }
-        , page: false
+        , limit: 15
+        , page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+            layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+            //,curr: 5 //设定初始在第 5 页
+            , groups: 1 //只显示 1 个连续页码
+            , first: false //不显示首页
+            , last: false //不显示尾页
+            , limits: [15, 30, 50, 100]
+        }
     });
 
     form.verify({
@@ -93,7 +102,6 @@ layui.config({
             }
         }
     });
-
 
     // 文件上传
     var timer;
@@ -308,8 +316,37 @@ layui.config({
             case 'bachAddConsAnswer':
                 common.openParent('问诊选择', basePath + '/pf/p/kb/part/define/cons/bach/add/page?idMedCase=' + idMedCase, 800, 480);
                 break;
+            case 'allAddConsAnswer':
+                var y = $(this).offset().top;
+                var x = $(this).offset().left;
+                addAll(x, y);
+                break;
         }
     });
+
+    function addAll(x, y) {
+        layer.confirm('确定要全部引入么？', {
+            title: '提示',
+            offset: [y + 'px', x + 'px'],
+            resize: false,
+            btn: ['确定', '取消'],
+            btnAlign: 'c',
+            icon: 3
+        }, function (index) {
+            var url = basePath + '/pf/r/kb/part/cons/bach/add';
+            var bizData = {
+                extId: idMedCase,
+                extType: '1' // 全部引入
+            }
+            layer.msg('正在执行，请稍后...', {icon: 16, shade: 0.01});
+            common.commonPost(url, bizData, '全部引入', null, successAddAllCallback, false);
+        })
+    }
+
+    function successAddAllCallback() {
+        layer.closeAll('loading');
+        _tableReload();
+    }
 
 });
 

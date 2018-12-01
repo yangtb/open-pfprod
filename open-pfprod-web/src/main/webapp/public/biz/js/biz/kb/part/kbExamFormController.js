@@ -69,7 +69,7 @@ layui.config({
     table.render({
         elem: '#partExamTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'partExamTableId'
-        , height: '465' //容器高度
+        , height: 'full-30' //容器高度
         , toolbar: '#toolbarExam'
         , defaultToolbar: []
         , cols: [[
@@ -82,7 +82,15 @@ layui.config({
         , where: {
             idMedCase: idMedCase
         }
-        , page: false
+        , limit: 15
+        , page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+            layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+            //,curr: 5 //设定初始在第 5 页
+            , groups: 1 //只显示 1 个连续页码
+            , first: false //不显示首页
+            , last: false //不显示尾页
+            , limits: [15, 30, 50, 100]
+        }
     });
 
     form.verify({
@@ -302,7 +310,7 @@ layui.config({
             where: {
                 idMedCase: idMedCase
             }
-            , height: '465'
+            , height: 'full-30'
         });
     };
 
@@ -327,9 +335,37 @@ layui.config({
             case 'bachAddExamAnswer':
                 common.openParent('辅助检查选择', basePath + '/pf/p/kb/part/define/exam/bach/add/page?idMedCase=' + idMedCase, 800, 480);
                 break;
+            case 'allAddExamAnswer':
+                var y = $(this).offset().top;
+                var x = $(this).offset().left;
+                addAll(x, y);
+                break;
         }
     });
 
+    function addAll(x, y) {
+        layer.confirm('确定要全部引入么？', {
+            title: '提示',
+            offset: [y + 'px', x + 'px'],
+            resize: false,
+            btn: ['确定', '取消'],
+            btnAlign: 'c',
+            icon: 3
+        }, function (index) {
+            var url = basePath + '/pf/r/kb/part/exam/bach/add';
+            var bizData = {
+                extId: idMedCase,
+                extType: '1' // 全部引入
+            }
+            layer.msg('正在执行，请稍后...', {icon: 16, shade: 0.01});
+            common.commonPost(url, bizData, '全部引入', null, successAddAllCallback, false);
+        })
+    }
+
+    function successAddAllCallback() {
+        layer.closeAll('loading');
+        _tableReload();
+    }
     function editSelect() {
         console.log(11)
         console.log($('.mySelect').find('input'))
