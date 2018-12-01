@@ -40,7 +40,15 @@ layui.config({
         }
     });
 
-    table.on('radio(kbTableFilter)', function (obj) {
+    //单击行选中radio
+    table.on('row(kbTableFilter)', function (obj) {
+        obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');//选中行样式
+        obj.tr.find('input[lay-type="layTableRadio"]').prop("checked", true);
+        form.render('radio');
+        rowClick(obj)
+    });
+
+    function rowClick (obj) {
         $('#reset').click();
         $("#kbForm").autofill(obj.data);
         form.render();
@@ -51,7 +59,7 @@ layui.config({
         }
         _tableSelectRender(obj.data.sdEva)
         _postReload(bizData);
-    });
+    };
 
     var _postReload = function (bizData) {
         //layer.load(2);
