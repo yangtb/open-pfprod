@@ -103,7 +103,7 @@ layui.config({
     table.render({
         elem: '#partCheckTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'partCheckTableId'
-        , height: 'full-30' //容器高度
+        , height: 'full-130' //容器高度
         , toolbar: '#toolbarCheck'
         , defaultToolbar: []
         , cols: [[
@@ -379,7 +379,7 @@ layui.config({
             where: {
                 idMedCase: idMedCase
             }
-            , height: 'full-30'
+            , height: 'full-130'
         });
     };
 
