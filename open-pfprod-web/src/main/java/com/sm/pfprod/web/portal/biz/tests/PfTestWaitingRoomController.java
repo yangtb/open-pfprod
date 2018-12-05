@@ -3,7 +3,6 @@ package com.sm.pfprod.web.portal.biz.tests;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestWatingRoomDto;
-import com.sm.pfprod.model.entity.ExmMedResultOrder;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.test.PfWaitingRoomDieReasonVo;
@@ -171,6 +170,7 @@ public class PfTestWaitingRoomController extends BaseController {
     @RequestMapping("/test/referral/form")
     public String referralForm(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
+        model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         return "pages/biz/tests/room/exec/referralForm";
     }
 

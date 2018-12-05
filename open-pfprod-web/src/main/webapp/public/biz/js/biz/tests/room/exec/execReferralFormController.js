@@ -1,10 +1,11 @@
 
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['form', 'layer', 'jquery', 'common'], function () {
+}).use(['form', 'layer', 'jquery', 'common', 'tableSelect'], function () {
     var $ = layui.$,
         form = layui.form,
-        common = layui.common;
+        common = layui.common
+        , tableSelect = layui.tableSelect;
 
     form.verify({
         desLength: function (value) {
@@ -42,6 +43,31 @@ layui.config({
             }
         });
         return false;
+    });
+
+    tableSelect.render({
+        elem: '#reasonIn',
+        checkedKey: 'reasonInId',
+        table: {
+            url: basePath + '/pf/p/waiting/room/test/die/ready/reason/list'
+            , cols: [[
+                {type: 'checkbox'},
+                {field: 'idText', minWidth: 150, title: '确诊理由'},
+                {field: 'sdEvaEffciency', width: 80, title: '阶段', templet: '#sdEvaTpl'}
+            ]] //设置表头
+            , where: {
+                idTestexecResult: idTestexecResult
+            }
+            , limit: 30
+            , limits: [30, 50]
+        },
+        done: function (elem, data) {
+            var NEWJSON = []
+            layui.each(data.data, function (index, item) {
+                NEWJSON.push(item.idText)
+            })
+            elem.val(NEWJSON.join(","))
+        }
     });
 
 });

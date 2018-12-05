@@ -24,14 +24,14 @@
             <input name="idTestexecResult" id="idTestexecResult" hidden>
             <input name="idDie" id="idDie" hidden>
         </div>
-        <div class="layui-form-item form-item-my5">
+        <div class="layui-form-item">
             <label class="layui-form-label">拟诊<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <input type="idDieText" name="idDieText" lay-verify="required" lay-vertype="tips"
                        autocomplete="off" class="layui-input" disabled>
             </div>
         </div>
-        <div class="layui-form-item form-item-my5">
+        <div class="layui-form-item">
             <label class="layui-form-label">阶段<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <select name="sdEvaReferral" autocomplete="off" lay-verify="required" lay-vertype="tips">
@@ -47,8 +47,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">加入原因<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                            <textarea name="reasonIn" lay-verify="required|desLength" lay-vertype="tips"
-                                      class="layui-textarea" placeholder="请输入加入原因"></textarea>
+                            <textarea name="reasonIn" id="reasonIn" lay-verify="required|desLength" lay-vertype="tips"
+                                      class="layui-textarea" placeholder="请输入加入原因" style="height: 200px;"></textarea>
             </div>
         </div>
 
@@ -76,6 +76,16 @@
         });
 
     }
+</script>
+
+<script type="text/html" id="sdEvaTpl">
+        #foreach($param in ${sdEva})
+        {{#  if(d.sdEvaEffciency == $!param.dictCode){ }}
+            $!{param.dictName}
+        {{#  } else { }}
+
+        {{#  } }}
+        #end
 </script>
 
 </body>

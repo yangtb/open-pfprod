@@ -112,6 +112,18 @@ layui.define(['layer'], function (exports) {
             })
         },
 
+        openMultiPhoto: function (imgData) {
+            layui.layer.photos({
+                photos: {
+                    title: "查看图片",
+                    data: imgData
+                },
+                shade: .01,
+                closeBtn: 1,
+                anim: 5
+            })
+        },
+
         /**弹出层*/
         open: function (title, url, width, height, sucBack, anim) {
             var index = layui.layer.open({

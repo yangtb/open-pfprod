@@ -44,7 +44,11 @@ layui.config({
                     common.errorMsg(data.msg);
                     return false;
                 } else {
-                    var zNodes = data.data;
+                    console.log(data.data)
+                    var zNodes = [
+                        {id: "0", name: "全部"}
+                    ];
+                    zNodes = zNodes.concat(data.data)
                     $.fn.zTree.init($("#treeDemo"), setting, zNodes);
                     zTree = $.fn.zTree.getZTreeObj("treeDemo");
                     return true;
@@ -66,9 +70,9 @@ layui.config({
             where: {
                 idMedicalrec: idMedicalrec,
                 cdMedAsse: cdMedAsse,
-                idTestexecResult : idTestexecResult,
-                sdBody : '',
-                extItemId: extItemId,
+                idTestexecResult: idTestexecResult,
+                //sdBody: '',
+                extItemId: extItemId == '0' ? '' : extItemId,
                 keyword: keyword
             }
             , height: '390'
@@ -87,7 +91,7 @@ layui.config({
         , cols: [[
             {type: 'numbers', title: 'R'},
             {field: 'desBody', minWidth: 140, title: '检查项'},
-            {field: 'cdCheckText', width: 90, title: '检查方式'},
+            //{field: 'cdCheckText', width: 90, title: '检查方式'},
             {field: 'idDieText', width: 90, title: '拟诊', toolbar: '#nzTpl'},
             {field: 'qa', width: 60, title: '提问', fixed: 'right', align: 'center', templet: '#qaTpl'}
         ]] //设置表头
@@ -133,7 +137,7 @@ layui.config({
                     var bizData = {
                         idTestexecResult: idTestexecResult,
                         idMedCaseList: id,
-                        idDie : selectData.idDie
+                        idDie: selectData.idDie
                     }
                     var url = basePath + '/pf/r/waiting/room/check/qa/edit';
                     common.commonPost(url, bizData, null, null, null, false);
@@ -197,8 +201,21 @@ layui.config({
     });
 
     $('#checkPhoto').on('click', function () {
-        var path = $('#checkPhoto').attr('src');
-        common.openSinglePhoto(path);
+        //var path = $('#checkPhoto').attr('src');
+        //common.openSinglePhoto(path);
+
+        var imgFirst, imgSecond;
+        if ($('input[name="photo"]:checked').val() == '1') {
+            imgFirst = photoData.frontPath;
+            imgSecond = photoData.backPath;
+        } else {
+            imgFirst = photoData.backPath;
+            imgSecond = photoData.frontPath;
+        }
+        var imgData = [
+            {src: imgFirst}, {src: imgSecond}
+        ]
+        common.openMultiPhoto(imgData)
     });
 
     function reloadTable(i, sdBody) {
@@ -206,9 +223,9 @@ layui.config({
             where: {
                 idMedicalrec: idMedicalrec,
                 cdMedAsse: cdMedAsse,
-                sdBody: sdBody,
-                idTestexecResult : idTestexecResult,
-                extItemId: null,
+                sdBody: sdBody == '0' ? '' : sdBody,
+                idTestexecResult: idTestexecResult,
+                //extItemId: null,
                 keyword: ''
             }
         });
@@ -441,8 +458,7 @@ function openMedia(sdType, idResult) {
         if (sdType == '1') {
             var path = $('#patientImg' + idResult).attr('src');
             layui.common.openSinglePhoto(path);
-        }
-        else if (sdType == '3') {
+        } else if (sdType == '3') {
             var path = $('#patientVideo' + idResult).attr('src');
             layui.common.openTopVideo(basePath + '/video/form?path=' + path, 890, 504);
         }

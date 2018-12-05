@@ -1,10 +1,11 @@
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['table', 'form', 'jquery', 'common'], function () {
+}).use(['table', 'form', 'jquery', 'common', 'tableSelect'], function () {
     var $ = layui.$
         , table = layui.table
         , form = layui.form
-        , common = layui.common;
+        , common = layui.common
+        , tableSelect = layui.tableSelect;
 
     //执行渲染
     table.render({
@@ -92,9 +93,9 @@ layui.config({
         if (formType == 'add') {
             var index = layui.layer.open({
                 title: '<b>添加拟诊</b>',
-                offset: [y + 'px', x + 'px'],
+                //offset: [y + 'px', x + 'px'],
                 type: 2,
-                area: ['425px', '315px'],
+                area: ['650px', '450px'],
                 fixed: false, //不固定
                 maxmin: true,
                 content: basePath + '/pf/p/waiting/room/test/referral/form?idTestexecResult=' + idTestexecResult,
@@ -159,8 +160,11 @@ function loadReferralList(data) {
             layui.form.val("outForm" + i, data[i]);
         }
         layui.form.render();
-    });
 
+        $.each(data, function (i, item) {
+            renderNzTable(item.idTestexecResultReferral, item);
+        });
+    });
 }
 
 function referralForm(index, data) {
@@ -286,5 +290,38 @@ function _outCallback(data) {
     $('#outBtn' + id).addClass("layui-btn-disabled");
     $('#outBtn' + id).attr("disabled", "disabled");
     $('#idDieText' + id).css("text-decoration", "line-through")
+}
+
+function renderNzTable(i, data) {
+    layui.config({
+        base: basePath + '/public/layui/build/js/'
+    }).use(['table', 'jquery', 'tableSelect'], function () {
+        var tableSelect = layui.tableSelect;
+        tableSelect.render({
+            elem: '#reasonOut' + i,
+            checkedKey: 'reasonOutId' + i,
+            table: {
+                url: basePath + '/pf/p/waiting/room/test/die/ready/reason/list'
+                , cols: [[
+                    {type: 'checkbox'},
+                    {field: 'idText', minWidth: 150, title: '确诊理由'},
+                    {field: 'sdEvaEffciency', width: 80, title: '阶段', templet: '#sdEvaTpl'}
+                ]] //设置表头
+                , where: {
+                    idTestexecResult: idTestexecResult
+                }
+                , limit: 30
+                , limits: [30, 50]
+            },
+            done: function (elem, data) {
+                var NEWJSON = []
+                layui.each(data.data, function (index, item) {
+                    NEWJSON.push(item.idText)
+                })
+                elem.val(NEWJSON.join(","))
+            }
+        });
+    });
+
 }
 
