@@ -306,7 +306,7 @@ layui.config({
     };
 
     var _editExam = function (obj) {
-        var checkStatus = table.checkStatus('partExamTableId')
+        /*var checkStatus = table.checkStatus('partExamTableId')
             , data = checkStatus.data;
         if (data.length == 0) {
             common.toastTop("请先选中当前行");
@@ -315,7 +315,7 @@ layui.config({
         if (obj.data.idMedCaseList != data[0].idMedCaseList) {
             common.toastTop("请先点击单选按钮选中当前行");
             return;
-        }
+        }*/
         var url = basePath + '/pf/r/kb/part/exam/custom';
         var reqData = new Array();
         reqData.push(obj.data.idMedCaseList);
@@ -363,7 +363,15 @@ layui.config({
         });
     };
 
-    table.on('radio(partExamTableFilter)', function (obj) {
+    /*table.on('radio(partExamTableFilter)', function (obj) {
+        fillForm(obj.data);
+    });*/
+
+    //单击行选中radio
+    table.on('row(partExamTableFilter)', function (obj) {
+        obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');//选中行样式
+        obj.tr.find('input[lay-type="layTableRadio"]').prop("checked", true);
+        form.render('radio');
         fillForm(obj.data);
     });
 
