@@ -7,25 +7,67 @@ layui.config({
         , common = layui.common
         , tableSelect = layui.tableSelect;
 
-    //执行渲染
-    table.render({
-        elem: '#kbTable' //指定原始表格元素选择器（推荐id选择器）
-        , id: 'kbTableId'
-        , height: '340' //容器高度
-        , cols: [[
-            {type: 'radio'},
-            {field: 'sdEva', width: 90, title: '评估阶段', templet: '#sdEvaTpl'},
-            {field: 'itemName', minWidth: 90, title: '评估项'},
-            {field: 'scoreEva', width: 60, title: '分值'},
-            {fixed: 'right', title: '操作', width: 60, align: 'left', toolbar: '#kbBar'}
-        ]] //设置表头
-        , url: basePath + '/pf/p/kb/assess/effciency/list'
-        , where: {
-            idEvaCase: idEvaCase,
-            cdEvaAsse : cdEvaAsse
+    init();
+
+    function init() {
+        if (tagFlag == '1' && idEvaCase == '') {
+            // 查询idMedCase
+            var medData = {
+                idMedicalrec: idMedicalrec,
+                idTag: idTag
+            }
+            $.ajax({
+                url: basePath + '/pf/r/case/history/select/eva/tag',
+                type: 'post',
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(medData),
+                success: function (data) {
+                    layer.closeAll('loading');
+                    if (data.code != 0) {
+                        common.errorMsg(data.msg);
+                        return false;
+                    } else {
+                        if (data.data) {
+                            idEvaCase = data.data.idEvaCase;
+                        }
+                        loadInfo()
+                        return true;
+                    }
+                },
+                error: function () {
+                    layer.closeAll('loading');
+                    common.errorMsg("查询失败");
+                    return false;
+                }
+            });
+        } else {
+            loadInfo();
         }
-        , page: false
-    });
+    };
+
+    function loadInfo() {
+        //执行渲染
+        table.render({
+            elem: '#kbTable' //指定原始表格元素选择器（推荐id选择器）
+            , id: 'kbTableId'
+            , height: '340' //容器高度
+            , cols: [[
+                {type: 'radio'},
+                {field: 'sdEva', width: 90, title: '评估阶段', templet: '#sdEvaTpl'},
+                {field: 'itemName', minWidth: 90, title: '评估项'},
+                {field: 'scoreEva', width: 60, title: '分值'},
+                {fixed: 'right', title: '操作', width: 60, align: 'left', toolbar: '#kbBar'}
+            ]] //设置表头
+            , url: basePath + '/pf/p/kb/assess/effciency/list'
+            , where: {
+                idEvaCase: idEvaCase,
+                cdEvaAsse: cdEvaAsse
+            }
+            , page: false
+        });
+    }
+
 
     form.verify({
         desAnswer: function (value) {
@@ -48,7 +90,7 @@ layui.config({
         rowClick(obj)
     });
 
-    function rowClick (obj) {
+    function rowClick(obj) {
         $('#reset').click();
         $("#kbForm").autofill(obj.data);
         form.render();
@@ -61,13 +103,24 @@ layui.config({
         data.field.cdEvaAsse = cdEvaAsse;
         data.field.sdEvaEffciency = data.field.sdEva;
 
+        data.field.tagFlag = tagFlag;
+        if (tagFlag == '1') {
+            data.field.caseName = caseName;
+            data.field.idMedicalrec = idMedicalrec;
+            data.field.idTag = idTag;
+        }
+
         var url = basePath + '/pf/r/kb/assess/effciency/save';
         return common.commonPost(url, data.field, '保存', '', _callBack);
     });
 
     var _callBack = function (data) {
-        _kbTableReload();
-        $('#idEvaCaseItem').val(data.data);
+        if (idEvaCase) {
+            _kbTableReload();
+            $('#idEvaCaseItem').val(data.data);
+        } else {
+            window.location.reload();
+        }
     }
 
 
@@ -75,7 +128,7 @@ layui.config({
         table.reload('kbTableId', {
             where: {
                 idEvaCase: idEvaCase,
-                cdEvaAsse : cdEvaAsse
+                cdEvaAsse: cdEvaAsse
             }
         });
     };

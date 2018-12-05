@@ -65,33 +65,75 @@ layui.config({
         }
     });
 
-    //执行渲染
-    table.render({
-        elem: '#partExamTable' //指定原始表格元素选择器（推荐id选择器）
-        , id: 'partExamTableId'
-        , height: 'full-30' //容器高度
-        , toolbar: '#toolbarExam'
-        , defaultToolbar: []
-        , cols: [[
-            {type: 'radio'},
-            {field: 'naItem', minWidth: 150, title: '项目'},
-            {field: 'valResult', minWidth: 110, title: '结果'},
-            {fixed: 'right', title: '操作', minWidth: 110, align: 'left', toolbar: '#partExamBar'}
-        ]] //设置表头
-        , url: basePath + '/pf/p/kb/part/exam/list'
-        , where: {
-            idMedCase: idMedCase
+    init();
+
+    function init() {
+        if (tagFlag == '1' && idMedCase == '') {
+            // 查询idMedCase
+            var medData = {
+                idMedicalrec: idMedicalrec,
+                idTag: idTag
+            }
+            $.ajax({
+                url: basePath + '/pf/r/case/history/select/med/tag',
+                type: 'post',
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(medData),
+                success: function (data) {
+                    layer.closeAll('loading');
+                    if (data.code != 0) {
+                        common.errorMsg(data.msg);
+                        return false;
+                    } else {
+                        if (data.data) {
+                            idMedCase = data.data.idMedCase;
+                        }
+                        loadInfo()
+                        return true;
+                    }
+                },
+                error: function () {
+                    layer.closeAll('loading');
+                    common.errorMsg("查询失败");
+                    return false;
+                }
+            });
+        } else {
+            loadInfo();
         }
-        , limit: 15
-        , page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-            layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
-            //,curr: 5 //设定初始在第 5 页
-            , groups: 1 //只显示 1 个连续页码
-            , first: false //不显示首页
-            , last: false //不显示尾页
-            , limits: [15, 30, 50, 100]
-        }
-    });
+    };
+
+    function loadInfo() {
+        //执行渲染
+        table.render({
+            elem: '#partExamTable' //指定原始表格元素选择器（推荐id选择器）
+            , id: 'partExamTableId'
+            , height: 'full-30' //容器高度
+            , toolbar: '#toolbarExam'
+            , defaultToolbar: []
+            , cols: [[
+                {type: 'radio'},
+                {field: 'naItem', minWidth: 150, title: '项目'},
+                {field: 'valResult', minWidth: 110, title: '结果'},
+                {fixed: 'right', title: '操作', minWidth: 110, align: 'left', toolbar: '#partExamBar'}
+            ]] //设置表头
+            , url: basePath + '/pf/p/kb/part/exam/list'
+            , where: {
+                idMedCase: idMedCase
+            }
+            , limit: 15
+            , page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                //,curr: 5 //设定初始在第 5 页
+                , groups: 1 //只显示 1 个连续页码
+                , first: false //不显示首页
+                , last: false //不显示尾页
+                , limits: [15, 30, 50, 100]
+            }
+        });
+    }
+
 
     form.verify({
         naItem: function (value) {
@@ -206,6 +248,13 @@ layui.config({
         $('#reset').click();
         $('#save').click();
     });
+
+    $('#save').on('click', function () {
+        if (!$('#idMedCaseList').val()) {
+            layer.tips('请先在左侧选中一行记录，若无，请先添加', '#save', {tips: 1});
+            return false;
+        }
+    })
 
     form.on('submit(saveExam)', function (data) {
         data.field.fgReason = data.field.fgReason ? '1' : '0';
@@ -333,7 +382,11 @@ layui.config({
     table.on('toolbar(partExamTableFilter)', function (obj) {
         switch (obj.event) {
             case 'bachAddExamAnswer':
-                common.openParent('辅助检查选择', basePath + '/pf/p/kb/part/define/exam/bach/add/page?idMedCase=' + idMedCase, 800, 480);
+                common.openParent('辅助检查选择',
+                    basePath + '/pf/p/kb/part/define/exam/bach/add/page?idMedCase='
+                    + idMedCase + '&tagFlag=' + tagFlag + '&idTag=' + idTag
+                    + '&idMedicalrec=' + idMedicalrec + '&caseName=' + caseName,
+                    800, 480);
                 break;
             case 'allAddExamAnswer':
                 var y = $(this).offset().top;
@@ -355,7 +408,12 @@ layui.config({
             var url = basePath + '/pf/r/kb/part/exam/bach/add';
             var bizData = {
                 extId: idMedCase,
-                extType: '1' // 全部引入
+                extType: '1', // 全部引入
+                tagFlag: tagFlag,
+                idMedCase: idMedCase,
+                idMedicalrec: idMedicalrec,
+                idTag: idTag,
+                caseName : caseName
             }
             layer.msg('正在执行，请稍后...', {icon: 16, shade: 0.01});
             common.commonPost(url, bizData, '全部引入', null, successAddAllCallback, false);
@@ -364,7 +422,7 @@ layui.config({
 
     function successAddAllCallback() {
         layer.closeAll('loading');
-        _tableReload();
+        window.location.reload();
     }
     function editSelect() {
         console.log(11)

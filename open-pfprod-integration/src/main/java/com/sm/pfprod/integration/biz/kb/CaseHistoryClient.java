@@ -7,6 +7,8 @@ import com.sm.open.core.facade.model.param.pf.biz.kb.casehistory.FaqMedicalrecPa
 import com.sm.open.core.facade.model.param.pf.biz.kb.casehistory.PfCaseHistoryParam;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
+import com.sm.open.core.facade.model.result.pf.biz.clinic.FaqEvaTagResult;
+import com.sm.open.core.facade.model.result.pf.biz.clinic.FaqMedTagResult;
 import com.sm.open.core.facade.model.result.pf.biz.clinic.PfAssessTagResult;
 import com.sm.open.core.facade.model.result.pf.biz.clinic.PfCaseHistoryTagResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
@@ -70,6 +72,22 @@ public class CaseHistoryClient {
 
     public CommonResult<List<PfAssessTagResult>> listAllAssessTag(Long idDemo, Long idMedicalrec) {
         return pfCaseHistoryFacade.listAllAssessTag(idDemo, idMedicalrec);
+    }
+
+    public CommonResult<FaqMedTagResult> selectMedTag(FaqMedTagParam param) {
+        return pfCaseHistoryFacade.selectMedTag(param);
+    }
+
+    public CommonResult<FaqEvaTagResult> selectEvaTag(FaqEvaTagParam param) {
+        return pfCaseHistoryFacade.selectEvaTag(param);
+    }
+
+    public CommonResult<Boolean> saveAsMed(FaqMedTagParam param) {
+        return pfCaseHistoryFacade.saveAsMed(param);
+    }
+
+    public CommonResult<Boolean> saveAsEva(FaqEvaTagParam param) {
+        return pfCaseHistoryFacade.saveAsEva(param);
     }
 
 }

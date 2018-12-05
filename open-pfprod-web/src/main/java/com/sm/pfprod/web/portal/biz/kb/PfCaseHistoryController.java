@@ -2,14 +2,12 @@ package com.sm.pfprod.web.portal.biz.kb;
 
 import com.alibaba.fastjson.JSON;
 import com.sm.open.core.facade.model.result.pf.biz.clinic.BasEvaTagVoResult;
-import com.sm.open.core.facade.model.result.pf.biz.clinic.BasMedicalTagVoResult;
 import com.sm.pfprod.model.dto.biz.clinic.PfClinicTemplateDto;
 import com.sm.pfprod.model.dto.biz.kb.casehistory.PfCaseHistoryDto;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
-import com.sm.pfprod.model.param.PageParam;
 import com.sm.pfprod.model.result.PageResult;
-import com.sm.pfprod.service.biz.kb.PfCaseHistoryService;
 import com.sm.pfprod.service.biz.clinic.PfClinicTemplateService;
+import com.sm.pfprod.service.biz.kb.PfCaseHistoryService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.util.EnumUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -67,9 +65,10 @@ public class PfCaseHistoryController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0040', 'ROLE_SUPER')")
     @RequestMapping("/form")
-    public String tagForm(Long idMedicalrec, Long idDemo, Model model) {
+    public String tagForm(Long idMedicalrec, Long idDemo, Model model, String caseName) {
         model.addAttribute("idMedicalrec", idMedicalrec);
         model.addAttribute("idDemo", idDemo);
+        model.addAttribute("caseName", caseName);
         model.addAttribute("tags", JSON.parseArray(JSON.toJSONString(pfCaseHistoryService.listAllCaseHistoryTag(idDemo, idMedicalrec))));
         model.addAttribute("assessTags", JSON.parseArray(JSON.toJSONString(pfCaseHistoryService.listAllAssessTag(idDemo, idMedicalrec))));
         return "pages/biz/kb/casehistory/casehistoryTagForm";

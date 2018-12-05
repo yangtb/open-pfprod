@@ -19,10 +19,11 @@
         var idMedicalrec = '$!{idMedicalrec}';
         var tags = '$!{tags}'
         var assessTags = '$!{assessTags}';
+        var caseName ='$!{caseName}';
     </script>
 </head>
 
-<body>
+<body onload="iframeHeight()">
 <div>
     <div class="layui-tab layui-tab-brief layui-col-xs12" lay-filter="tagTabFilter"
          style="margin: 0px">
@@ -45,9 +46,7 @@
                                             <img style="display: inline-block; width: 40px; height: 40px;"
                                                  src="$!element.path">
                                             <cite style="padding-right: 2px;">
-                                                $!element.name<span id="med-dot-bg$!element.idTag" class="layui-badge-dot
-                                                    #if($!element.idMedTag)layui-bg-green #else layui-bg-orange #end"
-                                                                    style="float: right;"></span>
+                                                $!element.name
                                             </cite>
                                         </a>
                                     </li>
@@ -73,9 +72,9 @@
                                         <i class="layui-icon layui-icon-search"></i>
                                     </button>
                                     <div class="layui-btn-group">
-                                        <a lay-href="${basePath}/pf/p/kb/part/page" class="layui-btn">
+                                        #*<a lay-href="${basePath}/pf/p/kb/part/page" class="layui-btn">
                                             <i class="layui-icon layui-icon-add-1"></i>新增用例
-                                        </a>
+                                        </a>*#
 
                                         #*<button id="editCase" class="layui-btn" type="button">
                                             <i class="iconfont icon-edit"></i> 编辑用例
@@ -88,8 +87,7 @@
 
                         </form>
                         <iframe id="caseHistoryTag" class='layui-col-xs12' frameborder="0"
-                                style="margin: 0px 0px 0px -10px; height: 550px;"
-                                scrolling="no">
+                                style="margin: 0px 0px 0px -10px;">
                         </iframe>
                     </div>
                 </div>
@@ -108,9 +106,7 @@
                                             <img style="display: inline-block; width: 40px; height: 40px;"
                                                  src="$!element.path">
                                             <cite style="padding-right: 2px;">
-                                                $!element.name<span id="eva-dot-bg$!element.idTag" class="layui-badge-dot
-                                                    #if($!element.idEvaTag)layui-bg-green #else layui-bg-orange #end"
-                                                                    style="float: right;"></span>
+                                                $!element.name
                                             </cite>
                                         </a>
                                     </li>
@@ -133,9 +129,9 @@
                                         <i class="layui-icon layui-icon-search"></i>
                                     </button>
                                     <div class="layui-btn-group">
-                                        <a lay-href="${basePath}/pf/p/kb/assess/page" class="layui-btn">
+                                        #*<a lay-href="${basePath}/pf/p/kb/assess/page" class="layui-btn">
                                             <i class="layui-icon layui-icon-add-1"></i>新增用例
-                                        </a>
+                                        </a>*#
                                         #*<button id="editAssess" type="button" class="layui-btn">
                                             <i class="iconfont icon-edit"></i> 编辑用例
                                         </button>*#
@@ -146,7 +142,7 @@
                         </form>
 
                         <iframe name="assessTag" width="100%" frameborder=0 height="100%"
-                                style="margin: 0px 0px 0px -10px; height: 650px;"
+                                style="margin: 0px 0px 0px -10px;"
                                 id="assessTag"></iframe>
 
                     </div>
@@ -155,7 +151,7 @@
         </div>
     </div>
 
-    <div class="layui-form-item layui-layout-admin">
+    #*<div class="layui-form-item layui-layout-admin">
         <div class="layui-input-block">
             <div class="layui-footer" style="left: 0;">
                 <button class="layui-btn" id="save">
@@ -166,7 +162,7 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div>*#
 
 
 </div>
@@ -175,6 +171,31 @@
 <script src="$!{contextPath}/public/layui/build/js/tableSelect.js"></script>
 <script src="$!{contextPath}/public/biz/js/biz/kb/casehistory/caseHistoryTabController.js"></script>
 
+<script type="text/javascript">
+    function iframeHeight(){
+        // obj 这里是要获取父页面的iframe对象
+        var obj = document.getElementById('caseHistoryTag');
+        // 调整父页面的高度为此页面的高度
+        obj.height = getClientHeight() - 100;
+
+        var assessTag = document.getElementById('assessTag');
+        assessTag.height = getClientHeight() - 100;
+    }
+
+    function getClientHeight()
+    {
+        var clientHeight=0;
+        if(document.body.clientHeight&&document.documentElement.clientHeight)
+        {
+            var clientHeight = (document.body.clientHeight<document.documentElement.clientHeight)?document.body.clientHeight:document.documentElement.clientHeight;
+        }
+        else
+        {
+            var clientHeight = (document.body.clientHeight>document.documentElement.clientHeight)?document.body.clientHeight:document.documentElement.clientHeight;
+        }
+        return clientHeight;
+    }
+</script>
 
 </body>
 </html>

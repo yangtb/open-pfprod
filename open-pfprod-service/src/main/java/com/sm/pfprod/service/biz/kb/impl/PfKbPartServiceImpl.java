@@ -2,17 +2,17 @@ package com.sm.pfprod.service.biz.kb.impl;
 
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
+import com.sm.open.core.facade.model.param.pf.biz.kb.PfSaveAsMedParam;
 import com.sm.open.core.facade.model.param.pf.biz.kb.part.*;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
-import com.sm.open.core.facade.model.param.pf.common.PfCommonListParam;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.*;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.biz.kb.KbPartClient;
+import com.sm.pfprod.model.dto.biz.kb.PfSaveAsMedDto;
 import com.sm.pfprod.model.dto.biz.kb.part.PfMedCaseDto;
 import com.sm.pfprod.model.dto.biz.kb.part.PfPartCommonDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
-import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.biz.kb.PfKbPartService;
@@ -243,8 +243,8 @@ public class PfKbPartServiceImpl implements PfKbPartService {
     }
 
     @Override
-    public boolean bachAddCons(PfCommonListDto dto) {
-        CommonResult<Boolean> result = kbPartClient.bachAddCons(BeanUtil.convert(dto, PfCommonListParam.class));
+    public boolean bachAddCons(PfSaveAsMedDto dto) {
+        CommonResult<Boolean> result = kbPartClient.bachAddCons(BeanUtil.convert(dto, PfSaveAsMedParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
@@ -252,8 +252,8 @@ public class PfKbPartServiceImpl implements PfKbPartService {
     }
 
     @Override
-    public boolean bachAddCheck(PfCommonListDto dto) {
-        CommonResult<Boolean> result = kbPartClient.bachAddCheck(BeanUtil.convert(dto, PfCommonListParam.class));
+    public boolean bachAddCheck(PfSaveAsMedDto dto) {
+        CommonResult<Boolean> result = kbPartClient.bachAddCheck(BeanUtil.convert(dto, PfSaveAsMedParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
@@ -261,8 +261,8 @@ public class PfKbPartServiceImpl implements PfKbPartService {
     }
 
     @Override
-    public boolean bachAddExam(PfCommonListDto dto) {
-        CommonResult<Boolean> result = kbPartClient.bachAddExam(BeanUtil.convert(dto, PfCommonListParam.class));
+    public boolean bachAddExam(PfSaveAsMedDto dto) {
+        CommonResult<Boolean> result = kbPartClient.bachAddExam(BeanUtil.convert(dto, PfSaveAsMedParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }

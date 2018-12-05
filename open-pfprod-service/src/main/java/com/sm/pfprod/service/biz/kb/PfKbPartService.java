@@ -1,9 +1,9 @@
 package com.sm.pfprod.service.biz.kb;
 
+import com.sm.pfprod.model.dto.biz.kb.PfSaveAsMedDto;
 import com.sm.pfprod.model.dto.biz.kb.part.PfMedCaseDto;
 import com.sm.pfprod.model.dto.biz.kb.part.PfPartCommonDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
-import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 
@@ -213,7 +213,7 @@ public interface PfKbPartService {
      * @param dto
      * @return
      */
-    boolean bachAddCons(PfCommonListDto dto);
+    boolean bachAddCons(PfSaveAsMedDto dto);
 
     /**
      * 批量添加体格检查
@@ -221,7 +221,7 @@ public interface PfKbPartService {
      * @param dto
      * @return
      */
-    boolean bachAddCheck(PfCommonListDto dto);
+    boolean bachAddCheck(PfSaveAsMedDto dto);
 
     /**
      * 批量添加辅助检查
@@ -229,6 +229,6 @@ public interface PfKbPartService {
      * @param dto
      * @return
      */
-    boolean bachAddExam(PfCommonListDto dto);
+    boolean bachAddExam(PfSaveAsMedDto dto);
 
 }

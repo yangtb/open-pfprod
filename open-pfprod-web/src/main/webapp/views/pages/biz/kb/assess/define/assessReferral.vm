@@ -16,6 +16,10 @@
         var cdEvaAsse = '$!{cdEvaAsse}';
         var idEvaCase = '$!{idEvaCase}';
         var sheets = '$!sheets';
+        var tagFlag='$!{tagFlag}';
+        var idMedicalrec = '$!{idMedicalrec}';
+        var idTag ='$!{idTag}';
+        var caseName ='$!{caseName}';
     </script>
 </head>
 

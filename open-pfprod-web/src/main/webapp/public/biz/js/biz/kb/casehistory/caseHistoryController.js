@@ -1,6 +1,8 @@
 layui.config({
-    base: basePath + '/public/layui/build/js/'
-}).use(['layer', 'table', 'form', 'jquery', 'common'], function () {
+    base: basePath + '/public/layui/plugins/'
+}).extend({
+    index: 'lib/index' //主入口模块
+}).use(['layer', 'table', 'form', 'element', 'jquery', 'common', 'index'], function () {
     var $ = layui.$
         , table = layui.table
         , form = layui.form
@@ -236,10 +238,7 @@ layui.config({
                     common.errorMsg(data.msg);
                     return false;
                 } else {
-                    var zNodes = [
-                        {id: "0", name: "分类", open: true}
-                    ];
-                    zNodes = data.data;
+                    var zNodes = data.data;
                     $.fn.zTree.init($("#treeDemo"), setting, zNodes);
                     zTree = $.fn.zTree.getZTreeObj("treeDemo");
                     rMenu = $("#rMenu");
@@ -470,10 +469,15 @@ layui.config({
     });
 
     var _editTemplate = function (title, id, idDemo) {
+        $('#test').attr('lay-href',
+            basePath + '/pf/p/case/history/form?idMedicalrec=' + id + '&idDemo=' + idDemo+ '&caseName=' + title);
+        $('#caseName').text(title);
+        $('#test').click();
         parent.spreadMenu();
+        /*parent.spreadMenu();
         var index = common.open('临床病历维护 【' + '<span style="color: red">' + title + '</span>】',
             basePath + '/pf/p/case/history/form?idMedicalrec=' + id + '&idDemo=' + idDemo, 900, 460);
-        layer.full(index);
+        layer.full(index);*/
     };
 
     //监听提交

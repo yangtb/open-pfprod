@@ -11,9 +11,13 @@
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
 
     <script>
-        var basePath = '${basePath}';
-        var contextPath = '${contextPath}';
+        var basePath = '$!{basePath}';
+        var contextPath = '$!{contextPath}';
         var idMedCase = '$!{idMedCase}';
+        var tagFlag='$!{tagFlag}';
+        var idMedicalrec = '$!{idMedicalrec}';
+        var idTag ='$!{idTag}';
+        var caseName ='$!{caseName}';
     </script>
 </head>
 
@@ -104,22 +108,20 @@
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <div class="layui-btn-group">
                         #if($!{showBtn} == 1)
-                            <button id="add" type="button" class="layui-btn">
+                            #*<button id="add" type="button" class="layui-btn">
                                 <i class="layui-icon layui-icon-add-1"></i>增加
-                            </button>
+                            </button>*#
                             <button id="save" class="layui-btn" lay-submit="" lay-filter="saveCons">
                                 <i class="iconfont icon-save-copy"></i> 保存
                             </button>
-                            <button class="layui-btn" lay-submit="" lay-filter="saveAsCons">
+                            #*<button class="layui-btn" lay-submit="" lay-filter="saveAsCons">
                                 <i class="iconfont icon-lingcunwei"></i> 重载
                             </button>
                             <button id="reset" type="reset" class="layui-btn layui-btn-danger">
                                 <i class="iconfont icon-reset"></i> 重置
-                            </button>
+                            </button>*#
                         #end
-                    </div>
                 </div>
             </div>
         </form>

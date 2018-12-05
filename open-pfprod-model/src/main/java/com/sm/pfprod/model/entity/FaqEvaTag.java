@@ -45,4 +45,28 @@ public class FaqEvaTag implements Serializable {
      */
     private Long idEvaCase;
 
+    /**
+     * 为1时保存病例与标签关联管理
+     */
+    private String tagFlag;
+
+    /**
+     * 创建者
+     */
+    private String creator;
+
+    /**
+     * 原病历组件案例id
+     */
+    private Long oldIdEvaCase;
+
+    /**
+     * 机构id
+     */
+    private Long idOrg;
+
+    /**
+     * 组件编码
+     */
+    private String cdEvaAsse;
 }

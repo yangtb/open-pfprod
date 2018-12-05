@@ -45,4 +45,26 @@ public class FaqMedTag implements Serializable {
      */
     private Long idMedCase;
 
+    /**
+     * 为1时保存病例与标签关联管理
+     */
+    private String tagFlag;
+
+    /**
+     * 创建者
+     */
+    private String creator;
+
+    /**
+     * 原病历组件案例id
+     */
+    private Long oldIdMedCase;
+
+    /**
+     * 机构id
+     */
+    private Long idOrg;
+
+    private String cdMedAsse;
+
 }

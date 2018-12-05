@@ -113,7 +113,12 @@ layui.config({
         var bizData = {
             list: reqData,
             extId: idMedCase,
-            extType : '0'
+            extType : '0',
+            tagFlag: tagFlag,
+            idMedCase: idMedCase,
+            idMedicalrec: idMedicalrec,
+            idTag: idTag,
+            caseName : caseName
         }
         common.commonPost(url, bizData, '添加', 'add', successBachAddCallback)
     });

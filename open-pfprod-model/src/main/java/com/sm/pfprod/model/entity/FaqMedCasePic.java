@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Setter
 @Getter
 @ToString
-public class FaqMedCasePic implements Serializable {
+public class FaqMedCasePic extends FaqMedTag implements Serializable {
 
     private static final long serialVersionUID = 1540020604667L;
 

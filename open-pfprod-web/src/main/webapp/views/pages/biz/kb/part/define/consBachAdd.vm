@@ -17,6 +17,10 @@
     var basePath = '${basePath}';
     var contextPath = '${contextPath}';
     var idMedCase = '$!{idMedCase}';
+    var tagFlag='$!{tagFlag}';
+    var idMedicalrec = '$!{idMedicalrec}';
+    var idTag ='$!{idTag}';
+    var caseName = '$!{caseName}';
 </script>
 
 <body class="body-my">

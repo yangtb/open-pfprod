@@ -69,6 +69,11 @@
                     <button type="reset" class="layui-btn layui-btn-primary">
                         <i class="iconfont icon-reset"></i> 重置
                     </button>
+                    #*模拟按钮*#
+                    <button id="test" type="button" class="layui-btn layui-btn-normal"
+                            lay-href="" style="display: none">
+                        临床病例维护: <span id="caseName"></span>
+                    </button>
                 </div>
             </div>
         </form>

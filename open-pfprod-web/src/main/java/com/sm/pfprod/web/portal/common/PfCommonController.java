@@ -34,4 +34,9 @@ public class PfCommonController extends BaseController {
         model.addAttribute("path", path);
         return "pages/common/videoForm";
     }
+
+    @RequestMapping("/empty/page")
+    public String emptyPage(Model model, String path) {
+        return "pages/common/emptyPage";
+    }
 }

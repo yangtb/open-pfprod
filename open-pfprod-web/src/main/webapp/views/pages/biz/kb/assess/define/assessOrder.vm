@@ -20,6 +20,10 @@
         var cdNursLevel = '$!cdNursLevel';
         var sdDiet = '$!sdDiet';
         var sdPosition = '$!sdPosition';
+        var tagFlag='$!{tagFlag}';
+        var idMedicalrec = '$!{idMedicalrec}';
+        var idTag ='$!{idTag}';
+        var caseName ='$!{caseName}';
     </script>
 </head>
 

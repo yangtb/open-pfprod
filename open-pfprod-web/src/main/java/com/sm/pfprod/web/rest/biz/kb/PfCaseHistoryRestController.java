@@ -202,5 +202,77 @@ public class PfCaseHistoryRestController {
                 pfCaseHistoryService.saveEvaTag(dto));
     }
 
+    /**
+     * 查询病历标签信息
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
+    @PostMapping(value = "/select/med/tag")
+    public ResultObject selectMedTag(@RequestBody FaqMedTag dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedicalrec() != null, "idMedicalrec");
+        Assert.isTrue(dto.getIdTag() != null, "idTag");
+        return ResultObject.createSuccess("selectMedTag", ResultObject.DATA_TYPE_OBJECT,
+                pfCaseHistoryService.selectMedTag(dto));
+    }
+
+    /**
+     * 查询评估标签信息
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
+    @PostMapping(value = "/select/eva/tag")
+    public ResultObject selectEvaTag(@RequestBody FaqEvaTag dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedicalrec() != null, "idMedicalrec");
+        Assert.isTrue(dto.getIdTag() != null, "idTag");
+        return ResultObject.createSuccess("selectEvaTag", ResultObject.DATA_TYPE_OBJECT,
+                pfCaseHistoryService.selectEvaTag(dto));
+    }
+
+    /**
+     * 重载病历组件
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
+    @PostMapping(value = "/save/as/med")
+    public ResultObject saveAsMed(@RequestBody FaqMedTag dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getOldIdMedCase() != null, "oldIdMedCase");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getCaseName()), "caseName");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getCdMedAsse()), "cdMedAsse");
+        Assert.isTrue(dto.getIdMedicalrec() != null, "idMedicalrec");
+        Assert.isTrue(dto.getIdTag() != null, "idTag");
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("saveAsMed", ResultObject.DATA_TYPE_OBJECT,
+                pfCaseHistoryService.saveAsMed(dto));
+    }
+    /**
+     * 重载评估组件
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
+    @PostMapping(value = "/save/as/eva")
+    public ResultObject saveAsEva(@RequestBody FaqEvaTag dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getOldIdEvaCase() != null, "oldIdEvaCase");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getCaseName()), "caseName");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getCdEvaAsse()), "cdEvaAsse");
+        Assert.isTrue(dto.getIdMedicalrec() != null, "idMedicalrec");
+        Assert.isTrue(dto.getIdTag() != null, "idTag");
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("saveAsEva", ResultObject.DATA_TYPE_OBJECT,
+                pfCaseHistoryService.saveAsEva(dto));
+    }
 
 }

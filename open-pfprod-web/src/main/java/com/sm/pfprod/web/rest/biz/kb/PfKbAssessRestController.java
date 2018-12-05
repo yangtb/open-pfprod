@@ -3,6 +3,7 @@ package com.sm.pfprod.web.rest.biz.kb;
 import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
+import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.biz.kb.assess.*;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
@@ -114,9 +115,17 @@ public class PfKbAssessRestController {
     @RequestMapping(value = "/referral/save")
     public ResultObject saveReferral(@RequestBody PfAssessReferralDto dto) {
         /* 参数校验 */
-        Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
         Assert.isTrue(StringUtils.isNotBlank(dto.getItemName()), "itemName");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "等效答案");
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+
+        } else {
+            /* 参数校验 */
+            Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
+
         return ResultObject.createSuccess("saveReferral", ResultObject.DATA_TYPE_OBJECT,
                 pfKbAssessService.saveReferral(dto));
     }
@@ -145,9 +154,15 @@ public class PfKbAssessRestController {
     @RequestMapping(value = "/diagnosis/save")
     public ResultObject saveDiagnosis(@RequestBody PfAssessDiagnosisDto dto) {
         /* 参数校验 */
-        Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
         Assert.isTrue(StringUtils.isNotBlank(dto.getItemName()), "itemName");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "等效答案");
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+
+        } else {
+            Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.createSuccess("saveDiagnosis", ResultObject.DATA_TYPE_OBJECT,
                 pfKbAssessService.saveDiagnosis(dto));
     }
@@ -177,9 +192,15 @@ public class PfKbAssessRestController {
     @RequestMapping(value = "/reason/save")
     public ResultObject saveReason(@RequestBody PfAssessReasonDto dto) {
         /* 参数校验 */
-        Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
         Assert.isTrue(StringUtils.isNotBlank(dto.getItemName()), "itemName");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "等效答案");
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+
+        } else {
+            Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.createSuccess("saveReason", ResultObject.DATA_TYPE_OBJECT,
                 pfKbAssessService.saveReason(dto));
     }
@@ -208,9 +229,15 @@ public class PfKbAssessRestController {
     @RequestMapping(value = "/cover/save")
     public ResultObject saveCover(@RequestBody PfAssessCoverDto dto) {
         /* 参数校验 */
-        Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
         Assert.isTrue(StringUtils.isNotBlank(dto.getItemName()), "itemName");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "等效答案");
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+
+        } else {
+            Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.createSuccess("saveCover", ResultObject.DATA_TYPE_OBJECT,
                 pfKbAssessService.saveCover(dto));
     }
@@ -239,9 +266,15 @@ public class PfKbAssessRestController {
     @RequestMapping(value = "/must/save")
     public ResultObject saveMust(@RequestBody PfAssessMustDto dto) {
         /* 参数校验 */
-        Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
         Assert.isTrue(StringUtils.isNotBlank(dto.getItemName()), "itemName");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "等效答案");
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+
+        } else {
+            Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.createSuccess("saveMust", ResultObject.DATA_TYPE_OBJECT,
                 pfKbAssessService.saveMust(dto));
     }
@@ -260,11 +293,18 @@ public class PfKbAssessRestController {
     @RequestMapping(value = "/effciency/save")
     public ResultObject saveEffciency(@RequestBody PfAssessEffciencyDto dto) {
         /* 参数校验 */
-        Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
         Assert.isTrue(StringUtils.isNotBlank(dto.getItemName()), "itemName");
         Assert.isTrue(StringUtils.isNotBlank(dto.getSdEvaEffciency()), "sdEvaEffciency");
         Assert.isTrue(dto.getScoreEva() != null, "scoreEva");
         Assert.isTrue(dto.getQuaUpper() != null, "quaUpper");
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+
+        } else {
+            Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
+
         return ResultObject.createSuccess("saveEffciency", ResultObject.DATA_TYPE_OBJECT,
                 pfKbAssessService.saveEffciency(dto));
     }
@@ -293,9 +333,15 @@ public class PfKbAssessRestController {
     @RequestMapping(value = "/order/save")
     public ResultObject saveOrder(@RequestBody PfAssessOrderDto dto) {
         /* 参数校验 */
-        Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
         Assert.isTrue(StringUtils.isNotBlank(dto.getItemName()), "itemName");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "等效答案");
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+
+        } else {
+            Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.createSuccess("saveOrder", ResultObject.DATA_TYPE_OBJECT,
                 pfKbAssessService.saveOrder(dto));
     }

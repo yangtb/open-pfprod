@@ -14,6 +14,10 @@
         var basePath = '$!{basePath}';
         var contextPath = '$!{contextPath}';
         var idMedCase = '$!{idMedCase}';
+        var tagFlag='$!{tagFlag}';
+        var idMedicalrec = '$!{idMedicalrec}';
+        var idTag ='$!{idTag}';
+        var caseName ='$!{caseName}';
     </script>
 
 </head>
@@ -68,12 +72,12 @@
                 <button class="layui-btn" lay-submit="" lay-filter="addKbPartPat">
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
-                <button class="layui-btn" lay-submit="" lay-filter="saveAsKbPartPat">
+                #*<button class="layui-btn" lay-submit="" lay-filter="saveAsKbPartPat">
                     <i class="iconfont icon-lingcunwei"></i> 重载
                 </button>
                 <button id="reset" type="reset" class="layui-btn layui-btn-danger">
                     <i class="iconfont icon-reset"></i> 重置
-                </button>
+                </button>*#
             #end
             </div>
         </div>

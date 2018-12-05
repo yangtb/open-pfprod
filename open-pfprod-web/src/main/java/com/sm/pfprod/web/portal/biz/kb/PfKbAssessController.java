@@ -2,6 +2,7 @@ package com.sm.pfprod.web.portal.biz.kb;
 
 import com.alibaba.fastjson.JSON;
 import com.sm.pfprod.model.dto.biz.kb.assess.PfAssessCommonDto;
+import com.sm.pfprod.model.dto.biz.kb.assess.PfAssessGetCommonDto;
 import com.sm.pfprod.model.dto.biz.kb.assess.PfEvaCaseDto;
 import com.sm.pfprod.model.dto.common.PfCatalogueTreeDto;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
@@ -87,11 +88,15 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/referral/page")
-    public String referralPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
-        model.addAttribute("showBtn", showBtn);
-        model.addAttribute("showForm", showForm);
-        model.addAttribute("cdEvaAsse", cdEvaAsse);
-        model.addAttribute("idEvaCase", idEvaCase);
+    public String referralPage(Model model, PfAssessGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("showForm", dto.getShowForm());
+        model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
+        model.addAttribute("idEvaCase", dto.getIdEvaCase());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("caseName", dto.getCaseName());
         model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         model.addAttribute("sheets", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllSheet())));
         return "pages/biz/kb/assess/define/assessReferral";
@@ -109,11 +114,15 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/diagnosis/page")
-    public String diagnosisPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
-        model.addAttribute("showBtn", showBtn);
-        model.addAttribute("showForm", showForm);
-        model.addAttribute("cdEvaAsse", cdEvaAsse);
-        model.addAttribute("idEvaCase", idEvaCase);
+    public String diagnosisPage(Model model, PfAssessGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("showForm", dto.getShowForm());
+        model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
+        model.addAttribute("idEvaCase", dto.getIdEvaCase());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("caseName", dto.getCaseName());
         model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         model.addAttribute("sheets", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllSheet())));
         return "pages/biz/kb/assess/define/assessDiagnosis";
@@ -122,11 +131,15 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/reason/page")
-    public String reasonPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
-        model.addAttribute("showBtn", showBtn);
-        model.addAttribute("showForm", showForm);
-        model.addAttribute("cdEvaAsse", cdEvaAsse);
-        model.addAttribute("idEvaCase", idEvaCase);
+    public String reasonPage(Model model, PfAssessGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("showForm", dto.getShowForm());
+        model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
+        model.addAttribute("idEvaCase", dto.getIdEvaCase());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("caseName", dto.getCaseName());
         model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         model.addAttribute("sheets", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllSheet())));
         return "pages/biz/kb/assess/define/assessReason";
@@ -134,11 +147,15 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/cover/page")
-    public String coverPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
-        model.addAttribute("showBtn", showBtn);
-        model.addAttribute("showForm", showForm);
-        model.addAttribute("cdEvaAsse", cdEvaAsse);
-        model.addAttribute("idEvaCase", idEvaCase);
+    public String coverPage(Model model, PfAssessGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("showForm", dto.getShowForm());
+        model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
+        model.addAttribute("idEvaCase", dto.getIdEvaCase());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("caseName", dto.getCaseName());
         model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         model.addAttribute("sheets", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllSheet())));
         return "pages/biz/kb/assess/define/assessCover";
@@ -146,11 +163,15 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/must/page")
-    public String mustPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
-        model.addAttribute("showBtn", showBtn);
-        model.addAttribute("showForm", showForm);
-        model.addAttribute("cdEvaAsse", cdEvaAsse);
-        model.addAttribute("idEvaCase", idEvaCase);
+    public String mustPage(Model model, PfAssessGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("showForm", dto.getShowForm());
+        model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
+        model.addAttribute("idEvaCase", dto.getIdEvaCase());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("caseName", dto.getCaseName());
         model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         model.addAttribute("sheets", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllSheet())));
         return "pages/biz/kb/assess/define/assessMust";
@@ -158,11 +179,15 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/effciency/page")
-    public String effciencyPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
-        model.addAttribute("showBtn", showBtn);
-        model.addAttribute("showForm", showForm);
-        model.addAttribute("cdEvaAsse", cdEvaAsse);
-        model.addAttribute("idEvaCase", idEvaCase);
+    public String effciencyPage(Model model, PfAssessGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("showForm", dto.getShowForm());
+        model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
+        model.addAttribute("idEvaCase", dto.getIdEvaCase());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("caseName", dto.getCaseName());
         model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         model.addAttribute("sheets", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllSheet())));
         return "pages/biz/kb/assess/define/assessEffciency";
@@ -170,11 +195,15 @@ public class PfKbAssessController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/order/page")
-    public String orderPage(Model model, String cdEvaAsse, Long idEvaCase, Integer showForm, String showBtn) {
-        model.addAttribute("showBtn", showBtn);
-        model.addAttribute("showForm", showForm);
-        model.addAttribute("cdEvaAsse", cdEvaAsse);
-        model.addAttribute("idEvaCase", idEvaCase);
+    public String orderPage(Model model, PfAssessGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("showForm", dto.getShowForm());
+        model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
+        model.addAttribute("idEvaCase", dto.getIdEvaCase());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("caseName", dto.getCaseName());
         model.addAttribute("sdEvaOrder", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA_ORDER.getCode()));
         model.addAttribute("sdNursRout", JSON.parseArray(JSON.toJSONString(enumUtil.getEnumList(SysDicGroupEnum.SD_NURS_ROUT.getCode()))));
         model.addAttribute("cdNursLevel", JSON.parseArray(JSON.toJSONString(enumUtil.getEnumList(SysDicGroupEnum.CD_NURS_LEVEL.getCode()))));

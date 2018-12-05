@@ -9,6 +9,8 @@ import com.sm.open.core.facade.model.param.pf.biz.kb.casehistory.FaqMedicalrecPa
 import com.sm.open.core.facade.model.param.pf.biz.kb.casehistory.PfCaseHistoryParam;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
+import com.sm.open.core.facade.model.result.pf.biz.clinic.FaqEvaTagResult;
+import com.sm.open.core.facade.model.result.pf.biz.clinic.FaqMedTagResult;
 import com.sm.open.core.facade.model.result.pf.biz.clinic.PfAssessTagResult;
 import com.sm.open.core.facade.model.result.pf.biz.clinic.PfCaseHistoryTagResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.casehistory.FaqMedicalrecResult;
@@ -141,6 +143,42 @@ public class PfCaseHistoryServiceImpl implements PfCaseHistoryService {
         CommonResult<List<PfAssessTagResult>> result = caseHistoryClient.listAllAssessTag(idDemo, idMedicalrec);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convertList(result.getContent(), PfAssessTagVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public FaqMedTag selectMedTag(FaqMedTag dto) {
+        CommonResult<FaqMedTagResult> result = caseHistoryClient.selectMedTag(BeanUtil.convert(dto, FaqMedTagParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), FaqMedTag.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public FaqEvaTag selectEvaTag(FaqEvaTag dto) {
+        CommonResult<FaqEvaTagResult> result = caseHistoryClient.selectEvaTag(BeanUtil.convert(dto, FaqEvaTagParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), FaqEvaTag.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean saveAsMed(FaqMedTag dto) {
+        CommonResult<Boolean> result = caseHistoryClient.saveAsMed(BeanUtil.convert(dto, FaqMedTagParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean saveAsEva(FaqEvaTag dto) {
+        CommonResult<Boolean> result = caseHistoryClient.saveAsEva(BeanUtil.convert(dto, FaqEvaTagParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }

@@ -5,8 +5,8 @@ import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.open.care.core.utils.Assert;
+import com.sm.pfprod.model.dto.biz.kb.PfSaveAsMedDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
-import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.enums.OperationTypeEnum;
 import com.sm.pfprod.service.biz.kb.PfKbPartService;
@@ -173,8 +173,14 @@ public class PfKbPartRestController {
     @PostMapping(value = "/text/save")
     public ResultObject saveKbText(@RequestBody FaqMedCaseText dto) {
         /* 参数校验 */
-        Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
-        Assert.isTrue(StringUtils.isNotBlank(dto.getContent()), "content");
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+            //Assert.isTrue(dto.getOldIdMedCase() != null, "oldIdMedCase");
+        } else {
+            Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
+            Assert.isTrue(StringUtils.isNotBlank(dto.getContent()), "content");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.createSuccess("saveKbText", ResultObject.DATA_TYPE_OBJECT,
                 pfKbPartService.saveKbText(dto));
     }
@@ -204,8 +210,16 @@ public class PfKbPartRestController {
     @PostMapping(value = "/pic/save")
     public ResultObject saveKbPic(@RequestBody FaqMedCasePic dto) {
         /* 参数校验 */
-        Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
-        Assert.isTrue(dto.getIdMedia() != null, "idMedia");
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+            if (dto.getOldIdMedCase() == null) {
+                Assert.isTrue(dto.getIdMedia() != null, "idMedia");
+            }
+        } else {
+            Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
+            Assert.isTrue(dto.getIdMedia() != null, "idMedia");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.createSuccess("saveKbPic", ResultObject.DATA_TYPE_OBJECT,
                 pfKbPartService.saveKbPic(dto));
     }
@@ -235,10 +249,20 @@ public class PfKbPartRestController {
     @PostMapping(value = "/pat/save")
     public ResultObject saveKbPat(@RequestBody FaqMedCasePatient dto) {
         /* 参数校验 */
-        Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
-        Assert.isTrue(StringUtils.isNotBlank(dto.getName()), "name");
-        Assert.isTrue(dto.getAge() != 0, "age");
-        Assert.isTrue(StringUtils.isNotBlank(dto.getComplaint()), "complaint");
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+            if (dto.getOldIdMedCase() == null) {
+                Assert.isTrue(StringUtils.isNotBlank(dto.getName()), "name");
+                Assert.isTrue(dto.getAge() != 0, "age");
+                Assert.isTrue(StringUtils.isNotBlank(dto.getComplaint()), "complaint");
+            }
+        } else {
+            Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
+            Assert.isTrue(StringUtils.isNotBlank(dto.getName()), "name");
+            Assert.isTrue(dto.getAge() != 0, "age");
+            Assert.isTrue(StringUtils.isNotBlank(dto.getComplaint()), "complaint");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.createSuccess("saveKbPat", ResultObject.DATA_TYPE_OBJECT,
                 pfKbPartService.saveKbPat(dto));
     }
@@ -400,7 +424,12 @@ public class PfKbPartRestController {
     @PostMapping(value = "/check/pic/save")
     public ResultObject saveFaqMedCaseBody(@RequestBody FaqMedCaseBody dto) {
         /* 参数校验 */
-        Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+        } else {
+            Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.createSuccess("saveFaqMedCaseBody", ResultObject.DATA_TYPE_OBJECT,
                 pfKbPartService.saveFaqMedCaseBody(dto));
     }
@@ -428,13 +457,19 @@ public class PfKbPartRestController {
      */
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
     @PostMapping(value = "/cons/bach/add")
-    public ResultObject bachAddCons(@RequestBody PfCommonListDto dto) {
+    public ResultObject bachAddCons(@RequestBody PfSaveAsMedDto dto) {
         /* 参数校验 */
         if (dto.getExtType().equals(YesOrNoNum.NO.getCode())) {
             Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
         }
-        Assert.isTrue(dto.getExtId() != null, "extId");
         Assert.isTrue(StringUtils.isNotBlank(dto.getExtType()), "extType");
+
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+        } else {
+            Assert.isTrue(dto.getExtId() != null, "extId");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
         return pfKbPartService.bachAddCons(dto) ? ResultObject.createSuccess("bachAddCons", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("bachAddCons", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
@@ -447,13 +482,19 @@ public class PfKbPartRestController {
      */
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
     @PostMapping(value = "/check/bach/add")
-    public ResultObject bachAddCheck(@RequestBody PfCommonListDto dto) {
+    public ResultObject bachAddCheck(@RequestBody PfSaveAsMedDto dto) {
         /* 参数校验 */
         if (dto.getExtType().equals(YesOrNoNum.NO.getCode())) {
             Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
         }
-        Assert.isTrue(dto.getExtId() != null, "extId");
         Assert.isTrue(StringUtils.isNotBlank(dto.getExtType()), "extType");
+
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+        } else {
+            Assert.isTrue(dto.getExtId() != null, "extId");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
         return pfKbPartService.bachAddCheck(dto) ? ResultObject.createSuccess("bachAddCheck", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("bachAddCheck", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
@@ -466,13 +507,19 @@ public class PfKbPartRestController {
      */
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
     @PostMapping(value = "/exam/bach/add")
-    public ResultObject bachAddExam(@RequestBody PfCommonListDto dto) {
+    public ResultObject bachAddExam(@RequestBody PfSaveAsMedDto dto) {
         /* 参数校验 */
         if (dto.getExtType().equals(YesOrNoNum.NO.getCode())) {
             Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
         }
-        Assert.isTrue(dto.getExtId() != null, "extId");
         Assert.isTrue(StringUtils.isNotBlank(dto.getExtType()), "extType");
+
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+        } else {
+            Assert.isTrue(dto.getExtId() != null, "extId");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
         return pfKbPartService.bachAddExam(dto) ? ResultObject.createSuccess("bachAddExam", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("bachAddExam", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }

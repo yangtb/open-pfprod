@@ -2,12 +2,14 @@ package com.sm.pfprod.service.biz.kb;
 
 import com.sm.pfprod.model.dto.biz.kb.casehistory.PfCaseHistoryDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
-import com.sm.pfprod.model.entity.*;
+import com.sm.pfprod.model.entity.FaqEvaTag;
+import com.sm.pfprod.model.entity.FaqMedTag;
+import com.sm.pfprod.model.entity.FaqMedicalrec;
+import com.sm.pfprod.model.entity.FaqMedicalrecCa;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.PfCommonZtreeVo;
 import com.sm.pfprod.model.vo.biz.clinic.PfAssessTagVo;
 import com.sm.pfprod.model.vo.biz.clinic.PfCaseHistoryTagVo;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -117,4 +119,35 @@ public interface PfCaseHistoryService {
      */
     List<PfAssessTagVo> listAllAssessTag(Long idDemo, Long idMedicalrec);
 
+    /**
+     * 查询病历标签信息
+     *
+     * @param dto
+     * @return
+     */
+    FaqMedTag selectMedTag(FaqMedTag dto);
+
+    /**
+     * 查询评估标签信息
+     *
+     * @param dto
+     * @return
+     */
+    FaqEvaTag selectEvaTag(FaqEvaTag dto);
+
+    /**
+     * 重载病历组件
+     *
+     * @param dto
+     * @return
+     */
+    boolean saveAsMed(FaqMedTag dto);
+
+    /**
+     * 重载评估组件
+     *
+     * @param dto
+     * @return
+     */
+    boolean saveAsEva(FaqEvaTag dto);
 }

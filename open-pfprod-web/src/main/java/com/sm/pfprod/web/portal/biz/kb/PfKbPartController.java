@@ -3,6 +3,7 @@ package com.sm.pfprod.web.portal.biz.kb;
 import com.alibaba.fastjson.JSON;
 import com.sm.pfprod.model.dto.biz.kb.part.PfMedCaseDto;
 import com.sm.pfprod.model.dto.biz.kb.part.PfPartCommonDto;
+import com.sm.pfprod.model.dto.biz.kb.part.PfPartGetCommonDto;
 import com.sm.pfprod.model.dto.common.PfCommonSearchDto;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.result.PageResult;
@@ -90,51 +91,75 @@ public class PfKbPartController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/text/form")
-    public String textForm(Model model, String idMedCase, String showBtn) {
-        model.addAttribute("showBtn", showBtn);
-        model.addAttribute("idMedCase", idMedCase);
+    public String textForm(Model model, PfPartGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("idMedCase", dto.getIdMedCase());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("caseName", dto.getCaseName());
         return "pages/biz/kb/part/define/textForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/pic/form")
-    public String picForm(Model model, String idMedCase, String showBtn) {
-        model.addAttribute("showBtn", showBtn);
-        model.addAttribute("idMedCase", idMedCase);
+    public String picForm(Model model, PfPartGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("idMedCase", dto.getIdMedCase());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("caseName", dto.getCaseName());
         return "pages/biz/kb/part/define/picForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/pat/form")
-    public String patForm(Model model, String idMedCase, String showBtn) {
-        model.addAttribute("showBtn", showBtn);
-        model.addAttribute("idMedCase", idMedCase);
+    public String patForm(Model model, PfPartGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("idMedCase", dto.getIdMedCase());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("caseName", dto.getCaseName());
         model.addAttribute("sexList", enumUtil.getEnumList(SysDicGroupEnum.SEX.getCode()));
         return "pages/biz/kb/part/define/patForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/cons/form")
-    public String consForm(Model model, String idMedCase, String showBtn) {
-        model.addAttribute("showBtn", showBtn);
-        model.addAttribute("idMedCase", idMedCase);
+    public String consForm(Model model, PfPartGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("idMedCase", dto.getIdMedCase());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("caseName", dto.getCaseName());
         return "pages/biz/kb/part/define/consForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/check/form")
-    public String checkForm(Model model, String idMedCase, String showBtn) {
-        model.addAttribute("showBtn", showBtn);
-        model.addAttribute("idMedCase", idMedCase);
+    public String checkForm(Model model, PfPartGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("idMedCase", dto.getIdMedCase());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("caseName", dto.getCaseName());
         model.addAttribute("bodyPosition", enumUtil.getEnumList(SysDicGroupEnum.BODY_POSITION.getCode()));
         return "pages/biz/kb/part/define/checkForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/exam/form")
-    public String examForm(Model model, String idMedCase, String showBtn) {
-        model.addAttribute("showBtn", showBtn);
-        model.addAttribute("idMedCase", idMedCase);
+    public String examForm(Model model, PfPartGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("idMedCase", dto.getIdMedCase());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("caseName", dto.getCaseName());
         return "pages/biz/kb/part/define/examForm";
     }
 
@@ -175,23 +200,35 @@ public class PfKbPartController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/cons/bach/add/page")
-    public String consBachAdd(Model model, String idMedCase) {
-        model.addAttribute("idMedCase", idMedCase);
+    public String consBachAdd(Model model, PfPartGetCommonDto dto) {
+        model.addAttribute("idMedCase", dto.getIdMedCase());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("caseName", dto.getCaseName());
         return "pages/biz/kb/part/define/consBachAdd";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/check/bach/add/page")
-    public String checkBachAdd(Model model, String idMedCase) {
-        model.addAttribute("idMedCase", idMedCase);
+    public String checkBachAdd(Model model, PfPartGetCommonDto dto) {
+        model.addAttribute("idMedCase", dto.getIdMedCase());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("caseName", dto.getCaseName());
         model.addAttribute("bodyPosition", enumUtil.getEnumList(SysDicGroupEnum.BODY_POSITION.getCode()));
         return "pages/biz/kb/part/define/checkBachAdd";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/define/exam/bach/add/page")
-    public String examBachAdd(Model model, String idMedCase) {
-        model.addAttribute("idMedCase", idMedCase);
+    public String examBachAdd(Model model, PfPartGetCommonDto dto) {
+        model.addAttribute("idMedCase", dto.getIdMedCase());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("caseName", dto.getCaseName());
         return "pages/biz/kb/part/define/examBachAdd";
     }
 }

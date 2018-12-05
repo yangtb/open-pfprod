@@ -1,8 +1,8 @@
 package com.sm.pfprod.integration.biz.kb;
 
+import com.sm.open.core.facade.model.param.pf.biz.kb.PfSaveAsMedParam;
 import com.sm.open.core.facade.model.param.pf.biz.kb.part.*;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
-import com.sm.open.core.facade.model.param.pf.common.PfCommonListParam;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.*;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
@@ -115,15 +115,15 @@ public class KbPartClient {
         return pfKbPartFacade.selectFaqMedCaseBody(idMedCase);
     }
 
-    public CommonResult<Boolean> bachAddCons(PfCommonListParam param) {
+    public CommonResult<Boolean> bachAddCons(PfSaveAsMedParam param) {
         return pfKbPartFacade.bachAddCons(param);
     }
 
-    public CommonResult<Boolean> bachAddCheck(PfCommonListParam param) {
+    public CommonResult<Boolean> bachAddCheck(PfSaveAsMedParam param) {
         return pfKbPartFacade.bachAddCheck(param);
     }
 
-    public CommonResult<Boolean> bachAddExam(PfCommonListParam param) {
+    public CommonResult<Boolean> bachAddExam(PfSaveAsMedParam param) {
         return pfKbPartFacade.bachAddExam(param);
     }
 }

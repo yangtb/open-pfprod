@@ -2,7 +2,7 @@ layui.config({
     base: basePath + '/public/layui/plugins/'
 }).extend({
     index: 'lib/index' //主入口模块
-}).use(['index', 'element', 'jquery', 'common'], function () {
+}).use(['element', 'jquery', 'common', 'index'], function () {
 
     var $ = layui.$
         , element = layui.element
@@ -69,6 +69,11 @@ layui.config({
         currentIndex = dataIndex;
 
         if (type == 'med') {
+            if (!caseTagList[dataIndex].script) {
+                $('#caseHistoryTag').attr('src', basePath + '/empty/page');
+                //$('#caseName').val("");
+                return;
+            }
             var dataUrl = basePath + caseTagList[dataIndex].script,
                 cd = caseTagList[dataIndex].cdMedAsse,
                 idTag = caseTagList[dataIndex].idTag,
@@ -77,14 +82,21 @@ layui.config({
                 return;
             }
             var medUrl = dataCase ? '?idMedCase=' + dataCase : '?idMedCase=';
-            $('#caseName').val(caseTagList[dataIndex].caseName);
+            //$('#caseName').val(caseTagList[dataIndex].caseName);
             currentMedIdTag = idTag;
             currentIdMedCase = dataCase;
             currentCdMedAsse = cd;
-            $('#caseHistoryTag').attr('src', dataUrl + medUrl);
+            $('#caseHistoryTag').attr('src', dataUrl + medUrl + '&showBtn=1&tagFlag=1'
+                + '&idMedicalrec=' + idMedicalrec + '&idTag=' + currentMedIdTag
+                + '&caseName=' + caseName);
             caseRender();
         }
         if (type == 'eva') {
+            if (!assessTagList[dataIndex].script) {
+                $('#assessTag').attr('src', basePath + '/empty/page');
+                $('#assessName').val("");
+                return;
+            }
             var dataUrl = basePath + assessTagList[dataIndex].script,
                 cd = assessTagList[dataIndex].cdEvaAsse,
                 idTag = assessTagList[dataIndex].idTag,
@@ -92,12 +104,17 @@ layui.config({
             if (!dataUrl) {
                 return;
             }
-            var evaUrl = dataCase ? '?cdEvaAsse=' + cd + '&idEvaCase=' + dataCase + '&showForm=0' : '?showForm=0';
-            $('#assessName').val(assessTagList[dataIndex].caseName);
+            if (!dataCase) {
+                dataCase = '';
+            }
+            var evaUrl = '?cdEvaAsse=' + cd + '&idEvaCase=' + dataCase + '&showForm=0';
+            //$('#assessName').val(assessTagList[dataIndex].caseName);
             currentEvaIdTag = idTag;
             currentIdEvaCase = dataCase;
             currentCdEvaAsse = cd;
-            $('#assessTag').attr('src', dataUrl + evaUrl);
+            evaUrl += '&idMedicalrec=' + idMedicalrec + '&idTag=' + currentEvaIdTag
+                + '&caseName=' + caseName;
+            $('#assessTag').attr('src', dataUrl + evaUrl + '&showBtn=1&tagFlag=1');
             evaRender();
         }
     };
@@ -131,25 +148,79 @@ layui.config({
                     return;
                 }
                 var selectData = data.data[0];
-                if (currentCdMedAsse != selectData.cdMedAsse) {
-                    var idx = '';
-                    caseTagList.map(function (item, index) {
-                        if (item.cdMedAsse === selectData.cdMedAsse) idx = index;
-                    })
-                    $('#med-' + selectData.cdMedAsse).addClass("active").siblings().removeClass("active");
-                    currentMedIdTag = caseTagList[idx].idTag;
-                    currentCdMedAsse = caseTagList[idx].cdMedAsse;
-                    currentIndex = idx;
-                }
-                currentIdMedCase = selectData.idMedCase;
-                $('#caseName').val(selectData.name);
-                if (!selectData.script) {
-                    return;
-                }
-                $('#caseHistoryTag').attr('src', basePath + selectData.script + '?idMedCase=' + selectData.idMedCase);
+                // 另存一份病例
+                saveAsCase(selectData);
             }
         });
     };
+
+    function saveAsCase(selectData) {
+        var bizData = {
+            idMedicalrec: idMedicalrec,
+            idTag: currentMedIdTag,
+            oldIdMedCase: selectData.idMedCase,
+            tagFlag: '1',
+            caseName: caseName + '-' + caseTagList[currentIndex].name,
+            cdMedAsse: selectData.cdMedAsse
+        };
+        var url = basePath;
+        if (selectData.cdMedAsse == '001') {
+            url += '/pf/r/kb/part/text/save';
+        }
+        if (selectData.cdMedAsse == '002') {
+            url += '/pf/r/kb/part/pic/save';
+        }
+        if (selectData.cdMedAsse == '003') {
+            url += '/pf/r/kb/part/pat/save';
+        }
+        if (selectData.cdMedAsse == '004' || selectData.cdMedAsse == '005' || selectData.cdMedAsse == '006') {
+            url += '/pf/r/case/history/save/as/med';
+        }
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    common.errorMsg(data.msg);
+                    return false;
+                } else {
+                    saveMedAfter(selectData);
+                    return true;
+                }
+            },
+            error: function () {
+                common.errorMsg("另存用例出错");
+                return false;
+            }
+        });
+    }
+
+    function saveMedAfter(selectData) {
+        if (currentCdMedAsse != selectData.cdMedAsse) {
+            var idx = '';
+            caseTagList.map(function (item, index) {
+                if (item.cdMedAsse === selectData.cdMedAsse) idx = index;
+            })
+            $('#med-' + selectData.cdMedAsse).addClass("active").siblings().removeClass("active");
+            currentMedIdTag = caseTagList[idx].idTag;
+            currentCdMedAsse = caseTagList[idx].cdMedAsse;
+            currentIndex = idx;
+        }
+        currentIdMedCase = selectData.idMedCase;
+        //$('#caseName').val(selectData.name);
+        if (!selectData.script) {
+            return;
+        }
+        $('#caseHistoryTag').attr('src', basePath + selectData.script
+            + '?idMedCase=' + selectData.idMedCase + '&showBtn=1&tagFlag=1'
+            + '&idMedicalrec=' + idMedicalrec + '&idTag=' + currentMedIdTag
+            + '&caseName=' + caseName);
+
+    }
 
     function evaRender() {
         tableSelect.render({
@@ -179,30 +250,72 @@ layui.config({
                 if (!data) {
                     return;
                 }
-                var selectData = data.data[0];
-                if (currentCdMedAsse != selectData.cdEvaAsse) {
-                    var idx = '';
-                    assessTagList.map(function (item, index) {
-                        if (item.cdEvaAsse === selectData.cdEvaAsse) idx = index;
-                    })
-                    $('#eva-' + selectData.cdEvaAsse).addClass("active").siblings().removeClass("active");
-                    currentEvaIdTag = assessTagList[idx].idTag;
-                    currentCdEvaAsse = assessTagList[idx].cdEvaAsse;
-                    currentIndex = idx;
-                }
-                currentIdEvaCase = selectData.idEvaCase;
-                $('#assessName').val(selectData.name);
 
-                var url = basePath;
-                if (!selectData.script) {
-                    url += '/pf/p/kb/assess/common/page';
-                } else {
-                    url = url + selectData.script;
-                }
-                url += '?cdEvaAsse=' + selectData.cdEvaAsse + '&idEvaCase=' + selectData.idEvaCase + '&showForm=0';
-                $('#assessTag').attr('src', url);
+                var selectData = data.data[0];
+                // 另存一份病例
+                saveAsEva(selectData);
             }
         });
+    }
+
+    function saveAsEva(selectData) {
+        var bizData = {
+            idMedicalrec: idMedicalrec,
+            idTag: currentEvaIdTag,
+            oldIdEvaCase: selectData.idEvaCase,
+            tagFlag: '1',
+            caseName: caseName + '-' + assessTagList[currentIndex].name,
+            cdEvaAsse: selectData.cdEvaAsse
+        };
+        $.ajax({
+            url: basePath + '/pf/r/case/history/save/as/eva',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    common.errorMsg(data.msg);
+                    return false;
+                } else {
+                    saveMedAfter(selectData);
+                    return true;
+                }
+            },
+            error: function () {
+                common.errorMsg("另存评估出错");
+                return false;
+            }
+        });
+    }
+
+    function saveMedAfter(selectData) {
+        if (currentCdMedAsse != selectData.cdEvaAsse) {
+            var idx = '';
+            assessTagList.map(function (item, index) {
+                if (item.cdEvaAsse === selectData.cdEvaAsse) idx = index;
+            })
+            $('#eva-' + selectData.cdEvaAsse).addClass("active").siblings().removeClass("active");
+            currentEvaIdTag = assessTagList[idx].idTag;
+            currentCdEvaAsse = assessTagList[idx].cdEvaAsse;
+            currentIndex = idx;
+        }
+        currentIdEvaCase = selectData.idEvaCase;
+        //$('#assessName').val(selectData.name);
+
+        var url = basePath;
+        if (!selectData.script) {
+            url += '/pf/p/kb/assess/common/page';
+        } else {
+            url = url + selectData.script;
+        }
+        url += '?cdEvaAsse=' + selectData.cdEvaAsse
+            + '&idEvaCase=' + selectData.idEvaCase
+            + '&showForm=0&showBtn=1&tagFlag=1' + '&idMedicalrec=' + idMedicalrec + '&idTag=' + currentMedIdTag
+            + '&caseName=' + caseName;
+        $('#assessTag').attr('src', url);
+
     }
 
 
@@ -258,12 +371,12 @@ layui.config({
                     layer.msg(msg + "成功");
                     if (type == 'med') {
                         caseTagList[currentIndex].idMedCase = currentIdMedCase;
-                        $('#med-dot-bg' + currentMedIdTag).removeClass('layui-bg-orange')
-                            .addClass('layui-bg-green');
+                        /*$('#med-dot-bg' + currentMedIdTag).removeClass('layui-bg-orange')
+                            .addClass('layui-bg-green');*/
                     } else if (type == 'eva') {
                         assessTagList[currentIndex].idEvaCase = currentIdEvaCase;
-                        $('#eva-dot-bg' + currentEvaIdTag).removeClass('layui-bg-orange')
-                            .addClass('layui-bg-green');
+                        /*$('#eva-dot-bg' + currentEvaIdTag).removeClass('layui-bg-orange')
+                            .addClass('layui-bg-green');*/
                     }
                     return true;
                 }

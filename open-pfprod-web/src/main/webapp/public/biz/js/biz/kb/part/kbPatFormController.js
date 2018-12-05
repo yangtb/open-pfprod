@@ -8,6 +8,41 @@ layui.config({
     init();
 
     function init() {
+        if (tagFlag == '1' && idMedCase == '') {
+            // 查询idMedCase
+            var medData = {
+                idMedicalrec: idMedicalrec,
+                idTag: idTag
+            }
+            $.ajax({
+                url: basePath + '/pf/r/case/history/select/med/tag',
+                type: 'post',
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(medData),
+                success: function (data) {
+                    layer.closeAll('loading');
+                    if (data.code != 0) {
+                        common.errorMsg(data.msg);
+                        return false;
+                    } else {
+                        idMedCase = data.data.idMedCase;
+                        loadInfo()
+                        return true;
+                    }
+                },
+                error: function () {
+                    layer.closeAll('loading');
+                    common.errorMsg("查询失败");
+                    return false;
+                }
+            });
+        } else {
+            loadInfo();
+        }
+    };
+
+    function loadInfo() {
         if (!idMedCase) {
             return;
         }
@@ -37,7 +72,7 @@ layui.config({
                 return false;
             }
         });
-    };
+    }
 
     form.verify({
         commonLength: function (value) {
@@ -57,6 +92,12 @@ layui.config({
 
     form.on('submit(addKbPartPat)', function (data) {
         data.field.idMedCase = idMedCase;
+        data.field.tagFlag = tagFlag;
+        if (tagFlag == '1') {
+            data.field.caseName = caseName;
+            data.field.idMedicalrec = idMedicalrec;
+            data.field.idTag = idTag;
+        }
         var url = basePath + '/pf/r/kb/part/pat/save';
         return common.commonPost(url, data.field, '保存');
     });
