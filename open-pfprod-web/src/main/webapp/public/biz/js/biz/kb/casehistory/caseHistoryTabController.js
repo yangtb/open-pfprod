@@ -297,10 +297,6 @@ layui.config({
                 if (item.cdEvaAsse === selectData.cdEvaAsse) idx = index;
             })
             $('#eva-' + selectData.cdEvaAsse).addClass("active").siblings().removeClass("active");
-            console.log("=========")
-            console.log(idx)
-            console.log(assessTagList[idx])
-
             currentEvaIdTag = assessTagList[idx].idTag;
             currentCdEvaAsse = assessTagList[idx].cdEvaAsse;
             currentIndex = idx;
