@@ -58,7 +58,7 @@ layui.config({
             , where: {
                 idTestexecResult: idTestexecResult
             }
-            , limit: 30
+            , limit: 1000
             , limits: [30, 50]
         },
         done: function (elem, data) {
@@ -66,7 +66,7 @@ layui.config({
             layui.each(data.data, function (index, item) {
                 NEWJSON.push(item.idText)
             })
-            elem.val(NEWJSON.join(","))
+            elem.val(NEWJSON.join("；"))
         }
     });
 

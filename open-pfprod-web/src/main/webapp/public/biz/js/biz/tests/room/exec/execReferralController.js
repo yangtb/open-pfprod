@@ -310,7 +310,7 @@ function renderNzTable(i, data) {
                 , where: {
                     idTestexecResult: idTestexecResult
                 }
-                , limit: 30
+                , limit: 1000
                 , limits: [30, 50]
             },
             done: function (elem, data) {
@@ -318,7 +318,7 @@ function renderNzTable(i, data) {
                 layui.each(data.data, function (index, item) {
                     NEWJSON.push(item.idText)
                 })
-                elem.val(NEWJSON.join(","))
+                elem.val(NEWJSON.join("；"))
             }
         });
     });

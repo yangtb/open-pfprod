@@ -252,7 +252,7 @@ layui.config({
                 , where: {
                     idTestexecResult: idTestexecResult
                 }
-                , limit: 30
+                , limit: 1000
                 , limits: [30, 50]
             },
             done: function (elem, data) {
@@ -280,6 +280,8 @@ layui.config({
                 idTestexecResultDiagnosis: data.idTestexecResultDiagnosis
             }
             , page: false
+            , limit: 1000
+            , limits: [30, 50]
         });
         tableTool(i);
     }

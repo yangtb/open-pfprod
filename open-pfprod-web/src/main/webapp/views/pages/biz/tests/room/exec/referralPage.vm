@@ -62,6 +62,16 @@
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="add"><i class="iconfont icon-add"></i> 拟诊</a>
 </script>
 
+<script type="text/html" id="sdEvaTpl">
+        #foreach($param in ${sdEva})
+        {{#  if(d.sdEvaEffciency == $!param.dictCode){ }}
+            $!{param.dictName}
+        {{#  } else { }}
+
+        {{#  } }}
+        #end
+</script>
+
 </body>
 
 

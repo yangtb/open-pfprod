@@ -157,6 +157,7 @@ public class PfTestWaitingRoomController extends BaseController {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
         model.addAttribute("cdMedAsse", dto.getCdMedAsse());
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
+        model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         return "pages/biz/tests/room/exec/referralPage";
     }
 
