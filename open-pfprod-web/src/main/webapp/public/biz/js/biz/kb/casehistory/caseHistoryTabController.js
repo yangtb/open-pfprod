@@ -279,7 +279,7 @@ layui.config({
                     common.errorMsg(data.msg);
                     return false;
                 } else {
-                    saveMedAfter(selectData);
+                    saveEvaAfter(selectData);
                     return true;
                 }
             },
@@ -290,13 +290,17 @@ layui.config({
         });
     }
 
-    function saveMedAfter(selectData) {
+    function saveEvaAfter(selectData) {
         if (currentCdMedAsse != selectData.cdEvaAsse) {
             var idx = '';
             assessTagList.map(function (item, index) {
                 if (item.cdEvaAsse === selectData.cdEvaAsse) idx = index;
             })
             $('#eva-' + selectData.cdEvaAsse).addClass("active").siblings().removeClass("active");
+            console.log("=========")
+            console.log(idx)
+            console.log(assessTagList[idx])
+
             currentEvaIdTag = assessTagList[idx].idTag;
             currentCdEvaAsse = assessTagList[idx].cdEvaAsse;
             currentIndex = idx;
