@@ -26,7 +26,8 @@ public enum SysDicGroupEnum {
     CD_NURS_LEVEL("CD_NURS_LEVEL", "护理级别"),
     SD_DIET("SD_DIET", "饮食"),
     SD_TESTPLAN("SD_TESTPLAN", "计划状态"),
-    EXM_EVAR_ESULT("EXM_EVAR_ESULT","评估结果");
+    EXM_EVAR_ESULT("EXM_EVAR_ESULT","评估结果"),
+    SD_POSITION("SD_POSITION", "医嘱体位");
 
 
     private String code;

@@ -229,7 +229,7 @@ public class PfTestWaitingRoomController extends BaseController {
         model.addAttribute("sdNursRout", enumUtil.getEnumList(SysDicGroupEnum.SD_NURS_ROUT.getCode()));
         model.addAttribute("cdNursLevel", enumUtil.getEnumList(SysDicGroupEnum.CD_NURS_LEVEL.getCode()));
         model.addAttribute("sdDiet", enumUtil.getEnumList(SysDicGroupEnum.SD_DIET.getCode()));
-        model.addAttribute("sdPosition", enumUtil.getEnumList(SysDicGroupEnum.BODY_POSITION.getCode()));
+        model.addAttribute("sdPosition", enumUtil.getEnumList(SysDicGroupEnum.SD_POSITION.getCode()));
         return "pages/biz/tests/room/exec/ordersPage";
     }
 
