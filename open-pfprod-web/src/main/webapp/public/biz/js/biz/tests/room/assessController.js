@@ -10,7 +10,7 @@ layui.config({
         , view = layui.view;
 
     //执行渲染
-    table.render({
+    /*table.render({
         elem: '#roomTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'roomTableId'
         , title: '候诊室'
@@ -38,15 +38,15 @@ layui.config({
             , last: false //不显示尾页
             , limits: [15, 30, 100]
         }
-    });
+    });*/
 
     //执行渲染
     table.render({
         elem: '#enumTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'enumTableId'
         , title: '接诊列表'
-        , toolbar: '#toolbarDemo2'
-        , defaultToolbar: []
+        //, toolbar: '#toolbarDemo2'
+        //, defaultToolbar: []
         , height: 'full-68' //容器高度
         , cols: [[
             //{checkbox: true, fixed: true},
@@ -55,7 +55,7 @@ layui.config({
             {field: 'receiveDate', width: 170, title: '接诊时间'},
             {field: 'receiveConsumingTime', width: 120, align: 'right', title: '接诊耗时(m)'},
             {field: 'patName', width: 100, title: '患者姓名'},
-            {field: 'patSex', width: 150, title: '性别', templet: '#sexTpl'},
+            {field: 'patSex', width: 100, title: '性别', templet: '#sexTpl'},
             {field: 'age', width: 80, sort: true, align: 'right', title: '年龄'},
             {field: 'receiveDoc', width: 120, title: '病例'},
             {field: 'medicalrecName', width: 120, title: '接诊医师'},
@@ -63,8 +63,8 @@ layui.config({
             {field: 'naTestpaper', width: 170, title: '试卷', templet: '#naTestpaperTpl'},
             {field: 'score', width: 120, title: '评分'},
             {field: 'ch', width: 120, title: '称号', templet: '#chTpl'},
-            {field: 'AssessTeacher', width: 120, title: '评估老师'},
-            {field: 'AssessDate', width: 170, title: '评估日期'}
+            //{field: 'AssessTeacher', width: 120, title: '评估老师'},
+            //{field: 'AssessDate', width: 170, title: '评估日期'}
         ]] //设置表头
         , url: basePath + '/pf/p/waiting/room/receive/list'
         , limit: 15

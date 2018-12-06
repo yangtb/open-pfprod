@@ -14,8 +14,8 @@ layui.config({
         elem: '#roomTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'roomTableId'
         , title: '候诊室'
-        , toolbar: '#toolbarDemo1'
-        , defaultToolbar: []
+        //, toolbar: '#toolbarDemo1'
+        //, defaultToolbar: []
         , height: 'full-68' //容器高度
         , cols: [[
             {type: 'radio', fixed: true},
@@ -24,23 +24,25 @@ layui.config({
             {field: 'patName', width: 90, title: '患者姓名'},
             {field: 'patSex', width: 70, title: '性别', templet: '#sexTpl'},
             {field: 'distributeDoc', width: 120, title: '分配医师'},
-            {field: 'naTestplan', width: 160, title: '测试计划'},
-            {field: 'naTestpaper', width: 160, title: '试卷名称', templet: '#naTestpaperTpl'}
+            {field: 'naTestplan', minWidth: 160, title: '测试计划'},
+            {field: 'naTestpaper', minWidth: 160, title: '试卷名称', templet: '#naTestpaperTpl'}
         ]] //设置表头
         , url: basePath + '/pf/p/waiting/room/list'
-        , limit: 15
+        , limit: 20
         , even: true
-        , page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+        , limits: [20, 30, 50]
+        , page: true
+        /*, page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
             layout: ['limit', 'count', 'prev', 'page', 'next'] //自定义分页布局
             //,curr: 5 //设定初始在第 5 页
             , groups: 1 //只显示 1 个连续页码
             , first: false //不显示首页
             , last: false //不显示尾页
             , limits: [15, 30, 100]
-        }
+        }*/
     });
 
-    //执行渲染
+    /*//执行渲染
     table.render({
         elem: '#enumTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'enumTableId'
@@ -71,7 +73,7 @@ layui.config({
         , even: true
         , limits: [15, 30, 100]
         , page: true
-    });
+    });*/
 
     //监听提交
     form.on('submit(enumSearchFilter)', function (data) {

@@ -80,15 +80,15 @@
             </div>
         </div>
     </form>
-    <div class="layui-col-xs4" style="padding-right: 5px;">
+    <div class="layui-col-xs12" style="padding-right: 5px;">
         <table id="roomTable" lay-filter="roomTableFilter">
         </table>
     </div>
 
-    <div class="layui-col-xs8">
+    #*<div class="layui-col-xs8">
         <table id="enumTable" lay-filter="enumTableFilter">
         </table>
-    </div>
+    </div>*#
 </div>
 
 
@@ -144,7 +144,7 @@
         {{#  } }}
 </script>
 
-<script type="text/html" id="chTpl">
+#*<script type="text/html" id="chTpl">
         #foreach($param in ${exmEvaResult})
         {{#  if(d.ch == $!param.dictCode){ }}
             $!{param.dictName}
@@ -152,7 +152,7 @@
 
         {{#  } }}
         #end
-</script>
+</script>*#
 
 </body>
 

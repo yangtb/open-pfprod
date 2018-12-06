@@ -91,12 +91,12 @@
             </div>
         </div>
     </form>
-    <div class="layui-col-xs4" style="padding-right: 5px;">
+    #*<div class="layui-col-xs4" style="padding-right: 5px;">
         <table id="roomTable" lay-filter="roomTableFilter">
         </table>
-    </div>
+    </div>*#
 
-    <div class="layui-col-xs8">
+    <div class="layui-col-xs12">
         <table id="enumTable" lay-filter="enumTableFilter">
         </table>
     </div>
