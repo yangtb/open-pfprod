@@ -29,8 +29,12 @@ layui.config({
 
     function loadIframe(execRef, execCode) {
         if (!$('#iframe' + execCode).attr("src")) {
-            $('#iframe' + execCode).attr('src', basePath + execRef
-                + '?idMedicalrec=' + idMedicalrec + '&cdMedAsse=' + execCode + '&idTestexecResult=' + $('#idTestexecResult').val());
+            if (!execRef) {
+                $('#iframe' + execCode).attr('src', basePath + '/empty/page');
+            } else {
+                $('#iframe' + execCode).attr('src', basePath + execRef
+                    + '?idMedicalrec=' + idMedicalrec + '&cdMedAsse=' + execCode + '&idTestexecResult=' + $('#idTestexecResult').val());
+            }
         }
         $('#iframe' + execCode).removeClass("display-my").siblings().addClass("display-my");
     }
@@ -78,7 +82,7 @@ layui.config({
             var url = basePath + '/pf/r/waiting/room/end';
             var bizData = {
                 idTestexec: $('#idTestexec').val(),
-                idTestplanDetail : idTestplanDetail,
+                idTestplanDetail: idTestplanDetail,
                 sdTestexec: '2'
             };
             common.commonPost(url, bizData, '', null, _endCallback);
