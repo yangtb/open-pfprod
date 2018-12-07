@@ -69,7 +69,7 @@ layui.config({
     init();
 
     function init() {
-        if (tagFlag == '1' && idMedCase == '') {
+        if (tagFlag == '1') {
             // 查询idMedCase
             var medData = {
                 idMedicalrec: idMedicalrec,

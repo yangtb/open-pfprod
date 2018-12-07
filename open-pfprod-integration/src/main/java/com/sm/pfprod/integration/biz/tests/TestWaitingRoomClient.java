@@ -168,6 +168,10 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.selectAllDiagnosis(idTestexecResult);
     }
 
+    public CommonResult<List<ExmMedResultReferralResult>> selectAllReferral(Long idTestexecResult) {
+        return pfTestWaitingRoomFacade.selectAllReferral(idTestexecResult);
+    }
+
     public CommonResult<PfWaitingRoomDiagnosisResult> selectDiagnosis(Long idTestexecResult) {
         return pfTestWaitingRoomFacade.selectDiagnosis(idTestexecResult);
     }
@@ -207,5 +211,13 @@ public class TestWaitingRoomClient {
     public CommonResult<ExmEvaResultResult> selectEvaResult(Long idTestexecResult) {
         return pfTestWaitingRoomFacade.selectEvaResult(idTestexecResult);
     }
+
+    public CommonResult<Boolean> saveReferralReason(List<ExmMedResultReferralReasonParam> list){
+        return pfTestWaitingRoomFacade.saveReferralReason(list);
+    }
+
+   public PfPageResult listReferralReason(Long idTestexecResultReferral){
+       return pfTestWaitingRoomFacade.listReferralReason(idTestexecResultReferral);
+   }
 
 }

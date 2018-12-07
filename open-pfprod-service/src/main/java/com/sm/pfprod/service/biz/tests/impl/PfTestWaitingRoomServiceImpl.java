@@ -35,6 +35,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("pfTestWaitingRoomService")
 public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
@@ -367,6 +368,15 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     }
 
     @Override
+    public List<ExmMedResultReferral> selectAllReferral(Long idTestexecResult) {
+        CommonResult<List<ExmMedResultReferralResult>> result = testWaitingRoomClient.selectAllReferral(idTestexecResult);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), ExmMedResultReferral.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
     public PfWaitingRoomDiagnosisVo selectDiagnosis(Long idTestexecResult) {
         CommonResult<PfWaitingRoomDiagnosisResult> result = testWaitingRoomClient.selectDiagnosis(idTestexecResult);
         if (result != null && result.getIsSuccess()) {
@@ -454,6 +464,27 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
             return BeanUtil.convert(result.getContent(), ExmEvaResult.class);
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean saveReferralReason(List<ExmMedResultReferralReason> list) {
+        CommonResult<Boolean> result = testWaitingRoomClient.saveReferralReason(BeanUtil.convertList(list, ExmMedResultReferralReasonParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult listReferralReason(Long idTestexecResultReferral, String fgExclude) {
+        PfPageResult<PfReferralReasonResult> result = testWaitingRoomClient.listReferralReason(idTestexecResultReferral);
+        if (result == null) {
+            return null;
+        }
+        result.setData(result.getData().stream().filter(
+                pfReferralReasonResult -> pfReferralReasonResult.getFgExclude().equals(fgExclude))
+                .collect(Collectors.toList()));
+        return BeanUtil.convert(result, PageResult.class);
     }
 
 

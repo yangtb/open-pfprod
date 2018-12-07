@@ -219,7 +219,7 @@ layui.config({
     function appendQaNormalHtml(data) {
 
         var html = '<li class="other-side">\n' +
-            '           <div class="doctor-details" style="margin-top: 0px;">\n' +
+            '           <div class="doctor-details">\n' +
             '               <input class="details-select" type="checkbox"';
         if (data.fgClue == '1') {
             html += 'checked="checked" ';
@@ -231,15 +231,15 @@ layui.config({
             '       </li>\n';
 
         if (!data.sdType) {
-            html += '<li class="patient" style="height: 40px;margin-bottom: 0px;">\n' +
+            html += '<li class="patient">\n' +
                 '       <div class="patient-details">\n' +
-                '           <p class="patient-response">' + data.valResult + '</p>\n' +
+                '           <p class="patient-response">结果:' + data.valResult + '&nbsp;<span class="des-stand"> '+'标准值:'+ data.desStand + '</span></p>\n' +
                 '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
                 '       </div>\n' +
                 '    </li>';
         } else if (data.sdType == '1') {
-            html += '<li class="patient-img-response" style="height: 190px;">\n' +
-                '       <p class="text" style="right: 70px;">' + data.valResult + '</p>\n' +
+            html += '<li class="patient-img-response">\n' +
+                '       <p class="text" style="right: 70px;">结果:' + data.valResult + '<span style="color: #009688"> '+'标准值:'+ data.desStand + '</span></p>\n' +
                 '       <p class="img-box">\n' +
                 '           <img class="response-img" id="patientImg' + data.idResult + '"  src="' + data.path + '" alt="" style="width: 400px; height: 250px;cursor: pointer;"' +
                 '               onerror="onError(this)"' +
@@ -248,8 +248,8 @@ layui.config({
                 '       </p>\n' +
                 '   </li>';
         } else if (data.sdType == '2') {
-            html += '<li class="patient" style="height: 40px;margin-bottom: 0px;">\n' +
-                '       <p class="text">' + data.valResult + '</p>\n' +
+            html += '<li class="patient">\n' +
+                '       <p class="text">结果:' + data.valResult + '<span style="color: #009688"> '+'标准值:'+ data.desStand + '</p>\n' +
                 '       <div class="patient-details">\n' +
                 '           <span class="time">12"</span>\n' +
                 '           <p class="voice-box">\n' +
@@ -260,8 +260,8 @@ layui.config({
                 '       </div>\n' +
                 '    </li>';
         } else if (data.sdType == '3') {
-            html += '<li class="patient" style="height: 40px;margin-bottom: 0px;">\n' +
-                '       <p class="text">' + data.valResult + '</p>\n' +
+            html += '<li class="patient">\n' +
+                '       <p class="text">结果:' + data.valResult + '<span style="color: #009688"> '+'标准值:'+ data.desStand + '</p>\n' +
                 '       <div class="patient-details">\n' +
                 '           <span class="time">12"</span>\n' +
                 '           <p class="voice-box">\n' +
@@ -295,7 +295,7 @@ layui.config({
         if (!data.sdType) {
             html += '<li class="patient">\n' +
                 '       <div class="patient-details">\n' +
-                '           <p class="patient-response">' + data.valResult + '</p>\n' +
+                '           <p class="patient-response">结果:' + data.valResult + '<span style="color: #009688"> '+'标准值:'+ data.desStand + '</p>\n' +
                 '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
                 '       </div>\n' +
                 '       <div class="official-details">\n' +
@@ -305,7 +305,7 @@ layui.config({
                 '   </li>';
         } else if (data.sdType == '1') {
             html += '<li class="patient-img-response">\n' +
-                '       <p class="text" style="right: 70px;">' + data.valResult + '</p>\n' +
+                '       <p class="text">结果:' + data.valResult + '<span style="color: #009688"> '+'标准值:'+ data.desStand + '</p>\n' +
                 '       <p class="img-box">\n' +
                 '           <img class="response-img" id="patientImg' + data.idResult + '"  src="' + data.path + '" alt="" style="width: 400px; height: 250px;cursor: pointer;"' +
                 '               onerror=\'this.src="' + data.path + '/public/biz/img/tupianjiazaishibai.png"' +
@@ -319,7 +319,7 @@ layui.config({
                 '   </li>';
         } else if (data.sdType == '2') {
             html += '<li class="patient">\n' +
-                '       <p class="text">' + data.valResult + '</p>\n' +
+                '       <p class="text">结果:' + data.valResult + '<span style="color: #009688"> '+'标准值:'+ data.desStand + '</p>\n' +
                 '       <div class="patient-details">\n' +
                 '           <span class="time">12"</span>\n' +
                 '           <p class="voice-box">\n' +
@@ -335,7 +335,7 @@ layui.config({
                 '    </li>';
         } else if (data.sdType == '3') {
             html += '<li class="patient">\n' +
-                '       <p class="text">' + data.valResult + '</p>\n' +
+                '       <p class="text">结果:' + data.valResult + '<span style="color: #009688"> '+'标准值:'+ data.desStand + '</p>\n' +
                 '       <div class="patient-details">\n' +
                 '           <span class="time">12"</span>\n' +
                 '           <p class="voice-box">\n' +

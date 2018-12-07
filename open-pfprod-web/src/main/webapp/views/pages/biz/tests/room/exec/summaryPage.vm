@@ -27,7 +27,7 @@
                 <div hidden>
                     <input id="idDie" name="idDie" hidden>
                 </div>
-                <div class="layui-row layui-form-item">
+                #*<div class="layui-row layui-form-item">
                     <div class="layui-col-md12">
                         <label class="layui-form-label">诊断<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
                         <div class="layui-input-block">
@@ -43,45 +43,30 @@
                             </button>
                         </div>
                     </div>
-                </div>
-            #*<div class="layui-row layui-form-item">
-                <div class="layui-col-md10">
-                    <label class="layui-form-label">诊断<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
-                    <div class="layui-input-block my-input-width">
-                        <input type="text" name="idDieText" id="idDieText" autocomplete="off" class="layui-input"
-                               placeholder="请选择诊断" lay-verify="required" lay-vertype="tips"
-                               style="display:inline-block;width:270px;vertical-align:middle;
-                           margin-right:-5px;border: 1px solid #C9C9C9;" disabled>
-                        <button type="button" class="layui-btn layui-btn-primary" id="searchAnswer">
-                            <i class="layui-icon layui-icon-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="layui-col-md2" style="text-align: right;">
-                    <button class="layui-btn layui-btn-danger" id="delSummary">
-                        <i class="layui-icon layui-icon-delete"></i>删除
-                    </button>
-                </div>
-            </div>*#
+                </div>*#
             </form>
         </div>
+    </div>
+    <div style="padding-left: 110px;padding-bottom: 5px;">
+        <button id="refresh" type="button" class="layui-btn layui-btn-normal">
+            <i class="iconfont icon-refresh"></i> 刷新
+        </button>
     </div>
     <div class="layui-row" id="zdField" style="padding-left: 110px;width: 600px;">
         <fieldset class="layui-elem-field">
             <legend>诊断 -
-                <button id="delSummary" class="layui-btn layui-btn-sm layui-btn-disabled" disabled>
+                #*<button id="delSummary" class="layui-btn layui-btn-sm layui-btn-disabled" disabled>
                     <i class="layui-icon layui-icon-delete"></i>删除
                 </button>
                 <button class="layui-btn layui-btn-sm layui-btn-disabled" id="addDieReason" disabled>
                     <i class="layui-icon layui-icon-add-1"></i>确诊理由
-                </button>
+                </button>*#
             </legend>
             <div class="layui-field-box">
                 <table id="zdTable" lay-filter="zdTableFilter">
                 </table>
             </div>
         </fieldset>
-
     </div>
     <div class="layui-row" style="width: 710px;">
         <div class="layui-form-item">

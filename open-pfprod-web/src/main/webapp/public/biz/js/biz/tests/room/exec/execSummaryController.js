@@ -17,6 +17,10 @@ layui.config({
         loadZd();
     }
 
+    $('#refresh').on('click', function () {
+        window.location.reload();
+    });
+
     function initForm() {
         var bizData = {
             idTestexecResult: idTestexecResult
@@ -221,15 +225,14 @@ layui.config({
     function zdHtml(i, data) {
         var html =
             '<fieldset id="fieldset' + i + '" class="layui-elem-field">\n' +
-            '   <legend>[' + (i + 1) + ']' +
-            '       <button id="delSummary' + i + '" class="layui-btn layui-btn-sm layui-btn-danger" ' +
-            '       onclick="delZd(' + i + ', ' + data.idTestexecResultDiagnosis + ', \'' + data.idDieText + '\')">\n' +
-            '           <i class="layui-icon layui-icon-delete"></i>删除\n' +
-            '       </button>\n' +
-            '       <button class="layui-btn layui-btn-sm" id="addDieReason' + i + '">\n' +
-            '           <i class="layui-icon layui-icon-add-1"></i>确诊理由\n' +
-            '       </button>\n' + '诊断 -' + data.idDieText +
-            '   </legend>\n' +
+            '   <legend style="font-size: 16px;">' +
+            // '       <button id="delSummary' + i + '" class="layui-btn layui-btn-sm layui-btn-danger" ' +
+            // '       onclick="delZd(' + i + ', ' + data.idTestexecResultDiagnosis + ', \'' + data.idDieText + '\')">\n' +
+            // '           <i class="layui-icon layui-icon-delete"></i>删除\n' +
+            // '       </button>\n' +
+            // '       <button class="layui-btn layui-btn-sm" id="addDieReason' + i + '">\n' +
+            // '           <i class="layui-icon layui-icon-add-1"></i>确诊理由\n' +
+            '       </button>\n' + '诊断' + (i + 1) + ' - <strong style="font-style: italic">' + data.idDieText + '</strong></legend>\n' +
             '   <div class="layui-field-box">\n' +
             '       <table id="zdTable' + i + '" lay-filter="zdTableFilter' + i + '">\n' +
             '       </table>\n' +
@@ -273,7 +276,7 @@ layui.config({
                 {type: 'numbers'},
                 {field: 'idText', minWidth: 150, title: '确诊理由'},
                 {field: 'sdEvaEffciency', width: 80, title: '阶段', templet: '#sdEvaTpl'},
-                {fixed: 'right', title: '操作', width: 60, align: 'left', toolbar: '#summaryBar'}
+                //{fixed: 'right', title: '操作', width: 60, align: 'left', toolbar: '#summaryBar'}
             ]] //设置表头
             , url: basePath + '/pf/p/waiting/room/test/die/reason/list'
             , where: {
@@ -304,7 +307,8 @@ layui.config({
         });
     }
 
-});
+
+})
 
 function delZd(i, idTestexecResultDiagnosis, idDieText) {
     layui.config({

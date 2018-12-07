@@ -306,7 +306,7 @@ layui.config({
     function appendQaNormalHtml(data) {
 
         var html = '<li class="other-side">\n' +
-            '           <div class="doctor-details" style="margin-top: 0px;">\n' +
+            '           <div class="doctor-details">\n' +
             '               <input class="details-select" type="checkbox"';
         if (data.fgClue == '1') {
             html += 'checked="checked" ';
@@ -318,15 +318,15 @@ layui.config({
             '       </li>\n';
 
         if (!data.sdType) {
-            html += '<li class="patient" style="height: 40px;margin-bottom: 0px;">\n' +
+            html += '<li class="patient">\n' +
                 '       <div class="patient-details">\n' +
                 '           <p class="patient-response">' + data.desResult + '</p>\n' +
                 '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
                 '       </div>\n' +
                 '    </li>';
         } else if (data.sdType == '1') {
-            html += '<li class="patient-img-response" style="height: 190px;">\n' +
-                '       <p class="text" style="right: 70px;">' + data.desResult + '</p>\n' +
+            html += '<li class="patient-img-response">\n' +
+                '       <p class="text">' + data.desResult + '</p>\n' +
                 '       <p class="img-box">\n' +
                 '           <img class="response-img" id="patientImg' + data.idResult + '"  src="' + data.path + '" alt="" style="width: 400px; height: 250px;cursor: pointer;"' +
                 '               onclick="openMedia(' + data.sdType + ',' + data.idResult + ')">\n' +
@@ -334,7 +334,7 @@ layui.config({
                 '       </p>\n' +
                 '   </li>';
         } else if (data.sdType == '2') {
-            html += '<li class="patient" style="height: 40px;margin-bottom: 0px;">\n' +
+            html += '<li class="patient">\n' +
                 '       <p class="text">' + data.desResult + '</p>\n' +
                 '       <div class="patient-details">\n' +
                 '           <span class="time">12"</span>\n' +
@@ -346,7 +346,7 @@ layui.config({
                 '       </div>\n' +
                 '    </li>';
         } else if (data.sdType == '3') {
-            html += '<li class="patient" style="height: 40px;margin-bottom: 0px;">\n' +
+            html += '<li class="patient">\n' +
                 '       <p class="text">' + data.desResult + '</p>\n' +
                 '       <div class="patient-details">\n' +
                 '           <span class="time">12"</span>\n' +
@@ -367,7 +367,7 @@ layui.config({
             data.desExpert = '';
         }
         var html = '<li class="other-side">\n' +
-            '           <div class="doctor-details" style="margin-top: 0px;">\n' +
+            '           <div class="doctor-details">\n' +
             '               <input class="details-select" type="checkbox" name="复选框" id="">\n' +
             '               <img src="' + basePath + '/public/biz/img/exam/doctor-avatar.png" alt="" class="doctor-avatar" style="width: 40px; height: 40px;">\n' +
             '               <p class="doctor-response">' + data.desBody + '</p>\n' +
@@ -387,7 +387,7 @@ layui.config({
                 '   </li>';
         } else if (data.sdType == '1') {
             html += '<li class="patient-img-response">\n' +
-                '       <p class="text" style="right: 70px;">' + data.desResult + '</p>\n' +
+                '       <p class="text">' + data.desResult + '</p>\n' +
                 '       <p class="img-box">\n' +
                 '           <img class="response-img" id="patientImg' + data.idResult + '"  src="' + data.path + '" alt="" style="width: 400px; height: 250px;cursor: pointer;"' +
                 '               onclick="openMedia(' + data.sdType + ',' + data.idResult + ')">\n' +

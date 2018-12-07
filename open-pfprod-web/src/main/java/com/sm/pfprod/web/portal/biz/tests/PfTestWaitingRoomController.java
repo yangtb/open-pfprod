@@ -1,5 +1,6 @@
 package com.sm.pfprod.web.portal.biz.tests;
 
+import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestWatingRoomDto;
@@ -295,6 +296,32 @@ public class PfTestWaitingRoomController extends BaseController {
     public PageResult listReceivePat(PfTestWatingRoomDto dto) {
         dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
         return pfTestWaitingRoomService.listReceivePat(dto);
+    }
+
+    /**
+     * 查询拟诊加入理由
+     *
+     * @param idTestexecResultReferral
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @RequestMapping(value = "/referral/reason/in/list")
+    @ResponseBody
+    public PageResult listReferralInReason(Long idTestexecResultReferral) {
+        return pfTestWaitingRoomService.listReferralReason(idTestexecResultReferral, YesOrNoNum.NO.getCode());
+    }
+
+    /**
+     * 查询拟诊排除理由
+     *
+     * @param idTestexecResultReferral
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @RequestMapping(value = "/referral/reason/out/list")
+    @ResponseBody
+    public PageResult listReferralOutReason(Long idTestexecResultReferral) {
+        return pfTestWaitingRoomService.listReferralReason(idTestexecResultReferral, YesOrNoNum.YES.getCode());
     }
 
 }

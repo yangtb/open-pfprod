@@ -294,9 +294,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
     public ResultObject saveReferral(@RequestBody ExmMedResultReferral dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
-        Assert.isTrue(StringUtils.isNotBlank(dto.getSdEvaReferral()), "sdEvaReferral");
         Assert.isTrue(dto.getIdDie() != null, "id_die");
-        Assert.isTrue(StringUtils.isNotBlank(dto.getReasonIn()), "reasonIn");
 
         return ResultObject.createSuccess("saveReferral", ResultObject.DATA_TYPE_OBJECT,
                 pfTestWaitingRoomService.saveReferral(dto));
@@ -314,7 +312,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
     public ResultObject outReferral(@RequestBody ExmMedResultReferral dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getIdTestexecResultReferral() != null, "idTestexecResultReferral");
-        Assert.isTrue(StringUtils.isNotBlank(dto.getReasonOut()), "reasonOut");
+        //Assert.isTrue(StringUtils.isNotBlank(dto.getReasonOut()), "reasonOut");
 
         return ResultObject.createSuccess("outReferral", ResultObject.DATA_TYPE_OBJECT,
                 pfTestWaitingRoomService.saveReferral(dto));
@@ -501,6 +499,22 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
+     * 查询拟诊
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/referral/select/all")
+    @ResponseBody
+    public ResultObject selectAllReferral(@RequestBody PfTestExamTagDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("selectAllReferral", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.selectAllReferral(dto.getIdTestexecResult()));
+    }
+
+    /**
      * 查询诊断、诊断小结
      *
      * @param dto
@@ -631,6 +645,22 @@ public class PfTestWaitingRoomRestController extends BaseController {
             exmEvaResult.setSdTitleDic(enumUtil.getEnumTxt(SysDicGroupEnum.EXM_EVAR_ESULT.getCode(), exmEvaResult.getSdTitle()));
         }
         return ResultObject.createSuccess("listExecLog", ResultObject.DATA_TYPE_OBJECT, exmEvaResult);
+    }
+
+    /**
+     * 拟诊原因 - 保存
+     *
+     * @param list
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/referral/reason/save")
+    @ResponseBody
+    public ResultObject saveReferralReason(@RequestBody List<ExmMedResultReferralReason> list) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(list), "list");
+        return ResultObject.createSuccess("saveReferralReason", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.saveReferralReason(list));
     }
 
 

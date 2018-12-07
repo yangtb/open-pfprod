@@ -315,6 +315,14 @@ public interface PfTestWaitingRoomService {
     List<PfDiagnosisVo> selectAllDiagnosis(Long idTestexecResult);
 
     /**
+     * 查询拟诊
+     *
+     * @param idTestexecResult 病历结果ID
+     * @return
+     */
+    List<ExmMedResultReferral> selectAllReferral(Long idTestexecResult);
+
+    /**
      * 查询诊断、诊断小结
      *
      * @param idTestexecResult 病历结果ID
@@ -393,5 +401,22 @@ public interface PfTestWaitingRoomService {
      * @return
      */
     ExmEvaResult selectEvaResult(Long idTestexecResult);
+
+    /**
+     * 保存拟诊原因
+     *
+     * @param list
+     * @return
+     */
+    boolean saveReferralReason(List<ExmMedResultReferralReason> list);
+
+    /**
+     * 拟诊原因列表
+     *
+     * @param idTestexecResultReferral
+     * @param fgExclude
+     * @return
+     */
+    PageResult listReferralReason(Long idTestexecResultReferral, String fgExclude);
 
 }
