@@ -63,6 +63,7 @@ public class PfTestPaperController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listQuestion(PfTestPaperDto dto) {
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
         return pfTestPaperService.listPaper(dto);
     }
 

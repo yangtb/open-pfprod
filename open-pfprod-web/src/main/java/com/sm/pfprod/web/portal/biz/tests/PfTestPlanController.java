@@ -68,6 +68,7 @@ public class PfTestPlanController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listPlan(PfTestPlanDto dto) {
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
         return pfTestPlanService.listPlans(dto);
     }
 

@@ -249,7 +249,6 @@ layui.config({
                             val.font = {'color': '#009688', 'font-weight':'bold'};
                         }
                     });
-                    console.log(zNodes)
                     $.fn.zTree.init($("#treeDemo"), setting, zNodes);
                     zTree = $.fn.zTree.getZTreeObj("treeDemo");
                     rMenu = $("#rMenu");
