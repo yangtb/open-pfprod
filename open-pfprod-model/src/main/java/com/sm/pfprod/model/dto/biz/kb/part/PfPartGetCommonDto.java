@@ -17,6 +17,8 @@ public class PfPartGetCommonDto implements Serializable {
     private String showBtn;
     private String tagFlag;
 
+    private String previewFlag;
+
     /**
      * 病历id
      */

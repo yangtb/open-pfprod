@@ -36,7 +36,7 @@ public class PfCommonController extends BaseController {
     }
 
     @RequestMapping("/empty/page")
-    public String emptyPage(Model model, String path) {
+    public String emptyPage(Model model) {
         return "pages/common/emptyPage";
     }
 }

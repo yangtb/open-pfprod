@@ -10,6 +10,7 @@ import com.sm.pfprod.model.entity.FaqMedTag;
 import com.sm.pfprod.model.entity.FaqMedicalrec;
 import com.sm.pfprod.model.entity.FaqMedicalrecCa;
 import com.sm.pfprod.model.enums.OperationTypeEnum;
+import com.sm.pfprod.model.vo.biz.PfCommonZtreeVo;
 import com.sm.pfprod.service.biz.kb.PfCaseHistoryService;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @ClassName: PfCaseHistoryRestController
@@ -43,8 +45,14 @@ public class PfCaseHistoryRestController {
     @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
     @PostMapping(value = "/classify/tree")
     public ResultObject listClassifyTree() {
-        return ResultObject.createSuccess("listClassifyTree", ResultObject.DATA_TYPE_LIST,
-                pfCaseHistoryService.listClassifyTree());
+        Long idOrg = CurrentUserUtils.getCurrentUserIdOrg();
+        List<PfCommonZtreeVo> ztreeVos = pfCaseHistoryService.listClassifyTree();
+        ztreeVos.stream().forEach(pfCommonZtreeVo -> {
+            if (!pfCommonZtreeVo.getExt().equals(String.valueOf(idOrg))) {
+                pfCommonZtreeVo.setNoR(true);
+            }
+        });
+        return ResultObject.createSuccess("listClassifyTree", ResultObject.DATA_TYPE_LIST, ztreeVos);
     }
 
     /**
@@ -254,6 +262,7 @@ public class PfCaseHistoryRestController {
         return ResultObject.createSuccess("saveAsMed", ResultObject.DATA_TYPE_OBJECT,
                 pfCaseHistoryService.saveAsMed(dto));
     }
+
     /**
      * 重载评估组件
      *

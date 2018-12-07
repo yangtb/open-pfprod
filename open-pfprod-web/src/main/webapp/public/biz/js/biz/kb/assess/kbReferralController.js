@@ -9,6 +9,14 @@ layui.config({
 
     init();
 
+    $(document).ready(function () {
+        if (previewFlag == '1') {
+            var formIdArr = new Array('add', 'save', 'itemName', 'scoreEva', 'sdEvaType');
+            common.setFormStatus('0', formIdArr);
+            layui.form.render('select');
+        }
+    });
+
     function init() {
         if (tagFlag == '1') {
             // 查询idMedCase

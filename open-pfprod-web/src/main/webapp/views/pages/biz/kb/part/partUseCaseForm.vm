@@ -16,6 +16,7 @@
         var cdMedAsse = '$!{cdMedAsse}';
         var idMedCase = '$!{idMedCase}';
         var parts = '$!parts';
+        var previewFlag = '$!{previewFlag}';
     </script>
 </head>
 

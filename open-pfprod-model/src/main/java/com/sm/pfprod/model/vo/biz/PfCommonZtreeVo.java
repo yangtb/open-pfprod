@@ -38,6 +38,10 @@ public class PfCommonZtreeVo implements Serializable {
      */
     private boolean checked;
     /**
+     * true 无右键菜单
+     */
+    private boolean noR;
+    /**
      * 扩展字段
      */
     private String ext;

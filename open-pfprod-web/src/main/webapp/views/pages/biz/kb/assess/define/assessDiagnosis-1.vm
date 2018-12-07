@@ -105,9 +105,9 @@
                             <button id="save" class="layui-btn" lay-submit="" lay-filter="saveCons">
                                 <i class="iconfont icon-save-copy"></i> 保存
                             </button>
-                            <button class="layui-btn" lay-submit="" lay-filter="saveAsCons">
+                            #*<button class="layui-btn" lay-submit="" lay-filter="saveAsCons">
                                 <i class="iconfont icon-lingcunwei"></i> 重载
-                            </button>
+                            </button>*#
                             <button id="reset" type="reset" class="layui-btn layui-btn-danger">
                                 <i class="iconfont icon-reset"></i> 重置
                             </button>

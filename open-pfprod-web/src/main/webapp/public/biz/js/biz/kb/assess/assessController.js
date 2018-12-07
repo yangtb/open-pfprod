@@ -102,7 +102,9 @@ layui.config({
         if (formType == 'add') {
             common.open('新增评估组件用例', basePath + '/pf/p/kb/assess/form?formType=' + formType, 420, 360, _successFunction(currentEditData));
         } else {
-            common.open('编辑评估组件用例', basePath + '/pf/p/kb/assess/form?formType=' + formType, 420, 360, _successFunction(currentEditData));
+            var previewFlag = currentEditData.idOrg == currentIdOrg ? '0' : '1';
+            common.open('编辑评估组件用例', basePath + '/pf/p/kb/assess/form?formType=' + formType + '&previewFlag=' + previewFlag,
+                420, 360, _successFunction(currentEditData));
         }
     };
 
@@ -167,8 +169,19 @@ layui.config({
         } else {
             url = url + data.script;
         }
-        url += '?cdEvaAsse=' + data.cdEvaAsse + '&idEvaCase=' + data.idEvaCase + '&showForm=1&showBtn=1';
-        var index = common.open('组件用例维护 【' + '<span style="color: red">' + data.name + '</span>】', url, 900, 460, _successFillUseCase(data));
+
+        var previewFlag, title;
+        if (data.idOrg == currentIdOrg) {
+            previewFlag = '0';
+            title = '组件用例维护';
+        } else {
+            previewFlag = '1';
+            title = '组件用例浏览';
+        }
+
+        url += '?cdEvaAsse=' + data.cdEvaAsse + '&idEvaCase=' + data.idEvaCase
+            + '&showForm=1&showBtn=1&previewFlag=' + previewFlag;
+        var index = common.open(title + ' 【' + '<span style="color: red">' + data.name + '</span>】', url, 900, 460, _successFillUseCase(data));
         layer.full(index);
     };
 

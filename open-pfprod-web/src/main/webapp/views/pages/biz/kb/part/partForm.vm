@@ -19,6 +19,7 @@
         var contextPath = '$!{contextPath}';
         var cdMedAsse = '$!{cdMedAsse}';
         var formType = '$!{formType}';
+        var previewFlag = '$!{previewFlag}';
     </script>
 
 </head>
@@ -34,7 +35,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">用例名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <input name="name" autocomplete="off" class="layui-input"
+                <input name="name" id="name" autocomplete="off" class="layui-input"
                        placeholder="请输入用例名称" lay-verify="required|commonLength" lay-vertype="tips">
             </div>
         </div>
@@ -42,7 +43,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">组件类型<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <select name="cdMedAsse" autocomplete="off" lay-verify="required" lay-vertype="tips"
+                <select name="cdMedAsse" id="cdMedAsse" autocomplete="off" lay-verify="required" lay-vertype="tips"
                         lay-vertype="tips">
                     <option value="">请选择组件类型</option>
                     #foreach($element in $!parts)
@@ -55,7 +56,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">用例描述</label>
             <div class="layui-input-block">
-                <input name="descript" autocomplete="off" class="layui-input"
+                <input name="descript" id="descript" autocomplete="off" class="layui-input"
                        lay-verify="descript" lay-vertype="tips"
                        placeholder="请输入用例描述">
             </div>
@@ -65,14 +66,14 @@
             <label class="layui-form-label">状态<i class="iconfont icon-required"
                                                  style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
+                <input type="checkbox" checked="" name="fgActive" id="fgActive" lay-skin="switch"
                        value="1" lay-text="启用|停用">
             </div>
         </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="addKbPart">
+                <button id="saveBtn" class="layui-btn" lay-submit="" lay-filter="addKbPart">
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
             </div>

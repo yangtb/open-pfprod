@@ -7,6 +7,14 @@ layui.config({
         , common = layui.common
         , tableSelect = layui.tableSelect;
 
+    $(document).ready(function () {
+        if (previewFlag == '1') {
+            var formIdArr = new Array('add', 'save', 'itemName', 'scoreEva', 'sdEvaType');
+            common.setFormStatus('0', formIdArr);
+            layui.form.render('select');
+        }
+    });
+
     init();
 
     function init() {

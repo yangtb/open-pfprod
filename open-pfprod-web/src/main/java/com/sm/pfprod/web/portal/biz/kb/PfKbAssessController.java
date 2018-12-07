@@ -1,6 +1,7 @@
 package com.sm.pfprod.web.portal.biz.kb;
 
 import com.alibaba.fastjson.JSON;
+import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.pfprod.model.dto.biz.kb.assess.PfAssessCommonDto;
 import com.sm.pfprod.model.dto.biz.kb.assess.PfAssessGetCommonDto;
 import com.sm.pfprod.model.dto.biz.kb.assess.PfEvaCaseDto;
@@ -12,6 +13,8 @@ import com.sm.pfprod.service.biz.clinic.PfClinicPartsService;
 import com.sm.pfprod.service.biz.disease.PfDiseaseService;
 import com.sm.pfprod.service.biz.kb.PfKbAssessService;
 import com.sm.pfprod.web.portal.BaseController;
+import com.sm.pfprod.web.security.CurrentUserUtils;
+import com.sm.pfprod.web.security.User;
 import com.sm.pfprod.web.util.EnumUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -47,6 +50,7 @@ public class PfKbAssessController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/page")
     public String partPage(Model model) {
+        model.addAttribute("currentIdOrg", CurrentUserUtils.getCurrentUser().getIdOrg());
         model.addAttribute("assesses", pfClinicPartsService.listAllSheet());
         return "pages/biz/kb/assess/assessTemplate";
     }
@@ -55,13 +59,18 @@ public class PfKbAssessController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listKbAssess(PfEvaCaseDto dto) {
+        User user = CurrentUserUtils.getCurrentUser();
+        if (user.getFgPlat().equals(YesOrNoNum.NO.getCode())) {
+            dto.setIdOrg(user.getIdOrg());
+        }
         return pfKbAssessService.listKbAssess(dto);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/form")
-    public String form(Model model, String formType) {
+    public String form(Model model, String formType, String previewFlag) {
         model.addAttribute("formType", formType);
+        model.addAttribute("previewFlag", previewFlag);
         model.addAttribute("assesses", pfClinicPartsService.listAllSheet());
         return "pages/biz/kb/assess/assessForm";
     }
@@ -90,6 +99,7 @@ public class PfKbAssessController extends BaseController {
     @RequestMapping("/referral/page")
     public String referralPage(Model model, PfAssessGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
         model.addAttribute("showForm", dto.getShowForm());
         model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
         model.addAttribute("idEvaCase", dto.getIdEvaCase());
@@ -116,6 +126,7 @@ public class PfKbAssessController extends BaseController {
     @RequestMapping("/diagnosis/page")
     public String diagnosisPage(Model model, PfAssessGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
         model.addAttribute("showForm", dto.getShowForm());
         model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
         model.addAttribute("idEvaCase", dto.getIdEvaCase());
@@ -133,6 +144,7 @@ public class PfKbAssessController extends BaseController {
     @RequestMapping("/reason/page")
     public String reasonPage(Model model, PfAssessGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
         model.addAttribute("showForm", dto.getShowForm());
         model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
         model.addAttribute("idEvaCase", dto.getIdEvaCase());
@@ -149,6 +161,7 @@ public class PfKbAssessController extends BaseController {
     @RequestMapping("/cover/page")
     public String coverPage(Model model, PfAssessGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
         model.addAttribute("showForm", dto.getShowForm());
         model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
         model.addAttribute("idEvaCase", dto.getIdEvaCase());
@@ -165,6 +178,7 @@ public class PfKbAssessController extends BaseController {
     @RequestMapping("/must/page")
     public String mustPage(Model model, PfAssessGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
         model.addAttribute("showForm", dto.getShowForm());
         model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
         model.addAttribute("idEvaCase", dto.getIdEvaCase());
@@ -181,6 +195,7 @@ public class PfKbAssessController extends BaseController {
     @RequestMapping("/effciency/page")
     public String effciencyPage(Model model, PfAssessGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
         model.addAttribute("showForm", dto.getShowForm());
         model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
         model.addAttribute("idEvaCase", dto.getIdEvaCase());
@@ -197,6 +212,7 @@ public class PfKbAssessController extends BaseController {
     @RequestMapping("/order/page")
     public String orderPage(Model model, PfAssessGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
         model.addAttribute("showForm", dto.getShowForm());
         model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
         model.addAttribute("idEvaCase", dto.getIdEvaCase());

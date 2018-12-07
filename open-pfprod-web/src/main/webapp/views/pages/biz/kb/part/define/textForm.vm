@@ -18,6 +18,7 @@
         var idMedicalrec = '$!{idMedicalrec}';
         var idTag ='$!{idTag}';
         var caseName ='$!{caseName}';
+        var previewFlag = '$!{previewFlag}';
     </script>
 
 </head>
@@ -31,7 +32,7 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">文本<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <textarea placeholder="请输入文本" class="layui-textarea" name="content"
+                <textarea placeholder="请输入文本" class="layui-textarea" name="content" id="content"
                           lay-verify="required" lay-vertype="tips"
                           style="height: 260px;"></textarea>
             </div>
@@ -40,7 +41,7 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 #if($!{showBtn} == 1)
-                    <button class="layui-btn" lay-submit="" lay-filter="addKbPartText">
+                    <button id="saveBtn" class="layui-btn" lay-submit="" lay-filter="addKbPartText">
                         <i class="iconfont icon-save-copy"></i> 保存
                     </button>
                     #*<button class="layui-btn" lay-submit="" lay-filter="saveAsKbPartText">

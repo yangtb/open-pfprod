@@ -82,7 +82,8 @@ layui.config({
         if (formType == 'add') {
             common.open('新增病例组件用例', basePath + '/pf/p/kb/part/form?formType=' + formType, 420, 320);
         } else {
-            common.open('编辑病例组件用例', basePath + '/pf/p/kb/part/form?formType=' + formType, 420, 320, _successFunction(currentEditData));
+            var previewFlag = currentEditData.idOrg == currentIdOrg ? '0' : '1';
+            common.open('编辑病例组件用例', basePath + '/pf/p/kb/part/form?formType=' + formType + '&previewFlag=' + previewFlag, 420, 320, _successFunction(currentEditData));
         }
     };
 
@@ -141,8 +142,18 @@ layui.config({
     });
 
     var _editUseCase = function (data) {
-        var index = common.open('组件用例维护 【' + '<span style="color: red">' + data.name + '</span>】',
-            basePath + '/pf/p/kb/part/useCase/form?cdMedAsse=' + data.cdMedAsse + '&idMedCase=' + data.idMedCase, 900, 460, _successFillUseCase(data));
+        var previewFlag, title;
+        if (data.idOrg == currentIdOrg) {
+            previewFlag = '0';
+            title = '组件用例维护';
+        } else {
+            previewFlag = '1';
+            title = '组件用例浏览';
+        }
+        var index = common.open(title + ' 【' + '<span style="color: red">' + data.name + '</span>】',
+            basePath + '/pf/p/kb/part/useCase/form?cdMedAsse='
+            + data.cdMedAsse + '&idMedCase=' + data.idMedCase + '&previewFlag=' + previewFlag,
+            900, 460, _successFillUseCase(data));
         layer.full(index);
     };
 

@@ -15,17 +15,19 @@
         var basePath = '$!{basePath}';
         var contextPath = '$!{contextPath}';
         var idMedCase = '$!{idMedCase}';
-        var tagFlag='$!{tagFlag}';
+        var tagFlag = '$!{tagFlag}';
         var idMedicalrec = '$!{idMedicalrec}';
-        var idTag ='$!{idTag}';
-        var caseName ='$!{caseName}';
+        var idTag = '$!{idTag}';
+        var caseName = '$!{caseName}';
+        var previewFlag = '$!{previewFlag}';
     </script>
 </head>
 
 <body>
 <div style="margin: 0px 10px 0px 10px">
     <div class="layui-col-xs5">
-        <form class="layui-form layui-form-pane" id="uploadForm" lay-filter="uploadFormFilter" style="padding-top: 10px;">
+        <form class="layui-form layui-form-pane" id="uploadForm" lay-filter="uploadFormFilter"
+              style="padding-top: 10px;">
             <div hidden>
                 <input name="idMediaFront" id="idMediaFront" hidden>
                 <input name="idMediaBack" id="idMediaBack" hidden>
@@ -89,7 +91,7 @@
                                                            style="color: #f03f2d"></i></label>
                     <div class="layui-input-block" style="width: 158px;">
                         <select name="sdBody" id="sdBody" autocomplete="off" lay-verify="required" lay-vertype="tips"
-                                lay-vertype="tips" placeholder="所属体位">
+                                placeholder="所属体位">
                             <option value="">请选择</option>
                             #foreach($param in ${bodyPosition})
                                 <option value="$!param.dictCode">${param.dictName}</option>
@@ -101,7 +103,8 @@
                     <label class="layui-form-label">检查方式<i class="iconfont icon-required"
                                                            style="color: #f03f2d"></i></label>
                     <div class="layui-input-block" style="width: 158px;">
-                        <select name="cdCheck" id="cdCheck" xm-select="cdCheckSelect" xm-select-search="" xm-select-radio=""
+                        <select name="cdCheck" id="cdCheck" xm-select="cdCheckSelect" xm-select-search=""
+                                xm-select-radio=""
                                 xm-select-height="25px" placeholder="检查方式"
                                 lay-verify="required" lay-vertype="tips">
                             <option value="">请选择</option>
@@ -143,7 +146,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">专家解读</label>
                 <div class="layui-input-block my-input-width">
-                <textarea name="desExpert" id="desExpert" class="layui-textarea" lay-verify="desAnswer" lay-vertype="tips"
+                <textarea name="desExpert" id="desExpert" class="layui-textarea" lay-verify="desAnswer"
+                          lay-vertype="tips"
                           placeholder="请输入专家解读"></textarea>
                 </div>
             </div>
@@ -171,19 +175,19 @@
             <div class="layui-form-item form-item-my5">
                 <div class="layui-input-block">
                     #if($!{showBtn} == 1)
-                        #*<button id="add" type="button" class="layui-btn">
-                            <i class="layui-icon layui-icon-add-1"></i>增加
-                        </button>*#
+                    #*<button id="add" type="button" class="layui-btn">
+                        <i class="layui-icon layui-icon-add-1"></i>增加
+                    </button>*#
                         <button id="save" class="layui-btn" lay-submit="" lay-filter="saveCheck">
                             <i class="iconfont icon-save-copy"></i> 保存
                         </button>
-                        #*<button class="layui-btn" lay-submit="" lay-filter="saveAsKbPart">
-                            <i class="iconfont icon-lingcunwei"></i> 重载
-                        </button>
-                        <button id="reset" type="reset" class="layui-btn layui-btn-danger">
-                            <i class="iconfont icon-reset"></i> 重置
-                        </button>*#
-                        #end
+                    #*<button class="layui-btn" lay-submit="" lay-filter="saveAsKbPart">
+                        <i class="iconfont icon-lingcunwei"></i> 重载
+                    </button>
+                    <button id="reset" type="reset" class="layui-btn layui-btn-danger">
+                        <i class="iconfont icon-reset"></i> 重置
+                    </button>*#
+                    #end
                 </div>
             </div>
         </form>
@@ -207,28 +211,30 @@
 </script>
 
 <script type="text/html" id="partCheckBar">
-    <div class="layui-btn-group">
-        <button class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" title="删除">
-            <i class="layui-icon layui-icon-delete"></i></button>
-        <button class="layui-btn layui-btn-xs" lay-event="reset" title="恢复默认">
-            <i class="iconfont icon-reset"></i></button>
-        {{# if(d.fgCarried == '0'){ }}
-        <button class="layui-btn layui-btn-xs" lay-event="edit" title="重载">
-            <i class="iconfont icon-edit"></i>
-        </button>
-        {{# } else { }}
-        {{# } }}
-    </div>
+        #if($!{previewFlag} != '1')
+        <div class="layui-btn-group">
+            <button class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" title="删除">
+                <i class="layui-icon layui-icon-delete"></i></button>
+            <button class="layui-btn layui-btn-xs" lay-event="reset" title="恢复默认">
+                <i class="iconfont icon-reset"></i></button>
+            {{# if(d.fgCarried == '0'){ }}
+            <button class="layui-btn layui-btn-xs" lay-event="edit" title="重载">
+                <i class="iconfont icon-edit"></i>
+            </button>
+            {{# } else { }}
+            {{# } }}
+        </div>
+        #end
 </script>
 
 <script type="text/html" id="toolbarCheck">
     <div class="layui-btn-container">
-        <button type="button" id="bachAddCheckAnswer" class="layui-btn layui-btn-sm layui-btn-normal"
-                lay-event="bachAddCheckAnswer">
+        <button type="button" id="bachAddCheckAnswer" class="layui-btn layui-btn-sm layui-btn-normal #if($!{previewFlag}=='1')layui-btn-disabled#end"
+                lay-event="bachAddCheckAnswer" #if($!{previewFlag}=='1')disabled#end>
             <i class="iconfont icon-icon-import"></i> 批量添加体格检查
         </button>
-        <button type="button" id="allAddCheckAnswer" class="layui-btn layui-btn-sm layui-btn-normal"
-                lay-event="allAddCheckAnswer">
+        <button type="button" id="allAddCheckAnswer" class="layui-btn layui-btn-sm layui-btn-normal #if($!{previewFlag}=='1')layui-btn-disabled#end"
+                lay-event="allAddCheckAnswer" #if($!{previewFlag}=='1')disabled#end>
             <i class="iconfont icon-all"></i> 全部引入
         </button>
     </div>

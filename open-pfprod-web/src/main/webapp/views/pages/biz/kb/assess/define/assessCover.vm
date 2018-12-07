@@ -20,6 +20,7 @@
         var idMedicalrec = '$!{idMedicalrec}';
         var idTag ='$!{idTag}';
         var caseName ='$!{caseName}';
+        var previewFlag ='$!{previewFlag}';
     </script>
 </head>
 
@@ -51,7 +52,7 @@
                                 <label class="layui-form-label">评估项名<i class="iconfont icon-required"
                                                                        style="color: #f03f2d"></i></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="itemName" lay-verify="required" lay-vertype="tips"
+                                    <input type="text" name="itemName" id="itemName" lay-verify="required" lay-vertype="tips"
                                            autocomplete="off" class="layui-input">
                                 </div>
                             </div>
@@ -95,8 +96,9 @@
                             </div>
                         </div>
 
-                        <button type="button" id="addAnswerBtn" class="layui-btn layui-btn-sm"
-                                #if($!{showBtn} != 1)style="visibility:hidden"#end>添加等效答案
+                        <button type="button" id="addAnswerBtn" class="layui-btn layui-btn-sm #if($!{previewFlag} == '1') layui-btn-disabled#end"
+                                #if($!{showBtn} != 1)style="visibility:hidden"#end
+                            #if($!{previewFlag} == '1') disabled#end>添加等效答案
                         </button>
 
                         <table id="answerTable" lay-filter="answerTableFilter">
@@ -110,9 +112,9 @@
                                 <button id="save" class="layui-btn" lay-submit="" lay-filter="saveAnswer">
                                     <i class="iconfont icon-save-copy"></i> 保存
                                 </button>
-                                <button type="button" id="saveAs" class="layui-btn" >
+                                #*<button type="button" id="saveAs" class="layui-btn" >
                                     <i class="iconfont icon-lingcunwei"></i> 重载
-                                </button>
+                                </button>*#
                                 <div hidden>
                                     <button id="reset" type="reset" class="layui-btn layui-btn-danger" hidden>
                                         <i class="iconfont icon-reset"></i> 重置
@@ -144,14 +146,18 @@
     </script>
 
     <script type="text/html" id="kbBar">
-        <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" title="删除">
-            <i class="layui-icon layui-icon-delete"></i>
-        </button>
+            #if($!{previewFlag} != '1')
+            <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" title="删除">
+                <i class="layui-icon layui-icon-delete"></i>
+            </button>
+            #end
     </script>
     <script type="text/html" id="answerBar">
-        <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" title="删除">
-            <i class="layui-icon layui-icon-delete"></i>
-        </button>
+            #if($!{previewFlag} != '1')
+            <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" title="删除">
+                <i class="layui-icon layui-icon-delete"></i>
+            </button>
+            #end
     </script>
 
     <script>

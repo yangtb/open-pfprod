@@ -16,6 +16,7 @@
 <script>
     var basePath = '${basePath}';
     var contextPath = '${contextPath}';
+    var currentIdOrg = '$!{currentIdOrg}';
 </script>
 
 <body class="body-my">
@@ -98,9 +99,15 @@
 <script type="text/html" id="kbAssess">
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>
 
+    {{#  if(d.idOrg == '$!currentIdOrg'){ }}
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="editUseCase">
         <i class="layui-icon layui-icon-edit"></i>用例维护
     </a>
+    {{#  } else { }}
+    <a class="layui-btn layui-btn-xs" lay-event="editUseCase">
+        <i class="iconfont icon-detail"></i> 用例浏览
+    </a>
+    {{#  } }}
 
 </script>
 

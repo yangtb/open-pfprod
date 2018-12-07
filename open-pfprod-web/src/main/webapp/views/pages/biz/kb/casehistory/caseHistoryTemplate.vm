@@ -17,6 +17,7 @@
 <script>
     var basePath = '${basePath}';
     var contextPath = '${contextPath}';
+    var currentIdOrg ='$!{currentIdOrg}';
 </script>
 
 <body class="body-my">
@@ -51,7 +52,7 @@
             </div>
             <div class="layui-inline">
                 <button type="button" class="layui-btn" id="editTemplate">
-                    <i class="layui-icon layui-icon-edit"></i>编辑病历
+                    <i class="layui-icon layui-icon-edit"></i>编辑病例
                 </button>
             </div>
             <div class="layui-inline">
@@ -72,7 +73,7 @@
                     #*模拟按钮*#
                     <button id="test" type="button" class="layui-btn layui-btn-normal"
                             lay-href="" style="display: none">
-                        临床病例维护: <span id="caseName"></span>
+                        <span id="caseTitle"></span>
                     </button>
                 </div>
             </div>
@@ -118,7 +119,16 @@
 
 <script type="text/html" id="template">
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="iconfont icon-edit"></i> 编辑</a>
-    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="editTemplate"><i class="layui-icon layui-icon-edit"></i>编辑病历</a>
+
+    {{#  if(d.idOrg == '$!currentIdOrg'){ }}
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="editTemplate">
+        <i class="layui-icon layui-icon-edit"></i>编辑病例
+    </a>
+    {{#  } else { }}
+    <a class="layui-btn layui-btn-xs" lay-event="editTemplate">
+        <i class="iconfont icon-detail"></i> 浏览病例
+    </a>
+    {{#  } }}
 </script>
 
 <script>

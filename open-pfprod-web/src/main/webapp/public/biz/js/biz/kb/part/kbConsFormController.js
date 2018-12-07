@@ -15,6 +15,16 @@ layui.config({
         , tableSelect = layui.tableSelect;
 
     var formIdArr = new Array('searchAnswer', 'desInques', 'idAnswer', 'desAnswer', 'fgReason', 'fgBack', 'desExpert', 'test3');
+
+    $(document).ready(function () {
+        if (previewFlag == '1') {
+            var formBtnArr = new Array('save');
+            common.setFormStatus('0', formBtnArr);
+            common.setFormStatus('0', formIdArr);
+            layui.form.render('select');
+        }
+    });
+
     var initFormData = {};
     tableSelect.render({
         elem: '#searchAnswer',

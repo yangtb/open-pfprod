@@ -17,6 +17,7 @@
         var idMedicalrec = '$!{idMedicalrec}';
         var idTag ='$!{idTag}';
         var caseName ='$!{caseName}';
+        var previewFlag = '$!{previewFlag}';
     </script>
 
 </head>
@@ -49,7 +50,7 @@
         <div class="layui-form-item ">
             <div class="layui-input-block">
                 #if($!{showBtn} == 1)
-                <button class="layui-btn" lay-submit="" lay-filter="addKbPartPic">
+                <button id="addKbPart" class="layui-btn" lay-submit="" lay-filter="addKbPartPic">
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
                 #*<button class="layui-btn" lay-submit="" lay-filter="saveAsKbPartPic">

@@ -9,6 +9,7 @@ import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.biz.clinic.PfClinicTemplateService;
 import com.sm.pfprod.service.biz.kb.PfCaseHistoryService;
 import com.sm.pfprod.web.portal.BaseController;
+import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.util.EnumUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,8 @@ public class PfCaseHistoryController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
     @RequestMapping("/page")
-    public String cataloguePage(Model model) {
+    public String cataloguePage(Model model, String previewFlag) {
+        model.addAttribute("currentIdOrg", CurrentUserUtils.getCurrentUser().getIdOrg());
         model.addAttribute("caseHistoryLevel", enumUtil.getEnumList(SysDicGroupEnum.CASE_HISTORY_LEVEL.getCode()));
         model.addAttribute("caseHistoryUse", enumUtil.getEnumList(SysDicGroupEnum.CASE_HISTORY_USE.getCode()));
         return "pages/biz/kb/casehistory/caseHistoryTemplate";
@@ -65,10 +67,11 @@ public class PfCaseHistoryController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0040', 'ROLE_SUPER')")
     @RequestMapping("/form")
-    public String tagForm(Long idMedicalrec, Long idDemo, Model model, String caseName) {
+    public String tagForm(Long idMedicalrec, Long idDemo, Model model, String caseName, String previewFlag) {
         model.addAttribute("idMedicalrec", idMedicalrec);
         model.addAttribute("idDemo", idDemo);
         model.addAttribute("caseName", caseName);
+        model.addAttribute("previewFlag", previewFlag);
         model.addAttribute("tags", JSON.parseArray(JSON.toJSONString(pfCaseHistoryService.listAllCaseHistoryTag(idDemo, idMedicalrec))));
         model.addAttribute("assessTags", JSON.parseArray(JSON.toJSONString(pfCaseHistoryService.listAllAssessTag(idDemo, idMedicalrec))));
         return "pages/biz/kb/casehistory/casehistoryTagForm";

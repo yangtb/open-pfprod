@@ -18,6 +18,7 @@
         var idMedicalrec = '$!{idMedicalrec}';
         var idTag ='$!{idTag}';
         var caseName ='$!{caseName}';
+        var previewFlag = '$!{previewFlag}';
     </script>
 
 </head>
@@ -31,7 +32,7 @@
         <div class="layui-form-item form-item-my5">
             <label class="layui-form-label">姓名<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-inline">
-                <input name="name" autocomplete="off" class="layui-input"
+                <input name="name" id="name" autocomplete="off" class="layui-input"
                        placeholder="请输入姓名" lay-verify="required|commonLength" lay-vertype="tips">
             </div>
         </div>
@@ -39,7 +40,7 @@
         <div class="layui-form-item form-item-my5">
             <label class="layui-form-label">性别<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-inline">
-                <select name="sex" autocomplete="off" lay-verify="required" lay-vertype="tips">
+                <select name="sex" id="sex" autocomplete="off" lay-verify="required" lay-vertype="tips">
                     <option value="">请选择性别</option>
                     #foreach($element in $sexList)
                         <option value="$element.dictCode">$element.dictName</option>
@@ -51,7 +52,7 @@
         <div class="layui-form-item form-item-my5">
             <label class="layui-form-label">年龄<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-inline">
-                <input name="age" autocomplete="off" class="layui-input"
+                <input name="age" id="age" autocomplete="off" class="layui-input"
                        lay-verify="required|age" lay-vertype="tips"
                        placeholder="请输入年龄">
             </div>
@@ -60,7 +61,7 @@
         <div class="layui-form-item layui-form-text form-item-my5">
             <label class="layui-form-label">患者主诉<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <textarea placeholder="请输入患者主诉" class="layui-textarea" name="complaint"
+                <textarea placeholder="请输入患者主诉" class="layui-textarea" name="complaint" id="complaint"
                           lay-verify="required" lay-vertype="tips"
                           style="height: 150px;"></textarea>
             </div>
@@ -69,7 +70,7 @@
         <div class="layui-form-item form-item-my5">
             <div class="layui-input-block">
             #if($!{showBtn} == 1)
-                <button class="layui-btn" lay-submit="" lay-filter="addKbPartPat">
+                <button id="saveBtn" class="layui-btn" lay-submit="" lay-filter="addKbPartPat">
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
                 #*<button class="layui-btn" lay-submit="" lay-filter="saveAsKbPartPat">

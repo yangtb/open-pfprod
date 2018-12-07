@@ -8,6 +8,16 @@ layui.config({
         , element = layui.element
         , common = layui.common;
 
+    $(document).ready(function () {
+        if (previewFlag == '1') {
+            var formIdArr = new Array('searchCase', 'searchAssess');
+            $.each(formIdArr, function (index, value) {
+                $('#' + value).addClass("layui-disabled");
+                $('#' + value).attr("disabled", "true");
+            });
+        }
+    });
+
     /*FrameWH();
 
     function FrameWH() {
@@ -51,10 +61,18 @@ layui.config({
                 loadIframe(this.getAttribute('data-type'), this.getAttribute('data-index') - 1);
             });
         }
+        if (caseli.length == 0) {
+            $('#caseHistoryTag').attr('src', basePath + '/empty/page');
+            return;
+        }
         caseli[0].click();
     };
 
     element.on('tab(tagTabFilter)', function (data) {
+        if (assessTagList.length == 0) {
+            $('#assessTag').attr('src', basePath + '/empty/page');
+            return;
+        }
         currentType = data.index == 0 ? 'med' : 'eva';
         if (!$("#assessTag").attr("src")) {
             currentCdEvaAsse = assessTagList[0].cdEvaAsse;
@@ -88,7 +106,7 @@ layui.config({
             currentCdMedAsse = cd;
             $('#caseHistoryTag').attr('src', dataUrl + medUrl + '&showBtn=1&tagFlag=1'
                 + '&idMedicalrec=' + idMedicalrec + '&idTag=' + currentMedIdTag
-                + '&caseName=' + caseName);
+                + '&caseName=' + caseName + '&previewFlag=' + previewFlag);
             caseRender();
         }
         if (type == 'eva') {
@@ -113,7 +131,7 @@ layui.config({
             currentIdEvaCase = dataCase;
             currentCdEvaAsse = cd;
             evaUrl += '&idMedicalrec=' + idMedicalrec + '&idTag=' + currentEvaIdTag
-                + '&caseName=' + caseName;
+                + '&caseName=' + caseName + '&previewFlag=' + previewFlag;
             $('#assessTag').attr('src', dataUrl + evaUrl + '&showBtn=1&tagFlag=1');
             evaRender();
         }
@@ -218,7 +236,7 @@ layui.config({
         $('#caseHistoryTag').attr('src', basePath + selectData.script
             + '?idMedCase=' + selectData.idMedCase + '&showBtn=1&tagFlag=1'
             + '&idMedicalrec=' + idMedicalrec + '&idTag=' + currentMedIdTag
-            + '&caseName=' + caseName);
+            + '&caseName=' + caseName + '&previewFlag=' + previewFlag);
 
     }
 
@@ -313,7 +331,7 @@ layui.config({
         url += '?cdEvaAsse=' + selectData.cdEvaAsse
             + '&idEvaCase=' + selectData.idEvaCase
             + '&showForm=0&showBtn=1&tagFlag=1' + '&idMedicalrec=' + idMedicalrec + '&idTag=' + currentMedIdTag
-            + '&caseName=' + caseName;
+            + '&caseName=' + caseName + '&previewFlag=' + previewFlag;
         $('#assessTag').attr('src', url);
 
     }

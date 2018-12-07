@@ -438,5 +438,14 @@ layui.config({
         $('.mySelect').find('input').attr("readonly", false)
     }
 
+    $(document).ready(function () {
+        if (previewFlag == '1') {
+            var formBtnArr = new Array('save');
+            common.setFormStatus('0', formBtnArr);
+            common.setFormStatus('0', formIdArr);
+            layui.form.render('select');
+        }
+    });
+
 });
 

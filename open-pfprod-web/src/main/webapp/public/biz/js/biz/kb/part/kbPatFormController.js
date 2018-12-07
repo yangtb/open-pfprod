@@ -7,8 +7,16 @@ layui.config({
 
     init();
 
+    $(document).ready(function () {
+        if (previewFlag == '1') {
+            var formIdArr = new Array('name', 'sex', 'age', 'complaint', 'saveBtn');
+            common.setFormStatus('0', formIdArr);
+            layui.form.render('select');
+        }
+    });
+
     function init() {
-        if (tagFlag == '1' && idMedCase == '') {
+        if (tagFlag == '1') {
             // 查询idMedCase
             var medData = {
                 idMedicalrec: idMedicalrec,
@@ -26,7 +34,9 @@ layui.config({
                         common.errorMsg(data.msg);
                         return false;
                     } else {
-                        idMedCase = data.data.idMedCase;
+                        if (data.data) {
+                            idMedCase = data.data.idMedCase;
+                        }
                         loadInfo()
                         return true;
                     }

@@ -1,6 +1,7 @@
 package com.sm.pfprod.web.portal.biz.kb;
 
 import com.alibaba.fastjson.JSON;
+import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.pfprod.model.dto.biz.kb.part.PfMedCaseDto;
 import com.sm.pfprod.model.dto.biz.kb.part.PfPartCommonDto;
 import com.sm.pfprod.model.dto.biz.kb.part.PfPartGetCommonDto;
@@ -13,6 +14,8 @@ import com.sm.pfprod.service.biz.exam.PfExamService;
 import com.sm.pfprod.service.biz.inquisition.PfInquisitionService;
 import com.sm.pfprod.service.biz.kb.PfKbPartService;
 import com.sm.pfprod.web.portal.BaseController;
+import com.sm.pfprod.web.security.CurrentUserUtils;
+import com.sm.pfprod.web.security.User;
 import com.sm.pfprod.web.util.EnumUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -53,6 +56,7 @@ public class PfKbPartController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/page")
     public String partPage(Model model) {
+        model.addAttribute("currentIdOrg", CurrentUserUtils.getCurrentUser().getIdOrg());
         model.addAttribute("parts", pfClinicPartsService.listAllPart());
         return "pages/biz/kb/part/partTemplate";
     }
@@ -61,23 +65,29 @@ public class PfKbPartController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listKbPart(PfMedCaseDto dto) {
+        User user = CurrentUserUtils.getCurrentUser();
+        if (user.getFgPlat().equals(YesOrNoNum.NO.getCode())) {
+            dto.setIdOrg(user.getIdOrg());
+        }
         return pfKbPartService.listKbPart(dto);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/form")
-    public String form(Model model, String formType, String cdMedAsse) {
+    public String form(Model model, String formType, String cdMedAsse, String previewFlag) {
         model.addAttribute("formType", formType);
         model.addAttribute("cdMedAsse", cdMedAsse);
+        model.addAttribute("previewFlag", previewFlag);
         model.addAttribute("parts", pfClinicPartsService.listAllPart());
         return "pages/biz/kb/part/partForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping("/useCase/form")
-    public String partForm(Model model, String cdMedAsse, Long idMedCase) {
+    public String partForm(Model model, String cdMedAsse, Long idMedCase, String previewFlag) {
         model.addAttribute("cdMedAsse", cdMedAsse);
         model.addAttribute("idMedCase", idMedCase);
+        model.addAttribute("previewFlag", previewFlag);
         model.addAttribute("parts", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllPart())));
         return "pages/biz/kb/part/partUseCaseForm";
     }
@@ -93,6 +103,7 @@ public class PfKbPartController extends BaseController {
     @RequestMapping("/define/text/form")
     public String textForm(Model model, PfPartGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
         model.addAttribute("idMedCase", dto.getIdMedCase());
         model.addAttribute("tagFlag", dto.getTagFlag());
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
@@ -105,6 +116,7 @@ public class PfKbPartController extends BaseController {
     @RequestMapping("/define/pic/form")
     public String picForm(Model model, PfPartGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
         model.addAttribute("idMedCase", dto.getIdMedCase());
         model.addAttribute("tagFlag", dto.getTagFlag());
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
@@ -117,6 +129,7 @@ public class PfKbPartController extends BaseController {
     @RequestMapping("/define/pat/form")
     public String patForm(Model model, PfPartGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
         model.addAttribute("idMedCase", dto.getIdMedCase());
         model.addAttribute("tagFlag", dto.getTagFlag());
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
@@ -130,6 +143,7 @@ public class PfKbPartController extends BaseController {
     @RequestMapping("/define/cons/form")
     public String consForm(Model model, PfPartGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
         model.addAttribute("idMedCase", dto.getIdMedCase());
         model.addAttribute("tagFlag", dto.getTagFlag());
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
@@ -142,6 +156,7 @@ public class PfKbPartController extends BaseController {
     @RequestMapping("/define/check/form")
     public String checkForm(Model model, PfPartGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
         model.addAttribute("idMedCase", dto.getIdMedCase());
         model.addAttribute("tagFlag", dto.getTagFlag());
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
@@ -155,6 +170,7 @@ public class PfKbPartController extends BaseController {
     @RequestMapping("/define/exam/form")
     public String examForm(Model model, PfPartGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
         model.addAttribute("idMedCase", dto.getIdMedCase());
         model.addAttribute("tagFlag", dto.getTagFlag());
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());

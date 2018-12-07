@@ -6,6 +6,13 @@ layui.config({
         form = layui.form,
         common = layui.common;
 
+    $(document).ready(function () {
+        if (previewFlag == '1') {
+            var formIdArr = new Array('name', 'cdMedAsse', 'descript', 'fgActive', 'saveBtn');
+            common.setFormStatus('0', formIdArr);
+        }
+    });
+
     form.verify({
         commonLength: function (value) {
             if (value.length > 64) {

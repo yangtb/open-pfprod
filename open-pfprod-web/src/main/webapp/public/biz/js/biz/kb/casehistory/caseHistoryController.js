@@ -32,6 +32,7 @@ layui.config({
             }
         },
         view: {
+            fontCss: getFont,
             dblClickExpand: false
         },
         callback: {
@@ -40,6 +41,10 @@ layui.config({
             onRename: onRename
         }
     };
+
+    function getFont(treeId, node) {
+        return node.font ? node.font : {};
+    }
 
     function OnRightClick(event, treeId, treeNode) {
         if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
@@ -239,6 +244,12 @@ layui.config({
                     return false;
                 } else {
                     var zNodes = data.data;
+                    $.each(zNodes, function (i, val) {
+                        if (val.noR == false) {
+                            val.font = {'color': '#009688', 'font-weight':'bold'};
+                        }
+                    });
+                    console.log(zNodes)
                     $.fn.zTree.init($("#treeDemo"), setting, zNodes);
                     zTree = $.fn.zTree.getZTreeObj("treeDemo");
                     rMenu = $("#rMenu");
@@ -434,7 +445,7 @@ layui.config({
             _addOrEdit("edit", data);
         }
         if (obj.event === 'editTemplate') {
-            _editTemplate(data.name, data.idMedicalrec, data.idDemo);
+            _editTemplate(data);
         }
     });
 
@@ -449,7 +460,7 @@ layui.config({
             layer.tips('请选中一行记录进行编辑', '#editTemplate', {tips: 1});
             return;
         }
-        _editTemplate(data[0].name, data[0].idMedicalrec, data[0].idDemo);
+        _editTemplate(data[0]);
     });
 
     //监听删除操作
@@ -468,10 +479,18 @@ layui.config({
         common.commonPost(basePath + '/pf/r/case/history/template/updateStatus', data, msg, obj.othis);
     });
 
-    var _editTemplate = function (title, id, idDemo) {
+    var _editTemplate = function (data) {
+
+        var title = data.name;
+        var id = data.idMedicalrec;
+        var idDemo = data.idDemo;
+
+        var previewFlag = data.idOrg == currentIdOrg ? '0' : '1';
+
         $('#test').attr('lay-href',
-            basePath + '/pf/p/case/history/form?idMedicalrec=' + id + '&idDemo=' + idDemo+ '&caseName=' + title);
-        $('#caseName').text(title);
+            basePath + '/pf/p/case/history/form?idMedicalrec=' + id
+            + '&idDemo=' + idDemo + '&caseName=' + title + '&previewFlag=' + previewFlag);
+        $('#caseTitle').text(previewFlag == '1' ? "病例浏览:" + title : "病例编辑:" + title);
         $('#test').click();
         parent.spreadMenu();
         /*parent.spreadMenu();

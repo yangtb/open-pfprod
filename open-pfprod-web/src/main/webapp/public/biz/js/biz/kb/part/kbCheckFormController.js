@@ -87,6 +87,7 @@ layui.config({
     }
 
     var formIdArr = new Array('searchAnswer', 'desBody', 'sdBody', 'cdCheck', 'idResult', 'desResult', 'fgReason', 'fgBack', 'desExpert', 'test3');
+
     var initFormData = {};
     tableSelect.render({
         elem: '#searchAnswer',
@@ -257,7 +258,7 @@ layui.config({
         }
     });
 
-    function loadPage(){
+    function loadPage() {
         if (!idMedCase) {
             window.location.reload();
         }
@@ -569,7 +570,7 @@ layui.config({
                 idMedCase: idMedCase,
                 idMedicalrec: idMedicalrec,
                 idTag: idTag,
-                caseName : caseName
+                caseName: caseName
             }
             layer.msg('正在执行，请稍后...', {icon: 16, shade: 0.01});
             common.commonPost(url, bizData, '全部引入', null, successAddAllCallback, false);
@@ -596,6 +597,15 @@ layui.config({
             });
         }
     };
+
+    $(document).ready(function () {
+        if (previewFlag == '1') {
+            var formBtnArr = new Array('sdBody', 'frontPicUp', 'backPicUp', 'save');
+            common.setFormStatus('0', formBtnArr);
+            setFormStatus('0', formIdArr);
+            layui.form.render('select');
+        }
+    });
 
 });
 

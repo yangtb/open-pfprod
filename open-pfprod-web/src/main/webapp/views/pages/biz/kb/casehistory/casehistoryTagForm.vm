@@ -20,6 +20,7 @@
         var tags = '$!{tags}'
         var assessTags = '$!{assessTags}';
         var caseName ='$!{caseName}';
+        var previewFlag = '$!{previewFlag}';
     </script>
 </head>
 

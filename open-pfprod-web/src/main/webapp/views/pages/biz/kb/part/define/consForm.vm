@@ -14,10 +14,11 @@
         var basePath = '$!{basePath}';
         var contextPath = '$!{contextPath}';
         var idMedCase = '$!{idMedCase}';
-        var tagFlag='$!{tagFlag}';
+        var tagFlag = '$!{tagFlag}';
         var idMedicalrec = '$!{idMedicalrec}';
-        var idTag ='$!{idTag}';
-        var caseName ='$!{caseName}';
+        var idTag = '$!{idTag}';
+        var caseName = '$!{caseName}';
+        var previewFlag = '$!{previewFlag}';
     </script>
 </head>
 
@@ -108,20 +109,20 @@
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                        #if($!{showBtn} == 1)
-                            #*<button id="add" type="button" class="layui-btn">
-                                <i class="layui-icon layui-icon-add-1"></i>增加
-                            </button>*#
-                            <button id="save" class="layui-btn" lay-submit="" lay-filter="saveCons">
-                                <i class="iconfont icon-save-copy"></i> 保存
-                            </button>
-                            #*<button class="layui-btn" lay-submit="" lay-filter="saveAsCons">
-                                <i class="iconfont icon-lingcunwei"></i> 重载
-                            </button>
-                            <button id="reset" type="reset" class="layui-btn layui-btn-danger">
-                                <i class="iconfont icon-reset"></i> 重置
-                            </button>*#
-                        #end
+                    #if($!{showBtn} == 1)
+                    #*<button id="add" type="button" class="layui-btn">
+                        <i class="layui-icon layui-icon-add-1"></i>增加
+                    </button>*#
+                        <button id="save" class="layui-btn" lay-submit="" lay-filter="saveCons">
+                            <i class="iconfont icon-save-copy"></i> 保存
+                        </button>
+                    #*<button class="layui-btn" lay-submit="" lay-filter="saveAsCons">
+                        <i class="iconfont icon-lingcunwei"></i> 重载
+                    </button>
+                    <button id="reset" type="reset" class="layui-btn layui-btn-danger">
+                        <i class="iconfont icon-reset"></i> 重置
+                    </button>*#
+                    #end
                 </div>
             </div>
         </form>
@@ -136,28 +137,32 @@
 
 
 <script type="text/html" id="partConsBar">
-    <div class="layui-btn-group">
-        <button class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" title="删除">
-            <i class="layui-icon layui-icon-delete"></i></button>
-        <button class="layui-btn layui-btn-xs" lay-event="reset" title="恢复默认">
-            <i class="iconfont icon-reset"></i></button>
-        {{# if(d.fgCarried == '0'){ }}
-        <button class="layui-btn layui-btn-xs" lay-event="edit" title="自定义">
-            <i class="iconfont icon-edit"></i>
-        </button>
-        {{# } else { }}
-        {{# } }}
-    </div>
+        #if($!{previewFlag} != '1')
+        <div class="layui-btn-group">
+            <button class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" title="删除">
+                <i class="layui-icon layui-icon-delete"></i></button>
+            <button class="layui-btn layui-btn-xs" lay-event="reset" title="恢复默认">
+                <i class="iconfont icon-reset"></i></button>
+            {{# if(d.fgCarried == '0'){ }}
+            <button class="layui-btn layui-btn-xs" lay-event="edit" title="自定义">
+                <i class="iconfont icon-edit"></i>
+            </button>
+            {{# } else { }}
+            {{# } }}
+        </div>
+        #end
 </script>
 
 <script type="text/html" id="toolbarCons">
     <div class="layui-btn-container">
-        <button type="button" id="bachAddConsAnswer" class="layui-btn layui-btn-sm layui-btn-normal"
-                lay-event="bachAddConsAnswer">
+        <button type="button" id="bachAddConsAnswer"
+                class="layui-btn layui-btn-sm layui-btn-normal #if($!{previewFlag}=='1')layui-btn-disabled#end"
+                lay-event="bachAddConsAnswer" #if($!{previewFlag}=='1')disabled#end>
             <i class="iconfont icon-icon-import"></i> 批量添加问诊
         </button>
-        <button type="button" id="allAddConsAnswer" class="layui-btn layui-btn-sm layui-btn-normal"
-                lay-event="allAddConsAnswer">
+        <button type="button" id="allAddConsAnswer"
+                class="layui-btn layui-btn-sm layui-btn-normal #if($!{previewFlag}=='1')layui-btn-disabled#end"
+                lay-event="allAddConsAnswer" #if($!{previewFlag}=='1')disabled#end>
             <i class="iconfont icon-all"></i> 全部引入
         </button>
     </div>
