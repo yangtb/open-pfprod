@@ -175,7 +175,7 @@ layui.config({
 
     function _addStudent(data) {
         // 学生列表刷新
-        var gradeData = currentGradeRowData;
+        var gradeData = currentGradeRowData[0];
         var idClass = gradeData.idClass;
 
         if (data.length == 0) {
