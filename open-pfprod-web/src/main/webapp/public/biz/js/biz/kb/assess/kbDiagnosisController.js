@@ -228,7 +228,6 @@ layui.config({
                 selectData.idDieText = dieList[i].name;
                 oldData.push(selectData)
             }
-            console.log(oldData)
             table.reload('answerTableId', {
                 data: oldData
             });
@@ -254,7 +253,6 @@ layui.config({
             data.field.idMedicalrec = idMedicalrec;
             data.field.idTag = idTag;
         }
-        console.log(data.field)
 
         var url = basePath + '/pf/r/kb/assess/diagnosis/save';
         return common.commonPost(url, data.field, '保存', '', _callBack);

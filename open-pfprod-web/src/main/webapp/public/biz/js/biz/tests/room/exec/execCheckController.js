@@ -44,7 +44,6 @@ layui.config({
                     common.errorMsg(data.msg);
                     return false;
                 } else {
-                    console.log(data.data)
                     var zNodes = [
                         {id: "0", name: "全部"}
                     ];

@@ -339,7 +339,6 @@ layui.config({
             data.field.idMedicalrec = idMedicalrec;
             data.field.idTag = idTag;
         }
-        console.log(data.field)
 
         var url = basePath + '/pf/r/kb/assess/cover/save';
         return common.commonPost(url, data.field, '保存', '', _callBack);

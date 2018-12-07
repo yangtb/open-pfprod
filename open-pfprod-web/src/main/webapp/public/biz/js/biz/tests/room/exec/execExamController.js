@@ -376,7 +376,6 @@ function openMedia(sdType, idResult) {
     layui.use('common', function () {
         if (sdType == '1') {
             var path = $('#patientImg' + idResult).attr('src');
-            console.log(path)
             layui.common.openSinglePhoto(path);
         }
         else if (sdType == '3') {

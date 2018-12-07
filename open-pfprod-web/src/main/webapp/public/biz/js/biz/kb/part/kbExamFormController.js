@@ -433,8 +433,6 @@ layui.config({
         window.location.reload();
     }
     function editSelect() {
-        console.log(11)
-        console.log($('.mySelect').find('input'))
         $('.mySelect').find('input').attr("readonly", false)
     }
 

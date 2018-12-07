@@ -181,7 +181,6 @@ layui.config({
 
     table.on('tool(shortTableFilter)', function (obj) {
         var data = obj.data;
-        console.log()
         if (obj.event === 'del') {
             layer.confirm('真的要删除药品【' + data.idShortDrugsText + '】么？', function (index) {
                 var bizData = {

@@ -85,7 +85,6 @@ layui.config({
             answerDataArr.push(answerData);
         }
 
-        console.log(JSON.stringify(answerDataArr));
         parent.addAnswer(answerDataArr);
         var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
         parent.layer.close(index);

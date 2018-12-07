@@ -233,7 +233,6 @@ layui.config({
                 selectData.idDieText = dieList[i].name;
                 oldData.push(selectData)
             }
-            console.log(oldData)
             table.reload('answerTableId', {
                 data: oldData
             });
@@ -260,8 +259,6 @@ layui.config({
             data.field.idTag = idTag;
         }
 
-        console.log(data.field)
-
         var url = basePath + '/pf/r/kb/assess/referral/save';
         return common.commonPost(url, data.field, '保存', '', _callBack);
     });
@@ -278,7 +275,6 @@ layui.config({
 
 
     var _kbTableReload = function () {
-        console.log(idEvaCase + '==' + cdEvaAsse)
         table.reload('kbTableId', {
             where: {
                 idEvaCase: idEvaCase,

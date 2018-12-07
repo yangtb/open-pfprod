@@ -364,9 +364,6 @@ layui.config({
     }
 
     function showChart(textData, personalData, avgData) {
-        console.log(textData)
-        console.log(personalData)
-        console.log(avgData)
         var dom = document.getElementById("container");
         var myChart = echarts.init(dom, 'macarons');
         var option = {

@@ -59,7 +59,6 @@ layui.config({
     });
 
     var _postTemplateData = function (data) {
-        console.log(JSON.stringify(data.field))
         var url = basePath + '/pf/r/message/' + formType;
         layer.load(2);
         $.ajax({
