@@ -13,7 +13,8 @@ public enum SysParamEnum {
     VISITOR_SWITCH("visitorSwitch","是否开启游客功能"),
     EXPIRE_NOTICE_DAY("expireNoticeDay", "机构使用到期提醒天数"),
     EXECUTING_SHOW_EXPERT("executingShowExpert","执行时是否显示专家解读"),
-    COMPLETED_SHOW_EXPERT("completedShowExpert", "执行完成是否显示专家解读");
+    COMPLETED_SHOW_EXPERT("completedShowExpert", "执行完成是否显示专家解读"),
+    SIMULATE_CASE_TYPE("simulateCaseType","模拟就诊(评估)参数");
 
     private String code;
     private String desc;

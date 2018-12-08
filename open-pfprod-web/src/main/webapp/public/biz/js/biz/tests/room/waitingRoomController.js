@@ -125,7 +125,31 @@ layui.config({
     }
 
     $('#exam').on('click', function () {
-        layer.tips('暂未开放', '#exam', {tips: 1});
+        layer.load(2);
+        var reqData = {};
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/case/simulate',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(reqData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    layer.tips(data.msg, '#exam', {tips: 1});
+                    return false;
+                } else {
+                    layer.msg("成功");
+                    layer.closeAll('loading');
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                layer.msg("模拟失败", {icon: 5});
+                return false;
+            }
+        });
     });
 
     $('#zf').on('click', function () {

@@ -3,6 +3,7 @@ package com.sm.pfprod.web.rest.biz.tests;
 import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
+import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.biz.tests.PfTestEvaDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
@@ -10,11 +11,14 @@ import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.dto.common.PfChangeStatusDto;
 import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
+import com.sm.pfprod.model.enums.PfSimulateCaseTypeEnum;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
+import com.sm.pfprod.model.enums.SysParamEnum;
 import com.sm.pfprod.service.biz.tests.PfTestWaitingRoomService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.util.EnumUtil;
+import com.sm.pfprod.web.util.ParamUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -38,6 +42,9 @@ public class PfTestWaitingRoomRestController extends BaseController {
 
     @Resource
     private EnumUtil enumUtil;
+
+    @Resource
+    private ParamUtil paramUtil;
 
     /**
      * 开始执行
@@ -679,5 +686,21 @@ public class PfTestWaitingRoomRestController extends BaseController {
                 pfTestWaitingRoomService.delPlanDetail(dto));
     }
 
+    /**
+     * 模拟就诊评估参数获取
+     *
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/case/simulate")
+    @ResponseBody
+    public ResultObject simulateCase() {
+        String simulateCaseType = paramUtil.getParamValue(SysParamEnum.SIMULATE_CASE_TYPE.getCode());
+        if (StringUtils.isBlank(simulateCaseType) || simulateCaseType.equals(PfSimulateCaseTypeEnum.CLOSE.getCode())) {
+            throw new BizRuntimeException(ErrorCode.COMMON_TIPS_CODE, "暂未开放");
+        }
 
+        return ResultObject.createSuccess("simulateCase", ResultObject.DATA_TYPE_OBJECT,
+                null);
+    }
 }

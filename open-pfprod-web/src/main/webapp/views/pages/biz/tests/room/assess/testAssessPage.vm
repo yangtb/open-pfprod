@@ -188,7 +188,7 @@
         #*模拟按钮*#
             <button id="test" type="button" class="layui-btn layui-btn-normal"
                     lay-href="" style="display: none">
-                <i class="iconfont icon-monikaoshi"></i><span id="patName"></span>：模拟就诊
+                <i class="iconfont icon-monikaoshi"></i><span id="patName">$!examInfo.studentInfo.realName</span>:模拟就诊
             </button>
             <div class="layui-form-item form-item-my5">
                 <div class="layui-inline">

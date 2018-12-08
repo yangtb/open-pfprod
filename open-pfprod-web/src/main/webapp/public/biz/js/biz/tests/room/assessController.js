@@ -135,7 +135,7 @@ layui.config({
         if (!data.medicalrecName) {
             medicalrecName = '学生';
         } else {
-            medicalrecName = medicalrecName + '学生';
+            medicalrecName = data.medicalrecName + '学生';
         }
         $('#patNameAssess').text(medicalrecName );
         $('#testAssess').click();

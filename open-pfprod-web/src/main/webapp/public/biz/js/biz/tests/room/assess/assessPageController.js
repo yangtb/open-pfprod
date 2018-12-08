@@ -15,7 +15,6 @@ layui.config({
             basePath + '/pf/p/waiting/room/exam/page?idTestplanDetail=' + data.idTestplanDetail
             + '&idDemo=' + data.idDemo + '&idTestplan=' + data.idTestplan + '&idStudent=' + data.idStudent
             + '&idTestpaper=' + data.idTestpaper + '&idMedicalrec=' + data.idMedicalrec);
-        $('#patName').text(data.patName);
         $('#test').click();
     }
 
@@ -310,7 +309,7 @@ layui.config({
                     layer.msg(data.msg, {icon: 5});
                     return false;
                 } else {
-                    if (data.data && data.data.sdTitleDic){
+                    if (data.data && data.data.sdTitleDic) {
                         $('#pjResult').text(data.data.sdTitleDic);
                     }
                     return true;
@@ -325,10 +324,10 @@ layui.config({
 
 
     function loadChart() {
-        var textData = [], personalData = [],  avgData = [];
+        var textData = [], personalData = [], avgData = [];
         var bizData = {
             idTestexecResult: idTestexecResult,
-            idMedicalrec : idMedicalrec
+            idMedicalrec: idMedicalrec
         };
         $.ajax({
             url: basePath + '/pf/r/waiting/room/eva/avg/score/select',
@@ -347,8 +346,8 @@ layui.config({
                     })
                     $.each(parData, function (i, item) {
                         textData.push({
-                            text : item.pgItem,
-                            max : item.weightScoreMax
+                            text: item.pgItem,
+                            max: item.weightScoreMax
                         });
                         personalData.push(item.weightScoreDimemsion);
                     })
