@@ -487,5 +487,14 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
         return BeanUtil.convert(result, PageResult.class);
     }
 
+    @Override
+    public boolean delPlanDetail(PfBachChangeStatusDto dto) {
+        CommonResult<Boolean> result = testWaitingRoomClient.delPlanDetail(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
 
 }

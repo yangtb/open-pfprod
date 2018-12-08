@@ -78,7 +78,7 @@ layui.config({
         var queryType = data.field.queryType;
         table.reload('enumTableId', {
             where: {
-                fgAsses : data.field.fgAsses,
+                fgAsses: data.field.fgAsses,
                 medicalrecName: queryType == '1' ? data.field.keyword : '',
                 naTestplan: queryType == '2' ? data.field.keyword : '',
                 naTestpaper: queryType == '3' ? data.field.keyword : ''
@@ -131,7 +131,13 @@ layui.config({
             + '&idDemo=' + data.idDemo + '&idTestplan=' + data.idTestplan + '&idStudent=' + data.idStudent
             + '&idTestpaper=' + data.idTestpaper + '&idMedicalrec=' + data.idMedicalrec
             + '&idTestexecResult=' + data.idTestexecResult);
-        $('#patNameAssess').text(data.patName);
+        var medicalrecName;
+        if (!data.medicalrecName) {
+            medicalrecName = '学生';
+        } else {
+            medicalrecName = medicalrecName + '学生';
+        }
+        $('#patNameAssess').text(medicalrecName );
         $('#testAssess').click();
     };
 

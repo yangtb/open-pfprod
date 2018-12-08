@@ -44,5 +44,9 @@ public class PfTestWatingRoomDto extends PageParam implements Serializable {
      */
     private String fgAsses;
 
+    /**
+     * 当前用户ID
+     */
+    private Long currentUserId;
 
 }

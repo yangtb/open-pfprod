@@ -663,5 +663,21 @@ public class PfTestWaitingRoomRestController extends BaseController {
                 pfTestWaitingRoomService.saveReferralReason(list));
     }
 
+    /**
+     * 删除计划详情
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030_CANCEL','ROLE_SUPER')")
+    @RequestMapping(value = "/cancel", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject delPlanDetail(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        return ResultObject.createSuccess("delPlanDetail", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.delPlanDetail(dto));
+    }
+
 
 }

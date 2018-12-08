@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户表
@@ -41,4 +42,9 @@ public class UserInfo implements Serializable {
 
     /** 当前用户所在机构状态 */
     private String fgActive;
+
+    /**
+     * 用户拥有角色编辑集合
+     */
+    private List<String> roleCodes;
 }

@@ -419,4 +419,12 @@ public interface PfTestWaitingRoomService {
      */
     PageResult listReferralReason(Long idTestexecResultReferral, String fgExclude);
 
+    /**
+     * 删除计划
+     *
+     * @param dto
+     * @return
+     */
+    boolean delPlanDetail(PfBachChangeStatusDto dto);
+
 }

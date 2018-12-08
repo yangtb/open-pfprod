@@ -18,7 +18,7 @@ layui.config({
         //, defaultToolbar: []
         , height: 'full-68' //容器高度
         , cols: [[
-            {type: 'radio', fixed: true},
+            {checkbox: true, fixed: true},
             {type: 'numbers', title: 'R'},
             {field: 'status', width: 90, title: '接诊状态', templet: '#statusTpl'},
             {field: 'patName', width: 90, title: '患者姓名'},
@@ -102,6 +102,10 @@ layui.config({
             layer.tips('请先选中一行记录', '#receivePat', {tips: 1});
             return;
         }
+        if (currentData.length > 1) {
+            layer.tips('请选中一行记录进行接诊', '#receivePat', {tips: 1});
+            return;
+        }
         setAttr(currentData[0])
     });
     // 获取编辑行数据
@@ -116,13 +120,110 @@ layui.config({
             basePath + '/pf/p/waiting/room/exam/page?idTestplanDetail=' + data.idTestplanDetail
             + '&idDemo=' + data.idDemo + '&idTestplan=' + data.idTestplan + '&idStudent=' + data.idStudent
             + '&idTestpaper=' + data.idTestpaper + '&idMedicalrec=' + data.idMedicalrec);
-        $('#patName').text(data.patName);
+        $('#patName').text(data.patName + '患者');
         $('#test').click();
     }
 
     $('#exam').on('click', function () {
         layer.tips('暂未开放', '#exam', {tips: 1});
     });
+
+    $('#zf').on('click', function () {
+        var currentData = _getEnumCheckData();
+        if (currentData.length == 0) {
+            layer.tips('至少选中一行记录', '#zf', {tips: 1});
+            return;
+        }
+        _delPlanDetail(currentData);
+    });
+
+    var _delPlanDetail = function (currentData) {
+        var reqData = new Array();
+        var messageTitle = '';
+        var dontDelPlan = '';
+        $.each(currentData, function (index, content) {
+            var distributeDoc;
+            if (content.distributeDoc) {
+                distributeDoc = content.distributeDoc;
+            } else {
+                distributeDoc = "***";
+            }
+            if (messageTitle) {
+                messageTitle += ', ';
+            }
+            if (content.status != '0') {
+                if (dontDelPlan) {
+                    dontDelPlan += ', ';
+                }
+                dontDelPlan += '【' + distributeDoc + '-' + content.naTestplan + '】';
+            } else {
+                messageTitle += '【' + distributeDoc + '-' + content.naTestplan + '】';
+                reqData.push(content.idTestplanDetail);
+            }
+        });
+        var title = dontDelPlan + '<span style="color: #5FB878; font-weight: bold;">正在接诊</span>，<span style="color: red; font-weight: bold;">不允许删除</span>！';
+        if (reqData.length == 0) {
+            layer.alert('<span style="color: red; font-weight: bold;">您选中的记录不可作废</span>');
+            return false;
+        } else {
+            title += '<br><br><span style="color: #1E9FFF; font-weight: bold;">继续执行将作废:</span>' + messageTitle;
+        }
+
+        var data = {
+            list: reqData,
+            status: '1'
+        };
+        layer.confirm(title + '<br><br>确定作废么？', {
+            title: '删除候诊室记录提示',
+            resize: false,
+            btn: ['确定', '取消'],
+            btnAlign: 'c',
+            icon: 3
+        }, function (index) {
+            var url = basePath + '/pf/r/waiting/room/cancel';
+            _commonAjax(index, url, data, "作废");
+        })
+    }
+
+    var _commonAjax = function (index, url, reqData, msg) {
+        layer.load(2);
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(reqData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    if (data.code == 'planStatusChange') {
+                        layer.alert('<span style="color: red; font-weight: bold;">' + data.msg + '</span>');
+                    } else {
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                    return false;
+                } else {
+                    layer.msg(msg + "成功");
+                    if (index) {
+                        layer.close(index);
+                    }
+                    zfCallback();
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                layer.msg(msg + "失败", {icon: 5});
+                return false;
+            }
+        });
+    }
+
+    function zfCallback() {
+        table.reload('roomTableId', {
+            height: 'full-68'
+        });
+    }
 
 });
 

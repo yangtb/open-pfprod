@@ -73,11 +73,11 @@
             #*模拟按钮*#
                 <button id="test" type="button" class="layui-btn layui-btn-normal"
                         lay-href="" style="display: none">
-                    <i class="iconfont icon-monikaoshi"></i><span id="patName"></span>：模拟就诊
+                    <i class="iconfont icon-monikaoshi"></i><span id="patName"></span>:模拟就诊
                 </button>
                 <button id="testAssess" type="button" class="layui-btn layui-btn-normal"
                         lay-href="" style="display: none">
-                    <i class="iconfont icon-monikaoshi"></i><span id="patNameAssess"></span>：模拟评估
+                    <i class="iconfont icon-monikaoshi"></i><span id="patNameAssess"></span>:模拟评估
                 </button>
                 <button id="exam" type="button" class="layui-btn layui-btn-normal"
                 #*lay-href="${basePath}/pf/p/waiting/room/exam/page"*#>

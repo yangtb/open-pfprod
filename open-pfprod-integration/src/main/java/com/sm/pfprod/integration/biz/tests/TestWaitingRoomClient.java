@@ -220,4 +220,8 @@ public class TestWaitingRoomClient {
        return pfTestWaitingRoomFacade.listReferralReason(idTestexecResultReferral);
    }
 
+    public CommonResult<Boolean> delPlanDetail(PfBachChangeStatusParam param) {
+        return pfTestWaitingRoomFacade.delPlanDetail(param);
+    }
+
 }

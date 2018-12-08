@@ -12,6 +12,8 @@ import com.sm.pfprod.model.vo.biz.test.paper.PfTestPaperVo;
 import com.sm.pfprod.service.biz.tests.PfTestWaitingRoomService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
+import com.sm.pfprod.web.security.SecurityContext;
+import com.sm.pfprod.web.security.User;
 import com.sm.pfprod.web.util.EnumUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -42,7 +44,7 @@ public class PfTestWaitingRoomController extends BaseController {
     @RequestMapping("/page")
     public String paperPage(Model model) {
         model.addAttribute("sexEnum", enumUtil.getEnumList(SysDicGroupEnum.SEX.getCode()));
-        //model.addAttribute("exmEvaResult", enumUtil.getEnumList(SysDicGroupEnum.EXM_EVAR_ESULT.getCode()));
+        model.addAttribute("showCancel", SecurityContext.hasRole("ROLE_EXM0030_CANCEL"));
         return "pages/biz/tests/room/waitingRoomPage";
     }
 
@@ -269,7 +271,7 @@ public class PfTestWaitingRoomController extends BaseController {
         model.addAttribute("idTestplan", dto.getIdTestplan());
         model.addAttribute("idDemo", dto.getIdDemo());
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
-        model.addAttribute("idTestpaper",  dto.getIdTestpaper());
+        model.addAttribute("idTestpaper", dto.getIdTestpaper());
         model.addAttribute("idStudent", dto.getIdStudent());
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
 
@@ -286,7 +288,14 @@ public class PfTestWaitingRoomController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listWaitingRoom(PfTestWatingRoomDto dto) {
-        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        User user = CurrentUserUtils.getCurrentUser();
+        dto.setIdOrg(user.getIdOrg());
+        // 学生只能查看自己的记录
+        if (user.getRoleCodes().contains("MCST")) {
+            dto.setCurrentUserId(user.getUserId());
+        } else {
+            dto.setCurrentUserId(null);
+        }
         return pfTestWaitingRoomService.listWaitingRoom(dto);
     }
 

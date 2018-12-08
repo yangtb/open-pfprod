@@ -2,6 +2,7 @@ package com.sm.pfprod.web.security;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @ClassName: User
@@ -54,6 +55,11 @@ public class User implements Serializable {
 	
 	/** 当前的终端类型：ANDROID:1；IOS:2；PC_BROWSER:3；服务器(SERVER):4；QQ:7；支付宝:8；微信:9；其他:6。 */
 	private Integer terminalType;
+
+	/**
+	 * 用户拥有角色编辑集合
+	 */
+	private List<String> roleCodes;
 
 	public Long getUserId() {
 		return userId;
@@ -165,5 +171,13 @@ public class User implements Serializable {
 
 	public void setTerminalType(Integer terminalType) {
 		this.terminalType = terminalType;
+	}
+
+	public List<String> getRoleCodes() {
+		return roleCodes;
+	}
+
+	public void setRoleCodes(List<String> roleCodes) {
+		this.roleCodes = roleCodes;
 	}
 }
