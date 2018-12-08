@@ -103,6 +103,13 @@ layui.config({
         _tableReload(null, $('#keyword').val())
     });
 
+    $('#keyword').bind('keypress', function (event) {
+        if (event.keyCode == "13") {
+            _tableReload(null, $('#keyword').val())
+            return false;
+        }
+    });
+
     form.on('checkbox(qaCheckFilter)', function (obj) {
         var qaValue = this.value;
         var qaArr = qaValue.split("-");

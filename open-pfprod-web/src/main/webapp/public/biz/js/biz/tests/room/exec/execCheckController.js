@@ -82,6 +82,13 @@ layui.config({
         _tableReload(null, $('#keyword').val())
     });
 
+    $('#keyword').bind('keypress', function (event) {
+        if (event.keyCode == "13") {
+            _tableReload(null, $('#keyword').val())
+            return false;
+        }
+    });
+
     //执行渲染
     table.render({
         elem: '#partConsTable' //指定原始表格元素选择器（推荐id选择器）
