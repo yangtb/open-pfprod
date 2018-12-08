@@ -161,7 +161,7 @@ layui.config({
                 reqData.push(content.idTestplanDetail);
             }
         });
-        var title = dontDelPlan + '<span style="color: #5FB878; font-weight: bold;">正在接诊</span>，<span style="color: red; font-weight: bold;">不允许删除</span>！';
+        var title = dontDelPlan + '<span style="color: #5FB878; font-weight: bold;">正在接诊</span>，<span style="color: red; font-weight: bold;">不允许作废</span>！';
         if (reqData.length == 0) {
             layer.alert('<span style="color: red; font-weight: bold;">您选中的记录不可作废</span>');
             return false;
