@@ -2,6 +2,7 @@ package com.sm.pfprod.web.util;
 
 import com.sm.pfprod.model.entity.SysParam;
 import com.sm.pfprod.service.system.param.PfParamService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -39,6 +40,17 @@ public class ParamUtil {
             return null;
         }
         return item;
+    }
+
+    public String getParamValue(String paramCode) {
+        SysParam sysParam = getParamInfo(paramCode);
+        if (sysParam == null) {
+            return null;
+        }
+        if (StringUtils.isNotBlank(sysParam.getParamValue())) {
+            return sysParam.getParamValue();
+        }
+        return sysParam.getDefaultValue();
     }
 
     /**

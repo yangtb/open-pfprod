@@ -11,7 +11,9 @@ public enum SysParamEnum {
     ORG_TRIAL_SWITCH("orgTrialSwitch", "是否开启机构试用"),
     ORG_EXPIRY_DAY("orgExpiryDay", "机构试用有效期"),
     VISITOR_SWITCH("visitorSwitch","是否开启游客功能"),
-    EXPIRE_NOTICE_DAY("expireNoticeDay", "机构使用到期提醒天数");
+    EXPIRE_NOTICE_DAY("expireNoticeDay", "机构使用到期提醒天数"),
+    EXECUTING_SHOW_EXPERT("executingShowExpert","执行时是否显示专家解读"),
+    COMPLETED_SHOW_EXPERT("completedShowExpert", "执行完成是否显示专家解读");
 
     private String code;
     private String desc;

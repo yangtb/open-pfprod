@@ -5,6 +5,7 @@ import com.sm.pfprod.model.dto.biz.tests.PfTestExamDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestWatingRoomDto;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
+import com.sm.pfprod.model.enums.SysParamEnum;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.test.PfWaitingRoomDieReasonVo;
 import com.sm.pfprod.model.vo.biz.test.PfWaitingRoomPatVo;
@@ -15,6 +16,7 @@ import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.security.SecurityContext;
 import com.sm.pfprod.web.security.User;
 import com.sm.pfprod.web.util.EnumUtil;
+import com.sm.pfprod.web.util.ParamUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +41,9 @@ public class PfTestWaitingRoomController extends BaseController {
 
     @Resource
     private EnumUtil enumUtil;
+
+    @Resource
+    private ParamUtil paramUtil;
 
     @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
     @RequestMapping("/page")
@@ -89,7 +94,10 @@ public class PfTestWaitingRoomController extends BaseController {
     public String consPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
         model.addAttribute("cdMedAsse", dto.getCdMedAsse());
+        model.addAttribute("sdTestexec", dto.getSdTestexec());
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
+        model.addAttribute("executingShowExpert", paramUtil.getParamValue(SysParamEnum.EXECUTING_SHOW_EXPERT.getCode()));
+        model.addAttribute("completedShowExpert", paramUtil.getParamValue(SysParamEnum.COMPLETED_SHOW_EXPERT.getCode()));
         return "pages/biz/tests/room/exec/consPage";
     }
 
@@ -113,6 +121,9 @@ public class PfTestWaitingRoomController extends BaseController {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
         model.addAttribute("cdMedAsse", dto.getCdMedAsse());
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
+        model.addAttribute("sdTestexec", dto.getSdTestexec());
+        model.addAttribute("executingShowExpert", paramUtil.getParamValue(SysParamEnum.EXECUTING_SHOW_EXPERT.getCode()));
+        model.addAttribute("completedShowExpert", paramUtil.getParamValue(SysParamEnum.COMPLETED_SHOW_EXPERT.getCode()));
         // 位置
         model.addAttribute("bodyPosition", enumUtil.getEnumList(SysDicGroupEnum.BODY_POSITION.getCode()));
         return "pages/biz/tests/room/exec/checkPage";
@@ -138,6 +149,9 @@ public class PfTestWaitingRoomController extends BaseController {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
         model.addAttribute("cdMedAsse", dto.getCdMedAsse());
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
+        model.addAttribute("sdTestexec", dto.getSdTestexec());
+        model.addAttribute("executingShowExpert", paramUtil.getParamValue(SysParamEnum.EXECUTING_SHOW_EXPERT.getCode()));
+        model.addAttribute("completedShowExpert", paramUtil.getParamValue(SysParamEnum.COMPLETED_SHOW_EXPERT.getCode()));
         return "pages/biz/tests/room/exec/examPage";
     }
 

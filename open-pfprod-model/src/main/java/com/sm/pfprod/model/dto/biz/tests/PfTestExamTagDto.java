@@ -30,14 +30,9 @@ public class PfTestExamTagDto extends PageParam implements Serializable {
     private Long idTestexecResult;
 
     /**
-     * 执行时是否显示专家解读
+     * 执行状态
      */
-    private String fgShowExec;
-
-    /**
-     * 执行完成时是否显示专家解读
-     */
-    private String fgShowExecFinsh;
+    private String sdTestexec;
 
     /**
      * 检查部位

@@ -128,7 +128,10 @@ layui.config({
     });
 
     // 显示专家解读
-    var showExpertFlag = false;
+    var showExpertFlag = executingShowExpert == 'Y' ? true : false;
+    if (showExpertFlag == false) {
+        showExpertFlag = sdTestexec == '2' && completedShowExpert == 'Y' ? true : false;
+    }
 
     function queryQa() {
         var bizData = {
@@ -198,6 +201,7 @@ layui.config({
                 '       <p class="text" style="right: 70px;">' + data.desAnswer + '</p>\n' +
                 '       <p class="img-box">\n' +
                 '           <img class="response-img" id="patientImg' + data.idAnswer + '"  src="' + data.path + '" alt="" style="width: 400px; height: 250px;cursor: pointer;"' +
+                '               onerror="onError(this)"' +
                 '               onclick="openMedia(' + data.sdType + ',' + data.idAnswer + ')">\n' +
                 '           <img class="patient-img-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
                 '       </p>\n' +
@@ -248,25 +252,30 @@ layui.config({
                 '       <div class="patient-details">\n' +
                 '           <p class="patient-response">' + data.desAnswer + '</p>\n' +
                 '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
-                '       </div>\n' +
-                '       <div class="official-details">\n' +
-                '           <span class="details-text">专家解读</span>\n' +
-                '           <p class="official-text">' + data.desExpert + '</p>\n' +
-                '       </div>\n' +
-                '   </li>';
+                '       </div>\n';
+            if (data.desExpert) {
+                html += '   <div class="official-details">\n' +
+                    '           <span class="details-text">专家解读</span>\n' +
+                    '           <p class="official-text">' + data.desExpert + '</p>\n' +
+                    '       </div>\n';
+            }
+            html += '   </li>';
         } else if (data.sdType == '1') {
             html += '<li class="patient-img-response">\n' +
                 '       <p class="text">' + data.desAnswer + '</p>\n' +
                 '       <p class="img-box">\n' +
                 '           <img class="response-img" id="patientImg' + data.idAnswer + '"  src="' + data.path + '" alt="" style="width: 400px; height: 250px;cursor: pointer;"' +
+                '               onerror="onError(this)"' +
                 '               onclick="openMedia(' + data.sdType + ',' + data.idAnswer + ')">\n' +
                 '           <img class="patient-img-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
-                '       </p>\n' +
-                '       <div class="official-details">\n' +
-                '           <span class="details-text">专家解读</span>\n' +
-                '           <p class="official-text">' + data.desExpert + '</p>\n' +
-                '       </div>\n' +
-                '   </li>';
+                '       </p>\n';
+            if (data.desExpert) {
+                html += '   <div class="official-details">\n' +
+                    '           <span class="details-text">专家解读</span>\n' +
+                    '           <p class="official-text">' + data.desExpert + '</p>\n' +
+                    '       </div>\n';
+            }
+            html += '   </li>';
         } else if (data.sdType == '2') {
             html += '<li class="patient">\n' +
                 '       <p class="text">' + data.desAnswer + '</p>\n' +
@@ -277,12 +286,14 @@ layui.config({
                 '               <button class="sound-icon" style="cursor: pointer;" onclick="control(' + data.idAnswer + ')"><i class="iconfont icon-shengyin"></i></button>\n' +
                 '           </p>\n' +
                 '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
-                '       </div>\n' +
-                '       <div class="official-details">\n' +
-                '           <span class="details-text">专家解读</span>\n' +
-                '           <p class="official-text">' + data.desExpert + '</p>\n' +
-                '       </div>\n' +
-                '    </li>';
+                '       </div>\n';
+            if (data.desExpert) {
+                html += '   <div class="official-details">\n' +
+                    '           <span class="details-text">专家解读</span>\n' +
+                    '           <p class="official-text">' + data.desExpert + '</p>\n' +
+                    '       </div>\n';
+            }
+            html += '   </li>';
         } else if (data.sdType == '3') {
             html += '<li class="patient">\n' +
                 '       <p class="text">' + data.desAnswer + '</p>\n' +
@@ -293,12 +304,14 @@ layui.config({
                 '               <button class="sound-icon" style="cursor: pointer;" onclick="openMedia(' + data.sdType + ',' + data.idAnswer + ')"><i class="iconfont icon-11"></i></button>\n' +
                 '           </p>\n' +
                 '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
-                '       </div>\n' +
-                '       <div class="official-details">\n' +
-                '           <span class="details-text">专家解读</span>\n' +
-                '           <p class="official-text">' + data.desExpert + '</p>\n' +
-                '       </div>\n' +
-                '   </li>';
+                '       </div>\n';
+            if (data.desExpert) {
+                html += '   <div class="official-details">\n' +
+                    '           <span class="details-text">专家解读</span>\n' +
+                    '           <p class="official-text">' + data.desExpert + '</p>\n' +
+                    '       </div>\n';
+            }
+            html += '   </li>';
         }
 
         return html;
@@ -367,3 +380,6 @@ function checkQa(obj) {
     });
 }
 
+function onError(obj) {
+    obj.src = basePath + '/public/biz/img/tupianjiazaishibai.png';
+}

@@ -1,10 +1,8 @@
 package com.sm.pfprod.model.vo.biz.test.paper;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -71,5 +69,9 @@ public class PfTestPaperInfoVo implements Serializable {
      */
     private String endTimeStr;
 
+    /**
+     * 执行状态
+     */
+    private String sdTestexec;
 
 }

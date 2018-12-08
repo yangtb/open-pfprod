@@ -18,6 +18,9 @@
         var idMedicalrec = '$!{idMedicalrec}';
         var cdMedAsse = '$!{cdMedAsse}';
         var idTestexecResult = '$!{idTestexecResult}';
+        var executingShowExpert = '$!{executingShowExpert}';
+        var completedShowExpert = '$!{completedShowExpert}';
+        var sdTestexec='$!{sdTestexec}';
     </script>
 
     <style>

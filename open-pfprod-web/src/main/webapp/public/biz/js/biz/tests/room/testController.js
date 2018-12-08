@@ -33,7 +33,9 @@ layui.config({
                 $('#iframe' + execCode).attr('src', basePath + '/empty/page');
             } else {
                 $('#iframe' + execCode).attr('src', basePath + execRef
-                    + '?idMedicalrec=' + idMedicalrec + '&cdMedAsse=' + execCode + '&idTestexecResult=' + $('#idTestexecResult').val());
+                    + '?idMedicalrec=' + idMedicalrec + '&cdMedAsse=' + execCode
+                    + '&idTestexecResult=' + $('#idTestexecResult').val()
+                    + '&sdTestexec=' + sdTestexec);
             }
         }
         $('#iframe' + execCode).removeClass("display-my").siblings().addClass("display-my");

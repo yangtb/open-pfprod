@@ -19,6 +19,7 @@
         var idDemo = '${idDemo}';
         var idMedicalrec = '${idMedicalrec}';
         var idTestpaper = '${idTestpaper}';
+        var sdTestexec='$!{examInfo.paperInfo.sdTestexec}';
     </script>
 
 </head>
