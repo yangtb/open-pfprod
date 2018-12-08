@@ -123,6 +123,7 @@ layui.config({
     var currentGradeRowData = [];
 
     function rowClick(obj) {
+        currentGradeRowData = []
         currentGradeRowData.push(obj.data);
         table.reload('studentTableId', {
             url: basePath + '/pf/p/class/student/list'

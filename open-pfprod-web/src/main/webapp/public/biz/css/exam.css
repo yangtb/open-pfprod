@@ -10,6 +10,10 @@ html, body {
   font-size: 16px;
 }
 /* 头部样式 */
+.users{
+    font-size: 14px;
+}
+
 .index-wrapper {
   min-width: 1200px;
   height: 100vh;
@@ -90,6 +94,7 @@ header {
   margin-left: 10px;
 }
 .msg-mail, .msg-tel {
+    font-size: 12px;
   padding-top: 5px;
   height: 20px;
   display: flex;
