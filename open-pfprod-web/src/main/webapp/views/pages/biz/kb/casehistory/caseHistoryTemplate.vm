@@ -45,13 +45,13 @@
                     <button type="button" class="layui-btn" id="edit">
                         <i class="iconfont icon-edit"></i> 编辑
                     </button>
-                    <button type="button" class="layui-btn" id="del">
+                    <button type="button" class="layui-btn layui-btn-danger" id="del">
                         <i class="iconfont icon-batch-del"></i> 删除
                     </button>
                 </div>
             </div>
             <div class="layui-inline">
-                <button type="button" class="layui-btn" id="editTemplate">
+                <button type="button" class="layui-btn layui-btn-normal" id="editTemplate">
                     <i class="layui-icon layui-icon-edit"></i>编辑病例
                 </button>
             </div>
