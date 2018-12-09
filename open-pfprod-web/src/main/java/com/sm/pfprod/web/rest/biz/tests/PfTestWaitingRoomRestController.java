@@ -60,7 +60,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
         Assert.isTrue(dto.getIdTestplanDetail() != null, "idTestplanDetail");
         Assert.isTrue(dto.getIdMedicalrec() != null, "idMedicalrec");
         Assert.isTrue(StringUtils.isNotBlank(dto.getSdTestexec()), "sdTestexec");
-        dto.setIdStudent(CurrentUserUtils.getCurrentUserId());
+        //dto.setIdStudent(CurrentUserUtils.getCurrentUserId());
         dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
         return ResultObject.createSuccess("startExam", ResultObject.DATA_TYPE_OBJECT, pfTestWaitingRoomService.startExam(dto));
     }
