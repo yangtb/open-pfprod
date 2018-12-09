@@ -83,6 +83,7 @@ public class PfHomeController extends BaseController {
             model.addAttribute("orgExpiryNoticeDay",
                     StringUtils.isBlank(sysParam.getParamValue()) ? ORG_EXPIRY_NOTICE_DEFAULT_DAY : sysParam.getParamValue());
         }
+        model.addAttribute("showMessage", SecurityContext.isAnonymousUser() ? false : true);
         return "/home/index";
     }
 

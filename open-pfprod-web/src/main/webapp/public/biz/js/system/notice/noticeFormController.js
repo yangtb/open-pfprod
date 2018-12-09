@@ -9,7 +9,8 @@ layui.config({
         layedit = layui.layedit,
         common = layui.common;
 
-       var editIndex = layedit.build('noticeContent', {
+    if (formType == 'add') {
+        editIndex = layedit.build('noticeContent', {
             tool: [
                 'strong' //加粗
                 , 'italic' //斜体
@@ -24,7 +25,7 @@ layui.config({
                 , 'face' //表情
             ]
         }); //建立编辑器
-
+    }
 
     //自定义验证规则
     form.verify({

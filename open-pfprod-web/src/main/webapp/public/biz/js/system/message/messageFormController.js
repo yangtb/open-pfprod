@@ -50,11 +50,12 @@ layui.config({
     //监听提交
     form.on('submit(addEmail)', function (data) {
         data.field.emailContent = layedit.getContent(editIndex);
-        alert(data.field.emailContent)
-        if (!data.field.emailContent.trim()) {
+        var emailContent = data.field.emailContent;
+        if (!emailContent.trim()) {
             common.errorMsg("请填写邮件模板内容");
             return false;
         }
+        data.field.content = emailContent;
         return _postTemplateData(data);
     });
 
