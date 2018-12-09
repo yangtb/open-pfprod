@@ -41,6 +41,9 @@
                              style="width: 80px; height: 75px;">
                         <div class="msg">
                             <p class="users">
+                                <div hidden>
+                                    <input id="studentId" hidden value="$!examInfo.studentInfo.studentId"></input>
+                                </div>
                                 <span class="users-item">$!examInfo.studentInfo.realName</span>
                                 <span class="users-item">$!examInfo.studentInfo.sex</span>
                                 <span class="users-item">$!examInfo.studentInfo.orgName</span>

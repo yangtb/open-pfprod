@@ -55,7 +55,8 @@ layui.config({
         var bizData = {
             idTestplanDetail: idTestplanDetail,
             idMedicalrec: idMedicalrec,
-            sdTestexec: '0'
+            sdTestexec: '0',
+            idStudent : $('#studentId').val()
         };
         return common.commonPost(url, bizData, '', null, _starCallback);
     });
