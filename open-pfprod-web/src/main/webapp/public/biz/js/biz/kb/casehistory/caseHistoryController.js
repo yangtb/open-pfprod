@@ -390,12 +390,12 @@ layui.config({
                 messageTitle += ', ';
             }
             messageTitle += '【' + content.name + '】';
-            reqData.push(content.idDemo);
+            reqData.push(content.idMedicalrec);
         });
         var data = {};
         data.list = reqData;
         data.status = '1';
-        layer.confirm('确定删除病例模板部位描述' + messageTitle + '么？', {
+        layer.confirm('确定删除病例' + messageTitle + '么？', {
             title: '删除提示',
             resize: false,
             btn: ['确定', '取消'],
