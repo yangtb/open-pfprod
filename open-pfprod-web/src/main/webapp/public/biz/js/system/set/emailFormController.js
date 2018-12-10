@@ -35,6 +35,7 @@ layui.config({
 
     form.on('submit(emailTo)', function (data) {
         if (!data.field.recipients) {
+            $('#recipients').focus();
             layer.tips("请填写收件人邮箱", '#recipients', {tips: 1});
             return false;
         }

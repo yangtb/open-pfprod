@@ -28,7 +28,7 @@
                     <button type="button" class="layui-btn" id="add">增加</button>
                     <button type="button" class="layui-btn" id="edit">编辑</button>
                     <button type="button" class="layui-btn" id="cancel">作废</button>
-                    <button type="button" class="layui-btn" id="del">删除</button>
+                    <button type="button" class="layui-btn layui-btn-danger" id="del">删除</button>
                 </div>
             </div>
             <div class="layui-inline">
@@ -60,7 +60,7 @@
     </div>
     <div class="layui-col-xs4">
         <div id="treeTitle">
-            <fieldset class="layui-elem-field layui-field-title" style="margin:10px 0 0;">
+            <fieldset class="layui-elem-field layui-field-title" style="margin:5px 0 0;">
                 <legend>
                     <span id="treeRoleName"></span>授权
                     <button class="layui-btn layui-btn-sm" id="saveSet">保存设置</button>
