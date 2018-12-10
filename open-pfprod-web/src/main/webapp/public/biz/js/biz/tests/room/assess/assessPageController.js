@@ -32,6 +32,7 @@ layui.config({
     });
 
     $('#accessMed').on('click', function () {
+        layer.load(2);
         var bizData = {
             idTestexecResult: idTestexecResult
         };
@@ -65,6 +66,7 @@ layui.config({
     });
 
     function initData() {
+        layer.msg('正在加载数据，请稍后...', {icon: 16, shade: 0.01});
         var bizData = {
             idTestexecResult: idTestexecResult
         };
@@ -86,6 +88,7 @@ layui.config({
                     listEva(data.data);
                     return true;
                 }
+                layer.closeAll('loading');
             },
             error: function () {
                 layer.closeAll('loading');
@@ -185,6 +188,7 @@ layui.config({
     });
 
     function execLog() {
+        layer.load(2);
         var bizData = {
             idTestexecResult: idTestexecResult
         };
@@ -324,6 +328,7 @@ layui.config({
 
 
     function loadChart() {
+        layer.load(2);
         var textData = [], personalData = [], avgData = [];
         var bizData = {
             idTestexecResult: idTestexecResult,
@@ -363,6 +368,9 @@ layui.config({
     }
 
     function showChart(textData, personalData, avgData) {
+        if (textData.length == 0) {
+            return;
+        }
         var dom = document.getElementById("container");
         var myChart = echarts.init(dom, 'macarons');
         var option = {
