@@ -287,4 +287,20 @@ public class PfClinicTemplateRestController {
                 pfClinicTemplateService.selectDimensionTagInfo(dto.getIdDimemsion()));
     }
 
+    /**
+     * 病例流程配置
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040','ROLE_SUPER')")
+    @RequestMapping(value = "/serialno/save", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject saveSerialNo(@RequestBody BasMedicalTag dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTag() != null, "idTag");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("saveSerialNo", ResultObject.DATA_TYPE_OBJECT,
+                pfClinicTemplateService.saveSerialNo(dto));
+    }
 }

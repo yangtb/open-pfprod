@@ -104,4 +104,8 @@ public class ClinicTemplateClient {
     public CommonResult<List<PfAssessTagResult>> listAllAssessTag(Long idDemo) {
         return pfClinicTemplateFacade.listAllAssessTag(idDemo);
     }
+
+    public CommonResult<Boolean> saveSerialNo(BasMedicalTagParam param) {
+        return pfClinicTemplateFacade.saveSerialNo(param);
+    }
 }

@@ -23,6 +23,7 @@
          style="margin: 5px">
         <ul class="layui-tab-title">
             <li class="layui-this">病历标签维护</li>
+            <li>病例流程配置</li>
             <li>评估标签维护</li>
             <li>评估维度维护</li>
         </ul>
@@ -31,6 +32,12 @@
                 <iframe class='layui-col-xs12' frameborder="0"
                         src="$!{basePath}/pf/p/clinic/template/tag/caseHistory/form?idDemo=$!{idDemo}"></iframe>
             </div>
+
+            <div class="layui-tab-item">
+                <iframe id="flowTag" class='layui-col-xs12' frameborder="0"
+                        src=""></iframe>
+            </div>
+
             <div class="layui-tab-item">
                 <iframe id="assessTag" class='layui-col-xs12' frameborder="0"
                         src=""></iframe>

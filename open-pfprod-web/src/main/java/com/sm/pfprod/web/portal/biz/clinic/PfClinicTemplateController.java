@@ -1,5 +1,6 @@
 package com.sm.pfprod.web.portal.biz.clinic;
 
+import com.alibaba.fastjson.JSON;
 import com.sm.pfprod.model.dto.biz.clinic.PfClinicTemplateDto;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.biz.clinic.PfClinicPartsService;
@@ -56,6 +57,14 @@ public class PfClinicTemplateController extends BaseController {
         model.addAttribute("idDemo", idDemo);
         model.addAttribute("parts", pfClinicPartsService.listAllPart());
         return "pages/biz/clinic/tagCaseHistoryForm";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_CLINIC0040', 'ROLE_SUPER')")
+    @RequestMapping("/template/tag/flow/form")
+    public String flowForm(Long idDemo, Model model) {
+        model.addAttribute("idDemo", idDemo);
+        model.addAttribute("tags", JSON.parseArray(JSON.toJSONString(pfClinicTemplateService.listAllCaseHistoryTag(idDemo))));
+        return "pages/biz/clinic/tagFlowForm";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_CLINIC0040', 'ROLE_SUPER')")

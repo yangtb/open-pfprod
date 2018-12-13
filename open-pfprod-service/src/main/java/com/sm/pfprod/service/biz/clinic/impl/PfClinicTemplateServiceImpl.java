@@ -226,4 +226,13 @@ public class PfClinicTemplateServiceImpl implements PfClinicTemplateService {
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
+    @Override
+    public boolean saveSerialNo(BasMedicalTag dto) {
+        CommonResult<Boolean> result = clinicTemplateClient.saveSerialNo(BeanUtil.convert(dto, BasMedicalTagParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
 }

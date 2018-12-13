@@ -1,11 +1,27 @@
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['table', 'form', 'jquery', 'common', 'layer'], function () {
+}).use(['table', 'form', 'jquery', 'common', 'layer', 'util'], function () {
     var $ = layui.$,
         table = layui.table,
         form = layui.form,
         common = layui.common
-        , layer = layui.layer;
+        , layer = layui.layer
+        , util = layui.util;
+
+    //固定块
+    util.fixbar({
+        /*bar1: '<div style="position: relative; font-size: 12px;"><img id="nzImg" class="aside-icon" style="width: 50px; height: 50px;" src="https://jiayiyixue.oss-cn-beijing.aliyuncs.com/69E5ACBDFF6B40A5BE640C2BE8C09361.png">' +
+            '    <span style="position: absolute; bottom: 0; left: 0; padding-left: 10px; font-weight: bold; color: black">拟诊</span> \n</div>'
+        */
+        bar1: '<span style="font-size: 14px;"><i class="layui-icon layui-icon-add-1"></i>拟诊</span>'
+        , css: {right: 40, top: 110}
+        , bgcolor: '#393D49'
+        , click: function (type) {
+            if (type === 'bar1') {
+                layer.msg('icon是可以随便换的')
+            }
+        }
+    });
 
     $(document).ready(function () {
         if (!$('#idTestexec').val()) {
@@ -39,8 +55,23 @@ layui.config({
             }
         }
         $('#iframe' + execCode).removeClass("display-my").siblings().addClass("display-my");
+        if (execCode == '004' || execCode == '005' || execCode == '006') {
+            showfixBar();
+            layer.tips('点击此处可添加拟诊', '#nzImg', {
+                tips: [4, '#FF5722']
+            });
+        } else {
+            hiddenFixBar()
+        }
     }
 
+    function showfixBar() {
+        $(".layui-fixbar").show();
+    }
+
+    function hiddenFixBar() {
+        $(".layui-fixbar").hide();
+    }
 
     $('#startBtn').on('click', function () {
         if ($('#endTime').text()) {
@@ -56,7 +87,7 @@ layui.config({
             idTestplanDetail: idTestplanDetail,
             idMedicalrec: idMedicalrec,
             sdTestexec: '0',
-            idStudent : $('#studentId').val()
+            idStudent: $('#studentId').val()
         };
         return common.commonPost(url, bizData, '', null, _starCallback);
     });
