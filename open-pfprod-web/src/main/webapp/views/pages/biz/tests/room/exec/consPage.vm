@@ -48,9 +48,9 @@
                 </form>
             </div>
             <div class="layui-col-xs5" style="text-align: right">
-                <button type="button" class="layui-btn" id="refreshRight">
+                #*<button type="button" class="layui-btn" id="refreshRight">
                     <i class="iconfont icon-add"></i> 问诊
-                </button>
+                </button>*#
             </div>
         </div>
         <div class="layui-row">

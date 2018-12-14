@@ -164,7 +164,7 @@ layui.config({
         }
         $('#nz' + qaArr[1]).attr('data-qa-check', 'true');
         var url = basePath + '/pf/r/waiting/room/exam/qa/save';
-        common.commonPost(url, data, null, null, null, false);
+        common.commonPost(url, data, null, null, queryQa, false);
     });
 
     // 页面加载完成查询问答
