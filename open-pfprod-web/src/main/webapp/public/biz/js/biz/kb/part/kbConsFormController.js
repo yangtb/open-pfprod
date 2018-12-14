@@ -121,11 +121,11 @@ layui.config({
             elem: '#partConsTable' //指定原始表格元素选择器（推荐id选择器）
             , id: 'partConsTableId'
             , height: 'full-20' //容器高度
-            , toolbar: '#toolbarCons'
-            , defaultToolbar: []
+            //, toolbar: '#toolbarCons'
+            //, defaultToolbar: []
             , cols: [[
                 {type: 'radio'},
-                {field: 'desInques', minWidth: 145, title: '问题'},
+                {field: 'desInques', minWidth: 135, title: '问题'},
                 {field: 'desAnswer', minWidth: 110, title: '答案'},
                 {fixed: 'right', title: '操作', minWidth: 110, align: 'left', toolbar: '#partConsBar'}
             ]] //设置表头
@@ -142,6 +142,28 @@ layui.config({
                 , last: false //不显示尾页
                 , limits: [15, 30, 50, 100]
             }
+        });
+    }
+
+    //监听提交
+    form.on('submit(queryFilter)', function (data) {
+        reloadTable(data.field.keyword)
+    });
+
+    $('#keyword').bind('keypress', function (event) {
+        if (event.keyCode == "13") {
+            reloadTable($('#keyword').val())
+            return false;
+        }
+    });
+
+    function reloadTable(keyword) {
+        table.reload('partConsTableId', {
+            where: {
+                idMedCase: idMedCase,
+                keyword: keyword
+            }
+            , height: 'full-20'
         });
     }
 
@@ -384,21 +406,18 @@ layui.config({
         form.render();
     };
 
-    table.on('toolbar(partConsTableFilter)', function (obj) {
-        switch (obj.event) {
-            case 'bachAddConsAnswer':
-                common.openParent('问诊选择',
-                    basePath + '/pf/p/kb/part/define/cons/bach/add/page?idMedCase='
-                    + idMedCase + '&tagFlag=' + tagFlag + '&idTag=' + idTag + '&idMedicalrec=' + idMedicalrec
-                    + '&caseName=' + caseName,
-                    800, 480);
-                break;
-            case 'allAddConsAnswer':
-                var y = $(this).offset().top;
-                var x = $(this).offset().left;
-                addAll(x, y);
-                break;
-        }
+    $('#bachAddConsAnswer').on('click', function () {
+        common.openParent('问诊选择',
+            basePath + '/pf/p/kb/part/define/cons/bach/add/page?idMedCase='
+            + idMedCase + '&tagFlag=' + tagFlag + '&idTag=' + idTag + '&idMedicalrec=' + idMedicalrec
+            + '&caseName=' + caseName,
+            800, 480);
+    });
+
+    $('#allAddConsAnswer').on('click', function () {
+        var y = $(this).offset().top;
+        var x = $(this).offset().left;
+        addAll(x, y);
     });
 
     function addAll(x, y) {

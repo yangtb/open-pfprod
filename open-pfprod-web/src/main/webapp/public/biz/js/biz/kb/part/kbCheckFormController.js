@@ -143,12 +143,12 @@ layui.config({
         table.render({
             elem: '#partCheckTable' //指定原始表格元素选择器（推荐id选择器）
             , id: 'partCheckTableId'
-            , height: 'full-130' //容器高度
-            , toolbar: '#toolbarCheck'
-            , defaultToolbar: []
+            , height: '600' //容器高度
+            //, toolbar: '#toolbarCheck'
+            //, defaultToolbar: []
             , cols: [[
                 {type: 'radio'},
-                {field: 'desBody', minWidth: 150, title: '部位描述'},
+                {field: 'desBody', minWidth: 140, title: '部位描述'},
                 {field: 'desResult', minWidth: 110, title: '检查结果'},
                 {fixed: 'right', title: '操作', minWidth: 110, align: 'left', toolbar: '#partCheckBar'}
             ]] //设置表头
@@ -168,6 +168,27 @@ layui.config({
         });
     }
 
+    //监听提交
+    form.on('submit(queryFilter)', function (data) {
+        reloadTable(data.field.keyword)
+    });
+
+    $('#keyword').bind('keypress', function (event) {
+        if (event.keyCode == "13") {
+            reloadTable($('#keyword').val())
+            return false;
+        }
+    });
+
+    function reloadTable(keyword) {
+        table.reload('partCheckTableId', {
+            where: {
+                idMedCase: idMedCase,
+                keyword: keyword
+            }
+            , height: '600'
+        });
+    }
 
     form.verify({
         desAnswer: function (value) {
@@ -467,7 +488,7 @@ layui.config({
             where: {
                 idMedCase: idMedCase
             }
-            , height: 'full-130'
+            , height: '600'
         });
     };
 
@@ -557,21 +578,18 @@ layui.config({
         return val;
     };
 
-    table.on('toolbar(partCheckTableFilter)', function (obj) {
-        switch (obj.event) {
-            case 'bachAddCheckAnswer':
-                common.openParent('体格检查选择',
-                    basePath + '/pf/p/kb/part/define/check/bach/add/page?idMedCase='
-                    + idMedCase + '&tagFlag=' + tagFlag + '&idTag=' + idTag
-                    + '&idMedicalrec=' + idMedicalrec + '&caseName=' + caseName,
-                    800, 480);
-                break;
-            case 'allAddCheckAnswer':
-                var y = $(this).offset().top;
-                var x = $(this).offset().left;
-                addAll(x, y);
-                break;
-        }
+    $('#bachAddCheckAnswer').on('click', function () {
+        common.openParent('体格检查选择',
+            basePath + '/pf/p/kb/part/define/check/bach/add/page?idMedCase='
+            + idMedCase + '&tagFlag=' + tagFlag + '&idTag=' + idTag
+            + '&idMedicalrec=' + idMedicalrec + '&caseName=' + caseName,
+            800, 480);
+    });
+
+    $('#allAddCheckAnswer').on('click', function () {
+        var y = $(this).offset().top;
+        var x = $(this).offset().left;
+        addAll(x, y);
     });
 
     function addAll(x, y) {
