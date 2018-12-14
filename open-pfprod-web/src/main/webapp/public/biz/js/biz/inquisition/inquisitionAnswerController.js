@@ -61,7 +61,7 @@ layui.config({
                         var per = data.percent + "%";
                         element.progress('demo', per);
                     }, error: function (data) {
-                        alert("ajax异常！！！");
+                        //alert("ajax异常！！！");
                     }
                 });
             }, 100);
@@ -69,6 +69,13 @@ layui.config({
         , done: function (res) {
             $('#path').show();
             $('#uploadProgress').hide();
+            if (res.code != '0') {
+                layer.tips(res.msg, '#test3', {
+                    tips: [1, '#FF5722'],
+                    time: 5000
+                });
+                return;
+            }
             clearInterval(timer);
             $('#path').val(res.data.path);
             $('#idMedia').val(res.data.idMedia);

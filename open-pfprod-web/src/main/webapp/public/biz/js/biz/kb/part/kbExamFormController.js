@@ -194,6 +194,13 @@ layui.config({
         , done: function (res) {
             $('#path').show();
             $('#uploadProgress').hide();
+            if (res.code != '0') {
+                layer.tips(res.msg, '#test3', {
+                    tips: [1, '#FF5722'],
+                    time: 5000
+                });
+                return;
+            }
             clearInterval(timer);
             $('#path').val(res.data.path);
             $('#idMedia').val(res.data.idMedia);

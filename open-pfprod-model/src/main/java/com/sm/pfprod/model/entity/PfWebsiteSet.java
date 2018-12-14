@@ -28,9 +28,29 @@ public class PfWebsiteSet implements Serializable {
      */
     private String logSwitch;
     /**
-     * 上传类型
+     * 图片-上传类型
      */
-    private String uploadType;
+    private String picUploadType;
+    /**
+     * 图片-最大上传值
+     */
+    private String picMaxUploadValue;
+    /**
+     * 音频-上传类型
+     */
+    private String audioUploadType;
+    /**
+     * 音频-最大上传值
+     */
+    private String audioMaxUploadValue;
+    /**
+     * 视频-上传类型
+     */
+    private String videoUploadType;
+    /**
+     * 视频-最大上传值
+     */
+    private String videoMaxUploadValue;
     /**
      * 版权信息
      */
@@ -39,10 +59,6 @@ public class PfWebsiteSet implements Serializable {
      * 网站备案号
      */
     private String approve;
-    /**
-     * 最大上传值
-     */
-    private String maxUploadValue;
     /**
      * IP黑名单
      */

@@ -215,6 +215,13 @@ layui.config({
         , done: function (res) {
             $('#path').show();
             $('#uploadProgress').hide();
+            if (res.code != '0') {
+                layer.tips(res.msg, '#test3', {
+                    tips: [1, '#FF5722'],
+                    time: 5000
+                });
+                return;
+            }
             clearInterval(timer);
             $('#path').val(res.data.path);
             $('#idMedia').val(res.data.idMedia);
@@ -238,6 +245,13 @@ layui.config({
             layer.msg('正在上传图片', {icon: 16, shade: 0.01});
         }
         , done: function (res) {
+            if (res.code != '0') {
+                layer.tips(res.msg, '#frontPicUp', {
+                    tips: [1, '#FF5722'],
+                    time: 5000
+                });
+                return;
+            }
             $('#frontPath').val(res.data.path);
             $('#idMedia').val(res.data.idMedia);
             var dataPic = {};
@@ -274,6 +288,13 @@ layui.config({
             layer.msg('正在上传图片', {icon: 16, shade: 0.01});
         }
         , done: function (res) {
+            if (res.code != '0') {
+                layer.tips(res.msg, '#backPicUp', {
+                    tips: [1, '#FF5722'],
+                    time: 5000
+                });
+                return;
+            }
             $('#backPath').val(res.data.path);
             $('#idMedia').val(res.data.idMedia);
             var dataPic = {};

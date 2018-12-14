@@ -135,6 +135,13 @@ layui.config({
             });
         }
         , done: function (res) {
+            if (res.code != '0') {
+                layer.tips(res.msg, '#test3', {
+                    tips: [1, '#FF5722'],
+                    time: 5000
+                });
+                return;
+            }
             $('#partPath').val(res.data.path);
             $('#idMediaPart').val(res.data.idMedia);
             layer.closeAll('loading');

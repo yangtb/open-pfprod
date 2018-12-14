@@ -101,6 +101,13 @@ layui.config({
             });
         }
         , done: function (res) {
+            if (res.code != '0') {
+                layer.tips(res.msg, '#uploadImg', {
+                    tips: [1, '#FF5722'],
+                    time: 5000
+                });
+                return;
+            }
             $('#kbPartPicPath').val(res.data.path);
             $('#idMedia').val(res.data.idMedia);
             layer.closeAll('loading');

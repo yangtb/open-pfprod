@@ -10,16 +10,20 @@ public enum WebsiteSetEnum {
 
     NAME("website.name", "网站名称"),
     LOG_SWITCH("website.logSwitch", "日志开关"),
-    UPLOAD_TYPE("website.uploadType", "上传类型"),
+    PIC_UPLOAD_TYPE("website.pic.uploadType", "图片上传类型"),
+    PIC_MAX_UPLOAD_VALUE("website.pic.maxUploadValue", "图片最大上传值"),
+    AUDIO_UPLOAD_TYPE("website.audio.uploadType", "音频上传类型"),
+    AUDIO_MAX_UPLOAD_VALUE("website.audio.maxUploadValue", "音频最大上传值"),
+    VIDEO_UPLOAD_TYPE("website.video.uploadType", "视频上传类型"),
+    VIDEO_MAX_UPLOAD_VALUE("website.video.maxUploadValue", "视频最大上传值"),
     COPYRIGHT("website.copyright", "版权信息"),
     APPROVE("website.approve", "网站备案号"),
-    MAX_UPLOAD_VALUE("website.maxUploadValue", "最大上传值"),
     IP_BLACKLIST("website.ipBlacklist", "IP黑名单");
 
     private String code;
     private String desc;
 
-    private WebsiteSetEnum(String code, String desc) {
+    WebsiteSetEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }
