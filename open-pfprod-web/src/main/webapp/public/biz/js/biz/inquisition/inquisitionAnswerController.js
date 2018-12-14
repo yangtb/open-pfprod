@@ -64,7 +64,7 @@ layui.config({
                         //alert("ajax异常！！！");
                     }
                 });
-            }, 100);
+            }, 1000);
         }
         , done: function (res) {
             $('#path').show();
