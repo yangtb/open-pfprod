@@ -337,7 +337,7 @@ layui.config({
             html += '<li class="patient-img-response">\n' +
                 '       <p class="text">' + data.desResult + '</p>\n' +
                 '       <p class="img-box">\n' +
-                '           <img class="response-img" id="patientImg' + data.idResult + '"  src="' + data.path + '" alt="" style="width: 400px; height: 250px;cursor: pointer;"' +
+                '           <img class="response-img" id="patientImg' + data.idResult + '"  src="' + data.path + '" alt="" style="max-width: 350px; height: 200px;cursor: pointer;"' +
                 '               onerror="onError(this)"' +
                 '               onclick="openMedia(' + data.sdType + ',' + data.idResult + ')">\n' +
                 '           <img class="patient-img-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
@@ -401,7 +401,7 @@ layui.config({
             html += '<li class="patient-img-response">\n' +
                 '       <p class="text">' + data.desResult + '</p>\n' +
                 '       <p class="img-box">\n' +
-                '           <img class="response-img" id="patientImg' + data.idResult + '"  src="' + data.path + '" alt="" style="width: 400px; height: 250px;cursor: pointer;"' +
+                '           <img class="response-img" id="patientImg' + data.idResult + '"  src="' + data.path + '" alt="" style="max-width: 350px; height: 200px;cursor: pointer;"' +
                 '               onerror="onError(this)"' +
                 '               onclick="openMedia(' + data.sdType + ',' + data.idResult + ')">\n' +
                 '           <img class="patient-img-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +

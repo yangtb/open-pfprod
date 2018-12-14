@@ -175,8 +175,8 @@ ul, li {
 }
 
 .patient-img-response {
-    height: 250px;
-    margin-bottom: 95px;;
+    height: auto;
+    /*margin-bottom: 95px;*/
     position: relative;
 }
 
@@ -225,12 +225,16 @@ ul, li {
 }
 
 .text {
-    display: block;
-    height: 40px;
-    line-height: 40px;
-    position: absolute;
-    /*top: -35px;*/
-    right: 100px;
+    text-align: right;
+    /*max-width: 320px;*/
+    width: auto;
+    /*display: block;*/
+    height: auto;
+    /*position: absolute;
+    top: -35px;*/
+    position: relative;
+    padding-right: 60px;
+
 }
 
 .sound-icon {
