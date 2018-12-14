@@ -215,6 +215,8 @@ layui.config({
         , done: function (res) {
             $('#path').show();
             $('#uploadProgress').hide();
+            clearInterval(timer);
+            clearPercent();
             if (res.code != '0') {
                 layer.tips(res.msg, '#test3', {
                     tips: [1, '#FF5722'],
@@ -222,10 +224,8 @@ layui.config({
                 });
                 return;
             }
-            clearInterval(timer);
             $('#path').val(res.data.path);
             $('#idMedia').val(res.data.idMedia);
-            clearPercent();
         }
         , error: function () {
             $('#path').show();
