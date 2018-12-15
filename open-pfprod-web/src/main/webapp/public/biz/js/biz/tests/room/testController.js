@@ -10,18 +10,19 @@ layui.config({
 
     //固定块
     util.fixbar({
-        /*bar1: '<div style="position: relative; font-size: 12px;"><img id="nzImg" class="aside-icon" style="width: 50px; height: 50px;" src="https://jiayiyixue.oss-cn-beijing.aliyuncs.com/69E5ACBDFF6B40A5BE640C2BE8C09361.png">' +
-            '    <span style="position: absolute; bottom: 0; left: 0; padding-left: 10px; font-weight: bold; color: black">拟诊</span> \n</div>'
-        */
-        bar1: '<span style="font-size: 14px;"><i class="layui-icon layui-icon-add-1"></i>拟诊</span>'
+        bar1: '<i class="iconfont icon-zhenduan" id="nzImg" style="font-size: 30px;"></i>'
         , css: {right: 40, top: 110}
         , bgcolor: '#393D49'
         , click: function (type) {
             if (type === 'bar1') {
-                layer.msg('icon是可以随便换的')
+                common.open('拟诊', basePath + '/pf/p/waiting/room/test/referral/page'
+                    + '?idMedicalrec=' + idMedicalrec + '&cdMedAsse=009'
+                    + '&idTestexecResult=' + $('#idTestexecResult').val()
+                    + '&sdTestexec=' + sdTestexec, 850, 450);
             }
         }
     });
+
 
     $(document).ready(function () {
         if (!$('#idTestexec').val()) {
