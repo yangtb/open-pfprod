@@ -25,7 +25,7 @@
 
 <body class="body-my">
 <div class="wrapper-content">
-    <form class="layui-form layui-form-pane" id="kbPartPatForm" lay-filter="kbPartPatFilter">
+    <form class="layui-form" id="kbPartPatForm" lay-filter="kbPartPatFilter">
         <div hidden>
             <input name="idMedCase" hidden>
         </div>
@@ -63,7 +63,7 @@
             <div class="layui-input-block">
                 <textarea placeholder="请输入患者主诉" class="layui-textarea" name="complaint" id="complaint"
                           lay-verify="required" lay-vertype="tips"
-                          style="height: 150px;"></textarea>
+                          style="height: 180px;width: 800px;"></textarea>
             </div>
         </div>
 

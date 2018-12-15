@@ -25,7 +25,7 @@
 
 <body class="body-my">
 <div class="wrapper-content">
-    <form class="layui-form layui-form-pane" id="kbPartTextForm" lay-filter="kbPartTextFilter">
+    <form class="layui-form" id="kbPartTextForm" lay-filter="kbPartTextFilter">
         <div hidden>
             <input name="idMedCase" hidden>
         </div>
@@ -34,7 +34,7 @@
             <div class="layui-input-block">
                 <textarea placeholder="请输入文本" class="layui-textarea" name="content" id="content"
                           lay-verify="required" lay-vertype="tips"
-                          style="height: 260px;"></textarea>
+                          style="height: 260px;width: 800px;"></textarea>
             </div>
         </div>
 
