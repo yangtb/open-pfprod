@@ -71,7 +71,9 @@
 
 <script type="text/html" id="sdProcessTpl">
     <input type="checkbox" name="sdProcess" value="{{d.idTag}}"
-           lay-skin="switch" lay-text="并行|串行" lay-filter="sdProcessFilter" {{ d.sdProcess == '1' ? 'checked' : '' }}>
+           lay-skin="switch" lay-text="并行|串行" lay-filter="sdProcessFilter"
+           {{ d.cdMedAsse == '009' ? 'disabled' : '' }}
+           {{ d.sdProcess == '1' ? 'checked' : '' }}>
 </script>
 
 <script type="text/html" id="processSerialnoTpl">
