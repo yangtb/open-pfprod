@@ -131,7 +131,7 @@ ul, li {
 /* 患者样式 */
 .patient {
     height: auto;
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
     position: relative;
 }
 
