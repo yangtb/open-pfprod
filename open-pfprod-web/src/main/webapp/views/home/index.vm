@@ -193,14 +193,6 @@
 <script src="$!{contextPath}/public/common/js/moment.js"></script>
 <script src="$!{contextPath}/public/biz/js/index/indexLayuiController.js"></script>
 
-<script>
-    function spreadMenu() {
-        if (!$('div').is('.layadmin-side-shrink')) {
-            $('#spreadMenu').click();
-        }
-    }
-</script>
-
 </body>
 </html>
 

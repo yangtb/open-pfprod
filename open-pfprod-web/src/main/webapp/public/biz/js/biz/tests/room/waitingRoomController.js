@@ -122,6 +122,7 @@ layui.config({
             + '&idTestpaper=' + data.idTestpaper + '&idMedicalrec=' + data.idMedicalrec);
         $('#patName').text(data.patName + '患者');
         $('#test').click();
+        parent.spreadMenu();
     }
 
     $('#exam').on('click', function () {

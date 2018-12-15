@@ -109,3 +109,14 @@ layui.config({
     }
 
 });
+
+
+function spreadMenu() {
+    var dpiWidth = window.screen.width;
+    if (dpiWidth < 1440) {
+        if (!$('div').is('.layadmin-side-shrink')) {
+            $('#spreadMenu').click();
+        }
+    }
+
+}
