@@ -61,6 +61,7 @@ layui.config({
 
     function loadSerial(data) {
         if (data.length == 0) {
+            $("#step").empty();
             return;
         }
 
@@ -89,6 +90,7 @@ layui.config({
 
     function loadParallel(data) {
         if (data.length == 0) {
+            $("#parallelTag").empty();
             return;
         }
         var resultHtml = '';
