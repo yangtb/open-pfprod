@@ -224,4 +224,8 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.delPlanDetail(param);
     }
 
+    public CommonResult<Boolean> saveExecSerialNo(ExmTestexecParam param) {
+        return pfTestWaitingRoomFacade.saveExecSerialNo(param);
+    }
+
 }

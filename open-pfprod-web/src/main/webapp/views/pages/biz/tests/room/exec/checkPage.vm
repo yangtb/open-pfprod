@@ -175,8 +175,8 @@
 <script src="${contextPath}/public/biz/js/biz/tests/room/exec/execCheckController.js"></script>
 
 <script type="text/html" id="qaTpl">
-    <input type="checkbox" name="qa" value="{{d.idBody}}-{{d.idMedCaseList}}"
-           lay-skin="primary" lay-filter="qaCheckFilter" {{ d.extQa== true ? 'checked' : '' }}>
+    <input type="checkbox" id="qa{{d.idMedCaseList}}" name="qa" value="{{d.idBody}}-{{d.idMedCaseList}}"
+           lay-skin="primary" lay-filter="qaCheckFilter" {{ d.extQa== true ? 'checked' : '' }} {{ d.extQa== true ? 'disabled' : '' }}>
 </script>
 
 <script type="text/html" id="nzTpl">

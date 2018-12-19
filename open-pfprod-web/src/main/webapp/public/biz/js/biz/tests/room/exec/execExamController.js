@@ -151,7 +151,7 @@ layui.config({
         });
     };
 
-    form.on('checkbox(qaCheckFilter)', function (obj) {
+    form.on('checkbox(qaExamFilter)', function (obj) {
         var qaValue = this.value;
         var qaArr = qaValue.split("-");
         var data = {
@@ -165,6 +165,17 @@ layui.config({
         $('#nz' + qaArr[1]).attr('data-qa-check', 'true');
         var url = basePath + '/pf/r/waiting/room/exam/qa/save';
         common.commonPost(url, data, null, null, queryQa, false);
+        if (obj.elem.checked) {
+            console.log('==========');
+            console.log($('#exam' + qaArr[1]));
+            console.log($('#exam' + qaArr[1]).parentNode)
+            console.log($('#exam' + qaArr[1]).val())
+            $('#exam' + qaArr[1]).attr("test", "2142141");
+            $('#exam' + qaArr[1]).attr("disabled", true);
+            console.log('-----');
+            form.render();
+            console.log('!!!!!!!!');
+        }
     });
 
     // 页面加载完成查询问答

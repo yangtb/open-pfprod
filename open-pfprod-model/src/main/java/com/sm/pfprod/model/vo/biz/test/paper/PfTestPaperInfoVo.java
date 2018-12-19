@@ -74,4 +74,9 @@ public class PfTestPaperInfoVo implements Serializable {
      */
     private String sdTestexec;
 
+    /**
+     * 当前串行序号
+     */
+    private Integer curSerialno;
+
 }

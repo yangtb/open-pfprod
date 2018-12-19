@@ -496,5 +496,14 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
+    @Override
+    public boolean saveExecSerialNo(ExmTestexec dto) {
+        CommonResult<Boolean> result = testWaitingRoomClient.saveExecSerialNo(BeanUtil.convert(dto, ExmTestexecParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
 
 }

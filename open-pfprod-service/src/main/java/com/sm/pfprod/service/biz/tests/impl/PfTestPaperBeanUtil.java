@@ -12,7 +12,10 @@ import com.sm.pfprod.model.vo.biz.test.paper.PfTestPaperStudentVo;
 import com.sm.pfprod.model.vo.biz.test.paper.PfTestPaperVo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PfTestPaperBeanUtil {
 
@@ -38,6 +41,17 @@ public class PfTestPaperBeanUtil {
             testPaperVo.getPaperInfo().setEndTimeStr(DateUtil.formateDate(testPaperVo.getPaperInfo().getEndTime(), DateUtil.DEFAULT_FORMAT));
         }
 
+        List<PfCaseHistoryTagVo> tags = testPaperVo.getTags();
+        tags = tags.stream().sorted(Comparator.comparing(PfCaseHistoryTagVo::getProcessSerialno)).collect(Collectors.toList());
+
+        LinkedList<String> linkedList = new LinkedList<>();
+        // 串行路径 组件编码-串行标识-序号
+        for (PfCaseHistoryTagVo pfCaseHistoryTagVo : tags) {
+            if (pfCaseHistoryTagVo.getSdProcess().equals("2")) {
+                linkedList.add(pfCaseHistoryTagVo.getCdMedAsse() + "-" + pfCaseHistoryTagVo.getProcessSerialno());
+            }
+        }
+        testPaperVo.setLink(linkedList);
         return testPaperVo;
     }
 

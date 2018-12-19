@@ -427,4 +427,12 @@ public interface PfTestWaitingRoomService {
      */
     boolean delPlanDetail(PfBachChangeStatusDto dto);
 
+    /**
+     * 保存执行序号
+     *
+     * @param dto
+     * @return
+     */
+    boolean saveExecSerialNo(ExmTestexec dto);
+
 }

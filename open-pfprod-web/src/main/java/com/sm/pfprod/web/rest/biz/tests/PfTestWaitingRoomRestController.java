@@ -701,7 +701,26 @@ public class PfTestWaitingRoomRestController extends BaseController {
             throw new BizRuntimeException(ErrorCode.COMMON_TIPS_CODE, "暂未开放");
         }
 
-        return ResultObject.createSuccess("simulateCase", ResultObject.DATA_TYPE_OBJECT,
-                null);
+        return ResultObject.createSuccess("simulateCase", ResultObject.DATA_TYPE_OBJECT, null);
     }
+
+
+    /**
+     * 保存执行序号
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/exec/serial/save")
+    @ResponseBody
+    public ResultObject saveExecSerialNo(@RequestBody ExmTestexec dto) {
+        /* 参数校验 */
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexec() != null, "idTestexec");
+        Assert.isTrue(dto.getCurSerialno() != null, "curSerialno");
+        return ResultObject.createSuccess("saveExecSerialNo", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.saveExecSerialNo(dto));
+    }
+
 }

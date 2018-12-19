@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 @Setter
@@ -29,4 +30,9 @@ public class PfTestPaperVo implements Serializable {
      * 标签
      */
     List<PfCaseHistoryTagVo> tags;
+
+    /**
+     * 链路
+     */
+    LinkedList<String> link;
 }

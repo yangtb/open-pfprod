@@ -1,5 +1,6 @@
 package com.sm.pfprod.web.portal.biz.tests;
 
+import com.alibaba.fastjson.JSON;
 import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
@@ -65,6 +66,7 @@ public class PfTestWaitingRoomController extends BaseController {
         if (pfTestPaperVo.getStudentInfo() != null) {
             pfTestPaperVo.getStudentInfo().setSex(enumUtil.getEnumTxt(SysDicGroupEnum.SEX.getCode(), pfTestPaperVo.getStudentInfo().getSex()));
         }
+        model.addAttribute("link", JSON.toJSONString(pfTestPaperVo.getLink()));
         model.addAttribute("examInfo", pfTestPaperVo);
         return "pages/biz/tests/room/testPage";
     }

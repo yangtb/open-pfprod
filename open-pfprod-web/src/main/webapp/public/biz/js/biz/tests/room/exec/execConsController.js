@@ -121,6 +121,11 @@ layui.config({
         }
         var url = basePath + '/pf/r/waiting/room/cons/qa/save';
         common.commonPost(url, data, null, null, queryQa, false);
+        if (obj.elem.checked) {
+            $('#qa' + qaArr[1]).attr("disabled", true);
+            form.render();
+        }
+
     });
 
     // 页面加载完成查询问答
