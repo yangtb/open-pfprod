@@ -62,7 +62,7 @@ layui.config({
     };
 
     function _tableReload(extItemId, keyword) {
-        table.reload('examTableId', {
+        table.reload('execExamTableId', {
             where: {
                 idMedicalrec: idMedicalrec,
                 cdMedAsse: cdMedAsse,
@@ -87,14 +87,14 @@ layui.config({
 
     //执行渲染
     table.render({
-        elem: '#examTable' //指定原始表格元素选择器（推荐id选择器）
-        , id: 'examTableId'
+        elem: '#execExamTable' //指定原始表格元素选择器（推荐id选择器）
+        , id: 'execExamTableId'
         , height: '734' //容器高度
         , cols: [[
             {type: 'numbers', title: 'R'},
             {field: 'naItem', minWidth: 150, title: '检验项目'},
             {field: 'idDieText', width: 140, title: '拟诊', toolbar: '#nzTpl'},
-            {field: 'qa', width: 60, title: '提问', fixed: 'right', align: 'center', templet: '#qaTpl'}
+            {field: 'qa', width: 60, title: '提问', fixed: 'right', align: 'center', templet: '#qaExamTpl'}
         ]] //设置表头
         , url: basePath + '/pf/p/waiting/room/test/exam/list'
         , where: {
@@ -166,15 +166,8 @@ layui.config({
         var url = basePath + '/pf/r/waiting/room/exam/qa/save';
         common.commonPost(url, data, null, null, queryQa, false);
         if (obj.elem.checked) {
-            console.log('==========');
-            console.log($('#exam' + qaArr[1]));
-            console.log($('#exam' + qaArr[1]).parentNode)
-            console.log($('#exam' + qaArr[1]).val())
-            $('#exam' + qaArr[1]).attr("test", "2142141");
             $('#exam' + qaArr[1]).attr("disabled", true);
-            console.log('-----');
             form.render();
-            console.log('!!!!!!!!');
         }
     });
 

@@ -145,7 +145,7 @@
                 </div>
             </div>
             <div class="layui-col-xs9">
-                <table id="partConsTable" lay-filter="partConsTableFilter">
+                <table id="partCheckTable" lay-filter="partCheckTableFilter">
                 </table>
             </div>
         </div>
@@ -175,7 +175,7 @@
 <script src="${contextPath}/public/biz/js/biz/tests/room/exec/execCheckController.js"></script>
 
 <script type="text/html" id="qaTpl">
-    <input type="checkbox" id="qa{{d.idMedCaseList}}" name="qa" value="{{d.idBody}}-{{d.idMedCaseList}}"
+    <input type="checkbox" id="check{{d.idMedCaseList}}" name="qa" value="{{d.idBody}}-{{d.idMedCaseList}}"
            lay-skin="primary" lay-filter="qaCheckFilter" {{ d.extQa== true ? 'checked' : '' }} {{ d.extQa== true ? 'disabled' : '' }}>
 </script>
 

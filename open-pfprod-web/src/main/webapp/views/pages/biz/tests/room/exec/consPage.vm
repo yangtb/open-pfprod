@@ -94,8 +94,8 @@
 <script src="$!{contextPath}/public/biz/js/biz/tests/room/exec/execConsController.js"></script>
 
 <script type="text/html" id="qaTpl">
-    <input type="checkbox" id="qa{{d.idMedCaseList}}" name="qa" value="{{d.idInques}}-{{d.idMedCaseList}}"
-           lay-skin="primary" lay-filter="qaCheckFilter" {{ d.extQa== true ? 'checked' : '' }} {{ d.extQa== true ? 'disabled' : '' }}>
+    <input type="checkbox" id="cons{{d.idMedCaseList}}" name="qa" value="{{d.idInques}}-{{d.idMedCaseList}}"
+           lay-skin="primary" lay-filter="qaConsFilter" {{ d.extQa== true ? 'checked' : '' }} {{ d.extQa== true ? 'disabled' : '' }}>
 </script>
 
 

@@ -29,16 +29,6 @@
 
 <div>
     <div class="layui-col-xs6">
-        #*<form class="layui-form" style="text-align: right;">
-            <div class="layui-inline">
-                <button type="button" class="layui-btn" id="refreshRight">
-                    <i class="iconfont icon-add"></i> 检验
-                </button>
-            </div>
-        </form>
-        <table id="examTable" lay-filter="examTableFilter">
-        </table>*#
-
         <div class="layui-row">
             <div class="layui-col-xs7">
                 <form class="layui-form">
@@ -70,7 +60,7 @@
                 </div>
             </div>
             <div class="layui-col-xs8">
-                <table id="examTable" lay-filter="examTableFilter">
+                <table id="execExamTable" lay-filter="execExamTableFilter">
                 </table>
             </div>
         </div>
@@ -94,13 +84,13 @@
 </div>
 
 
-<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/ztree/js/jquery.ztree.core.js"></script>
 <script src="${contextPath}/public/biz/js/biz/tests/room/exec/execExamController.js"></script>
 
-<script type="text/html" id="qaTpl">
-    <input type="checkbox" id="exam{{d.idMedCaseList}}" value="{{d.idInspectItem}}-{{d.idMedCaseList}}"
+<script type="text/html" id="qaExamTpl">
+    <input type="checkbox" id="exam{{d.idMedCaseList}}" name="qa" value="{{d.idInspectItem}}-{{d.idMedCaseList}}"
            lay-skin="primary" lay-filter="qaExamFilter" {{ d.extQa== true ? 'checked' : '' }} {{ d.extQa== true ? 'disabled' : '' }}>
 </script>
 

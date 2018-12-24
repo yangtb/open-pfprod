@@ -110,7 +110,7 @@ layui.config({
         }
     });
 
-    form.on('checkbox(qaCheckFilter)', function (obj) {
+    form.on('checkbox(qaConsFilter)', function (obj) {
         var qaValue = this.value;
         var qaArr = qaValue.split("-");
         var data = {
@@ -122,7 +122,7 @@ layui.config({
         var url = basePath + '/pf/r/waiting/room/cons/qa/save';
         common.commonPost(url, data, null, null, queryQa, false);
         if (obj.elem.checked) {
-            $('#qa' + qaArr[1]).attr("disabled", true);
+            $('#cons' + qaArr[1]).attr("disabled", true);
             form.render();
         }
 

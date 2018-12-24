@@ -65,7 +65,7 @@ layui.config({
     };
 
     function _tableReload(extItemId, keyword) {
-        table.reload('partConsTableId', {
+        table.reload('partCheckTableId', {
             where: {
                 idMedicalrec: idMedicalrec,
                 cdMedAsse: cdMedAsse,
@@ -91,8 +91,8 @@ layui.config({
 
     //执行渲染
     table.render({
-        elem: '#partConsTable' //指定原始表格元素选择器（推荐id选择器）
-        , id: 'partConsTableId'
+        elem: '#partCheckTable' //指定原始表格元素选择器（推荐id选择器）
+        , id: 'partCheckTableId'
         , height: '390' //容器高度
         , cols: [[
             {type: 'numbers', title: 'R'},
@@ -225,7 +225,7 @@ layui.config({
     });
 
     function reloadTable(i, sdBody) {
-        table.reload('partConsTableId', {
+        table.reload('partCheckTableId', {
             where: {
                 idMedicalrec: idMedicalrec,
                 cdMedAsse: cdMedAsse,
@@ -252,7 +252,7 @@ layui.config({
         var url = basePath + '/pf/r/waiting/room/check/qa/save';
         common.commonPost(url, data, null, null, queryQa, false);
         if (obj.elem.checked) {
-            $('#qa' + qaArr[1]).attr("disabled", true);
+            $('#check' + qaArr[1]).attr("disabled", true);
             form.render();
         }
     });
