@@ -194,6 +194,7 @@ public class PfKbAssessRestController {
         /* 参数校验 */
         Assert.isTrue(StringUtils.isNotBlank(dto.getItemName()), "itemName");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "等效答案");
+        Assert.isTrue(dto.getIdDie() != null, "疾病");
         if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
 
         } else {

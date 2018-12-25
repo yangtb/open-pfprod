@@ -52,4 +52,9 @@ public class FaqEvaCaseItemReason implements Serializable {
      * 字典文本
      */
     private String desText;
+
+    /**
+     * 诊断
+     */
+    private Long idDie;
 }
