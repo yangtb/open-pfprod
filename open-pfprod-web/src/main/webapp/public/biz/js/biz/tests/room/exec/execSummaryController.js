@@ -244,7 +244,7 @@ layui.config({
     function renderZdSelect(i, idTestexecResultDiagnosis) {
         tableSelect.render({
             elem: '#addDieReason' + i,
-            checkedKey: 'addDieReasonId' + i,
+            checkedKey: 'id',
             table: {
                 url: basePath + '/pf/p/waiting/room/test/die/ready/reason/list'
                 , cols: [[

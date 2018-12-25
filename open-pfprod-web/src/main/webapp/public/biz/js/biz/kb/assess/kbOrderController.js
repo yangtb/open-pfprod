@@ -211,7 +211,7 @@ layui.config({
             tableSelect.render({
                 elem: '#addAnswerBtn',
                 searchKey: 'keywords',
-                checkedKey: 'addAnswerBtnId',
+                checkedKey: 'idDrugs',
                 searchPlaceholder: '药品名称/拼音码',
                 table: {
                     url: basePath + '/pf/p/drug/info/list',

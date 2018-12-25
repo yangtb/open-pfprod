@@ -309,7 +309,7 @@ layui.config({
 
     tableSelect.render({
         elem: '#idDieText',
-        checkedKey: 'idDieTextId',
+        checkedKey: 'idDie',
         searchKey: 'keywords',
         table: {
             url: basePath + '/pf/p/disease/info/list'
