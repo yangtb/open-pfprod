@@ -121,7 +121,7 @@ layui.config({
     function tableSelectRender(id) {
         tableSelect.render({
             elem: '#nz' + id,
-            checkedKey: 'nzId' + id,
+            checkedKey: 'idDie',
             searchKey: 'keywords',
             table: {
                 url: basePath + '/pf/p/disease/info/list'

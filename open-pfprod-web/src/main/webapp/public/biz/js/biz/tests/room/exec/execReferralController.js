@@ -17,7 +17,7 @@ layui.config({
 
     tableSelect.render({
         elem: '#searchAnswer',
-        checkedKey: 'searchAnswerId',
+        checkedKey: 'idDie',
         searchKey: 'keywords',
         searchPlaceholder: '名称/拼音码/ICD编码',
         table: {
@@ -159,7 +159,7 @@ layui.config({
     function renderZdSelect(i, idTestexecResultReferral) {
         tableSelect.render({
             elem: '#addReason' + i,
-            checkedKey: 'addReason' + i,
+            checkedKey: 'id',
             table: {
                 url: basePath + '/pf/p/waiting/room/test/die/ready/reason/list'
                 , cols: [[
@@ -183,7 +183,7 @@ layui.config({
     function renderDelSelect(i, idTestexecResultReferral) {
         tableSelect.render({
             elem: '#delReason' + i,
-            checkedKey: 'delReason' + i,
+            checkedKey: 'id' ,
             table: {
                 url: basePath + '/pf/p/waiting/room/test/die/ready/reason/list'
                 , cols: [[

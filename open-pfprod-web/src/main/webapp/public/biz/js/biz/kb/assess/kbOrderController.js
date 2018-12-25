@@ -258,7 +258,7 @@ layui.config({
             tableSelect.render({
                 elem: '#addAnswerBtn',
                 //searchKey: 'keywords',
-                checkedKey: 'addAnswerBtnId',
+                checkedKey: 'idDrugs',
                 //searchPlaceholder: '请输入关键字',
                 table: {
                     cols: [[

@@ -91,7 +91,7 @@ layui.config({
     var initFormData = {};
     tableSelect.render({
         elem: '#searchAnswer',
-        checkedKey: 'searchAnswerId',
+        checkedKey: 'idBody',
         searchKey: 'keywords',
         searchPlaceholder: '检查分类和部位描述',
         table: {

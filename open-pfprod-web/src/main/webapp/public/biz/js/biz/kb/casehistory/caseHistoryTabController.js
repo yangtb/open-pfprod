@@ -146,7 +146,7 @@ layui.config({
         tableSelect.render({
             elem: '#searchCase',
             searchKey: 'name',
-            checkedKey: 'addAnswerBtnId',
+            checkedKey: 'idMedCase',
             searchPlaceholder: '请输入关键字',
             table: {
                 url: basePath + '/pf/p/kb/part/list',
@@ -249,7 +249,7 @@ layui.config({
         tableSelect.render({
             elem: '#searchAssess',
             searchKey: 'name',
-            checkedKey: 'searchAssessId',
+            checkedKey: 'idEvaCase',
             searchPlaceholder: '请输入关键字',
             table: {
                 url: basePath + '/pf/p/kb/assess/list',

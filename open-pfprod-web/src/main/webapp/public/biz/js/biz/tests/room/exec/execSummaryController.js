@@ -51,7 +51,7 @@ layui.config({
 
     tableSelect.render({
         elem: '#searchAnswer',
-        checkedKey: 'searchAnswerId',
+        checkedKey: 'idDie',
         searchKey: 'keywords',
         searchPlaceholder: '名称/拼音码/ICD编码',
         table: {

@@ -139,7 +139,7 @@ layui.config({
         tableSelect.render({
             elem: '#addStudent',
             searchKey: 'conditionValue',
-            checkedKey: 'addStudentId',
+            checkedKey: 'user_id',
             searchPlaceholder: '请输入关键字',
             table: {
                 url: basePath + '/pf/p/class/student/search/list',

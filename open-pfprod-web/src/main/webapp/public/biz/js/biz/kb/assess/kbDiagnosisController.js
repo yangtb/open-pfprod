@@ -201,7 +201,7 @@ layui.config({
     tableSelect.render({
         elem: '#addAnswerBtn',
         searchKey: 'keywords',
-        checkedKey: 'addAnswerBtnId',
+        checkedKey: 'idDie',
         searchPlaceholder: '疾病名称/ICD/拼音码',
         table: {
             url: basePath + '/pf/p/disease/info/list',
