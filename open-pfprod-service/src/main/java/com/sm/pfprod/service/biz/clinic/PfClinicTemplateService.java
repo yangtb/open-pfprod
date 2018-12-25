@@ -1,6 +1,9 @@
 package com.sm.pfprod.service.biz.clinic;
 
+import com.sm.pfprod.model.dto.biz.check.PfCheckQuestionDto;
 import com.sm.pfprod.model.dto.biz.clinic.PfClinicTemplateDto;
+import com.sm.pfprod.model.dto.biz.exam.PfExamQuestionDto;
+import com.sm.pfprod.model.dto.biz.inquisition.PfInquisitionQuestionDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
@@ -199,5 +202,30 @@ public interface PfClinicTemplateService {
      * @return
      */
     boolean saveSerialNo(BasMedicalTag dto);
+
+    /**
+     * 病例-问诊问题列表
+     *
+     * @param dto
+     * @return
+     */
+    PageResult listInquisitionQuestion(PfInquisitionQuestionDto dto);
+
+    /**
+     * 病例-体格检查问题列表
+     *
+     * @param dto
+     * @return
+     */
+    PageResult listCheckQuestion(PfCheckQuestionDto dto);
+
+    /**
+     * 病例-辅助检查问题列表
+     *
+     * @param dto
+     * @return
+     */
+    PageResult listExamQuestion(PfExamQuestionDto dto);
+
 
 }

@@ -2,7 +2,10 @@ package com.sm.pfprod.web.portal.biz.kb;
 
 import com.alibaba.fastjson.JSON;
 import com.sm.open.core.facade.model.result.pf.biz.clinic.BasEvaTagVoResult;
+import com.sm.pfprod.model.dto.biz.check.PfCheckQuestionDto;
 import com.sm.pfprod.model.dto.biz.clinic.PfClinicTemplateDto;
+import com.sm.pfprod.model.dto.biz.exam.PfExamQuestionDto;
+import com.sm.pfprod.model.dto.biz.inquisition.PfInquisitionQuestionDto;
 import com.sm.pfprod.model.dto.biz.kb.casehistory.PfCaseHistoryDto;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.result.PageResult;
@@ -99,6 +102,45 @@ public class PfCaseHistoryController extends BaseController {
         List<BasEvaTagVoResult> list = pageResult.getData();
         model.addAttribute("tags", JSON.parseArray(JSON.toJSONString(list)));
         return "pages/biz/kb/casehistory/tagAssessForm";
+    }
+
+    /**
+     * 病例-问诊问题列表
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
+    @RequestMapping(value = "/inquisition/question/list")
+    @ResponseBody
+    public PageResult listQuestion(PfInquisitionQuestionDto dto) {
+        return pfClinicTemplateService.listInquisitionQuestion(dto);
+    }
+
+    /**
+     * 病例-体格检查问题列表
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
+    @RequestMapping(value = "/check/question/list")
+    @ResponseBody
+    public PageResult listCheckQuestion(PfCheckQuestionDto dto) {
+        return pfClinicTemplateService.listCheckQuestion(dto);
+    }
+
+    /**
+     * 病例-辅助检查问题列表
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
+    @RequestMapping(value = "/exam/question/list")
+    @ResponseBody
+    public PageResult listExamQuestion(PfExamQuestionDto dto) {
+        return pfClinicTemplateService.listExamQuestion(dto);
     }
 
 }

@@ -51,14 +51,14 @@ layui.config({
         for (var i = 0; i < caseli.length; i++) {
             caseli[i].addEventListener('click', function () {
                 $(this).addClass("active").siblings().removeClass("active");
-                loadIframe(this.getAttribute('data-type'), this.getAttribute('data-index') - 1);
+                loadIframe(this.getAttribute('data-type'), this.getAttribute('data-index') - 1, this.getAttribute('id'));
             });
         }
 
         for (var i = 0; i < assessli.length; i++) {
             assessli[i].addEventListener('click', function () {
                 $(this).addClass("active").siblings().removeClass("active");
-                loadIframe(this.getAttribute('data-type'), this.getAttribute('data-index') - 1);
+                loadIframe(this.getAttribute('data-type'), this.getAttribute('data-index') - 1, this.getAttribute('id'));
             });
         }
         if (caseli.length == 0) {
@@ -82,7 +82,7 @@ layui.config({
     });
 
 
-    function loadIframe(type, dataIndex) {
+    function loadIframe(type, dataIndex, id) {
         currentType = type;
         currentIndex = dataIndex;
 
@@ -110,6 +110,11 @@ layui.config({
             caseRender();
         }
         if (type == 'eva') {
+            if (id == 'eva-003' || id == 'eva-004' || id == 'eva-005') {
+                $('#assessForm').hide();
+            } else {
+                $('#assessForm').show();
+            }
             if (!assessTagList[dataIndex].script) {
                 $('#assessTag').attr('src', basePath + '/empty/page');
                 $('#assessName').val("");

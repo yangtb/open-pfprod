@@ -2,14 +2,23 @@ package com.sm.pfprod.service.biz.clinic.impl;
 
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
+import com.sm.open.core.facade.model.param.pf.biz.check.PfCheckQuestionParam;
 import com.sm.open.core.facade.model.param.pf.biz.clinic.*;
+import com.sm.open.core.facade.model.param.pf.biz.exam.PfExamQuestionParam;
+import com.sm.open.core.facade.model.param.pf.biz.inquisition.PfInquisitionQuestionParam;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
+import com.sm.open.core.facade.model.result.pf.biz.check.BasBodyCheckResult;
 import com.sm.open.core.facade.model.result.pf.biz.clinic.*;
+import com.sm.open.core.facade.model.result.pf.biz.exam.BasInspectItemResult;
+import com.sm.open.core.facade.model.result.pf.biz.inquisition.BasInquesResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.biz.clinic.ClinicTemplateClient;
+import com.sm.pfprod.model.dto.biz.check.PfCheckQuestionDto;
 import com.sm.pfprod.model.dto.biz.clinic.PfClinicTemplateDto;
+import com.sm.pfprod.model.dto.biz.exam.PfExamQuestionDto;
+import com.sm.pfprod.model.dto.biz.inquisition.PfInquisitionQuestionDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
@@ -233,6 +242,33 @@ public class PfClinicTemplateServiceImpl implements PfClinicTemplateService {
             return result.getContent();
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult listInquisitionQuestion(PfInquisitionQuestionDto dto) {
+        PfPageResult<BasInquesResult> result = clinicTemplateClient.listInquisitionQuestion(BeanUtil.convert(dto, PfInquisitionQuestionParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public PageResult listCheckQuestion(PfCheckQuestionDto dto) {
+        PfPageResult<BasBodyCheckResult> result = clinicTemplateClient.listCheckQuestion(BeanUtil.convert(dto, PfCheckQuestionParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public PageResult listExamQuestion(PfExamQuestionDto dto) {
+        PfPageResult<BasInspectItemResult> result = clinicTemplateClient.listExamQuestion(BeanUtil.convert(dto, PfExamQuestionParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
     }
 
 }

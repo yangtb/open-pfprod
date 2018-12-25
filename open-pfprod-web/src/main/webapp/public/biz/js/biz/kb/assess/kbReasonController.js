@@ -209,15 +209,18 @@ layui.config({
             tableSelect.render({
                 elem: '#addAnswerBtn',
                 searchKey: 'keywords',
-                checkedKey: 'addAnswerBtnId',
+                checkedKey: 'idInques',
                 searchPlaceholder: '请输入关键字',
                 table: {
-                    url: basePath + '/pf/p/inquisition/question/list',
+                    url: basePath + '/pf/p/case/history/inquisition/question/list',
                     cols: [[
                         {type: 'checkbox'},
                         {field: 'idInquesCaText', title: '目录'},
                         {field: 'desInques', title: '问题内容'}
                     ]]
+                    , where: {
+                        extId: idMedicalrec
+                    }
                     , limits: [10, 20, 50]
                     , page: true
                 },
@@ -230,15 +233,18 @@ layui.config({
             tableSelect.render({
                 elem: '#addAnswerBtn',
                 searchKey: 'keywords',
-                checkedKey: 'addAnswerBtnId',
+                checkedKey: 'idBody',
                 searchPlaceholder: '请输入关键字',
                 table: {
-                    url: basePath + '/pf/p/check/question/list',
+                    url: basePath + '/pf/p/case/history/check/question/list',
                     cols: [[
                         {type: 'checkbox'},
                         {field: 'idBodyCaText', title: '目录'},
                         {field: 'desBody', title: '检查部位描述'}
                     ]]
+                    , where: {
+                        extId: idMedicalrec
+                    }
                     , limits: [10, 20, 50]
                     , page: true
                 },
@@ -251,15 +257,18 @@ layui.config({
             tableSelect.render({
                 elem: '#addAnswerBtn',
                 searchKey: 'keywords',
-                checkedKey: 'addAnswerBtnId',
+                checkedKey: 'idInspectItem',
                 searchPlaceholder: '请输入关键字',
                 table: {
-                    url: basePath + '/pf/p/exam/question/list',
+                    url: basePath + '/pf/p/case/history/exam/question/list',
                     cols: [[
                         {type: 'checkbox'},
                         {field: 'idInspectText', title: '目录'},
                         {field: 'naItem', title: '项目'}
                     ]]
+                    , where: {
+                        extId: idMedicalrec
+                    }
                     , limits: [10, 20, 50]
                     , page: true
                 },

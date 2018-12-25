@@ -32,4 +32,9 @@ public class PfInquisitionQuestionDto extends PageParam implements Serializable 
      * 搜索关键字
      */
     private String keywords;
+
+    /**
+     * 扩展id
+     */
+    private Long extId;
 }

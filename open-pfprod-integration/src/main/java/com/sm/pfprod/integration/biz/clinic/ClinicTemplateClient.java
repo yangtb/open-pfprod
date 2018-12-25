@@ -1,6 +1,9 @@
 package com.sm.pfprod.integration.biz.clinic;
 
+import com.sm.open.core.facade.model.param.pf.biz.check.PfCheckQuestionParam;
 import com.sm.open.core.facade.model.param.pf.biz.clinic.*;
+import com.sm.open.core.facade.model.param.pf.biz.exam.PfExamQuestionParam;
+import com.sm.open.core.facade.model.param.pf.biz.inquisition.PfInquisitionQuestionParam;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.result.pf.biz.PfCommonZtreeResult;
 import com.sm.open.core.facade.model.result.pf.biz.clinic.*;
@@ -108,4 +111,17 @@ public class ClinicTemplateClient {
     public CommonResult<Boolean> saveSerialNo(BasMedicalTagParam param) {
         return pfClinicTemplateFacade.saveSerialNo(param);
     }
+
+    public PfPageResult listInquisitionQuestion(PfInquisitionQuestionParam param) {
+        return pfClinicTemplateFacade.listInquisitionQuestion(param);
+    }
+
+    public PfPageResult listCheckQuestion(PfCheckQuestionParam param) {
+        return pfClinicTemplateFacade.listCheckQuestion(param);
+    }
+
+    public PfPageResult listExamQuestion(PfExamQuestionParam param) {
+        return pfClinicTemplateFacade.listExamQuestion(param);
+    }
+
 }
