@@ -48,7 +48,7 @@
             <label class="layui-form-label">疾病目录</label>
             <div class="layui-input-block">
                 <div hidden>
-                    <input id="cdDieclass" name="cdDieclass" type="text" value="" class="layui-input" hidden/>
+                    <input id="cdDieclass" name="cdDieclass" type="text" class="layui-input" hidden/>
                 </div>
                 <input id="cdDieclassText" name="cdDieclassText" type="text"
                        class="layui-input" readonly/>

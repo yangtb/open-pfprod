@@ -96,7 +96,7 @@ layui.config({
         if (v.length > 0) v = v.substring(0, v.length - 1);
         if (v_id.length > 0) v_id = v_id.substring(0, v_id.length - 1);
         $("#cdDieclassText").val(v);
-        $("#cdDieclass").attr("value", v_id);
+        $("#cdDieclass").val(v_id);
         hideMenu();
     };
 
