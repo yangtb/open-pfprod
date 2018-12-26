@@ -38,6 +38,11 @@ public class BasDrugs implements Serializable {
     private String cdDrugsclass;
 
     /**
+     * 药品目录编码字典
+     */
+    private String cdDrugsclassText;
+
+    /**
     * 药品规格
     */
     private String spec;

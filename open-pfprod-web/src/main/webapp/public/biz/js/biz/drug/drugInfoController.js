@@ -15,7 +15,7 @@ layui.config({
             {checkbox: true, fixed: true},
 
             {field: 'name', width: 180, title: '药品名称', fixed: true},
-            {field: 'cdDrugsclass', width: 90, title: '药品目录',
+            {field: 'cdDrugsclassText', width: 200, title: '药品目录',
                 style: 'background-color: #009688; color: #fff;', templet: '#cdDrugsclassTpl'},
             {field: 'spec', width: 150, title: '药品规格'},
             {field: 'unit', width: 100, title: '药品单位'},
@@ -82,9 +82,9 @@ layui.config({
 
     var _addOrEdit = function (formType, currentEditData) {
         if (formType == 'add') {
-            common.open('新增药品信息', basePath + '/pf/p/drug/info/form?formType=' + formType, 350, 430);
+            common.open('新增药品信息', basePath + '/pf/p/drug/info/form?formType=' + formType, 512, 430);
         } else {
-            common.open('编辑药品信息', basePath + '/pf/p/drug/info/form?formType=' + formType, 350, 430, _successFunction(currentEditData));
+            common.open('编辑药品信息', basePath + '/pf/p/drug/info/form?formType=' + formType, 512, 430, _successFunction(currentEditData));
         }
     };
 

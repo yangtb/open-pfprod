@@ -59,8 +59,6 @@ layui.config({
                     return false;
                 } else {
                     zNodes = data.data;
-                    console.log("=============")
-                    console.log(zNodes)
                     $.fn.zTree.init($("#drugCatalogueTree"), setting, zNodes);
                     //初始化模糊搜索方法
                     fuzzySearch('drugCatalogueTree', '#key', null, true);
@@ -334,7 +332,7 @@ layui.config({
         }
         var currentEditData = {};
         currentEditData.cdDrugsclass = $("#cd").val();
-        common.open('新增药品信息', basePath + '/pf/p/drug/info/form?formType=add', 350, 430, _successFunction(currentEditData));
+        common.open('新增药品信息', basePath + '/pf/p/drug/info/form?formType=add', 512, 430, _successFunction(currentEditData));
         return false;
     });
 

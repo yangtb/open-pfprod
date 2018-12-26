@@ -7,8 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="$!{contextPath}/public/ztree/zTreeStyle/zTreeStyle.css">
     <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+
+    <style>
+        ul.ztree {
+            margin-top: 10px;
+            border: 1px solid #617775;
+            background: #f0f6e4;
+            width: 220px;
+            height: 360px;
+            overflow-y: scroll;
+            overflow-x: auto;
+        }
+    </style>
 
     <script>
         var basePath = '${basePath}';
@@ -30,7 +43,7 @@
                        class="layui-input" placeholder="药品名称">
             </div>
         </div>
-        <div class="layui-form-item">
+        #*<div class="layui-form-item">
             <label class="layui-form-label">药品目录</label>
             <div class="layui-input-block">
                 <select name="cdDrugsclass"  autocomplete="off" lay-verify="commonLength"
@@ -42,7 +55,21 @@
                 </select>
 
             </div>
+        </div>*#
+        <div class="layui-form-item">
+            <label class="layui-form-label">药品目录</label>
+            <div class="layui-input-block">
+                <div hidden>
+                    <input id="cdDrugsclass" name="cdDrugsclass" type="text" class="layui-input" hidden/>
+                </div>
+                <input id="cdDrugsclassText" name="cdDrugsclassText" type="text"
+                       class="layui-input" readonly/>
+            </div>
+            <div id="menuContent" class="menuContent" style="display:none; position: absolute; z-index: 9999">
+                <ul id="treeDemo" class="ztree" style="margin-top:0; width:370px; height: 200px;"></ul>
+            </div>
         </div>
+
         <div class="layui-form-item">
             <label class="layui-form-label">药品规格</label>
             <div class="layui-input-block">
@@ -90,19 +117,10 @@
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
+<script src="$!{contextPath}/public/ztree/js/jquery.ztree.core.js"></script>
+<script src="$!{contextPath}/public/ztree/js/jquery.ztree.excheck.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 <script src="${contextPath}/public/biz/js/biz/drug/drugInfoFormController.js"></script>
-<script>
-    function fullForm(data) {
-        $(document).ready(function () {
-            $("#drugInfoForm").autofill(data);
-            layui.use('form',function(){
-                layui.form.render();
-            });
-        });
-
-    }
-</script>
 
 </body>
 </html>

@@ -84,17 +84,6 @@
     {{#  } }}
 </script>
 
-
-<script type="text/html" id="cdDrugsclassTpl">
-    #foreach($element in $drugCatalogue)
-        {{#  if(d.cdDrugsclass == $element.id){ }}
-            $element.name
-        {{#  } else { }}
-
-        {{#  } }}
-    #end
-</script>
-
 </body>
 
 </html>
