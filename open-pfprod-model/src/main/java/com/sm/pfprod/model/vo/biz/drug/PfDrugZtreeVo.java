@@ -1,6 +1,5 @@
 package com.sm.pfprod.model.vo.biz.drug;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.sm.pfprod.model.vo.biz.PfCommonZtreeVo;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +27,6 @@ public class PfDrugZtreeVo extends PfCommonZtreeVo implements Serializable {
     /**
      * 是否是父节点
      */
-    @JSONField(name = "isParent")
-    private boolean isParent;
+    //@JSONField(name = "isParent")
+    //private boolean isParent;
 }

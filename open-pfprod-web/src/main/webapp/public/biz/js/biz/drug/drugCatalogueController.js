@@ -59,6 +59,8 @@ layui.config({
                     return false;
                 } else {
                     zNodes = data.data;
+                    console.log("=============")
+                    console.log(zNodes)
                     $.fn.zTree.init($("#drugCatalogueTree"), setting, zNodes);
                     //初始化模糊搜索方法
                     fuzzySearch('drugCatalogueTree', '#key', null, true);
