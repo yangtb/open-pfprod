@@ -34,6 +34,12 @@ public class UserRegisterDto implements Serializable {
      * 邮箱验证码
      */
     private String emailVercode;
+
+    /**
+     * 图片验证码
+     */
+    private String photoVercode;
+
     /**
      * 密码
      */

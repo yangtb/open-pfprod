@@ -194,7 +194,13 @@ public class PfUserRestController extends BaseController {
     public ResultObject registerUser(HttpServletRequest request, @RequestBody UserRegisterDto dto) {
         /* 参数校验 */
         Assert.isTrue(StringUtils.isNotBlank(dto.getEmail()), "email");
-        Assert.isTrue(StringUtils.isNotBlank(dto.getEmailVercode()), "emailVercode");
+        if (StringUtils.isBlank(dto.getEmailVercode())) {
+            // 验证码校验
+            if (!dto.getPhotoVercode()
+                    .equalsIgnoreCase((String) request.getSession().getAttribute(imageCodeUtil.getSessionKey()))) {
+                throw new BizRuntimeException("photoVcodeError", "请输入正确的图片验证码");
+            }
+        }
         Assert.isTrue(StringUtils.isNotBlank(dto.getOrgName()), "orgName");
         Assert.isTrue(StringUtils.isNotBlank(dto.getPassword()), "password");
         Assert.isTrue(StringUtils.isNotBlank(dto.getPhone()), "phone");

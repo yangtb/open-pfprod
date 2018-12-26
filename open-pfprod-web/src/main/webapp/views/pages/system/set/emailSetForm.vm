@@ -110,7 +110,7 @@
     <span style="font-size: 14px;">你好！</span>
 </p>
 <p style="margin-top: 5px; text-indent: 2em;">
-    <span style="font-size: 14px;">&nbsp;&nbsp;&nbsp;&nbsp;这是一封来自&nbsp;</span><a href="${basePath}" target="_self">${websiteName}</a> <span style="font-size: 14px;">的测试邮件！请勿回复此邮件！</span>
+    <span style="font-size: 14px;">&nbsp;&nbsp;&nbsp;&nbsp;这是一封来自&nbsp;</span><a href="${basePath}" target="_blank">${websiteName}</a> <span style="font-size: 14px;">的测试邮件！请勿回复此邮件！</span>
 </p>
 <p>
     <span style="font-size: 14px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>

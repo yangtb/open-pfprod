@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="${contextPath}/public/biz/css/register.css">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="$!{contextPath}/public/biz/css/register.css">
     <script>
-        var basePath = '${basePath}';
-        var publicKey = '${publicKey}';
+        var basePath = '$!{basePath}';
+        var publicKey = '$!{publicKey}';
     </script>
 </head>
 <body>
@@ -20,7 +20,7 @@
 <div class="platform-user-login platform-user-display-show" id="user-register" style="display: none;">
     <div class="platform-user-login-main">
         <div class="platform-user-login-box platform-user-login-header">
-            <h2>${websiteName}</h2>
+            <h2>$!{websiteName}</h2>
             <p>上海嘉奕医学科技有限公司</p>
         </div>
         <div class="platform-user-login-box platform-user-login-body layui-form">
@@ -57,31 +57,31 @@
                     <div class="layui-col-xs5">
                         <div style="margin-left: 10px;">
                             <image id="vercodeImage" style="width: 100%;height: 37px"
-                                   src="${basePath}/login/verificationCode"
+                                   src="$!{basePath}/login/verificationCode"
                                    title="点击图片更换一张 "/>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <div class="layui-row">
-                    <div class="layui-col-xs7">
-                        <label class="platform-user-login-icon layui-icon layui-icon-vercode"></label>
-                        <input type="text" name="emailVercode" id="emailVercode"
-                               lay-verify="required|emailVercode" lay-vertype="tips"
-                               placeholder="邮箱验证码" class="layui-input" autocomplete="off">
-                    </div>
-                    <div class="layui-col-xs5">
-                        <div style="margin-left: 10px;">
-                            <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid"
-                                    id="getEmailCode">获取验证码
-                            </button>
+            #if($!{sendSwitch} == 'Y')
+                <div class="layui-form-item" >
+                    <div class="layui-row">
+                        <div class="layui-col-xs7">
+                            <label class="platform-user-login-icon layui-icon layui-icon-vercode"></label>
+                            <input type="text" name="emailVercode" id="emailVercode"
+                                   lay-verify="required|emailVercode" lay-vertype="tips"
+                                   placeholder="邮箱验证码" class="layui-input" autocomplete="off">
+                        </div>
+                        <div class="layui-col-xs5">
+                            <div style="margin-left: 10px;">
+                                <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid"
+                                        id="getEmailCode">获取验证码
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-
+            #end
             <div class="layui-form-item">
                 <label class="platform-user-login-icon layui-icon layui-icon-password"></label>
                 <input type="hidden" name="password" id="encryptPassword">
@@ -105,18 +105,18 @@
                 <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="user-register-submit">注 册</button>
             </div>
             <div class="layui-trans layui-form-item platform-user-login-other">
-                <a href="${contextPath}/login" class="platform-user-jump-change platform-link layui-hide-xs">已有帐号登入</a>
+                <a href="$!{contextPath}/login" class="platform-user-jump-change platform-link layui-hide-xs">已有帐号登入</a>
             </div>
         </div>
     </div>
 
 </div>
 
-<script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
-<script src="${contextPath}/public/common/js/jquery.min.js"></script>
-<script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
-<script src="${contextPath}/public/biz/js/user/register/registerFormController.js"></script>
-<script src="${contextPath}/public/biz/js/user/register/registerController.js"></script>
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.all.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
+<script src="$!{contextPath}/public/biz/js/user/register/registerFormController.js"></script>
+<script src="$!{contextPath}/public/biz/js/user/register/registerController.js"></script>
 <script>
     $(function () {
         var registerController = new RegisterController();

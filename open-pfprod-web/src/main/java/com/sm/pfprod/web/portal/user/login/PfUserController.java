@@ -1,12 +1,14 @@
 package com.sm.pfprod.web.portal.user.login;
 
+import com.sm.open.care.core.enums.YesOrNo;
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
 import com.sm.pfprod.model.dto.user.PfUserDto;
+import com.sm.pfprod.model.entity.PfEmailSet;
 import com.sm.pfprod.model.entity.SysOrg;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.role.PfRoleVo;
-import com.sm.pfprod.service.system.grade.PfGradeService;
 import com.sm.pfprod.service.system.org.PfOrgService;
+import com.sm.pfprod.service.system.set.PfSetService;
 import com.sm.pfprod.service.user.login.PfUserService;
 import com.sm.pfprod.service.user.role.PfRoleService;
 import com.sm.pfprod.web.portal.BaseController;
@@ -29,7 +31,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 登陆
+ * @ClassName: PfUserController
+ * @Description: 登陆
+ * @Author yangtongbin
+ * @Date 2018-12-26
  */
 @Controller
 @RequestMapping(value = "/pf/p/user")
@@ -45,7 +50,7 @@ public class PfUserController extends BaseController {
     private PfOrgService pfOrgService;
 
     @Resource
-    private PfGradeService pfGradeService;
+    private PfSetService pfSetService;
 
     @Resource(name = "rsaKeyPairQueue")
     private RsaKeyPairQueue rsaKeyPairQueue;
@@ -69,6 +74,10 @@ public class PfUserController extends BaseController {
         RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
         model.addAttribute(PUBLIC_KEY, keyPair.getPublicKey());
         model.addAttribute("websiteName", websiteName);
+
+        PfEmailSet pfEmailSet = pfSetService.selectEmailSet();
+        String sendSwitch = pfEmailSet == null || StringUtils.isBlank(pfEmailSet.getSendSwitch()) ? YesOrNo.NO.getCode() : pfEmailSet.getSendSwitch();
+        model.addAttribute("sendSwitch", sendSwitch);
         return "pages/user/register/register";
     }
 

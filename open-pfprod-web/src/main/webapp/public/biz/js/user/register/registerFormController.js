@@ -108,6 +108,10 @@ layui.config({
                 layer.closeAll('loading');
                 if (data.code == 'emailVcodeExpired') {
                     layer.tips(data.msg, '#emailVercode', {tips: 1});
+                } else if (data.code == 'photoVcodeError') {
+                    $('#vercodeImage').attr("src", basePath + "/login/verificationCode" + "?d=" + new Date().getTime());
+                    $('#photoVercode').focus();
+                    layer.tips('请输入正确的图片验证码', '#photoVercode', {tips: 1});
                 } else if (data.code == 'orgEmailError') {
                     layer.tips(data.msg, '#email', {tips: 1});
                 } else if (data.code != 0) {
