@@ -1,16 +1,25 @@
 package com.sm.pfprod.web.rest.user.login;
 
+import com.sm.open.care.core.ErrorCode;
+import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
+import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.open.care.core.utils.rsa.RSAEncrypt;
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
 import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
 import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
+import com.sm.pfprod.model.dto.user.register.RegisterVcodeDto;
+import com.sm.pfprod.model.dto.user.register.UserRegisterDto;
 import com.sm.pfprod.service.user.login.PfUserService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
+import com.sm.pfprod.web.security.SecurityContext;
+import com.sm.pfprod.web.security.User;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;
+import com.sm.pfprod.web.util.ImageCodeUtil;
+import com.sm.pfprod.web.util.SysUserAuthUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -39,6 +48,9 @@ public class PfUserRestController extends BaseController {
     @Resource(name = "rsaKeyPairQueue")
     private RsaKeyPairQueue rsaKeyPairQueue;
 
+    @Resource
+    private ImageCodeUtil imageCodeUtil;
+
     /**
      * 新增用户
      *
@@ -53,7 +65,12 @@ public class PfUserRestController extends BaseController {
         Assert.isTrue(dto.getUsername() != null, "username");
         Assert.isTrue(StringUtils.isNotBlank(dto.getPassword()), "password");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getRoles()), "roles");
-        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+
+        User user = SecurityContext.currentUser();
+        dto.setOperator(user.getUsername());
+        if (!SysUserAuthUtils.isPlatOrSuper() && !dto.getIdOrg().equals(user.getIdOrg())) {
+            throw new BizRuntimeException(ErrorCode.USER_AUTH_EXCEPTION, ErrorMessage.USER_AUTH_EXCEPTION_MSG);
+        }
 
         RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
         // 密码转化为明文
@@ -77,7 +94,12 @@ public class PfUserRestController extends BaseController {
         /* 参数校验 */
         Assert.isTrue(dto.getUsername() != null, "username");
         Assert.isTrue(CollectionUtils.isNotEmpty(dto.getRoles()), "roles");
-        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+
+        User user = SecurityContext.currentUser();
+        dto.setOperator(user.getUsername());
+        if (!SysUserAuthUtils.isPlatOrSuper() && !dto.getIdOrg().equals(user.getIdOrg())) {
+            throw new BizRuntimeException(ErrorCode.USER_AUTH_EXCEPTION, ErrorMessage.USER_AUTH_EXCEPTION_MSG);
+        }
         return ResultObject.create("updateUser", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfUserService.updateUser(dto));
     }
@@ -94,8 +116,10 @@ public class PfUserRestController extends BaseController {
     public ResultObject freezeUser(@RequestBody PfCommonListDto dto) {
         /* 参数校验 */
         Assert.isTrue(dto != null || CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        dto.setCurrentUserOrgId(SecurityContext.currentUser().getIdOrg());
+        dto.setPlatOrSuper(SysUserAuthUtils.isPlatOrSuper());
         return ResultObject.create("freezeUser", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
-                ResultObject.DATA_TYPE_OBJECT, pfUserService.freezeUser(dto.getList()));
+                ResultObject.DATA_TYPE_OBJECT, pfUserService.freezeUser(dto));
     }
 
     /**
@@ -110,8 +134,10 @@ public class PfUserRestController extends BaseController {
     public ResultObject delUser(@RequestBody PfCommonListDto dto) {
         /* 参数校验 */
         Assert.isTrue(dto != null || CollectionUtils.isNotEmpty(dto.getList()), "入参不能为空");
+        dto.setCurrentUserOrgId(SecurityContext.currentUser().getIdOrg());
+        dto.setPlatOrSuper(SysUserAuthUtils.isPlatOrSuper());
         return ResultObject.create("delUser", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
-                ResultObject.DATA_TYPE_OBJECT, pfUserService.delUser(dto.getList()));
+                ResultObject.DATA_TYPE_OBJECT, pfUserService.delUser(dto));
     }
 
     /**
@@ -154,6 +180,7 @@ public class PfUserRestController extends BaseController {
     public ResultObject resetPsw(HttpServletRequest request, @RequestBody RegisterDto dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getPassword() != null, "password");
+        dto.setPlatOrSuper(SysUserAuthUtils.isPlatOrSuper());
         RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
         // 密码转化为明文
         String plainPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getPassword());
@@ -161,5 +188,46 @@ public class PfUserRestController extends BaseController {
         return ResultObject.create("resetPsw", ResultObject.SUCCESS_CODE, ResultObject.MSG_SUCCESS,
                 ResultObject.DATA_TYPE_OBJECT, pfUserService.resetPsw(dto));
     }
+
+    @RequestMapping(value = "/register/add", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject registerUser(HttpServletRequest request, @RequestBody UserRegisterDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(StringUtils.isNotBlank(dto.getEmail()), "email");
+        if (StringUtils.isBlank(dto.getEmailVercode())) {
+            // 验证码校验
+            if (!dto.getPhotoVercode()
+                    .equalsIgnoreCase((String) request.getSession().getAttribute(imageCodeUtil.getSessionKey()))) {
+                throw new BizRuntimeException("photoVcodeError", "请输入正确的图片验证码");
+            }
+        }
+        Assert.isTrue(StringUtils.isNotBlank(dto.getOrgName()), "orgName");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getPassword()), "password");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getPhone()), "phone");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getUsername()), "orgName");
+
+        RsaKeyPair keyPair = rsaKeyPairQueue.getRsaKeyQueue(request);
+        // 密码转化为明文
+        String plainPsw = RSAEncrypt.decryptByPrivateKeyStr(keyPair.getPrivateKey(), dto.getPassword());
+        dto.setPassword(plainPsw);
+        return ResultObject.createSuccess("registerUser", ResultObject.DATA_TYPE_OBJECT,
+                pfUserService.registerUser(dto));
+    }
+
+    @RequestMapping(value = "/register/sendEmailVcode", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject sendRegisterEmailVcode(HttpServletRequest request, @RequestBody RegisterVcodeDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(StringUtils.isNotBlank(dto.getEmail()), "email");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getPhotoVercode()), "photoVercode");
+        // 验证码校验
+        if (!dto.getPhotoVercode()
+                .equalsIgnoreCase((String) request.getSession().getAttribute(imageCodeUtil.getSessionKey()))) {
+            throw new BizRuntimeException("photoVcodeError", "请输入正确的图片验证码");
+        }
+        return ResultObject.createSuccess("sendRegisterEmailVcode", ResultObject.DATA_TYPE_OBJECT,
+                pfUserService.sendRegisterEmailVcode(dto.getEmail(), null));
+    }
+
 
 }

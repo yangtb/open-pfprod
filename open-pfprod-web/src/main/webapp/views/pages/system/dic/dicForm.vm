@@ -60,7 +60,7 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
-<script src="${contextPath}/public/biz/js/dicFormController.js"></script>
+<script src="${contextPath}/public/biz/js/system/dic/dicFormController.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 

@@ -85,7 +85,7 @@ html{height: 100%;}
     /*background-position: center top;*/
     background-repeat: no-repeat;
     background-size:100% 100%;-moz-background-size:100% 100%;
-    background-image: url(/pfprod/public/biz/img/login-background-1.png);
+    background-image: url(../img/login-background.png);
 }
 
 .content_inner {
@@ -147,4 +147,11 @@ input{
     font-size: 12px;
     color: #FFFFFF;
     letter-spacing: 0;
+}
+.open-prod-link {
+    color: #029789!important
+}
+
+.open-prod-link:hover {
+    opacity: .8;
 }

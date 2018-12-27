@@ -27,7 +27,8 @@ public class PfNoticeController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_NOTICE_MG','ROLE_SUPER')")
     @RequestMapping("/page")
-    public String page() {
+    public String page(String type, Model model) {
+        model.addAttribute("type", type);
         return "pages/system/notice/notice";
     }
 

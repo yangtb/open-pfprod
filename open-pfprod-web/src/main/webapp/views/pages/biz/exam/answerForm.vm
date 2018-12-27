@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>${formType}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '${basePath}';
+        var contextPath = '${contextPath}';
+        var idInspectItem = '$!{idInspectItem}';
+    </script>
+</head>
+
+<body>
+<div style="margin: 0px 10px 0px 10px">
+    <div class="layui-col-xs5">
+        <table id="answerTable" lay-filter="answerTableFilter">
+        </table>
+    </div>
+
+    <div class="layui-col-xs7">
+        <form class="layui-form" id="answerForm" style="padding-top: 10px">
+            <div hidden>
+                <input name="idResult" id="idResult" hidden>
+                <input name="idInspectItem" hidden>
+                <input name="idMedia" id="idMedia" hidden>
+                <input name="sdType" id="sdType" hidden>
+            </div>
+
+            <div class="layui-form-item form-item-my">
+                <div class="layui-inline">
+                    <label class="layui-form-label">结果值<i class="iconfont icon-required"
+                                                          style="color: #f03f2d"></i></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="valResult" autocomplete="off" class="layui-input"
+                               placeholder="结果值" lay-verify="required|desResult" lay-vertype="tips">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">结果说明</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="desResult" autocomplete="off" class="layui-input"
+                               placeholder="结果说明" lay-verify="desResult" lay-vertype="tips">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-form-item form-item-my">
+                <div class="layui-inline">
+                    <label class="layui-form-label">费用</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="costMoney" autocomplete="off" class="layui-input"
+                               placeholder="费用" lay-verify="vDecimal" lay-vertype="tips">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">消耗时间(m)</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="costTime" id="costTime" autocomplete="off" class="layui-input"
+                               placeholder="消耗时间" lay-verify="vDecimal" lay-vertype="tips">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item form-item-my">
+                <label class="layui-form-label">专家解读</label>
+                <div class="layui-input-block">
+                <textarea name="desExpert" class="layui-textarea" lay-verify="desResult" lay-vertype="tips"
+                          placeholder="请输入专家解读" style="width: 441px;"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item form-item-my">
+                <label class="layui-form-label">激活状态<i class="iconfont icon-required"
+                                                       style="color: #f03f2d"></i></label>
+                <div class="layui-input-block">
+                    <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
+                           value="1" lay-text="NO|OFF">
+                    &nbsp;&nbsp;
+                    <input type="checkbox" name="fgShow" value="1" title="结果是否在医嘱前展示">
+                    <input type="checkbox" name="fgReason" value="1" title="是否需要说明理由">
+                </div>
+            </div>
+
+            <div class="layui-form-item form-item-my5">
+                <label class="layui-form-label" style="padding-right: 88px;"></label>
+                <input type="checkbox"
+                       name="fgBack" value="1" title="是否根据病人的回答反馈">
+                <input type="checkbox" name="fgDefault" value="1" title="默认答案">
+            #*<input type="radio" name="radioGroup" value="fgTag" title="标签">*#
+            </div>
+
+            <div class="layui-form-item form-item-my5">
+                <label class="layui-form-label">多媒体</label>
+                <div class="layui-input-inline" style="vertical-align: middle; width: 257px;">
+                    <input id="path" name="path" placeholder="请上传文件" autocomplete="off"
+                           class="layui-input layui-disabled" disabled>
+                    <div id="uploadProgress" style="padding-top: 15px;display: none;">
+                        <div class="layui-progress" lay-showpercent="true" lay-filter="demo">
+                            <div class="layui-progress-bar layui-bg-blue" lay-percent="0%"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <button type="button" class="layui-btn layui-btn-primary" id="test3"><i class="layui-icon" style="color: #009688; font-weight: bold">&#xe608;</i>上传</button>
+                <button type="button" class="layui-btn layui-btn-primary" id="preview"><i class="iconfont icon-look1" style="color: #009688; font-weight: bold"></i> 预览</button>
+            </div>
+
+            <div class="layui-form-item form-item-my">
+                <div class="layui-inline">
+                    <label class="layui-form-label">创建人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="creator" autocomplete="off" class="layui-input layui-disabled"
+                               disabled>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">创建时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="gmtCreate" autocomplete="off" class="layui-input layui-disabled"
+                               disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item form-item-my">
+                <div class="layui-inline">
+                    <label class="layui-form-label">修改人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="operator" autocomplete="off" class="layui-input layui-disabled"
+                               disabled>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">修改时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="gmtModify" autocomplete="off" class="layui-input layui-disabled"
+                               disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button id="add" type="button" class="layui-btn">
+                        <i class="layui-icon layui-icon-add-1"></i>增加
+                    </button>
+                    <button id="save" class="layui-btn" lay-submit="" lay-filter="saveAnswer">
+                        <i class="iconfont icon-save-copy"></i> 保存
+                    </button>
+                    <button id="reset" type="reset" class="layui-btn layui-btn-danger">
+                        <i class="iconfont icon-reset"></i> 重置
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
+<script src="${contextPath}/public/common/js/jquery.min.js"></script>
+<script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
+<script src="${contextPath}/public/biz/js/biz/exam/answerController.js"></script>
+
+<script type="text/html" id="fgActiveTpl">
+    {{#  if(d.fgActive == '1'){ }}
+    <button class="layui-btn layui-btn-normal layui-btn-xs">启用</button>
+    {{#  } else { }}
+    <button class="layui-btn layui-btn-danger layui-btn-xs">停用</button>
+    {{#  } }}
+</script>
+
+<script type="text/html" id="examAnswer">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="layui-icon layui-icon-delete"></i></a>
+</script>
+
+</body>
+</html>

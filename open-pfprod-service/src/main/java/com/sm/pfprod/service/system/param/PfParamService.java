@@ -5,6 +5,8 @@ import com.sm.pfprod.model.dto.system.param.PfParamListDto;
 import com.sm.pfprod.model.entity.SysParam;
 import com.sm.pfprod.model.result.PageResult;
 
+import java.util.List;
+
 /**
  * @ClassName: PfParamFacade
  * @Description: 参数接口
@@ -45,4 +47,10 @@ public interface PfParamService {
      */
     boolean changeStatus(PfParamListDto dto);
 
+    /**
+     * 获取所有参数
+     *
+     * @return
+     */
+    List<SysParam> listAllParam();
 }

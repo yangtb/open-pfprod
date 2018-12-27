@@ -25,7 +25,7 @@
             <label class="layui-form-label">原密码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <input type="hidden" name="oldPassword" id="encryptOldPassword">
-                <input type="password" id="clearOldPassword" lay-verify="required" autocomplete="off"
+                <input type="password" id="clearOldPassword" lay-verify="required" lay-vertype="tips" autocomplete="off"
                        placeholder="请输入原密码"
                        class="layui-input">
             </div>
@@ -35,7 +35,7 @@
             <label class="layui-form-label">新密码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <input type="hidden" name="newPassword" id="encryptNewPassword">
-                <input type="password" id="clearNewPassword" lay-verify="required|pass" autocomplete="off"
+                <input type="password" id="clearNewPassword" lay-verify="required|pass" lay-vertype="tips" autocomplete="off"
                        placeholder="请输入新密码"
                        class="layui-input">
             </div>
@@ -43,7 +43,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">确认密码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <input type="password" id="clearNewPassword2" lay-verify="required" autocomplete="off"
+                <input type="password" id="clearNewPassword2" lay-verify="required" lay-vertype="tips" autocomplete="off"
                        placeholder="请再次输入新密码"
                        class="layui-input">
             </div>
@@ -63,8 +63,8 @@
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.jcryption.3.1.0.js"></script>
-<script src="${contextPath}/public/biz/js/modifyPassController.js"></script>
-<script src="${contextPath}/public/biz/js/modifyPassFormController.js"></script>
+<script src="${contextPath}/public/biz/js/user/pass/modifyPassController.js"></script>
+<script src="${contextPath}/public/biz/js/user/pass/modifyPassFormController.js"></script>
 
 <script>
     $(function () {

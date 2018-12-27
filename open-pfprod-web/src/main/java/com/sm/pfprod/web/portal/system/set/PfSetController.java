@@ -47,4 +47,10 @@ public class PfSetController extends BaseController {
         model.addAttribute("websiteInfo", JSON.toJSONString(pfSetService.selectWebsiteSet()));
         return "pages/system/set/websiteSetForm";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_SUPER')")
+    @RequestMapping("/upload/page")
+    public String uploadForm(Model model) {
+        return "pages/system/set/uploadSetForm";
+    }
 }

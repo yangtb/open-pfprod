@@ -32,7 +32,7 @@ public class PfParamController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_PARAM_MG','ROLE_SUPER')")
     @RequestMapping("/page")
     public String page(Model model) {
-        model.addAttribute("modualMap", enumUtil.getEnumMap(SysDicGroupEnum.SYS_PARAM_BIZ_MODUAL.getCode()));
+        model.addAttribute("modelList", enumUtil.getEnumList(SysDicGroupEnum.SYS_PARAM_BIZ_MODUAL.getCode()));
         return "pages/system/param/param";
     }
 
@@ -40,7 +40,7 @@ public class PfParamController extends BaseController {
     @RequestMapping("/form")
     public String form(String formType, Model model) {
         model.addAttribute("formType", formType);
-        model.addAttribute("modualMap", enumUtil.getEnumMap(SysDicGroupEnum.SYS_PARAM_BIZ_MODUAL.getCode()));
+        model.addAttribute("modelList", enumUtil.getEnumList(SysDicGroupEnum.SYS_PARAM_BIZ_MODUAL.getCode()));
         return "pages/system/param/paramForm";
     }
 

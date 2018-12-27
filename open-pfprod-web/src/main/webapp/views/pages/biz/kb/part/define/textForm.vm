@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>文本定义</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '$!{basePath}';
+        var contextPath = '$!{contextPath}';
+        var idMedCase = '$!{idMedCase}';
+        var tagFlag='$!{tagFlag}';
+        var idMedicalrec = '$!{idMedicalrec}';
+        var idTag ='$!{idTag}';
+        var caseName ='$!{caseName}';
+        var previewFlag = '$!{previewFlag}';
+    </script>
+
+</head>
+
+<body class="body-my">
+<div class="wrapper-content">
+    <form class="layui-form" id="kbPartTextForm" lay-filter="kbPartTextFilter">
+        <div hidden>
+            <input name="idMedCase" hidden>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">文本<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入文本" class="layui-textarea" name="content" id="content"
+                          lay-verify="required" lay-vertype="tips"
+                          style="height: 260px;width: 800px;"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                #if($!{showBtn} == 1)
+                    <button id="saveBtn" class="layui-btn" lay-submit="" lay-filter="addKbPartText">
+                        <i class="iconfont icon-save-copy"></i> 保存
+                    </button>
+                    #*<button class="layui-btn" lay-submit="" lay-filter="saveAsKbPartText">
+                        <i class="iconfont icon-lingcunwei"></i> 重载
+                    </button>
+                    <button id="reset" type="reset" class="layui-btn layui-btn-danger">
+                        <i class="iconfont icon-reset"></i> 重置
+                    </button>*#
+                #end
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="$!{contextPath}/public/biz/js/biz/kb/part/kbTextFormController.js"></script>
+
+
+</body>
+</html>

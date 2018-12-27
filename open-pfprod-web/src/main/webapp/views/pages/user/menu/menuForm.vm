@@ -37,7 +37,7 @@
                         <option value="">请选择</option>
                         <option value="1">一级</option>
                         <option value="2">二级</option>
-                        #*<option value="3">三级</option>*#
+                        <option value="3">三级</option>
                     </select>
                 </div>
             </div>
@@ -68,10 +68,11 @@
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">菜单位置<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+                <label class="layui-form-label">菜单位置</label>
                 <div class="layui-input-inline">
-                    <select name="position" lay-verify="required" lay-vertype="tips">
-                        <option value="left" selected>左侧</option>
+                    <select name="position">
+                        <option value="">未选择</option>
+                        <option value="left">左侧</option>
                         <option value="top">顶部</option>
                     </select>
                 </div>
@@ -150,7 +151,7 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
-<script src="${contextPath}/public/biz/js/menuFormController.js"></script>
+<script src="${contextPath}/public/biz/js/user/menu/menuFormController.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 

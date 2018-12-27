@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>检验</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/css/service.css">
+    <link rel="stylesheet" href="${contextPath}/public/ztree/zTreeStyle/zTreeStyle.css" type="text/css">
+
+    <script>
+        var basePath = '${basePath}';
+        var idMedicalrec = '$!{idMedicalrec}';
+        var cdMedAsse = '$!{cdMedAsse}';
+        var idTestexecResult = '$!{idTestexecResult}';
+        var executingShowExpert = '$!{executingShowExpert}';
+        var completedShowExpert = '$!{completedShowExpert}';
+        var sdTestexec='$!{sdTestexec}';
+    </script>
+
+</head>
+
+<body class="wrapper-content">
+
+<div>
+    <div class="layui-col-xs6">
+        <div class="layui-row">
+            <div class="layui-col-xs7">
+                <form class="layui-form">
+                    <div class="layui-inline">
+                        <div class="layui-input-inline">
+                            <input type="text" name="keyword" id="keyword" autocomplete="off" class="layui-input"
+                                   placeholder="请输入检验项目">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-inline">
+                            <button type="button" class="layui-btn" id="queryBtn">
+                                <i class="iconfont icon-query"></i> 查询
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-col-xs5" style="text-align: right">
+               #* <button type="button" class="layui-btn" id="refreshRight">
+                    <i class="iconfont icon-add"></i> 检验
+                </button>*#
+            </div>
+        </div>
+        <div class="layui-row">
+            <div class="layui-col-xs4" style="padding-top: 10px">
+                <div id="treeDiv" style="overflow:auto; border: 1px solid #cccccc">
+                    <ul id="treeDemo" class="ztree"></ul>
+                </div>
+            </div>
+            <div class="layui-col-xs8">
+                <table id="execExamTable" lay-filter="execExamTableFilter">
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-xs6" style="padding-left:5px;">
+        <div class="service-wrapper" style="border: 1px solid #dddddd;">
+            <div class="progress-box">
+                <div class="item-box" hidden>
+                    <p class="progress-item"><span class="middle">6</span>/10</p>
+                    <p class="progress-item"><span class="end">10</span>/10</p>
+                    <p class="progress-item"><span class="end">12</span>/10</p>
+                </div>
+            </div>
+            <ul class="service-box" id="serviceBox">
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
+<script src="${contextPath}/public/ztree/js/jquery.ztree.core.js"></script>
+<script src="${contextPath}/public/biz/js/biz/tests/room/exec/execExamController.js"></script>
+
+<script type="text/html" id="qaExamTpl">
+    <input type="checkbox" id="exam{{d.idMedCaseList}}" name="qa" value="{{d.idInspectItem}}-{{d.idMedCaseList}}"
+           lay-skin="primary" lay-filter="qaExamFilter" {{ d.extQa== true ? 'checked' : '' }} {{ d.extQa== true ? 'disabled' : '' }}>
+</script>
+
+<script type="text/html" id="nzTpl">
+    <a href="javascript:;" class="layui-table-link" id="nz{{d.idMedCaseList}}"
+       data-index="{{ d.idDie ? d.idDie : '' }}"
+       data-qa-check="{{ d.extQa== true ? true : false }}" lay-event="add">
+        {{# if(d.idDie){ }}
+        {{d.idDieText}}
+        {{# } else { }}
+        点击选择
+        {{# } }}
+    </a>
+</script>
+
+
+</body>
+
+
+</html>

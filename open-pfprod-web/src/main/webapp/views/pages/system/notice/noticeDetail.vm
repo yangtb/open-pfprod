@@ -40,6 +40,7 @@
     </style>
     <script>
         var basePath = '${basePath}';
+        var formType = '';
     </script>
 </head>
 
@@ -58,7 +59,7 @@
             <div>
                 <p class="notice-content-title">尊敬的用户：</p>
                 <br>
-                <div id="noticeContent">
+                <div id="noticeContentPreview">
 
                 </div>
             </div>
@@ -70,12 +71,11 @@
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<script src="${contextPath}/public/biz/js/noticeFormController.js"></script>
+<script src="${contextPath}/public/biz/js/system/notice/noticeFormController.js"></script>
 
 <script>
     function fullForm(data) {
         $(document).ready(function () {
-            console.log(data)
             $("#noticeTitle").html(data.noticeTitle);
             var noticeTypeName = '';
             if (data.noticeType == 1) {
@@ -90,7 +90,7 @@
             if (data.operator) {
                 $("#operator").html('发布者：' + data.operator);
             }
-            $("#noticeContent").html(data.noticeContent);
+            $("#noticeContentPreview").html(data.noticeContent);
         });
     }
 </script>

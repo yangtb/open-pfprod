@@ -25,15 +25,16 @@
         <form class="layui-form">
             <div class="layui-inline">
                 <div class="layui-btn-group">
-                    <button type="button" class="layui-btn add">增加</button>
-                    <button type="button" class="layui-btn edit">编辑</button>
-                    <button type="button" class="layui-btn cancel">作废</button>
-                    <button type="button" class="layui-btn del">删除</button>
+                    <button type="button" class="layui-btn" id="add">增加</button>
+                    <button type="button" class="layui-btn" id="edit">编辑</button>
+                    <button type="button" class="layui-btn" id="cancel">作废</button>
+                    <button type="button" class="layui-btn layui-btn-danger" id="del">删除</button>
                 </div>
             </div>
             <div class="layui-inline">
                 <div class="layui-input-inline">
-                    <input type="text" name="queryCondition" placeholder="请输入角色名称" class="layui-input">
+                    <input type="text" name="queryCondition" placeholder="请输入角色名称" class="layui-input"
+                           autocomplete="off" style="width: 130px;">
                 </div>
             </div>
             <div class="layui-input-inline" style="width: 70px;">
@@ -59,14 +60,14 @@
     </div>
     <div class="layui-col-xs4">
         <div id="treeTitle">
-            <fieldset class="layui-elem-field layui-field-title" style="margin:10px 0 0;">
+            <fieldset class="layui-elem-field layui-field-title" style="margin:5px 0 0;">
                 <legend>
                     <span id="treeRoleName"></span>授权
                     <button class="layui-btn layui-btn-sm" id="saveSet">保存设置</button>
                 </legend>
             </fieldset>
         </div>
-        <div id="treeDiv" style="overflow:auto;">
+        <div id="treeDiv" style="overflow:auto; border-bottom: 1px solid #dddddd">
             <ul id="roleTree" class="ztree"></ul>
         </div>
     </div>
@@ -75,7 +76,7 @@
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/ztree/js/jquery.ztree.all.min.js"></script>
-<script src="${contextPath}/public/biz/js/roleController.js"></script>
+<script src="${contextPath}/public/biz/js/user/role/roleController.js"></script>
 
 <script type="text/html" id="stateTpl">
     {{#  if(d.state == 0){ }}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="${basePath}/public/biz/img/logo/favicon.ico" rel="shortcut icon">
+    <title>${homeInfo.websiteName}</title>
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+    <link rel="stylesheet" href="${contextPath}/public/layui/build/css/app.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/layui/build/css/themes/default.css" media="all" id="skin" kit-skin/>
+    <script>
+        var basePath = '${basePath}';
+        var isAnonymousUser='$!{homeInfo.anonymousUser}';
+        var fgActive= '$!{homeInfo.sysOrg.getFgActive()}';
+        var gmtValid = '$!{homeInfo.sysOrg.getGmtValid()}';
+        var orgExpiryNoticeDay = '$!{orgExpiryNoticeDay}';
+    </script>
+</head>
+
+<body class="kit-theme">
+<div class="layui-layout layui-layout-admin kit-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo" style="font-size:16px">
+            <i class="iconfont icon-yunpingtai"></i> ${homeInfo.websiteName}
+        </div>
+        <div class="layui-logo kit-logo-mobile">M</div>
+
+        <ul class="layui-nav layui-layout-left kit-nav">
+            #if(!$homeInfo.topMenus.isEmpty())
+                #foreach($element in $homeInfo.topMenus)
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"
+                           #if($element.groupList.isEmpty()) kit-target data-id='$!element.parentMenuId'
+                           data-icon='$!element.parentImg' data-title='$!element.parentMenuName'
+                           data-url='${contextPath}$!element.parentUrl'#end>
+                            <i class="iconfont $!element.parentImg"></i>
+                            <span> $!element.parentMenuName</span>
+                        </a>
+                        #if(!$element.groupList.isEmpty())
+                            <dl class="layui-nav-child">
+                                #foreach($menu in $element.groupList)
+                                    <dd>
+                                        <a href="javascript:;" data-url="${contextPath}$!menu.url"
+                                           data-icon="$!menu.img"
+                                           data-title="$!menu.name" kit-target data-id='$!menu.menuId'>
+                                            <i class="iconfont $!menu.img"></i><span> $!menu.name</span>
+                                        </a>
+                                    </dd>
+                                #end
+                            </dl>
+                        #end
+                    </li>
+                #end
+            #end
+        </ul>
+
+        <ul class="layui-nav layui-layout-right kit-nav">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <i class="iconfont icon-skin1"></i> 皮肤</a>
+                </a>
+                <dl class="layui-nav-child skin">
+                    <dd><a href="javascript:;" data-skin="default" style="color:#393D49;">
+                        <i class="layui-icon">&#xe658;</i> 默认</a></dd>
+                    <dd><a href="javascript:;" data-skin="orange" style="color:#ff6700;">
+                        <i class="layui-icon">&#xe658;</i> 橘子橙</a></dd>
+                    <dd><a href="javascript:;" data-skin="green" style="color:#00a65a;">
+                        <i class="layui-icon">&#xe658;</i> 原谅绿</a></dd>
+                    <dd><a href="javascript:;" data-skin="pink" style="color:#FA6086;">
+                        <i class="layui-icon">&#xe658;</i> 少女粉</a></dd>
+                    <dd><a href="javascript:;" data-skin="blue.1" style="color:#00c0ef;">
+                        <i class="layui-icon">&#xe658;</i> 天空蓝</a></dd>
+                    <dd><a href="javascript:;" data-skin="red" style="color:#dd4b39;">
+                        <i class="layui-icon">&#xe658;</i> 枫叶红</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <i class="iconfont icon-message"></i>消息<span class="layui-badge">9</span></span>
+                </a>
+            </li>
+            <li class="layui-nav-item">
+                <a id="fullScreen" href="javascript:;"><i class="iconfont icon-quanping"></i> 全屏</a>
+                <a id="exitScreen" href="javascript:;" style="display: none;">
+                    <i class="iconfont icon-tuichuquanping"></i> 退出全屏
+                </a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="${basePath}/public/biz/img/user-head-default.png" class="layui-nav-img">$!homeInfo.username
+                </a>
+                #if(${homeInfo.anonymousUser} == false)
+                    <dl class="layui-nav-child">
+                        #*<dd><a href="javascript:;" kit-target
+                               data-options="{url:'${basePath}/user/userDetail',icon:'icon-wodeziliao',title:'基本资料',id:'jbzl'}">
+                            <i class="iconfont icon-wodeziliao"></i><span> 基本资料</span></a></dd>*#
+                        #if(${homeInfo.sysOrg})
+                            <dd>
+                                <a id="orgInfo" href="javascript:;" kit-target
+                                   data-options="{url:'${basePath}/pf/p/org/form?formType=edit&idOrg=$!{homeInfo.sysOrg.idOrg}',icon:'icon-organization',title:'机构资料',id:'jgzl'}">
+                                <i class="iconfont icon-organization"></i><span> 机构资料</span></a>
+                            </dd>
+                        #end
+                        <dd id="modifyPass"><a href="javascript:;" data-title="修改密码">
+                            <i class="iconfont icon-modifyPass"></i><span> 修改密码</span></a></dd>
+                    </dl>
+                #end
+            </li>
+            <li class="layui-nav-item">
+                <a id="logout" href="javascript:;"><i class="iconfont icon-logout2"></i> 注销</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black kit-side">
+        <div class="layui-side-scroll">
+            <div class="kit-side-fold"><i class="iconfont icon-fold" aria-hidden="true"></i></div>
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
+                #if(!$homeInfo.leftMenus.isEmpty())
+                    #foreach($element in $homeInfo.leftMenus)
+                    <li class="layui-nav-item #if(${velocityCount}==1)layui-nav-itemed#end">
+                        <a href="javascript:;"
+                            #if($element.groupList.isEmpty()) kit-target data-id='$!element.parentMenuId'
+                           data-icon='$!element.parentImg' data-title='$!element.parentMenuName'
+                           data-url='${contextPath}$!element.parentUrl'#end>
+                            <i class="iconfont $!element.parentImg"></i>
+                            <span> $!element.parentMenuName</span>
+                        </a>
+                        #if(!$element.groupList.isEmpty())
+                            <dl class="layui-nav-child">
+                            #foreach($menu in $element.groupList)
+                                <dd>
+                                    <a href="javascript:;" data-url="${contextPath}$!menu.url"
+                                       data-icon="$!menu.img"
+                                       data-title="$!menu.name" kit-target data-id='$!menu.menuId'>
+                                        <i class="iconfont $!menu.img"></i><span> $!menu.name</span>
+                                    </a>
+                                </dd>
+                            #end
+                            </dl>
+                        #end
+                    </li>
+                    #end
+                #end
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body" id="container">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">主体内容加载中,请稍等...</div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        ${homeInfo.websiteCopyright}<a href="">(推荐使用IE9+ 、Firefox、Chrome 浏览器访问)</a>
+    </div>
+</div>
+
+<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="${contextPath}/public/common/js/moment.js"></script>
+<script src="${contextPath}/public/biz/js/index/indexController.js"></script>
+
+</body>
+
+</html>

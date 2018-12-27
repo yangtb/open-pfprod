@@ -10,6 +10,7 @@ import com.sm.open.core.facade.pf.system.param.PfParamFacade;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Component
 public class ParamClient {
@@ -32,5 +33,9 @@ public class ParamClient {
 
     public CommonResult<Boolean> changeStatus(PfParamListParam param) {
         return pfParamFacade.changeStatus(param);
+    }
+
+    public CommonResult<List<SysParamResult>> listAllParam() {
+        return pfParamFacade.listAllParam();
     }
 }

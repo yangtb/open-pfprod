@@ -1,9 +1,13 @@
 package com.sm.pfprod.web.portal;
 
+import com.sm.open.care.core.enums.YesOrNo;
 import com.sm.open.care.core.utils.rsa.RsaKeyPair;
+import com.sm.pfprod.model.entity.SysParam;
+import com.sm.pfprod.model.enums.SysParamEnum;
 import com.sm.pfprod.model.result.Result;
 import com.sm.pfprod.web.security.rsa.RsaKeyPairQueue;
 import com.sm.pfprod.web.util.ImageCodeUtil;
+import com.sm.pfprod.web.util.ParamUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -48,16 +52,30 @@ public class LoginController extends BaseController {
     @Resource
     private ImageCodeUtil imageCodeUtil;
 
+    @Resource
+    private ParamUtil paramUtil;
+
     /**
      * 网站名称
      */
     @Value("${website.name}")
     private String websiteName;
 
+    @Value("${website.copyright}")
+    private String websiteCopyright;
+
+    @Value("${website.approve}")
+    private String websiteApprove;
+
     @RequestMapping(value = "/login")
     public String home(Model model, HttpServletRequest request) {
         this.setModelAttr(model, request);
         model.addAttribute("websiteName", websiteName);
+        model.addAttribute("websiteCopyright", websiteCopyright);
+        model.addAttribute("websiteApprove", websiteApprove);
+        SysParam sysParam = paramUtil.getParamInfo(SysParamEnum.VISITOR_SWITCH.getCode());
+        model.addAttribute(SysParamEnum.VISITOR_SWITCH.getCode(),
+                sysParam != null ? sysParam.getParamValue() : YesOrNo.NO.getCode());
         return "login";
     }
 
@@ -69,6 +87,8 @@ public class LoginController extends BaseController {
             model.addAttribute(ERROR_MSG, "");
         }
         model.addAttribute("websiteName", websiteName);
+        model.addAttribute("websiteCopyright", websiteCopyright);
+        model.addAttribute("websiteApprove", websiteApprove);
         this.setModelAttr(model, request);
         return "login";
     }

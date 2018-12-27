@@ -1,5 +1,6 @@
 package com.sm.pfprod.service.system.param.impl;
 
+import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
 import com.sm.open.core.facade.model.param.pf.system.param.Param;
 import com.sm.open.core.facade.model.param.pf.system.param.PfParamListParam;
@@ -16,6 +17,7 @@ import com.sm.pfprod.service.system.param.PfParamService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class PfParamServiceImpl implements PfParamService {
@@ -57,5 +59,14 @@ public class PfParamServiceImpl implements PfParamService {
             return result.getContent();
         }
         return false;
+    }
+
+    @Override
+    public List<SysParam> listAllParam() {
+        CommonResult<List<SysParamResult>> result = paramClient.listAllParam();
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), SysParam.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 }

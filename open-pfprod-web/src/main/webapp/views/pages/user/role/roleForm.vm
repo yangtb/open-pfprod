@@ -17,7 +17,7 @@
     </script>
 </head>
 
-<body>
+<body class="body-my">
 <div class="wrapper-content">
     <form class="layui-form" id="roleform">
         <div hidden>
@@ -26,15 +26,28 @@
         <div class="layui-form-item">
             <label class="layui-form-label">角色名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input"
+                <input type="text" name="name" lay-verify="required|name" lay-vertype="tips" autocomplete="off" class="layui-input"
                        placeholder="请输入角色名称">
             </div>
         </div>
-
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色编码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <div class="layui-input-block">
+                <input type="text" name="code" lay-verify="required|code" lay-vertype="tips" autocomplete="off" class="layui-input"
+                       placeholder="请输入角色编码">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色级别<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <div class="layui-input-block">
+                <input type="text" name="level" lay-verify="required|level" lay-vertype="tips" autocomplete="off" class="layui-input"
+                       placeholder="角色级别, 从1递增权限逐次减小">
+            </div>
+        </div>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">角色描述<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <textarea name="resume" lay-verify="required" class="layui-textarea"
+                <textarea name="resume" lay-verify="required|resume" lay-vertype="tips" class="layui-textarea"
                           placeholder="请输入角色描述"></textarea>
             </div>
         </div>
@@ -57,7 +70,7 @@
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<script src="${contextPath}/public/biz/js/roleFormController.js"></script>
+<script src="${contextPath}/public/biz/js/user/role/roleFormController.js"></script>
 <script>
     function fullForm(data) {
         $(document).ready(function () {

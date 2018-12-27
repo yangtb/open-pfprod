@@ -16,8 +16,8 @@ public class AuthorityServiceImpl implements AuthorityService {
     private LoginClient loginClient;
 
     @Override
-    public List<String> findAuthoritiesByUserId(Long userId) {
-        CommonResult<List<String>> result = loginClient.findAuthoritiesByUserId(userId);
+    public List<String> findAuthoritiesByUserId(Long userId, String roleType) {
+        CommonResult<List<String>> result = loginClient.findAuthoritiesByUserId(userId, roleType);
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }

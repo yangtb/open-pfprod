@@ -59,7 +59,7 @@
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
-<script src="${contextPath}/public/biz/js/demoController.js"></script>
+<script src="${contextPath}/public/biz/js/biz/media/demoController.js"></script>
 
 </body>
 

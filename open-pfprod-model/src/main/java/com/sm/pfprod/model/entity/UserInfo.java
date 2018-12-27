@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户表
@@ -28,12 +29,22 @@ public class UserInfo implements Serializable {
     private String      roleType;       // 用户角色类型：1超级管理员，2普通管理员
     private String      roleDesc;       // 管理员角色描述
     private String      realName;       // 真实姓名
-    private int         sex;            // 性别
+    private Integer         sex;            // 性别
     private String      remark;         // 备注
+    private Long        idOrg;          // 机构ID
     private Date        lastLoginTime;  // 最后登录时间
     private String      isDeleted;      // 删除标示，N未删除 Y-已删除
     private String      operator;       // 操作人员
     private Date        gmtCreate;      // 创建时间
     private Date        gmtModify;      // 更新时间
+    /** 当前用户所在机构级别 */
+    private String fgPlat;
 
+    /** 当前用户所在机构状态 */
+    private String fgActive;
+
+    /**
+     * 用户拥有角色编辑集合
+     */
+    private List<String> roleCodes;
 }

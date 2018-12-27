@@ -1,6 +1,7 @@
 package com.sm.pfprod.web.security;
 
 import com.alibaba.fastjson.JSON;
+import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.pfprod.model.entity.UserInfo;
 import com.sm.pfprod.service.user.login.PfUserService;
 import com.sm.pfprod.service.user.security.AuthorityService;
@@ -48,7 +49,7 @@ public class PfUserDetailsService implements UserDetailsService, InitializingBea
         UserInfo user = pfUserService.selectUser(username);
         CustomUser customUser = customUserMap != null ? customUserMap.get(username) : null;
         PfUserDetails userDetails;
-        Set<GrantedAuthority> dbAuthsSet = new HashSet<GrantedAuthority>();
+        Set<GrantedAuthority> dbAuthsSet = new HashSet<>();
         if (user == null || user.getUserId() == null || user.getUserId() <= 0 || StringUtils.isBlank(user.getUsername())) {
             String logMsg = "查询用户'" + username + "'返回结果为空。" + JSON.toJSONString(user);
             String exceptionMsg = messages.getMessage("findUserByUserName({0})", new Object[]{username}, "用户:" + username + "不存在！" + JSON.toJSONString(user));
@@ -71,7 +72,7 @@ public class PfUserDetailsService implements UserDetailsService, InitializingBea
         }
         dbAuthsSet.addAll(customAuthorities);
 
-        List<String> authorities = authorityService.findAuthoritiesByUserId(user.getUserId());
+        List<String> authorities = authorityService.findAuthoritiesByUserId(user.getUserId(), user.getRoleType());
         if (CollectionUtils.isNotEmpty(authorities)) {
             for (Iterator<String> iterator = authorities.iterator(); iterator.hasNext(); ) {
                 String authority = iterator.next();
@@ -79,7 +80,7 @@ public class PfUserDetailsService implements UserDetailsService, InitializingBea
             }
         }
 
-        List<GrantedAuthority> dbAuthList = new ArrayList<GrantedAuthority>(dbAuthsSet);
+        List<GrantedAuthority> dbAuthList = new ArrayList<>(dbAuthsSet);
         if (CollectionUtils.size(dbAuthList) == 0) {
             logger.debug("用户'" + username + "'没有权限资源，该用户将被当做‘用户不存在’处理");
             throw new UsernameNotFoundException(messages.getMessage("PfUserDetailsService.noAuthority", new Object[]{username}, "用户" + username + "没有被授予权限资源"));
@@ -91,7 +92,7 @@ public class PfUserDetailsService implements UserDetailsService, InitializingBea
     protected PfUserDetails createUserDetails(UserInfo user) {
         PfUserDetails ud = new PfUserDetails();
         BeanUtils.copyProperties(user, ud);
-        ud.setAccountNonExpired(true);
+        ud.setAccountNonExpired(user.getFgActive().equals(YesOrNoNum.YES.getCode()) ? true : false);
         ud.setAccountNonLocked(true);
         ud.setCredentialsNonExpired(true);
         return ud;
@@ -104,7 +105,7 @@ public class PfUserDetailsService implements UserDetailsService, InitializingBea
             customAuthoritiesAsString = customAuthoritiesAsString.trim();
             Validate.isTrue(customAuthoritiesAsString.matches("^\\s*ROLE_[a-zA-Z0-9-_]+([,| |\t]+ROLE_[a-zA-Z0-9-_]+)*\\s*$"));
             String[] auths = customAuthoritiesAsString.split("[,| |\t]+");
-            customAuthorities = new ArrayList<PfGrantedAuthority>();
+            customAuthorities = new ArrayList<>();
             for (String auth : auths) {
                 customAuthorities.add(new PfGrantedAuthority(auth.trim()));
             }
@@ -123,7 +124,7 @@ public class PfUserDetailsService implements UserDetailsService, InitializingBea
         if (CollectionUtils.isEmpty(customUsers)) {
             return;
         }
-        this.customUserMap = new HashMap<String, CustomUser>();
+        this.customUserMap = new HashMap<>();
         for (CustomUser user : customUsers) {
             if (!StringUtils.isBlank(user.getUsername())) {
                 customUserMap.put(user.getUsername().trim(), user);

@@ -23,4 +23,24 @@ public class PfBachChangeStatusDto implements Serializable {
     private List<Long> list;
 
     private String status;
+
+    /**
+     * 修改人员
+     */
+    private String operator;
+
+    /**
+     * 操作类型 del=删除 updateStatus=修改状态
+     */
+    private String operationType;
+
+    /**
+     * 扩展ID，公用
+     */
+    private Long extId;
+
+    /**
+     * 扩展类型
+     */
+    private String extType;
 }

@@ -2,17 +2,21 @@ package com.sm.pfprod.service.user.login.impl;
 
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
+import com.sm.open.core.facade.model.param.pf.common.PfCommonListParam;
 import com.sm.open.core.facade.model.param.pf.user.PfUserParam;
 import com.sm.open.core.facade.model.param.pf.user.login.RegisterParam;
 import com.sm.open.core.facade.model.param.pf.user.login.UpdatePswParam;
+import com.sm.open.core.facade.model.param.pf.user.register.UserRegisterParam;
 import com.sm.open.core.facade.model.result.pf.common.auth.UserInfoResult;
 import com.sm.open.core.facade.model.result.pf.user.login.PfUsersResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.user.login.LoginClient;
+import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
 import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
+import com.sm.pfprod.model.dto.user.register.UserRegisterDto;
 import com.sm.pfprod.model.entity.UserInfo;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.user.login.PfUserService;
@@ -42,7 +46,7 @@ public class PfUserServiceImpl implements PfUserService {
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
-        return false;
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
     @Override
@@ -51,25 +55,25 @@ public class PfUserServiceImpl implements PfUserService {
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
-        return false;
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
     @Override
-    public boolean delUser(List<Long> users) {
-        CommonResult<Boolean> result = loginClient.delUser(users);
+    public boolean delUser(PfCommonListDto dto) {
+        CommonResult<Boolean> result = loginClient.delUser(BeanUtil.convert(dto, PfCommonListParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
-        return false;
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
     @Override
-    public boolean freezeUser(List<Long> users) {
-        CommonResult<Boolean> result = loginClient.freezeUser(users);
+    public boolean freezeUser(PfCommonListDto dto) {
+        CommonResult<Boolean> result = loginClient.freezeUser(BeanUtil.convert(dto, PfCommonListParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
-        return false;
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
 
@@ -79,7 +83,7 @@ public class PfUserServiceImpl implements PfUserService {
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
-        return false;
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
     @Override
@@ -88,7 +92,7 @@ public class PfUserServiceImpl implements PfUserService {
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
-        return false;
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
     @Override
@@ -96,6 +100,24 @@ public class PfUserServiceImpl implements PfUserService {
         CommonResult<UserInfoResult> result = loginClient.selectUser(userName);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convert(result.getContent(), UserInfo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean registerUser(UserRegisterDto dto) {
+        CommonResult<Boolean> result = loginClient.registerUser(BeanUtil.convert(dto, UserRegisterParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean sendRegisterEmailVcode(String email, Long userId) {
+        CommonResult<Boolean> result = loginClient.sendRegisterEmailVcode(email, userId);
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }

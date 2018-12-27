@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>编辑模板</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/style/admin.css" media="all">
+    <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '$!{basePath}';
+        var contextPath = '$!{contextPath}';
+        var idDemo = '$!{idDemo}';
+        var tags = '$!{tags}'
+    </script>
+</head>
+
+<body>
+
+<div>
+    <div class="layadmin-shortcut">
+        <div class="layui-col-xs1" style="border-right: 1px solid #2F4056">
+            <ul class="layui-row layui-col-space10">
+                #if(!$tags.isEmpty())
+                    #foreach($!element in $!tags)
+                        <li id="tag-$!element.cdMedAsse" class="layui-row-xs3" data-url="$!{basePath}$!element.script">
+                            <a href="javascript:;">
+                                <img style="display: inline-block; width: 40px; height: 40px;"
+                                     src="$!element.path">
+                                <cite>$!element.name</cite>
+                            </a>
+                        </li>
+                    #end
+                #end
+            </ul>
+        </div>
+
+        <div class="layui-col-xs11" style="padding-left: 5px;">
+            <form class="layui-form layui-form-pane" id="csForm">
+                <div hidden>
+                    <input name="idMedCaseList" id="idMedCaseList" hidden>
+                </div>
+                <div class="layui-form-item form-item-my5">
+                    <label class="layui-form-label">选择用例</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="desInques" id="desInques" autocomplete="off"
+                               class="layui-input layui-disabled"
+                               placeholder="请输入答案内容"
+                               style="display:inline-block;width:250px;vertical-align:middle;
+                                      argin-right:-5px;border: 1px solid #C9C9C9;" disabled>
+                        <button type="button" class="layui-btn layui-btn-primary" id="searchAnswer">
+                            <i class="layui-icon layui-icon-search"></i>
+                        </button>
+
+                        <div class="layui-btn-group">
+                            <button id="addCase" type="button" class="layui-btn">
+                                <i class="layui-icon layui-icon-add-1"></i>新增用例
+                            </button>
+                            <button id="saveCase" class="layui-btn" lay-submit="" lay-filter="saveCase">
+                                <i class="iconfont icon-edit"></i> 编辑用例
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <iframe id="csTag" class='layui-col-xs12' frameborder="0" style="margin: -10px;"
+                    src=""></iframe>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.all.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.formautofill.js"></script>
+<script src="$!{contextPath}/public/biz/js/biz/kb/casehistory/tagFormController.js"></script>
+
+<script type="text/html" id="fgActiveTpl">
+    {{#  if(d.fgActive == '1'){ }}
+    <button class="layui-btn layui-btn-normal layui-btn-xs">启用</button>
+    {{#  } else { }}
+    <button class="layui-btn layui-btn-danger layui-btn-xs">停用</button>
+    {{#  } }}
+</script>
+
+<script type="text/html" id="tagBar">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="layui-icon layui-icon-delete"></i></a>
+</script>
+
+</body>
+</html>

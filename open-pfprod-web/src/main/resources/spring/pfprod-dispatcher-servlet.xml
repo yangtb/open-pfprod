@@ -93,10 +93,25 @@
             <mvc:exclude-mapping path="/help/**" />
             <mvc:exclude-mapping path="/" />
             <mvc:exclude-mapping path="/login" />
-            <mvc:exclude-mapping path="/403.html" />
-            <mvc:exclude-mapping path="/404.html" />
-            <mvc:exclude-mapping path="/500.html" />
+            <mvc:exclude-mapping path="/403" />
+            <mvc:exclude-mapping path="/404" />
+            <mvc:exclude-mapping path="/500" />
+            <mvc:exclude-mapping path="/pf/p/user/register/page" />
+            <mvc:exclude-mapping path="/pf/r/user/register/**" />
+            <mvc:exclude-mapping path="/index" />
+            <mvc:exclude-mapping path="/main.html" />
             <bean class="com.sm.pfprod.web.interceptor.SessionTimeOutInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
+
+
+    <!-- 文件上传配置 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 默认编码 -->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 上传文件大小限制为31M，31*1024*1024 -->
+        <property name="maxUploadSize" value="32505856"/>
+        <!-- 内存中的最大值 -->
+        <property name="maxInMemorySize" value="4096"/>
+    </bean>
 </beans>

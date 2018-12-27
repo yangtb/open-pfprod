@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>${formType}机构</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '$!{basePath}';
+        var contextPath = '$!{contextPath}';
+        var formType = '$!{formType}';
+        var orgData = '$!{orgInfo}';
+        var position = '$!{position}';
+        var renewFlag = '$!{renewFlag}';
+    </script>
+</head>
+
+<body class="body-my">
+<div class="wrapper-content">
+    <form class="layui-form" id="orgform">
+        <div hidden>
+            <input name="idOrg" hidden>
+        </div>
+        <div class="layui-form-item form-item-my5">
+            <div class="layui-inline">
+                <label class="layui-form-label">机构名称<i class="iconfont icon-required"
+                                                       style="color: #f03f2d"></i></label>
+                <div class="layui-input-block" style="width: 514px">
+                    <input type="text" name="name" autocomplete="off" class="layui-input"
+                           placeholder="请输入机构名称" lay-verify="required|name" lay-vertype="tips">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text form-item-my5">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-block" style="width: 514px;">
+                <textarea name="des" class="layui-textarea" placeholder="请输入机构描述"
+                          lay-verify="des" lay-vertype="tips"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text form-item-my5">
+            <label class="layui-form-label">联系地址</label>
+            <div class="layui-input-block" style="width: 514px;">
+                <input type="text" name="addr" autocomplete="off" class="layui-input"
+                       placeholder="请输入联系地址" lay-verify="addr" lay-vertype="tips">
+            </div>
+        </div>
+
+        <div class="layui-form-item form-item-my5">
+            <div class="layui-inline">
+                <label class="layui-form-label">联系电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="phone" autocomplete="off" class="layui-input"
+                           lay-verify="phone" lay-vertype="tips">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="email" autocomplete="off" class="layui-input"
+                           lay-verify="e_mail" lay-vertype="tips">
+                </div>
+            </div>
+            <div class="layui-inline" style="display: none">
+                <label class="layui-form-label">排序</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="sort" autocomplete="off" class="layui-input"
+                           lay-verify="sort" lay-vertype="tips" value="999">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item form-item-my5">
+            <div class="layui-inline">
+                <label class="layui-form-label">激活<i class="iconfont icon-required"
+                                                     style="color: #f03f2d"></i></label>
+                <div class="layui-input-inline">
+                    <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
+                           lay-filter="fgActiveSwitch" value="1" lay-text="已激活|未激活" class="layui-disabled" disabled>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">有效期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="gmtValid" id="gmtValid" autocomplete="off"
+                           placeholder="yyyy-MM-dd" class="layui-input layui-disabled" disabled>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="layui-form-item form-item-my5">
+            <div class="layui-inline">
+                <label class="layui-form-label">创建人</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="creator" autocomplete="off" class="layui-input layui-disabled" disabled>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">创建时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="gmtCreate" autocomplete="off" class="layui-input layui-disabled" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item form-item-my5">
+            <div class="layui-inline">
+                <label class="layui-form-label">修改人</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="operator" autocomplete="off" class="layui-input layui-disabled" disabled>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">修改时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="gmtModify" autocomplete="off" class="layui-input layui-disabled" disabled>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="addOrg">
+                    <i class="iconfont icon-save-copy"></i> 保存
+                </button>
+                #if($!{fgActive} == '0')
+                    <button class="layui-btn layui-btn-warm" id="activeOrg" lay-submit="" lay-filter="activeOrg">
+                        <i class="iconfont icon-jihuo"></i> 申请激活
+                    </button>
+                #end
+                #if($!{renewFlag} == 'true')
+                    <button class="layui-btn layui-btn-normal" id="renewOrg" lay-submit="" lay-filter="renewOrg">
+                        <i class="iconfont icon-xuqitianshu"></i> 申请续期
+                    </button>
+                #end
+
+                #if(${formType} == 'add')
+                    <button type="reset" class="layui-btn layui-btn-danger">
+                        <i class="iconfont icon-reset"></i> 重置
+                    </button>
+                #end
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="${contextPath}/public/common/js/jquery.min.js"></script>
+<script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
+<script src="${contextPath}/public/biz/js/system/org/orgFormController.js"></script>
+<script src="${contextPath}/public/common/js/moment.js"></script>
+<script>
+    function fullForm(data) {
+        $(document).ready(function(){
+            $("#orgform").autofill(data);
+            layui.use('form',function(){
+                layui.form.render();
+            });
+        });
+    };
+
+    $(function(){
+        if (orgData) {
+            var formData = eval('(' + orgData + ')')
+            if (formData.gmtValid) {
+                formData.gmtValid = moment(formData.gmtValid).format('YYYY-MM-DD');
+            }
+            formData.gmtCreate = moment(formData.gmtCreate).format('YYYY-MM-DD HH:mm:ss');
+            formData.gmtModify = moment(formData.gmtModify).format('YYYY-MM-DD HH:mm:ss');
+            fullForm(formData);
+        }
+    });
+
+</script>
+
+</body>
+</html>

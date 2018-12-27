@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>患者信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+
+    <script>
+        var basePath = '${basePath}';
+    </script>
+
+    <style>
+        @charset "utf-8";
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        ul li {
+            list-style: none
+        }
+
+        img {
+            border: 0
+        }
+
+        .small-img {
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .clearfix:before, .clearfix:after {
+            display: table;
+            line-height: 0;
+            content: ""
+        }
+
+        .magnifier {
+            width: 400px;
+            position: relative;
+            margin-top: 10px;
+            margin-left: 10px
+        }
+
+        .magnifier-container {
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #ddd
+        }
+
+        .move-view {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-image: url(${contextPath}/public/common/img/move-box.png)
+        }
+
+        .images-cover {
+            height: 100%;
+            width: 100%;
+            position: relative
+        }
+
+        .images-cover img {
+            position: absolute
+        }
+
+        .magnifier-assembly {
+            height: 92px;
+            overflow: hidden;
+            position: relative;
+            padding-left: 30px;
+            padding-right: 30px
+        }
+
+        .magnifier-btn {
+            position: absolute;
+            font-family: 宋体;
+            width: 100%;
+            top: 50%;
+            left: 0;
+            margin-top: -40px
+        }
+
+        .magnifier-btn span {
+            line-height: 80px;
+            height: 80px;
+            width: 20px;
+            background-color: #6e6e6e;
+            color: #fff;
+            display: block;
+            z-index: 9998;
+            text-align: center;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 3px
+        }
+
+        .magnifier-btn .magnifier-btn-left {
+            float: left
+        }
+
+        .magnifier-btn .magnifier-btn-right {
+            float: right
+        }
+
+        .magnifier-line {
+            position: relative;
+            overflow: hidden;
+            height: 92px
+        }
+
+        .magnifier-line ul {
+            display: block;
+            font-size: 0;
+            width: 10000%;
+            position: absolute;
+            left: 0;
+            z-index: 9997
+        }
+
+        .magnifier-line li {
+            float: left;
+            width: 100px;
+            cursor: pointer
+        }
+
+        .magnifier-line ul > .active .small-img {
+            border-color: #bbb
+        }
+
+        .small-img {
+            height: 78px;
+            padding: 1px;
+            margin: 5px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            text-align: center
+        }
+
+        .small-img img {
+            max-width: 100%;
+            max-height: 100%
+        }
+
+        .magnifier-view {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            right: -105%;
+            top: 0;
+            z-index: 9999;
+            background-color: #fff;
+            display: none;
+            overflow: hidden
+        }
+
+        .magnifier-view img {
+            display: block
+        }
+
+        .animation03 {
+            transition: all .3s ease-in .1s;
+            -ms-transition: all .3s ease-in .1s;
+            -moz-transition: all .3s ease-in .1s;
+            -webkit-transition: all .3s ease-in .1s;
+            -o-transition: all .3s ease-in .1s
+        }
+
+        .msg {
+            display: inline-block;
+            width: 320px;
+            margin-left: 10px;
+            font-size: 18px;
+            margin: 10px 0px 10px 10px;
+        }
+
+        .users-item {
+            height: 20px;
+            color: #FF5722;
+            padding-right: 5px;
+            border-right: 1px solid blue;
+            font-weight: bold;
+        }
+
+        .no-border {
+            border-right: none;
+            padding-right: 0;
+        }
+    </style>
+
+</head>
+
+<body class="wrapper-content">
+
+<div>
+    <div class="msg">
+        <p>
+            患者信息：
+            <span class="users-item">$!{patInfo.name}</span>
+            <span class="users-item">$!{patInfo.sexStr}</span>
+            <span class="users-item no-border">$!{patInfo.age}岁</span>
+        </p>
+    </div>
+    <p style="margin-left: 10px; font-size: 18px;">
+        患者主诉：
+        <span style="text-decoration: underline">
+            $!{patInfo.complaint}
+        </span>
+    </p>
+</div>
+
+<div class="magnifier" id="magnifier1">
+    <div class="magnifier-container">
+        <div class="images-cover"></div>
+
+        <div class="move-view"></div>
+
+    </div>
+    <div class="magnifier-assembly">
+        <div class="magnifier-btn">
+            <span class="magnifier-btn-left">&lt;</span>
+            <span class="magnifier-btn-right">&gt;</span>
+        </div>
+
+        <div class="magnifier-line">
+            <ul class="clearfix animation03">
+                <li>
+                    <div class="small-img">
+                        <img src="$!{patInfo.frontPhotoUrl}"/>
+                    </div>
+                </li>
+                <li>
+                    <div class="small-img">
+                        <img src="$!{patInfo.backPhotoUrl}"/>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="magnifier-view"></div>
+
+</div>
+
+<script src="${contextPath}/public/common/js/jquery.min.js"></script>
+<script src="${contextPath}/public/biz/js/common/magnifier.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+        var magnifierConfig = {
+            magnifier: "#magnifier1",//最外层的大容器
+            width: 400,//承载容器宽
+            height: 400,//承载容器高
+            moveWidth: null,//如果设置了移动盒子的宽度，则不计算缩放比例
+            zoom: 5//缩放比例
+        };
+
+        var _magnifier = magnifier(magnifierConfig);
+
+        /*magnifier的内置函数调用*/
+        /*
+            //设置magnifier函数的index属性
+            _magnifier.setIndex(1);
+
+            //重新载入主图,根据magnifier函数的index属性
+            _magnifier.eqImg();
+        */
+    });
+</script>
+
+</body>
+
+
+</html>

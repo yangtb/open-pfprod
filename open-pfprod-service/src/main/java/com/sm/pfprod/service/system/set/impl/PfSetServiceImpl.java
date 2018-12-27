@@ -35,13 +35,17 @@ public class PfSetServiceImpl implements PfSetService {
     @Override
     public boolean websiteSet(PfWebsiteSet dto) {
         // 集合设置初始大小，新增时需要修改
-        Map<String, String> websiteMap = new HashMap<>(7);
+        Map<String, String> websiteMap = new HashMap<>(11);
         websiteMap.put(WebsiteSetEnum.NAME.getCode(), dto.getName());
         websiteMap.put(WebsiteSetEnum.LOG_SWITCH.getCode(), dto.getLogSwitch());
-        websiteMap.put(WebsiteSetEnum.UPLOAD_TYPE.getCode(), dto.getUploadType());
+        websiteMap.put(WebsiteSetEnum.PIC_UPLOAD_TYPE.getCode(), dto.getPicUploadType());
+        websiteMap.put(WebsiteSetEnum.PIC_MAX_UPLOAD_VALUE.getCode(), dto.getPicMaxUploadValue());
+        websiteMap.put(WebsiteSetEnum.AUDIO_UPLOAD_TYPE.getCode(), dto.getAudioUploadType());
+        websiteMap.put(WebsiteSetEnum.AUDIO_MAX_UPLOAD_VALUE.getCode(), dto.getAudioMaxUploadValue());
+        websiteMap.put(WebsiteSetEnum.VIDEO_UPLOAD_TYPE.getCode(), dto.getVideoUploadType());
+        websiteMap.put(WebsiteSetEnum.VIDEO_MAX_UPLOAD_VALUE.getCode(), dto.getVideoMaxUploadValue());
         websiteMap.put(WebsiteSetEnum.COPYRIGHT.getCode(), dto.getCopyright());
         websiteMap.put(WebsiteSetEnum.APPROVE.getCode(), dto.getApprove());
-        websiteMap.put(WebsiteSetEnum.MAX_UPLOAD_VALUE.getCode(), dto.getMaxUploadValue());
         websiteMap.put(WebsiteSetEnum.IP_BLACKLIST.getCode(), dto.getIpBlacklist());
 
         PropertiesUtil.setProperty(websiteMap,
@@ -61,8 +65,12 @@ public class PfSetServiceImpl implements PfSetService {
         pfWebsiteSet.setCopyright(properties.getProperty(WebsiteSetEnum.COPYRIGHT.getCode()));
         pfWebsiteSet.setIpBlacklist(properties.getProperty(WebsiteSetEnum.IP_BLACKLIST.getCode()));
         pfWebsiteSet.setLogSwitch(properties.getProperty(WebsiteSetEnum.LOG_SWITCH.getCode()));
-        pfWebsiteSet.setMaxUploadValue(properties.getProperty(WebsiteSetEnum.MAX_UPLOAD_VALUE.getCode()));
-        pfWebsiteSet.setUploadType(properties.getProperty(WebsiteSetEnum.UPLOAD_TYPE.getCode()));
+        pfWebsiteSet.setPicMaxUploadValue(properties.getProperty(WebsiteSetEnum.PIC_MAX_UPLOAD_VALUE.getCode()));
+        pfWebsiteSet.setPicUploadType(properties.getProperty(WebsiteSetEnum.PIC_UPLOAD_TYPE.getCode()));
+        pfWebsiteSet.setAudioMaxUploadValue(properties.getProperty(WebsiteSetEnum.AUDIO_MAX_UPLOAD_VALUE.getCode()));
+        pfWebsiteSet.setAudioUploadType(properties.getProperty(WebsiteSetEnum.AUDIO_UPLOAD_TYPE.getCode()));
+        pfWebsiteSet.setVideoMaxUploadValue(properties.getProperty(WebsiteSetEnum.VIDEO_MAX_UPLOAD_VALUE.getCode()));
+        pfWebsiteSet.setVideoUploadType(properties.getProperty(WebsiteSetEnum.VIDEO_UPLOAD_TYPE.getCode()));
         return pfWebsiteSet;
     }
 

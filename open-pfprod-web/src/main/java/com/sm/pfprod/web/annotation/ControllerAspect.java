@@ -10,13 +10,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+/**
+ * @ClassName: ControllerAspect
+ * @Description: 切面监控
+ * @Author yangtongbin
+ * @Date 2018/10/24
+ */
 @Component
 @Aspect
 public class ControllerAspect {
 
-	private static final Logger MONITORLOG = LoggerFactory.getLogger("monitor");
+	private static final Logger MONITOR_LOG = LoggerFactory.getLogger("monitor");
 
-	private static final String PREFIX = "Monitor-";
+	private static final String PREFIX = "monitor-";
 
 
 	@Pointcut("within(@org.springframework.stereotype.Controller *)")
@@ -32,7 +38,7 @@ public class ControllerAspect {
 		long end = System.currentTimeMillis();
 		LogTrace trace = LogTrace.createLogTrace(null, null, PREFIX + className + "-" + methodName,
 				(end - start), null, "(" + JSON.toJSONString(result).length() + ")");
-		MONITORLOG.info(trace.build());
+		MONITOR_LOG.info(trace.build());
 		return result;
 	}
 

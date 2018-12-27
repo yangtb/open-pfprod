@@ -16,6 +16,10 @@
     margin-bottom: 5px;
 }
 
+.form-item-my2 {
+    margin: 5px 5px 5px 5px
+}
+
 .body-my {
     overflow: hidden;
 }
@@ -37,16 +41,48 @@
     background-color: #5bc0de
 }
 
-
 .label-warning {
     background-color: #f0ad4e
 }
 
-
 .label-danger {
-    background-color: #d9534f
+    background-color: #FF5722
 }
 
 .label-width-my {
     width: 100px;
+}
+
+.layui-upload-img {
+    width: 92px;
+    height: 92px;
+}
+
+.layui-upload-img-bg {
+    width: 190px;
+    height: 190px;
+}
+
+.my-input-width{
+    width: 440px;
+}
+
+.active {
+    background: #6fc2fd;
+    border: 1px solid #6fc2fd;
+}
+
+.aside-link {
+    display: block;
+    margin: 0 auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.aside-link:hover {
+    background: #9dcdf6;
+}
+
+.display-my{
+    display: none;
 }

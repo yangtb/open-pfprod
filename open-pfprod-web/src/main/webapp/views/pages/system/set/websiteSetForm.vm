@@ -13,6 +13,12 @@
     <script>
         var basePath = '${basePath}';
     </script>
+
+    <style>
+        fieldset span{
+            font-size:14px; color: #FF5722; font-style: italic; font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -51,14 +57,6 @@
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">上传类型</label>
-            <div class="layui-input-inline" style="max-width: 600px">
-                <input name="uploadType" placeholder="请用','隔开" autocomplete="off" class="layui-input"
-                       type="text">
-            </div>
-        </div>
-
-        <div class="layui-form-item">
             <label class="layui-form-label">版权信息</label>
             <div class="layui-input-block" style="max-width: 600px">
                 <input name="copyright" autocomplete="off" class="layui-input"
@@ -68,24 +66,91 @@
 
         <div class="layui-form-item">
             <label class="layui-form-label">网站备案号</label>
-            <div class="layui-input-inline">
+            <div class="layui-input-block" style="max-width: 600px">
                 <input name="approve" autocomplete="off" class="layui-input"
                        type="text">
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">最大上传值</label>
-            <div class="layui-input-inline">
-                <input name="maxUploadValue" lay-verify="pass" placeholder="单位kb" autocomplete="off" class="layui-input"
-                       type="text">
-            </div>
-            <div class="layui-form-mid layui-word-aux">单位KB</div>
+            <fieldset class="layui-elem-field">
+                <legend  style="font-size：12px; font-style: italic; font-weight: bold;">上传设置</legend>
+                <div class="layui-field-box">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs4">
+                            <fieldset class="layui-elem-field">
+                                <legend><span>图片</span></legend>
+                                <div class="layui-field-box">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">上传类型</label>
+                                        <div class="layui-input-block">
+                                            <input name="picUploadType" placeholder="请用','隔开" autocomplete="off" class="layui-input"
+                                                   type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">最大上传值</label>
+                                        <div class="layui-input-block">
+                                            <input name="picMaxUploadValue" lay-verify="pass" placeholder="单位kb" autocomplete="off" class="layui-input"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="layui-col-xs4">
+                            <fieldset class="layui-elem-field">
+                                <legend><span>音频</span></legend>
+                                <div class="layui-field-box">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">上传类型</label>
+                                        <div class="layui-input-block" style="max-width: 600px">
+                                            <input name="audioUploadType" placeholder="请用','隔开" autocomplete="off" class="layui-input"
+                                                   type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">最大上传值</label>
+                                        <div class="layui-input-block">
+                                            <input name="audioMaxUploadValue" lay-verify="pass" placeholder="单位kb" autocomplete="off" class="layui-input"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="layui-col-xs4">
+                            <fieldset class="layui-elem-field">
+                                <legend><span>视频</span></legend>
+                                <div class="layui-field-box">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">上传类型</label>
+                                        <div class="layui-input-block" style="max-width: 600px">
+                                            <input name="videoUploadType" placeholder="请用','隔开" autocomplete="off" class="layui-input"
+                                                   type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">最大上传值</label>
+                                        <div class="layui-input-block">
+                                            <input name="videoMaxUploadValue" lay-verify="pass" placeholder="单位kb" autocomplete="off" class="layui-input"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">IP黑名单</label>
-            <div class="layui-input-block" style="max-width: 600px">
+            <div class="layui-input-block">
                 <textarea placeholder="用','隔开" class="layui-textarea" name="ipBlacklist"></textarea>
             </div>
         </div>
@@ -101,7 +166,7 @@
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
-<script src="${contextPath}/public/biz/js/websiteFormController.js"></script>
+<script src="${contextPath}/public/biz/js/system/set/websiteFormController.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 
 <script>

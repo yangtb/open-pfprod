@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:consumer check="false" timeout="${dubbo.timeout}" />
-    
+    <dubbo:consumer check="false" timeout="${dubbo.timeout}"/>
+
+    <!-- 首页服务 -->
+    <dubbo:reference id="pfHomeFacade" interface="com.sm.open.core.facade.pf.home.PfHomeFacade"/>
+
     <!-- 资媒服务 -->
     <dubbo:reference id="pfMediaFacade" interface="com.sm.open.core.facade.pf.biz.media.PfMediaFacade"/>
 
@@ -35,4 +38,57 @@
 
     <!-- 消息模板服务 -->
     <dubbo:reference id="pfMessageFacade" interface="com.sm.open.core.facade.pf.system.message.PfMessageFacade"/>
+
+    <!-- 机构服务 -->
+    <dubbo:reference id="pfOrgFacade" interface="com.sm.open.core.facade.pf.system.org.PfOrgFacade"/>
+
+    <!-- 疾病服务 -->
+    <dubbo:reference id="pfDiseaseFacade" interface="com.sm.open.core.facade.pf.biz.disease.PfDiseaseFacade"/>
+
+    <!-- 药品服务 -->
+    <dubbo:reference id="pfDrugFacade" interface="com.sm.open.core.facade.pf.biz.drug.PfDrugFacade"/>
+
+    <!-- 问诊服务 -->
+    <dubbo:reference id="pfInquisitionFacade"
+                     interface="com.sm.open.core.facade.pf.biz.inquisition.PfInquisitionFacade"/>
+
+    <!-- 上传服务 -->
+    <dubbo:reference id="pfUploadFacade" interface="com.sm.open.core.facade.pf.common.upload.PfUploadFacade"/>
+
+    <!-- 检查服务 -->
+    <dubbo:reference id="pfCheckFacade" interface="com.sm.open.core.facade.pf.biz.check.PfCheckFacade"/>
+
+    <!-- 检验服务 -->
+    <dubbo:reference id="pfExamFacade" interface="com.sm.open.core.facade.pf.biz.exam.PfExamFacade"/>
+
+    <!-- 临床模板服务 -->
+    <dubbo:reference id="pfClinicTemplateFacade"
+                     interface="com.sm.open.core.facade.pf.biz.clinic.PfClinicTemplateFacade"/>
+
+    <!-- 病历组件用例服务 -->
+    <dubbo:reference id="pfKbPartFacade" interface="com.sm.open.core.facade.pf.biz.kb.PfKbPartFacade"/>
+
+    <!-- 病历库服务 -->
+    <dubbo:reference id="pfCaseHistoryFacade"
+                     interface="com.sm.open.core.facade.pf.biz.kb.PfCaseHistoryFacade"/>
+
+    <!-- 临床组件服务 -->
+    <dubbo:reference id="pfClinicPartsFacade" interface="com.sm.open.core.facade.pf.biz.clinic.PfClinicPartsFacade"/>
+
+    <!-- 评估组件服务 -->
+    <dubbo:reference id="pfKbAssessFacade" interface="com.sm.open.core.facade.pf.biz.kb.PfKbAssessFacade"/>
+
+    <!-- 试卷定义服务 -->
+    <dubbo:reference id="pfTestPaperFacade" interface="com.sm.open.core.facade.pf.biz.tests.PfTestPaperFacade"/>
+
+    <!-- 测试计划服务 -->
+    <dubbo:reference id="pfTestPlanFacade" interface="com.sm.open.core.facade.pf.biz.tests.PfTestPlanFacade"/>
+
+    <!-- 班级服务 -->
+    <dubbo:reference id="pfGradeFacade" interface="com.sm.open.core.facade.pf.system.grade.PfGradeFacade"/>
+
+    <!-- 模拟就诊服务 -->
+    <dubbo:reference id="pfTestWaitingRoomFacade"
+                   interface="com.sm.open.core.facade.pf.biz.tests.PfTestWaitingRoomFacade"/>
+
 </beans>

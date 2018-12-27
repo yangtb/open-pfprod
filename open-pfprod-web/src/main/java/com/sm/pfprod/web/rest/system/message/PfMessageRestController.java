@@ -42,6 +42,7 @@ public class PfMessageRestController {
     public ResultObject addMessageTemplate(@RequestBody PfMessageTemplateDto dto) {
         /* 参数校验 */
         Assert.isTrue(StringUtils.isNotBlank(dto.getTemplateName()), "templateName");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getTemplateCode()), "templateCode");
         Assert.isTrue(StringUtils.isNotBlank(dto.getTemplateType()), "templateType");
         Assert.isTrue(StringUtils.isNotBlank(dto.getContent()), "content");
         dto.setOperator(CurrentUserUtils.getCurrentUsername());
@@ -61,6 +62,7 @@ public class PfMessageRestController {
     public ResultObject editMessageTemplate(@RequestBody PfMessageTemplateDto dto) {
         /* 参数校验 */
         Assert.isTrue(StringUtils.isNotBlank(dto.getTemplateName()), "templateName");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getTemplateCode()), "templateCode");
         Assert.isTrue(StringUtils.isNotBlank(dto.getTemplateType()), "templateType");
         Assert.isTrue(StringUtils.isNotBlank(dto.getContent()), "content");
         dto.setOperator(CurrentUserUtils.getCurrentUsername());

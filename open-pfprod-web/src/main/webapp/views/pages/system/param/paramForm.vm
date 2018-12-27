@@ -2,17 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>${formType}参数</title>
+    <title>$!{formType}参数</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
-    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
 
     <script>
-        var basePath = '${basePath}';
-        var formType = '${formType}';
+        var basePath = '$!{basePath}';
+        var formType = '$!{formType}';
     </script>
 </head>
 
@@ -27,7 +27,9 @@
         <div class="layui-form-item form-item-my5">
             <label class="layui-form-label">参数编码<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
-                <input type="text" name="paramCode" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="paramCode" lay-verify="required" autocomplete="off"
+                       class="layui-input #if($!{formType} == 'edit')layui-disabled#end"
+                       #if($!{formType} == 'edit')disabled#end>
             </div>
         </div>
 
@@ -51,8 +53,8 @@
             <label class="layui-form-label">作用模块<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <select name="bizModule" lay-verify="required">
-                    #foreach($param in ${modualMap.keySet()})
-                        <option value="$param">${modualMap.get($param)}</option>
+                    #foreach($param in $!{modelList})
+                        <option value="$!param.dictCode">$!param.dictName</option>
                     #end
                 </select>
             </div>
@@ -98,7 +100,7 @@
                 <button class="layui-btn" lay-submit="" lay-filter="addParam">
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
-                #if(${formType} == 'add')
+                #if($!{formType} == 'add')
                     <button type="reset" class="layui-btn layui-btn-danger">
                         <i class="iconfont icon-reset"></i> 重置
                     </button>
@@ -108,10 +110,10 @@
     </form>
 </div>
 
-<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
-<script src="${contextPath}/public/biz/js/paramFormController.js"></script>
-<script src="${contextPath}/public/common/js/jquery.min.js"></script>
-<script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="$!{contextPath}/public/biz/js/system/param/paramFormController.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.formautofill.js"></script>
 
 <script>
     function fullForm(data) {

@@ -51,4 +51,18 @@ public class CurrentUserUtils {
         }
         return user.getUsername();
     }
+
+    /**
+     * 获取当前用户所在机构
+     *
+     * @return
+     */
+    public static Long getCurrentUserIdOrg() {
+        User user = SecurityContext.currentUser();
+        if (null == user) {
+            LOGGER.error("session_user为空，访问被拒绝");
+            throw new BizRuntimeException(ErrorCode.ERROR_NET_150001, "session_user为空，访问被拒绝");
+        }
+        return user.getIdOrg();
+    }
 }

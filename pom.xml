@@ -35,15 +35,15 @@
         <open.pfprod.web.version>1.0.0</open.pfprod.web.version>
 
         <!-- 阿里的jar版本管理 -->
-        <fastjson.version>1.2.7.sec01</fastjson.version>
+        <fastjson.version>1.2.51</fastjson.version>
         <dubbo.version>2.5.9</dubbo.version>
 
         <zookeeper.version>3.4.6</zookeeper.version>
         <zkclient.version>0.10</zkclient.version>
 
         <!-- 第三方jar的版本管理 -->
-        <spring.version>4.3.7.RELEASE</spring.version>
-        <spring.security.version>4.2.2.RELEASE</spring.security.version>
+        <spring.version>4.3.20.RELEASE</spring.version>
+        <spring.security.version>4.2.8.RELEASE</spring.security.version>
         <spring.security.core.tiger>2.0.8.RELEASE</spring.security.core.tiger>
         <spring.oauth2.version>2.1.0.RELEASE</spring.oauth2.version>
         <spring.boot.version>1.5.2.RELEASE</spring.boot.version>
@@ -404,7 +404,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>

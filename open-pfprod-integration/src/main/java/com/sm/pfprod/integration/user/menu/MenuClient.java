@@ -45,7 +45,7 @@ public class MenuClient {
         return pfMenuFacade.listMenuRoleTree(roleId);
     }
 
-    public CommonResult<List<PfMenuResult>> listMyMenus(boolean isSuper, Long userId) {
-        return pfMenuFacade.listMyMenus(isSuper, userId);
+    public CommonResult<List<PfMenuResult>> listMyMenus(boolean isSuper, boolean isAnonymousUser, Long userId) {
+        return pfMenuFacade.listMyMenus(isSuper, isAnonymousUser, userId);
     }
 }

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>图片定义</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
+    <script>
+        var basePath = '$!{basePath}';
+        var contextPath = '$!{contextPath}';
+        var idMedCase = '$!{idMedCase}';
+        var tagFlag='$!{tagFlag}';
+        var idMedicalrec = '$!{idMedicalrec}';
+        var idTag ='$!{idTag}';
+        var caseName ='$!{caseName}';
+        var previewFlag = '$!{previewFlag}';
+    </script>
+
+    <style>
+        .box2-img {
+            width: 190px;
+            height: 190px;
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+            border: 1px solid #d2d2d2;
+        }
+
+        .box2-img .img2 {
+            max-height: 100%;
+            max-width: 100%;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body class="body-my">
+<div class="wrapper-content">
+    <form class="layui-form" id="kbPartPicForm" lay-filter="kbPartPicFilter">
+        <div hidden>
+            <input name="idMedCase" hidden>
+            <input name="idMedia" id="idMedia" hidden>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">专家图片</label>
+            <div class="layui-input-inline">
+                <input id="kbPartPicPath" name="path" placeholder="请上传标签图片" autocomplete="off"
+                       class="layui-input layui-disabled" disabled>
+            </div>
+            <button type="button" class="layui-btn layui-btn-primary" id="uploadImg">
+                <i class="layui-icon" style="color: #009688; font-weight: bold">&#xe608;</i>上传
+            </button>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+                <div class="box2-img">
+                    <img class="img2" id="expertImg" style="cursor: pointer;"
+                         src="$!{contextPath}/public/biz/img/parts/expert.jpg">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="layui-form-item ">
+            <div class="layui-input-block">
+                #if($!{showBtn} == 1)
+                <button id="addKbPart" class="layui-btn" lay-submit="" lay-filter="addKbPartPic">
+                    <i class="iconfont icon-save-copy"></i> 保存
+                </button>
+                #*<button class="layui-btn" lay-submit="" lay-filter="saveAsKbPartPic">
+                    <i class="iconfont icon-lingcunwei"></i> 重载
+                </button>
+                <button id="reset" type="reset" class="layui-btn layui-btn-danger">
+                    <i class="iconfont icon-reset"></i> 重置
+                </button>*#
+                #end
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="$!{contextPath}/public/biz/js/biz/kb/part/kbPicFormController.js"></script>
+
+
+</body>
+</html>

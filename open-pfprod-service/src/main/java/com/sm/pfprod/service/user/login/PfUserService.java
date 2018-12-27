@@ -1,9 +1,11 @@
 package com.sm.pfprod.service.user.login;
 
 
+import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.dto.user.PfUserDto;
 import com.sm.pfprod.model.dto.user.login.RegisterDto;
 import com.sm.pfprod.model.dto.user.login.UpdatePswDto;
+import com.sm.pfprod.model.dto.user.register.UserRegisterDto;
 import com.sm.pfprod.model.entity.UserInfo;
 import com.sm.pfprod.model.result.PageResult;
 
@@ -43,18 +45,18 @@ public interface PfUserService {
     /**
      * 删除用户
      *
-     * @param users 用户id集合
+     * @param dto 用户id集合
      * @return
      */
-    boolean delUser(List<Long> users);
+    boolean delUser(PfCommonListDto dto);
 
     /**
      * 删除用户
      *
-     * @param users 用户id集合
+     * @param dto 用户id集合
      * @return
      */
-    boolean freezeUser(List<Long> users);
+    boolean freezeUser(PfCommonListDto dto);
 
     /**
      * 修改密码
@@ -78,5 +80,22 @@ public interface PfUserService {
      * @return
      */
     UserInfo selectUser(String userName);
+
+    /**
+     * 用户注册
+     *
+     * @param dto
+     * @return
+     */
+    boolean registerUser(UserRegisterDto dto);
+
+    /**
+     * 发送验证码邮件
+     *
+     * @param email  邮箱
+     * @param userId 用户id
+     * @return
+     */
+    boolean sendRegisterEmailVcode(String email, Long userId);
 
 }

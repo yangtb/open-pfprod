@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>模拟评估列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" href="${contextPath}/public/layui/plugins/style/admin.css" media="all">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '${basePath}';
+    </script>
+    <style>
+        table {
+            padding-bottom: 2px;
+        }
+
+        .layui-table-tool {
+            position: relative;
+            z-index: 890;
+            width: 100%;
+            /* min-height: 50px; */
+            /* line-height: 30px; */
+            padding: 10px 15px;
+            border-width: 0 0 1px;
+        }
+
+        .layui-table-tool-temp {
+            /* padding-right: 120px; */
+        }
+    </style>
+
+</head>
+
+<body class="wrapper-content">
+<div>
+    <form class="layui-form">
+    #*<div class="layui-inline">
+        <div class="layui-btn-group">
+            <button type="button" class="layui-btn" id="receivePat" style="background-color: #7A84F7">
+                <i class="iconfont icon-yishenggerenjiezhen"></i> 接诊
+            </button>
+        </div>
+    </div>*#
+        <div class="layui-input-inline" style="width: 100px;">
+            <select name="queryType">
+                <option value="1" selected>病例名称</option>
+                <option value="2">测试计划</option>
+                <option value="3">测试试卷</option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <input type="text" name="keyword" id="keyword" class="layui-input" autocomplete="off"
+                   placeholder="请输入关键字">
+        </div>
+        <div class="layui-input-inline" style="width: 100px;">
+            <select name="fgAsses">
+                <option value="" selected>状态</option>
+                <option value="1">未评估</option>
+                <option value="2">已评估</option>
+            </select>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn" lay-submit lay-filter="enumSearchFilter">
+                    <i class="iconfont icon-query"></i> 查询
+                </button>
+            #*模拟按钮*#
+                <button id="test" type="button" class="layui-btn layui-btn-normal"
+                        lay-href="" style="display: none">
+                    <i class="iconfont icon-monikaoshi"></i><span id="patName"></span>:模拟就诊
+                </button>
+                <button id="testAssess" type="button" class="layui-btn layui-btn-normal"
+                        lay-href="" style="display: none">
+                    <i class="iconfont icon-monikaoshi"></i><span id="patNameAssess"></span>:模拟评估
+                </button>
+                <button id="exam" type="button" class="layui-btn layui-btn-normal"
+                #*lay-href="${basePath}/pf/p/waiting/room/exam/page"*#>
+                    <i class="iconfont icon-monikaoshi"></i>模拟评估
+                </button>
+                <div hidden>
+                    <button id="mock" type="button" class="layui-btn layui-btn-normal">
+                        <a lay-href="${basePath}/pf/p/waiting/room/exam/page">模拟练习</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    #*<div class="layui-col-xs4" style="padding-right: 5px;">
+        <table id="roomTable" lay-filter="roomTableFilter">
+        </table>
+    </div>*#
+
+    <div class="layui-col-xs12">
+        <table id="enumTable" lay-filter="enumTableFilter">
+        </table>
+    </div>
+</div>
+
+
+<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="${contextPath}/public/biz/js/biz/tests/room/assessController.js"></script>
+
+<script type="text/html" id="roomBar">
+    <a class="layui-btn layui-btn-xs" lay-event="detail"><i class="iconfont icon-detail"></i> 详情</a>
+</script>
+
+
+<script type="text/html" id="toolbarDemo1">
+    <div style="text-align: center;">候诊室</div>
+</script>
+<script type="text/html" id="toolbarDemo2">
+    <div style="text-align: center;">接诊列表</div>
+</script>
+
+
+<script type="text/html" id="statusTpl">
+    {{#  if(d.status == '0'){ }}
+    <span style="color: #1E9FFF; font-weight: bold">待接诊</span>
+    {{#  } }}
+    {{#  if(d.status == '1'){ }}
+    <span style="color: #5FB878; font-weight: bold">正在接诊</span>
+    {{#  } }}
+</script>
+
+<script type="text/html" id="assessStatusTpl">
+    {{#  if(d.status == '1'){ }}
+    <span style="color: #FFB800; font-weight: bold">接诊完成</span>
+    {{#  } }}
+    {{#  if(d.status == '2'){ }}
+    <span style="color: #009688; font-weight: bold">已评估</span>
+    {{#  } }}
+</script>
+
+<script type="text/html" id="sexTpl">
+        #foreach($param in ${sexEnum})
+        {{#  if(d.patSex == $!param.dictCode){ }}
+            $!{param.dictName}
+        {{#  } else { }}
+
+        {{#  } }}
+        #end
+</script>
+
+<script type="text/html" id="chTpl">
+        #foreach($param in ${exmEvaResult})
+        {{#  if(d.ch == $!param.dictCode){ }}
+            $!{param.dictName}
+        {{#  } else { }}
+
+        {{#  } }}
+        #end
+</script>
+
+<script type="text/html" id="naTestpaperTpl">
+    {{#  if(d.idTestpaper == -1){ }}
+    自定义
+    {{#  } else { }}
+    {{d.naTestpaper}}
+    {{#  } }}
+
+</script>
+
+
+</body>
+
+</html>

@@ -41,8 +41,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">账号</label>
                 <div class="layui-input-inline">
-                    <input name="sender" type="text" lay-verify="email" autocomplete="off" autocomplete="off"
-                           class="layui-input" lay-verify="required" lay-vertype="tips">
+                    <input name="sender" type="text" autocomplete="off" autocomplete="off"
+                           class="layui-input" lay-verify="required|email" lay-vertype="tips">
                 </div>
                 <div class="layui-form-mid layui-word-aux">发送邮件的邮箱账户</div>
             </div>
@@ -50,7 +50,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">密码</label>
                 <div class="layui-input-inline">
-                    <input type="password" name="password" lay-verify="pass" autocomplete="off" class="layui-input"
+                    <input type="password" name="password" autocomplete="off" class="layui-input"
                            lay-verify="required" lay-vertype="tips">
                 </div>
                 <div class="layui-form-mid layui-word-aux">发送邮件的邮箱密码，保存后密码不做展示</div>
@@ -58,8 +58,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">发件箱</label>
                 <div class="layui-input-inline">
-                    <input name="nickname" type="text" lay-verify="email" autocomplete="off" class="layui-input"
-                           lay-verify="required" lay-vertype="tips">
+                    <input name="userName" type="text" autocomplete="off" class="layui-input"
+                           lay-verify="required|email" lay-vertype="tips">
                 </div>
                 <div class="layui-form-mid layui-word-aux">发送邮件的邮箱地址</div>
             </div>
@@ -67,7 +67,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">发件人</label>
                 <div class="layui-input-inline">
-                    <input name="userName" lay-verify="pass" autocomplete="off" class="layui-input" type="text"
+                    <input name="nickname" autocomplete="off" class="layui-input" type="text"
                            lay-verify="required" lay-vertype="tips">
                 </div>
             </div>
@@ -86,23 +86,23 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">收件人邮箱</label>
                 <div class="layui-input-block" style="max-width: 400px">
-                    <input name="recipients" lay-verify="pass" autocomplete="off" class="layui-input" type="text"
+                    <input name="recipients" id="recipients" autocomplete="off" class="layui-input" type="text"
                            placeholder="多个请用英文';'隔开" lay-verify="required" lay-vertype="tips">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">邮件标题</label>
                 <div class="layui-input-block" style="max-width: 400px">
-                    <input name="title" lay-verify="pass" autocomplete="off" class="layui-input" type="text"
+                    <input name="title" autocomplete="off" class="layui-input" type="text"
                            value="${websiteName}幸甚有你！" lay-verify="required" lay-vertype="tips">
                 </div>
             </div>
 
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">邮件模板</label>
-                <div class="layui-input-block" style="max-width:800px;">
-                    <textarea placeholder="请输入内容" name="content" id="container" style="border:0;padding:0;width: 100%;">
-                        <p style="margin-top: 5px; text-indent: 2em;">
+                <div class="layui-input-block">
+                <textarea id="emailContent" name="content" style="display: none;">
+                    <p style="margin-top: 5px; text-indent: 2em;" lay-verify="required" lay-vertype="tips">
     <p style="margin-top: 5px; text-indent: 2em;">
     <span style="font-size: 14px;">尊敬的用户：</span>
 </p>
@@ -110,7 +110,7 @@
     <span style="font-size: 14px;">你好！</span>
 </p>
 <p style="margin-top: 5px; text-indent: 2em;">
-    <span style="font-size: 14px;">&nbsp;&nbsp;&nbsp;&nbsp;这是一封来自&nbsp;</span><a href="${basePath}" target="_self">${websiteName}</a> <span style="font-size: 14px;">的测试邮件！请勿回复此邮件！</span>
+    <span style="font-size: 14px;">&nbsp;&nbsp;&nbsp;&nbsp;这是一封来自&nbsp;</span><a href="${basePath}" target="_blank">${websiteName}</a> <span style="font-size: 14px;">的测试邮件！请勿回复此邮件！</span>
 </p>
 <p>
     <span style="font-size: 14px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -118,7 +118,7 @@
 <p>
     <span style="font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ——&nbsp;${websiteName}</span>
 </p>
-                    </textarea>
+                </textarea>
                 </div>
             </div>
 
@@ -136,23 +136,8 @@
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
-<script src="${contextPath}/public/biz/js/emailFormController.js"></script>
+<script src="${contextPath}/public/biz/js/system/set/emailFormController.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
-<!-- 加载编辑器的容器 -->
-<script id="container" name="content" type="text/plain">
-        这里写你的初始化内容
-</script>
-<!-- 配置文件 -->
-<script src="${contextPath}/public/common/ueditor/ueditor.config.js"></script>
-<!-- 编辑器源码文件 -->
-<script src="${contextPath}/public/common/ueditor/ueditor.all.js"></script><!-- 编辑器源码文件 -->
-<script src="${contextPath}/public/common/ueditor/lang/zh-cn/zh-cn.js"></script>
-
-<!-- 实例化编辑器 -->
-<script type="text/javascript">
-    var ue = UE.getEditor('container');
-</script>
-
 
 <script>
     var data = eval(${emailInfo});

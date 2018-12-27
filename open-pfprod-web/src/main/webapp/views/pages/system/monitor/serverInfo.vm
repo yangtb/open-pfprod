@@ -52,8 +52,10 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label" style="width:150px;">内存使用：</label>
-            <div class="layui-progress layui-progress-big" lay-showPercent="yes" style="margin-left: 180px;">
-                <div class="layui-progress-bar layui-bg-green" lay-percent="$number.percent($math.div($math.sub(${serverInfo.totalMemory},${serverInfo.freeMemory}), ${serverInfo.totalMemory}))"></div>
+            <div style="padding-top: 10px;">
+                <div class="layui-progress layui-progress-big" lay-showPercent="yes" style="margin-left: 180px;">
+                    <div class="layui-progress-bar layui-bg-green" lay-percent="$number.percent($math.div($math.sub(${serverInfo.totalMemory},${serverInfo.freeMemory}), ${serverInfo.totalMemory}))"></div>
+                </div>
             </div>
         </div>
         <div class="layui-form-item">
