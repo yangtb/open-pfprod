@@ -67,7 +67,7 @@
                         <a lay-href="$!{contextPath}/pf/p/notice/page?type=see" layadmin-event="message" lay-text="消息中心">
                             <i class="layui-icon layui-icon-notice"></i>
                             <!-- 如果有新消息，则显示小圆点 -->
-                            <span class="layui-badge-dot"></span>
+                            #*<span class="layui-badge-dot"></span>*#
                         </a>
                     </li>
                 #end
