@@ -10,7 +10,7 @@ public enum PfSimulateCaseTypeEnum {
 
     CLOSE("1", "不开放"),
     RANDOM("2", "随机"),
-    DESIGNATED_LIBRARY("3", "从指定病历库中选择");
+    DESIGNATED_LIBRARY("3", "从指定病例库中选择");
 
     private String code;
     private String desc;

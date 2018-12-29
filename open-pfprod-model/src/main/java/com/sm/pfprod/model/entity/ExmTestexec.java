@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * 临床模拟_测试执行_关联病历
+ * 临床模拟_测试执行_关联病例
  *
  * @author yangtongbin
  */
@@ -36,7 +36,7 @@ public class ExmTestexec implements Serializable {
     private Long idStudent;
 
     /**
-     * 病历ID
+     * 病例ID
      */
     private Long idMedicalrec;
 

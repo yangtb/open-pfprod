@@ -17,7 +17,7 @@ public class PfWaitingRoomStartVo implements Serializable {
     private Long idTestexec;
 
     /**
-     * 病历结果ID
+     * 病例结果ID
      */
     private Long idTestexecResult;
 

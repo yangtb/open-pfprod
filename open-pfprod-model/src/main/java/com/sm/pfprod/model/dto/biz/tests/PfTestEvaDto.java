@@ -20,7 +20,7 @@ public class PfTestEvaDto implements Serializable {
     private Long idTestexecResult;
 
     /**
-     * 病历评估维度ID
+     * 病例评估维度ID
      */
     private Long idTestexecResultDimension;
 

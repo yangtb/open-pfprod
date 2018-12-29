@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * 临床模拟_测试执行_病历结果_医嘱
+ * 临床模拟_测试执行_病例结果_医嘱
  *
  * @author yangtongbin
  */
@@ -26,7 +26,7 @@ public class ExmMedResultOrder implements Serializable {
     private Long idTestexecResultOrder;
 
     /**
-     * 病历结果ID
+     * 病例结果ID
      */
     private Long idTestexecResult;
 

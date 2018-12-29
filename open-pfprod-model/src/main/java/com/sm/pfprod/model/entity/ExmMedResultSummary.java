@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 临床模拟_测试执行_病历结果_病史小结
+ * 临床模拟_测试执行_病例结果_病史小结
  *
  * @author yangtongbin
  */
@@ -26,7 +26,7 @@ public class ExmMedResultSummary implements Serializable {
     private Long idTestexecResultSumary;
 
     /**
-     * 病历结果ID
+     * 病例结果ID
      */
     private Long idTestexecResult;
 

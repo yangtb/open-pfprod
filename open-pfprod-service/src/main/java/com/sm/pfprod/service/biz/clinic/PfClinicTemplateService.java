@@ -180,7 +180,7 @@ public interface PfClinicTemplateService {
     BasDemoAsses selectDimensionTagInfo(Long idDimemsion);
 
     /**
-     * 所有病历标签
+     * 所有病例标签
      *
      * @param idDemo
      * @return

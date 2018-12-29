@@ -200,7 +200,7 @@
             <div class="layui-form-item form-item-my5">
                 <div class="layui-inline">
                     <button class="layui-btn" type="button" id="accessMed">
-                        <i class="layui-icon layui-icon-edit"></i>病历评估
+                        <i class="layui-icon layui-icon-edit"></i>病例评估
                     </button>
                 </div>
             </div>
@@ -214,7 +214,7 @@
                 <th>临床思维得分</th>
                 <th>临床思维评价</th>
                 <th>医嘱得分</th>
-                <th>病历书写得分</th>
+                <th>病例书写得分</th>
                 <th>知识掌握得分</th>
                 <th>总得分</th>*#
             </tr>
@@ -241,7 +241,7 @@
     <div class="layui-col-md12" style="margin: 0px 30px 0 30px; ">
         <div class="layui-tab layui-col-xs12" lay-filter="tagTabFilter">
             <ul class="layui-tab-title">
-                <li class="layui-this">病历评估</li>
+                <li class="layui-this">病例评估</li>
                 <li>执行日志</li>
                 <li>评估分析</li>
             </ul>

@@ -29,7 +29,7 @@ public class FaqEvaCaseItemEffciency implements Serializable {
     private String sdEvaEffciency;
 
     /**
-     * 病历评估项id
+     * 病例评估项id
      */
     private Long idEvaCaseItem;
 

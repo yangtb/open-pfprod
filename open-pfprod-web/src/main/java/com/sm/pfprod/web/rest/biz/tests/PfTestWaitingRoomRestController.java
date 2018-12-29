@@ -539,7 +539,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
-     * 查询病历评估平均得分
+     * 查询病例评估平均得分
      *
      * @param dto
      * @return
@@ -556,7 +556,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
-     * 查询病历评估
+     * 查询病例评估
      *
      * @param dto
      * @return
@@ -572,7 +572,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
-     * 查询病历评估日志
+     * 查询病例评估日志
      *
      * @param dto
      * @return
@@ -588,7 +588,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
-     * 病历评估
+     * 病例评估
      *
      * @param dto
      * @return

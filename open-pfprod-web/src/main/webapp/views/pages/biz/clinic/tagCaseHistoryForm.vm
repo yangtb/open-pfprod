@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>病历标签维护</title>
+    <title>病例标签维护</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label class="layui-form-label">病历组件<i class="iconfont icon-required"
+                    <label class="layui-form-label">病例组件<i class="iconfont icon-required"
                                                            style="color: #f03f2d"></i></label>
                     <div class="layui-input-inline">
                         <select name="cdMedAsse" id="cdMedAsse" lay-verify="required" lay-vertype="tips">
@@ -72,7 +72,7 @@
 
                 </div>
                 <div class="layui-input-block">
-                <input type="checkbox" name="fgShowMake" value="1" title="制作病历时是否显示">
+                <input type="checkbox" name="fgShowMake" value="1" title="制作病例时是否显示">
                 <input type="checkbox" name="fgShowExec" value="1" title="执行时是否显示">
                 </div>
             </div>
