@@ -32,4 +32,9 @@ public class PfAssessCommonDto extends PageParam implements Serializable {
      */
     private String sdType;
 
+    /**
+     * 扩展id
+     */
+    private Long extId;
+
 }
