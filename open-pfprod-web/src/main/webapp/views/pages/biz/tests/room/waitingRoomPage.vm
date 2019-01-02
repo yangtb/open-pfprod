@@ -73,9 +73,9 @@
                         lay-href="" style="display: none">
                     <i class="iconfont icon-monikaoshi"></i><span id="patName"></span>:模拟就诊
                 </button>
-                <button id="exam" type="button" class="layui-btn layui-btn-normal">
+                #*<button id="exam" type="button" class="layui-btn layui-btn-normal">
                     <i class="iconfont icon-monikaoshi"></i>模拟就诊
-                </button>
+                </button>*#
                 <div hidden>
                     <button id="mock" type="button" class="layui-btn layui-btn-normal">
                         <a lay-href="$!{basePath}/pf/p/waiting/room/exam/page">模拟练习</a>

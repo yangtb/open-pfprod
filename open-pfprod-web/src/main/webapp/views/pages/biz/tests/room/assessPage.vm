@@ -79,10 +79,9 @@
                         lay-href="" style="display: none">
                     <i class="iconfont icon-monikaoshi"></i><span id="patNameAssess"></span>:模拟评估
                 </button>
-                <button id="exam" type="button" class="layui-btn layui-btn-normal"
-                #*lay-href="${basePath}/pf/p/waiting/room/exam/page"*#>
+                #*<button id="exam" type="button" class="layui-btn layui-btn-normal">
                     <i class="iconfont icon-monikaoshi"></i>模拟评估
-                </button>
+                </button>*#
                 <div hidden>
                     <button id="mock" type="button" class="layui-btn layui-btn-normal">
                         <a lay-href="${basePath}/pf/p/waiting/room/exam/page">模拟练习</a>
