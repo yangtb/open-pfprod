@@ -231,8 +231,8 @@ public class PfTestWaitingRoomController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
     @RequestMapping(value = "/test/die/ready/reason/list")
     @ResponseBody
-    public PageResult listReadyDieReason(Long idTestexecResult) {
-        List<PfWaitingRoomDieReasonVo> dieReasonVos = pfTestWaitingRoomService.listReadyDieReason(idTestexecResult);
+    public PageResult listReadyDieReason(Long idTestexecResult, String keyword) {
+        List<PfWaitingRoomDieReasonVo> dieReasonVos = pfTestWaitingRoomService.listReadyDieReason(idTestexecResult, keyword);
         return PageResult.create(dieReasonVos);
     }
 

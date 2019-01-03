@@ -386,8 +386,8 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     }
 
     @Override
-    public List<PfWaitingRoomDieReasonVo> listReadyDieReason(Long idTestexecResult) {
-        CommonResult<List<PfWaitingRoomDieReasonResult>> result = testWaitingRoomClient.listReadyDieReason(idTestexecResult);
+    public List<PfWaitingRoomDieReasonVo> listReadyDieReason(Long idTestexecResult, String keyword) {
+        CommonResult<List<PfWaitingRoomDieReasonResult>> result = testWaitingRoomClient.listReadyDieReason(idTestexecResult, keyword);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convertList(result.getContent(), PfWaitingRoomDieReasonVo.class);
         }

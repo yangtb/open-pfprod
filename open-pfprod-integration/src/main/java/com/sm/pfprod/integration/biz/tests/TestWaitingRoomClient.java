@@ -176,8 +176,8 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.selectDiagnosis(idTestexecResult);
     }
 
-    public CommonResult<List<PfWaitingRoomDieReasonResult>> listReadyDieReason(Long idTestexecResult) {
-        return pfTestWaitingRoomFacade.listReadyDieReason(idTestexecResult);
+    public CommonResult<List<PfWaitingRoomDieReasonResult>> listReadyDieReason(Long idTestexecResult, String keyword) {
+        return pfTestWaitingRoomFacade.listReadyDieReason(idTestexecResult, keyword);
     }
 
     public PfPageResult listDieReason(Long idTestexecResultDiagnosis) {

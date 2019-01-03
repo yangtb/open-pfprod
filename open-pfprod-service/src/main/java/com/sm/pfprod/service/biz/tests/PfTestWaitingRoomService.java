@@ -335,7 +335,7 @@ public interface PfTestWaitingRoomService {
      *
      * @return
      */
-    List<PfWaitingRoomDieReasonVo> listReadyDieReason(Long idTestexecResult);
+    List<PfWaitingRoomDieReasonVo> listReadyDieReason(Long idTestexecResult, String keyword);
 
     /**
      * 查询确诊理由
