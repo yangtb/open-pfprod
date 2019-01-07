@@ -350,4 +350,11 @@ public class PfTestWaitingRoomController extends BaseController {
         return pfTestWaitingRoomService.listReferralReason(idTestexecResultReferral, YesOrNoNum.YES.getCode());
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @RequestMapping(value = "/all/referral/die")
+    @ResponseBody
+    public PageResult listAllReferralDie(Long idTestexecResult, String keywords) {
+        return pfTestWaitingRoomService.listAllReferralDie(idTestexecResult, keywords);
+    }
+
 }

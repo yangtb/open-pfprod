@@ -716,7 +716,6 @@ public class PfTestWaitingRoomRestController extends BaseController {
     @ResponseBody
     public ResultObject saveExecSerialNo(@RequestBody ExmTestexec dto) {
         /* 参数校验 */
-        /* 参数校验 */
         Assert.isTrue(dto.getIdTestexec() != null, "idTestexec");
         Assert.isTrue(dto.getCurSerialno() != null, "curSerialno");
         return ResultObject.createSuccess("saveExecSerialNo", ResultObject.DATA_TYPE_OBJECT,

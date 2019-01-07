@@ -5,6 +5,7 @@ import com.sm.open.care.core.utils.BeanUtil;
 import com.sm.open.core.facade.model.param.pf.biz.tests.room.*;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.param.pf.common.PfCommonListParam;
+import com.sm.open.core.facade.model.result.pf.biz.disease.BasDieResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseBodyListResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseBodyResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseInquesListResult;
@@ -503,6 +504,15 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
             return result.getContent();
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult listAllReferralDie(Long idTestexecResult, String keywords) {
+        PfPageResult<BasDieResult> result = testWaitingRoomClient.listAllReferralDie(idTestexecResult, keywords);
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
     }
 
 

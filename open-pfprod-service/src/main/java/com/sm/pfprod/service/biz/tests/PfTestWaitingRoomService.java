@@ -435,4 +435,12 @@ public interface PfTestWaitingRoomService {
      */
     boolean saveExecSerialNo(ExmTestexec dto);
 
+    /**
+     * 查询拟诊
+     *
+     * @param idTestexecResult 病例结果ID
+     * @return
+     */
+    PageResult listAllReferralDie(Long idTestexecResult, String keywords);
+
 }

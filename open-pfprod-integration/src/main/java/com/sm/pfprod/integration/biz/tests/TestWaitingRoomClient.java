@@ -228,4 +228,8 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.saveExecSerialNo(param);
     }
 
+    public PfPageResult listAllReferralDie(Long idTestexecResult, String keywords) {
+        return pfTestWaitingRoomFacade.listAllReferralDie(idTestexecResult, keywords);
+    }
+
 }

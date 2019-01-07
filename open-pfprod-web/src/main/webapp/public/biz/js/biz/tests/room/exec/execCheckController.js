@@ -124,15 +124,18 @@ layui.config({
             checkedKey: 'idDie',
             searchKey: 'keywords',
             table: {
-                url: basePath + '/pf/p/disease/info/list'
+                url: basePath + '/pf/p/waiting/room/all/referral/die'
                 , cols: [[
                     {type: 'radio', fixed: true},
                     {field: 'name', minWidth: 160, title: '疾病名称'},
                     {field: 'cdDieclassText', minWidth: 120, title: '疾病目录'},
                     {field: 'icd', width: 80, title: 'ICD'}
                 ]] //设置表头
-                , limits: [10, 20, 50]
-                , page: true
+                , where: {
+                    idTestexecResult: idTestexecResult
+                }
+                , limit: 100
+                , page: false
             },
             done: function (elem, data) {
                 var selectData = data.data[0];
