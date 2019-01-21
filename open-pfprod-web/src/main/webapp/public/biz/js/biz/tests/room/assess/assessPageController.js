@@ -183,6 +183,9 @@ layui.config({
             execLog();
         }
         if (data.index == 2) {
+            loadItem();
+        }
+        if (data.index == 3) {
             loadChart();
         }
     });
@@ -325,7 +328,246 @@ layui.config({
             }
         });
     }
+    
+    function loadItem() {
+        var bizData = {
+            idTestexecResult: idTestexecResult
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/eva/diagnostic/analysis/list',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    layer.msg(data.msg, {icon: 5});
+                    return false;
+                } else {
+                    tableZdRender(data.data);
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                return false;
+            }
+        });
+    }
 
+    function tableZdRender(list) {
+        var qzList = [], pznzList = [];
+        if (list.length > 0) {
+            $.each(list, function (index, item) {
+                if (item.type == 1) {
+                    qzList.push(item);
+                } else {
+                    pznzList.push(item);
+                }
+            });
+
+        }
+        //展示已知数据
+        table.render({
+            elem: '#qzItem'
+            , id: 'qzItemTableId'
+            , cols: [[ //标题栏
+                {field: 'itemName', title: '确诊项'},
+                {fixed: 'right', width: 60, align: 'center', toolbar: '#statusBar'}
+            ]]
+            , data: qzList
+            , skin: 'line' //表格风格
+            , page: false
+            , limit: 1000
+        });
+
+        table.render({
+            elem: '#pcnzItem'
+            , id: 'pcnzItemTableId'
+            , cols: [[ //标题栏
+                {field: 'itemName', title: '排除拟诊项'},
+                {fixed: 'right', width: 60, align: 'center', toolbar: '#statusBar'}
+            ]]
+            , data: pznzList
+            , skin: 'line' //表格风格
+            , page: false
+            , limit: 1000
+        });
+    }
+
+    //单击行选中radio
+    table.on('row(qzItemFilter)', function (obj) {
+        obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');//选中行样式
+        rowClick(obj)
+    });
+
+    //单击行选中radio
+    table.on('row(pcnzItemFilter)', function (obj) {
+        obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');//选中行样式
+        rowClick(obj)
+    });
+
+    function rowClick(obj) {
+        var bizData = {
+            idTestexecResult: idTestexecResult,
+            idDieStr: obj.data.idDieStr,
+            type : obj.data.type
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/eva/diagnostic/analysis/list/detail',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    layer.msg(data.msg, {icon: 5});
+                    return false;
+                } else {
+                    loadTreeChart(data.data);
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                return false;
+            }
+        });
+    };
+
+    function buildChartData(item) {
+        var picName;
+        if (item.flag == 0) {
+            picName = 'circle';
+        } else if (item.flag == 1) {
+            picName = 'semi-circle';
+        } else if (item.flag == 2) {
+            picName = 'tick';
+        }
+        var data = {
+            "name": "Q："+ item.question +"\nA："+ item.answer +"",
+            symbolSize: [26, 26],
+            symbol: 'image://' + basePath + '/public/biz/img/chart/' + picName + '.png'
+        }
+        return data;
+    }
+
+
+    function loadTreeChart(list) {
+
+        var inquiryList = [], bodyList = [], checkList = [];
+        if (list.length > 0) {
+            $.each(list, function (index, item) {
+                if (item.sdEvaEffciency == 1) {
+                    inquiryList.push(buildChartData(item));
+                } else if (item.sdEvaEffciency == 2) {
+                    bodyList.push(buildChartData(item));
+                } else if (item.sdEvaEffciency == 3) {
+                    checkList.push(buildChartData(item));
+                }
+            });
+        }
+
+        var data = {
+                "name": "确诊肺结核",
+                "children": [
+                    {
+                        "name": "问诊",
+                        itemStyle:{ color: '#7a84f5'} ,
+                        lineStyle:{color: '#7a84f5'},
+                        "children": inquiryList
+                    },
+                    {
+                        "name": "体格检查",
+                        itemStyle:{ color: '#7a84f5'} ,
+                        lineStyle:{color: '#7a84f5'},
+                        "children": bodyList
+                    },
+                    {
+                        "name": "辅助检查检验",
+                        itemStyle:{ color: '#7a84f5'} ,
+                        lineStyle:{color: '#7a84f5'},
+                        "children": checkList
+                    },
+
+                ]
+            };
+        showTreeChart(data);
+    }
+
+    function showTreeChart(data) {
+        if (data.length == 0) {
+            return;
+        }
+        var dom = document.getElementById("treeContainer");
+        var myChart = echarts.init(dom, 'macarons');
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                triggerOn: 'mousemove'
+            },
+            series: [
+                {
+                    type: 'tree',
+                    data: [data],
+                    top: '1%',
+                    left: '15%',
+                    bottom: '1%',
+                    right: '45%',
+                    //layout: 'radial',
+                    symbol: 'circle',
+                    symbolSize: 14,
+                    //nodePadding: 20,
+                    initialTreeDepth: 4,
+                    animationDurationUpdate: 750,
+                    itemStyle:{
+                        color: {
+                            type: 'radial',
+                            x: 0.5,
+                            y: 0.5,
+                            r: 0.5,
+                            colorStops: [{
+                                offset: 0, color: '#108ee9' // 0% 处的颜色
+                            }, {
+                                offset: 1, color: '#62b7f4' // 100% 处的颜色
+                            }],
+                            globalCoord: false // 缺省为 false
+                        },
+                        borderWidth:0
+                    },
+                    lineStyle:{
+                        color: '#ff6600'
+                    },
+                    label: {
+                        normal: {
+                            position: 'left',
+                            verticalAlign: 'middle',
+                            align: 'right',
+                            fontSize: 12
+                        }
+                    },
+
+                    leaves: {
+                        label: {
+                            normal: {
+                                position: 'right',
+                                verticalAlign: 'middle',
+                                align: 'left'
+                            }
+                        }
+                    },
+
+                }
+            ]
+        };
+
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+
+    }
 
     function loadChart() {
         layer.load(2);

@@ -29,4 +29,14 @@ public class PfTestEvaDto implements Serializable {
      */
     private Long idMedicalrec;
 
+    /**
+     * 疾病字符串
+     */
+    private String idDieStr;
+
+    /**
+     * 类型 ：1=确诊项 2=排除拟诊项
+     */
+    private Integer type;
+
 }

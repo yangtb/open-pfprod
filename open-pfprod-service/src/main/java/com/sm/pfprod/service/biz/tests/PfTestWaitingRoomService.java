@@ -9,6 +9,8 @@ import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.test.*;
+import com.sm.pfprod.model.vo.biz.test.eva.PfDiagnosticAnalysisDetailVo;
+import com.sm.pfprod.model.vo.biz.test.eva.PfDiagnosticAnalysisVo;
 import com.sm.pfprod.model.vo.biz.test.eva.PfEvaExecVo;
 import com.sm.pfprod.model.vo.biz.test.eva.PfExecLogVo;
 import com.sm.pfprod.model.vo.biz.test.paper.PfTestPaperVo;
@@ -442,5 +444,22 @@ public interface PfTestWaitingRoomService {
      * @return
      */
     PageResult listAllReferralDie(Long idTestexecResult, String keywords);
+
+    /**
+     * 确诊项 及 排除拟诊项
+     *
+     * @param dto
+     * @return
+     */
+    List<PfDiagnosticAnalysisVo> listDiagnosticAnalysis(PfTestEvaDto dto);
+
+
+    /**
+     * 查询病例诊断分析详情
+     *
+     * @param dto
+     * @return
+     */
+    List<PfDiagnosticAnalysisDetailVo> listDiagnosticAnalysisDetail(PfTestEvaDto dto);
 
 }

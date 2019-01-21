@@ -722,4 +722,38 @@ public class PfTestWaitingRoomRestController extends BaseController {
                 pfTestWaitingRoomService.saveExecSerialNo(dto));
     }
 
+    /**
+     * 确诊项 及 排除拟诊项
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
+    @PostMapping(value = "/eva/diagnostic/analysis/list")
+    @ResponseBody
+    public ResultObject listDiagnosticAnalysis(@RequestBody PfTestEvaDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+
+        return ResultObject.createSuccess("listDiagnosticAnalysis", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.listDiagnosticAnalysis(dto));
+    }
+
+    /**
+     * 查询病例诊断分析详情
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
+    @PostMapping(value = "/eva/diagnostic/analysis/list/detail")
+    @ResponseBody
+    public ResultObject listDiagnosticAnalysisDetail(@RequestBody PfTestEvaDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getIdDieStr()), "idDieStr");
+
+        return ResultObject.createSuccess("listDiagnosticAnalysisDetail", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.listDiagnosticAnalysisDetail(dto));
+    }
 }

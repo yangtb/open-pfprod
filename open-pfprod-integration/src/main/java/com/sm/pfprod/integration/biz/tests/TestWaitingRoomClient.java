@@ -5,10 +5,7 @@ import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.param.pf.common.PfCommonListParam;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseBodyResult;
 import com.sm.open.core.facade.model.result.pf.biz.tests.room.*;
-import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.ExmEvaLogResult;
-import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.ExmEvaResultResult;
-import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.PfEvaExecResult;
-import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.PfExecLogResult;
+import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.*;
 import com.sm.open.core.facade.model.result.pf.biz.tests.room.paper.PfTestPaperResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
@@ -230,6 +227,14 @@ public class TestWaitingRoomClient {
 
     public PfPageResult listAllReferralDie(Long idTestexecResult, String keywords) {
         return pfTestWaitingRoomFacade.listAllReferralDie(idTestexecResult, keywords);
+    }
+
+    public CommonResult<List<PfDiagnosticAnalysisResult>> listDiagnosticAnalysis(PfTestEvaParam param) {
+        return pfTestWaitingRoomFacade.listDiagnosticAnalysis(param);
+    }
+
+    public CommonResult<List<PfDiagnosticAnalysisDetailResult>> listDiagnosticAnalysisDetail(PfTestEvaParam param) {
+        return pfTestWaitingRoomFacade.listDiagnosticAnalysisDetail(param);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.sm.pfprod.service.system.grade.Impl;
+package com.sm.pfprod.service.system.grade.impl;
 
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;

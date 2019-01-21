@@ -243,7 +243,8 @@
             <ul class="layui-tab-title">
                 <li class="layui-this">病例评估</li>
                 <li>执行日志</li>
-                <li>评估分析</li>
+                <li>诊断分析</li>
+                <li>分值雷达</li>
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
@@ -258,6 +259,18 @@
                 </div>
                 <div class="layui-tab-item" style="margin: -10px 30px 0 -10px;">
                     <table id="execLog"></table>
+                </div>
+
+                <div class="layui-tab-item" style="margin: -10px 30px 0 -10px;">
+                    <div class="layui-row">
+                        <div class="layui-col-md3">
+                            <table id="qzItem" lay-filter="qzItemFilter"></table>
+                            <table id="pcnzItem" lay-filter="pcnzItemFilter"></table>
+                        </div>
+                        <div class="layui-col-md9">
+                            <div id="treeContainer" style="height: 800px; width: 100%;"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="layui-tab-item">
@@ -284,6 +297,15 @@
            style="height: 28px; border-color: #5FB878">
     {{#  } else { }}
         {{d.scoreDimemsion}}
+    {{#  } }}
+</script>
+
+<script type="text/html" id="statusBar">
+    {{#  if(d.flag == 0){ }}
+    <i class="iconfont icon-wo" style="color: #2094D4"></i>
+    {{#  } }}
+    {{#  if(d.flag == 1){ }}
+    <i class="iconfont icon-checked" style="color: #29BB9C"></i>
     {{#  } }}
 </script>
 
