@@ -162,8 +162,23 @@
     {{#  } else { }}
     {{d.naTestpaper}}
     {{#  } }}
-
 </script>
+
+<script type="text/html" id="receiveConsumingTimeTpl">
+    {{#
+        var fn = function(s){
+            var h;
+            h  =   Math.floor(s/60);
+            return h;
+        };
+    }}
+
+    {{#  if(d.receiveConsumingTime){ }}
+    {{ fn(d.receiveConsumingTime) }}
+    {{#  } else { }}
+    {{#  } }}
+</script>
+
 
 
 </body>

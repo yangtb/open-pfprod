@@ -53,7 +53,7 @@ layui.config({
             {type: 'numbers', title: 'R'},
             {field: 'status', width: 90, title: '接诊状态', templet: '#assessStatusTpl'},
             {field: 'receiveDate', width: 170, title: '接诊时间'},
-            {field: 'receiveConsumingTime', width: 120, align: 'right', title: '接诊耗时(m)'},
+            {field: 'receiveConsumingTime', width: 120, align: 'right', title: '接诊耗时(m)', templet: '#receiveConsumingTimeTpl'},
             {field: 'patName', width: 100, title: '患者姓名'},
             {field: 'patSex', width: 100, title: '性别', templet: '#sexTpl'},
             {field: 'age', width: 80, sort: true, align: 'right', title: '年龄'},
