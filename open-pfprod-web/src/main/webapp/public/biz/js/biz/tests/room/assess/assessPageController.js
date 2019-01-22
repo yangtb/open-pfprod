@@ -420,7 +420,8 @@ layui.config({
         var bizData = {
             idTestexecResult: idTestexecResult,
             idDieStr: obj.data.idDieStr,
-            type : obj.data.type
+            type : obj.data.type,
+            idMedicalrec : idMedicalrec
         };
         $.ajax({
             url: basePath + '/pf/r/waiting/room/eva/diagnostic/analysis/list/detail',

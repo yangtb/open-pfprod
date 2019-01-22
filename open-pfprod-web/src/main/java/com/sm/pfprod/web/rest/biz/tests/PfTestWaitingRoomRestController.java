@@ -750,6 +750,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
     @ResponseBody
     public ResultObject listDiagnosticAnalysisDetail(@RequestBody PfTestEvaDto dto) {
         /* 参数校验 */
+        Assert.isTrue(dto.getIdMedicalrec() != null, "idMedicalrec");
         Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
         Assert.isTrue(StringUtils.isNotBlank(dto.getIdDieStr()), "idDieStr");
 
