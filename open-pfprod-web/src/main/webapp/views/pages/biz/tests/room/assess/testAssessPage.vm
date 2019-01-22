@@ -267,7 +267,11 @@
                             <table id="qzItem" lay-filter="qzItemFilter"></table>
                             <table id="pcnzItem" lay-filter="pcnzItemFilter"></table>
                         </div>
-                        <div class="layui-col-md9">
+                        <div class="layui-col-md9" style="text-align: center; padding-top: 10px">
+                            <span><i class="iconfont icon-wo" style="color: #2094D4"></i>未做相关检查或操作
+                                <i class="iconfont icon-banyuan-" style="color: #538CF6"></i> 已做相关检查或操作
+                                <i class="iconfont icon-checked" style="color: #29BB9C"></i> 纳入理由
+                            </span>
                             <div id="treeContainer" style="height: 800px; width: 100%;"></div>
                         </div>
                     </div>

@@ -378,8 +378,12 @@ layui.config({
             ]]
             , data: qzList
             , skin: 'line' //表格风格
+            , even: false
             , page: false
             , limit: 1000
+            , done: function (res, curr, count) {
+                $("div[lay-id='qzItemTableId'] th").css({'background-color': '#5FB878', 'color': '#fff'});
+            }
         });
 
         table.render({
@@ -391,8 +395,12 @@ layui.config({
             ]]
             , data: pznzList
             , skin: 'line' //表格风格
+            , even: false
             , page: false
             , limit: 1000
+            , done: function (res, curr, count) {
+                $("div[lay-id='pcnzItemTableId'] th").css({'background-color': '#5FB878', 'color': '#fff'});
+            }
         });
     }
 
