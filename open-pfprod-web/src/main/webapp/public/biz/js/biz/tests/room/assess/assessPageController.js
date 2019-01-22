@@ -426,7 +426,7 @@ layui.config({
                     layer.msg(data.msg, {icon: 5});
                     return false;
                 } else {
-                    loadTreeChart(data.data);
+                    loadTreeChart(data.data, obj.data.itemName);
                     return true;
                 }
             },
@@ -455,7 +455,7 @@ layui.config({
     }
 
 
-    function loadTreeChart(list) {
+    function loadTreeChart(list, itemName) {
 
         var inquiryList = [], bodyList = [], checkList = [];
         if (list.length > 0) {
@@ -471,7 +471,7 @@ layui.config({
         }
 
         var data = {
-                "name": "确诊肺结核",
+                "name": itemName,
                 "children": [
                     {
                         "name": "问诊",
