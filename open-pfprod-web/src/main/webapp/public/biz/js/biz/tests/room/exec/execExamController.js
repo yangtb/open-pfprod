@@ -168,8 +168,9 @@ layui.config({
         $('#nz' + qaArr[1]).attr('data-qa-check', 'true');
         var url = basePath + '/pf/r/waiting/room/exam/qa/save';
         common.commonPost(url, data, null, null, queryQa, false);
+        alert(obj.elem.checked)
         if (obj.elem.checked) {
-            $('#exam' + qaArr[1]).attr("disabled", true);
+            $(this).attr("disabled","true");
             form.render();
         }
     });
