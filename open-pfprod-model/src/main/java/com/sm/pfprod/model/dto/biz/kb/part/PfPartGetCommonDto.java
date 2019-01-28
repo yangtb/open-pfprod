@@ -20,12 +20,12 @@ public class PfPartGetCommonDto implements Serializable {
     private String previewFlag;
 
     /**
-     * 病历id
+     * 病例id
      */
     private Long idMedicalrec;
 
     /**
-     * 病历名称
+     * 病例名称
      */
     private String caseName;
 

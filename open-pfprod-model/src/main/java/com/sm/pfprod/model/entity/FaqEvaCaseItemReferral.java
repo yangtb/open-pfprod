@@ -7,7 +7,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- * 知识库_病历评估_评估项_拟诊
+ * 知识库_病例评估_评估项_拟诊
  *
  * @author yangtongbin
  */
@@ -25,7 +25,7 @@ public class FaqEvaCaseItemReferral implements Serializable {
     private Long idEvaCaseItemList;
 
     /**
-     * 病历评估项id
+     * 病例评估项id
      */
     private Long idEvaCaseItem;
 

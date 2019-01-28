@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.List;
 
 /**
- * 知识库_病历评估_评估项
+ * 知识库_病例评估_评估项
  *
  * @author yangtongbin
  */
@@ -25,7 +25,7 @@ public class FaqEvaCaseItem implements Serializable {
 
     /**
      * 主键
-     * 病历评估项id
+     * 病例评估项id
      */
     private Long idEvaCaseItem;
 

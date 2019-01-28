@@ -23,7 +23,7 @@ public class PfEvaExecVo extends ExmEvaDimension implements Serializable {
     private String nzName;
 
     /**
-     * 病历结果ID
+     * 病例结果ID
      */
     private Long parDimemsion;
 

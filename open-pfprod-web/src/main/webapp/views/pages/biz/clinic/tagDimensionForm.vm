@@ -120,6 +120,17 @@
                                autocomplete="off" class="layui-input">
                     </div>
                 </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">算法</label>
+                    <div class="layui-input-inline">
+                        <select name="idAlgorithm1">
+                            <option value="">请选择</option>
+                            #foreach($!elemet in $!algorithms)
+                                <option value="$!elemet.idAlgorithm">$!elemet.name</option>
+                            #end
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <div class="layui-form-item form-item-my5">

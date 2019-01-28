@@ -7,7 +7,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- * 知识库_病历标签
+ * 知识库_病例标签
  *
  * @author yangtongbin
  */
@@ -21,17 +21,17 @@ public class FaqMedTag implements Serializable {
 
     /**
      * 主键
-     * 病历标签id
+     * 病例标签id
      */
     private Long idMedTag;
 
     /**
-     * 所属病历
+     * 所属病例
      */
     private Long idMedicalrec;
 
     /**
-     * 所属病历名称
+     * 所属病例名称
      */
     private String caseName;
 
@@ -41,7 +41,7 @@ public class FaqMedTag implements Serializable {
     private Long idTag;
 
     /**
-     * 病历组件案例id
+     * 病例组件案例id
      */
     private Long idMedCase;
 
@@ -56,7 +56,7 @@ public class FaqMedTag implements Serializable {
     private String creator;
 
     /**
-     * 原病历组件案例id
+     * 原病例组件案例id
      */
     private Long oldIdMedCase;
 

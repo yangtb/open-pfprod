@@ -7,7 +7,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- * 临床模拟_测试计划_关联病历
+ * 临床模拟_测试计划_关联病例
  *
  * @author yangtongbin
  */
@@ -20,7 +20,7 @@ public class ExmTestplanMedicalrec implements Serializable {
 
     /**
      * 主键
-     * 关联病历ID
+     * 关联病例ID
      */
     private Long idTestplanMedicalrec;
 
@@ -30,7 +30,7 @@ public class ExmTestplanMedicalrec implements Serializable {
     private Long idTestplan;
 
     /**
-     * 病历ID
+     * 病例ID
      */
     private Long idMedicalrec;
 

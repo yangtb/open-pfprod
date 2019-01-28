@@ -88,7 +88,7 @@ public class PfTestPlanController extends BaseController {
         return "pages/biz/tests/plan/tagTestPlanItem";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020', 'ROLE_SUPER')")
     @RequestMapping("/tag/student/page")
     public String tagStudentPage(Long idTestplan, Model model) {
         model.addAttribute("idTestplan", idTestplan);
@@ -96,7 +96,7 @@ public class PfTestPlanController extends BaseController {
         return "pages/biz/tests/plan/tagStudentForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_STD0020', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0020', 'ROLE_SUPER')")
     @RequestMapping("/tag/detail/page")
     public String tagDetailPage(Long idTestplan, Model model) {
         model.addAttribute("idTestplan", idTestplan);

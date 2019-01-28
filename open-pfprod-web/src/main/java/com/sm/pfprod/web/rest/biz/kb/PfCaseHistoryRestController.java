@@ -211,7 +211,7 @@ public class PfCaseHistoryRestController {
     }
 
     /**
-     * 查询病历标签信息
+     * 查询病例标签信息
      *
      * @param dto
      * @return
@@ -243,7 +243,7 @@ public class PfCaseHistoryRestController {
     }
 
     /**
-     * 重载病历组件
+     * 重载病例组件
      *
      * @param dto
      * @return

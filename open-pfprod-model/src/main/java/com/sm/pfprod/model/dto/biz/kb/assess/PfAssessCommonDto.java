@@ -23,7 +23,7 @@ public class PfAssessCommonDto extends PageParam implements Serializable {
     private String cdEvaAsse;
 
     /**
-     * 病历评估项id
+     * 病例评估项id
      */
     private Long idEvaCaseItem;
 
@@ -31,5 +31,10 @@ public class PfAssessCommonDto extends PageParam implements Serializable {
      * 评估阶段
      */
     private String sdType;
+
+    /**
+     * 扩展id
+     */
+    private Long extId;
 
 }

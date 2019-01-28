@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class PfPartCommonDto extends PageParam implements Serializable {
 
     /**
-     * 病历组件案例id
+     * 病例组件案例id
      */
     private Long idMedCase;
 

@@ -119,6 +119,9 @@ layui.config({
                 } else {
                     $('#reset').click();
                     displayForm(data.data.fgSystemAlgorithm);
+                    if (data.data.fgSystemAlgorithm == '0') {
+                        data.data.idAlgorithm1 = data.data.idAlgorithm;
+                    }
                     data.data.parDimemsionText = parentName;
                     $("#tagForm").autofill(data.data);
                     layui.use('form', function () {
@@ -235,6 +238,11 @@ layui.config({
             data.field.fgActive = '0';
         }
         data.field.idDemo = idDemo;
+
+        var fgSystemAlgorithm = $('input:radio[name="fgSystemAlgorithm"]:checked').val();
+        if (fgSystemAlgorithm == '0') {
+            data.field.idAlgorithm = data.field.idAlgorithm1;
+        }
         common.commonPost(basePath + '/pf/r/clinic/template/tag/dimension/save', data.field, '保存', '', _callBack);
         return false;
     });

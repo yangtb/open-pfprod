@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class PfWaitingRoomExamVo implements Serializable {
 
     /**
-     * 临床模拟_测试执行_病历结果_检验id
+     * 临床模拟_测试执行_病例结果_检验id
      */
     private Long idTestexecResultInspect;
 

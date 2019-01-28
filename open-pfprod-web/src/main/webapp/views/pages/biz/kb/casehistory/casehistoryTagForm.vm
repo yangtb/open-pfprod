@@ -159,7 +159,7 @@
                     <i class="iconfont icon-save-copy"></i> 保存
                 </button>
                 <button class="layui-btn" id="saveAs">
-                    <i class="iconfont icon-lingcunwei"></i> 病历重载
+                    <i class="iconfont icon-lingcunwei"></i> 病例重载
                 </button>
             </div>
         </div>

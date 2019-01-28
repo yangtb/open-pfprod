@@ -62,7 +62,7 @@
             <label class="layui-form-label">组件code</label>
             <div class="layui-input-block">
                 <input name="script" id="script" class="layui-input" lay-verify="script" lay-vertype="tips"
-                       autocomplete="off" placeholder="病历组件嵌入代码"></input>
+                       autocomplete="off" placeholder="病例组件嵌入代码"></input>
             </div>
         </div>
 

@@ -35,7 +35,7 @@ public class ExmTestplanDetail implements Serializable {
     private Long idStudent;
 
     /**
-     * 病历ID
+     * 病例ID
      */
     private Long idMedicalrec;
 

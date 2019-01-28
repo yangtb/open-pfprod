@@ -22,7 +22,7 @@
     <div class="layui-tab layui-col-xs12" lay-filter="tagTabFilter"
          style="margin: 5px">
         <ul class="layui-tab-title">
-            <li class="layui-this">病历标签维护</li>
+            <li class="layui-this">病例标签维护</li>
             <li>病例流程配置</li>
             <li>评估标签维护</li>
             <li>评估维度维护</li>

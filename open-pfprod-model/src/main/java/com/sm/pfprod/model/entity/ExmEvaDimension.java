@@ -26,12 +26,12 @@ public class ExmEvaDimension implements Serializable {
 
     /**
      * 主键
-     * 病历评估维度ID
+     * 病例评估维度ID
      */
     private Long idTestexecResultDimension;
 
     /**
-     * 病历结果ID
+     * 病例结果ID
      */
     private Long idTestexecResult;
 

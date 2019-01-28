@@ -27,27 +27,27 @@
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">病历名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <label class="layui-form-label">病例名称<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <input name="name" autocomplete="off" class="layui-input"
-                       placeholder="病历名称" lay-verify="required|name" lay-vertype="tips">
+                       placeholder="病例名称" lay-verify="required|name" lay-vertype="tips">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">病历模板<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <label class="layui-form-label">病例模板<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <select name="idDemo" xm-select="idDemoSelects" xm-select-search="" xm-select-radio="" xm-select-search-type="dl"
                         xm-select-height="30px" lay-verify="required" lay-vertype="tips">
-                    <option value="">请选择病历模板</option>
+                    <option value="">请选择病例模板</option>
                 </select>
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">病历级别<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <label class="layui-form-label">病例级别<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <select name="sdLevel" autocomplete="off" lay-verify="required" lay-vertype="tips"
-                        lay-vertype="tips" placeholder="病历级别">
-                    <option value="">请选择病历级别</option>
+                        lay-vertype="tips" placeholder="病例级别">
+                    <option value="">请选择病例级别</option>
                     #foreach($param in ${caseHistoryLevel})
                         <option value="$!param.dictCode">${param.dictName}</option>
                     #end
@@ -55,11 +55,11 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">病历用途<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <label class="layui-form-label">病例用途<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <select name="sdUse" autocomplete="off" lay-verify="required" lay-vertype="tips"
-                        lay-vertype="tips" placeholder="病历用途">
-                    <option value="">请选择病历用途</option>
+                        lay-vertype="tips" placeholder="病例用途">
+                    <option value="">请选择病例用途</option>
                     #foreach($param in ${caseHistoryUse})
                         <option value="$!param.dictCode">${param.dictName}</option>
                     #end

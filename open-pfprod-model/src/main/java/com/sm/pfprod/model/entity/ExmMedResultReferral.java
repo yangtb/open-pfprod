@@ -23,7 +23,7 @@ public class ExmMedResultReferral implements Serializable {
     private Long idTestexecResultReferral;
 
     /**
-     * 病历结果ID
+     * 病例结果ID
      */
     private Long idTestexecResult;
 

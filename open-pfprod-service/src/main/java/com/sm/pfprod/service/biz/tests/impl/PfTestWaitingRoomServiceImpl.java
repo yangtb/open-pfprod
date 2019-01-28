@@ -5,15 +5,13 @@ import com.sm.open.care.core.utils.BeanUtil;
 import com.sm.open.core.facade.model.param.pf.biz.tests.room.*;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
 import com.sm.open.core.facade.model.param.pf.common.PfCommonListParam;
+import com.sm.open.core.facade.model.result.pf.biz.disease.BasDieResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseBodyListResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseBodyResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseInquesListResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseInspectListResult;
 import com.sm.open.core.facade.model.result.pf.biz.tests.room.*;
-import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.ExmEvaLogResult;
-import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.ExmEvaResultResult;
-import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.PfEvaExecResult;
-import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.PfExecLogResult;
+import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.*;
 import com.sm.open.core.facade.model.result.pf.biz.tests.room.paper.PfTestPaperResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
@@ -27,6 +25,8 @@ import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.model.vo.biz.test.*;
+import com.sm.pfprod.model.vo.biz.test.eva.PfDiagnosticAnalysisDetailVo;
+import com.sm.pfprod.model.vo.biz.test.eva.PfDiagnosticAnalysisVo;
 import com.sm.pfprod.model.vo.biz.test.eva.PfEvaExecVo;
 import com.sm.pfprod.model.vo.biz.test.eva.PfExecLogVo;
 import com.sm.pfprod.model.vo.biz.test.paper.PfTestPaperVo;
@@ -386,8 +386,8 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     }
 
     @Override
-    public List<PfWaitingRoomDieReasonVo> listReadyDieReason(Long idTestexecResult) {
-        CommonResult<List<PfWaitingRoomDieReasonResult>> result = testWaitingRoomClient.listReadyDieReason(idTestexecResult);
+    public List<PfWaitingRoomDieReasonVo> listReadyDieReason(Long idTestexecResult, String keyword) {
+        CommonResult<List<PfWaitingRoomDieReasonResult>> result = testWaitingRoomClient.listReadyDieReason(idTestexecResult, keyword);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convertList(result.getContent(), PfWaitingRoomDieReasonVo.class);
         }
@@ -501,6 +501,33 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
         CommonResult<Boolean> result = testWaitingRoomClient.saveExecSerialNo(BeanUtil.convert(dto, ExmTestexecParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult listAllReferralDie(Long idTestexecResult, String keywords) {
+        PfPageResult<BasDieResult> result = testWaitingRoomClient.listAllReferralDie(idTestexecResult, keywords);
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public List<PfDiagnosticAnalysisVo> listDiagnosticAnalysis(PfTestEvaDto dto) {
+        CommonResult<List<PfDiagnosticAnalysisResult>> result = testWaitingRoomClient.listDiagnosticAnalysis(BeanUtil.convert(dto, PfTestEvaParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfDiagnosticAnalysisVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<PfDiagnosticAnalysisDetailVo> listDiagnosticAnalysisDetail(PfTestEvaDto dto) {
+        CommonResult<List<PfDiagnosticAnalysisDetailResult>> result = testWaitingRoomClient.listDiagnosticAnalysisDetail(BeanUtil.convert(dto, PfTestEvaParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfDiagnosticAnalysisDetailVo.class);
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }

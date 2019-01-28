@@ -105,7 +105,8 @@ layui.config({
 
         var bizData = {
             idEvaCaseItem: obj.data.idEvaCaseItem,
-            sdType: obj.data.sdEva
+            sdType: obj.data.sdEva,
+            extId: idMedicalrec
         }
         _tableSelectRender(obj.data.sdEva)
         _postReload(bizData);
@@ -355,7 +356,7 @@ layui.config({
 
     var _callBack = function (data) {
         if (idEvaCase) {
-            _postReload({idEvaCaseItem: data.data, sdType: $('#sdEvaType').val()});
+            _postReload({idEvaCaseItem: data.data, sdType: $('#sdEvaType').val(), extId: idMedicalrec});
             _kbTableReload();
             $('#idEvaCaseItem').val(data.data);
         } else {

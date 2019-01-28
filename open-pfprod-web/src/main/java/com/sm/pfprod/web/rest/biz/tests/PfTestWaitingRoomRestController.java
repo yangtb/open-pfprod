@@ -539,7 +539,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
-     * 查询病历评估平均得分
+     * 查询病例评估平均得分
      *
      * @param dto
      * @return
@@ -556,7 +556,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
-     * 查询病历评估
+     * 查询病例评估
      *
      * @param dto
      * @return
@@ -572,7 +572,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
-     * 查询病历评估日志
+     * 查询病例评估日志
      *
      * @param dto
      * @return
@@ -588,7 +588,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
-     * 病历评估
+     * 病例评估
      *
      * @param dto
      * @return
@@ -716,11 +716,45 @@ public class PfTestWaitingRoomRestController extends BaseController {
     @ResponseBody
     public ResultObject saveExecSerialNo(@RequestBody ExmTestexec dto) {
         /* 参数校验 */
-        /* 参数校验 */
         Assert.isTrue(dto.getIdTestexec() != null, "idTestexec");
         Assert.isTrue(dto.getCurSerialno() != null, "curSerialno");
         return ResultObject.createSuccess("saveExecSerialNo", ResultObject.DATA_TYPE_OBJECT,
                 pfTestWaitingRoomService.saveExecSerialNo(dto));
     }
 
+    /**
+     * 确诊项 及 排除拟诊项
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
+    @PostMapping(value = "/eva/diagnostic/analysis/list")
+    @ResponseBody
+    public ResultObject listDiagnosticAnalysis(@RequestBody PfTestEvaDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+
+        return ResultObject.createSuccess("listDiagnosticAnalysis", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.listDiagnosticAnalysis(dto));
+    }
+
+    /**
+     * 查询病例诊断分析详情
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
+    @PostMapping(value = "/eva/diagnostic/analysis/list/detail")
+    @ResponseBody
+    public ResultObject listDiagnosticAnalysisDetail(@RequestBody PfTestEvaDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedicalrec() != null, "idMedicalrec");
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getIdDieStr()), "idDieStr");
+
+        return ResultObject.createSuccess("listDiagnosticAnalysisDetail", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.listDiagnosticAnalysisDetail(dto));
+    }
 }

@@ -200,7 +200,7 @@
             <div class="layui-form-item form-item-my5">
                 <div class="layui-inline">
                     <button class="layui-btn" type="button" id="accessMed">
-                        <i class="layui-icon layui-icon-edit"></i>病历评估
+                        <i class="layui-icon layui-icon-edit"></i>病例评估
                     </button>
                 </div>
             </div>
@@ -214,7 +214,7 @@
                 <th>临床思维得分</th>
                 <th>临床思维评价</th>
                 <th>医嘱得分</th>
-                <th>病历书写得分</th>
+                <th>病例书写得分</th>
                 <th>知识掌握得分</th>
                 <th>总得分</th>*#
             </tr>
@@ -241,9 +241,10 @@
     <div class="layui-col-md12" style="margin: 0px 30px 0 30px; ">
         <div class="layui-tab layui-col-xs12" lay-filter="tagTabFilter">
             <ul class="layui-tab-title">
-                <li class="layui-this">病历评估</li>
+                <li class="layui-this">病例评估</li>
                 <li>执行日志</li>
-                <li>评估分析</li>
+                <li>诊断分析</li>
+                <li>分值雷达</li>
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
@@ -258,6 +259,22 @@
                 </div>
                 <div class="layui-tab-item" style="margin: -10px 30px 0 -10px;">
                     <table id="execLog"></table>
+                </div>
+
+                <div class="layui-tab-item" style="margin: -10px 30px 0 -10px;">
+                    <div class="layui-row">
+                        <div class="layui-col-md3">
+                            <table id="qzItem" lay-filter="qzItemFilter"></table>
+                            <table id="pcnzItem" lay-filter="pcnzItemFilter"></table>
+                        </div>
+                        <div class="layui-col-md9" style="text-align: center; padding-top: 10px">
+                            <span><i class="iconfont icon-wo" style="color: #2094D4"></i>未做相关检查或操作
+                                <i class="iconfont icon-banyuan-" style="color: #538CF6"></i> 已做相关检查或操作
+                                <i class="iconfont icon-checked" style="color: #29BB9C"></i> 纳入理由
+                            </span>
+                            <div id="treeContainer" style="height: 800px; width: 100%;"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="layui-tab-item">
@@ -284,6 +301,15 @@
            style="height: 28px; border-color: #5FB878">
     {{#  } else { }}
         {{d.scoreDimemsion}}
+    {{#  } }}
+</script>
+
+<script type="text/html" id="statusBar">
+    {{#  if(d.flag == 0){ }}
+    <i class="iconfont icon-wo" style="color: #2094D4"></i>
+    {{#  } }}
+    {{#  if(d.flag == 1){ }}
+    <i class="iconfont icon-checked" style="color: #29BB9C"></i>
     {{#  } }}
 </script>
 
