@@ -10,40 +10,92 @@ layui.config({
 
     var linkList = eval("(" + linkPath + ")");
 
+    var flag = false;
+    var isEnterReferral = false;
+
     //固定块
     util.fixbar({
-        bar1: '<i class="iconfont icon-zhenduan" style="font-size: 30px;"></i><span id="nzImg" style="display: block;margin-top: -32px;"></span>'
-        , css: {right: 20, bottom: 50}
-        , bgcolor: '#393D49'
+        bar1: '<i class="icon-uniE907" style="font-size: 30px;"></i><span id="nzImg" style="display: block;margin-top: -32px;"></span>'
+        , css: {right: 60, bottom: 60}
+        , bgcolor: '#378D7E'
         , click: function (type) {
             if (type === 'bar1') {
-                common.open('拟诊', basePath + '/pf/p/waiting/room/test/referral/page'
+                let s = basePath + '/pf/p/waiting/room/test/referral/page'
                     + '?idMedicalrec=' + idMedicalrec + '&cdMedAsse=009'
                     + '&idTestexecResult=' + $('#idTestexecResult').val()
-                    + '&sdTestexec=' + sdTestexec, 850, 450);
+                    + '&sdTestexec=' + sdTestexec;
+
+                let $1 = $('#page' + $(".click-on")[0].parentNode.getAttribute("exec-code"));
+                $1.addClass("display-my");
+
+                $("#navBar").hide();
+                $("#main").css("margin-left", "20px");
+
+
+                let $iframeClinicalDiagnosis = $("#iframeClinicalDiagnosis");
+
+                let $pageClinicalDiagnosis = $('#pageClinicalDiagnosis');
+
+                $iframeClinicalDiagnosis.attr("src", s);
+                $pageClinicalDiagnosis.show();
+                $iframeClinicalDiagnosis.show();
+
+                let $returnBut = $("#returnBut");
+                $returnBut.show();
+
+                /*let $nextStepDiv = $('#nextStepDiv');
+                $nextStepDiv.hide();*/
+                isEnterReferral = true;
+
+                $returnBut.on('click', function () {
+                    $("#navBar").show();
+                    $("#main").css("margin-left", "130px");
+                    $pageClinicalDiagnosis.hide();
+                    $iframeClinicalDiagnosis.hide();
+                    $('#page' + $(".click-on")[0].parentNode.getAttribute("exec-code")).removeClass("display-my");
+                    $returnBut.hide();
+                    if (flag) {
+                        $('#nextStepDiv').show();
+                    } else {
+                        $('#nextStepDiv').hide();
+                    }
+                    isEnterReferral = false;
+                });
+
+                /*common.open('拟诊', s, 850, 450);*/
             }
         }
     });
 
+    window.onload = clockInit();
+
     var execTags;
     $(document).ready(function () {
-        if (!$('#idTestexec').val()) {
-            layer.confirm('请点击【开始】按钮答题', {
-                closeBtn: 0, //不显示关闭按钮
-                btn: ['开始'] //按钮
-            }, function () {
-                $('#startBtn').click();
-            });
+
+        setTimeout(function () {
+            $("#suspend-box").fadeOut("slow");
+        }, 5000);
+
+
+        if (beginTimeStr == null || beginTimeStr === '') {
+            startExam();
         }
+
+        $('#fullscreen').on('click', function () {
+            toggleFullScreen($(this));
+        });
 
         execTags = document.querySelectorAll(".execTag");
         for (var i = 0; i < execTags.length; i++) {
             execTags[i].addEventListener('click', function () {
-                $(this).addClass("active").siblings().removeClass("active");
-                loadIframe(this.getAttribute('exec-ref'), this.getAttribute('exec-code'), this.getAttribute('exec-no'));
+
+                let $1 = $(this);
+                $1.children("a").addClass("click-on");
+                $1.siblings().children("a").removeClass("click-on");
+
+                loadIframe(this.getAttribute('exec-ref'), this.getAttribute('exec-code'), this.getAttribute('exec-no'), this.getAttribute('exec-pat'));
             });
         }
-        execTags[0].click();
 
         var currentStepNo = $('#currentStepNo').val();
 
@@ -73,11 +125,20 @@ layui.config({
 
         });
 
+        execTags[0].click();
+
     });
 
-    function loadIframe(execRef, execCode, execNo) {
+    function loadIframe(execRef, execCode, execNo, patId) {
         // 设置下一步节点
+
+        code = execCode;
+
         var showStepBtn = false, delShade = false, serialPart = false;
+
+        if (execCode == '007' || execCode == '008') {
+            $('#suspend-box').hide();
+        }
 
         var currentStepNumber = $('#currentStepNo').val();
         $.each(linkList, function (i, item) {
@@ -106,6 +167,8 @@ layui.config({
             }
         });
 
+        flag = showStepBtn;
+
         // 下一步按钮显示
         if (showStepBtn) {
             $('#nextStepDiv').show();
@@ -120,17 +183,23 @@ layui.config({
                 $('#iframe' + execCode).attr('src', basePath + execRef
                     + '?idMedicalrec=' + idMedicalrec + '&cdMedAsse=' + execCode
                     + '&idTestexecResult=' + $('#idTestexecResult').val()
-                    + '&sdTestexec=' + sdTestexec);
+                    + '&sdTestexec=' + sdTestexec + '&idMedCase=' + patId);
             }
+        } else if (execCode == '007') {
+            $('#iframe' + execCode).attr('src', basePath + execRef
+                + '?idMedicalrec=' + idMedicalrec + '&cdMedAsse=' + execCode
+                + '&idTestexecResult=' + $('#idTestexecResult').val()
+                + '&sdTestexec=' + sdTestexec);
         }
+
         $('#iframe' + execCode).removeClass("display-my").siblings().addClass("display-my");
         $('#page' + execCode).removeClass("display-my").siblings().addClass("display-my");
         if (execCode == '004' || execCode == '005' || execCode == '006') {
             showfixBar();
-            layer.tips('点击此处可添加拟诊', '#nzImg', {
+            /*layer.tips('点击此处可添加拟诊', '#nzImg', {
                 tips: [4, '#FF5722'],
                 time: 3000
-            });
+            });*/
         } else {
             hiddenFixBar()
         }
@@ -144,15 +213,7 @@ layui.config({
         $(".layui-fixbar").hide();
     }
 
-    $('#startBtn').on('click', function () {
-        if ($('#endTime').text()) {
-            layer.msg('您已交卷', {icon: 1});
-            return;
-        }
-        if ($('#idTestexec').val()) {
-            layer.msg('请开始答题', {icon: 1});
-            return;
-        }
+    function startExam () {
         var url = basePath + '/pf/r/waiting/room/start';
         var bizData = {
             idTestplanDetail: idTestplanDetail,
@@ -160,8 +221,8 @@ layui.config({
             sdTestexec: '0',
             idStudent: $('#studentId').val()
         };
-        return common.commonPost(url, bizData, '', null, _starCallback);
-    });
+        return common.commonPostSync(url, bizData, '', null, _starCallback);
+    }
 
     function _starCallback(data) {
         $('#idTestexec').val(data.data.idTestexec);
@@ -176,29 +237,27 @@ layui.config({
             return;
         }
 
-        layer.confirm('确定要交卷么？', {
-            title: '交卷提示',
-            resize: false,
-            offset: 'rt',
-            btn: ['确定', '取消'],
-            btnAlign: 'c',
-            icon: 3
-        }, function (index) {
-            var url = basePath + '/pf/r/waiting/room/end';
-            var bizData = {
-                idTestexec: $('#idTestexec').val(),
-                idTestplanDetail: idTestplanDetail,
-                sdTestexec: '2'
-            };
-            common.commonPost(url, bizData, '', null, _endCallback);
-            layer.close(index);
-        })
+        var url = basePath + '/pf/r/waiting/room/end';
+        var bizData = {
+            idTestexec: $('#idTestexec').val(),
+            idTestplanDetail: idTestplanDetail,
+            sdTestexec: '2'
+        };
+        common.commonPost(url, bizData, '', null, _endCallback);
+
     });
 
     function _endCallback(data) {
-        $('#endTime').text(moment(new Date()).format('YYYY-MM-DD HH:mm:ss'));
-        layer.msg('交卷成功', {icon: 1});
-    };
+        parent.layer.open({
+            type: 2,
+            area: ['630px', '350px'],
+            title: false,
+            shade: 0,
+            resize: false,
+            offset: 'auto',
+            content: 'views/pages/biz/tests/room/submit.vm'
+        })
+    }
 
     // 配置说明
     options = {
@@ -244,6 +303,20 @@ layui.config({
 
 
     $('#nextStep').on('click', function () {
+
+        if (isEnterReferral) {
+            $("#navBar").show();
+            $("#main").css("margin-left", "130px");
+            $('#pageClinicalDiagnosis').hide();
+            $("#iframeClinicalDiagnosis").hide();
+            $("#returnBut").hide();
+            if (flag) {
+                $('#nextStepDiv').show();
+            } else {
+                $('#nextStepDiv').hide();
+            }
+        }
+
         var bizData = {
             idTestexec: $('#idTestexec').val(),
             curSerialno: $('#nextStepNo').val()
@@ -299,6 +372,70 @@ layui.config({
             }
         });
     }
+
+
+    function toggleFullScreen($fullscreen) {
+        var a = "layui-icon-screen-full", i = "layui-icon-screen-restore";
+        var t = $fullscreen.children("i");
+
+        let elem = document.body;
+        if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
+            if (elem.requestFullScreen) {
+                elem.requestFullScreen();
+            } else if (elem.mozRequestFullScreen) {
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullScreen) {
+                elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            }
+
+            t.addClass(i).removeClass(a);
+
+        } else {
+            if (document.cancelFullScreen) {
+                document.cancelFullScreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+
+            t.addClass(a).removeClass(i);
+        }
+    }
+
+    var animate;
+
+    function clockInit() {
+        clock();
+    }
+    
+    function clock() {
+        s++;
+        if(s==60){
+            s=0;
+            m++;
+            if(m==60){
+                m=0;
+                h++;
+            }
+        }
+        cal('sec',s);
+        cal('min',m);
+        cal('hr',h);
+        animate = setTimeout(clock, 1000);
+    }
+
+    function cal(id,val){
+        if(val<10){
+            val='0'+val;
+        }
+        document.getElementById(id).innerHTML=val;
+    }
+
 
 });
 

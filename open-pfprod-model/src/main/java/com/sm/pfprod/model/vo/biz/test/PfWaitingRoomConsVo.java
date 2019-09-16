@@ -38,6 +38,11 @@ public class PfWaitingRoomConsVo implements Serializable {
     private String desAnswer;
 
     /**
+     * 是否阳性
+     */
+    private String isMasculine;
+
+    /**
      * 专家解读
      */
     private String desExpert;

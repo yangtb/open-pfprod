@@ -85,17 +85,18 @@
                            value="1" lay-text="NO|OFF">
                     &nbsp;&nbsp;
                     <input type="checkbox" name="fgShow" value="1" title="结果是否在医嘱前展示">
-                    <input type="checkbox" name="fgReason" value="1" title="是否需要说明理由">
+                    <input type="checkbox" name="fgDefault" value="1" title="默认答案">
+                    #*<input type="checkbox" name="fgReason" value="1" title="是否需要说明理由">*#
                 </div>
             </div>
 
-            <div class="layui-form-item form-item-my5">
+#*            <div class="layui-form-item form-item-my5">
                 <label class="layui-form-label" style="padding-right: 88px;"></label>
                 <input type="checkbox"
                        name="fgBack" value="1" title="是否根据病人的回答反馈">
-                <input type="checkbox" name="fgDefault" value="1" title="默认答案">
-            #*<input type="radio" name="radioGroup" value="fgTag" title="标签">*#
-            </div>
+
+            *##*<input type="radio" name="radioGroup" value="fgTag" title="标签">*##*
+            </div>*#
 
             <div class="layui-form-item form-item-my5">
                 <label class="layui-form-label">多媒体</label>

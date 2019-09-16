@@ -49,7 +49,7 @@ public class PfUrlAuthenticationFailureHandler implements AuthenticationFailureH
      * @param exception
      * @throws IOException
      * @throws ServletException
-     * @see org.springframework.security.web.authentication.AuthenticationFailureHandler#onAuthenticationFailure(HttpServletRequest, HttpServletResponse, org.springframework.security.core.AuthenticationException)
+     * @see AuthenticationFailureHandler#onAuthenticationFailure(HttpServletRequest, HttpServletResponse, AuthenticationException)
      */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,

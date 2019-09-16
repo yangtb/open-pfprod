@@ -34,7 +34,13 @@ layui.config({
         done: function (elem, data) {
             var selectData = data.data[0];
             $('#idDie').val(selectData.idDie);
-            $('#idDieText').val(selectData.name);
+            let $none = $('#none');
+            if (!$none.is(":hidden")) {
+                $none.hide();
+            }
+
+            saveReferral();
+
         }
     });
 
@@ -53,13 +59,12 @@ layui.config({
         var bizData = {
             idTestexecResult: idTestexecResult,
             idDie: $('#idDie').val()
-        }
-        common.commonPost(url, bizData, '添加', 'addNz', saveReferralCallback)
+        };
+        common.commonPost(url, bizData, '添加', 'searchAnswer', saveReferralCallback)
     }
 
     function saveReferralCallback(data) {
         $('#idDie').val('');
-        $('#idDieText').val('');
         loadNz();
     }
 
@@ -110,49 +115,63 @@ layui.config({
     }
 
     function zdHtml(i, data) {
-        var html = '<fieldset class="layui-elem-field">\n' +
-            '            <legend style="font-size: 16px;">拟诊' + (i + 1) + ' - <strong style="font-style: italic">' + data.idDieText +'</strong></legend>\n' +
-            '            <div class="layui-field-box">\n' +
-            '                <div class="layui-row layui-col-space5">\n' +
-            '                    <div class="layui-col-xs6">\n' +
+
+        var html = '        <div class="layui-row referral">\n' +
+            '            <div class="titile">\n' +
+            '                <span class=disc></span>\n' +
+                '            <span class=diagnose-title >拟诊' + (i + 1) + '：' + data.idDieText +'</span>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="layui-col-xs6">\n' +
+            '                <div class="layui-card" style="box-shadow: none;">\n' +
+            '                    <div class="layui-card-header"  style="border: none;">\n' +
             '                        <button class="layui-btn layui-btn-xs';
-            if(data.fgExclude == '1') {
-                html +=' layui-btn-disabled" disabled';
-            } else {
-                html +='" ';
-            }
-            html +=' id="addReason' + i + '">\n' +
-            '                            <i class="layui-icon layui-icon-add-1"></i>加入原因\n' +
+        if(data.fgExclude == '1') {
+            html +=' layui-btn-disabled" disabled';
+        } else {
+            html +='" ';
+        }
+        html +=' id="addReason' + i + '">\n' +
+            '                            <i class="layui-icon layui-icon-add-1"></i>添加\n' +
             '                        </button>\n' +
-            '                        <table id="inTable' + i + '" lay-filter="inTableFilter' + i + '">\n' +
-            '                        </table>\n' +
             '                    </div>\n' +
-            '                    <div class="layui-col-xs6">\n' +
-            '                        <button class="layui-btn layui-btn-xs ' ;
-            if(data.fgExclude == '1') {
-                html +=' layui-btn-disabled" disabled style="color:red;" ';
-            } else {
-                html +='" ';
-            }
-            html +=  ' id="out' + i + '" ' +
-            '       onclick="outNz(' + i + ', ' + data.idTestexecResultReferral + ', \'' + data.idDieText + '\')">\n' +
-            '                            <i class="layui-icon layui-icon-delete"></i><span id="outBtnText' + i + '"';
-            if(data.fgExclude == '1') {
-                html +='>已排除';
-            } else {
-                html +='>排除';
-            }
-            html += '</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="layui-btn layui-btn-xs " id="delReason' + i + '" >\n' +
-            '                            <i class="layui-icon layui-icon-add-1"></i>排除原因\n' +
-            '                        </button>\n' +
-            '                        <table id="outTable' + i + '" lay-filter="outTableFilter' + i + '">\n' +
+            '                    <div class="layui-card-body">\n' +
+            '                        <table id="inTable' + i + '" lay-filter="inTableFilter' + i + '">\n' +
             '                        </table>\n' +
             '                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
-            '        </fieldset>';
+            '\n' +
+            '            <div class="layui-col-xs6">\n' +
+            '                <div class="layui-card" style="box-shadow: none">\n' +
+            '                    <div class="layui-card-header" style="border: none">\n' +
+            '                        <button class="layui-btn layui-btn-xs button-right' ;
+        if(data.fgExclude == '1') {
+            html +=' layui-btn-disabled" disabled style="color:red;" ';
+        } else {
+            html +='" ';
+        }
+        html +=  ' id="out' + i + '" ' +
+            '       onclick="outNz(' + i + ', ' + data.idTestexecResultReferral + ', \'' + data.idDieText + '\')">\n' +
+            '                            <i class="layui-icon layui-icon-delete"></i><span id="outBtnText' + i + '"';
+        if(data.fgExclude == '1') {
+            html +='>已排除';
+        } else {
+            html +='>排除';
+        }
+        html += '</span>\n' +
+            '                        </button>\n' +
+            '                        <button style="margin-left: 0" class="layui-btn layui-btn-xs " id="delReason' + i + '" >\n' +
+            '                            <i class="layui-icon layui-icon-add-1"></i>添加\n' +
+            '                        </button>\n' +
+            '                    </div>\n' +
+            '                    <div class="layui-card-body">\n' +
+            '                        <table id="outTable' + i + '" lay-filter="outTableFilter' + i + '">\n' +
+            '                        </table>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '                </div>\n' +
+            '            </div>';
         return html;
     }
 
@@ -314,7 +333,8 @@ function outNz(i, idTestexecResultReferral, idDieText) {
         base: basePath + '/public/layui/build/js/'
     }).use(['layer', 'common'], function () {
         layui.layer.confirm('确定排除拟诊【' + idDieText + '】么？', {
-            offset: [$('#out' + i).offset().top + 'px', $('#out' + i).offset().left + 'px'],
+            shade: 0
+            /*offset: [$('#out' + i).offset().top + 'px', $('#out' + i).offset().left + 'px'],*/
         }, function (index) {
             outNzPost(i, idTestexecResultReferral);
             layer.close(index);

@@ -111,5 +111,9 @@ public class FaqMedCaseInspectList extends BasMediaVo implements Serializable {
      */
     private String fgCarried;
 
+    /**
+     * 是否阳性
+     */
+    private String isMasculine;
 
 }

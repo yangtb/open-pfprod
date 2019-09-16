@@ -30,34 +30,14 @@ layui.config({
         }
     };
 
-    var zTree;
+    var operation;
+
     $(document).ready(function () {
-        layer.load(2);
-        $.ajax({
-            url: basePath + '/pf/r/check/question/classify/tree',
-            type: 'post',
-            dataType: 'json',
-            contentType: "application/json",
-            success: function (data) {
-                layer.closeAll('loading');
-                if (data.code != 0) {
-                    common.errorMsg(data.msg);
-                    return false;
-                } else {
-                    var zNodes = [
-                        {id: "0", name: "全部"}
-                    ];
-                    zNodes = zNodes.concat(data.data)
-                    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-                    zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                    return true;
-                }
-            },
-            error: function () {
-                layer.closeAll('loading');
-                return false;
-            }
+
+        $('#question-select').on("change", function () {
+            _tableReload(this.value, null)
         });
+
     });
 
     function zTreeOnClick(event, treeId, treeNode) {
@@ -74,7 +54,7 @@ layui.config({
                 extItemId: extItemId == '0' ? '' : extItemId,
                 keyword: keyword
             }
-            , height: '390'
+            , height: '604'
         });
     }
 
@@ -89,16 +69,88 @@ layui.config({
         }
     });
 
+    $('#switch-but').on('click', function () {
+        let $switch = $('#switch-text');
+        let text = $switch.text();
+        if (text == '背面') {
+            document.getElementById('body-img').src = basePath + '/public/biz/img/body-back.png';
+            $switch.text('正面');
+            $('#group-spot-front').hide();
+            $('#group-spot-back').show();
+        } else {
+            document.getElementById('body-img').src = basePath + '/public/biz/img/body-front.png';
+            $switch.text('背面');
+            $('#group-spot-front').show();
+            $('#group-spot-back').hide();
+        }
+    });
+
+    $('.show-spot').on('click', function () {
+
+        let $1 = $(this);
+        $1.children("div").addClass("click-on");
+        $1.siblings().children("div").removeClass("click-on");
+
+        let key = $1.children("div").children("span").text();
+        let fieldsJSONElement = fieldsJSON[key.replace(/\s*/g,"")];
+        $(".spot-circle").hide();
+
+        for(let fields_key in fieldsJSONElement){
+            $(".spot-circle[value='" + fields_key + "']").show();
+        }
+
+        let $switch = $('#switch-text');
+        let text = $switch.text();
+        if (text == '背面') {
+            $('#group-spot-front').show();
+        } else {
+            $('#group-spot-back').show();
+        }
+        operation = $(this).attr('value');
+    });
+
+    $('.spot-circle').on('click', function () {
+
+        let position = $(this).attr('value');
+
+        $('#body-check').hide();
+        $("#question-select option[value='"+ operation +"']").prop("selected",true).trigger('change');
+        $("#item-select option[value='"+ position +"']").prop("selected",true).trigger('change');
+
+        $('#question').show();
+
+    });
+
+    $('#live').on('click', function () {
+
+        let $1 = $(this);
+        $1.children("div").addClass("click-on");
+        $1.siblings().children("div").removeClass("click-on");
+        let key = $1.children("div").children("span").text();
+        $(".spot-circle").hide();
+
+        $('#body-check').hide();
+
+        $("#question-select option[value='1']").attr("selected",true).trigger('change');
+
+        $('#question').show();
+    });
+
+    $('#return').on('click', function () {
+        $('#question').hide();
+        $('#body-check').show();
+    });
+
     //执行渲染
     table.render({
         elem: '#partCheckTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'partCheckTableId'
-        , height: '390' //容器高度
+        , height: '604' //容器高度
         , cols: [[
             {type: 'numbers', title: 'R'},
             {field: 'desBody', minWidth: 140, title: '检查项'},
             //{field: 'cdCheckText', width: 90, title: '检查方式'},
-            {field: 'idDieText', width: 90, title: '拟诊', toolbar: '#nzTpl'},
+            {field: 'idDieText', width: 90, title: '选择拟诊', toolbar: '#nzTpl'},
             {field: 'qa', width: 60, title: '提问', fixed: 'right', align: 'center', templet: '#qaTpl'}
         ]] //设置表头
         , url: basePath + '/pf/p/waiting/room/test/check/list'
@@ -155,79 +207,22 @@ layui.config({
         });
     };
 
-    var photoData;
     // 页面加载完成查询问答
     $(document).ready(function () {
         init();
     });
 
     function init() {
-        var bizData = {
-            idMedicalrec: idMedicalrec,
-            cdMedAsse: cdMedAsse
-        };
-        layer.load(2);
-        $.ajax({
-            url: basePath + '/pf/r/waiting/room/check/qa/pic',
-            type: 'post',
-            dataType: 'json',
-            contentType: "application/json",
-            data: JSON.stringify(bizData),
-            success: function (data) {
-                layer.closeAll('loading');
-                if (data.code != 0) {
-                    common.errorMsg(data.msg);
-                    return false;
-                } else {
-                    photoData = data.data;
-                    $("#checkPhoto").attr("src", data.data.frontPath);
-                    return true;
-                }
-            },
-            error: function () {
-                layer.closeAll('loading');
-                common.errorMsg("查询失败");
-                return false;
-            }
+
+        $('#item-select').on("change", function () {
+            reloadTable(this.value)
         });
 
-        var li = document.querySelectorAll(".menu-item");
-        for (var i = 0; i < li.length; i++) {
-            li[i].addEventListener('click', function () {
-                $(this).addClass("active").siblings().removeClass("active");
-                reloadTable(i, this.getAttribute('data-value'));
-            });
-        }
-        li[0].click();
-    };
+        reloadTable(0);
+    }
 
-    form.on('radio(photoFilter)', function (data) {
-        if (data.value == '1') {
-            $("#checkPhoto").attr("src", photoData.frontPath);
-        } else {
-            $("#checkPhoto").attr("src", photoData.backPath);
-        }
-    });
 
-    $('#checkPhoto').on('click', function () {
-        //var path = $('#checkPhoto').attr('src');
-        //common.openSinglePhoto(path);
-
-        var imgFirst, imgSecond;
-        if ($('input[name="photo"]:checked').val() == '1') {
-            imgFirst = photoData.frontPath;
-            imgSecond = photoData.backPath;
-        } else {
-            imgFirst = photoData.backPath;
-            imgSecond = photoData.frontPath;
-        }
-        var imgData = [
-            {src: imgFirst}, {src: imgSecond}
-        ]
-        common.openMultiPhoto(imgData)
-    });
-
-    function reloadTable(i, sdBody) {
+    function reloadTable(sdBody) {
         table.reload('partCheckTableId', {
             where: {
                 idMedicalrec: idMedicalrec,
@@ -240,6 +235,31 @@ layui.config({
         });
     };
 
+
+    //监听行双击事件
+    table.on('rowDouble(partCheckTableFilter)', function (obj) {
+        let checkInput = $('#check' + obj.data.idMedCaseList);
+
+        if (!checkInput[0].checked) {
+            var data = {
+                idTestexecResult: idTestexecResult,
+                idBody: obj.data.idBody,
+                idMedCaseList: obj.data.idMedCaseList,
+                fgValid: '0',
+                idDie: $('#nz' + obj.data.idMedCaseList).attr('data-index')
+            };
+            var url = basePath + '/pf/r/waiting/room/check/qa/save';
+            common.commonPost(url, data, null, null, queryQa, false);
+            checkInput.attr("disabled", true);
+
+            let checkCell = obj.tr.find(".layui-form-checkbox");
+            if (!obj.tr.hasClass('layui-table-click')) {
+                obj.tr.addClass('layui-table-click');
+                checkCell.addClass('layui-form-checked');
+                checkCell.addClass('layui-checkbox-disbaled');
+            }
+        }
+    });
 
     form.on('checkbox(qaCheckFilter)', function (obj) {
         var qaValue = this.value;
@@ -256,7 +276,6 @@ layui.config({
         common.commonPost(url, data, null, null, queryQa, false);
         if (obj.elem.checked) {
             $('#check' + qaArr[1]).attr("disabled", true);
-            form.render();
         }
     });
 
@@ -306,7 +325,48 @@ layui.config({
     }
 
     function qaHtml(data, showExpertFlag) {
-        var result = '';
+        var result = '<li style="padding-top: 1px;">\n' +
+            ' <div class=\'chat\' >\n' +
+            '  <div style=\'overflow: hidden\'>\n' +
+            '   <div style=\'float: left \'>\n' +
+            '    <img src=' + basePath + '/public/layui/build/images/p3.png alt="">\n' +
+            '   </div>\n' +
+            '   <div style=\'float: left;  width:70%\'>\n' +
+            '    <span>&nbsp  开始接诊</span>\n' +
+            '   </div>\n' +
+            '  </div>\n' +
+            '\n' +
+            ' </div >\n' +
+            ' </div >\n' +
+            '</li >'+
+            '<li>\n' +
+            ' <div class=\'chat\' >\n' +
+            '  <div style=\'overflow: hidden\'>\n' +
+            '   <div style=\'float: left \'>\n' +
+            '    <img src=' + basePath + '/public/layui/build/images/p2.png alt="">\n' +
+            '   </div>\n' +
+            '   <div style=\'float: left;  width:70%\'>\n' +
+            '    <span>&nbsp  '+ name + "，"+ sex + "，" + age + "岁" +'</span>\n' +
+            '   </div>\n' +
+            '  </div>\n' +
+            '\n' +
+            ' </div >\n' +
+            ' </div >\n' +
+            '</li >'+
+            '<li>\n' +
+            ' <div class=\'chat\' >\n' +
+            '  <div style=\'overflow: hidden\'>\n' +
+            '   <div style=\'float: left; \'>\n' +
+            '    <img src=' + basePath + '/public/layui/build/images/p1.png alt="">\n' +
+            '   </div>\n' +
+            '   <div style=\'float: left; margin-left: 8px;  width:70%\'>\n' +
+            '    <span>'+ complaint +'</span>\n' +
+            '   </div>\n' +
+            '  </div>\n' +
+            '\n' +
+            ' </div >\n' +
+            ' </div >\n' +
+            '</li >';
         for (var i = 0; i < data.length; i++) {
             if (showExpertFlag == false) {
                 result += appendQaNormalHtml(data[i]);
@@ -317,64 +377,62 @@ layui.config({
         $('#serviceBox').empty();
         $('#serviceBox').append(result);
 
+        var objDiv = document.getElementById("autoScroll");
+        objDiv.scrollTop = objDiv.scrollHeight;
+
     }
 
     function appendQaNormalHtml(data) {
+        //1 图片 2 音频 3 视频 4 其它
 
-        var html = '<li class="other-side">\n' +
-            '           <div class="doctor-details">\n' +
-            '               <input class="details-select" type="checkbox"';
-        if (data.fgClue == '1') {
-            html += 'checked="checked" ';
+        let patientVar = null;
+        switch (data.sdType) {
+            case '1':
+                patientVar = '<span>' + data.desResult + '</span>\n'+
+                    '         <img class="response-img" id="patientImg' + data.idAnswer + '"  src="' + data.path + '" alt="" style="max-width: 350px; height: 200px;cursor: pointer;"' +
+                    '                      onerror="onError(this)"' +
+                    '                      onclick="openMedia(' + data.sdType + ',' + data.idAnswer + ')">\n';
+                break;
+            case '2':
+                patientVar = '<span>' + data.desResult + '</span>\n'+
+                    '           <p class="voice-box">\n' +
+                    '               <audio class="patient-voice" id="patientVoice' + data.idAnswer + '" src="' + data.path + '"></audio>\n' +
+                    '               <button class="sound-icon" style="cursor: pointer;" onclick="control(' + data.idAnswer + ')"><img src=' + basePath + '/public/layui/build/images/horn.png alt=""></button>\n' +
+                    '           </p>\n';
+                break;
+            case '3':
+                patientVar = '  <span class="time">12"</span>\n' +
+                    '           <p class="voice-box">\n' +
+                    '               <audio class="patient-voice" id="patientVideo' + data.idAnswer + '" src="' + data.path + '"></audio>\n' +
+                    '               <button class="sound-icon" style="cursor: pointer;" onclick="openMedia(' + data.sdType + ',' + data.idAnswer + ')"><i class="iconfont icon-11"></i></button>\n' +
+                    '           </p>\n';
+                break;
+            default:
+                patientVar = '<span>' + data.desResult + '</span>\n';
         }
-        html += '            value="' + data.idTestexecResultBody + '" onclick="checkQa(this)">\n' +
-            '               <img src="' + basePath + '/public/biz/img/exam/doctor-avatar.png" alt="" class="doctor-avatar" style="width: 40px; height: 40px;">\n' +
-            '               <p class="doctor-response">' + data.desBody + '</p>\n' +
-            '            </div>\n' +
-            '       </li>\n';
 
-        if (!data.sdType) {
-            html += '<li class="patient">\n' +
-                '       <div class="patient-details">\n' +
-                '           <p class="patient-response">' + data.desResult + '</p>\n' +
-                '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
-                '       </div>\n' +
-                '    </li>';
-        } else if (data.sdType == '1') {
-            html += '<li class="patient-img-response">\n' +
-                '       <p class="text">' + data.desResult + '</p>\n' +
-                '       <p class="img-box">\n' +
-                '           <img class="response-img" id="patientImg' + data.idResult + '"  src="' + data.path + '" alt="" style="max-width: 350px; height: 200px;cursor: pointer;"' +
-                '               onerror="onError(this)"' +
-                '               onclick="openMedia(' + data.sdType + ',' + data.idResult + ')">\n' +
-                '           <img class="patient-img-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
-                '       </p>\n' +
-                '   </li>';
-        } else if (data.sdType == '2') {
-            html += '<li class="patient">\n' +
-                '       <p class="text">' + data.desResult + '</p>\n' +
-                '       <div class="patient-details">\n' +
-                '           <span class="time">12"</span>\n' +
-                '           <p class="voice-box">\n' +
-                '               <audio class="patient-voice" id="patientVoice' + data.idResult + '" src="' + data.path + '"></audio>\n' +
-                '               <button class="sound-icon" style="cursor: pointer;" onclick="control(' + data.idResult + ')"><i class="iconfont icon-shengyin"></i></button>\n' +
-                '           </p>\n' +
-                '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
-                '       </div>\n' +
-                '    </li>';
-        } else if (data.sdType == '3') {
-            html += '<li class="patient">\n' +
-                '       <p class="text">' + data.desResult + '</p>\n' +
-                '       <div class="patient-details">\n' +
-                '           <span class="time">12"</span>\n' +
-                '           <p class="voice-box">\n' +
-                '               <audio class="patient-voice" id="patientVideo' + data.idResult + '" src="' + data.path + '"></audio>\n' +
-                '               <button class="sound-icon" style="cursor: pointer;" onclick="openMedia(' + data.sdType + ',' + data.idResult + ')"><i class="iconfont icon-11"></i></button>\n' +
-                '           </p>\n' +
-                '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
-                '       </div>\n' +
-                '   </li>';
-        }
+        var html = "                <li>\n" +
+            "                    <div class='chat'>\n" +
+            "                        <div style='overflow: hidden'>\n" +
+            "                            <div style='float: left '>\n" +
+            '                           <img src=' + basePath + '/public/layui/build/images/body.png alt="">\n' +
+            "                                <span>【医生】</span>\n" +
+            "                            </div>\n" +
+            "                            <div style='float: left;  width:70%'>\n" +
+            '                               <span>' + data.desBody + '</span>\n' +
+            "                            </div>\n" +
+            "                        </div>\n" +
+            "                        <div style='margin-left: 41px; margin-top: 7px; overflow: hidden'>\n" +
+            "                            <div style='float: left'>\n" +
+            "                                <span>【患者】</span>\n" +
+            "                            </div>\n" +
+            "                            <div style='float: left; width: 70%'>\n" +
+            patientVar
+            +
+            "                            </div>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                </li>";
 
         return html;
     }

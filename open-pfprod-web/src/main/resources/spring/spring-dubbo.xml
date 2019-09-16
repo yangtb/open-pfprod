@@ -6,7 +6,7 @@
 
 	<dubbo:application id="pfprod-web-id" name="pfprod-web-server" />
 
-	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" file="${dubbo.cache.file}"/>
+	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}"/>
 
 	<dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}" accesslog="${dubbo.protocol.accesslog}"/>
 

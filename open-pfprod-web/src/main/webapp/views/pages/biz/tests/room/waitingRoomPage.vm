@@ -41,7 +41,7 @@
 <div>
     <form class="layui-form">
         <div class="layui-inline">
-            <div class="layui-btn-group">
+            <div class="layui-btn-group">s
                 <button type="button" class="layui-btn" id="receivePat" style="background-color: #7A84F7">
                     <i class="iconfont icon-yishenggerenjiezhen"></i> 接诊
                 </button>

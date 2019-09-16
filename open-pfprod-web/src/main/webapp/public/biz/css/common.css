@@ -2,6 +2,82 @@
     自定义样式
  */
 
+
+@font-face {
+    font-family: 'icomoon';
+    src:  url('../../common/fonts/icomoon.eot?snsrp8');
+    src:  url('../../common/fonts/icomoon.eot?snsrp8#iefix') format('embedded-opentype'),
+    url('../../common/fonts/icomoon.ttf?snsrp8') format('truetype'),
+    url('../../common/fonts/icomoon.woff?snsrp8') format('woff'),
+    url('../../common/fonts/icomoon.svg?snsrp8#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon', serif !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-close:before {
+    color: #6E747D;
+    content: "\e908";
+    font-size: 24px;
+}
+.icon-medicine:before {
+    content: "\e909";
+    font-size: 24px;
+}
+.icon-uniE907:before {
+    content: "\e907";
+    font-size: 24px;
+}
+.icon-uniE900:before {
+    content: "\e900";
+    color: #5a5a5a;
+    font-size: 24px;
+}
+.icon--:before {
+    content: "\e901";
+    color: #5a5a5a;
+    font-size: 24px;
+}
+.icon-4:before {
+    content: "\e902";
+    font-size: 24px;
+}
+.icon-3:before {
+    content: "\e903";
+    font-size: 24px;
+}
+.icon-2:before {
+    content: "\e904";
+    font-size: 24px;
+}
+.icon-1:before {
+    content: "\e905";
+    font-size: 24px;
+}
+.icon-uniE904:before {
+    content: "\e906";
+    font-size: 24px;
+}
+.icon-success:before {
+    color: #5fb878;
+    content: "\e90a";
+    font-size: 100px;
+}
+
+
 /* 页内填充 */
 .wrapper-content {
     margin: 10px 10px 10px 10px

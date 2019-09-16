@@ -11,150 +11,142 @@
     <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/css/service.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/css/body.css">
     <link rel="stylesheet" href="${contextPath}/public/ztree/zTreeStyle/zTreeStyle.css" type="text/css">
 
     <script>
         var basePath = '${basePath}';
+        var name = '$!{patient.name}';
+        var age = '$!{patient.age}';
+        var sex = #if($!{patient.sex} == '2')'女'#elseif($!{patient.sex} == '1' )'男'#end;
+        var complaint = '$!{patient.complaint}';
         var idMedicalrec = '$!{idMedicalrec}';
         var cdMedAsse = '$!{cdMedAsse}';
         var idTestexecResult = '$!{idTestexecResult}';
         var executingShowExpert = '$!{executingShowExpert}';
         var completedShowExpert = '$!{completedShowExpert}';
         var sdTestexec='$!{sdTestexec}';
+
+        var fieldsArr ='$!{map}';
+        var fieldsJSON = eval('(' + fieldsArr + ')');
+
+
     </script>
-
-    <style>
-        .menu-item {
-            /*position: absolute;*/
-            width: 60px;
-            height: 60px;
-            display: inline-block;
-            background-color: #6769C9;
-            margin: 2px;
-            line-height: 60px;
-            text-align: center;
-            -webkit-border-radius: 50%;
-            border-radius: 50%;
-            text-decoration: none;
-            color: #fff;
-            -webkit-transition: background .5s, -webkit-transform .6s;
-            transition: background .5s, -webkit-transform .6s;
-            -moz-transition: transform .6s, background .5s, -moz-transform .6s;
-            transition: transform .6s, background .5s;
-            transition: transform .6s, background .5s, -webkit-transform .6s, -moz-transform .6s;
-            font-size: 14px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box
-        }
-
-        .menu-line {
-            line-height: 20px;
-            padding-top: 10px;
-        }
-
-        .menu-item:hover {
-            background: #A9C734;
-        }
-
-        .active {
-            background: #A9C734;
-        }
-
-        li {
-            padding-bottom: 2px;
-            cursor: pointer;
-        }
-
-        .box2-img {
-            width: 400px;
-            height: 305px;
-            text-align: center;
-            display: table-cell;
-            vertical-align: middle;
-            border: 1px solid #d2d2d2;
-        }
-
-        .box2-img .img2 {
-            max-height: 100%;
-            max-width: 100%;
-            cursor: pointer;
-        }
-
-    </style>
 
 </head>
 
 <body class="wrapper-content">
 
-<div class="layui-col-space5">
-    <div class="layui-col-xs6">
-        <div class="layui-row">
-            <div class="layui-col-xs6">
-                <div class="layui-form" style="text-align: center">
-                    <div class="layui-input-inline">
-                        <input type="radio" name="photo" value="1" title="正面" lay-filter="photoFilter" checked="">
-                        <input type="radio" name="photo" value="2" title="背面" lay-filter="photoFilter">
-                    </div>
-                </div>
-                <div class="box2-img">
-                    <img id="checkPhoto" class="img2" />
-                </div>
-                #*<img id="checkPhoto"
-                     style="width: 100%; height: 305px;position: relative; cursor: pointer;">*#
+<div>
 
-            </div>
-            <div class="layui-col-xs6" style="padding:50px 0px 0px 10px;text-align: center;">
-                <ul>
-                    <li class="menu-item" data-value="0">全部</li>
-                    #foreach($!element in $!bodyPosition)
-                        <li class="menu-item" data-value="$!element.dictCode">$!element.dictName</li>
-                    #end
-                </ul>
-            </div>
-        </div>
+    <div class="titile">
+        <ul>
+            <li style="width: 50.5%">
+                <span class="spot"></span>
+                <span class="titile-text">&nbsp;体格检查项</span>
+            </li>
+            <li style="width: 49.5%">
+                <span class="spot"></span>
+                <span class="titile-text">&nbsp;检查记录</span>
+            </li>
+        </ul>
+    </div>
 
-        <div class="layui-row" style="padding-top: 5px;">
-            <div class="layui-col-xs7">
-                <form class="layui-form">
-                    <div class="layui-inline">
-                        <div class="layui-input-inline">
-                            <input type="text" name="keyword" id="keyword" autocomplete="off" class="layui-input"
-                                   placeholder="请输入检查项">
+    <div class="layui-col-xs6 support-check">
+        <div id="body-check" style="padding-left: 5px">
+                <div id="operation">
+                    <li id="live"><div><span>生命征</span></div></li>
+                    <li class="show-spot" value="2"><div><span>视诊</span></div></li>
+                    <li class="show-spot" value="3"><div><span>触诊</span></div></li>
+                    <li class="show-spot" value="4"><div><span>叩诊</span></div></li>
+                    <li class="show-spot" value="5"><div><span>听诊器</span></div></li>
+                    <li class="show-spot" value="6"><div><span>神经系统</span></div></li>
+                    <li class="show-spot" value="7"><div><span>压舌板</span></div></li>
+                </div>
+
+                <div id="img-box">
+                    <div>
+                        <div id="group-spot-front" hidden>
+                            <div hidden value="1"  class="head spot-circle"><span></span></div>
+                            <div hidden value="2"  class="neck spot-circle"><span></span></div>
+                            <div hidden value="3"  class="shoulder spot-circle"><span></span></div>
+                            <div hidden value="4"  class="breast spot-circle"><span></span></div>
+                            <div hidden value="6"  class="stomach spot-circle"><span></span></div>
+                            <div hidden value="5"  class="arm spot-circle"><span></span></div>
+                            <div hidden value="8"  class="lap spot-circle"><span></span></div>
+                            <div hidden value="7"  class="pelvis spot-circle"><span></span></div>
+                        </div>
+
+                        <div id="group-spot-back" hidden>
+                            <div hidden value="9" class="back spot-circle"><span></span></div>
                         </div>
                     </div>
-                    <div class="layui-inline">
-                        <div class="layui-input-inline">
-                            <button type="button" class="layui-btn" id="queryBtn">
-                                <i class="iconfont icon-query"></i> 查询
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="layui-col-xs5" style="text-align: right">
-               #* <button type="button" class="layui-btn" id="refreshRight">
-                    <i class="iconfont icon-add"></i> 检查
-                </button>*#
-            </div>
+
+                    <img id="body-img" src="${contextPath}/public/biz/img/body-front.png"/>
+                </div>
+
+                <button type="button" id="switch-but" style="display: inline-block;">
+                    <span id="switch-text">背面</span>
+                </button>
         </div>
-        <div class="layui-row">
-            <div class="layui-col-xs3" style="padding-top: 10px">
-                <div id="treeDiv" style="overflow:auto; border: 1px solid #cccccc">
-                    <ul id="treeDemo" class="ztree"></ul>
+        <div id="question" style="padding-left: 5px" hidden>
+            <div class="layui-row" >
+                <div style="margin: 12px 5px 12px 0; overflow: hidden">
+                    <form class="layui-form" style="float: right">
+
+
+
+                        <div style="float: right">
+                            <div class="layui-input-inline">
+                                <button type="button" id="queryBtn">
+                                    <span>查询</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div style="float: right">
+                            <div class="layui-input-inline">
+                                <input type="text" name="keyword" id="keyword" autocomplete="off" class="layui-input"
+                                       placeholder="请输入检查项">
+                            </div>
+                        </div>
+                    </form>
+
+                    <div style="float: right">
+                        <select id="question-select" class="item-style">
+                            <option class="item-option" value="0" selected>全部</option>
+                            #foreach($!element in $!listQuestionClassifyTree)
+                                <option value="$!element.id">$!element.name</option>
+                            #end
+                        </select>
+                    </div>
+
+                    <div style="float: right">
+                        <select id="item-select" class="item-style" style="margin-right: 13px">
+                            <option class="item-option" value="0" selected>全部</option>
+                            #foreach($!element in $!bodyPosition)
+                                <option value="$!element.dictCode">$!element.dictName</option>
+                            #end
+                        </select>
+
+                    </div>
+
+                    <div id="return">
+                        返回上一级
+                    </div>
+
                 </div>
             </div>
-            <div class="layui-col-xs9">
-                <table id="partCheckTable" lay-filter="partCheckTableFilter">
-                </table>
-            </div>
+
+            <table id="partCheckTable" lay-filter="partCheckTableFilter">
+            </table>
         </div>
     </div>
 
-    <div class="layui-col-xs6">
-        <div class="service-wrapper" style="border: 1px solid #dddddd;">
-            <div class="progress-box">
-                <div class="item-box" hidden>
+    <div class="layui-col-xs6" style="padding-left:5px;">
+        <div class="service-wrapper" style="border: 1px solid #dddddd;" id="autoScroll">
+            <div class="progress-box" hidden>
+                <div class="item-box" >
                     <p class="progress-item"><span class="middle">6</span>/10</p>
                     <p class="progress-item"><span class="end">10</span>/10</p>
                     <p class="progress-item"><span class="end">12</span>/10</p>
@@ -180,7 +172,7 @@
 </script>
 
 <script type="text/html" id="nzTpl">
-    <a href="javascript:;" class="layui-table-link" id="nz{{d.idMedCaseList}}"
+    <a style="color: #378D7E" href="javascript:;" class="layui-table-link" id="nz{{d.idMedCaseList}}"
        data-index="{{ d.idDie ? d.idDie : '' }}"
        data-qa-check="{{ d.extQa== true ? true : false }}" lay-event="add">
         {{# if(d.idDie){ }}

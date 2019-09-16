@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/css/service.css">
     <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
 
     <script>
@@ -16,67 +17,80 @@
         var idTestexecResult = '$!{idTestexecResult}';
     </script>
 
+    <style>
+
+        .diagnose {
+            border: 1px solid rgba(239, 241, 244, 1);
+            height: 450px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border-radius: 4px;
+            margin-bottom: 15px
+        }
+
+        .disc {
+            width:8px;
+            height:8px;
+            display: inline-block;
+            background:rgba(55,141,126,1);
+            margin-right: 3px;
+            border-radius:50%;
+        }
+
+        .diagnose-title {
+            color:rgba(51,51,51,1);
+            width:77px;
+            height:14px;
+            font-size:14px;
+            font-family:MicrosoftYaHei;
+            font-weight:400;
+        }
+
+        #dieSumary::-webkit-input-placeholder {
+            height:14px;
+            font-size:14px;
+            font-family:MicrosoftYaHei;
+            font-weight:400;
+            color:rgba(102,102,102,1);
+        }
+
+</style>
+
 </head>
 
 <body>
 
-<div style="overflow: auto; height: 800px;">
-    <div class="layui-row" style="margin-right: 10px;">
-        <div class="layui-col-xs12">
-            <form class="layui-form" action="" lay-filter="component-form-element" style="padding-top: 10px;">
-                <div hidden>
-                    <input id="idDie" name="idDie" hidden>
-                </div>
-                #*<div class="layui-row layui-form-item">
-                    <div class="layui-col-md12">
-                        <label class="layui-form-label">诊断<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
-                        <div class="layui-input-block">
-                            <input type="text" name="idDieText" id="idDieText" autocomplete="off" class="layui-input"
-                                   placeholder="请选择诊断" lay-verify="required" lay-vertype="tips"
-                                   style="display:inline-block;width:442px;vertical-align:middle;
-                           margin-right:-5px;border: 1px solid #C9C9C9;" disabled>
-                            <button type="button" class="layui-btn layui-btn-primary" id="searchAnswer">
-                                <i class="layui-icon layui-icon-search"></i>
-                            </button>
-                            <button class="layui-btn layui-btn-normal" id="addZd">
-                                <i class="layui-icon layui-icon-add-1"></i>添加
-                            </button>
-                        </div>
-                    </div>
-                </div>*#
-            </form>
+<div class="wrapper-content">
+
+    <div class="titile">
+        <ul>
+            <li >
+                <span class="spot"></span>
+                <span class="titile-text">&nbsp;诊断项</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="diagnose">
+        <div class="layui-row layui-col-space15" id="zdField">
         </div>
     </div>
-    <div style="padding-left: 110px;padding-bottom: 5px;">
-        <button id="refresh" type="button" class="layui-btn layui-btn-normal">
-            <i class="iconfont icon-refresh"></i> 刷新
-        </button>
+
+    <div class="titile">
+        <ul>
+            <li >
+                <span class="spot"></span>
+                <span class="titile-text">&nbsp;诊断小结</span>
+            </li>
+        </ul>
     </div>
-    <div class="layui-row" id="zdField" style="padding-left: 110px;width: 600px;">
-        <fieldset class="layui-elem-field">
-            <legend>诊断 -
-                #*<button id="delSummary" class="layui-btn layui-btn-sm layui-btn-disabled" disabled>
-                    <i class="layui-icon layui-icon-delete"></i>删除
-                </button>
-                <button class="layui-btn layui-btn-sm layui-btn-disabled" id="addDieReason" disabled>
-                    <i class="layui-icon layui-icon-add-1"></i>确诊理由
-                </button>*#
-            </legend>
-            <div class="layui-field-box">
-                <table id="zdTable" lay-filter="zdTableFilter">
-                </table>
-            </div>
-        </fieldset>
-    </div>
-    <div class="layui-row" style="width: 710px;">
-        <div class="layui-form-item">
-            <div hidden>
-                <input id="idTestexecResultSumary" hidden>
-            </div>
-            <label class="layui-form-label">诊断小结</label>
-            <div class="layui-input-block">
-                <textarea name="dieSumary" id="dieSumary" placeholder="请填写诊断小结" class="layui-textarea"></textarea>
-            </div>
+
+    <div class="layui-row">
+        <div hidden>
+            <input id="idTestexecResultSumary" hidden>
+        </div>
+        <div>
+            <textarea name="dieSumary" id="dieSumary" placeholder="请填写诊断小结" class="layui-textarea"></textarea>
         </div>
     </div>
 </div>

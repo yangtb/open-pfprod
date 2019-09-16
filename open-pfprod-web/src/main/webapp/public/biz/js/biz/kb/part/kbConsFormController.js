@@ -126,6 +126,7 @@ layui.config({
             , cols: [[
                 {type: 'radio'},
                 {field: 'desInques', minWidth: 135, title: '问题'},
+                {field: 'isMasculine', minWidth: 135, title: '是否阳性',style:'display:none;'},
                 {field: 'desAnswer', minWidth: 110, title: '答案'},
                 {fixed: 'right', title: '操作', minWidth: 110, align: 'left', toolbar: '#partConsBar'}
             ]] //设置表头
@@ -141,6 +142,8 @@ layui.config({
                 , first: false //不显示首页
                 , last: false //不显示尾页
                 , limits: [15, 30, 50, 100]
+            },done: function () {
+                $("[data-field='isMasculine']").css('display','none');
             }
         });
     }
@@ -280,6 +283,7 @@ layui.config({
     form.on('submit(saveCons)', function (data) {
         data.field.fgReason = data.field.fgReason ? '1' : '0';
         data.field.fgBack = data.field.fgBack ? '1' : '0';
+        data.field.isMasculine = data.field.isMasculine ? '1' : '0';
         data.field.idMedCase = idMedCase;
         if (!data.field.fgCarried) {
             data.field.fgCarried = '0';

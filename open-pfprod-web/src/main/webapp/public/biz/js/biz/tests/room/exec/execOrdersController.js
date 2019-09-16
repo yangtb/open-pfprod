@@ -1,13 +1,61 @@
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['table', 'jquery', 'tableSelect', 'form', 'common'], function () {
+}).use(['table', 'jquery', 'tableSelect', 'form', 'common', 'element'], function () {
     var $ = layui.$
         , table = layui.table
         , common = layui.common
         , form = layui.form
+        , element = layui.element
         , tableSelect = layui.tableSelect;
 
     $(document).ready(function () {
+
+        let $addOrders = $('#addOrders');
+
+        let selector = function () {
+
+            let $medicine = $('#medicine');
+            if ($medicine.css('display') == 'none') {
+                tableRender();
+
+                element.progress('progress', '100%');
+                $('#basicInfo').hide();
+                $medicine.show();
+
+                $addOrders.hide();
+
+                $('#basicInfoIcon').removeClass('active').addClass('inactive');
+
+                $('#medicineIcon').removeClass('inactive').addClass('active');
+
+                $('#basicInfoText').removeClass('green');
+                $('#medicineText').addClass('green')
+                    .trigger("click");
+                $addOrders.trigger("click");
+            }
+
+        };
+
+        $addOrders.on('click', selector);
+        $('#medicineIcon').on('click', selector);
+
+        $('#basicInfoIcon').on('click', function () {
+            if ($('#medicine').css('display') != 'none') {
+                element.progress('progress', '50%');
+                $('#basicInfo').show();
+                $('#medicine').hide();
+
+                $addOrders.show();
+
+                $('#basicInfoIcon').removeClass('inactive').addClass('active');
+
+                $('#medicineIcon').removeClass('active').addClass('inactive');
+
+                $('#medicineText').removeClass('green');
+                $('#basicInfoText').addClass('green')
+            }
+        });
+
         initForm();
     });
 
@@ -16,12 +64,11 @@ layui.config({
         table.render({
             elem: '#shortTable' //指定原始表格元素选择器（推荐id选择器）
             , id: 'shortTableId'
-            , height: '500' //容器高度
-            , toolbar: '#toolbarShort'
+            , height: '300' //容器高度
             , defaultToolbar: []
             , cols: [[
                 {field: 'idShortDrugsText', minWidth: 150, title: '临时用药'},
-                {fixed: 'right', title: '操作', width: 60, align: 'left', toolbar: '#drugBar'}
+                {fixed: 'right', title: '操作', width: 65, align: 'left', toolbar: '#drugBar'}
             ]] //设置表头
             , url: basePath + '/pf/p/waiting/room/test/orders/drug/short/list'
             , where: {
@@ -34,12 +81,11 @@ layui.config({
         table.render({
             elem: '#longTable' //指定原始表格元素选择器（推荐id选择器）
             , id: 'longTableId'
-            , height: '500' //容器高度
-            , toolbar: '#toolbarLong'
+            , height: '300' //容器高度
             , defaultToolbar: []
             , cols: [[
                 {field: 'idLongDrugsText', minWidth: 150, title: '长期用药'},
-                {fixed: 'right', title: '操作', width: 60, align: 'left', toolbar: '#drugBar'}
+                {fixed: 'right', title: '操作', width: 65, align: 'left', toolbar: '#drugBar'}
             ]] //设置表头
             , url: basePath + '/pf/p/waiting/room/test/orders/drug/long/list'
             , where: {
@@ -48,9 +94,9 @@ layui.config({
             , page: false
         });
 
-        if ($('#idTestexecResultOrder').val()) {
+        /*if ($('#idTestexecResultOrder').val()) {
             controlBtn();
-        }
+        }*/
         tableSelectRender();
     }
 
@@ -127,20 +173,20 @@ layui.config({
                 }
             });
         }
-        controlBtn();
+        /*controlBtn();*/
         tableSelectRender()
     }
 
     form.on('submit(addOrders)', function (data) {
         var url = basePath + '/pf/r/waiting/room/orders/save';
         data.field.idTestexecResult = idTestexecResult;
-        common.commonPost(url, data.field, '保存', 'addOrders', saveOrdersCallback)
+        common.commonPost(url, data.field, null, 'addOrders', saveOrdersCallback);
         return false;
     });
 
     function saveOrdersCallback(data) {
         $('#idTestexecResultOrder').val(data.data);
-        controlBtn();
+        /*controlBtn();*/
     };
 
     function controlBtn() {
@@ -169,7 +215,6 @@ layui.config({
                         $("#ordersForm").autofill(data.data);
                         form.render();
                     }
-                    tableRender();
                 }
             },
             error: function () {

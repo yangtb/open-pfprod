@@ -70,7 +70,7 @@ layui.config({
                 extItemId: extItemId,
                 keyword: keyword
             }
-            , height: '734'
+            , height: '604'
         });
     }
 
@@ -89,11 +89,11 @@ layui.config({
     table.render({
         elem: '#execExamTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'execExamTableId'
-        , height: '734' //容器高度
+        , height: '604' //容器高度
         , cols: [[
             {type: 'numbers', title: 'R'},
             {field: 'naItem', minWidth: 150, title: '检验项目'},
-            {field: 'idDieText', width: 140, title: '拟诊', toolbar: '#nzTpl'},
+            {field: 'idDieText', width: 110, title: '拟诊', toolbar: '#nzTpl'},
             {field: 'qa', width: 60, title: '提问', fixed: 'right', align: 'center', templet: '#qaExamTpl'}
         ]] //设置表头
         , url: basePath + '/pf/p/waiting/room/test/exam/list'
@@ -154,6 +154,32 @@ layui.config({
         });
     };
 
+
+    //监听行双击事件
+    table.on('rowDouble(execExamTableFilter)', function (obj) {
+        let checkInput = $('#exam' + obj.data.idMedCaseList);
+
+        if (!checkInput[0].checked) {
+            var data = {
+                idTestexecResult: idTestexecResult,
+                idInspectItem: obj.data.idInspectItem,
+                idMedCaseList: obj.data.idMedCaseList,
+                fgValid: '0',
+                idDie: $('#nz' + obj.data.idMedCaseList).attr('data-index')
+            };
+            var url = basePath + '/pf/r/waiting/room/exam/qa/save';
+            common.commonPost(url, data, null, null, queryQa, false);
+            checkInput.attr("disabled", true);
+
+            let checkCell = obj.tr.find(".layui-form-checkbox");
+            if (!obj.tr.hasClass('layui-table-click')) {
+                obj.tr.addClass('layui-table-click');
+                checkCell.addClass('layui-form-checked');
+                checkCell.addClass('layui-checkbox-disbaled');
+            }
+        }
+    });
+
     form.on('checkbox(qaExamFilter)', function (obj) {
         var qaValue = this.value;
         var qaArr = qaValue.split("-");
@@ -169,8 +195,7 @@ layui.config({
         var url = basePath + '/pf/r/waiting/room/exam/qa/save';
         common.commonPost(url, data, null, null, queryQa, false);
         if (obj.elem.checked) {
-            $(this).attr("disabled","true");
-            form.render();
+            $('#exam' + qaArr[1]).attr("disabled", true);
         }
     });
 
@@ -220,7 +245,48 @@ layui.config({
     }
 
     function qaHtml(data, showExpertFlag) {
-        var result = '';
+        var result = '<li style="padding-top: 1px;">\n' +
+            ' <div class=\'chat\' >\n' +
+            '  <div style=\'overflow: hidden\'>\n' +
+            '   <div style=\'float: left \'>\n' +
+            '    <img src=' + basePath + '/public/layui/build/images/p3.png alt="">\n' +
+            '   </div>\n' +
+            '   <div style=\'float: left;  width:70%\'>\n' +
+            '    <span>&nbsp  开始接诊</span>\n' +
+            '   </div>\n' +
+            '  </div>\n' +
+            '\n' +
+            ' </div >\n' +
+            ' </div >\n' +
+            '</li >'+
+            '<li>\n' +
+            ' <div class=\'chat\' >\n' +
+            '  <div style=\'overflow: hidden\'>\n' +
+            '   <div style=\'float: left \'>\n' +
+            '    <img src=' + basePath + '/public/layui/build/images/p2.png alt="">\n' +
+            '   </div>\n' +
+            '   <div style=\'float: left;  width:70%\'>\n' +
+            '    <span>&nbsp  '+ name + "，"+ sex + "，" + age + "岁" +'</span>\n' +
+            '   </div>\n' +
+            '  </div>\n' +
+            '\n' +
+            ' </div >\n' +
+            ' </div >\n' +
+            '</li >'+
+            '<li>\n' +
+            ' <div class=\'chat\' >\n' +
+            '  <div style=\'overflow: hidden\'>\n' +
+            '   <div style=\'float: left; \'>\n' +
+            '    <img src=' + basePath + '/public/layui/build/images/p1.png alt="">\n' +
+            '   </div>\n' +
+            '   <div style=\'float: left; margin-left: 8px;  width:70%\'>\n' +
+            '    <span>'+ complaint +'</span>\n' +
+            '   </div>\n' +
+            '  </div>\n' +
+            '\n' +
+            ' </div >\n' +
+            ' </div >\n' +
+            '</li >';
         for (var i = 0; i < data.length; i++) {
             if (showExpertFlag == false) {
                 result += appendQaNormalHtml(data[i]);
@@ -235,7 +301,63 @@ layui.config({
 
     function appendQaNormalHtml(data) {
 
-        var html = '<li class="other-side">\n' +
+        //1 图片 2 音频 3 视频 4 其它
+        let t = "";
+        if (data.isMasculine == "1") {
+            t = '↓';
+        } else if (data.isMasculine == "2") {
+            t = '↑';
+        }
+
+        let patientVar = '<span>' + data.valResult + t + '</span>\n' + '<span class="des-stand"> 标准值:' + data.desStand  + '</span>';
+        switch (data.sdType) {
+            case '1':
+                patientVar +=
+                    '         <img class="response-img" id="patientImg' + data.idAnswer + '"  src="' + data.path + '" alt="" style="max-width: 350px; height: 200px;cursor: pointer;"' +
+                    '                      onerror="onError(this)"' +
+                    '                      onclick="openMedia(' + data.sdType + ',' + data.idAnswer + ')">\n';
+                break;
+            case '2':
+                patientVar += '           <p class="voice-box">\n' +
+                    '               <audio class="patient-voice" id="patientVoice' + data.idAnswer + '" src="' + data.path + '"></audio>\n' +
+                    '               <button class="sound-icon" style="cursor: pointer;" onclick="control(' + data.idAnswer + ')"><img src=' + basePath + '/public/layui/build/images/horn.png alt=""></button>\n' +
+                    '           </p>\n';
+
+                break;
+            case '3':
+                patientVar = '  <span class="time">12"</span>\n' +
+                    '           <p class="voice-box">\n' +
+                    '               <audio class="patient-voice" id="patientVideo' + data.idAnswer + '" src="' + data.path + '"></audio>\n' +
+                    '               <button class="sound-icon" style="cursor: pointer;" onclick="openMedia(' + data.sdType + ',' + data.idAnswer + ')"><i class="iconfont icon-11"></i></button>\n' +
+                    '           </p>\n';
+                break;
+            default:
+        }
+
+        var html = "                <li>\n" +
+            "                    <div class='chat'>\n" +
+            "                        <div style='overflow: hidden'>\n" +
+            "                            <div style='float: left '>\n" +
+            '                           <img src=' + basePath + '/public/layui/build/images/support.png alt="">\n' +
+            "                                <span>【医生】</span>\n" +
+            "                            </div>\n" +
+            "                            <div style='float: left;  width:70%'>\n" +
+            '                               <span>' +  data.naItem + '</span>\n' +
+            "                            </div>\n" +
+            "                        </div>\n" +
+            "                        <div style='margin-left: 41px; margin-top: 7px; overflow: hidden'>\n" +
+            "                            <div style='float: left'>\n" +
+            "                                <span>【患者】</span>\n" +
+            "                            </div>\n" +
+            "                            <div style='float: left; width: 70%'>\n" +
+            patientVar
+            +
+            "                            </div>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                </li>";
+
+/*        var html = '<li class="other-side">\n' +
             '           <div class="doctor-details">\n' +
             '               <input class="details-select" type="checkbox"';
         if (data.fgClue == '1') {
@@ -288,7 +410,7 @@ layui.config({
                 '           <img class="patient-avatar" src="' + basePath + '/public/biz/img/exam/patient-avatar.png" alt="" style="width: 40px; height: 40px;">\n' +
                 '       </div>\n' +
                 '   </li>';
-        }
+        }*/
 
         return html;
     }

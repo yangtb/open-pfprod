@@ -208,6 +208,57 @@ layui.define(['layer'], function (exports) {
             return false;
         },
 
+        commonPostSync: function (url, bizData, msg, selectId, callback, loadFlag) {
+            if (loadFlag == true) {
+                layer.load(2);
+            }
+            $.ajax({
+                url: url,
+                type: 'post',
+                async: false,
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(bizData),
+                success: function (data) {
+                    layer.closeAll('loading');
+                    if (data.code != 0) {
+                        if (selectId) {
+                            if (typeof(selectId) == 'string') {
+                                layer.tips(data.msg, '#' + selectId, {tips: 1});
+                            } else {
+                                layer.tips(data.msg, selectId);
+                            }
+                        } else {
+                            common.errorMsg(data.msg);
+                        }
+                        return false;
+                    } else {
+                        if (msg) {
+                            if (selectId) {
+                                if (typeof(selectId) == 'string') {
+                                    layer.tips(msg + "成功", '#' + selectId, {tips: 1});
+                                } else {
+                                    layer.tips(msg + "成功", selectId);
+                                }
+                            } else {
+                                common.sucChildMsg(msg + "成功");
+                            }
+                        }
+                        if (callback) {
+                            callback(data);
+                        }
+                        return true;
+                    }
+                },
+                error: function () {
+                    layer.closeAll('loading');
+                    common.errorMsg(msg + "失败");
+                    return false;
+                }
+            });
+            return false;
+        },
+
         commonParentFormPost: function (url, bizData, formType, tableId, msg) {
             layer.load(2);
             $.ajax({

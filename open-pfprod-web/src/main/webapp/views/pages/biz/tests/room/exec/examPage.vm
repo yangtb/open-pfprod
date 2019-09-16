@@ -15,6 +15,10 @@
 
     <script>
         var basePath = '${basePath}';
+        var name = '$!{patient.name}';
+        var age = '$!{patient.age}';
+        var sex = #if($!{patient.sex} == '2')'女'#elseif($!{patient.sex} == '1' )'男'#end;
+        var complaint = '$!{patient.complaint}';
         var idMedicalrec = '$!{idMedicalrec}';
         var cdMedAsse = '$!{cdMedAsse}';
         var idTestexecResult = '$!{idTestexecResult}';
@@ -28,38 +32,48 @@
 <body class="wrapper-content">
 
 <div>
+
+    <div class="titile">
+        <ul>
+            <li style="width: 50.5%">
+                <span class="spot"></span>
+                <span class="titile-text">&nbsp;辅助检查项</span>
+            </li>
+            <li style="width: 49.5%">
+                <span class="spot"></span>
+                <span class="titile-text">&nbsp;检查记录</span>
+            </li>
+        </ul>
+    </div>
+
     <div class="layui-col-xs6">
-        <div class="layui-row">
-            <div class="layui-col-xs7">
-                <form class="layui-form">
-                    <div class="layui-inline">
-                        <div class="layui-input-inline">
-                            <input type="text" name="keyword" id="keyword" autocomplete="off" class="layui-input"
-                                   placeholder="请输入检验项目">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <div class="layui-input-inline">
-                            <button type="button" class="layui-btn" id="queryBtn">
-                                <i class="iconfont icon-query"></i> 查询
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="layui-col-xs5" style="text-align: right">
-               #* <button type="button" class="layui-btn" id="refreshRight">
-                    <i class="iconfont icon-add"></i> 检验
-                </button>*#
-            </div>
-        </div>
-        <div class="layui-row">
-            <div class="layui-col-xs4" style="padding-top: 10px">
-                <div id="treeDiv" style="overflow:auto; border: 1px solid #cccccc">
+        <div class="layui-row" style="border:1px solid rgba(239,241,244,1);">
+            <div class="layui-col-xs4">
+                <div id="treeDiv" style="overflow:auto;">
                     <ul id="treeDemo" class="ztree"></ul>
                 </div>
             </div>
-            <div class="layui-col-xs8">
+            <div class="layui-col-xs8" style="padding-left: 5px">
+                <div class="layui-row">
+                    <div style="margin: 12px 5px 12px 0;overflow: hidden">
+                        <form class="layui-form">
+                            <div style="float: right">
+                                <div class="layui-input-inline">
+                                    <button type="button" id="queryBtn">
+                                         <span>查询</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="float: right">
+                                <div class="layui-input-inline">
+                                    <input type="text" name="keyword" id="keyword" autocomplete="off" class="layui-input"
+                                           placeholder="请输入检验项目">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
                 <table id="execExamTable" lay-filter="execExamTableFilter">
                 </table>
             </div>
@@ -68,8 +82,8 @@
 
     <div class="layui-col-xs6" style="padding-left:5px;">
         <div class="service-wrapper" style="border: 1px solid #dddddd;">
-            <div class="progress-box">
-                <div class="item-box" hidden>
+            <div class="progress-box" hidden>
+                <div class="item-box">
                     <p class="progress-item"><span class="middle">6</span>/10</p>
                     <p class="progress-item"><span class="end">10</span>/10</p>
                     <p class="progress-item"><span class="end">12</span>/10</p>

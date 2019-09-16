@@ -116,6 +116,7 @@ layui.config({
                 {type: 'radio'},
                 {field: 'naItem', minWidth: 140, title: '项目'},
                 {field: 'valResult', minWidth: 110, title: '结果'},
+                {field: 'isMasculine', minWidth: 135, title: '是否阳性',style:'display:none;'},
                 {fixed: 'right', title: '操作', minWidth: 110, align: 'left', toolbar: '#partExamBar'}
             ]] //设置表头
             , url: basePath + '/pf/p/kb/part/exam/list'
@@ -130,6 +131,8 @@ layui.config({
                 , first: false //不显示首页
                 , last: false //不显示尾页
                 , limits: [15, 30, 50, 100]
+            },done: function () {
+                $("[data-field='isMasculine']").css('display','none');
             }
         });
     }

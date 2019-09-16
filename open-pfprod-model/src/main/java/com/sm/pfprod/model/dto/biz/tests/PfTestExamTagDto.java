@@ -49,4 +49,6 @@ public class PfTestExamTagDto extends PageParam implements Serializable {
      */
     private String keyword;
 
+    private Long idMedCase;
+
 }

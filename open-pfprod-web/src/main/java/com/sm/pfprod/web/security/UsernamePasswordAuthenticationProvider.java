@@ -38,7 +38,7 @@ public class UsernamePasswordAuthenticationProvider extends PfAbstractUserDetail
      * @param userDetails
      * @param authentication
      * @throws AuthenticationException
-     * @see PfAbstractUserDetailsAuthenticationProvider#additionalAuthenticationChecks(org.springframework.security.core.userdetails.UserDetails, org.springframework.security.authentication.UsernamePasswordAuthenticationToken)
+     * @see PfAbstractUserDetailsAuthenticationProvider#additionalAuthenticationChecks(UserDetails, UsernamePasswordAuthenticationToken)
      */
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails,
@@ -76,7 +76,7 @@ public class UsernamePasswordAuthenticationProvider extends PfAbstractUserDetail
      * @param authentication
      * @return
      * @throws AuthenticationException
-     * @see PfAbstractUserDetailsAuthenticationProvider#retrieveUser(String, org.springframework.security.authentication.UsernamePasswordAuthenticationToken)
+     * @see PfAbstractUserDetailsAuthenticationProvider#retrieveUser(String, UsernamePasswordAuthenticationToken)
      */
     @Override
     protected final UserDetails retrieveUser(String username,

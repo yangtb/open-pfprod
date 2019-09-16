@@ -50,4 +50,12 @@ public class PfTestExamDto implements Serializable {
      */
     private Long idTestpaper;
 
+    private String patName;
+
+    private String patSex;
+
+    private String patAge;
+
+    private String complain;
+
 }

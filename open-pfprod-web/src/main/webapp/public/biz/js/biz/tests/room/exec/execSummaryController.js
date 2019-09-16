@@ -223,21 +223,24 @@ layui.config({
     }
 
     function zdHtml(i, data) {
-        var html =
-            '<fieldset id="fieldset' + i + '" class="layui-elem-field">\n' +
-            '   <legend style="font-size: 16px;">' +
-            // '       <button id="delSummary' + i + '" class="layui-btn layui-btn-sm layui-btn-danger" ' +
-            // '       onclick="delZd(' + i + ', ' + data.idTestexecResultDiagnosis + ', \'' + data.idDieText + '\')">\n' +
-            // '           <i class="layui-icon layui-icon-delete"></i>删除\n' +
-            // '       </button>\n' +
-            // '       <button class="layui-btn layui-btn-sm" id="addDieReason' + i + '">\n' +
-            // '           <i class="layui-icon layui-icon-add-1"></i>确诊理由\n' +
-            '       </button>\n' + '诊断' + (i + 1) + ' - <strong style="font-style: italic">' + data.idDieText + '</strong></legend>\n' +
-            '   <div class="layui-field-box">\n' +
-            '       <table id="zdTable' + i + '" lay-filter="zdTableFilter' + i + '">\n' +
-            '       </table>\n' +
-            '   </div>\n' +
-            '</fieldset>';
+
+        var html = "            <div class=\"layui-col-md6\">\n" +
+            "                <div class=\"layui-card\" style='box-shadow: none'>\n" +
+            "                    <div class=\"layui-card-header\" style=\"border: none\">\n" +
+            "                        <span class=\"disc\"></span>\n" +
+            "                        <span class='diagnose-title'>诊断" + (i + 1) + "： " + data.idDieText + "</span>\n" +
+            "                    </div>\n" +
+            "                    <div class=\"layui-card-body\">\n" +
+            "                        <div class=\"layui-row\" id=\"zdField\">\n" +
+                                    '   <div>\n' +
+                                    '       <table id="zdTable' + i + '" lay-filter="zdTableFilter' + i + '">\n' +
+                                    '       </table>\n' +
+                                    '   </div>\n' +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                </div>\n" +
+            "            </div>";
+
         return html;
     }
 

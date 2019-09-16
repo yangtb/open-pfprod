@@ -11,244 +11,147 @@
     <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
     <link rel="stylesheet" href="${contextPath}/public/biz/css/exam.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
-
     <script>
         var basePath = '${basePath}';
+        var patName = '${patName}';
+        var patSex = '${patSex}';
+        var patAge = '${patAge}';
+        var complain = '${complain}';
         var idTestplanDetail = '${idTestplanDetail}';
         var idTestplan = '${idTestplan}';
         var idDemo = '${idDemo}';
         var idMedicalrec = '${idMedicalrec}';
         var idTestpaper = '${idTestpaper}';
         var sdTestexec = '$!{examInfo.paperInfo.sdTestexec}';
+        var beginTimeStr = '$!{examInfo.paperInfo.beginTimeStr}';
         var linkPath = '$!{link}';
+        var h = '$!{h}';
+        var m = '$!{m}';
+        var s = '$!{s}';
     </script>
-
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        .layout {
-            margin: 20px;
-            padding-left: 15px;
-            padding-right: 15px;
-            margin-bottom: 70px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-        }
-
-        .layout textarea {
-            height: 400px;
-        }
-
-        .layout input[disabled],
-        .layout .layui-select-disabled .layui-disabled {
-            background: #eee;
-        }
-
-        .layout .my-fixed button {
-            margin-right: .5em;
-            margin-top: 16px;
-        }
-
-        .layout .my-fixed {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            text-align: center;
-            width: 100%;
-            z-index: 111;
-        }
-
-        .layout fieldset {
-            margin-top: 20px;
-        }
-
-        .layui-form-item .layui-input-inline {
-            width: auto;
-        }
-
-        .layui-form-switch em {
-            padding-right: 3px !important;
-        }
-
-        input::-webkit-input-placeholder {
-            color: #ccc;
-        }
-
-        /* 使用webkit内核的浏览器 */
-        input:-moz-placeholder {
-            color: #ccc;
-        }
-
-        /* Firefox版本4-18 */
-        input::-moz-placeholder {
-            color: #ccc;
-        }
-
-        /* Firefox版本19+ */
-        input:-ms-input-placeholder {
-            color: #ccc;
-        }
-
-        /* IE浏览器 */
-
-        /* .my-margin {} */
-
-        .layout textarea.code {
-            display: none;
-        }
-
-        .layout .CodeMirror {
-            height: auto;
-        }
-
-        .my-radius:hover {
-            background: #028073;
-        }
-
-        .my-radius {
-            background: #009688;
-            border-radius: 50%;
-            position: absolute;
-            right: 100px;
-            top: 100px;
-            height: 150px;
-            width: 150px;
-            line-height: 150px;
-            text-align: center;
-            color: white;
-            cursor: default;
-            font-size: 20px;
-        }
-    </style>
-
-
 </head>
 
-<body>
-<div class="index-wrapper">
-    <!-- 头部 -->
-    <header>
-        <div class="layui-row">
-            <div class="layui-col-md6">
-                <div class="header-left">
-                    <a href="javascript:;;" class="start-btn" id="startBtn">
-                        <span class="start-text">开始</span>
-                        <img class="icon" src="${contextPath}/public/biz/img/exam/start.png" alt=""
-                             style="width: 78px; height: 75px;">
-                    </a>
-                    <div class="user-details">
-                        <img src="${contextPath}/public/biz/img/exam/degree-1.png" alt="" class="details-icon"
-                             style="width: 80px; height: 75px;">
-                        <div class="msg">
-                            <p class="users">
-                            <div hidden>
-                                <input id="studentId" hidden value="$!examInfo.studentInfo.studentId"></input>
-                            </div>
-                            <span class="users-item">$!examInfo.studentInfo.realName</span>
-                            <span class="users-item">$!examInfo.studentInfo.sex</span>
-                            <span class="users-item">$!examInfo.studentInfo.orgName</span>
-                            <span class="users-item">$!examInfo.studentInfo.className</span>
-                            <span class="users-item no-border">学生</span>
-                            </p>
-                            <p class="msg-mail">
-                            #*<img src="${contextPath}/public/biz/img/exam/email.png" alt="" style="width: 32px; height: 32px;">*#
-                                <i class="iconfont icon-youjian"
-                                   style="color: #1E9FFF;"></i>&nbsp;<span>$!examInfo.studentInfo.email</span>
-                            </p>
-                            <p class="msg-tel">
-                            #*<img src="${contextPath}/public/biz/img/exam/tel.png" alt="" style="width: 32px; height: 32px;">*#
-                                <i class="iconfont icon-shouji1"
-                                   style="color: #01AAED;"></i>&nbsp;<span>$!examInfo.studentInfo.phoneNo</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+<body id="container">
+<div>
+    <!-- 头部 start -->
+    <div class="header">
+
+        <div class="test-info">
+
+            <button type="button" id="returnBut" hidden>
+                <span>返回</span>
+            </button>
+
+            <span class="test-info-name">患者：$!patName</span>
+            <span class="test-info-name">年龄：$!patAge</span>
+            <span class="test-info-name">
+                性别：#if($!{patSex} == '0')女#elseif($!{patSex} == '1' )男#end
+            </span>
+            <span class="test-info-org">出题机构： $!examInfo.paperInfo.orgName</span>
+        </div>
+        <div class="test-time">
+            <div class="clock-image">
+                <img src="${contextPath}/public/layui/build/images/time.png"/>
             </div>
-            <div class="layui-col-md6">
-                <div class="header-right">
-                    <div class="right-main">
-                        <img src="${contextPath}/public/biz/img/exam/paper1.png" alt="" class="details-icon"
-                             style="width: 80px; height: 75px;">
-                        <div class="paper-details">
-                            <input id="idTestexec" value="$!examInfo.paperInfo.idTestexec" hidden>
-                            <input id="idTestexecResult" value="$!examInfo.paperInfo.idTestexecResult" hidden>
-                            <p class="details-header">$!examInfo.paperInfo.testPaperName</p>
-                            <p class="details-text">
-                                <span class="details-head">出题机构：$!examInfo.paperInfo.orgName</span>
-                                <span class="time">开始时间：<span
-                                        id="beginTime">$!examInfo.paperInfo.beginTimeStr</span></span>
-                            </p>
-                            <p class="details-text">
-                                <span class="details-head">出题人：$!examInfo.paperInfo.paperCreator</span>
-                                <span class="time">完成时间：<span id="endTime">$!examInfo.paperInfo.endTimeStr</span></span>
-                            </p>
-                        </div>
-                    </div>
-                    <a href="javascript:;;" class="start-btn end-btn" id="endBtn">
-                        <span class="start-text">交卷</span>
-                        <img class="end-icon" src="${contextPath}/public/biz/img/exam/end.png" alt=""
-                             style="width: 78px; height: 75px;">
-                    </a>
-                </div>
+
+            <div class="clock">
+                <span id="hr">00</span>
+                <span> : </span>
+                <span id="min">00</span>
+                <span> : </span>
+                <span id="sec">00</span>
             </div>
+
+            <div hidden>
+                <input id="studentId" hidden value="$!examInfo.studentInfo.studentId"></input>
+                <input id="idTestexec" value="$!examInfo.paperInfo.idTestexec">
+                <input id="idTestexecResult" value="$!examInfo.paperInfo.idTestexecResult">
+                <span id="endTime">$!examInfo.paperInfo.endTimeStr</span>
+            </div>
+
         </div>
 
+        <div class="fullscreen">
+            <a href="javascript:;" id="fullscreen">
+                <i class="layui-icon layui-icon-screen-full"></i>
+            </a>
+        </div>
 
-    </header>
-    <!-- /头部 -->
-    <!-- 主体 -->
-    <section>
-        <!-- 左边内容 -->
-        <aside>
+    </div>
+    <!--  头部 end  -->
+    <!-- 主体 start -->
+    <div class="body">
+        <!-- 导航栏 start -->
+        <div class="nav-bar" id="navBar">
             <ul>
                 #if(!$examInfo.tags.isEmpty())
                     #foreach($!element in $!examInfo.tags)
                         #if($!element.fgShowExec == '1')
                             #if($!element.cdMedAsse != '009')
-                                <li class="aside-item execTag" exec-ref="$!element.scriptExec"
-                                    exec-code="$!element.cdMedAsse" exec-no="$!element.processSerialno">
-                                    <a href="javascript:;" class="aside-link">
-                                        <img class="aside-icon" style="width: 50px; height: 50px;" src="$!element.path">
+                                <li class="execTag" exec-ref="$!element.scriptExec" exec-code="$!element.cdMedAsse" exec-no="$!element.processSerialno" exec-pat="$!idMedCase">
+                                    <a href="javascript:;" class="a-item grey">
+                                        <i class="$!element.pName"></i>
                                         <span class="item-text">$!element.name</span>
                                     </a>
-                            <li>
+                                </li>
                             #end
                         #end
                     #end
                 #end
+
+                <li class="border-top" id="endBtn">
+                    <a href="javascript:;" class="a-item grey">
+                        <i class="icon-uniE904"></i>
+                        <span class="item-text">交卷</span>
+                    </a>
+                </li>
+
             </ul>
-        </aside>
-        <!-- /左边内容 -->
-        <!-- 中间内容 -->
-        <div class="main">
-            <div>
+        </div>
+        <!-- 导航栏 end -->
+
+        <!-- 主体内容 start -->
+        <div class="main" id="main">
+            <div id="content">
                 #if(!$examInfo.tags.isEmpty())
                     #foreach($!element in $!examInfo.tags)
                         #if($!element.fgShowExec == '1')
-                            <div id="page$!element.cdMedAsse" class="display-my" style="height: 800px;">
+                            <div id="page$!element.cdMedAsse" class="display-my" style="height: 728px;">
                                 <iframe id="iframe$!element.cdMedAsse" frameborder="0" scrolling="no"
                                         class='layui-col-xs12 display-my'
-                                        style="height: 800px;"></iframe>
+                                        style="height: 728px;"></iframe>
                             </div>
                         #end
                     #end
+
+                    <div id="pageClinicalDiagnosis" class="display-my" style="height: 728px; display: none">
+                        <iframe id="iframeClinicalDiagnosis" frameborder="0" scrolling="no"
+                                class='layui-col-xs12 display-my'
+                                style="height: 728px;"></iframe>
+                    </div>
+
                 #end
             </div>
 
-            <div id="nextStepDiv" style="float: right; margin: 5px 50px 5px 0px" hidden>
-                <input id="nextStepExecCode" hidden/>
-                <input id="nextStepNo" hidden/>
-                <input id="currentStepNo" value="$!examInfo.paperInfo.curSerialno" hidden/>
-                <button id="nextStep" type="button" class="layui-btn layui-btn-normal" style="width: 150px;">下一步
-                </button>
+            <div id="suspend-box" class="suspend">
+                <div class="suspend-text">点击此处可添加拟诊</div>
+                <div class="triangle"></div>
             </div>
+
         </div>
-        <!-- /中间内容 -->
-    </section>
-    <!-- /主体 -->
+        <!-- 主体内容 end -->
+
+        <div id="nextStepDiv">
+            <input id="nextStepExecCode" hidden/>
+            <input id="nextStepNo" hidden/>
+            <input id="currentStepNo" value="$!examInfo.paperInfo.curSerialno" hidden/>
+            <button id="nextStep" type="button" class="layui-btn">下一步
+            </button>
+        </div>
+
+    </div>
+    <!-- 主体 end -->
+
 </div>
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>

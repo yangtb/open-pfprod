@@ -116,11 +116,11 @@
                     </div>
                 </div>
                 <div class="layui-inline" style="margin-top: -20px;">
-                    <label class="layui-form-label">结果说明</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="desResult" id="desResult" autocomplete="off" class="layui-input"
-                               placeholder="结果说明" lay-verify="desResult" lay-vertype="tips">
-                    </div>
+                    <select name="isMasculine" lay-verify="">
+                        <option value="0">正常</option>
+                        <option value="1">↓</option>
+                        <option value="2">↑</option>
+                    </select>
                 </div>
             </div>
 
@@ -144,13 +144,17 @@
 
             <div class="layui-form-item form-item-my">
                 <div class="layui-inline">
+                    <label class="layui-form-label">结果说明</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="desResult" id="desResult" autocomplete="off" class="layui-input"
+                               placeholder="结果说明" lay-verify="desResult" lay-vertype="tips">
+                    </div>
+                </div>
+                <div class="layui-inline">
                     <label class="layui-form-label"></label>
                     <div class="layui-input-block">
                         <input type="checkbox" name="fgShow" id="fgShow" value="1" title="结果是否在医嘱前展示">
                     </div>
-                </div>
-                <div class="layui-inline">
-
                 </div>
             </div>
 

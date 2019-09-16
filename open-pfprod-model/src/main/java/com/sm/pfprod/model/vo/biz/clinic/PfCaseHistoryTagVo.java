@@ -16,6 +16,7 @@ public class PfCaseHistoryTagVo extends FaqMedTag implements Serializable {
 
     private Long idTag;
     private String name;
+    private String pName;
     private String cdMedAsse;
     private String path;
     /**

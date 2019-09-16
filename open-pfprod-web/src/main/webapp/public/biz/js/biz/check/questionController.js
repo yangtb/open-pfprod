@@ -341,9 +341,9 @@ layui.config({
 
     var _addOrEdit = function (formType, currentEditData) {
         if (formType == 'add') {
-            common.open('新增检查', basePath + '/pf/p/check/question/form?formType=' + formType, 360, 432, _successFunction(currentEditData));
+            common.open('新增检查', basePath + '/pf/p/check/question/form?formType=' + formType + '&idBodyCa=' + currentEditData.idBodyCa, 360, 432, _successFunction(currentEditData));
         } else {
-            common.open('编辑检查', basePath + '/pf/p/check/question/form?formType=' + formType, 360, 432, _successFunction(currentEditData));
+            common.open('编辑检查', basePath + '/pf/p/check/question/form?formType=' + formType + '&idBodyCa=' + currentEditData.idBodyCa, 360, 432, _successFunction(currentEditData));
         }
     };
 

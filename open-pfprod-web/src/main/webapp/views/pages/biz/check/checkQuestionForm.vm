@@ -14,6 +14,7 @@
         var basePath = '${basePath}';
         var contextPath = '${contextPath}';
         var formType = '${formType}';
+        var idBodyCa = '${idBodyCa}';
     </script>
 </head>
 
@@ -24,6 +25,7 @@
             <input name="idBody" hidden>
         </div>
 
+        #if($!idBodyCa != '1')
         <div class="layui-form-item">
             <label class="layui-form-label">所属体位<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
@@ -36,7 +38,7 @@
                 </select>
             </div>
         </div>
-
+        #end
         <div class="layui-form-item">
             <label class="layui-form-label">检查部位描述<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">

@@ -9,110 +9,309 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/css/service.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
 
     <script>
         var basePath = '${basePath}';
         var idTestexecResult = '$!{idTestexecResult}';
     </script>
+    <style>
 
+        .active {
+            color: #FFFFFF;
+            background: #378D7E;
+        }
+
+        .inactive {
+            color: rgb(102, 102, 102);
+            background: #ffffff;
+         }
+
+        .progress-icon {
+            width: 52px;
+            height: 52px;
+            position: absolute;
+            overflow: hidden;
+            text-align: center;
+            margin-top: -26px;
+            background: rgba(227, 234, 238, 1);
+            line-height: 52px;
+            border-radius: 50%;
+        }
+
+        .progress-icon:hover {
+            cursor: pointer;
+        }
+
+        .progress-icon div {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+            margin-top: 6px;
+            border-radius: 50%;
+        }
+
+        .progress-bar {
+            margin: 58px 50px 0;
+            position: relative;
+
+        }
+
+        .progress-icon-right {
+            right: 0;
+            margin-top: -30px;
+        }
+
+        #basicInfoText {
+            left: -17px;
+            bottom: -45px;
+            position: absolute;
+            font-size:12px;
+            font-family:MicrosoftYaHei;
+            font-weight:400;
+        }
+
+        #medicineText {
+            right: 11px;
+            bottom: -45px;
+            position: absolute;
+            font-size:12px;
+            font-family:MicrosoftYaHei;
+            font-weight:400;
+        }
+
+        .main {
+            width: 100%;
+            height: 500px;
+            margin-top: 73px;
+            border-bottom: 1px solid rgba(243,243,244,1);
+        }
+
+        .title-intro {
+            color:rgba(51,51,51,1);
+            width:85px;
+            height:14px;
+            font-size:14px;
+            font-family:MicrosoftYaHei-Bold;
+            font-weight:bold;
+            margin-left: 20px;
+        }
+
+        #basicInfo {
+            height: 500px;
+            margin: 0 12px;
+        }
+
+        .basicInfo-content {
+            width: 600px;
+            height: 500px;
+            margin: 0 auto;
+        }
+
+        .layui-form-item {
+            margin-bottom: 20px;
+        }
+
+        #medicine {
+            height: 500px;
+            margin: 0 12px;
+        }
+
+        .disc {
+            width:8px;
+            height:8px;
+            display: inline-block;
+            background:rgba(55,141,126,1);
+            margin-right: 3px;
+            border-radius:50%;
+        }
+
+        .but-right {
+            float: right;
+            margin-top: 7px;
+        }
+
+        #addOrders {
+            width: 141px;
+            height: 40px;
+            background: rgba(55, 141, 126, 1);
+            text-align: center;
+            border-radius: 4px;
+            margin: 25px auto;
+            display: block;
+            font-weight:400;
+            color:rgba(255,255,255,1);
+            font-size:14px;
+            font-family:MicrosoftYaHei;
+            border: none;
+        }
+
+        .green {
+            color:rgba(55,141,126,1);
+        }
+
+        .layui-table tbody tr:hover {
+            background-color: white;
+        }
+
+        .layui-form-item {
+            font-size:14px;
+            font-family:MicrosoftYaHei;
+            font-weight:400;
+            color:rgba(51,51,51,1);
+        }
+
+    </style>
 </head>
 
 <body>
 
-<div class="layui-card-body">
-    <form class="layui-form" id="ordersForm" lay-filter="ordersFilter">
-        <div hidden>
-            <input name="idTestexecResultOrder" id="idTestexecResultOrder" hidden>
-        </div>
-        <div class="layui-row layui-col-space5 layui-form-item">
-            <div class="layui-col-md3">
-                <label class="layui-form-label">护理常规</label>
-                <div class="layui-input-block">
-                    <select name="sdNursRout" >
-                        <option value=""></option>
-                        #foreach($!element in $!sdNursRout)
-                            <option value="$!element.dictCode">$!element.dictName</option>
-                            <li class="menu-item" data-value="$!element.dictCode">$!element.dictName</li>
-                        #end
-                    </select>
-                </div>
-            </div>
-            <div class="layui-col-md3">
-                <label class="layui-form-label">护理级别</label>
-                <div class="layui-input-block">
-                    <select name="cdNursLevel" >
-                        <option value=""></option>
-                        #foreach($!element in $!cdNursLevel)
-                            <option value="$!element.dictCode">$!element.dictName</option>
-                            <li class="menu-item" data-value="$!element.dictCode">$!element.dictName</li>
-                        #end
-                    </select>
-                </div>
-            </div>
-            <div class="layui-col-md3">
-                <label class="layui-form-label">饮食分类</label>
-                <div class="layui-input-block">
-                    <select name="sdDiet" >
-                        <option value=""></option>
-                        #foreach($!element in $!sdDiet)
-                            <option value="$!element.dictCode">$!element.dictName</option>
-                            <li class="menu-item" data-value="$!element.dictCode">$!element.dictName</li>
-                        #end
-                    </select>
-                </div>
-            </div>
-            <div class="layui-col-md3">
-                <label class="layui-form-label">体位</label>
-                <div class="layui-input-block">
-                    <select name="sdPosition" >
-                        <option value=""></option>
-                        #foreach($!element in $!sdPosition)
-                            <option value="$!element.dictCode">$!element.dictName</option>
-                            <li class="menu-item" data-value="$!element.dictCode">$!element.dictName</li>
-                        #end
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">检查或处置 (一次性)</label>
-            <div class="layui-input-block">
-                <textarea name="desCheck" placeholder="" class="layui-textarea" style="min-height: 50px;"></textarea>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">特殊处理</label>
-            <div class="layui-input-block">
-                <textarea name="desSpecial" placeholder="" class="layui-textarea" style="min-height: 50px;"></textarea>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" id="addOrders" lay-submit="" lay-filter="addOrders">
-                    <i class="iconfont icon-save-copy"></i> 保存
-                </button>
-                #*<button type="reset" class="layui-btn layui-btn-danger">
-                    <i class="iconfont icon-reset"></i> 重置
-                </button>*#
-            </div>
-        </div>
-    </form>
-
+<div>
 
     <div class="layui-row">
-        <div class="layui-col-xs6">
-            <table id="shortTable" lay-filter="shortTableFilter">
-            </table>
-        </div>
+        <div class="progress-bar">
+            <div class="progress-icon">
+                <div id="basicInfoIcon" class="active">
+                    <i class="icon-4"></i>
+                </div>
+            </div>
+            <div class="layui-progress" lay-filter="progress" style="margin: 0 52px; border-radius: 0;">
+                <div class="layui-progress-bar" lay-percent="50%" style="background-color:#378D7E; border-radius: 0 5px 5px 0"></div>
+            </div>
+            <div class="progress-icon progress-icon-right">
+                <div id="medicineIcon" class="inactive">
+                    <i class="icon-medicine"></i>
+                </div>
+            </div>
 
-        <div class="layui-col-xs6" style="padding-left:5px;">
+            <span id="basicInfoText" class="green">1.基本护理信息</span>
+            <span id="medicineText">2.药物</span>
 
-            <table id="longTable" lay-filter="longTableFilter">
-            </table>
         </div>
+    </div>
+
+    <div class="main">
+        <form class="layui-form" id="ordersForm" lay-filter="ordersFilter">
+            <div hidden>
+                <input name="idTestexecResultOrder" id="idTestexecResultOrder" hidden>
+            </div>
+
+            <div id="basicInfo" >
+                <p class="title-intro">基本护理信息</p>
+                <div class="basicInfo-content">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">护理常规</label>
+                        <div class="layui-input-block">
+                            <select name="sdNursRout" >
+                                <option value=""></option>
+                                #foreach($!element in $!sdNursRout)
+                                    <option value="$!element.dictCode">$!element.dictName</option>
+                                    <li class="menu-item" data-value="$!element.dictCode">$!element.dictName</li>
+                                #end
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">护理级别</label>
+                        <div class="layui-input-block">
+                            <select name="cdNursLevel" >
+                                <option value=""></option>
+                                #foreach($!element in $!cdNursLevel)
+                                    <option value="$!element.dictCode">$!element.dictName</option>
+                                    <li class="menu-item" data-value="$!element.dictCode">$!element.dictName</li>
+                                #end
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">饮食分类</label>
+                        <div class="layui-input-block">
+                            <select name="sdDiet" >
+                                <option value=""></option>
+                                #foreach($!element in $!sdDiet)
+                                    <option value="$!element.dictCode">$!element.dictName</option>
+                                    <li class="menu-item" data-value="$!element.dictCode">$!element.dictName</li>
+                                #end
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">体位</label>
+                        <div class="layui-input-block">
+                            <select name="sdPosition" >
+                                <option value=""></option>
+                                #foreach($!element in $!sdPosition)
+                                    <option value="$!element.dictCode">$!element.dictName</option>
+                                    <li class="menu-item" data-value="$!element.dictCode">$!element.dictName</li>
+                                #end
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">检查或处置 (一次性)</label>
+                        <div class="layui-input-block">
+                            <textarea name="desCheck" placeholder="" class="layui-textarea" style="min-height: 80px;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">特殊处理</label>
+                        <div class="layui-input-block">
+                            <textarea name="desSpecial" placeholder="" class="layui-textarea" style="min-height: 80px;"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="medicine" class="layui-row layui-col-space15" hidden>
+                <p class="title-intro">药物</p>
+                <div class="layui-col-md6">
+                    <div class="layui-card" style="box-shadow: none">
+                        <div class="layui-card-header" style="border: none">
+                            <span class="disc"></span>
+                            <span class="diagnose-title">临时用药</span>
+                            <button  type="button" class="layui-btn layui-btn-sm but-right" id="addDrugBtn"><i
+                                    class="layui-icon layui-icon-add-1" style="border-radius:4px;"></i>添加
+                        </div>
+                        <div class="layui-card-body">
+                            <div class="layui-row" id="zdField">
+                                <div class="layui-col-xs12">
+                                    <table id="shortTable" lay-filter="shortTableFilter">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card" style="box-shadow: none">
+                        <div class="layui-card-header" style="border: none">
+                            <span class="disc"></span>
+                            <span class="diagnose-title">长期用药</span>
+                            <button type="button" class="layui-btn layui-btn-sm but-right" id="addLongDrugBtn"><i
+                                    class="layui-icon layui-icon-add-1" style="border-radius:4px;"></i>添加
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="zdField">
+                                <div class="layui-col-xs12">
+                                    <table id="longTable" lay-filter="longTableFilter">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div >
+            <button class="layui-btn" id="addOrders" lay-submit="" lay-filter="addOrders">
+                下一步
+            </button>
+        </form>
     </div>
 
     <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
@@ -120,18 +319,9 @@
     <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
     <script src="${contextPath}/public/biz/js/biz/tests/room/exec/execOrdersController.js"></script>
 
-    <script type="text/html" id="toolbarShort">
-        <button class="layui-btn layui-btn-sm layui-btn-disabled" id="addDrugBtn" disabled><i
-                class="layui-icon layui-icon-add-1"></i>临时用药
-    </script>
-    <script type="text/html" id="toolbarLong">
-        <button class="layui-btn layui-btn-sm layui-btn-disabled" id="addLongDrugBtn" disabled><i
-                class="layui-icon layui-icon-add-1"></i>长期用药
-    </script>
-
     <script type="text/html" id="drugBar">
-        <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" title="删除">
-            <i class="layui-icon layui-icon-delete"></i>
+        <button type="button" class="layui-btn layui-btn-xs " lay-event="del" title="删除" style="background-color:#ffffff;">
+            <i class="icon-close"></i>
         </button>
     </script>
 

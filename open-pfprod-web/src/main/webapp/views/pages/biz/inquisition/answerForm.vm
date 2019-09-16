@@ -55,17 +55,18 @@
                 <div class="layui-input-block">
                     <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
                            value="1" lay-text="NO|OFF">
-                    <input type="checkbox" name="fgReason" value="1" title="是否需要说明理由">
-                    <input type="checkbox" name="fgBack" value="1" title="是否根据病人的回答反馈">
+                    <input type="checkbox" name="fgDefault" value="1" title="默认答案">
+#*                    <input type="checkbox" name="fgReason" value="1" title="是否需要说明理由">
+                    <input type="checkbox" name="fgBack" value="1" title="是否根据病人的回答反馈">*#
                     #*<input type="checkbox" value="1" title="标签">*#
                 </div>
             </div>
+#*
             <div class="layui-form-item">
                 <label class="layui-form-label"></label>
-                <div class="layui-input-block" style="padding-left: 60px;">
-                    <input type="checkbox" name="fgDefault" value="1" title="默认答案">
-                </div>
+
             </div>
+*#
 
             <div class="layui-form-item">
                 <label class="layui-form-label">多媒体</label>

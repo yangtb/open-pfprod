@@ -16,6 +16,10 @@
     <script>
         var basePath = '$!{basePath}';
         var idMedicalrec = '$!{idMedicalrec}';
+        var name = '$!{patient.name}';
+        var age = '$!{patient.age}';
+        var sex = #if($!{patient.sex} == '2')'女'#elseif($!{patient.sex} == '1' )'男'#end;
+        var complaint = '$!{patient.complaint}';
         var cdMedAsse = '$!{cdMedAsse}';
         var idTestexecResult = '$!{idTestexecResult}';
         var executingShowExpert = '$!{executingShowExpert}';
@@ -28,47 +32,142 @@
 <body class="wrapper-content">
 
 <div>
+    <div class="titile">
+        <ul>
+            <li style="width: 50.5%">
+                <span class="spot"></span>
+                <span class="titile-text">&nbsp;问诊项</span>
+            </li>
+            <li style="width: 49.5%">
+                <span class="spot"></span>
+                <span class="titile-text">&nbsp;检查记录</span>
+            </li>
+        </ul>
+    </div>
+    <div id="rollBar">
+        <span id="rollBarText" >展开</span>
+    </div>
     <div class="layui-col-xs6">
-        <div class="layui-row">
-            <div class="layui-col-xs7">
-                <form class="layui-form">
-                    <div class="layui-inline">
-                        <div class="layui-input-inline">
-                            <input type="text" name="keyword" id="keyword" autocomplete="off" class="layui-input"
-                                   placeholder="请输入问题">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <div class="layui-input-inline">
-                            <button type="button" class="layui-btn" id="queryBtn">
-                                <i class="iconfont icon-query"></i> 查询
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="layui-col-xs5" style="text-align: right">
-                #*<button type="button" class="layui-btn" id="refreshRight">
-                    <i class="iconfont icon-add"></i> 问诊
-                </button>*#
-            </div>
-        </div>
-        <div class="layui-row">
-            <div class="layui-col-xs4" style="padding-top: 10px">
-                <div id="treeDiv" style="overflow:auto; border: 1px solid #cccccc">
+        <div class="layui-row" style="border:1px solid rgba(239,241,244,1);">
+
+            <div id="rollObject" class="shrink">
+                <div id="treeDiv" style="overflow:auto;">
                     <ul id="treeDemo" class="ztree"></ul>
                 </div>
             </div>
-            <div class="layui-col-xs8">
-                <table id="partConsTable" lay-filter="partConsTableFilter">
-                </table>
+            <div id="rollQuestion" style="padding-left: 0;margin-left: 0">
+                <div class="layui-row">
+                    <div style="margin: 12px 5px 12px 0; overflow: hidden">
+                        <form class="layui-form">
+                            <div style="float: right">
+                                <div class="layui-input-inline">
+                                    <button type="button" id="queryBtn">
+                                        <span>查询</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="float: right">
+                                <div class="layui-input-inline">
+                                    <input type="text" name="keyword" id="keyword" autocomplete="off" class="layui-input"
+                                           placeholder="请输入关键字">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                 <div class="layui-col-xs6" style="height: 604px;width: 100%">
+                     <div id="key-tab" class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                         <ul class="layui-tab-title">
+                             <li class="layui-this">现病史</li>
+                             <li>既往史</li>
+                             <li>系统回顾</li>
+                             <li>个人史</li>
+                             <li>婚育史</li>
+                             <li>月经生育史</li>
+                             <li>家族病史</li>
+                         </ul>
+                         <div class="layui-tab-content">
+                             <div class="layui-tab-item layui-show" id="key">
+                                 <div class="layui-col-md4">
+                                     <div>发病情况</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>主要症状</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>伴随症状</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>诊断与治疗情况</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>发病以来的情况</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>其他疾病</div>
+                                 </div>
+                             </div>
+                             <div class="layui-tab-item">
+                                 <div class="layui-col-md4">
+                                     <div>健康状况</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>疾病史</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>传染病史</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>手术外伤史</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>输血史</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>食物与药敏过敏</div>
+                                 </div>
+                             </div>
+                             <div class="layui-tab-item">
+                                 <div class="layui-col-md4">
+                                     <div>呼吸系统</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>循环系统</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>消化系统</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>泌尿生殖系统</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>神经系统</div>
+                                 </div>
+                                 <div class="layui-col-md4">
+                                     <div>骨骼肌肉系统</div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <div hidden id="table">
+                         <div style="margin-bottom: 5px">
+                             <span id="back">返回上一级</span>
+                             <strong class="key-font" id="k">常用关键字</strong>
+                         </div>
+                         <table id="partConsTable" lay-filter="partConsTableFilter">
+                         </table>
+                     </div>
+                 </div>
+
             </div>
         </div>
 
     </div>
 
     <div class="layui-col-xs6" style="padding-left:5px;">
-        <div class="service-wrapper" style="border: 1px solid #dddddd;">
+        <div class="service-wrapper" style="border: 1px solid #EFF1F4;" id="autoScroll">
             <div hidden>
                 <input id="idTestexecResult" hidden>
             </div>
@@ -80,7 +179,6 @@
                 </div>
             </div>
             <ul class="service-box" id="serviceBox">
-
             </ul>
         </div>
     </div>

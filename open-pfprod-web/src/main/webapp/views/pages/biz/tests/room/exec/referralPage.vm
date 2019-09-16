@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/css/service.css">
     <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
 
     <script>
@@ -16,61 +17,164 @@
         var idTestexecResult = '$!{idTestexecResult}';
     </script>
 
+    <style>
+        #none {
+            width: 140px;
+            margin: 122px auto 0;
+            height: 500px;
+            display: block;
+        }
+
+        #none img {
+            margin: 0 6px;
+        }
+
+        #none p:nth-child(2)  {
+            width:108px;
+            color:rgba(51,51,51,1);
+            margin: 20px auto 28px;
+            height:19px;
+            font-size:18px;
+            font-family:MicrosoftYaHei;
+            font-weight:400;
+        }
+
+        #none p:last-child {
+            color:rgba(153,153,153,1);
+            width:140px;
+            height:14px;
+            font-size:14px;
+            font-family:MicrosoftYaHei;
+            font-weight:400;
+        }
+
+        .fix {
+            position: relative;
+            margin: 10px 0 16px 10px;
+        }
+
+        .add-but:hover {
+            cursor: pointer;
+        }
+
+        .add-but {
+            width:90px;
+            border: none;
+            height:32px;
+            background:rgba(55,141,126,1);
+            border-radius:4px;
+        }
+
+        .add-but span {
+            width: 28px;
+            height: 14px;
+            display: inline-block;
+            font-size: 14px;
+            font-family: MicrosoftYaHei;
+            font-weight: 400;
+            margin-left: 45px;
+            margin-right: 17px;
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .vertical {
+            top: 9px;
+            left: 25px;
+            width: 3px;
+            height: 15px;
+            position: absolute;
+            background-color: #ffffff;
+        }
+
+        .horizontal {
+            top: 15px;
+            left: 19px;
+            width: 15px;
+            height: 3px;
+            position: absolute;
+            background-color: #ffffff;
+        }
+
+        .main {
+            height: 628px;
+            overflow-y: auto;
+            margin-left: 10px;
+            border-radius: 4px;
+        }
+
+        .disc {
+            width:8px;
+            height:8px;
+            display: inline-block;
+            background:rgba(55,141,126,1);
+            margin-right: 3px;
+            border-radius:50%;
+        }
+
+        .diagnose-title {
+            color:rgba(51,51,51,1);
+            width:77px;
+            height:14px;
+            font-size:14px;
+            font-family:MicrosoftYaHei;
+            font-weight:400;
+        }
+
+
+        .referral {
+            height:290px;
+            border:1px solid rgba(239,241,244,1);
+            background:rgba(255,255,255,1);
+            border-radius:4px;
+            margin-bottom: 20px;
+        }
+
+        .titile {
+            margin: 15px 0 0 16px;
+        }
+
+        .layui-card-body {
+            padding: 0;
+            margin: 0 15px;
+        }
+
+        .layui-table-view {
+            margin: 0;
+        }
+
+        .button-right {
+            float: right;
+            margin-top: 10px;
+        }
+
+    </style>
+
 </head>
 
 <body class="wrapper-content">
 
-<div style="overflow: auto; height: 800px;">
-    <div class="layui-row" style="margin-right: 10px;">
-        <div class="layui-col-xs12">
-                <div hidden>
-                    <input id="idDie" name="idDie" hidden>
-                </div>
-                <div class="layui-row layui-form-item">
-                    <div class="layui-col-md12">
-                        <div>
-                            <input type="text" name="idDieText" id="idDieText" autocomplete="off" class="layui-input"
-                                   placeholder="请选择拟诊" lay-verify="required" lay-vertype="tips"
-                                   style="display:inline-block;width:442px;vertical-align:middle;
-                           margin-right:-5px;border: 1px solid #C9C9C9;" disabled>
-                            <button type="button" class="layui-btn layui-btn-primary" id="searchAnswer">
-                                <i class="layui-icon layui-icon-search"></i>
-                            </button>
-                            <button class="layui-btn layui-btn-normal" id="addNz">
-                                <i class="layui-icon layui-icon-add-1"></i>拟诊
-                            </button>
-                        </div>
-                    </div>
-                </div>
+<div style="overflow:hidden">
+
+    <div class="fix">
+        <div class="vertical"></div>
+        <div class="horizontal"></div>
+        <button id="searchAnswer" type="button" class="add-but">
+            <span>新增</span>
+        </button>
+        <input id="idDie" name="idDie" hidden>
+    </div>
+
+
+
+
+    <div class="main" id="zdField">
+        <div id="none">
+            <img src="${contextPath}/public/layui/build/images/none.png"/>
+            <p>暂无拟诊内容</p>
+            <p>请点击新增添加拟诊项</p>
         </div>
     </div>
-    <div class="layui-row" id="zdField">
-        <fieldset class="layui-elem-field">
-            <legend>拟诊</legend>
-            <div class="layui-field-box">
-                <div class="layui-row layui-col-space5">
-                    <div class="layui-col-xs6">
-                        <button class="layui-btn layui-btn-xs layui-btn-disabled" id="addDieReason" disabled>
-                            <i class="layui-icon layui-icon-add-1"></i>加入原因
-                        </button>
-                        <table id="zdTable" lay-filter="zdTableFilter">
-                        </table>
-                    </div>
-                    <div class="layui-col-xs6">
-                        <button class="layui-btn layui-btn-xs layui-btn-disabled" id="addDieReason" >
-                            <i class="layui-icon layui-icon-delete"></i>排除
-                        </button>
-                        <button class="layui-btn layui-btn-xs layui-btn-disabled" id="addDieReason" >
-                            <i class="layui-icon layui-icon-add-1"></i>排除原因
-                        </button>
-                        <table id="zdTable1" lay-filter="zdTableFilter1">
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
 
-    </div>
 </div>
 
 

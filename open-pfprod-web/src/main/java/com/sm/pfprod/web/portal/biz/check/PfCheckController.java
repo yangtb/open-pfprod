@@ -47,9 +47,10 @@ public class PfCheckController extends BaseController {
 
     @PreAuthorize("hasAnyRole('ROLE_STD0030', 'ROLE_SUPER')")
     @RequestMapping("/question/form")
-    public String form(String formType, Model model) {
+    public String form(String formType, String idBodyCa, Model model) {
         model.addAttribute("bodyPosition", enumUtil.getEnumList(SysDicGroupEnum.BODY_POSITION.getCode()));
         model.addAttribute("formType", formType);
+        model.addAttribute("idBodyCa", idBodyCa);
         return "pages/biz/check/checkQuestionForm";
     }
 

@@ -33,6 +33,11 @@ public class PfWaitingRoomExamVo implements Serializable {
     private Long idResult;
 
     /**
+     * 是否阳性
+     */
+    private String isMasculine;
+
+    /**
      * 答案
      */
     private String valResult;

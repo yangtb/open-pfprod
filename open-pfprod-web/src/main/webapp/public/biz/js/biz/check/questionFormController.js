@@ -17,6 +17,9 @@ layui.config({
         if (!data.field.fgActive) {
             data.field.fgActive = '0';
         }
+        if (idBodyCa == '1') {
+            data.field.sdBody = '';
+        }
         data.field.cdCheck = data.field.idBodyCa;
         var url = basePath + '/pf/r/check/question/';
         if (formType == 'add') {
