@@ -340,9 +340,11 @@ layui.config({
 
     var _addOrEdit = function (formType, currentEditData) {
         if (formType == 'add') {
-            common.open('新增问题', basePath + '/pf/p/inquisition/question/form?formType=' + formType, 450, 330, _successFunction(currentEditData));
+            var index = common.open('新增问题', basePath + '/pf/p/inquisition/question/form?formType=' + formType, 600, 450, _successFunction(currentEditData));
+            layer.full(index);
         } else {
-            common.open('编辑问题', basePath + '/pf/p/inquisition/question/form?formType=' + formType, 450, 330, _successFunction(currentEditData));
+            var index = common.open('编辑问题', basePath + '/pf/p/inquisition/question/form?formType=' + formType, 600, 450, _successFunction(currentEditData));
+            layer.full(index);
         }
     };
 

@@ -43,6 +43,10 @@ public class InquisitionClient {
         return pfInquisitionFacade.listQuestion(param);
     }
 
+    public PfPageResult listPreQuestion(PfInquisitionQuestionParam param) {
+        return pfInquisitionFacade.listPreQuestion(param);
+    }
+
     public CommonResult<Boolean> addQuestion(BasInquesParam param) {
         return pfInquisitionFacade.addQuestion(param);
     }

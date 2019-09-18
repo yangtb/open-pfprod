@@ -59,6 +59,14 @@ public interface PfInquisitionService {
     PageResult listQuestion(PfInquisitionQuestionDto dto);
 
     /**
+     * 问诊预设值问题列表
+     *
+     * @param dto
+     * @return
+     */
+    PageResult listPreQuestion(PfInquisitionQuestionDto dto);
+
+    /**
      * 新增问题
      *
      * @param dto

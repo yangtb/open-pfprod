@@ -81,6 +81,15 @@ public class PfInquisitionServiceImpl implements PfInquisitionService {
     }
 
     @Override
+    public PageResult listPreQuestion(PfInquisitionQuestionDto dto) {
+        PfPageResult<BasInquesResult> result = inquisitionClient.listPreQuestion(BeanUtil.convert(dto, PfInquisitionQuestionParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
     public boolean addQuestion(BasInques dto) {
         CommonResult<Boolean> result = inquisitionClient.addQuestion(BeanUtil.convert(dto, BasInquesParam.class));
         if (result != null && result.getIsSuccess()) {

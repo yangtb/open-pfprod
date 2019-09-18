@@ -1,5 +1,6 @@
 package com.sm.pfprod.web.portal.biz.inquisition;
 
+import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.biz.inquisition.PfInquisitionQuestionDto;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.biz.inquisition.PfInquisitionService;
@@ -31,11 +32,25 @@ public class PfInquisitionController extends BaseController {
         return "pages/biz/inquisition/question";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_SUPER')")
+    @RequestMapping("/question/pre/page")
+    public String preQuestionPage(Model model) {
+        return "pages/biz/inquisition/preQuestion";
+    }
+
     @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/question/list")
     @ResponseBody
     public PageResult listQuestion(PfInquisitionQuestionDto dto) {
         return pfInquisitionService.listQuestion(dto);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_FAQ0020','ROLE_SUPER')")
+    @RequestMapping(value = "/question/pre/list")
+    @ResponseBody
+    public PageResult listPreQuestion(PfInquisitionQuestionDto dto) {
+        Assert.isTrue(dto.getIdInques() != null, "idInques");
+        return pfInquisitionService.listPreQuestion(dto);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_STD0010', 'ROLE_SUPER')")

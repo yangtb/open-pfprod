@@ -5,24 +5,29 @@ import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.open.care.core.utils.Assert;
+import com.sm.pfprod.model.dto.biz.inquisition.PfInquisitionQuestionDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.entity.BasInques;
 import com.sm.pfprod.model.entity.BasInquesAnswer;
 import com.sm.pfprod.model.entity.BasInquesCa;
 import com.sm.pfprod.model.enums.OperationTypeEnum;
+import com.sm.pfprod.model.enums.SysDicGroupEnum;
+import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.model.vo.biz.PfTreeSelectVo;
+import com.sm.pfprod.model.vo.dic.PfDicCache;
 import com.sm.pfprod.service.biz.inquisition.PfInquisitionService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
+import com.sm.pfprod.web.util.EnumUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @ClassName: PfInquisitionController
@@ -37,6 +42,46 @@ public class PfInquisitionRestController extends BaseController {
     @Resource
     private PfInquisitionService pfInquisitionService;
 
+    @Resource
+    private EnumUtil enumUtil;
+
+    /**
+     * 问题标签treeSelect
+     *
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_ORG_MG','ROLE_SUPER')")
+    @PostMapping(value = "/question/classify/label")
+    @ResponseBody
+    public List<PfTreeSelectVo> selectQuestionClassifyLabel() {
+        List<PfTreeSelectVo> treeSelectVos = new ArrayList<>();
+        List<PfDicCache> dicCaches = enumUtil.getEnumList(SysDicGroupEnum.INQUES_LABEL.getCode());
+        for (PfDicCache pfDicCache : dicCaches) {
+            if (pfDicCache.getDictCode().length() == 2) {
+                PfTreeSelectVo pfTreeSelectVo = new PfTreeSelectVo();
+                pfTreeSelectVo.setId(pfDicCache.getDictCode());
+                pfTreeSelectVo.setName(pfDicCache.getDictName());
+                pfTreeSelectVo.setOpen(true);
+                pfTreeSelectVo.setChildren(this.getChildren(pfDicCache.getDictCode(), dicCaches));
+                treeSelectVos.add(pfTreeSelectVo);
+            }
+        }
+        return treeSelectVos;
+    }
+
+    private List<PfTreeSelectVo> getChildren(String parentCode, List<PfDicCache> dicCaches) {
+        List<PfTreeSelectVo> children = new ArrayList<>();
+        for (PfDicCache pfDicCache : dicCaches) {
+            if (pfDicCache.getDictCode().length() == 4 && pfDicCache.getDictCode().startsWith(parentCode)) {
+                PfTreeSelectVo pfTreeSelectVo = new PfTreeSelectVo();
+                pfTreeSelectVo.setId(pfDicCache.getDictCode());
+                pfTreeSelectVo.setName(pfDicCache.getDictName());
+                pfTreeSelectVo.setOpen(true);
+                children.add(pfTreeSelectVo);
+            }
+        }
+        return children;
+    }
 
     /**
      * 问诊题库分类树
@@ -214,6 +259,17 @@ public class PfInquisitionRestController extends BaseController {
         dto.setOperator(CurrentUserUtils.getCurrentUsername());
         return ResultObject.createSuccess("saveAnswer", ResultObject.DATA_TYPE_OBJECT,
                 pfInquisitionService.saveAnswer(dto));
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_FAQ0020','ROLE_SUPER')")
+    @RequestMapping(value = "/question/list", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject listQuestion(@RequestBody PfInquisitionQuestionDto dto) {
+        // 默认取1000，一般没这么多
+        dto.setPage(1);
+        dto.setLimit(1000);
+        PageResult pageResult = pfInquisitionService.listQuestion(dto);
+        return ResultObject.createSuccess("listQuestion", ResultObject.DATA_TYPE_LIST, pageResult.getData());
     }
 
 }

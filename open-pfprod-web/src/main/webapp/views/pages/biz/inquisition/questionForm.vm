@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
+    <link rel="stylesheet" href="${contextPath}/public/layui/build/js/treeSelect.js"></script>
 
     <script>
         var basePath = '${basePath}';
@@ -17,7 +18,7 @@
     </script>
 </head>
 
-<body class="body-my">
+<body>
 <div class="wrapper-content">
     <form class="layui-form" id="questionForm">
         <div hidden>
@@ -40,6 +41,25 @@
                 <input type="text" name="idInquesCaText" autocomplete="off" class="layui-input layui-disabled"
                        placeholder="问题分类" disabled>
             </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">问题标签</label>
+            <div class="layui-input-block">
+                <input id="sdInquesLabel" name="sdInquesLabel" type="text" lay-filter="sdInquesLabelTree" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">关联触发<i class="iconfont icon-required"
+                                                   style="color: #f03f2d"></i></label>
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn layui-btn-normal layui-btn-sm" id="addPreQuestion">
+                    <i class="layui-icon">&#xe654;添加</i>
+                </button>
+                <table class="layui-hide" id="test" lay-filter="test"></table>
+            </div>
+
         </div>
 
         <div class="layui-form-item layui-form-text">
@@ -71,14 +91,12 @@
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 <script src="${contextPath}/public/biz/js/biz/inquisition/inquisitionQuestionFormController.js"></script>
 <script>
-    function fullForm(data) {
-        $(document).ready(function () {
-            $("#questionForm").autofill(data);
-            layui.use('form',function(){
-                layui.form.render();
-            });
-        });
-    }
+
+
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
 </script>
 
 </body>
