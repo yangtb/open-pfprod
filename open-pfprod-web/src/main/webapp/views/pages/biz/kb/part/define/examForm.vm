@@ -121,8 +121,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="layui-inline" style="margin-top: -20px;">
-                    <select name="isMasculine" lay-verify="">
+                <div class="layui-inline" style="margin-top: -25px;">
+                    <select name="isMasculine" id="isMasculine" lay-verify="">
                         <option value="0">正常</option>
                         <option value="1">↓</option>
                         <option value="2">↑</option>
@@ -156,6 +156,9 @@
                                placeholder="结果说明" lay-verify="desResult" lay-vertype="tips">
                     </div>
                 </div>
+            </div>
+
+            <div class="layui-form-item form-item-my">
                 <div class="layui-inline">
                     <label class="layui-form-label"></label>
                     <div class="layui-input-block">

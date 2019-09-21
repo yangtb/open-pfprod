@@ -26,7 +26,7 @@ layui.config({
         }
     });
 
-    var formIdArr = new Array('searchAnswer', 'naItem', 'desStand', 'naShort', 'idResult', 'valResult' ,'desResult', 'costMoney', 'costTime', 'fgShow', 'fgReason', 'fgBack', 'desExpert', 'test3');
+    var formIdArr = new Array('searchAnswer', 'naItem', 'desStand', 'naShort', 'idResult', 'valResult' ,'desResult', 'costMoney', 'costTime', 'fgShow', 'fgReason', 'fgBack', 'desExpert', 'test3', 'isMasculine');
     var initFormData = {};
     tableSelect.render({
         elem: '#searchAnswer',
