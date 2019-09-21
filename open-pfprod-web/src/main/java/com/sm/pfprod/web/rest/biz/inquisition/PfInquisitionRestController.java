@@ -1,5 +1,6 @@
 package com.sm.pfprod.web.rest.biz.inquisition;
 
+import com.alibaba.fastjson.JSON;
 import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
@@ -50,7 +51,7 @@ public class PfInquisitionRestController extends BaseController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_ORG_MG','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_ORG_MG','ROLE_FAQ0010','ROLE_SUPER')")
     @PostMapping(value = "/question/classify/label")
     @ResponseBody
     public List<PfTreeSelectVo> selectQuestionClassifyLabel() {
@@ -95,6 +96,21 @@ public class PfInquisitionRestController extends BaseController {
         return ResultObject.createSuccess("listQuestionClassifyTree", ResultObject.DATA_TYPE_LIST,
                 pfInquisitionService.listQuestionClassifyTree());
     }
+
+    /**
+     * 问诊题库分类树treeSelect
+     *
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_EXM0030','ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping(value = "/question/classify/tree/select", method = RequestMethod.POST)
+    @ResponseBody
+    public List<PfTreeSelectVo> listQuestionClassifyTreeSelect() {
+        String str = pfInquisitionService.listQuestionClassifyTreeSelect();
+        List<PfTreeSelectVo> list = JSON.parseArray(str, PfTreeSelectVo.class);
+        return list;
+    }
+
 
     /**
      * 新增问诊题库分类信息

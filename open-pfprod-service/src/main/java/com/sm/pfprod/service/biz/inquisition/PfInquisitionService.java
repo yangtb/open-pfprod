@@ -27,6 +27,13 @@ public interface PfInquisitionService {
     List<PfCommonZtreeVo> listQuestionClassifyTree();
 
     /**
+     * treeSelect
+     *
+     * @return
+     */
+    String listQuestionClassifyTreeSelect();
+
+    /**
      * 新增问诊题库信息
      *
      * @param dto

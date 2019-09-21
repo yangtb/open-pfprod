@@ -27,6 +27,10 @@ public class CheckClient {
         return pfCheckFacade.listQuestionClassifyTree();
     }
 
+    public CommonResult<String> listQuestionClassifyTreeSelect() {
+        return pfCheckFacade.listQuestionClassifyTreeSelect();
+    }
+
     public CommonResult<Long> addQuestionClassify(BasBodyCaParam param) {
         return pfCheckFacade.addQuestionClassify(param);
     }

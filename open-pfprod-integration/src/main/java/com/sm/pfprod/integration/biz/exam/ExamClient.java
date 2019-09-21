@@ -27,6 +27,10 @@ public class ExamClient {
         return pfExamFacade.listQuestionClassifyTree();
     }
 
+    public CommonResult<String> listQuestionClassifyTreeSelect() {
+        return pfExamFacade.listQuestionClassifyTreeSelect();
+    }
+
     public CommonResult<Long> addQuestionClassify(BasInspectCaParam param) {
         return pfExamFacade.addQuestionClassify(param);
     }

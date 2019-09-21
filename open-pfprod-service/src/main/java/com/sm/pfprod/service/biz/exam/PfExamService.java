@@ -27,6 +27,13 @@ public interface PfExamService {
     List<PfCommonZtreeVo> listQuestionClassifyTree();
 
     /**
+     * treeSelect
+     *
+     * @return
+     */
+    String listQuestionClassifyTreeSelect();
+
+    /**
      * 新增题库信息
      *
      * @param dto

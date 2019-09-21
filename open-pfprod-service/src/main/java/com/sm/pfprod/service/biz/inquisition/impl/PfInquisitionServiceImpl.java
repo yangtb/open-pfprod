@@ -45,6 +45,15 @@ public class PfInquisitionServiceImpl implements PfInquisitionService {
     }
 
     @Override
+    public String listQuestionClassifyTreeSelect() {
+        CommonResult<String> result = inquisitionClient.listQuestionClassifyTreeSelect();
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
     public Long addQuestionClassify(BasInquesCa dto) {
         CommonResult<Long> result = inquisitionClient.addQuestionClassify(BeanUtil.convert(dto, BasInquesCaParam.class));
         if (result != null && result.getIsSuccess()) {

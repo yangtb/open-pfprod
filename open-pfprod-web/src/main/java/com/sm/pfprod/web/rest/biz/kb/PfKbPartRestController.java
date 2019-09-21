@@ -6,18 +6,17 @@ import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.biz.kb.PfSaveAsMedDto;
+import com.sm.pfprod.model.dto.biz.kb.part.PfPartCommonDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.enums.OperationTypeEnum;
+import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.biz.kb.PfKbPartService;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -522,6 +521,18 @@ public class PfKbPartRestController {
         dto.setCreator(CurrentUserUtils.getCurrentUsername());
         return pfKbPartService.bachAddExam(dto) ? ResultObject.createSuccess("bachAddExam", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("bachAddExam", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+    }
+
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping(value = "/question/list", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject listQuestion(@RequestBody PfPartCommonDto dto) {
+        // 默认取1000，一般没这么多
+        dto.setPage(1);
+        dto.setLimit(1000);
+        PageResult pageResult = pfKbPartService.listFaqMedCaseInques(dto);
+        return ResultObject.createSuccess("listQuestion", ResultObject.DATA_TYPE_LIST, pageResult.getData());
     }
 
 }

@@ -2,10 +2,12 @@ package com.sm.pfprod.web.portal.biz.kb;
 
 import com.alibaba.fastjson.JSON;
 import com.sm.open.care.core.enums.YesOrNoNum;
+import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.biz.kb.part.PfMedCaseDto;
 import com.sm.pfprod.model.dto.biz.kb.part.PfPartCommonDto;
 import com.sm.pfprod.model.dto.biz.kb.part.PfPartGetCommonDto;
 import com.sm.pfprod.model.dto.common.PfCommonSearchDto;
+import com.sm.pfprod.model.entity.FaqMedCaseInquesList;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.biz.check.PfCheckService;
@@ -246,5 +248,20 @@ public class PfKbPartController extends BaseController {
         model.addAttribute("tagFlag", dto.getTagFlag());
         model.addAttribute("caseName", dto.getCaseName());
         return "pages/biz/kb/part/define/examBachAdd";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping("/question/pre/page")
+    public String preQuestionPage(Model model, Long idMedCase) {
+        model.addAttribute("idMedCase", idMedCase);
+        return "pages/biz/kb/part/define/preQuestion";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010', 'ROLE_SUPER')")
+    @RequestMapping(value = "/question/pre/list")
+    @ResponseBody
+    public PageResult listPreQuestion(FaqMedCaseInquesList dto) {
+        Assert.isTrue(dto.getIdMedCaseList() != null, "idMedCaseList");
+        return pfKbPartService.listPreQuestion(dto);
     }
 }

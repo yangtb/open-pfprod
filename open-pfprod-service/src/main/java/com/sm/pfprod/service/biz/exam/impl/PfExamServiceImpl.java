@@ -45,6 +45,15 @@ public class PfExamServiceImpl implements PfExamService {
     }
 
     @Override
+    public String listQuestionClassifyTreeSelect() {
+        CommonResult<String> result = examClient.listQuestionClassifyTreeSelect();
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
     public Long addQuestionClassify(BasInspectCa dto) {
         CommonResult<Long> result = examClient.addQuestionClassify(BeanUtil.convert(dto, BasInspectCaParam.class));
         if (result != null && result.getIsSuccess()) {

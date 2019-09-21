@@ -1,7 +1,6 @@
 package com.sm.pfprod.service.biz.check;
 
 import com.sm.pfprod.model.dto.biz.check.PfCheckQuestionDto;
-import com.sm.pfprod.model.dto.biz.inquisition.PfInquisitionQuestionDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.dto.common.PfCommonSearchDto;
 import com.sm.pfprod.model.entity.BasBody;
@@ -26,6 +25,14 @@ public interface PfCheckService {
      * @return
      */
     List<PfCommonZtreeVo> listQuestionClassifyTree();
+
+
+    /**
+     * treeSelect
+     *
+     * @return
+     */
+    String listQuestionClassifyTreeSelect();
 
     /**
      * 新增题库信息
@@ -114,4 +121,5 @@ public interface PfCheckService {
      * @return
      */
     PageResult searchCheck(PfCommonSearchDto dto);
+
 }

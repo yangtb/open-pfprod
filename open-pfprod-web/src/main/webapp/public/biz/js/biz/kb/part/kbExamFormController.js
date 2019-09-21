@@ -4,14 +4,27 @@ layui.config({
     ckplayer: 'ckplayer/ckplayer'
     , Magnifier: 'js/Magnifier'
     , Event: 'js/Event'
-}).use(['table', 'form', 'upload', 'jquery', 'element', 'tableSelect', 'common'], function () {
+}).use(['table', 'form', 'upload', 'jquery', 'element', 'tableSelect', 'common', 'treeSelect'], function () {
     var $ = layui.$
         , table = layui.table
         , form = layui.form
         , upload = layui.upload
         , common = layui.common
         , element = layui.element
+        , treeSelect = layui.treeSelect
         , tableSelect = layui.tableSelect;
+
+    treeSelect.render({
+        elem: '#idInspect',
+        data: basePath + '/pf/r/exam/question/classify/tree/select',
+        type: 'post',
+        placeholder: '请选择',
+        search: true,
+        click: function (d) {
+            $("#idInspect").val(d.current.id);
+            reloadTable($('#keyword').val(), $('#idInspect').val())
+        }
+    });
 
     var formIdArr = new Array('searchAnswer', 'naItem', 'desStand', 'naShort', 'idResult', 'valResult' ,'desResult', 'costMoney', 'costTime', 'fgShow', 'fgReason', 'fgBack', 'desExpert', 'test3');
     var initFormData = {};
@@ -109,7 +122,7 @@ layui.config({
         table.render({
             elem: '#partExamTable' //指定原始表格元素选择器（推荐id选择器）
             , id: 'partExamTableId'
-            , height: 'full-30' //容器高度
+            , height: 'full-50' //容器高度
             //, toolbar: '#toolbarExam'
             //, defaultToolbar: []
             , cols: [[
@@ -145,18 +158,18 @@ layui.config({
 
     $('#keyword').bind('keypress', function (event) {
         if (event.keyCode == "13") {
-            reloadTable($('#keyword').val())
+            reloadTable($('#keyword').val(), $('#idInspect').val())
             return false;
         }
     });
 
-    function reloadTable(keyword) {
+    function reloadTable(keyword, idInspect) {
         table.reload('partExamTableId', {
             where: {
                 idMedCase: idMedCase,
-                keyword: keyword
+                keyword: keyword,
+                idInspect : idInspect
             }
-            , height: 'full-30'
         });
     }
 
@@ -393,7 +406,6 @@ layui.config({
             where: {
                 idMedCase: idMedCase
             }
-            , height: 'full-30'
         });
     };
 

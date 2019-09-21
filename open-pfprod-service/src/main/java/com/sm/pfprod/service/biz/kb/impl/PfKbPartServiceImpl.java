@@ -269,4 +269,13 @@ public class PfKbPartServiceImpl implements PfKbPartService {
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
+    @Override
+    public PageResult listPreQuestion(FaqMedCaseInquesList dto) {
+        PfPageResult<FaqMedCaseInquesListResult> result = kbPartClient.listPreQuestion(BeanUtil.convert(dto, FaqMedCaseInquesListParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
 }

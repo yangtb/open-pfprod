@@ -5,7 +5,7 @@ layui.config({
     , Magnifier: 'js/Magnifier'
     , Event: 'js/Event'
     , formSelects: 'formSelects-v4'
-}).use(['table', 'form', 'upload', 'jquery', 'element', 'tableSelect', 'formSelects', 'common'], function () {
+}).use(['table', 'form', 'upload', 'jquery', 'element', 'tableSelect', 'formSelects', 'common', 'treeSelect'], function () {
     var $ = layui.$
         , table = layui.table
         , form = layui.form
@@ -13,7 +13,20 @@ layui.config({
         , common = layui.common
         , element = layui.element
         , tableSelect = layui.tableSelect
+        , treeSelect = layui.treeSelect
         , formSelects = layui.formSelects;
+
+    treeSelect.render({
+        elem: '#idBodyCa',
+        data: basePath + '/pf/r/check/question/classify/tree/select',
+        type: 'post',
+        placeholder: '请选择',
+        search: true,
+        click: function (d) {
+            $("#idBodyCa").val(d.current.id);
+            reloadTable($('#keyword').val(), $('#idBodyCa').val())
+        }
+    });
 
     init();
 
@@ -143,7 +156,7 @@ layui.config({
         table.render({
             elem: '#partCheckTable' //指定原始表格元素选择器（推荐id选择器）
             , id: 'partCheckTableId'
-            , height: '600' //容器高度
+            , height: '560' //容器高度
             //, toolbar: '#toolbarCheck'
             //, defaultToolbar: []
             , cols: [[
@@ -175,18 +188,18 @@ layui.config({
 
     $('#keyword').bind('keypress', function (event) {
         if (event.keyCode == "13") {
-            reloadTable($('#keyword').val())
+            reloadTable($('#keyword').val(), $('#idBodyCa').val())
             return false;
         }
     });
 
-    function reloadTable(keyword) {
+    function reloadTable(keyword, idBodyCa) {
         table.reload('partCheckTableId', {
             where: {
                 idMedCase: idMedCase,
-                keyword: keyword
+                keyword: keyword,
+                idBodyCa : idBodyCa
             }
-            , height: '600'
         });
     }
 
@@ -488,7 +501,6 @@ layui.config({
             where: {
                 idMedCase: idMedCase
             }
-            , height: '600'
         });
     };
 

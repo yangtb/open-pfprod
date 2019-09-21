@@ -22,4 +22,12 @@ public class PfPartCommonDto extends PageParam implements Serializable {
      */
     private String keyword;
 
+    /**
+     * 问诊分类ID
+     */
+    private Long idInquesCa;
+
+    private Long idBodyCa;
+
+    private Long idInspect;
 }

@@ -27,6 +27,10 @@ public class InquisitionClient {
         return pfInquisitionFacade.listQuestionClassifyTree();
     }
 
+    public CommonResult<String> listQuestionClassifyTreeSelect() {
+        return pfInquisitionFacade.listQuestionClassifyTreeSelect();
+    }
+
     public CommonResult<Long> addQuestionClassify(BasInquesCaParam param) {
         return pfInquisitionFacade.addQuestionClassify(param);
     }

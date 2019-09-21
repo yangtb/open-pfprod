@@ -20,73 +20,70 @@
     </script>
 </head>
 
-<body class="body-my">
+<body>
 
-<div class="layui-row layui-col-space10">
-    <div class="layui-row-md4">
-        <form class="layui-form" id="useCaseForm" style="margin-top: 5px">
-            <div hidden>
-                <input name="idMedCase" hidden>
-                <input name="cdMedAsse" hidden>
-            </div>
-            <div class="layui-form-item form-item-my">
-                <div class="layui-inline">
-                    <label class="layui-form-label">用例名称<i class="iconfont icon-required"
-                                                           style="color: #f03f2d"></i></label>
-                    <div class="layui-input-block">
-                        <input name="name" autocomplete="off" class="layui-input"
-                               placeholder="请输入用例名称" lay-verify="required|commonLength" lay-vertype="tips" disabled>
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">用例描述</label>
-                    <div class="layui-input-block">
-                        <input name="descript" autocomplete="off" class="layui-input"
-                               lay-verify="descript" lay-vertype="tips"
-                               placeholder="请输入用例描述" disabled>
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">状态<i class="iconfont icon-required"
-                                                         style="color: #f03f2d"></i></label>
-                    <div class="layui-input-block">
-                        <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
-                               value="1" lay-text="启用|停用" disabled>
-                    </div>
+<div>
+    <form class="layui-form" id="useCaseForm" style="padding-top: 10px">
+        <div hidden>
+            <input name="idMedCase" hidden>
+            <input name="cdMedAsse" hidden>
+        </div>
+
+        <div class="layui-row layui-col-space10 layui-form-item" style="margin: 0px">
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">用例名称<i class="iconfont icon-required"
+                                                       style="color: #f03f2d"></i></label>
+                <div class="layui-input-block">
+                    <input name="name" autocomplete="off" class="layui-input"
+                           placeholder="请输入用例名称" lay-verify="required|commonLength" lay-vertype="tips" disabled>
                 </div>
             </div>
-
-            <div class="layui-form-item form-item-my">
-                <div class="layui-inline">
-                    <label class="layui-form-label">组件类型<i class="iconfont icon-required"
-                                                           style="color: #f03f2d"></i></label>
-                    <div class="layui-input-block" style="width: 158px;">
-                        <select name="cdMedAsse" autocomplete="off" disabled>
-                            <option value="">请选择组件类型</option>
-                            #foreach($element in $!parts)
-                                <option value="$!element.cdMedAsse">$!element.name</option>
-                            #end
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">用例归属</label>
-                    <div class="layui-input-block">
-                        <input name="orgName" autocomplete="off" class="layui-input" disabled>
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">使用次数</label>
-                    <div class="layui-input-block">
-                        <input name="count" autocomplete="off" class="layui-input" disabled>
-                    </div>
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">用例描述</label>
+                <div class="layui-input-block">
+                    <input name="descript" autocomplete="off" class="layui-input"
+                           lay-verify="descript" lay-vertype="tips"
+                           placeholder="请输入用例描述" disabled>
                 </div>
             </div>
-            <hr class="layui-bg-cyan" style="margin: 0px 10px 0px 10px">
-        </form>
-    </div>
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">状态<i class="iconfont icon-required"
+                                                     style="color: #f03f2d"></i></label>
+                <div class="layui-input-block">
+                    <input type="checkbox" checked="" name="fgActive" lay-skin="switch"
+                           value="1" lay-text="启用|停用" disabled>
+                </div>
+            </div>
 
-    <div class="layui-row-md8" id="bottomPage" style="margin: -10px 0px 0px 0px">
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">组件类型<i class="iconfont icon-required"
+                                                       style="color: #f03f2d"></i></label>
+                <div class="layui-input-block">
+                    <select name="cdMedAsse" autocomplete="off" disabled>
+                        <option value="">请选择组件类型</option>
+                        #foreach($element in $!parts)
+                            <option value="$!element.cdMedAsse">$!element.name</option>
+                        #end
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">用例归属</label>
+                <div class="layui-input-block">
+                    <input name="orgName" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">使用次数</label>
+                <div class="layui-input-block">
+                    <input name="count" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </form>
+
+    <div id="bottomPage" style="height:800px; padding-left: 10px;">
 
     </div>
 

@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @ClassName: PfTreeSelectVo
@@ -26,6 +25,6 @@ public class PfTreeSelectVo implements Serializable {
 
     private boolean open;
 
-    private List<PfTreeSelectVo> children;
+    private Object children;
 
 }

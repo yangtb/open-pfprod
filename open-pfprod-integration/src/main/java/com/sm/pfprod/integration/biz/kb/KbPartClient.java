@@ -126,4 +126,9 @@ public class KbPartClient {
     public CommonResult<Boolean> bachAddExam(PfSaveAsMedParam param) {
         return pfKbPartFacade.bachAddExam(param);
     }
+
+    public PfPageResult<FaqMedCaseInquesListResult> listPreQuestion(FaqMedCaseInquesListParam param) {
+        return pfKbPartFacade.listPreQuestion(param);
+    }
+
 }

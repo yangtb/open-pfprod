@@ -1,5 +1,6 @@
 package com.sm.pfprod.web.rest.biz.exam;
 
+import com.alibaba.fastjson.JSON;
 import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
@@ -10,6 +11,7 @@ import com.sm.pfprod.model.entity.BasInspectCa;
 import com.sm.pfprod.model.entity.BasInspectItem;
 import com.sm.pfprod.model.entity.BasItemResult;
 import com.sm.pfprod.model.enums.OperationTypeEnum;
+import com.sm.pfprod.model.vo.biz.PfTreeSelectVo;
 import com.sm.pfprod.service.biz.exam.PfExamService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @ClassName: PfExamRestController
@@ -48,6 +51,20 @@ public class PfExamRestController extends BaseController {
     public ResultObject listQuestionClassifyTree() {
         return ResultObject.createSuccess("listQuestionClassifyTree", ResultObject.DATA_TYPE_LIST,
                 pfExamService.listQuestionClassifyTree());
+    }
+
+    /**
+     * 问诊题库分类树treeSelect
+     *
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_EXM0030','ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping(value = "/question/classify/tree/select", method = RequestMethod.POST)
+    @ResponseBody
+    public List<PfTreeSelectVo> listQuestionClassifyTreeSelect() {
+        String str = pfExamService.listQuestionClassifyTreeSelect();
+        List<PfTreeSelectVo> list = JSON.parseArray(str, PfTreeSelectVo.class);
+        return list;
     }
 
     /**

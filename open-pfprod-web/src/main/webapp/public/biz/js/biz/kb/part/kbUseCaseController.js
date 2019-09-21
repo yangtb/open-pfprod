@@ -42,7 +42,7 @@ layui.config({
     function appendTabContent(part) {
         var result = '';
         if (part.script) {
-            result = '<iframe id="iframe' + part.cdMedAsse + '" class="layui-col-xs12" frameborder="0" ';
+            result = '<iframe id="iframe' + part.cdMedAsse + '" class="layui-col-xs12" scrolling="no" frameborder="0" style="height:740px;"';
 
             if (part.cdMedAsse == cdMedAsse) {
                 result += 'src="' + basePath + part.script + '?idMedCase=' + idMedCase +
@@ -57,20 +57,6 @@ layui.config({
         }
         return result;
     };
-
-    /**
-     * iframe 高度自适应
-     */
-    FrameWH();
-
-    function FrameWH() {
-        var h = $(window).height() - 110
-        $("iframe").css("height", h + "px");
-    }
-
-    $(window).resize(function () {
-        FrameWH();
-    });
 
 });
 

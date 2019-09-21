@@ -46,6 +46,15 @@ public class PfCheckServiceImpl implements PfCheckService {
     }
 
     @Override
+    public String listQuestionClassifyTreeSelect() {
+        CommonResult<String> result = checkClient.listQuestionClassifyTreeSelect();
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
     public Long addQuestionClassify(BasBodyCa dto) {
         CommonResult<Long> result = checkClient.addQuestionClassify(BeanUtil.convert(dto, BasBodyCaParam.class));
         if (result != null && result.getIsSuccess()) {

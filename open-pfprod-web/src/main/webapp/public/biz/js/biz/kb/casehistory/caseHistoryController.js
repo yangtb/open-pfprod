@@ -291,8 +291,8 @@ layui.config({
         , cols: [[
             {checkbox: true, fixed: true},
             {field: 'fgActive', width: 100, title: '状态', templet: '#fgActiveTpl'},
-            {field: 'name', width: 160, title: '病例名称'},
-            {field: 'sdLevel', width: 100, title: '病例级别', templet: '#sdLevelTpl'},
+            {field: 'name', width: 170, title: '病例名称'},
+            {field: 'sdLevel', width: 200, title: '病例级别', templet: '#sdLevelTpl'},
             {field: 'sdUse', width: 100, title: '病例用途', templet: '#sdUseTpl'},
             {field: 'chtName', width: 260, title: '病例模板'},
             {field: 'orgName', width: 170, title: '归属机构'},
