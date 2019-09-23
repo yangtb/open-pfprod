@@ -520,6 +520,7 @@ layui.config({
     function fillForm(data) {
         $('#reset').click();
 
+        data.path = data.path ? data.path : '';
         $("#idResult").empty();
         $('#idResult').append("<option value='" + data.idResult + "'>" + data.desResult + "</option>");
 

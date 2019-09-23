@@ -466,6 +466,7 @@ layui.config({
     function fillForm(data) {
         $('#reset').click();
 
+        data.path = data.path ? data.path : '';
         $("#idAnswer").empty();
         $('#idAnswer').append("<option value='" + data.idAnswer + "'>" + data.desAnswer + "</option>");
 

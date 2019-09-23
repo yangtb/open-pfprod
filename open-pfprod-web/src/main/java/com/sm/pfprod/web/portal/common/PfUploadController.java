@@ -72,7 +72,7 @@ public class PfUploadController extends BaseController {
         Assert.isTrue(!file.isEmpty(), "请选择要上传文件");
         // 获取上传的文件的名称
         String originalFilename = file.getOriginalFilename();
-        String fileType = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+        String fileType = originalFilename.substring(originalFilename.lastIndexOf(".") + 1).toLowerCase();
         // 上传oss
         String fileName = UUID.randomUUID().toString().toUpperCase().replace("-", "");
         String fileTypeNum = FileTypeUtil.getFileTypeEnum(fileType);
