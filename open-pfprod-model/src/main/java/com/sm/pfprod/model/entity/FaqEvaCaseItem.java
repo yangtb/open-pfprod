@@ -5,10 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
+import java.math.BigDecimal;
 
 /**
  * 知识库_病例评估_评估项
@@ -47,7 +44,7 @@ public class FaqEvaCaseItem implements Serializable {
     /**
      * 评估项分值
      */
-    private Integer scoreEva;
+    private BigDecimal scoreEva;
 
     /**
      * 评估阶段

@@ -129,6 +129,24 @@ layui.config({
                     table.reload('answerTableId', {
                         data: data.data
                     });
+                    if (data.data && data.data.length > 0) {
+                        var tsSelected = '',
+                            num = data.data.length,
+                            v_sdEvaType = $('#sdEvaType option:selected').val();
+                        $.each(data.data, function (index, context) {
+                            if (v_sdEvaType == 1) {
+                                tsSelected += context.idInques;
+                            } else if (v_sdEvaType == 2) {
+                                tsSelected += context.idBody;
+                            } else {
+                                tsSelected += context.idInspect;
+                            }
+                            if (index < num - 1) {
+                                tsSelected += ',';
+                            }
+                        })
+                        $('#addAnswerBtn').attr('ts-selected', tsSelected);
+                    }
                     return true;
                 }
             },

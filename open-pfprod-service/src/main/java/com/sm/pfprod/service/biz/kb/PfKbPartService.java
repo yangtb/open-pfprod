@@ -96,6 +96,22 @@ public interface PfKbPartService {
     FaqMedCaseText selectKbText(Long idMedCase);
 
     /**
+     * 组件 - add评估指南
+     *
+     * @param dto
+     * @return
+     */
+    boolean saveKbGuide(FaqMedCaseGuide dto);
+
+    /**
+     * 查询评估指南
+     *
+     * @param idMedCase
+     * @return
+     */
+    FaqMedCaseGuide selectKbGuide(Long idMedCase);
+
+    /**
      * 组件 - add图片
      *
      * @param dto

@@ -21,6 +21,11 @@ public class PfDiseaseZtreeVo extends PfCommonZtreeVo implements Serializable {
     private Long idDieclass;
 
     /**
+     * 疾病id
+     */
+    private Long idDie;
+
+    /**
      * 激活标志
      */
     private String fgActive;

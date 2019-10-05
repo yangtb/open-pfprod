@@ -179,6 +179,8 @@ layui.config({
             title = '组件用例浏览';
         }
 
+        console.log(data)
+
         url += '?cdEvaAsse=' + data.cdEvaAsse + '&idEvaCase=' + data.idEvaCase
             + '&showForm=1&showBtn=1&previewFlag=' + previewFlag;
         var index = common.open(title + ' 【' + '<span style="color: red">' + data.name + '</span>】', url, 900, 460, _successFillUseCase(data));

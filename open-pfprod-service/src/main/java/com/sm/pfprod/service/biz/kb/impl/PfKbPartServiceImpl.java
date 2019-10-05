@@ -117,6 +117,24 @@ public class PfKbPartServiceImpl implements PfKbPartService {
     }
 
     @Override
+    public boolean saveKbGuide(FaqMedCaseGuide dto) {
+        CommonResult<Boolean> result = kbPartClient.saveKbGuide(BeanUtil.convert(dto, FaqMedCaseGuideParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public FaqMedCaseGuide selectKbGuide(Long idMedCase) {
+        CommonResult<FaqMedCaseGuideResult> result = kbPartClient.selectKbGuide(idMedCase);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), FaqMedCaseGuide.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
     public boolean saveKbPic(FaqMedCasePic dto) {
         CommonResult<Boolean> result = kbPartClient.saveKbPic(BeanUtil.convert(dto, FaqMedCasePicParam.class));
         if (result != null && result.getIsSuccess()) {

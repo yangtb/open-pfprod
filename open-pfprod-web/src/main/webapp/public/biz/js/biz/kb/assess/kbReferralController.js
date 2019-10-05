@@ -203,7 +203,7 @@ layui.config({
         }
     });
 
-    tableSelect.render({
+    /*tableSelect.render({
         elem: '#addAnswerBtn',
         searchKey: 'keywords',
         checkedKey: 'idDie',
@@ -236,6 +236,113 @@ layui.config({
             table.reload('answerTableId', {
                 data: oldData
             });
+        }
+    });*/
+
+
+    var setting = {
+        check: {
+            enable: true
+            , chkStyle: 'checkbox'
+            , chkboxType:{ "Y": "", "N": "" }
+        },
+
+        data: {
+            simpleData: {
+                enable: true
+            }
+        } ,
+        callback: {
+            onCheck: zTreeOnCheck
+        }
+    };
+
+    function zTreeOnCheck(event, treeId, treeNode) {
+        console.log(treeNode)
+
+        var oldData = table.cache["answerTableId"];
+        if (!oldData) {
+            //oldData = [];
+        }
+
+        var fgDieClass = treeNode.idDieclass ? '1' : '2' ,
+            idDie = treeNode.idDieclass ? treeNode.idDieclass : treeNode.idDie,
+            name = treeNode.name;
+        var selectData = {
+            idEvaCaseItem : $('#idEvaCaseItem').val(),
+            sdEvaReferral : $('#sdEvaType').val(),
+            idDie : idDie,
+            idDieText : name,
+            fgDieClass : fgDieClass
+        };
+
+        if (treeNode.checked) {
+            oldData.push(selectData);
+            table.reload('answerTableId', {
+                data: oldData
+            });
+        } else {
+            var oldDataDel = new Array();
+            $.each(oldData, function (index, context) {
+                if (context.fgDieClass == selectData.fgDieClass && context.idDie == selectData.idDie ) {
+
+                } else {
+                    oldDataDel.push(context);
+                }
+            })
+            table.reload('answerTableId', {
+                data: oldDataDel
+            });
+        }
+    };
+
+
+
+    $('#addAnswerBtn').on('click', function () {
+        popSelectDie();
+    });
+
+    function popSelectDie() {
+        var elem = $('#addAnswerBtn');
+        var t = elem.offset().top + elem.outerHeight() - 162 + "px";
+        var l = (elem.offset().left - 270) + "px";
+
+        var html = '<div id="div-select-die" class="layui-anim layui-anim-upbit" style="left:' + l + ';top:' + t + ';border: 1px solid #d2d2d2;background-color: #fff;box-shadow: 0 2px 4px rgba(0,0,0,.12);padding:10px 10px 0 0px;position: absolute;z-index:666;margin: 5px 0;border-radius: 2px;width:250px; height: 545px;">' +
+            '           <div id="treeDiv" style="overflow:auto;">\n' +
+            '               <ul id="roleTree" class="ztree"></ul>\n' +
+            '           </div>' +
+            ' </div>';
+
+        var formBox = $(html);
+        $('body').append(formBox);
+
+        var reqData = {
+            includeDie : 1
+        }
+        $.ajax({
+            url: basePath + '/pf/r/disease/catalogue/tree',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(reqData),
+            success: function (data) {
+                var zNodes = data;
+                $.fn.zTree.init($("#roleTree"), setting, zNodes);
+                return true;
+            },
+            error: function () {
+                return false;
+            }
+        });
+        $("#treeDiv").css("max-height", 545);
+
+    }
+
+    //点击其他区域关闭
+    $(document).mouseup(function (e) {
+        var userSet_con = $('#div-select-die');
+        if (!userSet_con.is(e.target) && userSet_con.has(e.target).length === 0) {
+            $('#div-select-die').remove();
         }
     });
 
@@ -317,6 +424,9 @@ layui.config({
     $('#saveAs').on('click', function () {
         layer.tips('重载成功', '#saveAs', {tips: 1});
     });
+
+
+
 
 
 });

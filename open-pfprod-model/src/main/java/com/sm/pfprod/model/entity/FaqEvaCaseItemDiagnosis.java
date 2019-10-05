@@ -38,4 +38,9 @@ public class FaqEvaCaseItemDiagnosis implements Serializable {
      */
     private String idDieText;
 
+    /**
+     * 主机板标识
+     */
+    private String fgDieMain;
+
 }

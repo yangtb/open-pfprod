@@ -60,7 +60,7 @@ layui.config({
         table.render({
             elem: '#kbTable' //指定原始表格元素选择器（推荐id选择器）
             , id: 'kbTableId'
-            , height: '558' //容器高度
+            , height: '582' //容器高度
             , cols: [[
                 {type: 'radio'},
                 {field: 'sdEva', width: 90, title: '评估阶段', templet: '#sdEvaTpl'},
@@ -130,6 +130,26 @@ layui.config({
                     table.reload('answerTableId', {
                         data: data.data
                     });
+
+                    if (data.data && data.data.length > 0) {
+                        var tsSelected = '',
+                            num = data.data.length,
+                            v_sdEvaType = $('#sdEvaType option:selected').val();
+                        $.each(data.data, function (index, context) {
+                            if (v_sdEvaType == 1) {
+                                tsSelected += context.idInques;
+                            } else if (v_sdEvaType == 2) {
+                                tsSelected += context.idBody;
+                            } else {
+                                tsSelected += context.idInspect;
+                            }
+                            if (index < num - 1) {
+                                tsSelected += ',';
+                            }
+                        })
+                        $('#addAnswerBtn').attr('ts-selected', tsSelected);
+                    }
+
                     return true;
                 }
             },
@@ -166,7 +186,7 @@ layui.config({
         if (obj.event === 'del') {
             var tableData = table.cache["answerTableId"];
             if (tableData.length == 1) {
-                layer.tips("等效答案至少一个，请先添加后再删除", obj.othis);
+                layer.msg("等效答案至少一个，请先添加后再删除");
                 return false;
             }
             if (obj.data.idEvaCaseItemList != null) {

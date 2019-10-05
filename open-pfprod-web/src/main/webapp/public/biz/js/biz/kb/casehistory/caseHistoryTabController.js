@@ -199,6 +199,9 @@ layui.config({
         if (selectData.cdMedAsse == '004' || selectData.cdMedAsse == '005' || selectData.cdMedAsse == '006') {
             url += '/pf/r/case/history/save/as/med';
         }
+        if (selectData.cdMedAsse == '010') {
+            url += '/pf/r/kb/part/guide/save';
+        }
         $.ajax({
             url: url,
             type: 'post',

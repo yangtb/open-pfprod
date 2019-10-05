@@ -9,11 +9,13 @@ layui.config({
         , formSelects = layui.formSelects;
 
     var selectArr = [];
+    var reqData = {};
     $.ajax({
         url: basePath + '/pf/r/disease/catalogue/tree',
         type: 'post',
         dataType: 'json',
         contentType: "application/json",
+        data: JSON.stringify(reqData),
         success: function (data) {
             var selectData = data;
             selectArr = toTree(selectData);

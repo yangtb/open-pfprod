@@ -40,8 +40,8 @@
         <div class="layui-col-xs7">
             <fieldset class="layui-elem-field" style="margin-top: 10px;">
             #*<legend></legend>*#
-                <div class="layui-field-box">
-                    <form class="layui-form" id="kbForm" lay-filter="kbFormFilter" style="padding-top: 10px">
+                <div class="layui-field-box" style="height: 560px;">
+                    <form class="layui-form" id="kbForm" lay-filter="kbFormFilter">
                         <div hidden>
                             <input name="idEvaCaseItem" id="idEvaCaseItem" hidden>
                             <input name="idEvaCase" id="idEvaCase" hidden>
@@ -68,7 +68,7 @@
                             </div>
                         </div>
 
-                        <div class="layui-form-item">
+                        <div class="layui-form-item form-item-my5">
                             <div class="layui-inline">
                                 <label class="layui-form-label">评估阶段<i class="iconfont icon-required"
                                                                        style="color: #f03f2d"></i></label>

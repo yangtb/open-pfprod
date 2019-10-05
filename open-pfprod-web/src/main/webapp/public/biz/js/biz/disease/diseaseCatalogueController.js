@@ -52,11 +52,13 @@ layui.config({
     var zNodes = [];
     $(document).ready(function () {
         layer.load(2);
+        var reqData = {};
         $.ajax({
             url: basePath + '/pf/r/disease/catalogue/tree',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",
+            data: JSON.stringify(reqData),
             success: function (data) {
                 layer.closeAll('loading');
                 zNodes = data;

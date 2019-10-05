@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" href="${contextPath}/public/ztree/zTreeStyle/zTreeStyle.css">
     <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
 
     <script>
@@ -118,6 +119,7 @@
     <script src="$!{contextPath}/public/layui/plugins/layui/layui.all.js"></script>
     <script src="${contextPath}/public/common/js/jquery.min.js"></script>
     <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
+    <script src="${contextPath}/public/ztree/js/jquery.ztree.all.min.js"></script>
     <script src="${contextPath}/public/biz/js/biz/kb/assess/kbAssessCommonForm.js"></script>
     <script src="${contextPath}/public/biz/js/biz/kb/assess/kbReferralController.js"></script>
     <script src="$!{contextPath}/public/common/js/js-pinyin.js"></script>

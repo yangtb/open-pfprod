@@ -132,6 +132,11 @@
             #end
     </script>
 
+    <script type="text/html" id="fgDieMainTpl">
+        <input type="checkbox" name="fgDieMain" value="{{ d.LAY_INDEX }}"
+               lay-skin="switch" lay-text="是|否" lay-filter="fgDieMainFilter" {{ d.fgDieMain== '1' ? 'checked' : '' }}>
+    </script>
+
 
     #*<script type="text/html" id="toolbarDemo">
         <div class="layui-btn-container">

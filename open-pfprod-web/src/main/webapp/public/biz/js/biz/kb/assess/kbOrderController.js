@@ -129,6 +129,32 @@ layui.config({
                     table.reload('answerTableId', {
                         data: data.data
                     });
+
+                    console.log(bizData)
+                    var sdType = bizData.sdType;
+                    if (data.data && data.data.length > 0) {
+                        var tsSelected = '',
+                            num = data.data.length;
+                        $.each(data.data, function (index, context) {
+                            console.log(context)
+                            if (sdType == '1' || sdType == '6') {
+                                tsSelected += context.idShortDrugs;
+                            } else if (sdType == '2') {
+                                tsSelected += context.sdNursRout;
+                            } else if (sdType == '3') {
+                                tsSelected += context.cdNursLevel;
+                            } else if (sdType == '4') {
+                                tsSelected += context.sdDiet;
+                            } else if (sdType == '5') {
+                                tsSelected += context.sdPosition;
+                            }
+
+                            if (index < num - 1) {
+                                tsSelected += ',';
+                            }
+                        })
+                        $('#addAnswerBtn').attr('ts-selected', tsSelected);
+                    }
                     return true;
                 }
             },
@@ -258,7 +284,7 @@ layui.config({
             tableSelect.render({
                 elem: '#addAnswerBtn',
                 //searchKey: 'keywords',
-                checkedKey: 'idDrugs',
+                checkedKey: 'dictCode',
                 //searchPlaceholder: '请输入关键字',
                 table: {
                     cols: [[
@@ -363,6 +389,7 @@ layui.config({
         });
         $('#save').click();
         $('#scoreEva').val(defaultScoreEva);
+        $('#addAnswerBtn').attr('ts-selected', '');
     });
 
     //监听工具条

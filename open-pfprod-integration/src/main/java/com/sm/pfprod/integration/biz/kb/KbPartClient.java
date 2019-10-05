@@ -59,6 +59,14 @@ public class KbPartClient {
         return pfKbPartFacade.selectKbText(idMedCase);
     }
 
+    public CommonResult<Boolean> saveKbGuide(FaqMedCaseGuideParam param) {
+        return pfKbPartFacade.saveKbGuide(param);
+    }
+
+    public CommonResult<FaqMedCaseGuideResult> selectKbGuide(Long idMedCase) {
+        return pfKbPartFacade.selectKbGuide(idMedCase);
+    }
+
     public CommonResult<Boolean> saveKbPic(FaqMedCasePicParam param) {
         return pfKbPartFacade.saveKbPic(param);
     }

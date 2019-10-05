@@ -41,10 +41,10 @@ public class PfDiseaseRestController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_BAS0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_BAS0030', 'ROLE_FAQ0020', 'ROLE_SUPER')")
     @RequestMapping(value = "/catalogue/tree", method = RequestMethod.POST)
     @ResponseBody
-    public Object listDiseaseCatalogueTree(PfCatalogueTreeDto dto) {
+    public Object listDiseaseCatalogueTree(@RequestBody PfCatalogueTreeDto dto) {
         return pfDiseaseService.listDiseaseCatalogueTree(dto);
     }
 
@@ -152,6 +152,5 @@ public class PfDiseaseRestController {
         return pfDiseaseService.delDiseaseInfo(dto) ? ResultObject.createSuccess("delDiseaseInfo", ResultObject.DATA_TYPE_OBJECT, true)
                 : ResultObject.create("delDiseaseInfo", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
     }
-
 
 }

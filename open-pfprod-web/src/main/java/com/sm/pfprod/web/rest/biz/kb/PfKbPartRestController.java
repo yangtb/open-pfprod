@@ -200,6 +200,44 @@ public class PfKbPartRestController {
     }
 
     /**
+     * 组件 - add评估指南
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PostMapping(value = "/guide/save")
+    public ResultObject saveKbGuide(@RequestBody FaqMedCaseGuide dto) {
+        /* 参数校验 */
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+
+        } else {
+            Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
+            Assert.isTrue(StringUtils.isNotBlank(dto.getGuideContent()), "guideContent");
+            Assert.isTrue(StringUtils.isNotBlank(dto.getGuideNotesUrl()), "guideNotesUrl");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("saveKbGuide", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.saveKbGuide(dto));
+    }
+
+    /**
+     * 组件 - select评估指南
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @PostMapping(value = "/guide/select")
+    public ResultObject selectKbGuide(@RequestBody FaqMedCaseGuide dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdMedCase() != null, "idMedCase");
+        return ResultObject.createSuccess("selectKbGuide", ResultObject.DATA_TYPE_OBJECT,
+                pfKbPartService.selectKbGuide(dto.getIdMedCase()));
+    }
+
+    /**
      * 组件 - add图片
      *
      * @param dto

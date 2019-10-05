@@ -182,6 +182,19 @@ public class PfKbPartController extends BaseController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
+    @RequestMapping("/define/guide/form")
+    public String guideForm(Model model, PfPartGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
+        model.addAttribute("idMedCase", dto.getIdMedCase());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("caseName", dto.getCaseName());
+        return "pages/biz/kb/part/define/guideForm";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping(value = "/cons/search")
     @ResponseBody
     public PageResult searchQuestion(PfCommonSearchDto dto) {

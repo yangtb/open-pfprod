@@ -88,6 +88,8 @@ public class PfUploadController extends BaseController {
         } else if (fileTypeNum.equals(FileTypeUtil.FileTypeEnum.VIDEO.getCode())) {
             Assert.isTrue(videoUploadType.indexOf(fileType) != -1, ErrorCode.FILE_TYPE_ERROR_CODE, "目前暂支持类型为[" + picUploadType + "]的视频文件");
             Assert.isTrue(Long.valueOf(videoMaxUploadValue) >= fileSize, ErrorCode.FILE_SIZE_ERROR_CODE, "视频文件不能超过" + Long.valueOf(videoMaxUploadValue) + "M");
+        } else if (fileTypeNum.equals(FileTypeUtil.FileTypeEnum.DOCUMENT.getCode())) {
+
         } else {
             throw new BizRuntimeException(ErrorCode.FILE_TYPE_ERROR_CODE, "不支持的文件类型");
         }
