@@ -36,8 +36,8 @@ layui.config({
             , cols: [[
                 {checkbox: true, fixed: true},
                 {field: 'fgActive', width: 100, title: '状态', templet: '#fgActiveTpl'},
-                {field: 'name', width: 130, title: '用例名称'},
-                {field: 'descript', width: 260, title: '用例描述'},
+                {field: 'name', width: 170, title: '用例名称'},
+                {field: 'descript', width: 280, title: '用例描述'},
                 {field: 'cdMedAsse', width: 140, title: '组件类型', templet: '#cdMedAsseTpl'},
                 {field: 'orgName', width: 170, title: '归属机构'},
                 {

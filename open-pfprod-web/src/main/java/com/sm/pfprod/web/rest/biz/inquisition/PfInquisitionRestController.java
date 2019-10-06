@@ -51,7 +51,7 @@ public class PfInquisitionRestController extends BaseController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_ORG_MG','ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_ORG_MG','ROLE_FAQ0010','ROLE_EXM0040','ROLE_SUPER')")
     @PostMapping(value = "/question/classify/label")
     @ResponseBody
     public List<PfTreeSelectVo> selectQuestionClassifyLabel() {

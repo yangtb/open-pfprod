@@ -86,11 +86,11 @@ layui.config({
     };
 
     //执行渲染
-    function rebderTable() {
+    function rebderTable(sdInquesLabel) {
         table.render({
             elem: '#partConsTable' //指定原始表格元素选择器（推荐id选择器）
             , id: 'partConsTableId'
-            , height: '600' //容器高度
+            , height: '580' //容器高度
             , cols: [[
                 {type: 'numbers',width: 50, title: 'R'},
                 {field: 'desInques', title: '问题'},
@@ -100,7 +100,8 @@ layui.config({
             , where: {
                 idMedicalrec: idMedicalrec,
                 cdMedAsse: cdMedAsse,
-                idTestexecResult: idTestexecResult
+                idTestexecResult: idTestexecResult,
+                sdInquesLabel : sdInquesLabel
             }
             , limit: 20
             , page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
@@ -145,21 +146,14 @@ layui.config({
                 cdMedAsse: cdMedAsse,
                 idTestexecResult: idTestexecResult,
                 extItemId: extItemId,
-                keyword: keyword
+                keyword: keyword,
+                sdInquesLabel : null
             }
-            , height: '604'
         });
     }
 
     $('#queryBtn').on('click', function () {
         _tableReload(null, $('#keyword').val())
-    });
-
-    $('.layui-col-md4').on('click', function () {
-        $('#key-tab').hide();
-        rebderTable();
-        $('#table').show();
-        $('#k').text(($(this).text().trim()));
     });
 
     $('#back').on('click', function () {
@@ -177,6 +171,43 @@ layui.config({
     form.on('checkbox(qaConsFilter)', function (obj) {
         var qaValue = this.value;
         var qaArr = qaValue.split("-");
+        var bizData = {
+            idTestexecResult: idTestexecResult,
+            idInques: qaArr[0],
+            idMedCaseList: qaArr[1],
+            fgValid: obj.elem.checked ? '0' : '1'
+        }
+
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/cons/qa/save',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    common.errorMsg(data.msg);
+                    return false;
+                } else {
+                    queryResult(bizData.idInques)
+                    if (obj.elem.checked) {
+                        $('#cons' + qaArr[1]).attr("disabled", true);
+                    }
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                common.errorMsg("网络异常");
+                return false;
+            }
+        });
+    });
+
+    form.on('checkbox(qaPreConsFilter)', function (obj) {
+        var qaValue = this.value;
+        var qaArr = qaValue.split("-");
         var data = {
             idTestexecResult: idTestexecResult,
             idInques: qaArr[0],
@@ -186,9 +217,8 @@ layui.config({
         var url = basePath + '/pf/r/waiting/room/cons/qa/save';
         common.commonPost(url, data, null, null, queryQa, false);
         if (obj.elem.checked) {
-            $('#cons' + qaArr[1]).attr("disabled", true);
+            $('#consPre' + qaArr[1]).attr("disabled", true);
         }
-
     });
 
     element.on('tab(docDemoTabBrief)', function(data){
@@ -197,7 +227,66 @@ layui.config({
     // 页面加载完成查询问答
     $(document).ready(function () {
         queryQa();
+        // 加载问诊标签
+        loadConsLabel();
     });
+
+    function loadConsLabel() {
+        $.ajax({
+            url: basePath + '/pf/r/inquisition/question/classify/label',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (data) {
+                layer.closeAll('loading');
+
+                $('#labelTab').empty();
+                $('#labelContent').empty();
+
+                if (data) {
+                    $.each(data, function (index, context) {
+                        //console.log(context);
+                        var styleTab = index == 0 ? 'layui-this' : '';
+                        $('#labelTab').append('<li class="' + styleTab + '">' + context.name + '</li>');
+                        if (context.children) {
+                            //console.log("------------------");
+                            var styleContent = index == 0 ? 'layui-show' : '';
+                            var attrContent = index == 0 ? 'id="key"' : '';
+
+                            var html = ' <div class="layui-tab-item ' + styleContent + '" ' + attrContent + '>\n';
+                            $.each(context.children, function (index, context) {
+                                console.log(context);
+                                html += '<div class="layui-col-md4" data-key="' + context.id + '">\n' +
+                                    '        <div>' + context.name + '</div>\n' +
+                                    '    </div>\n';
+
+                            });
+                            html += '    </div>';
+                            $('#labelContent').append(html);
+                            //console.log("------------------");
+                        } else {
+                            $('#labelContent').append('<div class="layui-tab-item"</div>');
+                        }
+                    });
+                }
+
+                $('.layui-col-md4').on('click', function () {
+                    var sdInquesLabel = $(this).attr("data-key");
+                    $('#key-tab').hide();
+                    rebderTable(sdInquesLabel);
+                    $('#table').show();
+                    $('#k').text(($(this).text().trim()));
+                });
+
+                return true;
+            },
+            error: function () {
+                layer.closeAll('loading');
+                common.errorMsg("查询问诊标签失败");
+                return false;
+            }
+        });
+    }
 
     $('#refreshRight').on('click', function () {
         layer.load(2);
@@ -210,6 +299,83 @@ layui.config({
     if (showExpertFlag == false) {
         showExpertFlag = sdTestexec == '2' && completedShowExpert == 'Y' ? true : false;
     }
+
+    function queryResult(idInques) {
+        // 问诊结果
+        queryQa();
+        // 查询是否有前置条件
+        queryInquesPre(idInques);
+    }
+    
+    function queryInquesPre(idInques) {
+        var bizData = {
+            idMedicalrec: idMedicalrec,
+            cdMedAsse: cdMedAsse,
+            idTestexecResult: idTestexecResult,
+            inquesPreFlag : 1,
+            idInques : idInques
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/test/cons/list',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+
+                if (!data || data.length == 0) {
+                    return true;
+                }
+
+                var elem = $('#queryBtn');
+                var t = elem.offset().top + elem.outerHeight() + "px";
+                var l = (elem.offset().left + 60) + "px";
+
+                var html =
+                    '<div id="div-pop-cons-pre" class="layui-anim layui-anim-upbit" style="left:' + l + ';top:' + t + ';border: 1px solid #d2d2d2;background-color: #fff;box-shadow: 0 2px 4px rgba(0,0,0,.12);padding:0px 0px 0 0px;position: absolute;z-index:666;margin: 5px 0;border-radius: 2px;width:450px; height: 350px;">' +
+                    '    <table id="partConsPreTable" lay-filter="partConsPreTableFilter">\n' +
+                    '    </table>' +
+                    '</div>';
+
+                var formBox = $(html);
+                $('body').append(formBox);
+
+                renderConsPreTable(data);
+
+                return true;
+
+            },
+            error: function () {
+                layer.closeAll('loading');
+                common.errorMsg("网络异常");
+                return false;
+            }
+        });
+    }
+
+    function renderConsPreTable(data) {
+        table.render({
+            elem: '#partConsPreTable' //指定原始表格元素选择器（推荐id选择器）
+            , id: 'partConsPreTableId'
+            , height: '350' //容器高度
+            , cols: [[
+                {type: 'numbers',width: 50, title: 'R'},
+                {field: 'desInques', title: '问题'},
+                {field: 'qa', width: 60, title: '提问', fixed: 'right', align: 'center', templet: '#qaPreTpl'}
+            ]] //设置表头
+            , data : data
+            , page: false
+        });
+    }
+
+    //点击其他区域关闭
+    $(document).mouseup(function (e) {
+        var userSet_con = $('#div-pop-cons-pre');
+        if (!userSet_con.is(e.target) && userSet_con.has(e.target).length === 0) {
+            $('#div-pop-cons-pre').remove();
+        }
+    });
 
     function queryQa() {
         var bizData = {

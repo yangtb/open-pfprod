@@ -61,7 +61,7 @@
                         <form class="layui-form">
                             <div style="float: right">
                                 <div class="layui-input-inline">
-                                    <button type="button" id="queryBtn">
+                                    <button type="button" id="queryBtn" style="cursor: pointer;">
                                         <span>查询</span>
                                     </button>
                                 </div>
@@ -79,76 +79,11 @@
 
                  <div class="layui-col-xs6" style="height: 604px;width: 100%">
                      <div id="key-tab" class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-                         <ul class="layui-tab-title">
-                             <li class="layui-this">现病史</li>
-                             <li>既往史</li>
-                             <li>系统回顾</li>
-                             <li>个人史</li>
-                             <li>婚育史</li>
-                             <li>月经生育史</li>
-                             <li>家族病史</li>
+                         <ul id="labelTab" class="layui-tab-title">
+
                          </ul>
-                         <div class="layui-tab-content">
-                             <div class="layui-tab-item layui-show" id="key">
-                                 <div class="layui-col-md4">
-                                     <div>发病情况</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>主要症状</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>伴随症状</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>诊断与治疗情况</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>发病以来的情况</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>其他疾病</div>
-                                 </div>
-                             </div>
-                             <div class="layui-tab-item">
-                                 <div class="layui-col-md4">
-                                     <div>健康状况</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>疾病史</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>传染病史</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>手术外伤史</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>输血史</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>食物与药敏过敏</div>
-                                 </div>
-                             </div>
-                             <div class="layui-tab-item">
-                                 <div class="layui-col-md4">
-                                     <div>呼吸系统</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>循环系统</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>消化系统</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>泌尿生殖系统</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>神经系统</div>
-                                 </div>
-                                 <div class="layui-col-md4">
-                                     <div>骨骼肌肉系统</div>
-                                 </div>
-                             </div>
+                         <div id="labelContent" class="layui-tab-content">
+
                          </div>
                      </div>
                      <div hidden id="table">
@@ -196,6 +131,10 @@
            lay-skin="primary" lay-filter="qaConsFilter" {{ d.extQa== true ? 'checked' : '' }} {{ d.extQa== true ? 'disabled' : '' }}>
 </script>
 
+<script type="text/html" id="qaPreTpl">
+    <input type="checkbox" id="consPre{{d.idMedCaseList}}" name="qa" value="{{d.idInques}}-{{d.idMedCaseList}}"
+           lay-skin="primary" lay-filter="qaPreConsFilter" {{ d.extQa== true ? 'checked' : '' }} {{ d.extQa== true ? 'disabled' : '' }}>
+</script>
 
 </body>
 

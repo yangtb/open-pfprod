@@ -14,6 +14,7 @@ import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.enums.PfSimulateCaseTypeEnum;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.enums.SysParamEnum;
+import com.sm.pfprod.model.result.PageResult;
 import com.sm.pfprod.service.biz.tests.PfTestWaitingRoomService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
@@ -82,6 +83,16 @@ public class PfTestWaitingRoomRestController extends BaseController {
 
         dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
         return ResultObject.createSuccess("startExam", ResultObject.DATA_TYPE_OBJECT, pfTestWaitingRoomService.endExam(dto));
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/test/cons/list")
+    @ResponseBody
+    public Object listTestCons(@RequestBody PfTestExamTagDto dto) {
+        dto.setPage(1);
+        dto.setLimit(100);
+        PageResult pageResult = pfTestWaitingRoomService.listTestCons(dto);
+        return pageResult.getData();
     }
 
     /**
@@ -757,4 +768,6 @@ public class PfTestWaitingRoomRestController extends BaseController {
         return ResultObject.createSuccess("listDiagnosticAnalysisDetail", ResultObject.DATA_TYPE_LIST,
                 pfTestWaitingRoomService.listDiagnosticAnalysisDetail(dto));
     }
+
+
 }

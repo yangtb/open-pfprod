@@ -51,7 +51,7 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label"></label>
             <div class="layui-input-block">
-                <input class="layui-input" lay-verify="required" lay-vertype="tips" autocomplete="off"
+                <input class="layui-input" lay-verify="required|url" lay-vertype="tips" autocomplete="off"
                        name="guideNotesUrl" id="guideNotesUrl">
             </div>
         </div>
