@@ -16,6 +16,7 @@ import com.sm.open.core.facade.model.result.pf.biz.tests.room.paper.PfTestPaperR
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.pfprod.integration.biz.tests.TestWaitingRoomClient;
+import com.sm.pfprod.model.dto.biz.exam.PfExmMedResultDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestEvaDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
@@ -118,6 +119,15 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     @Override
     public Long saveConsQa(ExmMedResultInques dto) {
         CommonResult<Long> result = testWaitingRoomClient.saveConsQa(BeanUtil.convert(dto, ExmMedResultInquesParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean editConsQa(PfExmMedResultDto dto) {
+        CommonResult<Boolean> result = testWaitingRoomClient.editConsQa(BeanUtil.convert(dto, PfExmMedResultParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
@@ -381,6 +391,15 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
         CommonResult<PfWaitingRoomDiagnosisResult> result = testWaitingRoomClient.selectDiagnosis(idTestexecResult);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convert(result.getContent(), PfWaitingRoomDiagnosisVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public ExmMedResultSummary selectSummary(Long idTestexecResult) {
+        CommonResult<ExmMedResultSummaryResult> result = testWaitingRoomClient.selectSummary(idTestexecResult);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), ExmMedResultSummary.class);
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }

@@ -55,6 +55,9 @@ layui.config({
                 keyword: keyword
             }
             , height: '604'
+            , page: {
+                curr: 1 //重新从第 1 页开始
+            }
         });
     }
 
@@ -178,7 +181,7 @@ layui.config({
             table: {
                 url: basePath + '/pf/p/waiting/room/all/referral/die'
                 , cols: [[
-                    {type: 'radio', fixed: true},
+                    {type: 'checkbox', fixed: true},
                     {field: 'name', minWidth: 160, title: '疾病名称'},
                     {field: 'cdDieclassText', minWidth: 120, title: '疾病目录'},
                     {field: 'icd', width: 80, title: 'ICD'}
@@ -190,15 +193,23 @@ layui.config({
                 , page: false
             },
             done: function (elem, data) {
-                var selectData = data.data[0];
-                $('#nz' + id).attr('data-index', selectData.idDie)
-                $('#nz' + id).text(selectData.name);
+                var nameArr = [],  idArr = []
+                layui.each(data.data, function (index, item) {
+                    nameArr.push(item.name)
+                    idArr.push(item.idDie)
+                })
+                var idStr = idArr.join(",");
+                var nameStr = nameArr.join(",");
+                elem.attr('data-index', idStr)
+                elem.attr('ts-selected', idStr)
+                elem.text(nameStr)
+
                 // if check
                 if ($('#nz' + id).attr('data-qa-check') == 'true') {
                     var bizData = {
                         idTestexecResult: idTestexecResult,
                         idMedCaseList: id,
-                        idDie: selectData.idDie
+                        idDie: idStr
                     }
                     var url = basePath + '/pf/r/waiting/room/check/qa/edit';
                     common.commonPost(url, bizData, null, null, null, false);
@@ -231,6 +242,8 @@ layui.config({
                 idTestexecResult: idTestexecResult,
                 //extItemId: null,
                 keyword: ''
+            }, page: {
+                curr: 1 //重新从第 1 页开始
             }
         });
     };
@@ -380,6 +393,94 @@ layui.config({
         var objDiv = document.getElementById("autoScroll");
         objDiv.scrollTop = objDiv.scrollHeight;
 
+        $('.cons-reply').on('click', function () {
+            var idTestexecResultBody = this.getAttribute("data-index");
+            var desExpert = this.getAttribute("data-expert");
+
+            layer.prompt({title: '<strong>解释患者回复</strong>', formType: 2}, function(text, index){
+                layer.close(index);
+                editExmMedResultBody(idTestexecResultBody, '', text, desExpert);
+            });
+        })
+
+        registerexpertLinkEvent();
+    }
+
+    function editExmMedResultBody(id, desReason, desReply, desExpert) {
+        var bizData = {
+            id : id,
+            desReason : desReason,
+            desReply : desReply,
+            type : 2
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/qa/edit',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    layer.msg(data.msg);
+                    return false;
+                } else {
+                    if (desReason) {
+                        $('#reason-' + id).empty();
+
+                        var html =
+                            "                           <div style='background-color: #F2F2F2; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
+                            "                               <div style='font-weight: bold; padding: 2px;'>● 问诊理由</div>\n" +
+                            "                               <div>" + desReason + "</div>\n" +
+                            "                           </div>\n";
+                        $('#reason-' + id).append(html);
+                    }
+                    if (desReply) {
+                        $('#reply-' + id).empty();
+
+                        var html =
+                            "                           <div style='background-color: #F2F2F2; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
+                            "                               <div style='font-weight: bold; padding: 2px;'>● 解释患者的回复</div>\n" +
+                            "                               <div>" + desReply + "</div>\n" +
+                            "                           </div>\n";
+                        if (desExpert) {
+                            html +=
+                                '                           <div style="margin-top: 10px;"><a class="expertLink" data-index="' + id + '" href="javascript:;" style="color: #009688; text-decoration: underline;">专家解读？</a></div>\n';
+                            html +=
+                                "                           <div id='expert-div-" + id + "' style='background-color: #F2F2F2; display: none; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
+                                "                               <div style='font-weight: bold; padding: 2px;'>● 专家解读</div>\n" +
+                                "                               <div>" + desExpert + "</div>\n" +
+                                "                           </div>\n";
+                        }
+                        $('#reply-' + id).append(html);
+
+                        if (desExpert) {
+                            registerexpertLinkEvent();
+                        }
+                    }
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                layer.msg("网络异常");
+                return false;
+            }
+        });
+    }
+
+    function registerexpertLinkEvent() {
+        $('.expertLink').on('click', function () {
+            var idTestexecResultBody = this.getAttribute("data-index");
+            //alert(idTestexecResultBody)
+
+            if ($("#reply-btn-" + idTestexecResultBody).length > 0) {
+                $('#reply-btn-' + idTestexecResultBody).addClass("layui-btn-disabled");
+                $('#reply-btn-' + idTestexecResultBody).attr("disabled", "disabled");
+            }
+            $(this).hide();
+            $('#expert-div-' + idTestexecResultBody).css("display","block");
+        })
     }
 
     function appendQaNormalHtml(data) {
@@ -411,6 +512,7 @@ layui.config({
                 patientVar = '<span>' + data.desResult + '</span>\n';
         }
 
+        console.log(data)
         var html = "                <li>\n" +
             "                    <div class='chat'>\n" +
             "                        <div style='overflow: hidden'>\n" +
@@ -430,7 +532,37 @@ layui.config({
             patientVar
             +
             "                            </div>\n" +
-            "                        </div>\n" +
+            "                        </div>\n";
+
+        var expertFlag = data.desExpert ? '1' : '0';
+        var replyStyle = data.fgBack == '1' || data.desReply ? 'padding-top: 10px;' : '';
+        html +=
+            "                        <div  id='reply-" + data.idTestexecResultBody + "' style='padding-left: 45px; " + replyStyle + "'>\n";
+        if (data.fgBack == '1' && !data.desReply) {
+            html +=
+                '                            <button id="reply-btn-' + data.idTestexecResultBody + '" data-index="' + data.idTestexecResultBody + '" data-expert="' + data.desExpert + '" class="layui-btn layui-btn-xs layui-btn-radius cons-reply" style="background-color: #999999">解释患者的回复</button>\n';
+        }
+        if (data.desReply) {
+            html +=
+                "                           <div style='background-color: #F2F2F2; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
+                "                               <div style='font-weight: bold; padding: 2px;'>● 解释患者的回复</div>\n" +
+                "                               <div>" + data.desReply + "</div>\n" +
+                "                           </div>\n";
+        }
+        if (expertFlag == '1') {
+            html +=
+                '                           <div style="margin-top: 10px;"><a class="expertLink" data-index="' + data.idTestexecResultBody + '" href="javascript:;" style="color: #009688; text-decoration: underline;">专家解读？</a></div>\n';
+            html +=
+                "                           <div id='expert-div-" + data.idTestexecResultBody + "' style='background-color: #F2F2F2; display: none; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
+                "                               <div style='font-weight: bold; padding: 2px;'>● 专家解读</div>\n" +
+                "                               <div>" + data.desExpert + "</div>\n" +
+                "                           </div>\n";
+        }
+
+        html +=
+            "                        </div>\n";
+        
+        html +=
             "                    </div>\n" +
             "                </li>";
 
@@ -518,6 +650,76 @@ layui.config({
 
         return html;
     }
+
+
+    $("#gooey-v").gooeymenu({
+        bgColor: "#009688",
+        contentColor: "white",
+        style: "vertical",
+        horizontal: {
+            menuItemPosition: "glue"
+        },
+        vertical: {
+            menuItemPosition: "spaced",
+            direction: "up"
+        },
+        circle: {
+            radius: 90
+        },
+        margin: "small",
+        size: 50,
+        bounce: true,
+        bounceLength: "small",
+        transitionStep: 100,
+        hover: "#44AAA0"
+    });
+
+    $('.gooey-menu-item').on('click', function () {
+        var type = this.getAttribute("data-type");
+        if (type == 1) {
+            // 拟诊
+        }
+        if (type == 2) {
+            // 病情描述
+            var bizData = {
+                idTestexecResult: idTestexecResult
+            };
+            $.ajax({
+                url: basePath + '/pf/r/waiting/room/summary/select',
+                type: 'post',
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(bizData),
+                success: function (data) {
+                    if (data.code != 0) {
+                        layer.msg(data.msg);
+                        return false;
+                    } else {
+                        layer.prompt({
+                                title: '<strong>体检小结</strong>',
+                                formType: 2,
+                                anim: 2,
+                                value: data.data.desConditionPe,
+                                offset: [$(window).height() - 300, 100]
+                            },
+                            function (text, index) {
+                                layer.close(index);
+
+                                var bizData = {
+                                    idTestexecResult: idTestexecResult,
+                                    desConditionPe: text
+                                }
+                                common.commonPost(basePath + '/pf/r/waiting/room/summary/save', bizData, '保存', null, null);
+                            });
+                    }
+                },
+                error: function () {
+                    layer.msg("网络异常");
+                    return false;
+                }
+            });
+        }
+    });
 
 });
 

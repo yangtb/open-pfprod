@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="${contextPath}/public/ztree/zTreeStyle/zTreeStyle.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
     <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/css/service.css">
+    <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/common/css/gooey.min.css">
 
     <script>
         var basePath = '$!{basePath}';
@@ -118,13 +119,28 @@
         </div>
     </div>
 
+    <div style="float: right; padding-bottom: 250px; margin-top: -100px; z-index: 999999;">
+        <nav id="gooey-v" style="width: 90px; padding-bottom: 100px;">
+            <input type="checkbox" class="menu-open" name="menu-open4" id="menu-open4" />
+            <label class="open-button" for="menu-open4">
+                <span class="burger burger-1"></span>
+                <span class="burger burger-2"></span>
+                <span class="burger burger-3"></span>
+            </label>
+            <a href="#" class="gooey-menu-item" data-type="1"><span>拟诊</span></a>
+            <a href="#" class="gooey-menu-item" data-type="2"><p style="margin: -10px">病情</p><p style="margin: -30px">描述</p></a>
+        </nav>
+    </div>
+
 </div>
 
 
 <script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/ztree/js/jquery.ztree.core.js"></script>
+<script src="$!{contextPath}/public/common/js/gooey.min.js"></script>
 <script src="$!{contextPath}/public/biz/js/biz/tests/room/exec/execConsController.js"></script>
+
 
 <script type="text/html" id="qaTpl">
     <input type="checkbox" id="cons{{d.idMedCaseList}}" name="qa" value="{{d.idInques}}-{{d.idMedCaseList}}"

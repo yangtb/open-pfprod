@@ -1,5 +1,6 @@
 package com.sm.pfprod.service.biz.tests;
 
+import com.sm.pfprod.model.dto.biz.exam.PfExmMedResultDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestEvaDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
@@ -96,6 +97,14 @@ public interface PfTestWaitingRoomService {
      * @return
      */
     Long saveConsQa(ExmMedResultInques dto);
+
+    /**
+     * 问诊 - 编辑问答问题
+     *
+     * @param dto
+     * @return
+     */
+    boolean editConsQa(PfExmMedResultDto dto);
 
     /**
      * 问诊 - 线索标志
@@ -331,6 +340,14 @@ public interface PfTestWaitingRoomService {
      * @return
      */
     PfWaitingRoomDiagnosisVo selectDiagnosis(Long idTestexecResult);
+
+    /**
+     * 查询诊断小结
+     *
+     * @param idTestexecResult 病例结果ID
+     * @return
+     */
+    ExmMedResultSummary selectSummary(Long idTestexecResult);
 
     /**
      * 查询已做问诊、检查、检验

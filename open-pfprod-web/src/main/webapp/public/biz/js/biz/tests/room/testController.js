@@ -14,7 +14,7 @@ layui.config({
     var isEnterReferral = false;
 
     //固定块
-    util.fixbar({
+    /*util.fixbar({
         bar1: '<i class="icon-uniE907" style="font-size: 30px;"></i><span id="nzImg" style="display: block;margin-top: -32px;"></span>'
         , css: {right: 60, bottom: 60}
         , bgcolor: '#378D7E'
@@ -43,8 +43,8 @@ layui.config({
                 let $returnBut = $("#returnBut");
                 $returnBut.show();
 
-                /*let $nextStepDiv = $('#nextStepDiv');
-                $nextStepDiv.hide();*/
+                /!*let $nextStepDiv = $('#nextStepDiv');
+                $nextStepDiv.hide();*!/
                 isEnterReferral = true;
 
                 $returnBut.on('click', function () {
@@ -62,10 +62,11 @@ layui.config({
                     isEnterReferral = false;
                 });
 
-                /*common.open('拟诊', s, 850, 450);*/
+                /!*common.open('拟诊', s, 850, 450);*!/
             }
+
         }
-    });
+    });*/
 
     window.onload = clockInit();
 

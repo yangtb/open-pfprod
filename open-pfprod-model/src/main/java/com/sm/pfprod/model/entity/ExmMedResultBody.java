@@ -39,7 +39,7 @@ public class ExmMedResultBody implements Serializable {
     /**
      * 拟诊id
      */
-    private Long idDie;
+    private String idDie;
 
     /**
      * 检查明细ID

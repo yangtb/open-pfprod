@@ -56,4 +56,14 @@ public class ExmMedResultInques implements Serializable {
      */
     private Date gmtCreate;
 
+    /**
+     * 说明理由
+     */
+    private String desReason;
+
+    /**
+     * 解释患者的回复
+     */
+    private String desReply;
+
 }

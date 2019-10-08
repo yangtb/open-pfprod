@@ -255,7 +255,7 @@ layui.config({
 
                             var html = ' <div class="layui-tab-item ' + styleContent + '" ' + attrContent + '>\n';
                             $.each(context.children, function (index, context) {
-                                console.log(context);
+                                //console.log(context);
                                 html += '<div class="layui-col-md4" data-key="' + context.id + '">\n' +
                                     '        <div>' + context.name + '</div>\n' +
                                     '    </div>\n';
@@ -461,6 +461,103 @@ layui.config({
 
         var objDiv = document.getElementById("autoScroll");
         objDiv.scrollTop = objDiv.scrollHeight;
+
+        //添加按钮点击事件
+        $('.cons-reason').on('click', function () {
+            var idTestexecResultInques = this.getAttribute("data-index");
+            layer.prompt({title: '<strong>检查理由</strong>', formType: 2}, function(text, index){
+                layer.close(index);
+                editExmMedResultInques(idTestexecResultInques, text, '');
+            });
+        })
+
+        $('.cons-reply').on('click', function () {
+            var idTestexecResultInques = this.getAttribute("data-index");
+            var desExpert = this.getAttribute("data-expert");
+
+            layer.prompt({title: '<strong>解释患者回复</strong>', formType: 2}, function(text, index){
+                layer.close(index);
+                editExmMedResultInques(idTestexecResultInques, '', text, desExpert);
+            });
+        })
+
+        registerexpertLinkEvent();
+    }
+    function editExmMedResultInques(id, desReason, desReply, desExpert) {
+        var bizData = {
+            id : id,
+            desReason : desReason,
+            desReply : desReply,
+            type : 1
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/qa/edit',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    layer.msg(data.msg);
+                    return false;
+                } else {
+                    if (desReason) {
+                        $('#reason-' + id).empty();
+
+                        var html =
+                            "                           <div style='background-color: #F2F2F2; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
+                            "                               <div style='font-weight: bold; padding: 2px;'>● 问诊理由</div>\n" +
+                            "                               <div>" + desReason + "</div>\n" +
+                            "                           </div>\n";
+                        $('#reason-' + id).append(html);
+                    }
+                    if (desReply) {
+                        $('#reply-' + id).empty();
+
+                        var html =
+                            "                           <div style='background-color: #F2F2F2; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
+                            "                               <div style='font-weight: bold; padding: 2px;'>● 解释患者的回复</div>\n" +
+                            "                               <div>" + desReply + "</div>\n" +
+                            "                           </div>\n";
+                        if (desExpert) {
+                            html +=
+                                '                           <div style="margin-top: 10px;"><a class="expertLink" data-index="' + id + '" href="javascript:;" style="color: #009688; text-decoration: underline;">专家解读？</a></div>\n';
+                            html +=
+                                "                           <div id='expert-div-" + id + "' style='background-color: #F2F2F2; display: none; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
+                                "                               <div style='font-weight: bold; padding: 2px;'>● 专家解读</div>\n" +
+                                "                               <div>" + desExpert + "</div>\n" +
+                                "                           </div>\n";
+                        }
+                        $('#reply-' + id).append(html);
+
+                        if (desExpert) {
+                            registerexpertLinkEvent();
+                        }
+                    }
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                layer.msg("网络异常");
+                return false;
+            }
+        });
+    }
+
+    function registerexpertLinkEvent() {
+        $('.expertLink').on('click', function () {
+            var idTestexecResultInques = this.getAttribute("data-index");
+            //alert(idTestexecResultInques)
+
+            if ($("#reply-btn-" + idTestexecResultInques).length > 0) {
+                $('#reply-btn-' + idTestexecResultInques).addClass("layui-btn-disabled");
+                $('#reply-btn-' + idTestexecResultInques).attr("disabled", "disabled");
+            }
+            $(this).hide();
+            $('#expert-div-' + idTestexecResultInques).css("display","block");
+        })
     }
 
     function appendQaNormalHtml(data) {
@@ -496,26 +593,77 @@ layui.config({
                 patientVar = begin + data.desAnswer + '</span>\n';
         }
 
-        var html = "                <li>\n" +
+        //console.log(data)
+        var html = "           <li>\n" +
             "                    <div class='chat'>\n" +
             "                        <div style='overflow: hidden'>\n" +
             "                            <div style='float: left '>\n" +
-            '                           <img src=' + basePath + '/public/layui/build/images/chat.png alt="">\n' +
+            '                            <img src=' + basePath + '/public/layui/build/images/chat.png alt="">\n' +
             "                                <span>【医生】</span>\n" +
             "                            </div>\n" +
             "                            <div style='float: left;  width:70%'>\n" +
             '                               <span>' + data.desInques + '</span>\n' +
             "                            </div>\n" +
-            "                        </div>\n" +
+            "                        </div>\n";
+
+        var reasonStyle = data.fgReason == '1' || data.desReason ? 'padding-top: 10px;' : '';
+        html +=
+            "                        <div id='reason-" + data.idTestexecResultInques + "' style='padding-left: 45px; " + reasonStyle + "'>\n";
+        if (data.fgReason == '1' && !data.desReason) {
+            html +=
+            '                           <button data-index="' + data.idTestexecResultInques + '" class="layui-btn layui-btn-xs layui-btn-radius cons-reason" style="background-color: #999999">请输入问诊理由</button>\n';
+        }
+        if (data.desReason) {
+            html +=
+            "                           <div style='background-color: #F2F2F2; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
+            "                               <div style='font-weight: bold; padding: 2px;'>● 问诊理由</div>\n" +
+            "                               <div>" + data.desReason + "</div>\n" +
+            "                           </div>\n";
+        }
+
+        html +=
+            "                        </div>\n";
+
+        html += 
             "                        <div style='margin-left: 41px; margin-top: 7px; overflow: hidden'>\n" +
             "                            <div style='float: left'>\n" +
             "                                <span>【患者】</span>\n" +
             "                            </div>\n" +
             "                            <div style='float: left; width: 70%'>\n" +
-            patientVar
-            +
+            patientVar +
             "                            </div>\n" +
-            "                        </div>\n" +
+            "                        </div>\n";
+
+
+        var expertFlag = data.desExpert ? '1' : '0';
+        var replyStyle = data.fgBack == '1' || data.desReply ? 'padding-top: 10px;' : '';
+        html +=
+            "                        <div  id='reply-" + data.idTestexecResultInques + "' style='padding-left: 45px; " + replyStyle + "'>\n";
+        if (data.fgBack == '1' && !data.desReply) {
+            html +=
+                '                            <button id="reply-btn-' + data.idTestexecResultInques + '" data-index="' + data.idTestexecResultInques + '" data-expert="' + data.desExpert + '" class="layui-btn layui-btn-xs layui-btn-radius cons-reply" style="background-color: #999999">解释患者的回复</button>\n';
+        }
+        if (data.desReply) {
+            html +=
+                "                           <div style='background-color: #F2F2F2; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
+                "                               <div style='font-weight: bold; padding: 2px;'>● 解释患者的回复</div>\n" +
+                "                               <div>" + data.desReply + "</div>\n" +
+                "                           </div>\n";
+        }
+        if (expertFlag == '1') {
+            html +=
+                '                           <div style="margin-top: 10px;"><a class="expertLink" data-index="' + data.idTestexecResultInques + '" href="javascript:;" style="color: #009688; text-decoration: underline;">专家解读？</a></div>\n';
+            html +=
+                "                           <div id='expert-div-" + data.idTestexecResultInques + "' style='background-color: #F2F2F2; display: none; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
+                "                               <div style='font-weight: bold; padding: 2px;'>● 专家解读</div>\n" +
+                "                               <div>" + data.desExpert + "</div>\n" +
+                "                           </div>\n";
+        }
+
+        html +=
+            "                        </div>\n";
+
+        html +=  
             "                    </div>\n" +
             "                </li>";
 
@@ -604,6 +752,77 @@ layui.config({
 
         return html;
     }
+
+
+    $("#gooey-v").gooeymenu({
+        bgColor: "#009688",
+        contentColor: "white",
+        style: "vertical",
+        horizontal: {
+            menuItemPosition: "glue"
+        },
+        vertical: {
+            menuItemPosition: "spaced",
+            direction: "up"
+        },
+        circle: {
+            radius: 90
+        },
+        margin: "small",
+        size: 50,
+        bounce: true,
+        bounceLength: "small",
+        transitionStep: 100,
+        hover: "#44AAA0"
+    });
+
+    $('.gooey-menu-item').on('click', function () {
+        var type = this.getAttribute("data-type");
+        if (type == 1) {
+            // 拟诊
+        }
+        if (type == 2) {
+            // 病情描述
+            var bizData = {
+                idTestexecResult: idTestexecResult
+            };
+            $.ajax({
+                url: basePath + '/pf/r/waiting/room/summary/select',
+                type: 'post',
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(bizData),
+                success: function (data) {
+                    if (data.code != 0) {
+                        layer.msg(data.msg);
+                        return false;
+                    } else {
+                        layer.prompt({
+                                title: '<strong>病情描述</strong>',
+                                formType: 2,
+                                anim: 2,
+                                value: data.data.desConditionHpi,
+                                offset: [$(window).height() - 300, 100]
+                            },
+                            function (text, index) {
+                                layer.close(index);
+
+                                var bizData = {
+                                    idTestexecResult: idTestexecResult,
+                                    desConditionHpi: text
+                                }
+                                common.commonPost(basePath + '/pf/r/waiting/room/summary/save', bizData, '保存', null, null);
+                            }
+                        );
+                    }
+                },
+                error: function () {
+                    layer.msg("网络异常");
+                    return false;
+                }
+            });
+        }
+    });
 
 });
 

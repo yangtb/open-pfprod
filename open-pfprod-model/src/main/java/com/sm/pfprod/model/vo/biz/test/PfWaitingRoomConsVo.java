@@ -57,4 +57,23 @@ public class PfWaitingRoomConsVo implements Serializable {
      */
     private String path;
 
+    /**
+     * 是否需要说明理由
+     */
+    private String fgReason;
+
+    /**
+     * 是否根据病人回答反馈
+     */
+    private String fgBack;
+
+    /**
+     * 说明理由
+     */
+    private String desReason;
+
+    /**
+     * 解释患者的回复
+     */
+    private String desReply;
 }

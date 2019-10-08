@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>模拟候诊</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="../../../../../public/biz/css/common.css">
+
+    <style>
+        .center {
+            margin: 0 auto;
+        }
+
+        p {
+            font-family: MicrosoftYaHei;
+            font-weight: 400;
+            font-size: 14px;
+            text-align: center;
+            color: #666666;
+        }
+
+        #countDown {
+            color: red;
+            font-size: 24px;
+        }
+
+        #comeBack {
+            width: 141px;
+            height: 40px;
+            background: rgba(55, 141, 126, 1);
+            text-align: center;
+            border-radius: 4px;
+            margin: 25px auto;
+            display: block;
+            font-weight: 400;
+            color: rgba(255,255,255,1);
+            font-size: 14px;
+            font-family: MicrosoftYaHei;
+            border: none;
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+<body id="container">
+<div>
+    <div class="center" style="width: 100px; margin-top: 40px"><i class="icon-success"></i></div>
+    <h1 style="text-align: center">交卷成功</h1>
+    <p>已成功交卷, <span id="countDown">&nbsp;3</span>后跳转至候诊室</p>
+
+    <button id="comeBack" onclick="comeBack()">
+        后跳转至候诊室
+    </button>
+</div>
+
+<script>
+
+    let count = 4;
+    let countDown = document.getElementById('countDown');
+    let close = window.parent.document.getElementsByClassName("layui-this")[0].getElementsByTagName("i");
+    let z = window.parent.document.getElementsByClassName("layui-layer-close2")[0];
+    var clickFlag = true;
+    z.addEventListener('click', function () {
+        if (clickFlag) {
+            clickFlag = false
+            comeBack();
+        }
+    })
+
+    let timer = null;
+
+    function counter() {
+        if (count > 0) {
+            countDown.innerHTML=--count;
+            timer = setTimeout(counter, 1000);
+        }else {
+            comeBack();
+        }
+    };
+
+    counter();
+
+    function comeBack() {
+        if (timer !== null) {
+            clearTimeout(timer);
+        }
+
+        if (clickFlag) {
+            clickFlag = false
+            z.click();
+        }
+
+        let tabs = window.parent.document.getElementsByClassName("layui-tab-title")[0].getElementsByTagName("li");
+        for (var j = 0, len = tabs.length; j < len; j++) {
+            let tab = tabs[j].getElementsByTagName("span")[0];
+            if (tab !== undefined) {
+                if (tab.innerText === "学生模拟候诊室") {
+                    tabs[j].click();
+                }
+
+            }
+        }
+
+        close[0].click();
+        window.parent.document.getElementsByClassName("layui-icon-refresh-3")[0].click();
+
+    }
+</script>
+
+</body>
+
+</html>

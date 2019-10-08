@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>模拟候诊室</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/style/admin.css" media="all">
+    <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
+
+    <script>
+        var basePath = '$!{basePath}';
+    </script>
+
+    <style>
+        .layout-flex-self {
+            display: flex;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            margin-top: 25px;
+            border-radius: 50%;
+        }
+
+        .d-flex {
+            overflow: auto;
+            margin-left: 30px;
+            flex-direction: column;
+            position: relative;
+        }
+
+        span {
+            word-wrap: break-word;
+        }
+
+        .status-float {
+            right: 0px;
+            color: #009688;
+            width: 50px;
+            height: 24px;
+            opacity: 0.5;
+            position: absolute;
+            font-size: 12px;
+            text-align: center;
+            border-radius: 25px;
+            background-color: #ffffff;
+            margin-right: 10px;
+        }
+
+        .bg-diagnosing {
+            color: #ffffff;
+            background-color: #D59F5E;
+        }
+
+        .color-diagnosing-status {
+            color: #D59F5E;
+            width: 60px;
+        }
+
+        .title {
+            width:80px;
+            height:20px;
+            font-size:20px;
+            font-family:MicrosoftYaHei-Bold;
+            font-weight:bold;
+            color:rgba(51,51,51,1);
+            padding-top: 0;
+            margin-bottom: 3px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+    <p class="title">患者列表</p>
+
+
+        <button id="test" type="button" class="layui-btn layui-btn-normal"
+                lay-href="" style="display: none">
+            <i class="iconfont icon-monikaoshi"></i><span id="patName"></span>:模拟就诊
+        </button>
+
+
+        #foreach($!element in $!result)
+            <div class="layui-col-md4">
+                <div class="layui-card">
+                    <div class="layui-card-body
+                                #if($!{element.status} == 0)
+                                    layui-bg-green
+                                #elseif($!{element.status} == 1 )
+                                    bg-diagnosing
+                                #end">
+                        <div class="layout-flex-self">
+                            <div>
+                                <img src="https://jiayiyixue.oss-cn-beijing.aliyuncs.com/582BD4D0DFBB4236BBF296D2A0ED46E7.jpg">
+                            </div>
+
+                            <div class="d-flex flex-column">
+                                <div>
+                                    <span>姓名：</span>
+                                    <span>$!element.patName</span>
+                                </div>
+                                <div>
+                                    <span>性别：</span>
+                                    <span>
+                                        #if($!{element.patSex} == 2)
+                                            女
+                                        #elseif($!{element.patSex} == 1 )
+                                            男
+                                        #end
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>年龄：</span>
+                                    <span>$!element.patAge</span>
+                                </div>
+                                <div style="height: 70px">
+                                    <span>患者主诉：</span>
+                                    <span>$!element.complaint</span>
+                                </div>
+                            </div>
+
+                            #if($!{element.status} == 0)
+                                <span class="status-float">
+                                    待接诊
+                                </span>
+                            #elseif($!{element.status} == 1 )
+                                <span class="status-float color-diagnosing-status">
+                                    正在接诊
+                                </span>
+                            #end
+
+                            <input class="$!element.idTestplanDetail" value="$!element.idDemo" hidden>
+                            <input class="$!element.idTestplanDetail" value="$!element.idTestplan" hidden>
+                            <input class="$!element.idTestplanDetail" value="$!element.idStudent" hidden>
+                            <input class="$!element.idTestplanDetail" value="$!element.idTestpaper" hidden>
+                            <input class="$!element.idTestplanDetail" value="$!element.idMedicalrec" hidden>
+                            <input class="$!element.idTestplanDetail" value="$!element.patName" hidden>
+                            <input class="$!element.idTestplanDetail" value="$!element.patSex" hidden>
+                            <input class="$!element.idTestplanDetail" value="$!element.patAge" hidden>
+                            <input class="$!element.idTestplanDetail" value="$!element.complaint" hidden>
+                            <input class="$!element.idTestplanDetail" value="$!element.idMedCase" hidden>
+
+                        </div>
+                    </div>
+                    <div class="layui-card-header">
+                        <button class="layui-btn layui-btn-primary layui-btn-fluid receivePat" style="border:none" value="$!element.idTestplanDetail">
+                            #if($!{element.status} == 0)
+                                    待接诊
+                            #elseif($!{element.status} == 1 )
+                                    继续接诊
+                            #end
+                        </button>
+                    </div>
+                </div>
+            </div>
+        #end
+
+
+</div>
+
+<script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="$!{contextPath}/public/biz/js/biz/tests/room/studentRoomPage.js"></script>
+
+</body>
+
+</html>

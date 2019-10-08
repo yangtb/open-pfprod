@@ -177,7 +177,7 @@ layui.define(['layer'], function (exports) {
                                 layer.tips(msg + "成功", selectId);
                             }
                         } else {
-                            common.sucChildMsg(msg + "成功");
+                            layer.msg(msg + "成功");
                         }
                         if (callback) {
                             callback(data);

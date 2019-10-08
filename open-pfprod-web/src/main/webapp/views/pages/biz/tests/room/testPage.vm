@@ -133,10 +133,10 @@
                 #end
             </div>
 
-            <div id="suspend-box" class="suspend">
+            #*<div id="suspend-box" class="suspend">
                 <div class="suspend-text">点击此处可添加拟诊</div>
                 <div class="triangle"></div>
-            </div>
+            </div>*#
 
         </div>
         <!-- 主体内容 end -->

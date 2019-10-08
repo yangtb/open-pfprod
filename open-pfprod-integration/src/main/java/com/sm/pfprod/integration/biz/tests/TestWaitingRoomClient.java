@@ -57,6 +57,10 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.saveConsQa(param);
     }
 
+    public CommonResult<Boolean> editConsQa(PfExmMedResultParam param) {
+        return pfTestWaitingRoomFacade.editConsQa(param);
+    }
+
     public CommonResult<Boolean> updateConsStatus(PfBachChangeStatusParam param) {
         return pfTestWaitingRoomFacade.updateConsStatus(param);
     }
@@ -171,6 +175,10 @@ public class TestWaitingRoomClient {
 
     public CommonResult<PfWaitingRoomDiagnosisResult> selectDiagnosis(Long idTestexecResult) {
         return pfTestWaitingRoomFacade.selectDiagnosis(idTestexecResult);
+    }
+
+    public CommonResult<ExmMedResultSummaryResult> selectSummary(Long idTestexecResult) {
+        return pfTestWaitingRoomFacade.selectSummary(idTestexecResult);
     }
 
     public CommonResult<List<PfWaitingRoomDieReasonResult>> listReadyDieReason(Long idTestexecResult, String keyword) {

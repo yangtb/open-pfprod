@@ -5,6 +5,7 @@ import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
 import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.Assert;
+import com.sm.pfprod.model.dto.biz.exam.PfExmMedResultDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestEvaDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
@@ -112,6 +113,23 @@ public class PfTestWaitingRoomRestController extends BaseController {
 
         return ResultObject.createSuccess("saveConsQa", ResultObject.DATA_TYPE_OBJECT,
                 pfTestWaitingRoomService.saveConsQa(dto));
+    }
+
+    /**
+     * 修改
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/qa/edit")
+    @ResponseBody
+    public ResultObject editConsQa(@RequestBody PfExmMedResultDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getId() != null, "id");
+
+        return ResultObject.createSuccess("editConsQa", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.editConsQa(dto));
     }
 
     /**
@@ -547,6 +565,22 @@ public class PfTestWaitingRoomRestController extends BaseController {
         Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
         return ResultObject.createSuccess("selectDiagnosis", ResultObject.DATA_TYPE_OBJECT,
                 pfTestWaitingRoomService.selectDiagnosis(dto.getIdTestexecResult()));
+    }
+
+    /**
+     * 查询诊断小结
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/summary/select")
+    @ResponseBody
+    public ResultObject selectSummary(@RequestBody PfTestExamTagDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("selectSummary", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.selectSummary(dto.getIdTestexecResult()));
     }
 
     /**

@@ -1,0 +1,188 @@
+.support-check {
+    height: 660px;
+    border: 1px solid rgba(239, 241, 244, 1);
+    padding-left: 13px;
+}
+
+.item-style {
+    width:74px;
+    height:32px;
+    background:rgba(255,255,255,1);
+    border:1px solid rgba(204,204,204,1);
+    border-radius:4px;
+    text-align: center;
+    text-align-last:center;
+    margin-right: 6px;
+}
+
+#body-img {
+    width: 100%;
+    height: 650px;
+}
+
+#img-box {
+    position: relative;
+    width: 216px;
+    height: 650px;
+    bottom: 230px;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+#switch-text {
+    width: 24px;
+    height: 12px;
+    font-size: 12px;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    color: rgba(255,255,255,1);
+}
+
+#switch-but {
+    width: 36px;
+    border: none;
+    height: 24px;
+    position: absolute;
+    background: rgba(55, 141, 126, 1);
+    margin-left: 17px;
+    margin-right: 20px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    bottom: 10px;
+    right: 10px;
+}
+
+#switch-but:before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0px;
+    left: -19px;
+    margin-left: -5px;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    border-width: 12px;
+    border-style: solid;
+    border-color: #ffffff #378D7E #ffffff #ffffff;
+}
+
+#operation {
+    width: 65px;
+    height: 500px;
+    margin: 30px 10px;
+    cursor: pointer;
+}
+
+#operation li{
+    width: 60px;
+    height: 60px;
+    background-color: #378D7E;
+    border-radius: 50%;
+    margin-top: 5px;
+    line-height: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+#operation li:hover div{
+    background-color: #fff;
+    color: #666666;
+}
+
+#operation li div span{
+    display: block;
+    text-align: center;
+    font-size: 14px;
+}
+
+.spot-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    position: absolute;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.head {
+    top: 37px;
+    left: 95px;
+}
+
+.neck {
+    top: 81px;
+    left: 95px;
+}
+
+.shoulder {
+    top: 115px;
+    left: 29px;
+}
+
+.breast {
+    top: 150px;
+    left: 92px;
+}
+
+.stomach {
+    top: 230px;
+    left: 91px;
+}
+
+.arm {
+    top: 220px;
+    left: 177px;
+}
+
+.lap {
+    top: 363px;
+    left: 57px;
+}
+
+.pelvis {
+    top: 288px;
+    left: 129px;
+}
+
+.back {
+    top: 142px;
+    left: 94px;
+}
+
+#img-box span {
+    display: block;
+    width: 3px;
+    height: 3px;
+    background-color: #e2c1a0;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    left: 7px;
+}
+
+#return {
+    float: right;
+    font-size: 13px;
+    position: absolute;
+    top: 20px;
+    cursor: pointer;
+    color: #378D7E;
+}
+
+#operation div {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 5px 5px;
+}
+
+.click-on {
+    background-color: #fff;
+    color: #666666 !important;
+}
