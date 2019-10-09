@@ -270,6 +270,23 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
+     * 检验 - 问题 - 批量处理
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/exam/qa/batch/save")
+    @ResponseBody
+    public ResultObject saveBatchExamQa(@RequestBody PfTestExamTagDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+
+        return ResultObject.createSuccess("saveBatchExamQa", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.saveBatchExamQa(dto));
+    }
+
+    /**
      * 检验 - 编辑问题
      *
      * @param dto

@@ -35,6 +35,7 @@ import com.sm.pfprod.service.biz.tests.PfTestWaitingRoomService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -218,6 +219,15 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     @Override
     public Long saveExamQa(ExmMedResultInspect dto) {
         CommonResult<Long> result = testWaitingRoomClient.saveExamQa(BeanUtil.convert(dto, ExmMedResultInspectParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public BigDecimal saveBatchExamQa(PfTestExamTagDto dto) {
+        CommonResult<BigDecimal> result = testWaitingRoomClient.saveBatchExamQa(BeanUtil.convert(dto, PfTestExamTagParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }

@@ -13,6 +13,7 @@ import com.sm.open.core.facade.pf.biz.tests.PfTestWaitingRoomFacade;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Component
@@ -99,6 +100,10 @@ public class TestWaitingRoomClient {
 
     public CommonResult<Long> saveExamQa(ExmMedResultInspectParam param) {
         return pfTestWaitingRoomFacade.saveExamQa(param);
+    }
+
+    public CommonResult<BigDecimal> saveBatchExamQa(PfTestExamTagParam param) {
+        return pfTestWaitingRoomFacade.saveBatchExamQa(param);
     }
 
     public CommonResult<Boolean> editExamQa(ExmMedResultInspectParam param) {

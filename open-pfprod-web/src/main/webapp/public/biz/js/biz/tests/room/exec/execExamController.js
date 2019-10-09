@@ -10,9 +10,10 @@ layui.config({
         , tableSelect = layui.tableSelect;
 
     $(document).ready(function () {
-        var bodyHeight = $(this).height() - 93;
-        $("#treeDemo").css("min-height", bodyHeight);
-        $("#treeDemo").css("max-height", bodyHeight);
+        console.log($(this).height())
+        var bodyHeight = $(this).height() - 120;
+        $("#treeDemo").css("min-height", 630);
+        $("#treeDemo").css("max-height", 630);
     });
 
     //********************zTree***********************
@@ -22,11 +23,17 @@ layui.config({
                 enable: true
             }
         },
+        check: {
+            enable: true
+            , chkStyle: 'checkbox'
+            , chkboxType:{ "Y": "", "N": "" }
+        },
         view: {
             dblClickExpand: false
         },
         callback: {
-            onClick: zTreeOnClick
+            onClick: zTreeOnClick,
+            onCheck: zTreeOnCheck
         }
     };
 
@@ -57,6 +64,42 @@ layui.config({
         });
     });
 
+    function zTreeOnCheck(event, treeId, treeNode) {
+        // 选择某分类节点后，自动勾选该分类节点下的所有检验项目
+        // 1.勾选所有分类项目，计算金额返回
+        var bizData = {
+            idTestexecResult: idTestexecResult,
+            idInspect : treeNode.id,
+            idMedicalrec : idMedicalrec,
+            checked : treeNode.checked
+        }
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/exam/qa/batch/save',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    common.errorMsg(data.msg);
+                    return false;
+                } else {
+                    // 2.刷新项目table和检查列表
+                    _tableReload(treeNode.id, null);
+                    queryQa();
+                    $("#amountTotal").text(data.data);
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                common.errorMsg("网络异常");
+                return false;
+            }
+        });
+    }
+
     function zTreeOnClick(event, treeId, treeNode) {
         _tableReload(treeNode.id, null);
     };
@@ -69,8 +112,9 @@ layui.config({
                 idTestexecResult: idTestexecResult,
                 extItemId: extItemId,
                 keyword: keyword
+            }, page: {
+                curr: 1 //重新从第 1 页开始
             }
-            , height: '604'
         });
     }
 
@@ -89,7 +133,7 @@ layui.config({
     table.render({
         elem: '#execExamTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'execExamTableId'
-        , height: '604' //容器高度
+        , height: '550' //容器高度
         , cols: [[
             {type: 'numbers', title: 'R'},
             {field: 'naItem', minWidth: 150, title: '检验项目'},

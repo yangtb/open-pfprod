@@ -77,6 +77,10 @@
 
                 <table id="execExamTable" lay-filter="execExamTableFilter">
                 </table>
+
+                <div style="padding-top: 10px;">
+                    <span>共计：</span><span id="amountTotal" style="font-size: 25px; color: red;"></span><span> 元</span>
+                </div>
             </div>
         </div>
     </div>
@@ -115,6 +119,7 @@
 <script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/ztree/js/jquery.ztree.core.js"></script>
+<script src="${contextPath}/public/ztree/js/jquery.ztree.excheck.js"></script>
 <script src="$!{contextPath}/public/common/js/gooey.min.js"></script>
 <script src="${contextPath}/public/biz/js/biz/tests/room/exec/execExamController.js"></script>
 
