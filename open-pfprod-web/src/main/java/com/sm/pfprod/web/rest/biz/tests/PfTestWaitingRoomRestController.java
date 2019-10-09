@@ -9,6 +9,7 @@ import com.sm.pfprod.model.dto.biz.exam.PfExmMedResultDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestEvaDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfCatalogueTreeDto;
 import com.sm.pfprod.model.dto.common.PfChangeStatusDto;
 import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
@@ -820,5 +821,16 @@ public class PfTestWaitingRoomRestController extends BaseController {
                 pfTestWaitingRoomService.listDiagnosticAnalysisDetail(dto));
     }
 
+    /**
+     * 拟诊疾病目录树
+     *
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030', 'ROLE_SUPER')")
+    @RequestMapping(value = "/referral/catalogue/tree", method = RequestMethod.POST)
+    @ResponseBody
+    public Object listDiseaseCatalogueTree(@RequestBody PfCatalogueTreeDto dto) {
+        return pfTestWaitingRoomService.listDiseaseCatalogueTree(dto);
+    }
 
 }

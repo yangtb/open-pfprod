@@ -2,7 +2,9 @@ package com.sm.pfprod.integration.biz.tests;
 
 import com.sm.open.core.facade.model.param.pf.biz.tests.room.*;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
+import com.sm.open.core.facade.model.param.pf.common.PfCatalogueTreeParam;
 import com.sm.open.core.facade.model.param.pf.common.PfCommonListParam;
+import com.sm.open.core.facade.model.result.pf.biz.disease.PfDiseaseZtreeResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseBodyResult;
 import com.sm.open.core.facade.model.result.pf.biz.tests.room.*;
 import com.sm.open.core.facade.model.result.pf.biz.tests.room.eva.*;
@@ -248,6 +250,10 @@ public class TestWaitingRoomClient {
 
     public CommonResult<List<PfDiagnosticAnalysisDetailResult>> listDiagnosticAnalysisDetail(PfTestEvaParam param) {
         return pfTestWaitingRoomFacade.listDiagnosticAnalysisDetail(param);
+    }
+
+    public CommonResult<List<PfDiseaseZtreeResult>> listDiseaseCatalogueTree(PfCatalogueTreeParam param) {
+        return pfTestWaitingRoomFacade.listDiseaseCatalogueTree(param);
     }
 
 }

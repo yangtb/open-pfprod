@@ -1,11 +1,12 @@
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['table', 'form', 'jquery', 'common', 'tableSelect'], function () {
+}).use(['table', 'form', 'jquery', 'common', 'tableSelect','element'], function () {
     var $ = layui.$
         , table = layui.table
         , form = layui.form
         , common = layui.common
-        , tableSelect = layui.tableSelect;
+        , tableSelect = layui.tableSelect
+        , element = layui.element;
 
     initData();
 
@@ -15,7 +16,7 @@ layui.config({
         layer.closeAll('loading');
     };
 
-    tableSelect.render({
+    /*tableSelect.render({
         elem: '#searchAnswer',
         checkedKey: 'idDie',
         searchKey: 'keywords',
@@ -42,7 +43,7 @@ layui.config({
             saveReferral();
 
         }
-    });
+    });*/
 
     $('#addNz').on('click', function () {
         if (!$('#idDie').val()) {
@@ -116,63 +117,153 @@ layui.config({
 
     function zdHtml(i, data) {
 
-        var html = '        <div class="layui-row referral">\n' +
-            '            <div class="titile">\n' +
-            '                <span class=disc></span>\n' +
-                '            <span class=diagnose-title >拟诊' + (i + 1) + '：' + data.idDieText +'</span>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="layui-col-xs6">\n' +
-            '                <div class="layui-card" style="box-shadow: none;">\n' +
-            '                    <div class="layui-card-header"  style="border: none;">\n' +
-            '                        <button class="layui-btn layui-btn-xs';
+        var newHtml = '<div class="layui-row referral">\n' +
+            '                    <div class="titile">\n' +
+            '                        <span class="disc"></span>\n' +
+            '                        <span class="diagnose-title">拟诊' + (i + 1) + '：' + data.idDieText +'</span>\n' +
+            '                        <span>\n' +
+            '                            <button style="float: right; margin-right: 10px;" class="layui-btn layui-btn-xs' ;
         if(data.fgExclude == '1') {
-            html +=' layui-btn-disabled" disabled';
+            newHtml +=' layui-btn-disabled" disabled style="color:red;" ';
         } else {
-            html +='" ';
+            newHtml +='" ';
         }
-        html +=' id="addReason' + i + '">\n' +
-            '                            <i class="layui-icon layui-icon-add-1"></i>添加\n' +
-            '                        </button>\n' +
-            '                    </div>\n' +
-            '                    <div class="layui-card-body">\n' +
-            '                        <table id="inTable' + i + '" lay-filter="inTableFilter' + i + '">\n' +
-            '                        </table>\n' +
-            '                    </div>\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="layui-col-xs6">\n' +
-            '                <div class="layui-card" style="box-shadow: none">\n' +
-            '                    <div class="layui-card-header" style="border: none">\n' +
-            '                        <button class="layui-btn layui-btn-xs button-right' ;
-        if(data.fgExclude == '1') {
-            html +=' layui-btn-disabled" disabled style="color:red;" ';
-        } else {
-            html +='" ';
-        }
-        html +=  ' id="out' + i + '" ' +
+        newHtml +=  ' id="out' + i + '" ' +
             '       onclick="outNz(' + i + ', ' + data.idTestexecResultReferral + ', \'' + data.idDieText + '\')">\n' +
             '                            <i class="layui-icon layui-icon-delete"></i><span id="outBtnText' + i + '"';
+
         if(data.fgExclude == '1') {
-            html +='>已排除';
+            newHtml +='><span style="color: red;">已排除</span>';
         } else {
-            html +='>排除';
+            newHtml +='>排除';
         }
-        html += '</span>\n' +
+
+        var tab1li = '',
+            tab1content = '',
+            tab2li = '',
+            tab2content = '';
+        if(data.fgExclude == '0') {
+            tab1li = 'layui-this';
+            tab1content = 'layui-show';
+        } else {
+            tab2li = 'layui-this';
+            tab2content = 'layui-show';
+        }
+        newHtml += '</span>\n' +
             '                        </button>\n' +
-            '                        <button style="margin-left: 0" class="layui-btn layui-btn-xs " id="delReason' + i + '" >\n' +
+            '                        </span>\n' +
+            '                    </div>\n' +
+            '\n' +
+            '                    <div class="layui-tab layui-tab-card" style="margin: 10px;">\n' +
+            '                        <ul class="layui-tab-title">\n' +
+            '                            <li class="' + tab1li + '">确诊理由</li>\n' +
+            '                            <li class="' + tab2li + '">排除理由</li>\n' +
+            '                        </ul>\n' +
+            '                        <div class="layui-tab-content" style="margin: 0px;">\n' +
+            '                            <div class="layui-tab-item ' + tab1content + '" style="margin: -10px -10px 0 -10px;">\n' +
+            '\n' +
+            '                                <div class="layui-card" style="box-shadow: none;">\n' +
+            '                                    <div class="layui-card-header" style="border: none;">\n' +
+            '                                        <button class="layui-btn layui-btn-xs';
+        if(data.fgExclude == '1') {
+            newHtml +=' layui-btn-disabled" disabled';
+        } else {
+            newHtml +='" ';
+        }
+        newHtml +=' id="addReason' + i + '">\n' +
             '                            <i class="layui-icon layui-icon-add-1"></i>添加\n' +
-            '                        </button>\n' +
+            '                                        </button>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="layui-card-body">\n' +
+            '                                       <table id="inTable' + i + '" lay-filter="inTableFilter' + i + '">\n' +
+            '                                       </table>\n' +
+            '                                    </div>\n' +
+            '                                </div>\n' +
+            '\n' +
+            '                            </div>\n' +
+            '\n' +
+            '                            <div class="layui-tab-item ' + tab2content + '" style="margin: -10px -10px 0 -10px;">\n' +
+            '\n' +
+            '                                <div class="layui-card" style="box-shadow: none">\n' +
+            '                                    <div class="layui-card-header" style="border: none">\n' +
+            '                                       <button style="margin-left: 0" class="layui-btn layui-btn-xs " id="delReason' + i + '" >\n' +
+            '                                           <i class="layui-icon layui-icon-add-1"></i>添加\n' +
+            '                                       </button>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="layui-card-body">\n' +
+            '                                       <table id="outTable' + i + '" lay-filter="outTableFilter' + i + '">\n' +
+            '                                       </table>\n' +
+            '                                    </div>\n' +
+            '                                </div>\n' +
+            '\n' +
+            '                            </div>\n' +
+            '\n' +
+            '                        </div>\n' +
             '                    </div>\n' +
-            '                    <div class="layui-card-body">\n' +
-            '                        <table id="outTable' + i + '" lay-filter="outTableFilter' + i + '">\n' +
-            '                        </table>\n' +
-            '                    </div>\n' +
-            '                </div>\n' +
-            '                </div>\n' +
-            '            </div>';
-        return html;
+            '\n' +
+            '                </div>';
+
+
+        //-----------------------------
+
+        // var html = '        <div class="layui-row referral">\n' +
+        //     '            <div class="titile">\n' +
+        //     '                <span class=disc></span>\n' +
+        //         '            <span class=diagnose-title >拟诊' + (i + 1) + '：' + data.idDieText +'</span>\n' +
+        //     '            </div>\n' +
+        //     '\n' +
+        //     '            <div class="layui-col-xs6">\n' +
+        //     '                <div class="layui-card" style="box-shadow: none;">\n' +
+        //     '                    <div class="layui-card-header"  style="border: none;">\n' +
+        //     '                        <button class="layui-btn layui-btn-xs';
+        // if(data.fgExclude == '1') {
+        //     html +=' layui-btn-disabled" disabled';
+        // } else {
+        //     html +='" ';
+        // }
+        // html +=' id="addReason' + i + '">\n' +
+        //     '                            <i class="layui-icon layui-icon-add-1"></i>添加\n' +
+        //     '                        </button>\n' +
+        //     '                    </div>\n' +
+        //     '                    <div class="layui-card-body">\n' +
+        //     '                        <table id="inTable' + i + '" lay-filter="inTableFilter' + i + '">\n' +
+        //     '                        </table>\n' +
+        //     '                    </div>\n' +
+        //     '                </div>\n' +
+        //     '            </div>\n' +
+        //     '\n' +
+        //     '            <div class="layui-col-xs6">\n' +
+        //     '                <div class="layui-card" style="box-shadow: none">\n' +
+        //     '                    <div class="layui-card-header" style="border: none">\n' +
+        //     '                        <button class="layui-btn layui-btn-xs button-right' ;
+        // if(data.fgExclude == '1') {
+        //     html +=' layui-btn-disabled" disabled style="color:red;" ';
+        // } else {
+        //     html +='" ';
+        // }
+        // html +=  ' id="out' + i + '" ' +
+        //     '       onclick="outNz(' + i + ', ' + data.idTestexecResultReferral + ', \'' + data.idDieText + '\')">\n' +
+        //     '                            <i class="layui-icon layui-icon-delete"></i><span id="outBtnText' + i + '"';
+        // if(data.fgExclude == '1') {
+        //     html +='>已排除';
+        // } else {
+        //     html +='>排除';
+        // }
+        // html += '</span>\n' +
+        //     '                        </button>\n' +
+        //     '                        <button style="margin-left: 0" class="layui-btn layui-btn-xs " id="delReason' + i + '" >\n' +
+        //     '                            <i class="layui-icon layui-icon-add-1"></i>添加\n' +
+        //     '                        </button>\n' +
+        //     '                    </div>\n' +
+        //     '                    <div class="layui-card-body">\n' +
+        //     '                        <table id="outTable' + i + '" lay-filter="outTableFilter' + i + '">\n' +
+        //     '                        </table>\n' +
+        //     '                    </div>\n' +
+        //     '                </div>\n' +
+        //     '                </div>\n' +
+        //     '            </div>';
+
+        return newHtml;
     }
 
     function renderZdSelect(i, idTestexecResultReferral) {
@@ -324,6 +415,101 @@ layui.config({
             , limit: 1000
         });
     }
+
+    // ============ 疾病库begin ============
+    var reqData = {
+        includeDie : 1,
+        mainCatalogue : 1
+    }
+    $.ajax({
+        url: basePath + '/pf/r/waiting/room/referral/catalogue/tree',
+        type: 'post',
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify(reqData),
+        success: function (data) {
+            var html = '';
+            $.each(data, function (index, context) {
+                html += '<option class="item-option" value="' + context.id + '">' + context.name + '</option>';
+            })
+            $('#mainCatalogue').append(html);
+            return true;
+        },
+        error: function () {
+            return false;
+        }
+    });
+
+    var setting = {
+        check: {
+            enable: true
+            , chkStyle: 'checkbox'
+            , chkboxType:{ "Y": "", "N": "" }
+        },
+
+        data: {
+            simpleData: {
+                enable: true
+            }
+        } ,
+        callback: {
+            onCheck: zTreeOnCheck
+        }
+    };
+
+    $(document).ready(function () {
+        loadDieZtree();
+    });
+
+    function loadDieZtree() {
+        var reqData = {
+            includeDie : 1,
+            mainCatalogue : 2,
+            mainCatalogueId : $('#mainCatalogue option:selected').val(),
+            keyword : $("#keyword").val()
+        }
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/referral/catalogue/tree',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(reqData),
+            success: function (data) {
+                var zNodes = data;
+                $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                return true;
+            },
+            error: function () {
+                return false;
+            }
+        });
+
+        $("#treeDiv").css("min-height", 305);
+        $("#treeDiv").css("max-height", 305);
+    }
+
+    $('#queryBtn').on('click', function () {
+        loadDieZtree();
+    });
+
+    function zTreeOnCheck(event, treeId, treeNode) {
+
+        if (treeNode.checked) {
+            var url = basePath + '/pf/r/waiting/room/referral/save';
+            var bizData = {
+                idTestexecResult: idTestexecResult ,
+                fgDieClass:  treeNode.idDieclass ? '1' : '2' ,
+                idDie: treeNode.idDieclass ? treeNode.idDieclass : treeNode.idDie
+            };
+            common.commonPost(url, bizData, '添加', null, saveReferralCallback)
+        } else {
+            layer.msg("不允许删除");
+        }
+    }
+
+
+
+    // ============ 疾病库 end ============
 
 })
 

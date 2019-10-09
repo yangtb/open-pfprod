@@ -6,9 +6,11 @@ import com.sm.pfprod.model.dto.biz.tests.PfTestExamDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestWatingRoomDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfCatalogueTreeDto;
 import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.model.vo.biz.disease.PfDiseaseZtreeVo;
 import com.sm.pfprod.model.vo.biz.test.*;
 import com.sm.pfprod.model.vo.biz.test.eva.PfDiagnosticAnalysisDetailVo;
 import com.sm.pfprod.model.vo.biz.test.eva.PfDiagnosticAnalysisVo;
@@ -487,5 +489,13 @@ public interface PfTestWaitingRoomService {
      * @return
      */
     List<PfDiagnosticAnalysisDetailVo> listDiagnosticAnalysisDetail(PfTestEvaDto dto);
+
+    /**
+     * 疾病目录树
+     *
+     * @param dto
+     * @return
+     */
+    List<PfDiseaseZtreeVo> listDiseaseCatalogueTree(PfCatalogueTreeDto dto);
 
 }

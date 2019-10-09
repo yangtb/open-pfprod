@@ -4,8 +4,10 @@ import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.BeanUtil;
 import com.sm.open.core.facade.model.param.pf.biz.tests.room.*;
 import com.sm.open.core.facade.model.param.pf.common.PfBachChangeStatusParam;
+import com.sm.open.core.facade.model.param.pf.common.PfCatalogueTreeParam;
 import com.sm.open.core.facade.model.param.pf.common.PfCommonListParam;
 import com.sm.open.core.facade.model.result.pf.biz.disease.BasDieResult;
+import com.sm.open.core.facade.model.result.pf.biz.disease.PfDiseaseZtreeResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseBodyListResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseBodyResult;
 import com.sm.open.core.facade.model.result.pf.biz.kb.part.FaqMedCaseInquesListResult;
@@ -22,9 +24,11 @@ import com.sm.pfprod.model.dto.biz.tests.PfTestExamDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestExamTagDto;
 import com.sm.pfprod.model.dto.biz.tests.PfTestWatingRoomDto;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
+import com.sm.pfprod.model.dto.common.PfCatalogueTreeDto;
 import com.sm.pfprod.model.dto.common.PfCommonListDto;
 import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.model.vo.biz.disease.PfDiseaseZtreeVo;
 import com.sm.pfprod.model.vo.biz.test.*;
 import com.sm.pfprod.model.vo.biz.test.eva.PfDiagnosticAnalysisDetailVo;
 import com.sm.pfprod.model.vo.biz.test.eva.PfDiagnosticAnalysisVo;
@@ -557,6 +561,16 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
         CommonResult<List<PfDiagnosticAnalysisDetailResult>> result = testWaitingRoomClient.listDiagnosticAnalysisDetail(BeanUtil.convert(dto, PfTestEvaParam.class));
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convertList(result.getContent(), PfDiagnosticAnalysisDetailVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<PfDiseaseZtreeVo> listDiseaseCatalogueTree(PfCatalogueTreeDto dto) {
+        CommonResult<List<PfDiseaseZtreeResult>> result = testWaitingRoomClient.listDiseaseCatalogueTree(
+                BeanUtil.convert(dto, PfCatalogueTreeParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfDiseaseZtreeVo.class);
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }

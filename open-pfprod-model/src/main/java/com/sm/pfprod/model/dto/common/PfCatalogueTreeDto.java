@@ -43,4 +43,19 @@ public class PfCatalogueTreeDto implements Serializable {
      * 包含疾病 1 包含 0不包含
      */
     private int includeDie;
+
+    /**
+     * 主目录 1 是 2否
+     */
+    private int mainCatalogue;
+
+    /**
+     * 主目录id
+     */
+    private String mainCatalogueId;
+
+    /**
+     * 搜索关键字
+     */
+    private String keyword;
 }
