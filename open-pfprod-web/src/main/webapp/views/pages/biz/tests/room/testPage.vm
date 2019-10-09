@@ -156,6 +156,7 @@
 
 <script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="${contextPath}/public/common/js/moment.js"></script>
+<script src="$!{contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/biz/js/biz/tests/room/testController.js"></script>
 
 </body>

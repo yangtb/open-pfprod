@@ -43,8 +43,8 @@ layui.config({
                 let $returnBut = $("#returnBut");
                 $returnBut.show();
 
-                /!*let $nextStepDiv = $('#nextStepDiv');
-                $nextStepDiv.hide();*!/
+                //let $nextStepDiv = $('#nextStepDiv');
+                //$nextStepDiv.hide();
                 isEnterReferral = true;
 
                 $returnBut.on('click', function () {
@@ -437,6 +437,48 @@ layui.config({
         document.getElementById(id).innerHTML=val;
     }
 
-
 });
 
+function openNzPage() {
+    let s = basePath + '/pf/p/waiting/room/test/referral/page'
+        + '?idMedicalrec=' + idMedicalrec + '&cdMedAsse=009'
+        + '&idTestexecResult=' + $('#idTestexecResult').val()
+        + '&sdTestexec=' + sdTestexec;
+
+    let $1 = $('#page' + $(".click-on")[0].parentNode.getAttribute("exec-code"));
+    $1.addClass("display-my");
+
+    $("#navBar").hide();
+    $("#main").css("margin-left", "20px");
+
+
+    let $iframeClinicalDiagnosis = $("#iframeClinicalDiagnosis");
+
+    let $pageClinicalDiagnosis = $('#pageClinicalDiagnosis');
+
+    $iframeClinicalDiagnosis.attr("src", s);
+    $pageClinicalDiagnosis.show();
+    $iframeClinicalDiagnosis.show();
+
+    let $returnBut = $("#returnBut");
+    $returnBut.show();
+
+    //let $nextStepDiv = $('#nextStepDiv');
+    //$nextStepDiv.hide();
+    isEnterReferral = true;
+
+    $returnBut.on('click', function () {
+        $("#navBar").show();
+        $("#main").css("margin-left", "130px");
+        $pageClinicalDiagnosis.hide();
+        $iframeClinicalDiagnosis.hide();
+        $('#page' + $(".click-on")[0].parentNode.getAttribute("exec-code")).removeClass("display-my");
+        $returnBut.hide();
+        if (flag) {
+            $('#nextStepDiv').show();
+        } else {
+            $('#nextStepDiv').hide();
+        }
+        isEnterReferral = false;
+    });
+}

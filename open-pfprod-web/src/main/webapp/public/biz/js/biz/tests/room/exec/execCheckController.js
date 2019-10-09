@@ -678,6 +678,7 @@ layui.config({
         var type = this.getAttribute("data-type");
         if (type == 1) {
             // 拟诊
+            parent.openNzPage();
         }
         if (type == 2) {
             // 病情描述
