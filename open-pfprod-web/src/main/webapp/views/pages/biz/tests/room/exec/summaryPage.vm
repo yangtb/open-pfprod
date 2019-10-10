@@ -54,7 +54,32 @@
             color:rgba(102,102,102,1);
         }
 
+        .titile {
+            padding-top: 10px;
+        }
 </style>
+
+    <style type="text/css">
+        .input {
+             position: relative
+         }
+
+        .word {
+            position: absolute;
+            line-height: 30px;
+            left: 0px;
+            top: 5px;
+            z-index: 10;
+            background: #fff
+        }
+
+        .input textarea {
+            border: none;
+            line-height: 30px;
+            background: url($!{contextPath}/public/biz/img/linebg.gif) repeat;
+            overflow: auto
+        }
+    </style>
 
 </head>
 
@@ -62,16 +87,93 @@
 
 <div class="wrapper-content">
 
-    <div class="titile">
-        <ul>
-            <li >
-                <span class="spot"></span>
-                <span class="titile-text">&nbsp;诊断项</span>
-            </li>
-        </ul>
+    <div class="layui-row" style="padding-top: 20px;">
+        <form class="layui-form" id="summaryForm" lay-filter="summaryFormFilter">
+
+            <div class="layui-col-md6" style="padding-right: 30px;">
+                <div class="titile">
+                    <ul>
+                        <li >
+                            <span class="spot"></span>
+                            <span class="titile-text">&nbsp;问诊小结</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div>
+                        <textarea name="desConditionHpi" id="desConditionHpi" class="layui-textarea" style="height: 170px;" disabled></textarea>
+                    </div>
+                </div>
+
+                <div class="titile">
+                    <ul>
+                        <li >
+                            <span class="spot"></span>
+                            <span class="titile-text">&nbsp;体检小结</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div>
+                        <textarea name="desConditionPe" id="desConditionPe" class="layui-textarea" style="height: 170px;" disabled></textarea>
+                    </div>
+                </div>
+
+                <div class="titile">
+                    <ul>
+                        <li >
+                            <span class="spot"></span>
+                            <span class="titile-text">&nbsp;辅检小结</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div>
+                        <textarea name="desConditionFe" id="desConditionFe" class="layui-textarea" style="height: 170px;" disabled></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-col-md6" style="border: 1px solid #e9e9e9; padding: 10px 10px 10px 10px">
+                <div hidden>
+                    <input id="idTestexecResultSumary" hidden>
+                </div>
+                <div class="layui-row">
+                    <div class="input">
+                        <div class="word">既往史：</div>
+                        <textarea class="layui-textarea input" rows="5"
+                                  style="height: 165px; text-indent: 60px;"
+                                  name="desSumaryHpi" id="desSumaryHpi"></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-row" style="padding-top: 20px;">
+                    <div class="input">
+                        <div class="word">查体：</div>
+                        <textarea class="layui-textarea input" rows="5"
+                                  style="height: 165px; text-indent: 50px;"
+                                  name="desSumaryPe" id="desSumaryPe"></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-row" style="padding-top: 20px;">
+                    <div class="input">
+                        <div class="word">辅助检查：</div>
+                        <textarea class="layui-textarea input" rows="5"
+                                  style="height: 165px; text-indent: 75px;"
+                                  name="desSumaryFe" id="desSumaryFe"></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
     </div>
 
-    <div class="diagnose">
+
+
+    #*<div class="diagnose">
         <div class="layui-row layui-col-space15" id="zdField">
         </div>
     </div>
@@ -83,16 +185,16 @@
                 <span class="titile-text">&nbsp;诊断小结</span>
             </li>
         </ul>
-    </div>
+    </div>*#
 
-    <div class="layui-row">
+    #*<div class="layui-row">
         <div hidden>
             <input id="idTestexecResultSumary" hidden>
         </div>
         <div>
             <textarea name="dieSumary" id="dieSumary" placeholder="请填写诊断小结" class="layui-textarea"></textarea>
         </div>
-    </div>
+    </div>*#
 </div>
 
 

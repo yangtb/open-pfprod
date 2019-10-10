@@ -1,10 +1,11 @@
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['table', 'jquery', 'tableSelect', 'common'], function () {
+}).use(['table', 'jquery','form',  /*'tableSelect',*/ 'common'], function () {
     var $ = layui.$
         , table = layui.table
         , common = layui.common
-        , tableSelect = layui.tableSelect;
+        , form = layui.form
+        /*, tableSelect = layui.tableSelect*/;
 
     $(document).ready(function () {
         initData();
@@ -12,16 +13,78 @@ layui.config({
 
     function initData() {
         // 加载诊断
-        initForm();
+        //initForm();
         // 加载确诊理由
-        loadZd();
+        //loadZd();
+
+        // 加载小结信息
+        loadSummary();
     }
+
+    function loadSummary() {
+        var bizData = {
+            idTestexecResult: idTestexecResult
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/summary/select',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                if (data.code != 0) {
+                    layer.msg(data.msg);
+                    return false;
+                } else {
+                    if (data.data) {
+                        form.val("summaryFormFilter", data.data);
+                    }
+                }
+            },
+            error: function () {
+                layer.msg("网络异常");
+                return false;
+            }
+        });
+    }
+
+
+    $("#desSumaryHpi").blur(function () {
+        var bizData = {
+            desSumaryHpi: $('#desSumaryHpi').val()
+        }
+        saveSummary(bizData);
+    });
+
+    $("#desSumaryPe").blur(function () {
+        var bizData = {
+            desSumaryPe: $('#desSumaryPe').val()
+        }
+        saveSummary(bizData);
+    });
+
+    $("#desSumaryFe").blur(function () {
+        var bizData = {
+            desSumaryFe: $('#desSumaryFe').val()
+        }
+        saveSummary(bizData);
+    });
+
+    function saveSummary(bizData) {
+        bizData.idTestexecResultSumary = $('#idTestexecResultSumary').val();
+        bizData.idTestexecResult = idTestexecResult;
+        common.commonPost(basePath + '/pf/r/waiting/room/summary/save', bizData, null, null, saveDieSumaryCallback);
+    }
+
+    function saveDieSumaryCallback(data) {
+        $('#idTestexecResultSumary').val(data.data);
+    };
 
     $('#refresh').on('click', function () {
         window.location.reload();
     });
 
-    function initForm() {
+    /*function initForm() {
         var bizData = {
             idTestexecResult: idTestexecResult
         };
@@ -308,7 +371,7 @@ layui.config({
                 });
             }
         });
-    }
+    }*/
 
 
 })
