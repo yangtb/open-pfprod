@@ -12,8 +12,8 @@ layui.config({
     $(document).ready(function () {
         console.log($(this).height())
         var bodyHeight = $(this).height() - 120;
-        $("#treeDemo").css("min-height", 630);
-        $("#treeDemo").css("max-height", 630);
+        $("#treeDemo").css("min-height", 635);
+        $("#treeDemo").css("max-height", 635);
     });
 
     //********************zTree***********************
