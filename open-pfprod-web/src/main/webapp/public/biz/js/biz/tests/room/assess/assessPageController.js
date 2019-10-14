@@ -14,24 +14,56 @@ layui.config({
         $('#test').attr('lay-href',
             basePath + '/pf/p/waiting/room/exam/page?idTestplanDetail=' + data.idTestplanDetail
             + '&idDemo=' + data.idDemo + '&idTestplan=' + data.idTestplan + '&idStudent=' + data.idStudent
-            + '&idTestpaper=' + data.idTestpaper + '&idMedicalrec=' + data.idMedicalrec);
+            + '&idTestpaper=' + data.idTestpaper
+            + '&idMedicalrec=' + data.idMedicalrec
+            + '&idMedCase=' + data.idMedCase);
         $('#test').click();
     }
 
     $('#queryMed').on('click', function () {
+        // 获取患者信息idMedCase
+        layer.load(2);
         var bizData = {
-            idTestplanDetail: idTestplanDetail,
-            idDemo: idDemo,
-            idTestplan: idTestplan,
-            idStudent: idStudent,
-            idTestpaper: idTestpaper,
-            idMedicalrec: idMedicalrec
-        }
-        setAttr(bizData);
+            idTestplanDetail: idTestplanDetail
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/assess/pat/idMedCase',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    layer.msg(data.msg, {icon: 5});
+                    return false;
+                } else {
+                    var bizData = {
+                        idTestplanDetail: idTestplanDetail,
+                        idDemo: idDemo,
+                        idTestplan: idTestplan,
+                        idStudent: idStudent,
+                        idTestpaper: idTestpaper,
+                        idMedicalrec: idMedicalrec,
+                        idMedCase: data.data
+                    }
+                    setAttr(bizData);
+                    return false;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                return false;
+            }
+        });
         return false;
     });
 
     $('#accessMed').on('click', function () {
+        assessCase();
+    });
+
+    function assessCase() {
         layer.load(2);
         var bizData = {
             idTestexecResult: idTestexecResult
@@ -58,17 +90,22 @@ layui.config({
                 return false;
             }
         });
-    });
-
+    }
 
     $(document).ready(function () {
-        initData();
+        if (autoAssess == 1) {
+            assessCase();
+        } else {
+            initData();
+        }
     });
 
     function initData() {
+        var filterFlag = autoAssess == 1 ? 1 : 0;
         layer.msg('正在加载数据，请稍后...', {icon: 16, shade: 0.01});
         var bizData = {
-            idTestexecResult: idTestexecResult
+            idTestexecResult: idTestexecResult,
+            filterFlag : filterFlag
         };
         $.ajax({
             url: basePath + '/pf/r/waiting/room/eva/list',

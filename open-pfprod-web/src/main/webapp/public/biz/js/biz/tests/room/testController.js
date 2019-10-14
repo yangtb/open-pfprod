@@ -13,61 +13,6 @@ layui.config({
     var flag = false;
     var isEnterReferral = false;
 
-    //固定块
-    /*util.fixbar({
-        bar1: '<i class="icon-uniE907" style="font-size: 30px;"></i><span id="nzImg" style="display: block;margin-top: -32px;"></span>'
-        , css: {right: 60, bottom: 60}
-        , bgcolor: '#378D7E'
-        , click: function (type) {
-            if (type === 'bar1') {
-                let s = basePath + '/pf/p/waiting/room/test/referral/page'
-                    + '?idMedicalrec=' + idMedicalrec + '&cdMedAsse=009'
-                    + '&idTestexecResult=' + $('#idTestexecResult').val()
-                    + '&sdTestexec=' + sdTestexec;
-
-                let $1 = $('#page' + $(".click-on")[0].parentNode.getAttribute("exec-code"));
-                $1.addClass("display-my");
-
-                $("#navBar").hide();
-                $("#main").css("margin-left", "20px");
-
-
-                let $iframeClinicalDiagnosis = $("#iframeClinicalDiagnosis");
-
-                let $pageClinicalDiagnosis = $('#pageClinicalDiagnosis');
-
-                $iframeClinicalDiagnosis.attr("src", s);
-                $pageClinicalDiagnosis.show();
-                $iframeClinicalDiagnosis.show();
-
-                let $returnBut = $("#returnBut");
-                $returnBut.show();
-
-                //let $nextStepDiv = $('#nextStepDiv');
-                //$nextStepDiv.hide();
-                isEnterReferral = true;
-
-                $returnBut.on('click', function () {
-                    $("#navBar").show();
-                    $("#main").css("margin-left", "130px");
-                    $pageClinicalDiagnosis.hide();
-                    $iframeClinicalDiagnosis.hide();
-                    $('#page' + $(".click-on")[0].parentNode.getAttribute("exec-code")).removeClass("display-my");
-                    $returnBut.hide();
-                    if (flag) {
-                        $('#nextStepDiv').show();
-                    } else {
-                        $('#nextStepDiv').hide();
-                    }
-                    isEnterReferral = false;
-                });
-
-                /!*common.open('拟诊', s, 850, 450);*!/
-            }
-
-        }
-    });*/
-
     window.onload = clockInit();
 
     var execTags;
@@ -235,7 +180,7 @@ layui.config({
     $('#endBtn').on('click', function () {
         if ($('#endTime').text()) {
             layer.msg('您已交卷成功', {icon: 1});
-            return;
+            return false;
         }
 
         var url = basePath + '/pf/r/waiting/room/end';
@@ -249,15 +194,59 @@ layui.config({
     });
 
     function _endCallback(data) {
-        parent.layer.open({
-            type: 2,
-            area: ['630px', '350px'],
-            title: false,
-            shade: 0,
-            resize: false,
-            offset: 'auto',
-            content: 'views/pages/biz/tests/room/submit.vm'
-        })
+        // 1.	如果是训练（非考试），则点击交卷，直接弹出评估子页面并计算评估结果
+        // 2.	因为训练不存在老师打分，所以要过滤掉主观评分项
+        var bizData = {
+            idTestplanDetail: idTestplanDetail
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/exam/finish/select',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    layer.msg(data.msg);
+                    return false;
+                } else {
+                    afterFinishOfOpenPage(data.data);
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                layer.msg("网络异常");
+                return false;
+            }
+        });
+    }
+
+    function afterFinishOfOpenPage (data) {
+        var sdUse = data && data.sdUse ? data.sdUse : '2';
+        if (sdUse == '1') {
+            var url = basePath + '/pf/p/waiting/room/test/assess/page?'
+                + 'idTestplanDetail=' + idTestplanDetail
+                + '&idDemo=' + idDemo
+                + '&idTestplan=' + idTestplan
+                + '&idMedicalrec=' + idMedicalrec
+                + '&idStudent=' + data.idStudent
+                + '&idTestpaper=' + data.idTestpaper
+                + '&idTestexecResult=' + $('#idTestexecResult').val()
+                + '&autoAssess=1';
+            var index = common.open('模拟评估结果', url, 800, 500);
+            layer.full(index);
+        } else {
+            parent.layer.open({
+                type: 2,
+                area: ['630px', '350px'],
+                title: false,
+                shade: 0,
+                resize: false,
+                offset: 'auto',
+                content: 'views/pages/biz/tests/room/submit.vm'
+            })
+        }
     }
 
     // 配置说明

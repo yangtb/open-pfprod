@@ -12,16 +12,16 @@
     <link rel="stylesheet" href="${contextPath}/public/biz/css/exam.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
     <script>
-        var basePath = '${basePath}';
-        var patName = '${patName}';
-        var patSex = '${patSex}';
-        var patAge = '${patAge}';
-        var complain = '${complain}';
-        var idTestplanDetail = '${idTestplanDetail}';
-        var idTestplan = '${idTestplan}';
-        var idDemo = '${idDemo}';
-        var idMedicalrec = '${idMedicalrec}';
-        var idTestpaper = '${idTestpaper}';
+        var basePath = '$!{basePath}';
+        var patName = '$!{patName}';
+        var patSex = '$!{patSex}';
+        var patAge = '$!{patAge}';
+        var complain = '$!{complain}';
+        var idTestplanDetail = '$!{idTestplanDetail}';
+        var idTestplan = '$!{idTestplan}';
+        var idDemo = '$!{idDemo}';
+        var idMedicalrec = '$!{idMedicalrec}';
+        var idTestpaper = '$!{idTestpaper}';
         var sdTestexec = '$!{examInfo.paperInfo.sdTestexec}';
         var beginTimeStr = '$!{examInfo.paperInfo.beginTimeStr}';
         var linkPath = '$!{link}';

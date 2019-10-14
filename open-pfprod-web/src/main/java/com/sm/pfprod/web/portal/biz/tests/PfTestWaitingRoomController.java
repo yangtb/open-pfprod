@@ -99,6 +99,8 @@ public class PfTestWaitingRoomController extends BaseController {
         model.addAttribute("patAge", dto.getPatAge());
         model.addAttribute("complain", dto.getComplain());
         model.addAttribute("idMedCase", dto.getIdMedCase());
+        model.addAttribute("autoAssess", dto.getAutoAssess());
+
 
         PfTestPaperVo pfTestPaperVo = pfTestWaitingRoomService.selectTestPaperInfo(dto);
 
@@ -374,6 +376,7 @@ public class PfTestWaitingRoomController extends BaseController {
         model.addAttribute("idTestpaper", dto.getIdTestpaper());
         model.addAttribute("idStudent", dto.getIdStudent());
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
+        model.addAttribute("autoAssess", dto.getAutoAssess());
 
         PfTestPaperVo pfTestPaperVo = pfTestWaitingRoomService.selectTestPaper(dto);
         if (pfTestPaperVo.getStudentInfo() != null) {

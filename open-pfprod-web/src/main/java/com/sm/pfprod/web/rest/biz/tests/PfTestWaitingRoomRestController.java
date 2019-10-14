@@ -798,7 +798,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030', 'ROLE_EXM0040','ROLE_SUPER')")
     @PostMapping(value = "/exec/serial/save")
     @ResponseBody
     public ResultObject saveExecSerialNo(@RequestBody ExmTestexec dto) {
@@ -850,7 +850,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0040', 'ROLE_SUPER')")
     @RequestMapping(value = "/referral/catalogue/tree", method = RequestMethod.POST)
     @ResponseBody
     public Object listDiseaseCatalogueTree(@RequestBody PfCatalogueTreeDto dto) {
@@ -862,7 +862,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0040', 'ROLE_SUPER')")
     @RequestMapping(value = "/referral/chart/data", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject selectReferralChartData(@RequestBody PfTestEvaDto dto) {
@@ -876,6 +876,38 @@ public class PfTestWaitingRoomRestController extends BaseController {
         return ResultObject.createSuccess("selectReferralChartData", ResultObject.DATA_TYPE_OBJECT, pfOrgChartVo);
     }
 
+
+    /**
+     * 考试完成后所需跳转信息
+     *
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0040', 'ROLE_SUPER')")
+    @RequestMapping(value = "/exam/finish/select", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject selectFinishExamInfo(@RequestBody ExmTestexec dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestplanDetail() != null, "idTestplanDetail");
+
+        return ResultObject.createSuccess("selectFinishExamInfo", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.selectFinishExamInfo(dto.getIdTestplanDetail()));
+    }
+
+    /**
+     * 患者页签idMedCase
+     *
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0040', 'ROLE_SUPER')")
+    @RequestMapping(value = "/assess/pat/idMedCase", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject selectAssessPatIdMedCase(@RequestBody ExmTestexec dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestplanDetail() != null, "idTestplanDetail");
+
+        return ResultObject.createSuccess("selectAssessPatIdMedCase", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.selectAssessPatIdMedCase(dto.getIdTestplanDetail()));
+    }
 
 }
 

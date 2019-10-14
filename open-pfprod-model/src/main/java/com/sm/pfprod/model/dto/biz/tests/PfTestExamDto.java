@@ -58,4 +58,9 @@ public class PfTestExamDto implements Serializable {
 
     private String complain;
 
+    /**
+     * 自动评估标识
+     */
+    private int autoAssess;
+
 }

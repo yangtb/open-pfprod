@@ -522,4 +522,20 @@ public interface PfTestWaitingRoomService {
      */
     PageResult listDiagnosticChart(PfTestExamTagDto dto);
 
+    /**
+     * 考试完成后所需跳转信息
+     *
+     * @param idTestplanDetail
+     * @return
+     */
+    PfWaitingRoomFinishVo selectFinishExamInfo(Long idTestplanDetail);
+
+    /**
+     * 患者页签idMedCase
+     *
+     * @param idTestplanDetail
+     * @return
+     */
+    Long selectAssessPatIdMedCase(Long idTestplanDetail);
+
 }

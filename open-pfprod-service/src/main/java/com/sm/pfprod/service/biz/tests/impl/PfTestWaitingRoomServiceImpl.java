@@ -602,5 +602,22 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
         return BeanUtil.convert(result, PageResult.class);
     }
 
+    @Override
+    public PfWaitingRoomFinishVo selectFinishExamInfo(Long idTestplanDetail) {
+        CommonResult<PfWaitingRoomFinishResult> result = testWaitingRoomClient.selectFinishExamInfo(idTestplanDetail);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convert(result.getContent(), PfWaitingRoomFinishVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public Long selectAssessPatIdMedCase(Long idTestplanDetail) {
+        CommonResult<Long> result = testWaitingRoomClient.selectAssessPatIdMedCase(idTestplanDetail);
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
 
 }

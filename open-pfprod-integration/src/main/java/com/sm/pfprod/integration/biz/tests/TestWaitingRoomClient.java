@@ -268,4 +268,12 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.listDiagnosticChart(param);
     }
 
+    public CommonResult<PfWaitingRoomFinishResult> selectFinishExamInfo(Long idTestplanDetail) {
+        return pfTestWaitingRoomFacade.selectFinishExamInfo(idTestplanDetail);
+    }
+
+    public CommonResult<Long> selectAssessPatIdMedCase(Long idTestplanDetail) {
+        return pfTestWaitingRoomFacade.selectAssessPatIdMedCase(idTestplanDetail);
+    }
+
 }

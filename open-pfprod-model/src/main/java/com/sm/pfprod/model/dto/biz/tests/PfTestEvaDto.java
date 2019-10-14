@@ -44,4 +44,9 @@ public class PfTestEvaDto implements Serializable {
      */
     private Integer chartType;
 
+    /**
+     * 过滤标识
+     */
+    private boolean filterFlag;
+
 }
