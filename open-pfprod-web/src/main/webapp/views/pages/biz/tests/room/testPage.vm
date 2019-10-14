@@ -89,8 +89,12 @@
                         #if($!element.fgShowExec == '1')
                             #if($!element.cdMedAsse != '009')
                                 <li class="execTag" exec-ref="$!element.scriptExec" exec-code="$!element.cdMedAsse" exec-no="$!element.processSerialno" exec-pat="$!idMedCase">
-                                    <a href="javascript:;" class="a-item grey">
+                                    #*<a href="javascript:;" class="a-item grey">
                                         <i class="$!element.pName"></i>
+                                        <span class="item-text">$!element.name</span>
+                                    </a>*#
+                                    <a href="javascript:;" class="a-item grey" style="text-align: center;">
+                                        <img src="$!element.path" style="width: 25px; height: 25px;">
                                         <span class="item-text">$!element.name</span>
                                     </a>
                                 </li>

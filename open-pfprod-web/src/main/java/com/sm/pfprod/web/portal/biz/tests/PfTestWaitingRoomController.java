@@ -455,4 +455,48 @@ public class PfTestWaitingRoomController extends BaseController {
         return pfTestWaitingRoomService.listAllReferralDie(idTestexecResult, keywords);
     }
 
+    /**
+     * 页签-初步诊断
+     *
+     * @param model
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @RequestMapping("/test/diagnosis/preliminary/page")
+    public String preliminaryDiagnosisPage(Model model, PfTestExamTagDto dto) {
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("cdMedAsse", dto.getCdMedAsse());
+        model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
+        return "pages/biz/tests/room/exec/diagnosisPreliminaryPage";
+    }
+
+    /**
+     * 页签-鉴别诊断
+     *
+     * @param model
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @RequestMapping("/test/diagnosis/differential/page")
+    public String differentialDiagnosisPage(Model model, PfTestExamTagDto dto) {
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("cdMedAsse", dto.getCdMedAsse());
+        model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
+        model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
+        return "pages/biz/tests/room/exec/diagnosisDifferentialPage";
+    }
+
+    /**
+     * 查询诊断分析、鉴别诊断列表
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
+    @RequestMapping(value = "/diagnostic/chart/list")
+    @ResponseBody
+    public PageResult listDiagnosticChart(PfTestExamTagDto dto) {
+        return pfTestWaitingRoomService.listDiagnosticChart(dto);
+    }
+
 }

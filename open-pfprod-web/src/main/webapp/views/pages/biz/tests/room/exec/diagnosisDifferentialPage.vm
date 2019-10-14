@@ -3,15 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>拟诊</title>
+    <title>鉴别诊断</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/css/service.css">
-    <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
-    <link rel="stylesheet" href="${contextPath}/public/ztree/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="${contextPath}/public/common/css/jquery.orgchart.css">
 
 
@@ -149,13 +147,13 @@
             margin-top: 10px;
         }
         .item-style {
-            width:120px;
+            width:95%;
             height:32px;
             background:rgba(255,255,255,1);
             border:1px solid rgba(204,204,204,1);
             border-radius:4px;
-            text-align: center;
-            text-align-last:center;
+            text-align: left;
+            text-align-last:left;
             margin-right: 6px;
         }
 
@@ -177,50 +175,22 @@
 
 <div style="overflow:hidden">
 
-    #*<div class="fix">
-        <div class="vertical"></div>
-        <div class="horizontal"></div>
-        <button id="searchAnswer" type="button" class="add-but">
-            <span>新增</span>
-        </button>
-        <input id="idDie" name="idDie" hidden>
-    </div>*#
-
     <div class="layui-row layui-col-space5">
         <div class="layui-col-md7 layui-col-space5">
             <div class="layui-row">
-                <div class="layui-card" style="border: 1px #e9e9e9 solid; height: 350px;">
-                    <div class="layui-card-header" style="background-color: #F2F1EE">
-                        <span style="font-weight: bold">疾病库</span>
-
-                        <form class="layui-form" style="float: right">
-                            <div style="float: right">
-                                <div class="layui-input-inline">
-                                    <button type="button" id="queryBtn" style="cursor: pointer;">
-                                        <span>查询</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div style="float: right">
-                                <div class="layui-input-inline">
-                                    <input type="text" name="keyword" id="keyword" autocomplete="off" class="layui-input"
-                                           placeholder="请输入关键字">
-                                </div>
-                            </div>
-                        </form>
-
-                        <div style="float: right">
-                            <select id="mainCatalogue" class="item-style">
-                                <option class="item-option" value="" selected>全部</option>
-                            </select>
-                        </div>
-
-                    </div>
-
+                <div class="layui-card" style="border: 1px #e9e9e9 solid; height: 350px; overflow: auto">
                     <div class="layui-card-body">
-                        <div id="treeDiv" style="overflow:auto; width: 100%;">
-                            <ul id="treeDemo" class="ztree"></ul>
+                        <div style="padding: 10px;">
+                            <span style="font-weight: bold;">既往史：</span>
+                            <span name="desSumaryHpi" id="desSumaryHpi" style="text-decoration: underline;"></span>
+                        </div>
+                        <div style="padding: 10px;">
+                            <span style="font-weight: bold;">查体：</span>
+                            <span name="desSumaryPe" id="desSumaryPe" style="text-decoration: underline;"></span>
+                        </div>
+                        <div style="padding: 10px;">
+                            <span style="font-weight: bold;">辅助检查：</span>
+                            <span name="desSumaryFe" id="desSumaryFe" style="text-decoration: underline;"></span>
                         </div>
                     </div>
                 </div>
@@ -242,22 +212,66 @@
                 </div>
             </div>
         </div>
+
         <div class="layui-col-md5">
             <div class="titile" style="margin-top: 5px;">
                 <ul>
                     <li style="width: 100%">
                         <span class="spot"></span>
-                        <span class="titile-text">&nbsp;拟诊项</span>
+                        <span class="titile-text">&nbsp;鉴别诊断</span>
                     </li>
                 </ul>
             </div>
 
-            <div class="main" id="zdField">
-                <div id="none">
-                    <img src="${contextPath}/public/layui/build/images/none.png"/>
-                    <p>暂无拟诊内容</p>
-                    <p>请在左侧勾选拟诊项</p>
+            <div class="main">
+
+                <div style="padding: 10px 0 10px 5px; font-weight: bold">鉴别诊断</div>
+
+                <div hidden>
+                    <input id="idTestexecResultIdentify" hidden/>
                 </div>
+
+                <div>
+                    <form class="layui-form">
+                        <div style="float: left">
+                            <div class="layui-input-inline">
+                                <input type="text" name="naDie" id="naDie" autocomplete="off" class="layui-input"
+                                       placeholder="请输入关键字" style="width: 320px; height: 32px;">
+                            </div>
+                        </div>
+                        <div style="float: left">
+                            <div class="layui-input-inline">
+                                <button type="button" id="queryBtn" style="cursor: pointer;">
+                                    <span>查询</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div style="padding: 50px 0 10px 5px; font-weight: bold">诊断说明</div>
+
+                <textarea name="desDieReason" id="desDieReason" class="layui-textarea"
+                          style="height: 200px;"></textarea>
+
+                <div style="padding: 20px 0 10px 5px; font-weight: bold">
+                    排除理由
+                    <span style="float: right;">
+                        <button style="margin-left: 0" class="layui-btn layui-btn-xs" id="addReason">
+                            <i class="layui-icon layui-icon-add-1"></i> 添加
+                        </button>
+                    </span>
+
+                </div>
+
+                <table id="outTable" lay-filter="outTableFilter">
+                </table>
+
+                <div style="padding: 20px 0 0 120px;">
+                    <button type="button" id="saveIdentify" class="layui-btn layui-btn-sm"
+                            style="padding: 0 20px 0 20px; background-color: #4A92D8;">保存</button>
+                </div>
+
             </div>
         </div>
     </div>
@@ -267,17 +281,8 @@
 
 <script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
-<script src="${contextPath}/public/ztree/js/jquery.ztree.core.js"></script>
-<script src="${contextPath}/public/ztree/js/jquery.ztree.excheck.js"></script>
 <script src="${contextPath}/public/common/js/jquery.orgchart.js"></script>
-<script src="$!{contextPath}/public/biz/js/biz/tests/room/exec/execReferralController.js"></script>
-
-
-<script type="text/html" id="summaryBar">
-    <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" title="删除">
-        <i class="layui-icon layui-icon-delete"></i>
-    </button>
-</script>
+<script src="$!{contextPath}/public/biz/js/biz/tests/room/exec/execDiagnosisDifferentialController.js"></script>
 
 <script type="text/html" id="sdEvaTpl">
         #foreach($param in ${sdEva})
@@ -290,6 +295,5 @@
 </script>
 
 </body>
-
 
 </html>

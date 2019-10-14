@@ -80,4 +80,9 @@ public class ExmMedResultReferral implements Serializable {
      */
     private String fgDieClass;
 
+    /**
+     * 目录，1 = 是，0 = 否
+     */
+    private int catalogue;
+
 }

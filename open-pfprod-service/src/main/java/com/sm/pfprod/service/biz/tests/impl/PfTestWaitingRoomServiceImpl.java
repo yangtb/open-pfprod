@@ -347,6 +347,15 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     }
 
     @Override
+    public Long saveIdentifyDiagnosis(ExmMedResultIdentify dto) {
+        CommonResult<Long> result = testWaitingRoomClient.saveIdentifyDiagnosis(BeanUtil.convert(dto, ExmMedResultIdentifyParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
     public boolean delDiagnosis(Long idTestexecResultDiagnosis) {
         CommonResult<Boolean> result = testWaitingRoomClient.delDiagnosis(idTestexecResultDiagnosis);
         if (result != null && result.getIsSuccess()) {
@@ -401,8 +410,8 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     }
 
     @Override
-    public PfWaitingRoomDiagnosisVo selectDiagnosis(Long idTestexecResult) {
-        CommonResult<PfWaitingRoomDiagnosisResult> result = testWaitingRoomClient.selectDiagnosis(idTestexecResult);
+    public PfWaitingRoomDiagnosisVo selectDiagnosis(ExmMedResultDiagnosis dto) {
+        CommonResult<PfWaitingRoomDiagnosisResult> result = testWaitingRoomClient.selectDiagnosis(BeanUtil.convert(dto, ExmMedResultDiagnosisParam.class));
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convert(result.getContent(), PfWaitingRoomDiagnosisVo.class);
         }
@@ -573,6 +582,24 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
             return BeanUtil.convertList(result.getContent(), PfDiseaseZtreeVo.class);
         }
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public String selectReferralChartData(PfTestEvaDto dto) {
+        CommonResult<String> result = testWaitingRoomClient.selectReferralChartData(BeanUtil.convert(dto, PfTestEvaParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public PageResult listDiagnosticChart(PfTestExamTagDto dto) {
+        PfPageResult<BasDieResult> result = testWaitingRoomClient.listDiagnosticChart(BeanUtil.convert(dto, PfTestExamTagParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
     }
 
 

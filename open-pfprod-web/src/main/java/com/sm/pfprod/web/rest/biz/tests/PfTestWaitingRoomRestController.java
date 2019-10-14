@@ -1,5 +1,6 @@
 package com.sm.pfprod.web.rest.biz.tests;
 
+import com.alibaba.fastjson.JSON;
 import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
@@ -17,6 +18,7 @@ import com.sm.pfprod.model.enums.PfSimulateCaseTypeEnum;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.enums.SysParamEnum;
 import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.model.vo.biz.PfOrgChartVo;
 import com.sm.pfprod.service.biz.tests.PfTestWaitingRoomService;
 import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
@@ -473,6 +475,25 @@ public class PfTestWaitingRoomRestController extends BaseController {
                 pfTestWaitingRoomService.saveDiagnosis(dto));
     }
 
+
+    /**
+     * 保存鉴别诊断
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/summary/diagnosis/identify/save")
+    @ResponseBody
+    public ResultObject saveIdentifyDiagnosis(@RequestBody ExmMedResultIdentify dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getNaDie()), "naDie");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getDesDieReason()), "desDieReason");
+        return ResultObject.createSuccess("saveDiagnosis", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.saveIdentifyDiagnosis(dto));
+    }
+
     /**
      * 删除诊断
      *
@@ -578,11 +599,14 @@ public class PfTestWaitingRoomRestController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
     @PostMapping(value = "/summary/diagnosis/select")
     @ResponseBody
-    public ResultObject selectDiagnosis(@RequestBody PfTestExamTagDto dto) {
+    public ResultObject selectDiagnosis(@RequestBody ExmMedResultDiagnosis dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        Assert.isTrue(dto.getIdTestexecResultReferral() != null, "idTestexecResultReferral");
+        Assert.isTrue(dto.getIdDie() != null, "idDie");
+        Assert.isTrue(dto.getFgDieClass() != null, "fgDieClass");
         return ResultObject.createSuccess("selectDiagnosis", ResultObject.DATA_TYPE_OBJECT,
-                pfTestWaitingRoomService.selectDiagnosis(dto.getIdTestexecResult()));
+                pfTestWaitingRoomService.selectDiagnosis(dto));
     }
 
     /**
@@ -833,4 +857,25 @@ public class PfTestWaitingRoomRestController extends BaseController {
         return pfTestWaitingRoomService.listDiseaseCatalogueTree(dto);
     }
 
+    /**
+     * 思维导图
+     *
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030', 'ROLE_SUPER')")
+    @RequestMapping(value = "/referral/chart/data", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultObject selectReferralChartData(@RequestBody PfTestEvaDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        Assert.isTrue(dto.getChartType() != null, "chartType");
+
+        String orgChartStr = pfTestWaitingRoomService.selectReferralChartData(dto);
+        PfOrgChartVo pfOrgChartVo = JSON.parseObject(orgChartStr, PfOrgChartVo.class);
+
+        return ResultObject.createSuccess("selectReferralChartData", ResultObject.DATA_TYPE_OBJECT, pfOrgChartVo);
+    }
+
+
 }
+

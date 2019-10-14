@@ -296,6 +296,14 @@ public interface PfTestWaitingRoomService {
     Long saveDiagnosis(ExmMedResultDiagnosis dto);
 
     /**
+     * 保存鉴别诊断
+     *
+     * @param dto
+     * @return
+     */
+    Long saveIdentifyDiagnosis(ExmMedResultIdentify dto);
+
+    /**
      * 删除诊断
      *
      * @param idTestexecResultDiagnosis 主键
@@ -347,10 +355,10 @@ public interface PfTestWaitingRoomService {
     /**
      * 查询诊断、诊断小结
      *
-     * @param idTestexecResult 病例结果ID
+     * @param dto
      * @return
      */
-    PfWaitingRoomDiagnosisVo selectDiagnosis(Long idTestexecResult);
+    PfWaitingRoomDiagnosisVo selectDiagnosis(ExmMedResultDiagnosis dto);
 
     /**
      * 查询诊断小结
@@ -497,5 +505,21 @@ public interface PfTestWaitingRoomService {
      * @return
      */
     List<PfDiseaseZtreeVo> listDiseaseCatalogueTree(PfCatalogueTreeDto dto);
+
+    /**
+     * 思维导图
+     *
+     * @param dto
+     * @return
+     */
+    String selectReferralChartData(PfTestEvaDto dto);
+
+    /**
+     * 查询诊断分析、鉴别诊断列表
+     *
+     * @param dto
+     * @return
+     */
+    PageResult listDiagnosticChart(PfTestExamTagDto dto);
 
 }

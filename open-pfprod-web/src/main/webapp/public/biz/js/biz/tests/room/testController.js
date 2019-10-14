@@ -186,7 +186,7 @@ layui.config({
                     + '&idTestexecResult=' + $('#idTestexecResult').val()
                     + '&sdTestexec=' + sdTestexec + '&idMedCase=' + patId);
             }
-        } else if (execCode == '007') {
+        } else if (execCode == '007' || execCode == '011' || execCode == '012') {
             $('#iframe' + execCode).attr('src', basePath + execRef
                 + '?idMedicalrec=' + idMedicalrec + '&cdMedAsse=' + execCode
                 + '&idTestexecResult=' + $('#idTestexecResult').val()

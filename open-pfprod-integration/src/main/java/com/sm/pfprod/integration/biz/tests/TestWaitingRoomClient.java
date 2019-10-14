@@ -156,6 +156,10 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.saveDiagnosis(param);
     }
 
+    public CommonResult<Long> saveIdentifyDiagnosis(ExmMedResultIdentifyParam param) {
+        return pfTestWaitingRoomFacade.saveIdentifyDiagnosis(param);
+    }
+
     public CommonResult<Boolean> delDiagnosis(Long idTestexecResultDiagnosis) {
         return pfTestWaitingRoomFacade.delDiagnosis(idTestexecResultDiagnosis);
     }
@@ -180,8 +184,8 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.selectAllReferral(idTestexecResult);
     }
 
-    public CommonResult<PfWaitingRoomDiagnosisResult> selectDiagnosis(Long idTestexecResult) {
-        return pfTestWaitingRoomFacade.selectDiagnosis(idTestexecResult);
+    public CommonResult<PfWaitingRoomDiagnosisResult> selectDiagnosis(ExmMedResultDiagnosisParam param) {
+        return pfTestWaitingRoomFacade.selectDiagnosis(param);
     }
 
     public CommonResult<ExmMedResultSummaryResult> selectSummary(Long idTestexecResult) {
@@ -254,6 +258,14 @@ public class TestWaitingRoomClient {
 
     public CommonResult<List<PfDiseaseZtreeResult>> listDiseaseCatalogueTree(PfCatalogueTreeParam param) {
         return pfTestWaitingRoomFacade.listDiseaseCatalogueTree(param);
+    }
+
+    public CommonResult<String> selectReferralChartData(PfTestEvaParam param) {
+        return pfTestWaitingRoomFacade.selectReferralChartData(param);
+    }
+
+    public PfPageResult listDiagnosticChart(PfTestExamTagParam param)  {
+        return pfTestWaitingRoomFacade.listDiagnosticChart(param);
     }
 
 }

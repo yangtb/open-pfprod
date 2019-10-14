@@ -1,6 +1,6 @@
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['table', 'form', 'jquery', 'common', 'tableSelect','element'], function () {
+}).use(['table', 'form', 'jquery', 'common', 'tableSelect', 'element'], function () {
     var $ = layui.$
         , table = layui.table
         , form = layui.form
@@ -515,6 +515,138 @@ layui.config({
            return false;
         }
     });
+
+    // ============ 思维导图 begin ============
+
+    $(function(){
+
+        var bizData = {
+            idTestexecResult: idTestexecResult,
+            chartType : 1
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/referral/chart/data',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                if (data.code != 0) {
+                    layer.msg(data.msg);
+                    return false;
+                } else {
+                    if (data.data) {
+                        loadChart(data.data);
+                    }
+                }
+            },
+            error: function () {
+                layer.msg("网络异常");
+                return false;
+            }
+        });
+
+        function loadChart(dataScource) {
+            $('#chart-container').orgchart({
+                'data' : dataScource,
+                'nodeContent': 'title',
+                'direction': 't2b',
+                'createNode': function ($node, data) {
+                    if (data.type ) {
+                        if (data.type == 1) {
+                            $node.html('<button class="layui-btn layui-btn-radius">' + data.name + '</button>');
+                        } else if (data.type == 2) {
+                            $node.html('<button class="layui-btn layui-bg-blue" style="height: 50px;">' + data.name + '</button>');
+                        } else if (data.type == 3) {
+                            $node.html('<button class="layui-btn layui-btn-primary thirdChart" id="zdfx-' + data.id + '" style="border-color: #4A92D8">' + data.name + '</button>');
+                        } else if (data.type == 4){
+                            $node.html('<button class="layui-btn fourChart" id="jbzd-' + data.id + '" style="background-color: #64C092">' + data.name + '</button>');
+                        } else{
+                            $node.html('<button class="layui-btn">' + data.name + '</button>');
+                        }
+                    } else {
+                        $node.html('<button class="layui-btn">' + data.name + '</button>');
+                    }
+                }
+            });
+
+            $('.orgchart > table > tbody').find('.nodes').find(".lines:even").hide();
+            $('.orgchart > table > tbody > tr ').find('.nodes').find(".lines").hide();
+
+            // 绑定点击事件
+            var thirdCharts = document.querySelectorAll(".thirdChart");
+            for (var i = 0; i < thirdCharts.length; i++) {
+                tableSelectRender(thirdCharts[i].getAttribute("id"), 1);
+            }
+
+            var fourCharts = document.querySelectorAll(".fourChart");
+            for (var i = 0; i < fourCharts.length; i++) {
+                tableSelectRender(fourCharts[i].getAttribute("id"), 2);
+            }
+        }
+
+    });
+
+    // ============ 思维导图 end ==============
+
+
+    function tableSelectRender(id, type) {
+        // type = 1 加载拟真下面的检查，检验（且都是单选的）
+        // type = 2 加载拟真下的检查检验（只加载多选）
+        table = $.extend(table, {config: {checkName: 'fgClue'}});
+        tableSelect.render({
+            elem: '#' + id,
+            checkedKey: 'id',
+            searchKey: 'keywords',
+            table: {
+                url: basePath + '/pf/p/waiting/room/diagnostic/chart/list?type=' + type + '&idTestexecResult=' + idTestexecResult
+                , cols: [[
+                    {type: 'checkbox', fixed: true},
+                    {field: 'checkItem', minWidth: 160, title: '检查项'},
+                    {field: 'desResult', minWidth: 120, title: '结果'},
+                ]] //设置表头
+            },
+            done: function (elem, data) {
+                var selectData = data.data;
+                saveFgClue(selectData, type);
+            }
+        });
+    }
+
+    function saveFgClue(data, type) {
+        var reqBodyData = new Array();
+        var reqExamData = new Array();
+        $.each(data, function (index, content) {
+            var idArr = content.id.split("-");
+            if (idArr[0] == 'body') {
+                reqBodyData.push(idArr[1]);
+            } else {
+                reqExamData.push(idArr[1]);
+            }
+        });
+
+        if (reqBodyData.length >= 1) {
+            var bizBodyData = {
+                list : reqBodyData,
+                status : '1',
+                extId : idTestexecResult,
+                operationType : type,
+                extType : 1 // 先删后插
+            };
+            common.commonPost(basePath + '/pf/r/waiting/room/check/qa/status', bizBodyData, null);
+        }
+        if (reqExamData.length >= 1) {
+            var bizExamData = {
+                list : reqExamData,
+                status : '1',
+                extId : idTestexecResult,
+                operationType : type,
+                extType : 1 // 先删后插
+            };
+            common.commonPost(basePath + '/pf/r/waiting/room/exam/qa/status', bizExamData, null);
+        }
+
+    }
 })
 
 
