@@ -38,7 +38,7 @@
         </div>
 
         <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">指南说明<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
+            <label class="layui-form-label">指南说明</label>
             <div class="layui-input-block">
                 <button type="button" class="layui-btn" id="LAY_avatarUpload"><i class="layui-icon"></i>上传文件</button>
                 <button type="button" class="layui-btn layui-btn-normal" id="preview"><i class="iconfont icon-look2"></i> 预览</button>
@@ -51,8 +51,8 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label"></label>
             <div class="layui-input-block">
-                <input class="layui-input" lay-verify="required|url" lay-vertype="tips" autocomplete="off"
-                       name="guideNotesUrl" id="guideNotesUrl">
+                <input class="layui-input layui-disabled" lay-vertype="tips" autocomplete="off"
+                       name="guideNotesUrl" id="guideNotesUrl" disabled>
             </div>
         </div>
 
