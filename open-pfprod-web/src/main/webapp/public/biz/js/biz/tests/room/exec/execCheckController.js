@@ -700,7 +700,7 @@ layui.config({
                                 title: '<strong>体检小结</strong>',
                                 formType: 2,
                                 anim: 2,
-                                value: data.data.desConditionPe,
+                                value: data.data && data.data.desConditionPe ? data.data.desConditionPe : '' ,
                                 offset: [$(window).height() - 300, 100]
                             },
                             function (text, index) {

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
-#*<link rel="stylesheet" href="$!{contextPath}/public/biz/css/exam.css">*#
+    #*<link rel="stylesheet" href="$!{contextPath}/public/biz/css/exam.css">*#
     <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
 
     <script>
@@ -255,7 +255,21 @@
                             <table id="demo" lay-filter="demoFilter"></table>
                         </div>
                         <div class="layui-col-md6">
-                            <table id="evaLog"></table>
+                            <div class="layui-tab" lay-filter="evaTabFilter">
+                                <ul class="layui-tab-title">
+                                    <li class="layui-this" lay-id="1">评估明细</li>
+                                    <li lay-id="2">诊断标准</li>
+                                </ul>
+                                <div class="layui-tab-content">
+                                    <div class="layui-tab-item layui-show">
+                                        <table id="evaLog"></table>
+                                    </div>
+                                    <div class="layui-tab-item">
+                                        <textarea name="guideContent" id="guideContent" class="layui-textarea"
+                                                  style="height: 800px;" disabled></textarea>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

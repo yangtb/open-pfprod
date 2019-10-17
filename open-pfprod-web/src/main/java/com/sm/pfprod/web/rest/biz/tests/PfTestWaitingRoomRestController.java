@@ -602,7 +602,10 @@ public class PfTestWaitingRoomRestController extends BaseController {
     public ResultObject selectDiagnosis(@RequestBody ExmMedResultDiagnosis dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
-        Assert.isTrue(dto.getIdTestexecResultReferral() != null, "idTestexecResultReferral");
+        //Assert.isTrue(dto.getIdTestexecResultReferral() != null, "idTestexecResultReferral");
+        if (dto.getIdTestexecResultReferral() == null) {
+            throw new BizRuntimeException(ErrorCode.ERROR_GENERAL_110001, "请先填写拟诊");
+        }
         Assert.isTrue(dto.getIdDie() != null, "idDie");
         Assert.isTrue(dto.getFgDieClass() != null, "fgDieClass");
         return ResultObject.createSuccess("selectDiagnosis", ResultObject.DATA_TYPE_OBJECT,
@@ -907,6 +910,22 @@ public class PfTestWaitingRoomRestController extends BaseController {
 
         return ResultObject.createSuccess("selectAssessPatIdMedCase", ResultObject.DATA_TYPE_OBJECT,
                 pfTestWaitingRoomService.selectAssessPatIdMedCase(dto.getIdTestplanDetail()));
+    }
+
+    /**
+     * 查询病例评估指南
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
+    @PostMapping(value = "/eva/guide/content")
+    @ResponseBody
+    public ResultObject selectEvaGuideContent(@RequestBody ExmTestexec dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestplanDetail() != null, "idTestplanDetail");
+        return ResultObject.createSuccess("selectEvaGuideContent", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.selectEvaGuideContent(dto.getIdTestplanDetail()));
     }
 
 }

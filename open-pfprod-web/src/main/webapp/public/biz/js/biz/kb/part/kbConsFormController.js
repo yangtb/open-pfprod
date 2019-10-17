@@ -68,7 +68,7 @@ layui.config({
         }
     });
 
-    var formIdArr = new Array('searchAnswer', 'desInques', 'idAnswer', 'desAnswer', 'fgReason', 'fgBack', 'desExpert', 'test3');
+    var formIdArr = new Array('searchAnswer', 'desInques', 'idAnswer', 'desAnswer', 'fgReason', 'fgBack', 'desExpert', 'test3','addPreQuestion');
 
     $(document).ready(function () {
         if (previewFlag == '1') {

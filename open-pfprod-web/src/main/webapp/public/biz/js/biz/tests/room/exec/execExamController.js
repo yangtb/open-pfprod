@@ -722,7 +722,7 @@ layui.config({
                                 title: '<strong>辅检小节</strong>',
                                 formType: 2,
                                 anim: 2,
-                                value: data.data.desConditionFe,
+                                value:  data.data && data.data.desConditionFe ? data.data.desConditionFe : '' ,
                                 offset: [$(window).height() - 300, 100]
                             },
                             function (text, index) {

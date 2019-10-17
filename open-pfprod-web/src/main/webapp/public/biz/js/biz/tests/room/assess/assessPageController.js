@@ -194,6 +194,7 @@ layui.config({
         tableRender(data);
         evaLog();
         setPjResult();
+        loadGuideContent();
     }
 
     function tableRender(list) {
@@ -331,6 +332,8 @@ layui.config({
                 resultData.push(item);
             }
         });
+
+        element.tabChange('evaTabFilter', '1'); //切换tab
 
         table.reload('evaLogTableId', {
             data: resultData
@@ -718,6 +721,35 @@ layui.config({
         }
     }
 
+    
+    function loadGuideContent() {
+        var bizData = {
+            idTestplanDetail: idTestplanDetail
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/eva/guide/content',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    layer.msg(data.msg, {icon: 5});
+                    return false;
+                } else {
+                    if (data.data) {
+                        $('#guideContent').val(data.data);
+                    }
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                return false;
+            }
+        });
+    }
 
 });
 

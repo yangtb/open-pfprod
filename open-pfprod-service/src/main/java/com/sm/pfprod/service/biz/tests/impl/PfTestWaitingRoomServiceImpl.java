@@ -620,4 +620,13 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
         throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
     }
 
+    @Override
+    public String selectEvaGuideContent(Long idTestplanDetail) {
+        CommonResult<String> result = testWaitingRoomClient.selectEvaGuideContent(idTestplanDetail);
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
 }

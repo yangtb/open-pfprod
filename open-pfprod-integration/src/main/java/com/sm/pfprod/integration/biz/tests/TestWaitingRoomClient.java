@@ -276,4 +276,9 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.selectAssessPatIdMedCase(idTestplanDetail);
     }
 
+    public CommonResult<String> selectEvaGuideContent(Long idTestplanDetail) {
+        return pfTestWaitingRoomFacade.selectEvaGuideContent(idTestplanDetail);
+    }
+
+
 }

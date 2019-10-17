@@ -802,7 +802,7 @@ layui.config({
                                 title: '<strong>病情描述</strong>',
                                 formType: 2,
                                 anim: 2,
-                                value: data.data.desConditionHpi,
+                                value: data.data && data.data.desConditionHpi ? data.data.desConditionHpi : '' ,
                                 offset: [$(window).height() - 300, 100]
                             },
                             function (text, index) {

@@ -33,7 +33,7 @@
             <label class="layui-form-label">指南简介<i class="iconfont icon-required" style="color: #f03f2d"></i></label>
             <div class="layui-input-block">
                 <textarea placeholder="请输入指南简介" class="layui-textarea" name="guideContent" id="guideContent"
-                          lay-verify="required" lay-vertype="tips" style="height: 150px;"></textarea>
+                          lay-verify="required" lay-vertype="tips" style="height: 300px;"></textarea>
             </div>
         </div>
 
