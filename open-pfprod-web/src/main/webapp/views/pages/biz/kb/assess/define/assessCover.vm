@@ -82,7 +82,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="layui-inline">
+                            #*<div class="layui-inline" hidden>
                                 <label class="layui-form-label">疾病</label>
                                 <div class="layui-input-block">
                                     <div hidden>
@@ -93,7 +93,7 @@
                                            autocomplete="off" class="layui-input">
                                 </div>
 
-                            </div>
+                            </div>*#
                         </div>
 
                         <button type="button" id="addAnswerBtn" class="layui-btn layui-btn-sm #if($!{previewFlag} == '1') layui-btn-disabled#end"
