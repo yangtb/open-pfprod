@@ -281,6 +281,43 @@ public class PfKbAssessRestController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
+    @RequestMapping(value = "/thorough/list")
+    public ResultObject listThoroughAnswer(@RequestBody PfAssessCommonDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdEvaCaseItem() != null, "idEvaCaseItem");
+        Assert.isTrue(StringUtils.isNotBlank(dto.getSdType()), "sdType");
+        return ResultObject.createSuccess("listMustAnswer", ResultObject.DATA_TYPE_OBJECT,
+                pfKbAssessService.listThoroughAnswer(dto));
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
+    @RequestMapping(value = "/thorough/del")
+    public ResultObject delThorough(@RequestBody PfBachChangeStatusDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "list");
+        dto.setOperator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("delMust", ResultObject.DATA_TYPE_OBJECT,
+                pfKbAssessService.delThorough(dto));
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
+    @RequestMapping(value = "/thorough/save")
+    public ResultObject saveThorough(@RequestBody PfAssessThoroughDto dto) {
+        /* 参数校验 */
+        Assert.isTrue(StringUtils.isNotBlank(dto.getItemName()), "itemName");
+        Assert.isTrue(CollectionUtils.isNotEmpty(dto.getList()), "等效答案");
+        if (StringUtils.isNotBlank(dto.getTagFlag()) && dto.getTagFlag().equals(YesOrNoNum.YES.getCode())) {
+
+        } else {
+            Assert.isTrue(dto.getIdEvaCase() != null, "idEvaCase");
+        }
+        dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        dto.setCreator(CurrentUserUtils.getCurrentUsername());
+        return ResultObject.createSuccess("saveThorough", ResultObject.DATA_TYPE_OBJECT,
+                pfKbAssessService.saveThorough(dto));
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/effciency/del")
     public ResultObject delEffciency(@RequestBody PfBachChangeStatusDto dto) {
         /* 参数校验 */

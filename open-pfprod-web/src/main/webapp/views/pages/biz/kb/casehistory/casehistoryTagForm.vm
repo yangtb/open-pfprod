@@ -43,7 +43,7 @@
                                         data-type="med"
                                         data-index="$!{velocityCount}">
                                         <a href="javascript:;">
-                                            <img style="display: inline-block; width: 40px; height: 40px;"
+                                            <img style="display: inline-block; width: 30px; height: 30px;"
                                                  src="$!element.path">
                                             <cite style="padding-right: 2px;">
                                                 $!element.name
@@ -103,7 +103,7 @@
                                         data-type="eva"
                                         data-index="$!{velocityCount}">
                                         <a href="javascript:;">
-                                            <img style="display: inline-block; width: 40px; height: 40px;"
+                                            <img style="display: inline-block; width: 30px; height: 30px;"
                                                  src="$!element.path">
                                             <cite style="padding-right: 2px;">
                                                 $!element.name

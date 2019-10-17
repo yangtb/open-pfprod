@@ -192,6 +192,23 @@ public class PfKbAssessController extends BaseController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
+    @RequestMapping("/thorough/page")
+    public String thoroughtPage(Model model, PfAssessGetCommonDto dto) {
+        model.addAttribute("showBtn", dto.getShowBtn());
+        model.addAttribute("previewFlag", dto.getPreviewFlag());
+        model.addAttribute("showForm", dto.getShowForm());
+        model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
+        model.addAttribute("idEvaCase", dto.getIdEvaCase());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("caseName", dto.getCaseName());
+        model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
+        model.addAttribute("sheets", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllSheet())));
+        return "pages/biz/kb/assess/define/assessThorough";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping("/effciency/page")
     public String effciencyPage(Model model, PfAssessGetCommonDto dto) {
         model.addAttribute("showBtn", dto.getShowBtn());
@@ -274,6 +291,13 @@ public class PfKbAssessController extends BaseController {
     @ResponseBody
     public PageResult listKbMust(PfAssessCommonDto dto) {
         return pfKbAssessService.listKbMust(dto);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
+    @RequestMapping(value = "/thorough/list")
+    @ResponseBody
+    public PageResult listKbThorough(PfAssessCommonDto dto) {
+        return pfKbAssessService.listKbThorough(dto);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")

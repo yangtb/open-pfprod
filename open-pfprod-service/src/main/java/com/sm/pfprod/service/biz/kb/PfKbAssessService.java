@@ -202,6 +202,38 @@ public interface PfKbAssessService {
     Long saveMust(PfAssessMustDto dto);
 
     /**
+     * 全面检查估表 - 评估项 - 列表
+     *
+     * @param dto
+     * @return
+     */
+    PageResult listKbThorough(PfAssessCommonDto dto);
+
+    /**
+     * 全面检查估表 - 等效答案列表
+     *
+     * @param dto
+     * @return
+     */
+    List<FaqEvaCaseItemThorough> listThoroughAnswer(PfAssessCommonDto dto);
+
+    /**
+     * 全面检查估表 - 删除等效答案
+     *
+     * @param dto
+     * @return
+     */
+    boolean delThorough(PfBachChangeStatusDto dto);
+
+    /**
+     * 全面检查估表 - 保存等效答案
+     *
+     * @param dto
+     * @return
+     */
+    Long saveThorough(PfAssessThoroughDto dto);
+
+    /**
      * 检查效率 - 评估项 - 列表
      *
      * @param dto

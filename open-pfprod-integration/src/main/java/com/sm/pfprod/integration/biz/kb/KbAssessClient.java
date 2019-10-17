@@ -111,6 +111,24 @@ public class KbAssessClient {
         return pfKbAssessFacade.saveMust(param);
     }
 
+
+    public PfPageResult listKbThorough(PfAssessCommonParam param) {
+        return pfKbAssessFacade.listKbThorough(param);
+    }
+
+    public CommonResult<List<FaqEvaCaseItemThoroughResult>> listThoroughAnswer(PfAssessCommonParam param) {
+        return pfKbAssessFacade.listThoroughAnswer(param);
+    }
+
+    public CommonResult<Boolean> delThorough(PfBachChangeStatusParam param) {
+        return pfKbAssessFacade.delThorough(param);
+    }
+
+    public CommonResult<Long> saveThorough(PfAssessThoroughParam param) {
+        return pfKbAssessFacade.saveThorough(param);
+    }
+
+
     public PfPageResult listKbEffciency(PfAssessCommonParam param) {
         return pfKbAssessFacade.listKbEffciency(param);
     }

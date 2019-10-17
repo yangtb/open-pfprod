@@ -247,6 +247,45 @@ public class PfKbAssessServiceImpl implements PfKbAssessService {
     }
 
     @Override
+    public PageResult listKbThorough(PfAssessCommonDto dto) {
+        PfPageResult<FaqEvaCaseItemResult> result = kbAssessClient.listKbThorough(BeanUtil.convert(dto, PfAssessCommonParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public List<FaqEvaCaseItemThorough> listThoroughAnswer(PfAssessCommonDto dto) {
+        CommonResult<List<FaqEvaCaseItemThoroughResult>> result = kbAssessClient.listThoroughAnswer(BeanUtil.convert(dto, PfAssessCommonParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), FaqEvaCaseItemThorough.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public boolean delThorough(PfBachChangeStatusDto dto) {
+        CommonResult<Boolean> result = kbAssessClient.delThorough(BeanUtil.convert(dto, PfBachChangeStatusParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public Long saveThorough(PfAssessThoroughDto dto) {
+        List<FaqEvaCaseItemThoroughParam> list = BeanUtil.convertList(dto.getList(), FaqEvaCaseItemThoroughParam.class);
+        PfAssessThoroughParam param = BeanUtil.convert(dto, PfAssessThoroughParam.class);
+        param.setList(list);
+        CommonResult<Long> result = kbAssessClient.saveThorough(param);
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
     public PageResult listKbEffciency(PfAssessCommonDto dto) {
         PfPageResult<FaqEvaCaseItemResult> result = kbAssessClient.listKbEffciency(BeanUtil.convert(dto, PfAssessCommonParam.class));
         if (result == null) {
