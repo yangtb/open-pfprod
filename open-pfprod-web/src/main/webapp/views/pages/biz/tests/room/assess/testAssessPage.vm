@@ -323,6 +323,9 @@
     {{#  if(d.fgSystemAlgorithm == '1' && d.nzName && d.nzName != 'pgResult'){ }}
         {{d.scoreDimemsion}}/{{d.scoreMax}}
     {{#  } }}
+    {{#  if(d.fgSystemAlgorithm == '1' && d.pgItem){ }}
+        {{d.scoreDimemsion}}
+    {{#  } }}
 </script>
 
 <script type="text/html" id="statusBar">
