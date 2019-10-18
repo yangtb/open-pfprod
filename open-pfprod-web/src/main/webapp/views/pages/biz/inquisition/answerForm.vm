@@ -29,13 +29,12 @@
             <div hidden>
                 <input name="idAnswer" id="idAnswer" hidden>
                 <input name="idInques" id="idInques" hidden>
-                <input name="idMedia" id="idMedia" hidden>
                 <input name="sdType" id="sdType" hidden>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">答案内容<i class="iconfont icon-required"
                                                        style="color: #f03f2d"></i></label>
-                <div class="layui-input-block my-input-width">
+                <div class="layui-input-block">
                     <input type="text" name="desAnswer" autocomplete="off" class="layui-input"
                            placeholder="请输入答案内容" lay-verify="required|desAnswer" lay-vertype="tips">
                 </div>
@@ -43,7 +42,7 @@
 
             <div class="layui-form-item">
                 <label class="layui-form-label">专家解读</label>
-                <div class="layui-input-block my-input-width">
+                <div class="layui-input-block">
                 <textarea name="desExpert" class="layui-textarea" lay-verify="desAnswer" lay-vertype="tips"
                           placeholder="请输入专家解读"></textarea>
                 </div>
@@ -70,21 +69,26 @@
 
             <div class="layui-form-item">
                 <label class="layui-form-label">多媒体</label>
-                <div class="layui-input-inline" style="vertical-align: middle;width: 257px;">
-                    <input id="path" name="path" placeholder="请上传文件" autocomplete="off"
-                           class="layui-input layui-disabled" disabled>
-                    <div id="uploadProgress" style="padding-top: 15px;display: none;">
-                        <div class="layui-progress" lay-showpercent="true" lay-filter="demo">
-                            <div class="layui-progress-bar layui-bg-blue" lay-percent="0%"></div>
+                <div class="layui-input-block" style="vertical-align: middle;">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn layui-btn-normal layui-btn-sm" id="testList">选择多文件</button>
+                        <div class="layui-upload-list">
+                            <table class="layui-table">
+                                <thead>
+                                    <tr>
+                                        <th>文件名</th>
+                                        #*<th>大小</th>*#
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="demoList"></tbody>
+                            </table>
                         </div>
+                        <button type="button" class="layui-btn layui-btn-sm" id="testListAction">开始上传</button>
                     </div>
-
                 </div>
-                <button type="button" class="layui-btn layui-btn-primary" id="test3">
-                    <i class="layui-icon" style="color: #009688; font-weight: bold">&#xe608;</i>上传</button>
-                <button type="button" class="layui-btn layui-btn-primary" id="preview">
-                    <i class="iconfont icon-look1" style="color: #009688; font-weight: bold"></i> 预览
-                </button>
+
             </div>
 
             <div class="layui-form-item">

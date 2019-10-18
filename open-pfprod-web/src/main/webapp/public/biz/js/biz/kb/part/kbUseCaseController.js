@@ -42,7 +42,7 @@ layui.config({
     function appendTabContent(part) {
         var result = '';
         if (part.script) {
-            result = '<iframe id="iframe' + part.cdMedAsse + '" class="layui-col-xs12" scrolling="no" frameborder="0" style="height:740px;"';
+            result = '<iframe id="iframe' + part.cdMedAsse + '" class="layui-col-xs12" scrolling="no" frameborder="0" style="height:980px;"';
 
             if (part.cdMedAsse == cdMedAsse) {
                 result += 'src="' + basePath + part.script + '?idMedCase=' + idMedCase +

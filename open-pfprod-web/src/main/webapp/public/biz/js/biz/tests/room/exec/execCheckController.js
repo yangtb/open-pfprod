@@ -483,11 +483,44 @@ layui.config({
         })
     }
 
+    function appendMediahtml(data) {
+        let patientVar = '';
+        var begin = '<span>';
+        patientVar += begin + data.desResult + '</span>\n';
+
+        let picHtml = '', voiceHtml = '', videoHtml = '';
+        if (data.mediaList && data.mediaList.length > 0) {
+            $.each(data.mediaList, function (index, item) {
+                if (item.sdType == '1') {
+                    picHtml += '         <img id="patientImg' + item.idMedia + '"  src="' + item.path + '" alt="" style="width: 50px; height: 50px;cursor: pointer;"' +
+                        '                      onerror="onError(this)"' +
+                        '                      onclick="openMedia(' + item.sdType + ',' + item.idMedia + ')">\n';
+                } else if (item.sdType == '2') {
+                    voiceHtml += '  <p class="voice-box" style="margin-right: 0px;">\n' +
+                        '               <audio class="patient-voice" id="patientVoice' + item.idMedia + '" src="' + item.path + '"></audio>\n' +
+                        '               <button class="sound-icon" style="cursor: pointer;" onclick="openMedia(' + item.sdType + ', ' + item.idMedia + ')"><img src=' + basePath + '/public/layui/build/images/horn.png alt=""></button>\n' +
+                        '           </p>\n' ;
+                } else if (item.sdType == '3') {
+                    videoHtml +=   '<p class="voice-box">\n' +
+                        '               <audio class="patient-voice" id="patientVideo' + item.idMedia + '" src="' + item.path + '"></audio>\n' +
+                        '               <button class="sound-icon" style="cursor: pointer;" onclick="openMedia(' + item.sdType + ',' + item.idMedia + ')"><i class="iconfont icon-11"></i></button>\n' +
+                        '           </p>\n';
+                }
+            })
+        }
+
+        patientVar += '<div>' + picHtml + '</div>';
+        patientVar += '<div style="padding-top: 5px;">' + voiceHtml + '</div>';
+        patientVar += '<div style="padding-top: 5px;">' + videoHtml + '</div>';
+
+        return patientVar;
+    }
+
     function appendQaNormalHtml(data) {
         //1 图片 2 音频 3 视频 4 其它
 
-        let patientVar = null;
-        switch (data.sdType) {
+        let patientVar = appendMediahtml(data);
+        /*switch (data.sdType) {
             case '1':
                 patientVar = '<span>' + data.desResult + '</span>\n'+
                     '         <img class="response-img" id="patientImg' + data.idAnswer + '"  src="' + data.path + '" alt="" style="max-width: 350px; height: 200px;cursor: pointer;"' +
@@ -510,7 +543,7 @@ layui.config({
                 break;
             default:
                 patientVar = '<span>' + data.desResult + '</span>\n';
-        }
+        }*/
 
         console.log(data)
         var html = "                <li>\n" +

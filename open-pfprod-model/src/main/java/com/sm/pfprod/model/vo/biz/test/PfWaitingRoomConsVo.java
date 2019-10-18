@@ -1,10 +1,12 @@
 package com.sm.pfprod.model.vo.biz.test;
 
+import com.sm.pfprod.model.entity.BasMedia;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Setter
 @Getter
@@ -76,4 +78,14 @@ public class PfWaitingRoomConsVo implements Serializable {
      * 解释患者的回复
      */
     private String desReply;
+
+    /**
+     * 多媒体id
+     */
+    private String idMedia;
+
+    /**
+     * 多媒体
+     */
+    private List<BasMedia> mediaList;
 }

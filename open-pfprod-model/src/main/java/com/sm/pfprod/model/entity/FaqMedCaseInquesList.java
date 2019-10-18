@@ -62,7 +62,7 @@ public class FaqMedCaseInquesList implements Serializable {
     /**
      * 多媒体id
      */
-    private Long idMedia;
+    private String idMedia;
 
     /**
      * 是否需要说明理由

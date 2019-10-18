@@ -1,6 +1,5 @@
 package com.sm.pfprod.model.entity;
 
-import com.sm.pfprod.model.vo.common.media.BasMediaVo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +14,7 @@ import java.io.Serializable;
 @Setter
 @Getter
 @ToString
-public class FaqMedCaseBodyList extends BasMediaVo implements Serializable {
+public class FaqMedCaseBodyList implements Serializable {
 
     private static final long serialVersionUID = 1540450805283L;
 
@@ -68,7 +67,7 @@ public class FaqMedCaseBodyList extends BasMediaVo implements Serializable {
     /**
      * 多媒体id
      */
-    private Long idMedia;
+    private String idMedia;
 
     /**
      * 是否需要说明理由

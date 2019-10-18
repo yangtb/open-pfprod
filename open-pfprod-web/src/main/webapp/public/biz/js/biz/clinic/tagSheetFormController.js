@@ -14,9 +14,9 @@ layui.config({
         , height: 'full-20' //容器高度
         , cols: [[
             {type: 'radio', fixed: true},
-            {field: 'sort', title: '', width: 40},
+            {field: 'sort', title: '', width: 60},
             {field: 'path', width: 60, title: 'logo', align: 'center', templet: '#imgTpl'},
-            {field: 'name', width: 100, title: '标签名称'},
+            {field: 'name', width: 160, title: '标签名称'},
             {field: 'fgActive', width: 60, title: '状态', align: 'center', templet: '#fgActiveTpl'},
             {fixed: 'right', title: '操作', align: 'center', toolbar: '#tagBar'}
         ]] //设置表头

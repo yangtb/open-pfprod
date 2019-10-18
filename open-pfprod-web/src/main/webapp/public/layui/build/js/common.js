@@ -80,8 +80,7 @@ layui.define(['layer'], function (exports) {
                 content: '<div style="width: 350px;height: 110px;">\n' +
                     '    <div style="position: relative;top: 50%;transform: translateY(-50%);text-align: center;">' +
                     ' <audio controls=true>\n' +
-                    ' <source src=' + url + '.mp3 />\n' +
-                    ' <source src= ' + url + '.ogg />\n' +
+                    ' <source src=' + url + '/>\n' +
                     ' 你的浏览器不支持video标签。\n' +
                     ' </audio>\n' +
                     '</div>\n' +

@@ -38,7 +38,12 @@ public class BasInquesAnswer implements Serializable {
     /**
      * 多媒体ID
      */
-    private Long idMedia;
+    private String idMedia;
+
+    /**
+     * 多媒体文件，多个逗号隔开
+     */
+    private String mediaUrls;
 
     /**
      * 是否需要说明理由

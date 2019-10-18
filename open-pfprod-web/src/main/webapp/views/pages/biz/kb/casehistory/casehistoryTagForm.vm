@@ -31,7 +31,7 @@
             <li class="layui-this" lay-id="med">临床病例</li>
             <li lay-id="eva">评估表</li>
         </ul>
-        <div class="layui-tab-content">
+        <div class="layui-tab-content" style="margin-left: -10px;">
             <div class="layui-tab-item layui-show">
                 <div class="layadmin-shortcut">
                     <div class="layui-col-xs1">
@@ -55,7 +55,7 @@
                         </ul>
                     </div>
 
-                    <div class="layui-col-xs11" style="border-left: 1px solid #2F4056; padding-left: 5px;">
+                    <div class="layui-col-xs11" style="border-left: 1px solid #dddddd; padding-left: 5px;">
                         <form class="layui-form layui-form-pane" id="caseForm">
                             <div hidden>
 
@@ -87,7 +87,7 @@
 
                         </form>
                         <iframe id="caseHistoryTag" class='layui-col-xs12' frameborder="0" scrolling="no"
-                                style="height: 800px">
+                                style="height: 1000px">
                         </iframe>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                         </ul>
                     </div>
 
-                    <div class="layui-col-xs11" style="border-left: 1px solid #2F4056; padding-left: 5px;">
+                    <div class="layui-col-xs11" style="border-left: 1px solid #dddddd; padding-left: 5px;">
                         <form class="layui-form layui-form-pane" id="assessForm">
                             <div class="layui-form-item form-item-my5">
                                 <label class="layui-form-label">选择用例</label>

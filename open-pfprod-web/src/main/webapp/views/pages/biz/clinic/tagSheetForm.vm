@@ -19,11 +19,11 @@
 
 <body>
 <div>
-    <div class="layui-col-xs4" style="padding-right: 10px; margin-top: -10px;">
+    <div class="layui-col-xs5" style="padding-right: 10px; margin-top: -10px;">
         <table id="tagTable" lay-filter="tagTableFilter">
         </table>
     </div>
-    <div class="layui-col-xs8">
+    <div class="layui-col-xs7">
         <form class="layui-form layui-form-pane" id="tagForm">
             <div hidden>
                 <input name="idTag" id="idTag" hidden>
