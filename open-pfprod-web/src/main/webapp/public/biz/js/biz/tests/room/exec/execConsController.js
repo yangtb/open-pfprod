@@ -82,6 +82,9 @@ layui.config({
     });
 
     function zTreeOnClick(event, treeId, treeNode) {
+        $('#key-tab').hide();
+        rebderTable();
+        $('#table').show();
         _tableReload(treeNode.id, null);
     };
 

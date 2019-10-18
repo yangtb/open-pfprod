@@ -255,7 +255,11 @@
                             <table id="demo" lay-filter="demoFilter"></table>
                         </div>
                         <div class="layui-col-md6">
-                            <div class="layui-tab" lay-filter="evaTabFilter">
+                            <div style="padding-top: 10px">
+                                <textarea name="guideContent" id="guideContent" class="layui-textarea"
+                                      style="height: 1000px;" disabled></textarea>
+                            </div>
+                            #*<div class="layui-tab" lay-filter="evaTabFilter">
                                 <ul class="layui-tab-title">
                                     <li class="layui-this" lay-id="1">评估明细</li>
                                     <li lay-id="2">诊断标准</li>
@@ -269,7 +273,7 @@
                                                   style="height: 800px;" disabled></textarea>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*#
                         </div>
                     </div>
                 </div>
@@ -316,7 +320,7 @@
            onfocus="saveTips({{d.idTestexecResultDimension}})"
            style="height: 28px; border-color: #5FB878">
     {{#  } else { }}
-        {{d.scoreDimemsion}}
+        {{d.scoreDimemsion}}/{{d.scoreMax}}
     {{#  } }}
 </script>
 

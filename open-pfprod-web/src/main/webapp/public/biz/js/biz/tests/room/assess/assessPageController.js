@@ -102,7 +102,7 @@ layui.config({
 
     function initData() {
         var filterFlag = autoAssess == 1 ? 1 : 0;
-        layer.msg('正在加载数据，请稍后...', {icon: 16, shade: 0.01});
+        //layer.msg('正在加载数据，请稍后...', {icon: 16, shade: 0.01});
         var bizData = {
             idTestexecResult: idTestexecResult,
             filterFlag : filterFlag
@@ -192,22 +192,29 @@ layui.config({
 
     function listEva(data) {
         tableRender(data);
-        evaLog();
+        //evaLog();
         setPjResult();
         loadGuideContent();
     }
 
     function tableRender(list) {
+        if (list && list.length > 0) {
+            list[0].nzName = 'pgResult';
+        }
         //展示已知数据
         table.render({
             elem: '#demo'
             , id: 'demoTableId'
             , cols: [[ //标题栏
-                {field: 'pgItem', title: '评估项', width: 130}
-                , {field: 'nzName', minWidth: 120, align: 'left'}
-                , {field: 'weightDimemsion', title: '权重', width: 80, align: 'left'}
-                , {field: 'scoreDimemsion', title: '得分', width: 80, align: 'left', templet: '#scoreDimemsionTpl'}
-                , {field: 'weightScoreDimemsion', title: '加权分', width: 80, align: 'left'}
+                {field: 'pgItem', title: '评估项', width: 130, style:'font-weight: bold;'}
+                , {field: 'nzName', minWidth: 120, align: 'left', templet:function(d){
+                        return d.nzName != 'pgResult' ? d.nzName : '<span id="pgResult"></span>';
+                    }}
+                , {field: 'weightDimemsion', title: '权重', width: 80, align: 'left', templet:function(d){
+                        return d.weightDimemsion + "%";
+                    }}
+                , {field: 'scoreDimemsion', title: '得分', width: 120, align: 'center', templet: '#scoreDimemsionTpl'}
+                //, {field: 'weightScoreDimemsion', title: '加权分', width: 80, align: 'left'}
             ]]
             , data: list
             , skin: 'line' //表格风格
@@ -326,7 +333,7 @@ layui.config({
 
     //监听行双击事件
     table.on('rowDouble(demoFilter)', function (obj) {
-        var resultData = [];
+        /*var resultData = [];
         $.each(evaLogList, function (i, item) {
             if (obj.data.idTestexecResultDimension == item.idTestexecResultDimension) {
                 resultData.push(item);
@@ -337,7 +344,7 @@ layui.config({
 
         table.reload('evaLogTableId', {
             data: resultData
-        });
+        });*/
     });
 
     function setPjResult() {
@@ -358,6 +365,7 @@ layui.config({
                 } else {
                     if (data.data && data.data.sdTitleDic) {
                         $('#pjResult').text(data.data.sdTitleDic);
+                        $('#pgResult').text("(" + data.data.sdTitleDic + ")");
                     }
                     return true;
                 }
