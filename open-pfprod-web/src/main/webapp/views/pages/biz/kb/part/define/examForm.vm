@@ -29,7 +29,7 @@
             <div class="layui-inline">
                 <div class="layui-input-inline">
                     <input id="idInspect" name="idInspect" type="text"
-                           class="layui-input" readonly/>
+                           class="layui-input" autocomplete="off" readonly/>
                 </div>
             </div>
             <div class="layui-inline">

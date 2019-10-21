@@ -10,9 +10,6 @@ layui.config({
 
     var linkList = eval("(" + linkPath + ")");
 
-    var flag = false;
-    var isEnterReferral = false;
-
     window.onload = clockInit();
 
     var execTags;

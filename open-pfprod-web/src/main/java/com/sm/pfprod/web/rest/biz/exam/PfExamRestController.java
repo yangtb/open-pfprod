@@ -61,10 +61,15 @@ public class PfExamRestController extends BaseController {
     @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_EXM0030','ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping(value = "/question/classify/tree/select", method = RequestMethod.POST)
     @ResponseBody
-    public List<PfTreeSelectVo> listQuestionClassifyTreeSelect() {
+    public PfTreeSelectVo listQuestionClassifyTreeSelect() {
         String str = pfExamService.listQuestionClassifyTreeSelect();
         List<PfTreeSelectVo> list = JSON.parseArray(str, PfTreeSelectVo.class);
-        return list;
+        PfTreeSelectVo pfTreeSelectVo = new PfTreeSelectVo();
+        pfTreeSelectVo.setId("0");
+        pfTreeSelectVo.setName("全部");
+        pfTreeSelectVo.setOpen(true);
+        pfTreeSelectVo.setChildren(list);
+        return pfTreeSelectVo;
     }
 
     /**

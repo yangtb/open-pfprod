@@ -651,12 +651,20 @@ layui.config({
                         avgData.push(item.avgScore);
                     })
                     $.each(parData, function (i, item) {
+                        console.log("****************")
+                        console.log(item)
+                        console.log("****************")
                         textData.push({
                             text: item.pgItem,
                             max: item.weightScoreMax
                         });
                         personalData.push(item.weightScoreDimemsion);
                     })
+                    console.log("=================")
+                    console.log(textData)
+                    console.log(personalData)
+                    console.log(avgData)
+                    console.log("=================")
                     showChart(textData, personalData, avgData);
                     return true;
                 }

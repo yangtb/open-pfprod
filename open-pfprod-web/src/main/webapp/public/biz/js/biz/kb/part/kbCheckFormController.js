@@ -194,6 +194,9 @@ layui.config({
     });
 
     function reloadTable(keyword, idBodyCa) {
+        if (idBodyCa == "0") {
+            idBodyCa = null;
+        }
         table.reload('partCheckTableId', {
             where: {
                 idMedCase: idMedCase,

@@ -28,6 +28,8 @@
         var h = '$!{h}';
         var m = '$!{m}';
         var s = '$!{s}';
+        var flag = false;
+        var isEnterReferral = false;
     </script>
 </head>
 
