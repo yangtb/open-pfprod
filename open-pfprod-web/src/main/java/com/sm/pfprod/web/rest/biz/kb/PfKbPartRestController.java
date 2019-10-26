@@ -507,8 +507,8 @@ public class PfKbPartRestController {
         }
         dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
         dto.setCreator(CurrentUserUtils.getCurrentUsername());
-        return pfKbPartService.bachAddCons(dto) ? ResultObject.createSuccess("bachAddCons", ResultObject.DATA_TYPE_OBJECT, true)
-                : ResultObject.create("bachAddCons", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+        pfKbPartService.bachAddCons(dto);
+        return ResultObject.createSuccess("bachAddCons", ResultObject.DATA_TYPE_OBJECT, true);
     }
 
     /**
@@ -532,8 +532,8 @@ public class PfKbPartRestController {
         }
         dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
         dto.setCreator(CurrentUserUtils.getCurrentUsername());
-        return pfKbPartService.bachAddCheck(dto) ? ResultObject.createSuccess("bachAddCheck", ResultObject.DATA_TYPE_OBJECT, true)
-                : ResultObject.create("bachAddCheck", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+        pfKbPartService.bachAddCheck(dto);
+        return ResultObject.createSuccess("bachAddCheck", ResultObject.DATA_TYPE_OBJECT, true);
     }
 
     /**
@@ -557,8 +557,8 @@ public class PfKbPartRestController {
         }
         dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
         dto.setCreator(CurrentUserUtils.getCurrentUsername());
-        return pfKbPartService.bachAddExam(dto) ? ResultObject.createSuccess("bachAddExam", ResultObject.DATA_TYPE_OBJECT, true)
-                : ResultObject.create("bachAddExam", ErrorCode.ERROR_SYS_160002, ErrorMessage.MESSAGE_SYS_160002);
+        pfKbPartService.bachAddExam(dto);
+        return ResultObject.createSuccess("bachAddExam", ResultObject.DATA_TYPE_OBJECT, true);
     }
 
 

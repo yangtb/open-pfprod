@@ -104,7 +104,7 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.saveExamQa(param);
     }
 
-    public CommonResult<BigDecimal> saveBatchExamQa(PfTestExamTagParam param) {
+    public CommonResult<BigDecimal> saveBatchExamQa(List<ExmMedResultInspectParam> param) {
         return pfTestWaitingRoomFacade.saveBatchExamQa(param);
     }
 

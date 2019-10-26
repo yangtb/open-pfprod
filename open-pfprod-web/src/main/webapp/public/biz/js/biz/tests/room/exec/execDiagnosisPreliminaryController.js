@@ -77,7 +77,8 @@ layui.config({
                                 'catalogue="' + item.catalogue + '" referral-id="' + item.idTestexecResultReferral + '">' + idDieText + '</option>';
                         });
                         $('#question-select').append(html);
-                        loadDieReason();
+
+                        loadDieReasonCommon()
                     }
                 }
             },
@@ -92,27 +93,82 @@ layui.config({
     $('#saveDiagnosis').on('click', function () {
         layer.load(2);
         var url = basePath + '/pf/r/waiting/room/summary/diagnosis/save';
+        let catalogue = $('#question-select').find("option:selected").attr("catalogue");
+        let idDie;
+        if (catalogue == 1) {
+            idDie = $('#question-select-detail option:selected').val()
+        } else {
+            idDie = $('#question-select option:selected').val();
+        }
         var bizData = {
             idTestexecResult: idTestexecResult,
-            idDie: $('#question-select option:selected').val(),
+            idDie: idDie,
             idTestexecResultReferral : $("#question-select").find("option:selected").attr("referral-id"),
             fgDieClass : $("#question-select").find("option:selected").attr("catalogue"),
             desDieReason : $('#desDieReason').val()
-        }
-        if (bizData.fgDieClass == 0) {
-            bizData.fgDieClass = '2';
         }
         common.commonPost(url, bizData, '添加');
     });
 
     $('#question-select').on('change', function () {
+        $("#question-select-detail").empty();
+        loadDieReasonCommon();
+    });
+
+    $('#question-select-detail').on('change', function () {
         loadDieReason();
     });
 
+    function loadDieReasonCommon() {
+        let catalogue = $('#question-select').find("option:selected").attr("catalogue");
+        if (catalogue == 1) {
+            questionSelectDetail();
+        } else {
+            loadDieReason();
+        }
+    }
+
+    function questionSelectDetail() {
+        // 如果是目录，查询该目录的疾病
+        var reqData = {
+            queryChildCatalogue: 1,
+            id : $('#question-select option:selected').val()
+        }
+        $.ajax({
+            url: basePath + '/pf/r/disease/catalogue/tree',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(reqData),
+            success: function (data) {
+                var html = '';
+                $.each(data, function (i, item) {
+                    var idDieText = item.name;
+                    html += '<option class="item-option" value="' + item.idDie + '" ' +
+                        '>' + idDieText + '</option>';
+                });
+                $('#question-select-detail').append(html);
+                loadDieReason();
+                return true;
+            },
+            error: function () {
+                layer.msg("网络异常");
+                return false;
+            }
+        });
+    }
+
     function loadDieReason() {
+        let catalogue = $('#question-select').find("option:selected").attr("catalogue");
+        var idDie;
+        if (catalogue == 1) {
+            idDie = $('#question-select-detail option:selected').val()
+        } else {
+            idDie = $('#question-select option:selected').val();
+        }
         var bizData = {
             idTestexecResult: idTestexecResult,
-            idDie: $('#question-select option:selected').val(),
+            idDie: idDie,
             idTestexecResultReferral : $("#question-select").find("option:selected").attr("referral-id"),
             fgDieClass : $("#question-select").find("option:selected").attr("catalogue")
         };
@@ -184,7 +240,13 @@ layui.config({
                         if (data.type == 1) {
                             $node.html('<button class="layui-btn layui-btn-radius">' + data.name + '</button>');
                         } else if (data.type == 2) {
-                            $node.html('<button class="layui-btn layui-bg-blue" style="height: 50px;">' + data.name + '</button>');
+                            var fgExcludeHtml = '';
+                            if (data.fgExclude == '1') {
+                                fgExcludeHtml = '<span style="text-decoration: line-through; color: #FF5722;">' + data.name + '</span>';
+                            } else {
+                                fgExcludeHtml = data.name;
+                            }
+                            $node.html('<button class="layui-btn layui-bg-blue" style="height: 50px;">' + fgExcludeHtml + '</button>');
                         } else if (data.type == 3) {
                             $node.html('<button class="layui-btn layui-btn-primary thirdChart" id="zdfx-' + data.id + '" style="border-color: #4A92D8">' + data.name + '</button>');
                         } else if (data.type == 4){

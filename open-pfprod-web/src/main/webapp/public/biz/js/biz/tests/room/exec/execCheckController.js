@@ -176,7 +176,7 @@ layui.config({
     function tableSelectRender(id) {
         tableSelect.render({
             elem: '#nz' + id,
-            checkedKey: 'idDie',
+            checkedKey: 'idTestexecResultReferral',
             searchKey: 'keywords',
             table: {
                 url: basePath + '/pf/p/waiting/room/all/referral/die'
@@ -196,7 +196,7 @@ layui.config({
                 var nameArr = [],  idArr = []
                 layui.each(data.data, function (index, item) {
                     nameArr.push(item.name)
-                    idArr.push(item.idDie)
+                    idArr.push(item.idTestexecResultReferral)
                 })
                 var idStr = idArr.join(",");
                 var nameStr = nameArr.join(",");

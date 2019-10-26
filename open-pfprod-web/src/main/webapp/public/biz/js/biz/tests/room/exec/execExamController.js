@@ -65,14 +65,61 @@ layui.config({
     });
 
     function zTreeOnCheck(event, treeId, treeNode) {
+        if (treeNode.checked == true) {
+            popExamChildItem(treeNode.id, treeNode.name);
+        }
+    }
+
+    function popExamChildItem(extItemId, itemName) {
+        layer.open({
+            title: itemName,
+            shadeClose: true,
+            skin: 'layui-layer-molv',
+            area: ['350px', '635px'], //宽高
+            content: ' <table id="execExamChildTable" lay-filter="execExamChildTableFilter">\n' +
+                '      </table>',
+            success: function (layero, index) {
+                //执行渲染
+                table =  $.extend(table, {config: {checkName: 'extQa'}});
+                table.render({
+                    elem: '#execExamChildTable' //指定原始表格元素选择器（推荐id选择器）
+                    , id: 'execExamChildTableId'
+                    , height: '500' //容器高度
+                    , cols: [[
+                        {type: 'numbers', title: 'R'},
+                        {type:'checkbox'},
+                        {field: 'naItem', minWidth: 150, title: '检验项目'}
+                    ]] //设置表头
+                    , url: basePath + '/pf/p/waiting/room/test/exam/list'
+                    , where: {
+                        idMedicalrec: idMedicalrec,
+                        cdMedAsse: cdMedAsse,
+                        idTestexecResult: idTestexecResult,
+                        extItemId: extItemId
+                    }
+                    , limit: 500
+                    , page: false
+                });
+            },
+            yes: function (index, layero) {
+                var checkStatus = table.checkStatus('execExamChildTableId')
+                    , data = checkStatus.data;
+                if (data.length == 0) {
+                    return;
+                } else {
+                    bachSaveQa(extItemId, data)
+                }
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    }
+
+    function bachSaveQa(extItemId, bizData) {
         // 选择某分类节点后，自动勾选该分类节点下的所有检验项目
         // 1.勾选所有分类项目，计算金额返回
-        var bizData = {
-            idTestexecResult: idTestexecResult,
-            idInspect : treeNode.id,
-            idMedicalrec : idMedicalrec,
-            checked : treeNode.checked
-        }
+        $.each(bizData, function (index, item) {
+            item.idTestexecResult = idTestexecResult
+        })
         $.ajax({
             url: basePath + '/pf/r/waiting/room/exam/qa/batch/save',
             type: 'post',
@@ -86,9 +133,8 @@ layui.config({
                     return false;
                 } else {
                     // 2.刷新项目table和检查列表
-                    _tableReload(treeNode.id, null);
+                    _tableReload(extItemId, null);
                     queryQa();
-                    $("#amountTotal").text(data.data);
                     return true;
                 }
             },
@@ -155,6 +201,8 @@ layui.config({
             , limits: [20, 30, 50]
         }
         , done: function (res, curr, count) {
+            //console.log(res)
+            $("#amountTotal").text(res.ext ? res.ext : '0.00');
             $.each(res.data, function (i, item) {
                 tableSelectRender(item.idMedCaseList);
             });
@@ -164,7 +212,7 @@ layui.config({
     function tableSelectRender(id) {
         tableSelect.render({
             elem: '#nz' + id,
-            checkedKey: 'idDie',
+            checkedKey: 'idTestexecResultReferral',
             searchKey: 'keywords',
             table: {
                 url: basePath + '/pf/p/waiting/room/all/referral/die'
@@ -182,9 +230,10 @@ layui.config({
             },
             done: function (elem, data) {
                 var nameArr = [],  idArr = []
+                console.log(data.data)
                 layui.each(data.data, function (index, item) {
                     nameArr.push(item.name)
-                    idArr.push(item.idDie)
+                    idArr.push(item.idTestexecResultReferral)
                 })
                 var idStr = idArr.join(",");
                 var nameStr = nameArr.join(",");

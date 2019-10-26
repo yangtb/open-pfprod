@@ -170,7 +170,13 @@ layui.config({
                         if (data.type == 1) {
                             $node.html('<button class="layui-btn layui-btn-radius">' + data.name + '</button>');
                         } else if (data.type == 2) {
-                            $node.html('<button class="layui-btn layui-bg-blue">' + data.name + '</button>');
+                            var fgExcludeHtml = '';
+                            if (data.fgExclude == '1') {
+                                fgExcludeHtml = '<span style="text-decoration: line-through; color: #FF5722;">' + data.name + '</span>';
+                            } else {
+                                fgExcludeHtml = data.name;
+                            }
+                            $node.html('<button class="layui-btn layui-bg-blue" style="height: 50px;">' + fgExcludeHtml + '</button>');
                         } else {
                             $node.html('<button class="layui-btn">' + data.name + '</button>');
                         }

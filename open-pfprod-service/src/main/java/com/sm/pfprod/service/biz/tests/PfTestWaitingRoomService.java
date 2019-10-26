@@ -193,10 +193,10 @@ public interface PfTestWaitingRoomService {
     /**
      * 检验 - 批量保存问答问题
      *
-     * @param dto
+     * @param list
      * @return
      */
-    BigDecimal saveBatchExamQa(PfTestExamTagDto dto);
+    BigDecimal saveBatchExamQa(List<ExmMedResultInspect> list);
 
     /**
      * 检验 - 保存问答问题

@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Setter
 @Getter
@@ -77,5 +78,10 @@ public class PfTestExamTagDto extends PageParam implements Serializable {
      * 类型
      */
     private Integer type;
+
+    /**
+     * idMedCaseList集合
+     */
+    private List<Long> idMedCaseLists;
 
 }

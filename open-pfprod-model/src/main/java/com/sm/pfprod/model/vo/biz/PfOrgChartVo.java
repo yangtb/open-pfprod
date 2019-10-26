@@ -26,6 +26,8 @@ public class PfOrgChartVo implements Serializable {
 
     private Integer type;
 
+    private String fgExclude;
+
     private List<PfOrgChartVo> children;
 
 }

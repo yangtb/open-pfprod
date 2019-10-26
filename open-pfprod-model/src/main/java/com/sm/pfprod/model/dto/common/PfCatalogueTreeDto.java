@@ -50,6 +50,11 @@ public class PfCatalogueTreeDto implements Serializable {
     private int mainCatalogue;
 
     /**
+     * 查询目录下的疾病 1 是 2否
+     */
+    private int queryChildCatalogue;
+
+    /**
      * 主目录id
      */
     private String mainCatalogueId;

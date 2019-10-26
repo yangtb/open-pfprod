@@ -418,6 +418,9 @@ layui.config({
         $('#reset').click();
 
         data.path = data.path ? data.path : '';
+        data.costMoney = data.costMoney ? data.costMoney : '';
+        data.costTime = data.costTime ? data.costTime : '';
+        data.desResult = data.desResult ? data.desResult : '';
         $("#idResult").empty();
         $('#idResult').append("<option value='" + data.idResult + "'>" + data.valResult + "</option>");
 

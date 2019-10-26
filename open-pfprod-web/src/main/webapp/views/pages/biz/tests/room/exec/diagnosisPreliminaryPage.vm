@@ -226,6 +226,11 @@
                 <select id="question-select" class="item-style">
                 </select>
 
+                <div style="padding-top: 20px;">
+                    <select id="question-select-detail" class="item-style">
+                    </select>
+                </div>
+
                 <div style="padding: 20px 0 10px 5px">诊断理由</div>
 
                 <textarea name="desDieReason" id="desDieReason" class="layui-textarea"

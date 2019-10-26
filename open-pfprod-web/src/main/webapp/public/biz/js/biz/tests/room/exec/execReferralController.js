@@ -67,6 +67,7 @@ layui.config({
     function saveReferralCallback(data) {
         $('#idDie').val('');
         loadNz();
+        loadChartData();
     }
 
     function loadNz() {
@@ -517,12 +518,14 @@ layui.config({
     });
 
     // ============ 思维导图 begin ============
-
     $(function(){
+        loadChartData()
+    });
 
+    function loadChartData() {
         var bizData = {
             idTestexecResult: idTestexecResult,
-            chartType : 1
+            chartType : 2
         };
         $.ajax({
             url: basePath + '/pf/r/waiting/room/referral/chart/data',
@@ -545,47 +548,53 @@ layui.config({
                 return false;
             }
         });
+    }
 
-        function loadChart(dataScource) {
-            $('#chart-container').orgchart({
-                'data' : dataScource,
-                'nodeContent': 'title',
-                'direction': 't2b',
-                'createNode': function ($node, data) {
-                    if (data.type ) {
-                        if (data.type == 1) {
-                            $node.html('<button class="layui-btn layui-btn-radius">' + data.name + '</button>');
-                        } else if (data.type == 2) {
-                            $node.html('<button class="layui-btn layui-bg-blue" style="height: 50px;">' + data.name + '</button>');
-                        } else if (data.type == 3) {
-                            $node.html('<button class="layui-btn layui-btn-primary thirdChart" id="zdfx-' + data.id + '" style="border-color: #4A92D8">' + data.name + '</button>');
-                        } else if (data.type == 4){
-                            $node.html('<button class="layui-btn fourChart" id="jbzd-' + data.id + '" style="background-color: #64C092">' + data.name + '</button>');
-                        } else{
-                            $node.html('<button class="layui-btn">' + data.name + '</button>');
+    function loadChart(dataScource) {
+        $('#chart-container').empty();
+        $('#chart-container').orgchart({
+            'data' : dataScource,
+            'nodeContent': 'title',
+            'direction': 't2b',
+            'createNode': function ($node, data) {
+                if (data.type ) {
+                    if (data.type == 1) {
+                        $node.html('<button class="layui-btn layui-btn-radius">' + data.name + '</button>');
+                    } else if (data.type == 2) {
+                        var fgExcludeHtml = '';
+                        if (data.fgExclude == '1') {
+                            fgExcludeHtml = '<span style="text-decoration: line-through; color: #FF5722;">' + data.name + '</span>';
+                        } else {
+                            fgExcludeHtml = data.name;
                         }
-                    } else {
+                        $node.html('<button class="layui-btn layui-bg-blue" style="height: 50px;">' + fgExcludeHtml + '</button>');
+                    } else if (data.type == 3) {
+                        $node.html('<button class="layui-btn layui-btn-primary thirdChart" id="zdfx-' + data.id + '" style="border-color: #4A92D8">' + data.name + '</button>');
+                    } else if (data.type == 4){
+                        $node.html('<button class="layui-btn fourChart" id="jbzd-' + data.id + '" style="background-color: #64C092">' + data.name + '</button>');
+                    } else{
                         $node.html('<button class="layui-btn">' + data.name + '</button>');
                     }
+                } else {
+                    $node.html('<button class="layui-btn">' + data.name + '</button>');
                 }
-            });
-
-            $('.orgchart > table > tbody').find('.nodes').find(".lines:even").hide();
-            $('.orgchart > table > tbody > tr ').find('.nodes').find(".lines").hide();
-
-            // 绑定点击事件
-            var thirdCharts = document.querySelectorAll(".thirdChart");
-            for (var i = 0; i < thirdCharts.length; i++) {
-                tableSelectRender(thirdCharts[i].getAttribute("id"), 1);
             }
+        });
 
-            var fourCharts = document.querySelectorAll(".fourChart");
-            for (var i = 0; i < fourCharts.length; i++) {
-                tableSelectRender(fourCharts[i].getAttribute("id"), 2);
-            }
+        $('.orgchart > table > tbody').find('.nodes').find(".lines:even").hide();
+        $('.orgchart > table > tbody > tr ').find('.nodes').find(".lines").hide();
+
+        // 绑定点击事件
+        var thirdCharts = document.querySelectorAll(".thirdChart");
+        for (var i = 0; i < thirdCharts.length; i++) {
+            tableSelectRender(thirdCharts[i].getAttribute("id"), 1);
         }
 
-    });
+        var fourCharts = document.querySelectorAll(".fourChart");
+        for (var i = 0; i < fourCharts.length; i++) {
+            tableSelectRender(fourCharts[i].getAttribute("id"), 2);
+        }
+    }
 
     // ============ 思维导图 end ==============
 

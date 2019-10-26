@@ -230,8 +230,8 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     }
 
     @Override
-    public BigDecimal saveBatchExamQa(PfTestExamTagDto dto) {
-        CommonResult<BigDecimal> result = testWaitingRoomClient.saveBatchExamQa(BeanUtil.convert(dto, PfTestExamTagParam.class));
+    public BigDecimal saveBatchExamQa(List<ExmMedResultInspect> list) {
+        CommonResult<BigDecimal> result = testWaitingRoomClient.saveBatchExamQa(BeanUtil.convertList(list, ExmMedResultInspectParam.class));
         if (result != null && result.getIsSuccess()) {
             return result.getContent();
         }
