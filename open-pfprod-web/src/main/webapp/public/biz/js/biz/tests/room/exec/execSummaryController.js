@@ -49,21 +49,21 @@ layui.config({
     }
 
 
-    $("#desSumaryHpi").blur(function () {
+    $("#desSumaryHpi").change(function () {
         var bizData = {
             desSumaryHpi: $('#desSumaryHpi').val()
         }
         saveSummary(bizData);
     });
 
-    $("#desSumaryPe").blur(function () {
+    $("#desSumaryPe").change(function () {
         var bizData = {
             desSumaryPe: $('#desSumaryPe').val()
         }
         saveSummary(bizData);
     });
 
-    $("#desSumaryFe").blur(function () {
+    $("#desSumaryFe").change(function () {
         var bizData = {
             desSumaryFe: $('#desSumaryFe').val()
         }
