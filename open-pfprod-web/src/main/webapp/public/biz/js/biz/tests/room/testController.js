@@ -231,7 +231,20 @@ layui.config({
                 + '&idTestpaper=' + data.idTestpaper
                 + '&idTestexecResult=' + $('#idTestexecResult').val()
                 + '&autoAssess=1';
-            var index = common.open('模拟评估结果', url, 800, 500);
+            var index = layui.layer.open({
+                title: '<b>模拟评估结果</b>',
+                skin: 'layui-layer-molv', //样式类名
+                type: 2,
+                area: ['800px', '500px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: url,
+                shadeClose: true,
+                zIndex: 99999999,
+                success: function(layero){
+                    layer.setTop(layero); //通过这种方式弹出的层，每当它被选择，就会置顶。
+                }
+            });
             layer.full(index);
         } else {
             parent.layer.open({
