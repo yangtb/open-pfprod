@@ -226,7 +226,7 @@
                 <select id="question-select" class="item-style">
                 </select>
 
-                <div style="padding-top: 20px;">
+                <div id="zdDetail" style="padding-top: 20px;">
                     <select id="question-select-detail" class="item-style">
                     </select>
                 </div>

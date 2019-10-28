@@ -122,8 +122,10 @@ layui.config({
     function loadDieReasonCommon() {
         let catalogue = $('#question-select').find("option:selected").attr("catalogue");
         if (catalogue == 1) {
+            $('#zdDetail').show();
             questionSelectDetail();
         } else {
+            $('#zdDetail').hide();
             loadDieReason();
         }
     }
