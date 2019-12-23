@@ -28,7 +28,7 @@
         <form class="layui-form">
             <div class="layui-inline">
                 <div class="layui-input-inline">
-                    <input id="idInspect" name="idInspect" type="text"
+                    <input id="idInspectSearch" name="idInspect" type="text"
                            class="layui-input" autocomplete="off" readonly/>
                 </div>
             </div>
@@ -121,12 +121,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="layui-inline" style="margin-top: -25px;">
-                    <select name="isMasculine" id="isMasculine" lay-verify="">
-                        <option value="0">正常</option>
-                        <option value="1">↓</option>
-                        <option value="2">↑</option>
-                    </select>
+                <div class="layui-inline" style="margin-top: -25px">
+                    <div class="layui-input-block" style="width: 158px;">
+                        <select name="isMasculine" id="isMasculine" lay-verify="">
+                            <option value=""></option>
+                            <option value="0">正常</option>
+                            <option value="1">↓</option>
+                            <option value="2">↑</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -139,16 +142,13 @@
                                placeholder="费用" lay-verify="vDecimal" lay-vertype="tips">
                     </div>
                 </div>
-                <div class="layui-inline">
+               #* <div class="layui-inline">
                     <label class="layui-form-label">消耗时间(m)</label>
                     <div class="layui-input-block">
                         <input type="text" name="costTime" id="costTime" autocomplete="off" class="layui-input"
                                placeholder="消耗时间" lay-verify="vDecimal" lay-vertype="tips">
                     </div>
-                </div>
-            </div>
-
-            <div class="layui-form-item">
+                </div>*#
                 <div class="layui-inline">
                     <label class="layui-form-label">结果说明</label>
                     <div class="layui-input-block">
@@ -173,7 +173,7 @@
                     <div class="layui-input-block">
                         <input type="checkbox" name="fgReason" id="fgReason" value="1" title="是否需要说明理由">
                         <input type="checkbox" id="fgBack"
-                               name="fgBack" value="1" title="是否根据病人的回答反馈">
+                               name="fgBack" value="1" title="是否需要判读">
                     </div>
                 </div>
             </div>

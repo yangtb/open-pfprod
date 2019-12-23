@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="${contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="${contextPath}/public/biz/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/public/biz/iconfont/iconfont.css">
-    <link rel="stylesheet" href="${contextPath}/public/layui/build/js/treeSelect.js"></script>
+    #*<link rel="stylesheet" href="${contextPath}/public/layui/build/js/treeSelect.js"></script>*#
 
     <script>
         var basePath = '${basePath}';
         var contextPath = '${contextPath}';
         var formType = '${formType}';
+        var demo1;
     </script>
 </head>
 
@@ -46,7 +47,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">问题标签</label>
             <div class="layui-input-block">
-                <input id="sdInquesLabel" name="sdInquesLabel" type="text" lay-filter="sdInquesLabelTree" class="layui-input">
+                <div id="sdInquesLabel" style="width: 500px;" class="xm-select-demo"></div>
+                #*<input id="sdInquesLabel" name="sdInquesLabel" type="text" lay-filter="sdInquesLabelTree" class="layui-input">*#
             </div>
         </div>
 
@@ -86,7 +88,7 @@
     </form>
 </div>
 
-<script src="${contextPath}/public/layui/plugins/layui/layui.all.js"></script>
+<script src="${contextPath}/public/layui/plugins/layui/layui.js"></script>
 <script src="${contextPath}/public/common/js/jquery.min.js"></script>
 <script src="${contextPath}/public/common/js/jquery.formautofill.js"></script>
 <script src="${contextPath}/public/biz/js/biz/inquisition/inquisitionQuestionFormController.js"></script>

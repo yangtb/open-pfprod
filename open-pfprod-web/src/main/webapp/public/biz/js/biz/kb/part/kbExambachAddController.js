@@ -88,7 +88,8 @@ layui.config({
             url: basePath + '/pf/p/exam/question/list'
             , where: {
                 idInspect: idInspect,
-                naItem: naItem
+                naItem: naItem,
+                idMedCase : idMedCase
             }
             , height: 'full-68'
             , page: {

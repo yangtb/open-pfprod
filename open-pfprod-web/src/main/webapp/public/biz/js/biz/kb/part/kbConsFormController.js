@@ -4,7 +4,8 @@ layui.config({
     ckplayer: 'ckplayer/ckplayer'
     , Magnifier: 'js/Magnifier'
     , Event: 'js/Event'
-}).use(['table', 'form', 'upload', 'jquery', 'element', 'tableSelect', 'common', 'layer', 'treeSelect'], function () {
+    , xmSelect: 'xm-select'
+}).use(['table', 'form', 'upload', 'jquery', 'element', 'tableSelect', 'common', 'layer', 'treeSelect', 'xmSelect'], function () {
     var $ = layui.$
         , table = layui.table
         , form = layui.form
@@ -12,23 +13,52 @@ layui.config({
         , common = layui.common
         , element = layui.element
         , layer = layui.layer
+        , xmSelect = layui.xmSelect
         , treeSelect = layui.treeSelect
         , tableSelect = layui.tableSelect;
 
 
-    treeSelect.render({
-        elem: '#sdInquesLabel',
-        data: basePath + '/pf/r/inquisition/question/classify/label',
+    var demo1;
+    $.ajax({
+        url: basePath + '/pf/r/inquisition/question/classify/label/xmSelect',
         type: 'post',
-        placeholder: '请选择问题标签',
-        search: true,
-        click: function (d) {
-            $("#sdInquesLabel").val(d.current.id);
+        dataType: 'json',
+        contentType: "application/json",
+        //data: JSON.stringify(data.field),
+        success: function (data) {
+            demo1 = xmSelect.render({
+                el: '#sdInquesLabel',
+                autoRow: true,
+                filterable: true,
+                tree: {
+                    //是否显示树状结构
+                    show: true,
+                    //是否展示三角图标
+                    showFolderIcon: true,
+                    //是否显示虚线
+                    showLine: true,
+                    //间距
+                    indent: 20,
+                    //默认展开节点的数组, 为 true 时, 展开所有节点
+                    expandedKeys: true,
+                    //是否严格遵守父子模式
+                    strict: true,
+                },
+                filterable: true,
+                //height: 'auto',
+                data: data
+            })
+
+            return true;
+        },
+        error: function () {
+            common.errorMsg("网络异常");
+            return false;
         }
     });
 
     treeSelect.render({
-        elem: '#idInquesCa',
+        elem: '#idInquesCaSearch',
         data: basePath + '/pf/r/inquisition/question/classify/tree/select',
         type: 'post',
         placeholder: '请选择',
@@ -188,14 +218,14 @@ layui.config({
             , where: {
                 idMedCase: idMedCase
             }
-            , limit: 15
+            , limit: 20
             , page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
                 //,curr: 5 //设定初始在第 5 页
                 , groups: 1 //只显示 1 个连续页码
                 , first: false //不显示首页
                 , last: false //不显示尾页
-                , limits: [15, 30, 50, 100]
+                , limits: [20, 30, 50, 100]
             },done: function () {
                 $("[data-field='isMasculine']").css('display','none');
             }
@@ -223,6 +253,8 @@ layui.config({
                 idMedCase: idMedCase,
                 keyword: keyword,
                 idInquesCa : idInquesCa
+            }, page: {
+                curr: 1 //重新从第 1 页开始
             }
         });
     }
@@ -247,10 +279,10 @@ layui.config({
         ,auto: false
         ,bindAction: '#testListAction'
         ,choose: function(obj){
-            var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+            let files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
             //读取本地文件
             obj.preview(function(index, file, result){
-                var tr = $(['<tr id="upload-'+ index +'">'
+                let tr = $(['<tr id="upload-'+ index +'">'
                     ,'<td>'+ file.name +'</td>'
                     //,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
                     ,'<td>等待上传</td>'
@@ -276,15 +308,19 @@ layui.config({
             });
         }
         ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
-            layer.msg('正在上传，若文件过大，请耐心等待', {
-                icon: 16,
-                shade: 0.01,
-                time: false
-            });
+            //let files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+            //console.log(files)
+            if ($('#demoList').children('tr').length > 0) {
+                layer.msg('正在上传，若文件过大，请耐心等待', {
+                    icon: 16,
+                    shade: 0.01,
+                    time: false
+                });
+            }
         }
         ,done: function(res, index, upload){
             if(res.code == 0){ //上传成功
-                var tr = demoListView.find('tr#upload-'+ index)
+                let tr = demoListView.find('tr#upload-'+ index)
                     ,tds = tr.children();
                 tds.eq(1).html('<span style="color: #5FB878;">上传成功</span><input class="media-value" value="'+ res.data.idMedia +'" hidden>');
                 //tds.eq(2).html(''); //清空操作
@@ -294,13 +330,14 @@ layui.config({
             this.error(index, upload);
         }
         ,error: function(index, upload) {
-            var tr = demoListView.find('tr#upload-'+ index)
+            let tr = demoListView.find('tr#upload-'+ index)
                 ,tds = tr.children();
             tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
             tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
             layer.closeAll(); //关闭loading
         }
     });
+
     //--------------------文件上传end-----------------------
 
     $('#add').on('click', function () {
@@ -318,8 +355,20 @@ layui.config({
     })
 
     form.on('submit(saveCons)', function (data) {
-        data.field.sdInquesLabel = $("#sdInquesLabel").val();
-        var tableData = table.cache["preQuestionId"];
+        let selectArr = demo1.getValue();
+        let sdInquesLabelStr = '';
+        if (selectArr.length > 0) {
+            $.each(selectArr, function (index, item) {
+                if (index < selectArr.length - 1) {
+                    sdInquesLabelStr += item.value + ','
+                } else {
+                    sdInquesLabelStr += item.value
+                }
+
+            });
+        }
+        data.field.sdInquesLabel = sdInquesLabelStr;
+        let tableData = table.cache["preQuestionId"];
         if (tableData.length > 0) {
             for (var i = 0; i < tableData.length; i++) {
                 if (i == 0) {
@@ -336,7 +385,7 @@ layui.config({
         if (!data.field.fgCarried) {
             data.field.fgCarried = '0';
         }
-        var idMedia = '';
+        let idMedia = '';
         $(".media-value").each(function(index, item) {
             //console.log($(this).val())
             if (index == 0) {
@@ -350,14 +399,14 @@ layui.config({
         return false;
     });
 
-    var _callBack = function (data) {
+    let _callBack = function (data) {
         _tableReload();
         $('#idMedCaseList').val(data.data);
     }
 
     //监听工具条
     table.on('tool(partConsTableFilter)', function (obj) {
-        var data = obj.data;
+        let data = obj.data;
         if (obj.event === 'del') {
             _delCons(data);
         } else if (obj.event === 'reset') {
@@ -367,7 +416,7 @@ layui.config({
         }
     });
 
-    var _resetCons = function (obj) {
+    let _resetCons = function (obj) {
         var url = basePath + '/pf/r/kb/part/cons/reset';
         layer.confirm('真的要将：【' + obj.data.desInques + '】恢复默认么？', {
             title: '问题恢复默认提示',
@@ -387,7 +436,7 @@ layui.config({
         _tableReload();
     };
 
-    var _editCons = function (obj) {
+    let _editCons = function (obj) {
         /*var checkStatus = table.checkStatus('partConsTableId')
             , data = checkStatus.data;
         if (data.length == 0) {
@@ -440,6 +489,8 @@ layui.config({
         table.reload('partConsTableId', {
             where: {
                 idMedCase: idMedCase
+            }, page: {
+                curr: 1 //重新从第 1 页开始
             }
         });
     };
@@ -460,6 +511,7 @@ layui.config({
         $('#reset').click();
 
         data.path = data.path ? data.path : '';
+        data.desExpert = data.desExpert ? data.desExpert : '';
         $("#idAnswer").empty();
         $('#idAnswer').append("<option value='" + data.idAnswer + "'>" + data.desAnswer + "</option>");
 
@@ -467,14 +519,20 @@ layui.config({
         common.setFormStatus(data.fgCarried, formIdArr);
 
         // 撤销选中的节点
-        treeSelect.revokeNode('sdInquesLabelTree');
+        /*treeSelect.revokeNode('sdInquesLabelTree');
         // 填充treeSelect
         if (data.sdInquesLabel) {
             treeSelect.checkNode('sdInquesLabelTree', data.sdInquesLabel);
         } else {
             $("#sdInquesLabel").val('');
-        }
+        }*/
         form.render();
+
+        if (data.sdInquesLabel) {
+            demo1.setValue(data.sdInquesLabel.split(','))
+        } else {
+            demo1.setValue([])
+        }
 
         // 关联触发问题
         fullPreQuestionTable(data.idMedCaseList);
@@ -506,8 +564,7 @@ layui.config({
                 previewMedia(this.getAttribute('data-url'), this.getAttribute('sd-type'));
                 return false;
             });
-
-            demoListView.append(tr);
+            $('#demoList').append(tr);
         })
     }
 

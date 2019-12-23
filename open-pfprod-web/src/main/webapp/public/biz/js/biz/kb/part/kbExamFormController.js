@@ -15,7 +15,7 @@ layui.config({
         , tableSelect = layui.tableSelect;
 
     treeSelect.render({
-        elem: '#idInspect',
+        elem: '#idInspectSearch',
         data: basePath + '/pf/r/exam/question/classify/tree/select',
         type: 'post',
         placeholder: '请选择',
@@ -172,6 +172,8 @@ layui.config({
                 idMedCase: idMedCase,
                 keyword: keyword,
                 idInspect : idInspect
+            }, page: {
+                curr: 1 //重新从第 1 页开始
             }
         });
     }
@@ -216,10 +218,10 @@ layui.config({
         ,auto: false
         ,bindAction: '#testListAction'
         ,choose: function(obj){
-            var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+            let files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
             //读取本地文件
             obj.preview(function(index, file, result){
-                var tr = $(['<tr id="upload-'+ index +'">'
+                let tr = $(['<tr id="upload-'+ index +'">'
                     ,'<td>'+ file.name +'</td>'
                     //,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
                     ,'<td>等待上传</td>'
@@ -245,15 +247,19 @@ layui.config({
             });
         }
         ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
-            layer.msg('正在上传，若文件过大，请耐心等待', {
-                icon: 16,
-                shade: 0.01,
-                time: false
-            });
+            //let files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+            //console.log(files)
+            if ($('#demoList').children('tr').length > 0) {
+                layer.msg('正在上传，若文件过大，请耐心等待', {
+                    icon: 16,
+                    shade: 0.01,
+                    time: false
+                });
+            }
         }
         ,done: function(res, index, upload){
             if(res.code == 0){ //上传成功
-                var tr = demoListView.find('tr#upload-'+ index)
+                let tr = demoListView.find('tr#upload-'+ index)
                     ,tds = tr.children();
                 tds.eq(1).html('<span style="color: #5FB878;">上传成功</span><input class="media-value" value="'+ res.data.idMedia +'" hidden>');
                 //tds.eq(2).html(''); //清空操作
@@ -263,7 +269,7 @@ layui.config({
             this.error(index, upload);
         }
         ,error: function(index, upload) {
-            var tr = demoListView.find('tr#upload-'+ index)
+            let tr = demoListView.find('tr#upload-'+ index)
                 ,tds = tr.children();
             tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
             tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
@@ -290,6 +296,7 @@ layui.config({
         data.field.fgReason = data.field.fgReason ? '1' : '0';
         data.field.fgBack = data.field.fgBack ? '1' : '0';
         data.field.fgShow = data.field.fgShow ? '1' : '0';
+        data.field.isMasculine= data.field.isMasculine ? data.field.isMasculine : null;
         data.field.idMedCase = idMedCase;
         if (!data.field.fgCarried) {
             data.field.fgCarried = '0';
@@ -398,6 +405,8 @@ layui.config({
         table.reload('partExamTableId', {
             where: {
                 idMedCase: idMedCase
+            }, page: {
+                curr: 1 //重新从第 1 页开始
             }
         });
     };
@@ -418,15 +427,19 @@ layui.config({
         $('#reset').click();
 
         data.path = data.path ? data.path : '';
+        data.desExpert = data.desExpert ? data.desExpert : '';
+        data.naShort = data.naShort ? data.naShort : '';
+        data.idResult = data.idResult ? data.idResult : '';
         data.costMoney = data.costMoney ? data.costMoney : '';
         data.costTime = data.costTime ? data.costTime : '';
         data.desResult = data.desResult ? data.desResult : '';
         $("#idResult").empty();
         $('#idResult').append("<option value='" + data.idResult + "'>" + data.valResult + "</option>");
-
+        data.isMasculine = data.isMasculine ? data.isMasculine : '';
         $("#examForm").autofill(data);
         fullMediaUrl(data.mediaList);
         common.setFormStatus(data.fgCarried, formIdArr);
+
         form.render();
         editSelect();
     };

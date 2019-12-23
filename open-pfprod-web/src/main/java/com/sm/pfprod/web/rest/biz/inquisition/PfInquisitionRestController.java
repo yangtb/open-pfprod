@@ -14,6 +14,7 @@ import com.sm.pfprod.model.entity.BasInquesCa;
 import com.sm.pfprod.model.enums.OperationTypeEnum;
 import com.sm.pfprod.model.enums.SysDicGroupEnum;
 import com.sm.pfprod.model.result.PageResult;
+import com.sm.pfprod.model.vo.PfXmSelectVo;
 import com.sm.pfprod.model.vo.biz.PfTreeSelectVo;
 import com.sm.pfprod.model.vo.dic.PfDicCache;
 import com.sm.pfprod.service.biz.inquisition.PfInquisitionService;
@@ -78,6 +79,38 @@ public class PfInquisitionRestController extends BaseController {
                 pfTreeSelectVo.setId(pfDicCache.getDictCode());
                 pfTreeSelectVo.setName(pfDicCache.getDictName());
                 pfTreeSelectVo.setOpen(true);
+                children.add(pfTreeSelectVo);
+            }
+        }
+        return children;
+    }
+
+
+    @PreAuthorize("hasAnyRole('ROLE_ORG_MG','ROLE_FAQ0010','ROLE_EXM0040','ROLE_SUPER')")
+    @PostMapping(value = "/question/classify/label/xmSelect")
+    @ResponseBody
+    public List<PfXmSelectVo> selectQuestionClassifyLabelXm() {
+        List<PfXmSelectVo> treeSelectVos = new ArrayList<>();
+        List<PfDicCache> dicCaches = enumUtil.getEnumList(SysDicGroupEnum.INQUES_LABEL.getCode());
+        for (PfDicCache pfDicCache : dicCaches) {
+            if (pfDicCache.getDictCode().length() == 2) {
+                PfXmSelectVo pfTreeSelectVo = new PfXmSelectVo();
+                pfTreeSelectVo.setValue(pfDicCache.getDictCode());
+                pfTreeSelectVo.setName(pfDicCache.getDictName());
+                pfTreeSelectVo.setChildren(this.getChildrenXm(pfDicCache.getDictCode(), dicCaches));
+                treeSelectVos.add(pfTreeSelectVo);
+            }
+        }
+        return treeSelectVos;
+    }
+
+    private List<PfXmSelectVo> getChildrenXm(String parentCode, List<PfDicCache> dicCaches) {
+        List<PfXmSelectVo> children = new ArrayList<>();
+        for (PfDicCache pfDicCache : dicCaches) {
+            if (pfDicCache.getDictCode().length() == 4 && pfDicCache.getDictCode().startsWith(parentCode)) {
+                PfXmSelectVo pfTreeSelectVo = new PfXmSelectVo();
+                pfTreeSelectVo.setValue(pfDicCache.getDictCode());
+                pfTreeSelectVo.setName(pfDicCache.getDictName());
                 children.add(pfTreeSelectVo);
             }
         }

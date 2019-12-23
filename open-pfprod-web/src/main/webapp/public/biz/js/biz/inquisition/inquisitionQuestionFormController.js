@@ -2,16 +2,56 @@
 layui.config({
     base: basePath + '/public/layui/build/js/'
 }).extend({
-    formSelects: 'formSelects-v4'
-}).use(['form', 'layer', 'jquery', 'common', 'formSelects', 'treeSelect', 'table'], function () {
+    xmSelect: 'xm-select'
+}).use(['form', 'layer', 'jquery', 'common', 'xmSelect', 'table'], function () {
     var $ = layui.$,
         form = layui.form,
         common = layui.common
-        , treeSelect = layui.treeSelect
+        , xmSelect = layui.xmSelect
         , table = layui.table;
 
+
+
     if (formType == 'add') {
-        treeSelect.render({
+        $.ajax({
+            url: basePath + '/pf/r/inquisition/question/classify/label/xmSelect',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            //data: JSON.stringify(data.field),
+            success: function (data) {
+                demo1 = xmSelect.render({
+                    el: '#sdInquesLabel',
+                    autoRow: true,
+                    filterable: true,
+                    tree: {
+                        //是否显示树状结构
+                        show: true,
+                        //是否展示三角图标
+                        showFolderIcon: true,
+                        //是否显示虚线
+                        showLine: true,
+                        //间距
+                        indent: 20,
+                        //默认展开节点的数组, 为 true 时, 展开所有节点
+                        expandedKeys: true,
+                        //是否严格遵守父子模式
+                        strict: true,
+                    },
+                    filterable: true,
+                    //height: 'auto',
+                    data: data
+                })
+
+                return true;
+            },
+            error: function () {
+                common.errorMsg("网络异常");
+                return false;
+            }
+        });
+        //渲染多选
+        /*treeSelect.render({
             elem: '#sdInquesLabel',
             data: basePath + '/pf/r/inquisition/question/classify/label',
             type: 'post',
@@ -20,7 +60,7 @@ layui.config({
             click: function (d) {
                 $("#sdInquesLabel").val(d.current.id);
             }
-        });
+        });*/
         form.render();
         table.render({
             elem: '#test'
@@ -59,7 +99,19 @@ layui.config({
 
     //监听提交
     form.on('submit(addQuestion)', function (data) {
-        data.field.sdInquesLabel = $("#sdInquesLabel").val();
+        let selectArr = demo1.getValue();
+        let sdInquesLabelStr = '';
+        if (selectArr.length > 0) {
+            $.each(selectArr, function (index, item) {
+                if (index < selectArr.length - 1) {
+                    sdInquesLabelStr += item.value + ','
+                } else {
+                    sdInquesLabelStr += item.value
+                }
+
+            });
+        }
+        data.field.sdInquesLabel = sdInquesLabelStr;
         var tableData = table.cache["preQuestionId"];
         if (tableData.length > 0) {
             for (var i = 0; i < tableData.length; i++) {
@@ -97,25 +149,52 @@ layui.config({
 });
 
 
-function fullForm(data) {
+function fullForm(bizData) {
     $(document).ready(function () {
-        $("#questionForm").autofill(data);
-        layui.use(['form', 'treeSelect', 'table'], function () {
-            var treeSelect= layui.treeSelect
-                , table = layui.table;
+        $("#questionForm").autofill(bizData);
+        layui.use(['form' , 'xmSelect', 'table'], function () {
+
+            var  table = layui.table
+                , xmSelect = layui.xmSelect
+
             if(formType == 'edit') {
-                treeSelect.render({
-                    elem: '#sdInquesLabel',
-                    data: basePath + '/pf/r/inquisition/question/classify/label',
+                $.ajax({
+                    url: basePath + '/pf/r/inquisition/question/classify/label/xmSelect',
                     type: 'post',
-                    placeholder: '请选择问题标签',
-                    search: true,
-                    // 加载完成后的回调函数
-                    success: function (d) {
-                        treeSelect.checkNode('sdInquesLabelTree', data.sdInquesLabel);
-                    }
-                    , click: function (d) {
-                        $("#sdInquesLabel").val(d.current.id);
+                    dataType: 'json',
+                    contentType: "application/json",
+                    //data: JSON.stringify(data.field),
+                    success: function (data) {
+                         demo1 = xmSelect.render({
+                            el: '#sdInquesLabel',
+                            autoRow: true,
+                            filterable: true,
+                            tree: {
+                                //是否显示树状结构
+                                show: true,
+                                //是否展示三角图标
+                                showFolderIcon: true,
+                                //是否显示虚线
+                                showLine: true,
+                                //间距
+                                indent: 20,
+                                //默认展开节点的数组, 为 true 时, 展开所有节点
+                                expandedKeys: true,
+                                //是否严格遵守父子模式
+                                strict: true,
+                            },
+                            filterable: true,
+                            //height: 'auto',
+                            data: data
+                        })
+
+                        if (bizData.sdInquesLabel) {
+                            demo1.setValue(bizData.sdInquesLabel.split(','))
+                        }
+                        return true;
+                    },
+                    error: function () {
+                        return false;
                     }
                 });
             }
@@ -137,7 +216,7 @@ function fullForm(data) {
                 });
 
                 $.ajax({
-                    url: basePath + '/pf/p/inquisition/question/pre/list?idInques=' + data.idInques,
+                    url: basePath + '/pf/p/inquisition/question/pre/list?idInques=' + bizData.idInques,
                     type: 'get',
                     dataType: 'json',
                     contentType: "application/json",

@@ -225,6 +225,7 @@ layui.config({
     });
 
     form.on('select(sdEvaTypeSelectFilter)', function (data) {
+        $('#addAnswerBtn').attr('ts-selected', '');
         table.reload('answerTableId', {
             data: []
         });
@@ -331,7 +332,48 @@ layui.config({
                 selectData.idLongDrugs = dieList[i].idDrugs;
                 selectData.desText = dieList[i].name;
             }
-            oldData.push(selectData)
+            if (oldData.length == 0) {
+                oldData.push(selectData)
+            } else {
+                let flag = false;
+                for (let j = 0; j < oldData.length; j++) {
+                    if (type == '1') {
+                        if (oldData[j].idShortDrugs && selectData.idShortDrugs == oldData[j].idShortDrugs) {
+                            flag = true;
+                            break;
+                        }
+                    } else if (type == '2') {
+                        if (oldData[j].sdNursRout && selectData.sdNursRout == oldData[j].sdNursRout) {
+                            flag = true;
+                            break;
+                        }
+                    } else if (type == '3') {
+                        if (oldData[j].cdNursLevel && selectData.cdNursLevel == oldData[j].cdNursLevel) {
+                            flag = true;
+                            break;
+                        }
+                    } else if (type == '4') {
+                        if (oldData[j].sdDiet && selectData.sdDiet == oldData[j].sdDiet) {
+                            flag = true;
+                            break;
+                        }
+                    } else if (type == '5') {
+                        if (oldData[j].sdPosition && selectData.sdPosition == oldData[j].sdPosition) {
+                            flag = true;
+                            break;
+                        }
+                    } else if (type == '6') {
+                        if (oldData[j].idLongDrugs && selectData.idLongDrugs == oldData[j].idLongDrugs) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (flag == false) {
+                    oldData.push(selectData);
+                }
+            }
         }
         table.reload('answerTableId', {
             data: oldData
@@ -388,6 +430,7 @@ layui.config({
             data: []
         });
         $('#save').click();
+        $('#addAnswerBtn').attr('ts-selected', '');
         $('#scoreEva').val(defaultScoreEva);
         $('#addAnswerBtn').attr('ts-selected', '');
     });

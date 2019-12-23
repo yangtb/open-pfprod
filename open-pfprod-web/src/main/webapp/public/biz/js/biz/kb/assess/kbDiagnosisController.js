@@ -227,18 +227,33 @@ layui.config({
             , page: true
         },
         done: function (elem, data) {
-            var dieList = data.data;
-            var oldData = table.cache["answerTableId"];
+            let dieList = data.data;
+            let oldData = table.cache["answerTableId"];
             if (!oldData) {
                 //oldData = [];
             }
-            for (var i = 0; i < dieList.length; i++) {
-                var selectData = {};
+            for (let i = 0; i < dieList.length; i++) {
+                let selectData = {};
                 selectData.idEvaCaseItem = $('#idEvaCaseItem').val();
                 selectData.sdEvaReferral = $('#sdEvaType').val();
                 selectData.idDie = dieList[i].idDie;
                 selectData.idDieText = dieList[i].name;
-                oldData.push(selectData)
+
+                if (oldData.length == 0) {
+                    oldData.push(selectData)
+                } else {
+                    let flag = false;
+                    for (let j = 0; j < oldData.length; j++) {
+                        if (selectData.idDie == oldData[j].idDie) {
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if (flag == false) {
+                        oldData.push(selectData);
+                    }
+                }
             }
             table.reload('answerTableId', {
                 data: oldData
@@ -307,6 +322,7 @@ layui.config({
             data: []
         });
         $('#save').click();
+        $('#addAnswerBtn').attr('ts-selected', '');
         $('#scoreEva').val(defaultScoreEva);
     });
 

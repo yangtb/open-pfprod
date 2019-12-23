@@ -37,4 +37,10 @@ public class PfInquisitionQuestionDto extends PageParam implements Serializable 
      * 扩展id
      */
     private Long extId;
+
+    /**
+     * 过滤标识
+     */
+    private Long idMedCase;
+
 }

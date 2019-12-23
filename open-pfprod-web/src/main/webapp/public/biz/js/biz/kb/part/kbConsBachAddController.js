@@ -86,7 +86,8 @@ layui.config({
             url: basePath + '/pf/p/inquisition/question/list'
             , where: {
                 idInquesCa: idInquesCa,
-                desInques: desInques
+                desInques: desInques,
+                idMedCase : idMedCase
             }
             , height: 'full-60'
             , page: {

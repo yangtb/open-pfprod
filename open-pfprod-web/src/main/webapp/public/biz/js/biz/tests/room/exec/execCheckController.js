@@ -759,6 +759,7 @@ layui.config({
 
 
 function control(idResult) {
+    console.log(idResult)
     var audio = document.querySelector('#patientVoice' + idResult);
     if (audio !== null) {
         //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
@@ -778,6 +779,9 @@ function openMedia(sdType, idResult) {
         if (sdType == '1') {
             var path = $('#patientImg' + idResult).attr('src');
             layui.common.openSinglePhoto(path);
+        } else if (sdType == '2') {
+            var path = $('#patientVoice' + idResult).attr('src');
+            layui.common.openAudio(path);
         } else if (sdType == '3') {
             var path = $('#patientVideo' + idResult).attr('src');
             layui.common.openTopVideo(basePath + '/video/form?path=' + path, 890, 504);

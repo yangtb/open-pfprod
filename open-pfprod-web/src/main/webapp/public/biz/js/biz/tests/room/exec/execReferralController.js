@@ -108,6 +108,8 @@ layui.config({
         $('#zdField').empty();
         $('#zdField').append(result);
 
+        registerOutNzEvent();
+
         $.each(dataList, function (i, item) {
             renderZdSelect(i, item.idTestexecResultReferral);
             renderDelSelect(i, item.idTestexecResultReferral);
@@ -123,14 +125,14 @@ layui.config({
             '                        <span class="disc"></span>\n' +
             '                        <span class="diagnose-title">拟诊' + (i + 1) + '：' + data.idDieText +'</span>\n' +
             '                        <span>\n' +
-            '                            <button style="float: right; margin-right: 10px;" class="layui-btn layui-btn-xs' ;
+            '                            <button data-index="' + i + '" data-content-id="' + data.idTestexecResultReferral + '" data-die-id="' + data.idDieText + '" style="float: right; margin-right: 10px;" class="layui-btn layui-btn-xs outNzBtn' ;
         if(data.fgExclude == '1') {
             newHtml +=' layui-btn-disabled" disabled style="color:red;" ';
         } else {
             newHtml +='" ';
         }
         newHtml +=  ' id="out' + i + '" ' +
-            '       onclick="outNz(' + i + ', ' + data.idTestexecResultReferral + ', \'' + data.idDieText + '\')">\n' +
+            '       >\n' +
             '                            <i class="layui-icon layui-icon-delete"></i><span id="outBtnText' + i + '"';
 
         if(data.fgExclude == '1') {
@@ -265,6 +267,25 @@ layui.config({
         //     '            </div>';
 
         return newHtml;
+    }
+
+    function registerOutNzEvent() {
+        let outNzBtns = document.querySelectorAll(".outNzBtn");
+        for (var i = 0; i < outNzBtns.length; i++) {
+            outNzBtns[i].addEventListener('click', function () {
+                let i = this.getAttribute("data-index");
+                let idTestexecResultReferral = this.getAttribute("data-content-id");
+                let idDieText = this.getAttribute("data-die-id");
+
+                layui.layer.confirm('确定排除拟诊【' + idDieText + '】么？', {
+                    shade: 0
+                    /*offset: [$('#out' + i).offset().top + 'px', $('#out' + i).offset().left + 'px'],*/
+                }, function (index) {
+                    outNzPost(i, idTestexecResultReferral);
+                    layer.close(index);
+                });
+            });
+        }
     }
 
     function renderZdSelect(i, idTestexecResultReferral) {
@@ -656,60 +677,54 @@ layui.config({
         }
 
     }
+
+
+
+    function outNzPost(i, idTestexecResultReferral) {
+        let bizData = {
+            idTestexecResultReferral: idTestexecResultReferral
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/referral/out',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    layer.tips(data.msg, '#out' + i, {tips: 1});
+                    return false;
+                } else {
+                    layer.tips("排除成功", '#out' + i, {tips: 1});
+                    outCallBack(i);
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                layui.common.errorMsg(data.msg + "失败");
+                return false;
+            }
+        });
+    }
+
+    function outCallBack(i) {
+        $('#out' + i).addClass("layui-btn-disabled");
+        $('#out' + i).attr("disabled", "disabled");
+        $('#out' + i).css("color","red");
+        $('#outBtnText' + i).text('已排除');
+
+        $('#addReason' + i).addClass("layui-btn-disabled");
+        $('#addReason' + i).attr("disabled", "disabled");
+
+        loadChartData();
+    }
+
+
+
 })
 
 
-function outNz(i, idTestexecResultReferral, idDieText) {
-    layui.config({
-        base: basePath + '/public/layui/build/js/'
-    }).use(['layer', 'common'], function () {
-        layui.layer.confirm('确定排除拟诊【' + idDieText + '】么？', {
-            shade: 0
-            /*offset: [$('#out' + i).offset().top + 'px', $('#out' + i).offset().left + 'px'],*/
-        }, function (index) {
-            outNzPost(i, idTestexecResultReferral);
-            layer.close(index);
-        });
 
-        function outNzPost(i, idTestexecResultReferral) {
-            var bizData = {
-                idTestexecResultReferral: idTestexecResultReferral
-            };
-            $.ajax({
-                url: basePath + '/pf/r/waiting/room/referral/out',
-                type: 'post',
-                dataType: 'json',
-                contentType: "application/json",
-                data: JSON.stringify(bizData),
-                success: function (data) {
-                    layer.closeAll('loading');
-                    if (data.code != 0) {
-                        layer.tips(data.msg, '#out' + i, {tips: 1});
-                        return false;
-                    } else {
-                        layer.tips("排除成功", '#out' + i, {tips: 1});
-                        outCallBack(i);
-                        return true;
-                    }
-                },
-                error: function () {
-                    layer.closeAll('loading');
-                    layui.common.errorMsg(data.msg + "失败");
-                    return false;
-                }
-            });
-        }
-
-        function outCallBack(i) {
-            $('#out' + i).addClass("layui-btn-disabled");
-            $('#out' + i).attr("disabled", "disabled");
-            $('#out' + i).css("color","red");
-            $('#outBtnText' + i).text('已排除');
-
-            $('#addReason' + i).addClass("layui-btn-disabled");
-            $('#addReason' + i).attr("disabled", "disabled");
-        }
-    });
-    return false;
-}
 

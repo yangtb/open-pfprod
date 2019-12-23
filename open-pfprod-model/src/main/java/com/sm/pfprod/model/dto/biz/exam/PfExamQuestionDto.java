@@ -38,4 +38,6 @@ public class PfExamQuestionDto extends PageParam implements Serializable {
      * 扩展id
      */
     private Long extId;
+
+    private Long idMedCase;
 }

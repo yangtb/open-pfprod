@@ -17,7 +17,7 @@ layui.config({
         , formSelects = layui.formSelects;
 
     treeSelect.render({
-        elem: '#idBodyCa',
+        elem: '#idBodyCaSearch',
         data: basePath + '/pf/r/check/question/classify/tree/select',
         type: 'post',
         placeholder: '请选择',
@@ -202,6 +202,8 @@ layui.config({
                 idMedCase: idMedCase,
                 keyword: keyword,
                 idBodyCa : idBodyCa
+            }, page: {
+                curr: 1 //重新从第 1 页开始
             }
         });
     }
@@ -232,10 +234,10 @@ layui.config({
         ,auto: false
         ,bindAction: '#testListAction'
         ,choose: function(obj){
-            var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+            let files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
             //读取本地文件
             obj.preview(function(index, file, result){
-                var tr = $(['<tr id="upload-'+ index +'">'
+                let tr = $(['<tr id="upload-'+ index +'">'
                     ,'<td>'+ file.name +'</td>'
                     //,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
                     ,'<td>等待上传</td>'
@@ -261,15 +263,19 @@ layui.config({
             });
         }
         ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
-            layer.msg('正在上传，若文件过大，请耐心等待', {
-                icon: 16,
-                shade: 0.01,
-                time: false
-            });
+            //let files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+            //console.log(files)
+            if ($('#demoList').children('tr').length > 0) {
+                layer.msg('正在上传，若文件过大，请耐心等待', {
+                    icon: 16,
+                    shade: 0.01,
+                    time: false
+                });
+            }
         }
         ,done: function(res, index, upload){
             if(res.code == 0){ //上传成功
-                var tr = demoListView.find('tr#upload-'+ index)
+                let tr = demoListView.find('tr#upload-'+ index)
                     ,tds = tr.children();
                 tds.eq(1).html('<span style="color: #5FB878;">上传成功</span><input class="media-value" value="'+ res.data.idMedia +'" hidden>');
                 //tds.eq(2).html(''); //清空操作
@@ -279,7 +285,7 @@ layui.config({
             this.error(index, upload);
         }
         ,error: function(index, upload) {
-            var tr = demoListView.find('tr#upload-'+ index)
+            let tr = demoListView.find('tr#upload-'+ index)
                 ,tds = tr.children();
             tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
             tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
@@ -494,7 +500,10 @@ layui.config({
         table.reload('partCheckTableId', {
             where: {
                 idMedCase: idMedCase
+            }, page: {
+                curr: 1 //重新从第 1 页开始
             }
+
         });
     };
 

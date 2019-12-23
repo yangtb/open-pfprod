@@ -86,7 +86,8 @@ layui.config({
             url: basePath + '/pf/p/check/question/list'
             , where: {
                 idBodyCa: idBodyCa,
-                desBody: desBody
+                desBody: desBody,
+                idMedCase : idMedCase
             }
             , height: 'full-68'
             , page: {

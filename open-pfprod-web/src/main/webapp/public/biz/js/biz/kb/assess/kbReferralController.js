@@ -63,7 +63,7 @@ layui.config({
             , height: '558' //容器高度
             , cols: [[
                 {type: 'radio'},
-                {field: 'sdEva', width: 90, title: '评估阶段', templet: '#sdEvaTpl'},
+                /*{field: 'sdEva', width: 90, title: '评估阶段', templet: '#sdEvaTpl'},*/
                 {field: 'itemName', minWidth: 90, title: '评估项'},
                 {field: 'scoreEva', width: 60, title: '分值'},
                 {fixed: 'right', title: '操作', width: 60, align: 'left', toolbar: '#kbBar'}
@@ -139,7 +139,7 @@ layui.config({
         elem: '#answerTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'answerTableId'
         , title: '等效答案'
-        , height: '315' //容器高度
+        , height: '375' //容器高度
         //, toolbar: '#toolbarDemo'
         , defaultToolbar: []
         , cols: [[
@@ -355,6 +355,8 @@ layui.config({
             return false;
         }
 
+
+        data.field.sdEva = 1;
         data.field.idEvaCase = idEvaCase;
         data.field.cdEvaAsse = cdEvaAsse;
         data.field.list = tableData;

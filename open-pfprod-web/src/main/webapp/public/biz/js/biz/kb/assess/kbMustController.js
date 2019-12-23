@@ -241,7 +241,7 @@ layui.config({
         table.reload('answerTableId', {
             data: []
         });
-
+        $('#addAnswerBtn').attr('ts-selected', '');
         _tableSelectRender(data.value);
     });
 
@@ -321,13 +321,13 @@ layui.config({
     };
 
     function tableSelectDone(elem, data, type) {
-        var dieList = data.data;
-        var oldData = table.cache["answerTableId"];
+        let dieList = data.data;
+        let oldData = table.cache["answerTableId"];
         if (!oldData) {
             oldData = [];
         }
-        for (var i = 0; i < dieList.length; i++) {
-            var selectData = {};
+        for (let i = 0; i < dieList.length; i++) {
+            let selectData = {};
             selectData.idEvaCaseItem = $('#idEvaCaseItem').val();
             selectData.sdEvaEffciency = $('#sdEvaType').val();
             if (type == '1') {
@@ -340,8 +340,35 @@ layui.config({
                 selectData.idInspectItem = dieList[i].idInspectItem;
                 selectData.desText = dieList[i].naItem;
             }
-            oldData.push(selectData)
+            if (oldData.length == 0) {
+                oldData.push(selectData)
+            } else {
+                let flag = false;
+                for (let j = 0; j < oldData.length; j++) {
+                    if (type == '1') {
+                        if (oldData[j].idInques && selectData.idInques == oldData[j].idInques) {
+                            flag = true;
+                            break;
+                        }
+                    } else if (type == '2') {
+                        if (oldData[j].idBody && selectData.idBody == oldData[j].idBody) {
+                            flag = true;
+                            break;
+                        }
+                    } else if (type == '3') {
+                        if (oldData[j].idInspectItem && selectData.idInspectItem == oldData[j].idInspectItem) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (flag == false) {
+                    oldData.push(selectData);
+                }
+            }
         }
+
         table.reload('answerTableId', {
             data: oldData
         });
@@ -397,6 +424,7 @@ layui.config({
             data: []
         });
         $('#save').click();
+        $('#addAnswerBtn').attr('ts-selected', '');
         $('#scoreEva').val(defaultScoreEva);
     });
 

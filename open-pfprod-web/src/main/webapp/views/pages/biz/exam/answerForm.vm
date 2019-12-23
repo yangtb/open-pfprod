@@ -60,13 +60,14 @@
                                placeholder="费用" lay-verify="vDecimal" lay-vertype="tips">
                     </div>
                 </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">消耗时间(m)</label>
+                #*<div class="layui-inline">
+                    <label class="layui-form-label">
+                        消耗时间(m)</label>
                     <div class="layui-input-block">
                         <input type="text" name="costTime" id="costTime" autocomplete="off" class="layui-input"
                                placeholder="消耗时间" lay-verify="vDecimal" lay-vertype="tips">
                     </div>
-                </div>
+                </div>*#
             </div>
 
             <div class="layui-form-item form-item-my">
@@ -93,7 +94,7 @@
 #*            <div class="layui-form-item form-item-my5">
                 <label class="layui-form-label" style="padding-right: 88px;"></label>
                 <input type="checkbox"
-                       name="fgBack" value="1" title="是否根据病人的回答反馈">
+                       name="fgBack" value="1" title="是否需要判读">
 
             *##*<input type="radio" name="radioGroup" value="fgTag" title="标签">*##*
             </div>*#

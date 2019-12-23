@@ -83,39 +83,34 @@ layui.config({
 
     function zTreeOnClick(event, treeId, treeNode) {
         $('#key-tab').hide();
-        rebderTable();
         $('#table').show();
         _tableReload(treeNode.id, null);
     };
 
-    //执行渲染
-    function rebderTable(sdInquesLabel) {
-        table.render({
-            elem: '#partConsTable' //指定原始表格元素选择器（推荐id选择器）
-            , id: 'partConsTableId'
-            , height: '580' //容器高度
-            , cols: [[
-                {type: 'numbers',width: 50, title: 'R'},
-                {field: 'desInques', title: '问题'},
-                {field: 'qa', width: 60, title: '提问', fixed: 'right', align: 'center', templet: '#qaTpl'}
-            ]] //设置表头
-            , url: basePath + '/pf/p/waiting/room/test/cons/list'
-            , where: {
-                idMedicalrec: idMedicalrec,
-                cdMedAsse: cdMedAsse,
-                idTestexecResult: idTestexecResult,
-                sdInquesLabel : sdInquesLabel
-            }
-            , limit: 20
-            , page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                layout: ['limit', 'count', 'prev', 'page', 'next'] //自定义分页布局
-                , groups: 1 //只显示 1 个连续页码
-                , first: false //不显示首页
-                , last: false //不显示尾页
-                , limits: [20, 30, 50]
-            }
-        });
-    }
+    table.render({
+        elem: '#partConsTable' //指定原始表格元素选择器（推荐id选择器）
+        , id: 'partConsTableId'
+        , height: '580' //容器高度
+        , cols: [[
+            {type: 'numbers',width: 50, title: 'R'},
+            {field: 'desInques', title: '问题'},
+            {field: 'qa', width: 60, title: '提问', fixed: 'right', align: 'center', templet: '#qaTpl'}
+        ]] //设置表头
+        , url: basePath + '/pf/p/waiting/room/test/cons/list'
+        , where: {
+            idMedicalrec: idMedicalrec,
+            cdMedAsse: cdMedAsse,
+            idTestexecResult: idTestexecResult
+        }
+        , limit: 20
+        , page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+            layout: ['limit', 'count', 'prev', 'page', 'next'] //自定义分页布局
+            , groups: 1 //只显示 1 个连续页码
+            , first: false //不显示首页
+            , last: false //不显示尾页
+            , limits: [20, 30, 50]
+        }
+    });
 
     //监听行双击事件
     table.on('rowDouble(partConsTableFilter)', function (obj) {
@@ -151,6 +146,8 @@ layui.config({
                 extItemId: extItemId,
                 keyword: keyword,
                 sdInquesLabel : null
+            }, page: {
+                curr: 1 //重新从第 1 页开始
             }
         });
     }
@@ -276,7 +273,7 @@ layui.config({
                 $('.layui-col-md4').on('click', function () {
                     var sdInquesLabel = $(this).attr("data-key");
                     $('#key-tab').hide();
-                    rebderTable(sdInquesLabel);
+                    _tableReloadBysdInquesLabel(sdInquesLabel);
                     $('#table').show();
                     $('#k').text(($(this).text().trim()));
                 });
@@ -290,6 +287,21 @@ layui.config({
             }
         });
     }
+
+    function _tableReloadBysdInquesLabel(sdInquesLabel) {
+        table.reload('partConsTableId', {
+            where: {
+                idMedicalrec: idMedicalrec,
+                cdMedAsse: cdMedAsse,
+                idTestexecResult: idTestexecResult,
+                sdInquesLabel: sdInquesLabel
+            }, page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+    }
+
+
 
     $('#refreshRight').on('click', function () {
         layer.load(2);
@@ -515,6 +527,9 @@ layui.config({
                             "                           </div>\n";
                         $('#reason-' + id).append(html);
                     }
+
+                    $('#pat-reply-' + id).show();
+                    $('#reply-' + id).show();
                     if (desReply) {
                         $('#reply-' + id).empty();
 
@@ -653,7 +668,9 @@ layui.config({
             html +=
             '                           <button data-index="' + data.idTestexecResultInques + '" class="layui-btn layui-btn-xs layui-btn-radius cons-reason" style="background-color: #999999">请输入问诊理由</button>\n';
         }
+        let reasonFlag = false;
         if (data.desReason) {
+            reasonFlag = true;
             html +=
             "                           <div style='background-color: #F2F2F2; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
             "                               <div style='font-weight: bold; padding: 2px;'>● 问诊理由</div>\n" +
@@ -664,8 +681,13 @@ layui.config({
         html +=
             "                        </div>\n";
 
+        let showPatReplay = '';
+        if (!reasonFlag) {
+            showPatReplay = 'display: none; ';
+        }
+
         html += 
-            "                        <div style='margin-left: 41px; margin-top: 7px; overflow: hidden'>\n" +
+            "                        <div id='pat-reply-" + data.idTestexecResultInques + "' style='" + showPatReplay + "margin-left: 41px; margin-top: 7px; overflow: hidden'>\n" +
             "                            <div style='float: left'>\n" +
             "                                <span>【患者】</span>\n" +
             "                            </div>\n" +
@@ -678,7 +700,7 @@ layui.config({
         var expertFlag = data.desExpert ? '1' : '0';
         var replyStyle = data.fgBack == '1' || data.desReply ? 'padding-top: 10px;' : '';
         html +=
-            "                        <div  id='reply-" + data.idTestexecResultInques + "' style='padding-left: 45px; " + replyStyle + "'>\n";
+            "                        <div  id='reply-" + data.idTestexecResultInques + "' style='" + showPatReplay + "padding-left: 45px; " + replyStyle + "'>\n";
         if (data.fgBack == '1' && !data.desReply) {
             html +=
                 '                            <button id="reply-btn-' + data.idTestexecResultInques + '" data-index="' + data.idTestexecResultInques + '" data-expert="' + data.desExpert + '" class="layui-btn layui-btn-xs layui-btn-radius cons-reply" style="background-color: #999999">解释患者的回复</button>\n';
