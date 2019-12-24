@@ -275,6 +275,15 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     }
 
     @Override
+    public Boolean updateReferral(ExmMedResultReferral dto) {
+        CommonResult<Boolean> result = testWaitingRoomClient.updateReferral(BeanUtil.convert(dto, ExmMedResultReferralParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
     public List<ExmMedResultReferral> listReferral(PfTestExamTagDto dto) {
         CommonResult<List<ExmMedResultReferralResult>> result = testWaitingRoomClient.listReferral(BeanUtil.convert(dto, PfTestExamTagParam.class));
         if (result != null && result.getIsSuccess()) {

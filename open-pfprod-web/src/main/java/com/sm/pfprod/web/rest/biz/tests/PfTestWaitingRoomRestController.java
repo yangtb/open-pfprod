@@ -358,6 +358,24 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
+     * 拟诊 - 修改
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/referral/update")
+    @ResponseBody
+    public ResultObject updateReferral(@RequestBody ExmMedResultReferral dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResultReferral() != null, "idTestexecResultReferral");
+        Assert.isTrue(dto.getIdDie() != null, "id_die");
+
+        return ResultObject.createSuccess("updateReferral", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.updateReferral(dto));
+    }
+
+    /**
      * 拟诊 - 排除
      *
      * @param dto

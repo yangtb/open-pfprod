@@ -113,6 +113,7 @@ layui.config({
         $.each(dataList, function (i, item) {
             renderZdSelect(i, item.idTestexecResultReferral);
             renderDelSelect(i, item.idTestexecResultReferral);
+            renderUpdateNzSelect(i, item);
             renderInTable(i, item);
             renderOutTable(i, item);
         });
@@ -123,8 +124,11 @@ layui.config({
         var newHtml = '<div class="layui-row referral">\n' +
             '                    <div class="titile">\n' +
             '                        <span class="disc"></span>\n' +
-            '                        <span class="diagnose-title">拟诊' + (i + 1) + '：' + data.idDieText +'</span>\n' +
-            '                        <span>\n' +
+            '                        <span class="diagnose-title">拟诊' + (i + 1) + '：' + data.idDieText +'</span>\n';
+        if(data.catalogue == '1') {
+            newHtml += '             <span id="updateNz' + data.idTestexecResultReferral + '" class="update-nz" style="font-size:14px; color: #009688; cursor: pointer;" data-content-id="' + data.idTestexecResultReferral + '">+添加疾病</span>\n';
+        }
+            newHtml +=      '                        <span>\n' +
             '                            <button data-index="' + i + '" data-content-id="' + data.idTestexecResultReferral + '" data-die-id="' + data.idDieText + '" style="float: right; margin-right: 10px;" class="layui-btn layui-btn-xs outNzBtn' ;
         if(data.fgExclude == '1') {
             newHtml +=' layui-btn-disabled" disabled style="color:red;" ';
@@ -286,6 +290,43 @@ layui.config({
                 });
             });
         }
+    }
+
+    function renderUpdateNzSelect(i, item) {
+        if (item.catalogue == '1') {
+            tableSelect.render({
+                elem: '#updateNz' + item.idTestexecResultReferral,
+                searchKey: 'keywords',
+                checkedKey: 'idDie',
+                searchPlaceholder: '疾病名称/ICD/拼音码',
+                table: {
+                    url: basePath + '/pf/p/disease/info/list?catalogueId=' + item.idDie,
+                    cols: [[
+                        {type: 'radio'},
+                        {field: 'name', title: '疾病名称'},
+                        //{field: 'cdDieclassText', title: '疾病目录'},
+                        {field: 'icd', title: 'ICD编码'},
+                    ]]
+                    , limit: 20
+                    , limits: [20, 30, 50]
+                    , page: true
+                },
+                done: function (elem, data) {
+                    console.log(data.data)
+                    let url = basePath + '/pf/r/waiting/room/referral/update';
+                    let bizData = {
+                        idTestexecResultReferral: item.idTestexecResultReferral ,
+                        idDie: data.data[0].idDie
+                    };
+                    common.commonPost(url, bizData, '修改', null, updateReferralCallback);
+                }
+            });
+        }
+    }
+
+    function updateReferralCallback(data) {
+        loadNz();
+        loadChartData();
     }
 
     function renderZdSelect(i, idTestexecResultReferral) {

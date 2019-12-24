@@ -124,6 +124,10 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.saveReferral(param);
     }
 
+    public CommonResult<Boolean> updateReferral(ExmMedResultReferralParam param) {
+        return pfTestWaitingRoomFacade.updateReferral(param);
+    }
+
     public CommonResult<List<ExmMedResultReferralResult>> listReferral(PfTestExamTagParam param) {
         return pfTestWaitingRoomFacade.listReferral(param);
     }

@@ -231,6 +231,14 @@ public interface PfTestWaitingRoomService {
     Long saveReferral(ExmMedResultReferral dto);
 
     /**
+     * 拟诊 - 修改
+     *
+     * @param dto
+     * @return
+     */
+    Boolean updateReferral(ExmMedResultReferral dto);
+
+    /**
      * 已添加拟诊
      *
      * @param dto
