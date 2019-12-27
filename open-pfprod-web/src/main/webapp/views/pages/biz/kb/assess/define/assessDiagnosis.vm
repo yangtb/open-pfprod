@@ -67,6 +67,16 @@
 
                             </div>
                         </div>
+                        <div class="layui-form-item form-item-my5">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">CRS<i class="iconfont icon-required"
+                                                                      style="color: #f03f2d"></i></label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" checked="" name="fgCrs" lay-skin="switch" value="1" lay-text="NO|OFF">
+                                </div>
+
+                            </div>
+                        </div>
 
                         <button type="button" id="addAnswerBtn" class="layui-btn layui-btn-sm #if($!{previewFlag} == '1') layui-btn-disabled#end"
                                 #if($!{showBtn} != 1)style="visibility:hidden"#end

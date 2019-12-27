@@ -162,7 +162,7 @@ layui.config({
         elem: '#answerTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'answerTableId'
         , title: '等效答案'
-        , height: '315' //容器高度
+        , height: '317' //容器高度
         , defaultToolbar: []
         , cols: [[
             {type: 'numbers'},
@@ -382,6 +382,10 @@ layui.config({
             layer.tips('请添加等效答案', '#addAnswerBtn', {tips: 1});
             return false;
         }
+
+        $.each(tableData, function (index, item) {
+            item.fgCrs = data.field.fgCrs ? data.field.fgCrs : '0'
+        });
 
         data.field.idEvaCase = idEvaCase;
         data.field.cdEvaAsse = cdEvaAsse;

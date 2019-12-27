@@ -49,4 +49,8 @@ public class FaqEvaCaseItemReferral implements Serializable {
      */
     private String fgDieClass;
 
+    /**
+     * crs标志
+     */
+    private String fgCrs;
 }

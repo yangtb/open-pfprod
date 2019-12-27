@@ -82,6 +82,15 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="layui-inline">
+                                <label class="layui-form-label">CRS<i class="iconfont icon-required"
+                                                                      style="color: #f03f2d"></i></label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" checked="" name="fgCrs" lay-skin="switch" value="1" lay-text="NO|OFF">
+                                </div>
+
+                            </div>
                             #*<div class="layui-inline" hidden>
                                 <label class="layui-form-label">疾病</label>
                                 <div class="layui-input-block">

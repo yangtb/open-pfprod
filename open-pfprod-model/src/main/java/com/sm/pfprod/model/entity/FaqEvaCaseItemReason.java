@@ -57,4 +57,9 @@ public class FaqEvaCaseItemReason implements Serializable {
      * 诊断
      */
     private Long idDie;
+
+    /**
+     * crs标志
+     */
+    private String fgCrs;
 }

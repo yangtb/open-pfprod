@@ -139,7 +139,7 @@ layui.config({
         elem: '#answerTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'answerTableId'
         , title: '等效答案'
-        , height: '375' //容器高度
+        , height: '327' //容器高度
         //, toolbar: '#toolbarDemo'
         , defaultToolbar: []
         , cols: [[
@@ -355,6 +355,9 @@ layui.config({
             return false;
         }
 
+        $.each(tableData, function (index, item) {
+            item.fgCrs = data.field.fgCrs ? data.field.fgCrs : '0'
+        });
 
         data.field.sdEva = 1;
         data.field.idEvaCase = idEvaCase;

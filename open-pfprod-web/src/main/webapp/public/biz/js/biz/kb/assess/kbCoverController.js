@@ -383,6 +383,10 @@ layui.config({
             return false;
         }
 
+        $.each(tableData, function (index, item) {
+            item.fgCrs = data.field.fgCrs ? data.field.fgCrs : '0'
+        });
+
         data.field.idEvaCase = idEvaCase;
         data.field.cdEvaAsse = cdEvaAsse;
         data.field.list = tableData;

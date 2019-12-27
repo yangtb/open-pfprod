@@ -58,7 +58,7 @@ layui.config({
         table.render({
             elem: '#kbTable' //指定原始表格元素选择器（推荐id选择器）
             , id: 'kbTableId'
-            , height: '500' //容器高度
+            , height: '550' //容器高度
             , cols: [[
                 {type: 'radio'},
                 //{field: 'sdEva', width: 90, title: '评估阶段', templet: '#sdEvaTpl'},
@@ -148,7 +148,7 @@ layui.config({
         elem: '#answerTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'answerTableId'
         , title: '等效答案'
-        , height: '316' //容器高度
+        , height: '319' //容器高度
         //, toolbar: '#toolbarDemo'
         , defaultToolbar: []
         , cols: [[
@@ -273,11 +273,15 @@ layui.config({
     //监听提交
     form.on('submit(saveAnswer)', function (data) {
 
-        var tableData = table.cache["answerTableId"];
+        let tableData = table.cache["answerTableId"];
         if (tableData.length == 0) {
             layer.tips('请添加等效答案', '#addAnswerBtn', {tips: 1});
             return false;
         }
+
+        $.each(tableData, function (index, item) {
+            item.fgCrs = data.field.fgCrs ? data.field.fgCrs : '0'
+        });
 
         data.field.idEvaCase = idEvaCase;
         data.field.cdEvaAsse = cdEvaAsse;
@@ -292,7 +296,7 @@ layui.config({
 
         console.log(tableData)
 
-        var url = basePath + '/pf/r/kb/assess/diagnosis/save';
+        let url = basePath + '/pf/r/kb/assess/diagnosis/save';
         return common.commonPost(url, data.field, '保存', '', _callBack);
     });
 
