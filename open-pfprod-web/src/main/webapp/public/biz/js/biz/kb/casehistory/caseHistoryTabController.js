@@ -18,6 +18,7 @@ layui.config({
         }
     });
 
+
     /*FrameWH();
 
     function FrameWH() {
@@ -32,6 +33,22 @@ layui.config({
     var tableSelect = layui.tableSelect;
     var caseTagList = eval('(' + tags + ')');
     var assessTagList = eval('(' + assessTags + ')');
+
+    var caseTag = '';
+    $.each(caseTagList, function (index, item) {
+        if (item.cdMedAsse == '004') {
+            caseTag = 'wz' + item.idMedCase? item.idMedCase : '' + '|';
+        }
+
+        if (item.cdMedAsse == '005') {
+            caseTag += 'tj' +  item.idMedCase? item.idMedCase : '' + '|';
+        }
+
+        if (item.cdMedAsse == '006') {
+            caseTag += 'fj' +  item.idMedCase? item.idMedCase : '';
+        }
+    })
+
 
     var currentMedIdTag = '',
         currentEvaIdTag = '',
@@ -137,7 +154,7 @@ layui.config({
             currentCdEvaAsse = cd;
             evaUrl += '&idMedicalrec=' + idMedicalrec + '&idTag=' + currentEvaIdTag
                 + '&caseName=' + caseName + '&previewFlag=' + previewFlag;
-            $('#assessTag').attr('src', dataUrl + evaUrl + '&showBtn=1&tagFlag=1');
+            $('#assessTag').attr('src', dataUrl + evaUrl + '&showBtn=1&tagFlag=1&caseTag=' + caseTag);
             evaRender();
         }
     };

@@ -21,6 +21,7 @@
         var idTag = '$!{idTag}';
         var caseName = '$!{caseName}';
         var previewFlag = '$!{previewFlag}';
+        var caseTag ='$!{caseTag}';
     </script>
 </head>
 
@@ -32,6 +33,9 @@
     </div>
 
     <div id="bottomPage" style="padding-left: 10px; padding-right: 10px;">
+        <div>
+            <button id="fromCaseImport" class="layui-btn layui-btn-sm">从病例引入</button>
+        </div>
         <div class="layui-col-xs5">
             <table id="kbTable" lay-filter="kbTableFilter">
             </table>
@@ -40,7 +44,7 @@
         <div class="layui-col-xs7">
             <fieldset class="layui-elem-field" style="margin-top: 10px;">
             #*<legend></legend>*#
-                <div class="layui-field-box" style="height: 560px;">
+                <div class="layui-field-box">
                     <form class="layui-form" id="kbForm" lay-filter="kbFormFilter">
                         <div hidden>
                             <input name="idEvaCaseItem" id="idEvaCaseItem" hidden>

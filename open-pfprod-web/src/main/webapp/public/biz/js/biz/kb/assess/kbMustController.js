@@ -457,6 +457,25 @@ layui.config({
         layer.tips('重载成功', '#saveAs', {tips: 1});
     });
 
+    $('#fromCaseImport').on('click', function () {
+        layui.layer.open({
+            title: '<b>从病例引入</b>',
+            type: 2,
+            area: ['900px', '550px'],
+            fixed: false, //不固定
+            maxmin: false,
+            content: basePath + '/pf/p/kb/assess/from/case/import?caseTag=' + caseTag
+                + '&idEvaCase=' + idEvaCase
+                + '&cdEvaAsse=' + cdEvaAsse
+                + '&tagFlag=' + tagFlag
+                + '&idMedicalrec=' + idMedicalrec
+                + '&idTag=' + idTag
+                + '&caseName=' + caseName
+                + '&module=must'
+            , shadeClose: true
+        });
+    });
+
 
 });
 

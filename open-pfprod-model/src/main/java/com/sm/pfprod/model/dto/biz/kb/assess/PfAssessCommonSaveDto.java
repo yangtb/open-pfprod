@@ -1,7 +1,5 @@
 package com.sm.pfprod.model.dto.biz.kb.assess;
 
-import com.sm.pfprod.model.entity.FaqEvaCaseItem;
-import com.sm.pfprod.model.entity.FaqEvaCaseItemMust;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,15 +10,18 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
-public class PfAssessMustDto extends FaqEvaCaseItem implements Serializable {
+public class PfAssessCommonSaveDto implements Serializable {
 
-
-    private static final long serialVersionUID = 5866052701892123619L;
+    private static final long serialVersionUID = 5699801286051115280L;
 
     /**
-     * 等效答案
+     * 模块：must
      */
-    private List<FaqEvaCaseItemMust> list;
+    private String module;
+
+    private List<String> names;
+
+    private String sdEva;
 
     /**
      * 主键
@@ -59,11 +60,6 @@ public class PfAssessMustDto extends FaqEvaCaseItem implements Serializable {
     private String creator;
 
     /**
-     * 原病例组件案例id
-     */
-    private Long oldIdEvaCase;
-
-    /**
      * 机构id
      */
     private Long idOrg;
@@ -77,4 +73,5 @@ public class PfAssessMustDto extends FaqEvaCaseItem implements Serializable {
      * 从病例引入标识
      */
     private int fromCaseFlag;
+
 }

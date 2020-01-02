@@ -21,8 +21,8 @@ layui.config({
         placeholder: '请选择',
         search: true,
         click: function (d) {
-            $("#idInspect").val(d.current.id);
-            reloadTable($('#keyword').val(), $('#idInspect').val())
+            $("#idInspectSearch").val(d.current.id);
+            reloadTable($('#keyword').val(), $('#idInspectSearch').val())
         }
     });
 
@@ -158,7 +158,7 @@ layui.config({
 
     $('#keyword').bind('keypress', function (event) {
         if (event.keyCode == "13") {
-            reloadTable($('#keyword').val(), $('#idInspect').val())
+            reloadTable($('#keyword').val(), $('#idInspectSearch').val())
             return false;
         }
     });

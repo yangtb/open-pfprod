@@ -152,6 +152,7 @@ public class PfKbAssessController extends BaseController {
         model.addAttribute("idTag", dto.getIdTag());
         model.addAttribute("tagFlag", dto.getTagFlag());
         model.addAttribute("caseName", dto.getCaseName());
+        model.addAttribute("caseTag", dto.getCaseTag());
         model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         model.addAttribute("sheets", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllSheet())));
         return "pages/biz/kb/assess/define/assessReason";
@@ -169,6 +170,7 @@ public class PfKbAssessController extends BaseController {
         model.addAttribute("idTag", dto.getIdTag());
         model.addAttribute("tagFlag", dto.getTagFlag());
         model.addAttribute("caseName", dto.getCaseName());
+        model.addAttribute("caseTag", dto.getCaseTag());
         model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         model.addAttribute("sheets", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllSheet())));
         return "pages/biz/kb/assess/define/assessCover";
@@ -186,6 +188,7 @@ public class PfKbAssessController extends BaseController {
         model.addAttribute("idTag", dto.getIdTag());
         model.addAttribute("tagFlag", dto.getTagFlag());
         model.addAttribute("caseName", dto.getCaseName());
+        model.addAttribute("caseTag", dto.getCaseTag());
         model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         model.addAttribute("sheets", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllSheet())));
         return "pages/biz/kb/assess/define/assessMust";
@@ -203,6 +206,7 @@ public class PfKbAssessController extends BaseController {
         model.addAttribute("idTag", dto.getIdTag());
         model.addAttribute("tagFlag", dto.getTagFlag());
         model.addAttribute("caseName", dto.getCaseName());
+        model.addAttribute("caseTag", dto.getCaseTag());
         model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         model.addAttribute("sheets", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllSheet())));
         return "pages/biz/kb/assess/define/assessThorough";
@@ -312,6 +316,20 @@ public class PfKbAssessController extends BaseController {
     @ResponseBody
     public PageResult listKbOrder(PfAssessCommonDto dto) {
         return pfKbAssessService.listKbOrder(dto);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
+    @RequestMapping("/from/case/import")
+    public String fromCaseImportPage(Model model, PfAssessGetCommonDto dto) {
+        model.addAttribute("caseTag", dto.getCaseTag());
+        model.addAttribute("cdEvaAsse", dto.getCdEvaAsse());
+        model.addAttribute("idEvaCase", dto.getIdEvaCase());
+        model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
+        model.addAttribute("idTag", dto.getIdTag());
+        model.addAttribute("tagFlag", dto.getTagFlag());
+        model.addAttribute("caseName", dto.getCaseName());
+        model.addAttribute("module", dto.getModule());
+        return "pages/biz/kb/assess/define/fromCaseImport";
     }
 
 }

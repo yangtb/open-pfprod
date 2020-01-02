@@ -162,7 +162,7 @@ layui.config({
         elem: '#answerTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'answerTableId'
         , title: '等效答案'
-        , height: '315' //容器高度
+        , height: '317' //容器高度
         , defaultToolbar: []
         , cols: [[
             {type: 'numbers'},
@@ -449,6 +449,24 @@ layui.config({
             });
 
         }
+    });
+
+    $('#fromCaseImport').on('click', function () {
+        layui.layer.open({
+            title: '<b>从病例引入</b>',
+            type: 2,
+            area: ['900px', '550px'],
+            fixed: false, //不固定
+            maxmin: false,
+            content: basePath + '/pf/p/kb/assess/from/case/import?idEvaCase=' + idEvaCase
+                + '&cdEvaAsse=' + cdEvaAsse
+                + '&tagFlag=' + tagFlag
+                + '&idMedicalrec=' + idMedicalrec
+                + '&idTag=' + idTag
+                + '&caseName=' + caseName
+                + '&module=thorough'
+            , shadeClose: true
+        });
     });
 
 });

@@ -663,6 +663,7 @@ layui.config({
 
     function tableSelectRender(id, type) {
         // type = 1 加载拟真下面的检查，检验（且都是单选的）
+        let idTestexecResultReferral = id.substring(5, id.length);
         // type = 2 加载拟真下的检查检验（只加载多选）
         table = $.extend(table, {config: {checkName: 'fgClue'}});
         tableSelect.render({
@@ -670,7 +671,9 @@ layui.config({
             checkedKey: 'id',
             searchKey: 'keywords',
             table: {
-                url: basePath + '/pf/p/waiting/room/diagnostic/chart/list?type=' + type + '&idTestexecResult=' + idTestexecResult
+                url: basePath + '/pf/p/waiting/room/diagnostic/chart/list?type=' + type
+                    + '&idTestexecResult=' + idTestexecResult
+                    + '&idTestexecResultReferral=' + idTestexecResultReferral
                 , cols: [[
                     {type: 'checkbox', fixed: true},
                     {field: 'checkItem', minWidth: 160, title: '检查项'},

@@ -7,12 +7,13 @@ import com.sm.open.care.core.enums.YesOrNoNum;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.biz.kb.assess.*;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
-import com.sm.pfprod.model.entity.FaqEvaCase;
+import com.sm.pfprod.model.entity.*;
 import com.sm.pfprod.model.enums.OperationTypeEnum;
 import com.sm.pfprod.service.biz.kb.PfKbAssessService;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @ClassName: PfKbAssessRestController
@@ -395,5 +399,99 @@ public class PfKbAssessRestController {
                 pfKbAssessService.delCommonAssess(dto));
     }
 
+
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0020','ROLE_SUPER')")
+    @RequestMapping(value = "/from/case/save")
+    public ResultObject fromCaseSave(@RequestBody PfAssessCommonSaveDto dto) {
+        /* 参数校验 */
+        if ("must".equals(dto.getModule())) {
+            PfAssessMustDto pfAssessMustDto = new PfAssessMustDto();
+            BeanUtils.copyProperties(dto, pfAssessMustDto);
+            pfAssessMustDto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+            pfAssessMustDto.setCreator(CurrentUserUtils.getCurrentUsername());
+
+            pfAssessMustDto.setScoreEva(BigDecimal.valueOf(1));
+            pfAssessMustDto.setSdEva(dto.getSdEva());
+            pfAssessMustDto.setFromCaseFlag(dto.getFromCaseFlag());
+
+            for (String str : dto.getNames()) {
+                pfAssessMustDto.setItemName(str);
+                List<FaqEvaCaseItemMust> list = new ArrayList<>();
+                FaqEvaCaseItemMust faqEvaCaseItemMust = new FaqEvaCaseItemMust();
+                faqEvaCaseItemMust.setSdEvaMust(dto.getSdEva());
+                faqEvaCaseItemMust.setFgCrs("0");
+                list.add(faqEvaCaseItemMust);
+                pfAssessMustDto.setList(list);
+                pfKbAssessService.saveMust(pfAssessMustDto);
+            }
+        }
+
+        if ("reason".equals(dto.getModule())) {
+            PfAssessReasonDto pfAssessReasonDto = new PfAssessReasonDto();
+            BeanUtils.copyProperties(dto, pfAssessReasonDto);
+            pfAssessReasonDto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+            pfAssessReasonDto.setCreator(CurrentUserUtils.getCurrentUsername());
+
+            pfAssessReasonDto.setScoreEva(BigDecimal.valueOf(1));
+            pfAssessReasonDto.setSdEva(dto.getSdEva());
+            pfAssessReasonDto.setFromCaseFlag(dto.getFromCaseFlag());
+
+            for (String str : dto.getNames()) {
+                pfAssessReasonDto.setItemName(str);
+                List<FaqEvaCaseItemReason> list = new ArrayList<>();
+                FaqEvaCaseItemReason faqEvaCaseItemReason = new FaqEvaCaseItemReason();
+                faqEvaCaseItemReason.setSdEvaEffciency(dto.getSdEva());
+                faqEvaCaseItemReason.setFgCrs("0");
+                list.add(faqEvaCaseItemReason);
+                pfAssessReasonDto.setList(list);
+                pfKbAssessService.saveReason(pfAssessReasonDto);
+            }
+        }
+
+        if ("cover".equals(dto.getModule())) {
+            PfAssessCoverDto pfAssessCoverDto = new PfAssessCoverDto();
+            BeanUtils.copyProperties(dto, pfAssessCoverDto);
+            pfAssessCoverDto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+            pfAssessCoverDto.setCreator(CurrentUserUtils.getCurrentUsername());
+
+            pfAssessCoverDto.setScoreEva(BigDecimal.valueOf(1));
+            pfAssessCoverDto.setSdEva(dto.getSdEva());
+            pfAssessCoverDto.setFromCaseFlag(dto.getFromCaseFlag());
+
+            for (String str : dto.getNames()) {
+                pfAssessCoverDto.setItemName(str);
+                List<FaqEvaCaseItemCover> list = new ArrayList<>();
+                FaqEvaCaseItemCover faqEvaCaseItemCover = new FaqEvaCaseItemCover();
+                faqEvaCaseItemCover.setSdEvaCover(dto.getSdEva());
+                faqEvaCaseItemCover.setFgCrs("0");
+                list.add(faqEvaCaseItemCover);
+                pfAssessCoverDto.setList(list);
+                pfKbAssessService.saveCover(pfAssessCoverDto);
+            }
+        }
+
+        if ("thorough".equals(dto.getModule())) {
+            PfAssessThoroughDto pfAssessThoroughDto = new PfAssessThoroughDto();
+            BeanUtils.copyProperties(dto, pfAssessThoroughDto);
+            pfAssessThoroughDto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+            pfAssessThoroughDto.setCreator(CurrentUserUtils.getCurrentUsername());
+
+            pfAssessThoroughDto.setScoreEva(BigDecimal.valueOf(1));
+            pfAssessThoroughDto.setSdEva(dto.getSdEva());
+            pfAssessThoroughDto.setFromCaseFlag(dto.getFromCaseFlag());
+
+            for (String str : dto.getNames()) {
+                pfAssessThoroughDto.setItemName(str);
+                List<FaqEvaCaseItemThorough> list = new ArrayList<>();
+                FaqEvaCaseItemThorough faqEvaCaseItemThorough = new FaqEvaCaseItemThorough();
+                faqEvaCaseItemThorough.setSdEvaMust(dto.getSdEva());
+                faqEvaCaseItemThorough.setFgCrs("0");
+                list.add(faqEvaCaseItemThorough);
+                pfAssessThoroughDto.setList(list);
+                pfKbAssessService.saveThorough(pfAssessThoroughDto);
+            }
+        }
+        return ResultObject.createSuccess("fromCaseSave", ResultObject.DATA_TYPE_OBJECT, true);
+    }
 
 }

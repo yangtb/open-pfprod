@@ -34,4 +34,7 @@ public class PfAssessGetCommonDto implements Serializable {
      * 标签id
      */
     private Long idTag;
+
+    private String caseTag;
+    private String module;
 }

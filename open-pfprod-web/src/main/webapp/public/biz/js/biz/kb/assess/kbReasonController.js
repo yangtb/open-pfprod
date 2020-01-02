@@ -60,7 +60,7 @@ layui.config({
         table.render({
             elem: '#kbTable' //指定原始表格元素选择器（推荐id选择器）
             , id: 'kbTableId'
-            , height: '582' //容器高度
+            , height: '550' //容器高度
             , cols: [[
                 {type: 'radio'},
                 {field: 'sdEva', width: 90, title: '评估阶段', templet: '#sdEvaTpl'},
@@ -165,7 +165,7 @@ layui.config({
         elem: '#answerTable' //指定原始表格元素选择器（推荐id选择器）
         , id: 'answerTableId'
         , title: '等效答案'
-        , height: '315' //容器高度
+        , height: '281' //容器高度
         , defaultToolbar: []
         , cols: [[
             {type: 'numbers'},
@@ -458,6 +458,23 @@ layui.config({
         layer.tips('重载成功', '#saveAs', {tips: 1});
     });
 
+    $('#fromCaseImport').on('click', function () {
+        layui.layer.open({
+            title: '<b>从病例引入</b>',
+            type: 2,
+            area: ['900px', '550px'],
+            fixed: false, //不固定
+            maxmin: false,
+            content: basePath + '/pf/p/kb/assess/from/case/import?idEvaCase=' + idEvaCase
+                + '&cdEvaAsse=' + cdEvaAsse
+                + '&tagFlag=' + tagFlag
+                + '&idMedicalrec=' + idMedicalrec
+                + '&idTag=' + idTag
+                + '&caseName=' + caseName
+                + '&module=reason'
+            , shadeClose: true
+        });
+    });
 
 });
 

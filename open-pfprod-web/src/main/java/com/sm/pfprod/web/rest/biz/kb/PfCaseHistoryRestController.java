@@ -3,6 +3,7 @@ package com.sm.pfprod.web.rest.biz.kb;
 import com.sm.open.care.core.ErrorCode;
 import com.sm.open.care.core.ErrorMessage;
 import com.sm.open.care.core.ResultObject;
+import com.sm.open.care.core.exception.BizRuntimeException;
 import com.sm.open.care.core.utils.Assert;
 import com.sm.pfprod.model.dto.common.PfBachChangeStatusDto;
 import com.sm.pfprod.model.entity.FaqEvaTag;
@@ -221,7 +222,9 @@ public class PfCaseHistoryRestController {
     public ResultObject selectMedTag(@RequestBody FaqMedTag dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getIdMedicalrec() != null, "idMedicalrec");
-        Assert.isTrue(dto.getIdTag() != null, "idTag");
+        if (dto.getIdTag() == null && StringUtils.isBlank(dto.getCdMedAsse())) {
+            throw new BizRuntimeException(ErrorCode.ERROR_GENERAL_110001, "idTag和cdMedAsse必须传一个");
+        }
         return ResultObject.createSuccess("selectMedTag", ResultObject.DATA_TYPE_OBJECT,
                 pfCaseHistoryService.selectMedTag(dto));
     }
@@ -237,7 +240,9 @@ public class PfCaseHistoryRestController {
     public ResultObject selectEvaTag(@RequestBody FaqEvaTag dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getIdMedicalrec() != null, "idMedicalrec");
-        Assert.isTrue(dto.getIdTag() != null, "idTag");
+        if (dto.getIdTag() == null && StringUtils.isBlank(dto.getCdEvaAsse())) {
+            throw new BizRuntimeException(ErrorCode.ERROR_GENERAL_110001, "idTag和cdEvaAsse必须传一个");
+        }
         return ResultObject.createSuccess("selectEvaTag", ResultObject.DATA_TYPE_OBJECT,
                 pfCaseHistoryService.selectEvaTag(dto));
     }
