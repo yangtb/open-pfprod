@@ -368,6 +368,8 @@ public interface PfTestWaitingRoomService {
      */
     PfWaitingRoomDiagnosisVo selectDiagnosis(ExmMedResultDiagnosis dto);
 
+    List<PfWaitingRoomDiagnosisVo> listDiagnosis(ExmMedResultDiagnosis dto);
+
     /**
      * 查询诊断小结
      *
@@ -529,6 +531,10 @@ public interface PfTestWaitingRoomService {
      * @return
      */
     PageResult listDiagnosticChart(PfTestExamTagDto dto);
+
+    PageResult listEvaDimension(Long idTestexecResultDimension);
+
+    String selectIdStr(PfTestExamTagDto dto);
 
     /**
      * 考试完成后所需跳转信息

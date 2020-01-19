@@ -19,7 +19,7 @@ public class PfAssessCommonSaveDto implements Serializable {
      */
     private String module;
 
-    private List<String> names;
+    private List<PfAssessCommonitemDto> names;
 
     private String sdEva;
 

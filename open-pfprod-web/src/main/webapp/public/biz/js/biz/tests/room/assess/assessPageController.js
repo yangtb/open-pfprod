@@ -347,8 +347,44 @@ layui.config({
         });*/
     });
 
+    //监听行双击事件
+    table.on('row(demoFilter)', function (obj) {
+        console.log(obj.data) //得到当前行数据
+        let fgSystemAlgorithm = obj.data.fgSystemAlgorithm; // 1=系统 0主观
+        //CASE WHEN 类型 = 主观 OR 评分项名称 = 诊断表现  THEN  打开文本页  ELSE 打开LIST页
+        if (fgSystemAlgorithm == 0 || obj.data.pgItem == '诊断表现') {
+            $('#guideContent').show();
+            //$('#dimensionResult').hide();
+            $('div[lay-id="dimensionResultTableId"]').hide();
+        } else {
+            $('#guideContent').hide();
+            $('div[lay-id="dimensionResultTableId"]').show();
+            // 加载table
+            dimensionResult(obj.data.idTestexecResultDimension);
+        }
+    });
+
+    function dimensionResult(idTestexecResultDimension) {
+        //展示已知数据
+        table.render({
+            elem: '#dimensionResult'
+            , id: 'dimensionResultTableId'
+            , cols: [[ //标题栏
+                {type: 'numbers', title: ''}
+                , {field: 'flag', title: '学员操作', width: 100, align: 'center', templet : function(d) {
+                        return d.flag == true ? '√' : '';
+                }}
+                , {field: 'nameEva', title: '评估项', minwidth: 200, align: 'left'}
+            ]]
+            , url: basePath + '/pf/p/waiting/room/eva/result/dimension?idTestexecResultDimension=' + idTestexecResultDimension
+            //, skin: 'row' //表格风格
+            , page: false
+            , limit: 1000
+        });
+    }
+
     function setPjResult() {
-        var bizData = {
+        let bizData = {
             idTestexecResult: idTestexecResult
         };
         $.ajax({

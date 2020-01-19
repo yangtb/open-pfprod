@@ -258,6 +258,7 @@
                             <div style="padding-top: 10px">
                                 <textarea name="guideContent" id="guideContent" class="layui-textarea"
                                       style="height: 1000px;" disabled></textarea>
+                                <table id="dimensionResult" style="margin-top: -10px;"></table>
                             </div>
                             #*<div class="layui-tab" lay-filter="evaTabFilter">
                                 <ul class="layui-tab-title">

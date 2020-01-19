@@ -414,10 +414,19 @@ public class PfKbAssessRestController {
             pfAssessMustDto.setSdEva(dto.getSdEva());
             pfAssessMustDto.setFromCaseFlag(dto.getFromCaseFlag());
 
-            for (String str : dto.getNames()) {
-                pfAssessMustDto.setItemName(str);
+            for (PfAssessCommonitemDto item : dto.getNames()) {
+                pfAssessMustDto.setItemName(item.getName());
                 List<FaqEvaCaseItemMust> list = new ArrayList<>();
                 FaqEvaCaseItemMust faqEvaCaseItemMust = new FaqEvaCaseItemMust();
+                if ("1".equals(dto.getSdEva())) {
+                    faqEvaCaseItemMust.setIdInques(item.getId());
+                }
+                if ("2".equals(dto.getSdEva())) {
+                    faqEvaCaseItemMust.setIdBody(item.getId());
+                }
+                if ("3".equals(dto.getSdEva())) {
+                    faqEvaCaseItemMust.setIdInspectItem(item.getId());
+                }
                 faqEvaCaseItemMust.setSdEvaMust(dto.getSdEva());
                 faqEvaCaseItemMust.setFgCrs("0");
                 list.add(faqEvaCaseItemMust);
@@ -436,10 +445,19 @@ public class PfKbAssessRestController {
             pfAssessReasonDto.setSdEva(dto.getSdEva());
             pfAssessReasonDto.setFromCaseFlag(dto.getFromCaseFlag());
 
-            for (String str : dto.getNames()) {
-                pfAssessReasonDto.setItemName(str);
+            for (PfAssessCommonitemDto item  : dto.getNames()) {
+                pfAssessReasonDto.setItemName(item.getName());
                 List<FaqEvaCaseItemReason> list = new ArrayList<>();
                 FaqEvaCaseItemReason faqEvaCaseItemReason = new FaqEvaCaseItemReason();
+                if ("1".equals(dto.getSdEva())) {
+                    faqEvaCaseItemReason.setIdInques(item.getId());
+                }
+                if ("2".equals(dto.getSdEva())) {
+                    faqEvaCaseItemReason.setIdBody(item.getId());
+                }
+                if ("3".equals(dto.getSdEva())) {
+                    faqEvaCaseItemReason.setIdInspectItem(item.getId());
+                }
                 faqEvaCaseItemReason.setSdEvaEffciency(dto.getSdEva());
                 faqEvaCaseItemReason.setFgCrs("0");
                 list.add(faqEvaCaseItemReason);
@@ -458,10 +476,19 @@ public class PfKbAssessRestController {
             pfAssessCoverDto.setSdEva(dto.getSdEva());
             pfAssessCoverDto.setFromCaseFlag(dto.getFromCaseFlag());
 
-            for (String str : dto.getNames()) {
-                pfAssessCoverDto.setItemName(str);
+            for (PfAssessCommonitemDto item  : dto.getNames()) {
+                pfAssessCoverDto.setItemName(item.getName());
                 List<FaqEvaCaseItemCover> list = new ArrayList<>();
                 FaqEvaCaseItemCover faqEvaCaseItemCover = new FaqEvaCaseItemCover();
+                if ("1".equals(dto.getSdEva())) {
+                    faqEvaCaseItemCover.setIdInques(String.valueOf(item.getId()));
+                }
+                if ("2".equals(dto.getSdEva())) {
+                    faqEvaCaseItemCover.setIdBody(item.getId());
+                }
+                if ("3".equals(dto.getSdEva())) {
+                    faqEvaCaseItemCover.setIdInspectItem(item.getId());
+                }
                 faqEvaCaseItemCover.setSdEvaCover(dto.getSdEva());
                 faqEvaCaseItemCover.setFgCrs("0");
                 list.add(faqEvaCaseItemCover);
@@ -480,10 +507,19 @@ public class PfKbAssessRestController {
             pfAssessThoroughDto.setSdEva(dto.getSdEva());
             pfAssessThoroughDto.setFromCaseFlag(dto.getFromCaseFlag());
 
-            for (String str : dto.getNames()) {
-                pfAssessThoroughDto.setItemName(str);
+            for (PfAssessCommonitemDto item  : dto.getNames()) {
+                pfAssessThoroughDto.setItemName(item.getName());
                 List<FaqEvaCaseItemThorough> list = new ArrayList<>();
                 FaqEvaCaseItemThorough faqEvaCaseItemThorough = new FaqEvaCaseItemThorough();
+                if ("1".equals(dto.getSdEva())) {
+                    faqEvaCaseItemThorough.setIdInques(item.getId());
+                }
+                if ("2".equals(dto.getSdEva())) {
+                    faqEvaCaseItemThorough.setIdBody(item.getId());
+                }
+                if ("3".equals(dto.getSdEva())) {
+                    faqEvaCaseItemThorough.setIdInspectItem(item.getId());
+                }
                 faqEvaCaseItemThorough.setSdEvaMust(dto.getSdEva());
                 faqEvaCaseItemThorough.setFgCrs("0");
                 list.add(faqEvaCaseItemThorough);

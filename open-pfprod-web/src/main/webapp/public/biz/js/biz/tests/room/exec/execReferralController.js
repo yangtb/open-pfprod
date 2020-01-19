@@ -1,12 +1,10 @@
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['table', 'form', 'jquery', 'common', 'tableSelect', 'element'], function () {
+}).use(['table', 'jquery', 'common', 'tableSelect'], function () {
     var $ = layui.$
         , table = layui.table
-        , form = layui.form
         , common = layui.common
-        , tableSelect = layui.tableSelect
-        , element = layui.element;
+        , tableSelect = layui.tableSelect;
 
     initData();
 
@@ -302,9 +300,8 @@ layui.config({
                 table: {
                     url: basePath + '/pf/p/disease/info/list?catalogueId=' + item.idDie,
                     cols: [[
-                        {type: 'radio'},
+                        {type:'radio'},
                         {field: 'name', title: '疾病名称'},
-                        //{field: 'cdDieclassText', title: '疾病目录'},
                         {field: 'icd', title: 'ICD编码'},
                     ]]
                     , limit: 20
@@ -312,11 +309,16 @@ layui.config({
                     , page: true
                 },
                 done: function (elem, data) {
-                    console.log(data.data)
+                    console.log(data)
+                    let selectData = data.data[0];
+                    if (!selectData) {
+                        return;
+                    }
+                    console.log(selectData)
                     let url = basePath + '/pf/r/waiting/room/referral/update';
                     let bizData = {
                         idTestexecResultReferral: item.idTestexecResultReferral ,
-                        idDie: data.data[0].idDie
+                        idDie: selectData.idDie
                     };
                     common.commonPost(url, bizData, '修改', null, updateReferralCallback);
                 }
@@ -347,7 +349,7 @@ layui.config({
                 , limits: [200]
             },
             done: function (elem, data) {
-                var selectData = data.data;
+                let selectData = data.data;
                 saveDieReason(selectData, idTestexecResultReferral, i, '0');
             }
         });
@@ -371,7 +373,7 @@ layui.config({
                 , limits: [200]
             },
             done: function (elem, data) {
-                var selectData = data.data;
+                let selectData = data.data;
                 saveDieReason(selectData, idTestexecResultReferral, i, '1');
             }
         });
@@ -623,7 +625,7 @@ layui.config({
                     if (data.type == 1) {
                         $node.html('<button class="layui-btn layui-btn-radius">' + data.name + '</button>');
                     } else if (data.type == 2) {
-                        var fgExcludeHtml = '';
+                        let fgExcludeHtml = '';
                         if (data.fgExclude == '1') {
                             fgExcludeHtml = '<span style="text-decoration: line-through; color: #FF5722;">' + data.name + '</span>';
                         } else {
@@ -647,13 +649,13 @@ layui.config({
         $('.orgchart > table > tbody > tr ').find('.nodes').find(".lines").hide();
 
         // 绑定点击事件
-        var thirdCharts = document.querySelectorAll(".thirdChart");
-        for (var i = 0; i < thirdCharts.length; i++) {
+        let thirdCharts = document.querySelectorAll(".thirdChart");
+        for (let i = 0; i < thirdCharts.length; i++) {
             tableSelectRender(thirdCharts[i].getAttribute("id"), 1);
         }
 
-        var fourCharts = document.querySelectorAll(".fourChart");
-        for (var i = 0; i < fourCharts.length; i++) {
+        let fourCharts = document.querySelectorAll(".fourChart");
+        for (let i = 0; i < fourCharts.length; i++) {
             tableSelectRender(fourCharts[i].getAttribute("id"), 2);
         }
     }
@@ -665,7 +667,7 @@ layui.config({
         // type = 1 加载拟真下面的检查，检验（且都是单选的）
         let idTestexecResultReferral = id.substring(5, id.length);
         // type = 2 加载拟真下的检查检验（只加载多选）
-        table = $.extend(table, {config: {checkName: 'fgClue'}});
+
         tableSelect.render({
             elem: '#' + id,
             checkedKey: 'id',
@@ -678,20 +680,20 @@ layui.config({
                     {type: 'checkbox', fixed: true},
                     {field: 'checkItem', minWidth: 160, title: '检查项'},
                     {field: 'desResult', minWidth: 120, title: '结果'},
-                ]] //设置表头
+                ]]
             },
             done: function (elem, data) {
-                var selectData = data.data;
+                let selectData = data.data;
                 saveFgClue(selectData, type);
             }
         });
     }
 
     function saveFgClue(data, type) {
-        var reqBodyData = new Array();
-        var reqExamData = new Array();
+        let reqBodyData = new Array();
+        let reqExamData = new Array();
         $.each(data, function (index, content) {
-            var idArr = content.id.split("-");
+            let idArr = content.id.split("-");
             if (idArr[0] == 'body') {
                 reqBodyData.push(idArr[1]);
             } else {
@@ -700,7 +702,7 @@ layui.config({
         });
 
         if (reqBodyData.length >= 1) {
-            var bizBodyData = {
+            let bizBodyData = {
                 list : reqBodyData,
                 status : '1',
                 extId : idTestexecResult,
@@ -710,7 +712,7 @@ layui.config({
             common.commonPost(basePath + '/pf/r/waiting/room/check/qa/status', bizBodyData, null);
         }
         if (reqExamData.length >= 1) {
-            var bizExamData = {
+            let bizExamData = {
                 list : reqExamData,
                 status : '1',
                 extId : idTestexecResult,
@@ -740,7 +742,7 @@ layui.config({
                     layer.tips(data.msg, '#out' + i, {tips: 1});
                     return false;
                 } else {
-                    layer.tips("排除成功", '#out' + i, {tips: 1});
+                    //layer.tips("排除成功", '#out' + i, {tips: 1});
                     outCallBack(i);
                     return true;
                 }
@@ -762,6 +764,7 @@ layui.config({
         $('#addReason' + i).addClass("layui-btn-disabled");
         $('#addReason' + i).attr("disabled", "disabled");
 
+        loadNz();
         loadChartData();
     }
 

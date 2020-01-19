@@ -428,6 +428,16 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     }
 
     @Override
+    public List<PfWaitingRoomDiagnosisVo> listDiagnosis(ExmMedResultDiagnosis dto) {
+        CommonResult<List<PfWaitingRoomDiagnosisResult>> result = testWaitingRoomClient.listDiagnosis(BeanUtil.convert(dto, ExmMedResultDiagnosisParam.class));
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), PfWaitingRoomDiagnosisVo.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+
+    @Override
     public ExmMedResultSummary selectSummary(Long idTestexecResult) {
         CommonResult<ExmMedResultSummaryResult> result = testWaitingRoomClient.selectSummary(idTestexecResult);
         if (result != null && result.getIsSuccess()) {
@@ -604,12 +614,28 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
 
     @Override
     public PageResult listDiagnosticChart(PfTestExamTagDto dto) {
-        PfPageResult<BasDieResult> result = testWaitingRoomClient.listDiagnosticChart(BeanUtil.convert(dto, PfTestExamTagParam.class));
+        PfPageResult result = testWaitingRoomClient.listDiagnosticChart(BeanUtil.convert(dto, PfTestExamTagParam.class));
         if (result == null) {
             return null;
         }
         return BeanUtil.convert(result, PageResult.class);
     }
+
+    @Override
+    public PageResult listEvaDimension(Long idTestexecResultDimension) {
+        PfPageResult result = testWaitingRoomClient.listEvaDimension(idTestexecResultDimension);
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public String selectIdStr(PfTestExamTagDto dto) {
+        CommonResult<String> result = testWaitingRoomClient.selectIdStr(BeanUtil.convert(dto, PfTestExamTagParam.class));
+        return result.getContent();
+    }
+
 
     @Override
     public PfWaitingRoomFinishVo selectFinishExamInfo(Long idTestplanDetail) {

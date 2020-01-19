@@ -502,4 +502,11 @@ public class PfTestWaitingRoomController extends BaseController {
         return pfTestWaitingRoomService.listDiagnosticChart(dto);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
+    @RequestMapping(value = "/eva/result/dimension")
+    @ResponseBody
+    public PageResult listEvaDimension(PfTestExamTagDto dto) {
+        return pfTestWaitingRoomService.listEvaDimension(Long.valueOf(dto.getIdTestexecResultDimension()));
+    }
+
 }

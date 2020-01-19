@@ -16,6 +16,7 @@ layui.config({
         // 加载小结信息
         loadSummary();
         loadNz();
+        loadCbzdList();
         layer.closeAll('loading');
     };
 
@@ -91,8 +92,8 @@ layui.config({
 
     // 保存诊断
     $('#saveDiagnosis').on('click', function () {
-        layer.load(2);
-        var url = basePath + '/pf/r/waiting/room/summary/diagnosis/save';
+
+        let url = basePath + '/pf/r/waiting/room/summary/diagnosis/save';
         let catalogue = $('#question-select').find("option:selected").attr("catalogue");
         let idDie;
         if (catalogue == 1) {
@@ -100,18 +101,30 @@ layui.config({
         } else {
             idDie = $('#question-select option:selected').val();
         }
-        var bizData = {
+        if (!idDie) {
+            layer.msg("请先选择疾病");
+            return;
+        }
+        let bizData = {
             idTestexecResult: idTestexecResult,
             idDie: idDie,
             idTestexecResultReferral : $("#question-select").find("option:selected").attr("referral-id"),
             fgDieClass : $("#question-select").find("option:selected").attr("catalogue"),
-            desDieReason : $('#desDieReason').val()
+            desDieReason : $('#desDieReason').val(),
+            mainFlag : $("input[name='mainFlag']:checked").val()
         }
-        common.commonPost(url, bizData, '添加');
+
+        common.commonPost(url, bizData, '添加', null, _callbackSaveDiagnosis, true);
     });
+
+    function _callbackSaveDiagnosis() {
+        loadCbzdList()
+        loadChartData()
+    }
 
     $('#question-select').on('change', function () {
         $("#question-select-detail").empty();
+        $('#desDieReason').val('');
         loadDieReasonCommon();
     });
 
@@ -132,7 +145,7 @@ layui.config({
 
     function questionSelectDetail() {
         // 如果是目录，查询该目录的疾病
-        var reqData = {
+        let reqData = {
             queryChildCatalogue: 1,
             id : $('#question-select option:selected').val()
         }
@@ -143,9 +156,9 @@ layui.config({
             contentType: "application/json",
             data: JSON.stringify(reqData),
             success: function (data) {
-                var html = '';
+                let html = '<option class="item-option" value="">请选择</option>';
                 $.each(data, function (i, item) {
-                    var idDieText = item.name;
+                    let idDieText = item.name;
                     html += '<option class="item-option" value="' + item.idDie + '" ' +
                         '>' + idDieText + '</option>';
                 });
@@ -162,13 +175,16 @@ layui.config({
 
     function loadDieReason() {
         let catalogue = $('#question-select').find("option:selected").attr("catalogue");
-        var idDie;
+        let idDie;
         if (catalogue == 1) {
             idDie = $('#question-select-detail option:selected').val()
         } else {
             idDie = $('#question-select option:selected').val();
         }
-        var bizData = {
+        if (!idDie) {
+            return;
+        }
+        let bizData = {
             idTestexecResult: idTestexecResult,
             idDie: idDie,
             idTestexecResultReferral : $("#question-select").find("option:selected").attr("referral-id"),
@@ -190,6 +206,7 @@ layui.config({
                 } else {
                     if (data.data) {
                         $('#desDieReason').val(data.data.desDieReason ? data.data.desDieReason : '' );
+                        $(":radio[name=mainFlag][value=" + data.data.mainFlag + "]").attr("checked", "true");
                     } else {
                         $('#desDieReason').val('');
                     }
@@ -205,8 +222,11 @@ layui.config({
     // ============ 思维导图 begin ============
 
     $(function(){
+        loadChartData()
+    });
 
-        var bizData = {
+    function loadChartData() {
+        let bizData = {
             idTestexecResult: idTestexecResult,
             chartType : 2
         };
@@ -231,66 +251,70 @@ layui.config({
                 return false;
             }
         });
+    }
 
-        function loadChart(dataScource) {
-            $('#chart-container').orgchart({
-                'data' : dataScource,
-                'nodeContent': 'title',
-                'direction': 't2b',
-                'createNode': function ($node, data) {
-                    if (data.type ) {
-                        if (data.type == 1) {
-                            $node.html('<button class="layui-btn layui-btn-radius">' + data.name + '</button>');
-                        } else if (data.type == 2) {
-                            var fgExcludeHtml = '';
-                            if (data.fgExclude == '1') {
-                                fgExcludeHtml = '<span style="text-decoration: line-through; color: #FF5722;">' + data.name + '</span>';
-                            } else {
-                                fgExcludeHtml = data.name;
-                            }
-                            $node.html('<button class="layui-btn layui-bg-blue" style="height: 50px;">' + fgExcludeHtml + '</button>');
-                        } else if (data.type == 3) {
-                            $node.html('<button class="layui-btn layui-btn-primary thirdChart" id="zdfx-' + data.id + '" style="border-color: #4A92D8">' + data.name + '</button>');
-                        } else if (data.type == 4){
-                            $node.html('<button class="layui-btn fourChart" id="jbzd-' + data.id + '" style="background-color: #64C092">' + data.name + '</button>');
-                        } else{
-                            $node.html('<button class="layui-btn">' + data.name + '</button>');
+    function loadChart(dataScource) {
+        $('#chart-container').empty();
+        $('#chart-container').orgchart({
+            'data' : dataScource,
+            'nodeContent': 'title',
+            'direction': 't2b',
+            'createNode': function ($node, data) {
+                if (data.type ) {
+                    if (data.type == 1) {
+                        $node.html('<button class="layui-btn layui-btn-radius">' + data.name + '</button>');
+                    } else if (data.type == 2) {
+                        let fgExcludeHtml = '';
+                        let mainFlagStyle = data.mainFlag == 1 ? ' <span style="color: red;"><i class="iconfont icon-zhu"></i></span>' : '';
+                        if (data.fgExclude == '1') {
+                            fgExcludeHtml = '<span style="text-decoration: line-through; color: #FF5722;">' + data.name + '</span>';
+                        } else {
+                            fgExcludeHtml = data.name;
                         }
-                    } else {
+                        $node.html('<button class="layui-btn layui-bg-blue" style="height: 50px;">' + fgExcludeHtml + mainFlagStyle +'</button>');
+                    } else if (data.type == 3) {
+                        $node.html('<button class="layui-btn layui-btn-primary thirdChart" id="zdfx-' + data.id + '" style="border-color: #4A92D8">' + data.name + '</button>');
+                    } else if (data.type == 4){
+                        $node.html('<button class="layui-btn fourChart" id="jbzd-' + data.id + '" style="background-color: #64C092">' + data.name + '</button>');
+                    } else{
                         $node.html('<button class="layui-btn">' + data.name + '</button>');
                     }
+                } else {
+                    $node.html('<button class="layui-btn">' + data.name + '</button>');
                 }
-            });
-
-            $('.orgchart > table > tbody').find('.nodes').find(".lines:even").hide();
-            $('.orgchart > table > tbody > tr ').find('.nodes').find(".lines").hide();
-
-            // 绑定点击事件
-            var thirdCharts = document.querySelectorAll(".thirdChart");
-            for (var i = 0; i < thirdCharts.length; i++) {
-                tableSelectRender(thirdCharts[i].getAttribute("id"), 1);
             }
+        });
 
-            var fourCharts = document.querySelectorAll(".fourChart");
-            for (var i = 0; i < fourCharts.length; i++) {
-                tableSelectRender(fourCharts[i].getAttribute("id"), 2);
-            }
+        $('.orgchart > table > tbody').find('.nodes').find(".lines:even").hide();
+        $('.orgchart > table > tbody > tr ').find('.nodes').find(".lines").hide();
+
+        // 绑定点击事件
+        var thirdCharts = document.querySelectorAll(".thirdChart");
+        for (var i = 0; i < thirdCharts.length; i++) {
+            tableSelectRender(thirdCharts[i].getAttribute("id"), 1);
         }
 
-    });
+        var fourCharts = document.querySelectorAll(".fourChart");
+        for (var i = 0; i < fourCharts.length; i++) {
+            tableSelectRender(fourCharts[i].getAttribute("id"), 2);
+        }
+    }
 
     // ============ 思维导图 end ==============
 
     function tableSelectRender(id, type) {
-        // type = 1 加载拟真下面的检查，检验（且都是单选的）
-        // type = 2 加载拟真下的检查检验（只加载多选）
+        // type = 1 加载拟诊下面的检查，检验（且都是单选的）
+        let idDie = id.substring(5, id.length);
+        // type = 2 加载拟诊下的检查检验（只加载多选）
         table = $.extend(table, {config: {checkName: 'fgClue'}});
         tableSelect.render({
             elem: '#' + id,
             checkedKey: 'id',
             searchKey: 'keywords',
             table: {
-                url: basePath + '/pf/p/waiting/room/diagnostic/chart/list?type=' + type + '&idTestexecResult=' + idTestexecResult
+                url: basePath + '/pf/p/waiting/room/diagnostic/chart/list?type=' + type
+                    + '&idTestexecResult=' + idTestexecResult
+                    + '&idDie=' + idDie
                 , cols: [[
                     {type: 'checkbox', fixed: true},
                     {field: 'checkItem', minWidth: 160, title: '检查项'},
@@ -298,17 +322,17 @@ layui.config({
                 ]] //设置表头
             },
             done: function (elem, data) {
-                var selectData = data.data;
+                let selectData = data.data;
                 saveFgClue(selectData, type);
             }
         });
     }
 
     function saveFgClue(data, type) {
-        var reqBodyData = new Array();
-        var reqExamData = new Array();
+        let reqBodyData = new Array();
+        let reqExamData = new Array();
         $.each(data, function (index, content) {
-            var idArr = content.id.split("-");
+            let idArr = content.id.split("-");
             if (idArr[0] == 'body') {
                 reqBodyData.push(idArr[1]);
             } else {
@@ -317,7 +341,7 @@ layui.config({
         });
 
         if (reqBodyData.length >= 1) {
-            var bizBodyData = {
+            let bizBodyData = {
                 list : reqBodyData,
                 status : '1',
                 extId : idTestexecResult,
@@ -327,7 +351,7 @@ layui.config({
             common.commonPost(basePath + '/pf/r/waiting/room/check/qa/status', bizBodyData, null);
         }
         if (reqExamData.length >= 1) {
-            var bizExamData = {
+            let bizExamData = {
                 list : reqExamData,
                 status : '1',
                 extId : idTestexecResult,
@@ -337,6 +361,127 @@ layui.config({
             common.commonPost(basePath + '/pf/r/waiting/room/exam/qa/status', bizExamData, null);
         }
 
+    }
+
+    $('#addDiagnosis').on('click', function () {
+        $("#question-select-detail option:first").prop("selected", 'selected');
+        $('#desDieReason').val('');
+
+    });
+
+    function loadCbzdList() {
+        let bizData = {
+            idTestexecResult: idTestexecResult
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/summary/diagnosis/list',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                if (data.code != 0) {
+                    common.errorMsg(data.msg);
+                    return false;
+                } else {
+                    if (data.data) {
+                        refreshCbzd(data.data);
+                    }
+                }
+            },
+            error: function () {
+                layui.common.errorMsg("网络异常");
+                return false;
+            }
+        });
+    }
+
+    function refreshCbzd(dataList){
+        if (dataList.length == 0) {
+            return;
+        }
+        let result = '';
+        $.each(dataList, function (i, item) {
+            result += cbzdHtml(i, item);
+        });
+        $('#cbzdField').empty();
+        $('#cbzdField').append(result);
+
+        registerOutCbzdEvent();
+
+    }
+
+    function cbzdHtml(i, data) {
+        let desDieReason = data.desDieReason ? data.desDieReason : '';
+
+        let mainFlagStyle = data.mainFlag == 1 ? ' <span style="color: red; font-size: 20px;"><i class="iconfont icon-zhu"></i></span>' : '';
+
+        let newHtml = '           <div id="cbzd-'+ data.idTestexecResultDiagnosis +'" class="layui-row referral">\n' +
+            '                        <div style="margin: 15px 0 0 5px">\n' +
+            '                            <span class="disc"></span>\n' +
+            '                            <span class="diagnose-title">初步诊断' + (i + 1) + '：' + data.idDieText + mainFlagStyle +'</span>\n' +
+            '                            <span>\n' +
+            '                                <button data-content-id="' + data.idTestexecResultDiagnosis +'" data-content="' + data.idDieText +'" style="float: right; margin-right: 10px;" class="layui-btn layui-btn-xs layui-btn-danger delCbzdBtn" id="out'+ i +'">\n' +
+            '                                   <i class="layui-icon layui-icon-delete"></i><span id="outBtnText0">删除</span>\n' +
+            '                                </button>\n' +
+            '                            </span>\n' +
+            '                        </div>\n' +
+            '                        <div style="margin: 5px 0 10px 5px">\n' +
+            '                            <span class="disc"></span>\n' +
+            '                            <span class="diagnose-title">诊断理由：' + desDieReason +'</span>\n' +
+            '                        </div>\n' +
+            '                    </div>';
+        return newHtml;
+    }
+
+
+    function registerOutCbzdEvent() {
+        let outCbzdBtns = document.querySelectorAll(".delCbzdBtn");
+        for (let i = 0; i < outCbzdBtns.length; i++) {
+            outCbzdBtns[i].addEventListener('click', function () {
+                let idTestexecResultDiagnosis = this.getAttribute("data-content-id");
+                let idDieText = this.getAttribute("data-content");
+
+                layui.layer.confirm('确定删除初步诊断【' + idDieText + '】么？', {
+                    shade: 0
+                }, function (index) {
+                    delCbzdPost(idTestexecResultDiagnosis);
+                    layer.close(index);
+                });
+            });
+        }
+    }
+
+    function delCbzdPost(idTestexecResultDiagnosis) {
+        let bizData = {
+            idTestexecResultDiagnosis: idTestexecResultDiagnosis
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/summary/diagnosis/del',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data.code != 0) {
+                    layer.msg(data.msg);
+                    return false;
+                } else {
+                    $('#cbzd-' + idTestexecResultDiagnosis).remove();
+                    loadChartData();
+                    layer.tips("排除成功");
+                    $("#question-select-detail option:first").prop("selected", 'selected');
+                    $('#desDieReason').val('');
+                    return true;
+                }
+            },
+            error: function () {
+                layer.closeAll('loading');
+                layui.common.errorMsg(data.msg + "失败");
+                return false;
+            }
+        });
     }
 
 

@@ -51,7 +51,13 @@ layui.config({
                     common.errorMsg(data.msg);
                     return false;
                 } else {
-                    var zNodes = data.data;
+                    let zNodes = data.data;
+                    for (let i = 0; i < zNodes.length; i++) {
+                        if (!zNodes[i].pId) {
+                            zNodes[i].nocheck = true;
+                        }
+                    }
+                    
                     $.fn.zTree.init($("#treeDemo"), setting, zNodes);
                     zTree = $.fn.zTree.getZTreeObj("treeDemo");
                     return true;

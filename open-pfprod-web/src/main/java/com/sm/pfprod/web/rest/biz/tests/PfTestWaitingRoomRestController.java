@@ -513,22 +513,6 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
-     * 删除诊断
-     *
-     * @param dto
-     * @return
-     */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
-    @PostMapping(value = "/summary/diagnosis/del")
-    @ResponseBody
-    public ResultObject delDiagnosis(@RequestBody ExmMedResultDiagnosis dto) {
-        /* 参数校验 */
-        Assert.isTrue(dto.getIdTestexecResultDiagnosis() != null, "idTestexecResultDiagnosis");
-        return ResultObject.createSuccess("delDiagnosis", ResultObject.DATA_TYPE_OBJECT,
-                pfTestWaitingRoomService.delDiagnosis(dto.getIdTestexecResultDiagnosis()));
-    }
-
-    /**
      * 保存诊断小结
      *
      * @param dto
@@ -628,6 +612,26 @@ public class PfTestWaitingRoomRestController extends BaseController {
         Assert.isTrue(dto.getFgDieClass() != null, "fgDieClass");
         return ResultObject.createSuccess("selectDiagnosis", ResultObject.DATA_TYPE_OBJECT,
                 pfTestWaitingRoomService.selectDiagnosis(dto));
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/summary/diagnosis/list")
+    @ResponseBody
+    public ResultObject listDiagnosis(@RequestBody ExmMedResultDiagnosis dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("selectDiagnosis", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.listDiagnosis(dto));
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/summary/diagnosis/del")
+    @ResponseBody
+    public ResultObject delDiagnosis(@RequestBody ExmMedResultDiagnosis dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResultDiagnosis() != null, "idTestexecResultDiagnosis");
+        return ResultObject.createSuccess("delDiagnosis", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.delDiagnosis(dto.getIdTestexecResultDiagnosis()));
     }
 
     /**
@@ -944,6 +948,21 @@ public class PfTestWaitingRoomRestController extends BaseController {
         Assert.isTrue(dto.getIdTestplanDetail() != null, "idTestplanDetail");
         return ResultObject.createSuccess("selectEvaGuideContent", ResultObject.DATA_TYPE_LIST,
                 pfTestWaitingRoomService.selectEvaGuideContent(dto.getIdTestplanDetail()));
+    }
+
+    /**
+     * 查询诊断分析、鉴别诊断线索标识
+     *
+     * @param dto
+     * @return
+     */
+    @Deprecated
+    @PreAuthorize("hasAnyRole('ROLE_EXM0040','ROLE_SUPER')")
+    @RequestMapping(value = "/diagnostic/chart/tsSelect")
+    @ResponseBody
+    public ResultObject selectIdStr(PfTestExamTagDto dto) {
+        return ResultObject.createSuccess("selectIdStr", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.selectIdStr(dto));
     }
 
 }

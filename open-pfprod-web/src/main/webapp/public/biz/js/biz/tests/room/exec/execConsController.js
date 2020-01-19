@@ -682,7 +682,7 @@ layui.config({
             "                        </div>\n";
 
         let showPatReplay = '';
-        if (!reasonFlag) {
+        if (data.fgReason == '1' && !reasonFlag) {
             showPatReplay = 'display: none; ';
         }
 

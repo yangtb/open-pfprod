@@ -142,7 +142,14 @@ layui.define(['table', 'jquery', 'form'], function (exports) {
                         }
                     }
                     checkedData = uniqueObjArray(checkedData, opt.checkedKey);
+                } else {
+                    for (let i = 0; i < res.data.length; i++) {
+                        if (res.data[i].lAY_CHECKED) {
+                            checkedData.push(res.data[i])
+                        }
+                    }
                 }
+
             }
 
             //更新选中数量

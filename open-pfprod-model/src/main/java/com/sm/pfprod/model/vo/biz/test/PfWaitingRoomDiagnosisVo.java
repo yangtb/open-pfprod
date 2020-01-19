@@ -45,4 +45,10 @@ public class PfWaitingRoomDiagnosisVo implements Serializable {
      * 诊断理由
      */
     private String desDieReason;
+
+    /**
+     * 主诊断：0=否，1=是
+     */
+    private Integer mainFlag;
+
 }

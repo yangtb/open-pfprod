@@ -192,6 +192,11 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.selectDiagnosis(param);
     }
 
+    public CommonResult<List<PfWaitingRoomDiagnosisResult>> listDiagnosis(ExmMedResultDiagnosisParam param) {
+        return pfTestWaitingRoomFacade.listDiagnosis(param);
+    }
+
+
     public CommonResult<ExmMedResultSummaryResult> selectSummary(Long idTestexecResult) {
         return pfTestWaitingRoomFacade.selectSummary(idTestexecResult);
     }
@@ -271,6 +276,14 @@ public class TestWaitingRoomClient {
     public PfPageResult listDiagnosticChart(PfTestExamTagParam param)  {
         return pfTestWaitingRoomFacade.listDiagnosticChart(param);
     }
+    public PfPageResult listEvaDimension(Long idTestexecResultDimension)  {
+        return pfTestWaitingRoomFacade.listEvaDimension(idTestexecResultDimension);
+    }
+
+    public CommonResult<String> selectIdStr(PfTestExamTagParam param)  {
+        return pfTestWaitingRoomFacade.selectIdStr(param);
+    }
+
 
     public CommonResult<PfWaitingRoomFinishResult> selectFinishExamInfo(Long idTestplanDetail) {
         return pfTestWaitingRoomFacade.selectFinishExamInfo(idTestplanDetail);

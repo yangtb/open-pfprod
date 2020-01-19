@@ -252,7 +252,11 @@ layui.config({
         }
         let names = new Array();
         $.each(data, function (index, item) {
-            names.push(item.desInques);
+            let bizItemData = {
+                id : item.idInques,
+                name : item.desInques
+            }
+            names.push(bizItemData);
         });
         fromCaseSave(1, names);
     });
@@ -266,7 +270,11 @@ layui.config({
         }
         let names = new Array();
         $.each(data, function (index, item) {
-            names.push(item.desBody);
+            let bizItemData = {
+                id : item.idBody,
+                name : item.desBody
+            }
+            names.push(bizItemData);
         });
         fromCaseSave(2, names);
     });
@@ -280,7 +288,11 @@ layui.config({
         }
         let names = new Array();
         $.each(data, function (index, item) {
-            names.push(item.naItem);
+            let bizItemData = {
+                id : item.idInspectItem,
+                name : item.naItem
+            }
+            names.push(bizItemData);
         });
         fromCaseSave(3, names);
     });
@@ -290,11 +302,12 @@ layui.config({
             module: module,
             idEvaCase: idEvaCase,
             cdEvaAsse: cdEvaAsse,
-            tagFlag : tagFlag,
-            sdEva : sdEva,
-            names : names,
-            fromCaseFlag : 1
+            tagFlag: tagFlag,
+            sdEva: sdEva,
+            names: names,
+            fromCaseFlag: 1
         }
+
 
         if (tagFlag == '1') {
             bizData.caseName = caseName;
@@ -330,7 +343,6 @@ layui.config({
     }
 
     function _callBack(cdEvaAsse) {
-
         let medData = {
             idMedicalrec: idMedicalrec,
             cdEvaAsse: cdEvaAsse
