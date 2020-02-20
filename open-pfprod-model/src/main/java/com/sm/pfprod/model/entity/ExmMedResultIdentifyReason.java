@@ -58,6 +58,11 @@ public class ExmMedResultIdentifyReason implements Serializable {
     private Long idInspectItem;
 
     /**
+     * 阶段对应问诊、检查、检验名称
+     */
+    private String idText;
+
+    /**
      * 明细ID
      * isNullAble:0
      */

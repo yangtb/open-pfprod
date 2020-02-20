@@ -312,6 +312,30 @@ public interface PfTestWaitingRoomService {
     Long saveIdentifyDiagnosis(ExmMedResultIdentify dto);
 
     /**
+     * 删除鉴别诊断
+     *
+     * @param idTestexecResultIdentify
+     * @return
+     */
+    Integer delIdentify(Long idTestexecResultIdentify);
+
+    /**
+     * 鉴别诊断原因列表
+     *
+     * @param idTestexecResultIdentify
+     * @return
+     */
+    List<ExmMedResultIdentifyReason> listIdentifyReasons(Long idTestexecResultIdentify);
+
+    /**
+     * 鉴别诊断列表
+     *
+     * @param idTestexecResult 病例结果id
+     * @return
+     */
+    List<ExmMedResultIdentify> listIdentifyDiagnosis(Long idTestexecResult);
+
+    /**
      * 删除诊断
      *
      * @param idTestexecResultDiagnosis 主键

@@ -513,6 +513,54 @@ public class PfTestWaitingRoomRestController extends BaseController {
     }
 
     /**
+     * 删除鉴别诊断
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/identify/del")
+    @ResponseBody
+    public ResultObject delIdentify(@RequestBody ExmMedResultIdentify dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResultIdentify() != null, "idTestexecResultIdentify");
+        return ResultObject.createSuccess("delIdentify", ResultObject.DATA_TYPE_OBJECT,
+                pfTestWaitingRoomService.delIdentify(dto.getIdTestexecResultIdentify()));
+    }
+
+    /**
+     * 鉴别诊断理由列表
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/identify/reason/list")
+    @ResponseBody
+    public ResultObject listIdentifyReasons(@RequestBody ExmMedResultIdentifyReason dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResultIdentify() != null, "idTestexecResultIdentify");
+        return ResultObject.createSuccess("listIdentifyReasons", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.listIdentifyReasons(dto.getIdTestexecResultIdentify()));
+    }
+
+    /**
+     * 鉴别诊断列表
+     *
+     * @param dto
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PostMapping(value = "/identify/list")
+    @ResponseBody
+    public ResultObject listIdentifyDiagnosis(@RequestBody ExmMedResultIdentify dto) {
+        /* 参数校验 */
+        Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
+        return ResultObject.createSuccess("listIdentifyDiagnosis", ResultObject.DATA_TYPE_LIST,
+                pfTestWaitingRoomService.listIdentifyDiagnosis(dto.getIdTestexecResult()));
+    }
+
+    /**
      * 保存诊断小结
      *
      * @param dto

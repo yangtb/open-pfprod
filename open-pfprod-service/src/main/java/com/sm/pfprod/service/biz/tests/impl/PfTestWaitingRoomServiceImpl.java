@@ -365,6 +365,33 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     }
 
     @Override
+    public Integer delIdentify(Long idTestexecResultIdentify) {
+        CommonResult<Integer> result = testWaitingRoomClient.delIdentify(idTestexecResultIdentify);
+        if (result != null && result.getIsSuccess()) {
+            return result.getContent();
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<ExmMedResultIdentifyReason> listIdentifyReasons(Long idTestexecResultIdentify) {
+        CommonResult<List<ExmMedResultIdentifyReasonResult>> result = testWaitingRoomClient.listIdentifyReasons(idTestexecResultIdentify);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), ExmMedResultIdentifyReason.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
+    public List<ExmMedResultIdentify> listIdentifyDiagnosis(Long idTestexecResult) {
+        CommonResult<List<ExmMedResultIdentifyResult>> result = testWaitingRoomClient.listIdentifyDiagnosis(idTestexecResult);
+        if (result != null && result.getIsSuccess()) {
+            return BeanUtil.convertList(result.getContent(), ExmMedResultIdentify.class);
+        }
+        throw new BizRuntimeException(result.getErrorCode(), result.getErrorDesc());
+    }
+
+    @Override
     public boolean delDiagnosis(Long idTestexecResultDiagnosis) {
         CommonResult<Boolean> result = testWaitingRoomClient.delDiagnosis(idTestexecResultDiagnosis);
         if (result != null && result.getIsSuccess()) {

@@ -223,7 +223,7 @@
                 </ul>
             </div>
 
-            <div class="main">
+            <div class="main" style="padding-right: 5px;">
 
                 <div style="padding: 10px 0 10px 5px; font-weight: bold">鉴别诊断</div>
 
@@ -236,7 +236,7 @@
                         <div style="float: left">
                             <div class="layui-input-inline">
                                 <input type="text" name="naDie" id="naDie" autocomplete="off" class="layui-input"
-                                       placeholder="请输入关键字" style="width: 320px; height: 32px;">
+                                       placeholder="请输入鉴别诊断" style="width: 320px; height: 32px;">
                             </div>
                         </div>
                         <div style="float: left">
@@ -251,8 +251,7 @@
 
                 <div style="padding: 50px 0 10px 5px; font-weight: bold">诊断说明</div>
 
-                <textarea name="desDieReason" id="desDieReason" class="layui-textarea"
-                          style="height: 200px;"></textarea>
+                <textarea name="desDieReason" id="desDieReason" class="layui-textarea"></textarea>
 
                 <div style="padding: 20px 0 10px 5px; font-weight: bold">
                     排除理由
@@ -268,11 +267,19 @@
                 </table>
 
                 <div style="padding: 20px 0 0 120px;">
+                    <button type="button" id="addIdentify" class="layui-btn layui-btn-sm">
+                        <i class="layui-icon">&#xe654;</i>新增</button>
                     <button type="button" id="saveIdentify" class="layui-btn layui-btn-sm"
                             style="padding: 0 20px 0 20px; background-color: #4A92D8;">保存</button>
                 </div>
 
+                <div id="jbzdField" style="padding-top: 10px;">
+
+                </div>
+
             </div>
+
+
         </div>
     </div>
 

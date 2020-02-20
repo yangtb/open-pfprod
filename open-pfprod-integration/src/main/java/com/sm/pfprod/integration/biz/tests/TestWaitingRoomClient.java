@@ -164,6 +164,18 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.saveIdentifyDiagnosis(param);
     }
 
+    public CommonResult<Integer> delIdentify(Long idTestexecResultIdentify) {
+        return pfTestWaitingRoomFacade.delIdentify(idTestexecResultIdentify);
+    }
+
+    public CommonResult<List<ExmMedResultIdentifyReasonResult>> listIdentifyReasons(Long idTestexecResultIdentify) {
+        return pfTestWaitingRoomFacade.listIdentifyReasons(idTestexecResultIdentify);
+    }
+
+    public CommonResult<List<ExmMedResultIdentifyResult>> listIdentifyDiagnosis(Long idTestexecResult) {
+        return pfTestWaitingRoomFacade.listIdentifyDiagnosis(idTestexecResult);
+    }
+
     public CommonResult<Boolean> delDiagnosis(Long idTestexecResultDiagnosis) {
         return pfTestWaitingRoomFacade.delDiagnosis(idTestexecResultDiagnosis);
     }
