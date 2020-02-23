@@ -217,6 +217,7 @@ layui.config({
     });
 
     form.on('select(sdEvaTypeSelectFilter)', function (data) {
+        $('#addAnswerBtn').attr('ts-selected', '');
         table.reload('answerTableId', {
             data: []
         });

@@ -440,7 +440,7 @@ layui.config({
 
                         var html =
                             "                           <div style='background-color: #F2F2F2; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
-                            "                               <div style='font-weight: bold; padding: 2px;'>● 解释患者的回复</div>\n" +
+                            "                               <div style='font-weight: bold; padding: 2px;'>● 请判读体检结果</div>\n" +
                             "                               <div>" + desReply + "</div>\n" +
                             "                           </div>\n";
                         if (desExpert) {
@@ -573,12 +573,12 @@ layui.config({
             "                        <div  id='reply-" + data.idTestexecResultBody + "' style='padding-left: 45px; " + replyStyle + "'>\n";
         if (data.fgBack == '1' && !data.desReply) {
             html +=
-                '                            <button id="reply-btn-' + data.idTestexecResultBody + '" data-index="' + data.idTestexecResultBody + '" data-expert="' + data.desExpert + '" class="layui-btn layui-btn-xs layui-btn-radius cons-reply" style="background-color: #999999">解释患者的回复</button>\n';
+                '                            <button id="reply-btn-' + data.idTestexecResultBody + '" data-index="' + data.idTestexecResultBody + '" data-expert="' + data.desExpert + '" class="layui-btn layui-btn-xs layui-btn-radius cons-reply" style="background-color: #999999">请判读体检结果</button>\n';
         }
         if (data.desReply) {
             html +=
                 "                           <div style='background-color: #F2F2F2; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
-                "                               <div style='font-weight: bold; padding: 2px;'>● 解释患者的回复</div>\n" +
+                "                               <div style='font-weight: bold; padding: 2px;'>● 请判读体检结果</div>\n" +
                 "                               <div>" + data.desReply + "</div>\n" +
                 "                           </div>\n";
         }

@@ -81,6 +81,24 @@ public class PfDiseaseServiceImpl implements PfDiseaseService {
     }
 
     @Override
+    public PageResult listIdeReason(PfDiseaseInfoDto dto) {
+        PfPageResult<BasDieResult> result = diseaseClient.listIdeReason(BeanUtil.convert(dto, PfDiseaseInfoParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
+    public PageResult listDiseaseByCatalogueId(PfDiseaseInfoDto dto) {
+        PfPageResult<BasDieResult> result = diseaseClient.listDiseaseByCatalogueId(BeanUtil.convert(dto, PfDiseaseInfoParam.class));
+        if (result == null) {
+            return null;
+        }
+        return BeanUtil.convert(result, PageResult.class);
+    }
+
+    @Override
     public boolean addDiseaseInfo(BasDie dto) {
         CommonResult<Boolean> result = diseaseClient.addDiseaseInfo(BeanUtil.convert(dto, BasDieParam.class));
         if (result != null && result.getIsSuccess()) {

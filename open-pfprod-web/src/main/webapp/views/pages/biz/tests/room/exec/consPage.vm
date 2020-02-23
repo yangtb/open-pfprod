@@ -19,6 +19,7 @@
         var idMedicalrec = '$!{idMedicalrec}';
         var name = '$!{patient.name}';
         var age = '$!{patient.age}';
+        var sexInt = $!{patient.sex};
         var sex = #if($!{patient.sex} == '2')'女'#elseif($!{patient.sex} == '1' )'男'#end;
         var complaint = '$!{patient.complaint}';
         var cdMedAsse = '$!{cdMedAsse}';
@@ -78,7 +79,7 @@
                 </div>
 
 
-                 <div class="layui-col-xs6" style="height: 604px;width: 100%">
+                 <div class="layui-row" style="height: 604px;width: 100%">
                      <div id="key-tab" class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
                          <ul id="labelTab" class="layui-tab-title">
 

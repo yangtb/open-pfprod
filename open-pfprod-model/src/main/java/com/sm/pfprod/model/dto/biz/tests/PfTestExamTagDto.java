@@ -90,4 +90,6 @@ public class PfTestExamTagDto extends PageParam implements Serializable {
 
     private Long idDie;
 
+    private boolean flag;
+
 }

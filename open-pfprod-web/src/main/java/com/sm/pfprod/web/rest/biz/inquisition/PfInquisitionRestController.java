@@ -122,7 +122,7 @@ public class PfInquisitionRestController extends BaseController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping(value = "/question/classify/tree", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject listQuestionClassifyTree() {
@@ -135,7 +135,7 @@ public class PfInquisitionRestController extends BaseController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_EXM0030','ROLE_FAQ0010','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_STD0010','ROLE_EXM0030','ROLE_EXM0300','ROLE_FAQ0010','ROLE_SUPER')")
     @RequestMapping(value = "/question/classify/tree/select", method = RequestMethod.POST)
     @ResponseBody
     public PfTreeSelectVo listQuestionClassifyTreeSelect() {

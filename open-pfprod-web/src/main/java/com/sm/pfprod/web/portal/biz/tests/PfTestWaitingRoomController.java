@@ -21,6 +21,7 @@ import com.sm.pfprod.web.security.SecurityContext;
 import com.sm.pfprod.web.security.User;
 import com.sm.pfprod.web.util.EnumUtil;
 import com.sm.pfprod.web.util.ParamUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,7 +72,7 @@ public class PfTestWaitingRoomController extends BaseController {
         return "pages/biz/tests/room/waitingRoomPage";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/student")
     public String paperStudentPage(Model model) {
         PfTestWatingRoomDto dto = new PfTestWatingRoomDto();
@@ -86,7 +87,7 @@ public class PfTestWaitingRoomController extends BaseController {
         return "pages/biz/tests/room/studentRoomPage";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/exam/page")
     public String papPage(Model model, PfTestExamDto dto) {
         model.addAttribute("idTestplanDetail", dto.getIdTestplanDetail());
@@ -95,7 +96,7 @@ public class PfTestWaitingRoomController extends BaseController {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
         model.addAttribute("idTestpaper", "idTestpaper");
         model.addAttribute("patName", dto.getPatName());
-        //model.addAttribute("patSex", dto.getPatSex().trim());
+        model.addAttribute("patSex", StringUtils.isNotBlank(dto.getPatSex()) ? dto.getPatSex().trim() : "");
         model.addAttribute("patAge", dto.getPatAge());
         model.addAttribute("complain", dto.getComplain());
         model.addAttribute("idMedCase", dto.getIdMedCase());
@@ -144,7 +145,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param model
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/test/pat/page")
     public String patPage(Model model, PfTestExamTagDto dto) {
         PfWaitingRoomPatVo pfWaitingRoomPatVo = pfTestWaitingRoomService.selectPatInfo(dto);
@@ -159,7 +160,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param model
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/test/cons/page")
     public String consPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
@@ -172,7 +173,7 @@ public class PfTestWaitingRoomController extends BaseController {
         return "pages/biz/tests/room/exec/consPage";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping(value = "/test/cons/list")
     @ResponseBody
     public PageResult listTestCons(PfTestExamTagDto dto) {
@@ -186,7 +187,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param model
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/test/check/page")
     public String checkPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
@@ -216,7 +217,7 @@ public class PfTestWaitingRoomController extends BaseController {
         return "pages/biz/tests/room/exec/checkPage";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping(value = "/test/check/list")
     @ResponseBody
     public PageResult listTestCheck(PfTestExamTagDto dto) {
@@ -230,7 +231,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param model
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/test/exam/page")
     public String examPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
@@ -243,7 +244,7 @@ public class PfTestWaitingRoomController extends BaseController {
         return "pages/biz/tests/room/exec/examPage";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping(value = "/test/exam/list")
     @ResponseBody
     public PageResult listTestExam(PfTestExamTagDto dto) {
@@ -256,7 +257,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param model
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/test/referral/page")
     public String referralPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
@@ -272,7 +273,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param model
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/test/referral/form")
     public String referralForm(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
@@ -286,7 +287,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param model
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/test/summary/page")
     public String summaryPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
@@ -300,7 +301,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param idTestexecResultDiagnosis
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping(value = "/test/die/reason/list")
     @ResponseBody
     public PageResult listDieReason(Long idTestexecResultDiagnosis) {
@@ -313,7 +314,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping(value = "/test/die/ready/reason/list")
     @ResponseBody
     public PageResult listReadyDieReason(Long idTestexecResult, String keyword) {
@@ -327,7 +328,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param model
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/test/orders/page")
     public String ordersPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
@@ -338,21 +339,21 @@ public class PfTestWaitingRoomController extends BaseController {
         return "pages/biz/tests/room/exec/ordersPage";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping(value = "/test/orders/drug/long/list")
     @ResponseBody
     public PageResult listLongDrugs(Long idTestexecResultOrder) {
         return pfTestWaitingRoomService.listLongDrugs(idTestexecResultOrder);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping(value = "/test/orders/drug/short/list")
     @ResponseBody
     public PageResult listShortDrugs(Long idTestexecResultOrder) {
         return pfTestWaitingRoomService.listShortDrugs(idTestexecResultOrder);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/assess/page")
     public String assessPage(Model model) {
         model.addAttribute("sexEnum", enumUtil.getEnumList(SysDicGroupEnum.SEX.getCode()));
@@ -366,7 +367,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param model
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/test/assess/page")
     public String testAssessPage(Model model, PfTestExamDto dto) {
         model.addAttribute("idTestplanDetail", dto.getIdTestplanDetail());
@@ -387,7 +388,7 @@ public class PfTestWaitingRoomController extends BaseController {
     }
 
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping(value = "/list")
     @ResponseBody
     public PageResult listWaitingRoom(PfTestWatingRoomDto dto) {
@@ -417,7 +418,7 @@ public class PfTestWaitingRoomController extends BaseController {
         return pfTestWaitingRoomService.listWaitingRoom(dto);
     }*/
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping(value = "/receive/list")
     @ResponseBody
     public PageResult listReceivePat(PfTestWatingRoomDto dto) {
@@ -431,7 +432,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param idTestexecResultReferral
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping(value = "/referral/reason/in/list")
     @ResponseBody
     public PageResult listReferralInReason(Long idTestexecResultReferral) {
@@ -444,14 +445,14 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param idTestexecResultReferral
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping(value = "/referral/reason/out/list")
     @ResponseBody
     public PageResult listReferralOutReason(Long idTestexecResultReferral) {
         return pfTestWaitingRoomService.listReferralReason(idTestexecResultReferral, YesOrNoNum.YES.getCode());
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping(value = "/all/referral/die")
     @ResponseBody
     public PageResult listAllReferralDie(Long idTestexecResult, String keywords) {
@@ -464,7 +465,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param model
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/test/diagnosis/preliminary/page")
     public String preliminaryDiagnosisPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());
@@ -479,7 +480,7 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param model
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/test/diagnosis/differential/page")
     public String differentialDiagnosisPage(Model model, PfTestExamTagDto dto) {
         model.addAttribute("idMedicalrec", dto.getIdMedicalrec());

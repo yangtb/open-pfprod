@@ -59,7 +59,7 @@ public class PfDiseaseController extends BaseController {
         return "pages/biz/disease/diseaseInfoForm";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_BAS0040', 'ROLE_EXM0030','ROLE_FAQ0020','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_BAS0040', 'ROLE_EXM0030','ROLE_EXM0300','ROLE_FAQ0020','ROLE_SUPER')")
     @RequestMapping(value = "/info/list")
     @ResponseBody
     public PageResult listDiseaseInfo(PfDiseaseInfoDto dto) {
@@ -71,6 +71,20 @@ public class PfDiseaseController extends BaseController {
             dto.setPinyin(dto.getQueryCondition());
         }
         return pfDiseaseService.listDiseaseInfo(dto);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_BAS0040', 'ROLE_EXM0030','ROLE_EXM0300','ROLE_FAQ0020','ROLE_SUPER')")
+    @RequestMapping(value = "/assess/reason/ide/list")
+    @ResponseBody
+    public PageResult listIdeReason(PfDiseaseInfoDto dto) {
+        return pfDiseaseService.listIdeReason(dto);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_BAS0040', 'ROLE_EXM0030','ROLE_EXM0300','ROLE_FAQ0020','ROLE_SUPER')")
+    @RequestMapping(value = "/info/list/byCatalogueId")
+    @ResponseBody
+    public PageResult listDiseaseByCatalogueId(PfDiseaseInfoDto dto) {
+        return pfDiseaseService.listDiseaseByCatalogueId(dto);
     }
 
 }

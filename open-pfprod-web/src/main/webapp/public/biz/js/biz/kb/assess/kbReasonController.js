@@ -64,8 +64,9 @@ layui.config({
             , cols: [[
                 {type: 'radio'},
                 {field: 'sdEva', width: 90, title: '评估阶段', templet: '#sdEvaTpl'},
-                {field: 'itemName', minWidth: 90, title: '评估项'},
+                {field: 'itemName', minWidth: 140, title: '评估项'},
                 {field: 'scoreEva', width: 60, title: '分值'},
+                {field: 'idDieText', width: 140, title: '疾病'},
                 {fixed: 'right', title: '操作', width: 60, align: 'left', toolbar: '#kbBar'}
             ]] //设置表头
             , url: basePath + '/pf/p/kb/assess/reason/list'
@@ -353,27 +354,52 @@ layui.config({
         });
     };
 
-    tableSelect.render({
-        elem: '#idDieText',
-        checkedKey: 'idDie',
-        searchKey: 'keywords',
-        table: {
-            url: basePath + '/pf/p/disease/info/list'
-            , cols: [[
-                {type: 'radio', fixed: true},
-                {field: 'name', minWidth: 160, title: '疾病名称'},
-                {field: 'cdDieclassText', minWidth: 120, title: '疾病目录'},
-                {field: 'icd', width: 80, title: 'ICD'}
-            ]] //设置表头
-            , limits: [10, 20, 50]
-            , page: true
-        },
-        done: function (elem, data) {
-            var selectData = data.data[0];
-            $('#idDie').val(selectData.idDie);
-            $('#idDieText').val(selectData.name);
-        }
-    });
+    if (caseEdit == 1) {
+        tableSelect.render({
+            elem: '#idDieText',
+            checkedKey: 'idDie',
+            searchKey: 'keywords',
+            table: {
+                url: basePath + '/pf/p/disease/assess/reason/ide/list?idMedicalrec=' + idMedicalrec
+                , cols: [[
+                    {type: 'radio', fixed: true},
+                    {field: 'name', minWidth: 160, title: '疾病名称'},
+                    {field: 'cdDieclassText', minWidth: 120, title: '疾病目录'},
+                    {field: 'icd', width: 80, title: 'ICD'}
+                ]] //设置表头
+                , limits: [10, 20, 50]
+                , page: true
+            },
+            done: function (elem, data) {
+                let selectData = data.data[0];
+                $('#idDie').val(selectData.idDie);
+                $('#idDieText').val(selectData.name);
+            }
+        });
+    } else {
+        tableSelect.render({
+            elem: '#idDieText',
+            checkedKey: 'idDie',
+            searchKey: 'keywords',
+            table: {
+                url: basePath + '/pf/p/disease/info/list'
+                , cols: [[
+                    {type: 'radio', fixed: true},
+                    {field: 'name', minWidth: 160, title: '疾病名称'},
+                    {field: 'cdDieclassText', minWidth: 120, title: '疾病目录'},
+                    {field: 'icd', width: 80, title: 'ICD'}
+                ]] //设置表头
+                , limits: [10, 20, 50]
+                , page: true
+            },
+            done: function (elem, data) {
+                let selectData = data.data[0];
+                $('#idDie').val(selectData.idDie);
+                $('#idDieText').val(selectData.name);
+            }
+        });
+    }
+
 
     //监听提交
     form.on('submit(saveAnswer)', function (data) {

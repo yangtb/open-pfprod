@@ -57,7 +57,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/start")
     @ResponseBody
     public ResultObject startExam(@RequestBody ExmTestexec dto) {
@@ -77,7 +77,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/end")
     @ResponseBody
     public ResultObject endExam(@RequestBody ExmTestexec dto) {
@@ -89,7 +89,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
         return ResultObject.createSuccess("startExam", ResultObject.DATA_TYPE_OBJECT, pfTestWaitingRoomService.endExam(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/test/cons/list")
     @ResponseBody
     public Object listTestCons(@RequestBody PfTestExamTagDto dto) {
@@ -105,7 +105,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/cons/qa/save")
     @ResponseBody
     public ResultObject saveConsQa(@RequestBody ExmMedResultInques dto) {
@@ -124,7 +124,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/qa/edit")
     @ResponseBody
     public ResultObject editConsQa(@RequestBody PfExmMedResultDto dto) {
@@ -141,7 +141,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/cons/qa/status")
     @ResponseBody
     public ResultObject updateConsStatus(@RequestBody PfBachChangeStatusDto dto) {
@@ -158,7 +158,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/cons/qa/list")
     @ResponseBody
     public ResultObject listConsQa(@RequestBody PfTestExamTagDto dto) {
@@ -174,7 +174,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300', 'ROLE_SUPER')")
     @PostMapping(value = "/check/qa/pic")
     public ResultObject selectPic(@RequestBody PfTestExamTagDto dto) {
         /* 参数校验 */
@@ -190,7 +190,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/check/qa/save")
     @ResponseBody
     public ResultObject saveCheckQa(@RequestBody ExmMedResultBody dto) {
@@ -209,7 +209,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/check/qa/edit")
     @ResponseBody
     public ResultObject editCheckQa(@RequestBody ExmMedResultBody dto) {
@@ -227,7 +227,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/check/qa/status")
     @ResponseBody
     public ResultObject updateCheckStatus(@RequestBody PfBachChangeStatusDto dto) {
@@ -244,7 +244,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/check/qa/list")
     @ResponseBody
     public ResultObject listCheckQa(@RequestBody PfTestExamTagDto dto) {
@@ -260,7 +260,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/exam/qa/save")
     @ResponseBody
     public ResultObject saveExamQa(@RequestBody ExmMedResultInspect dto) {
@@ -278,7 +278,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param list
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/exam/qa/batch/save")
     @ResponseBody
     public ResultObject saveBatchExamQa(@RequestBody List<ExmMedResultInspect> list) {
@@ -295,7 +295,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/exam/qa/edit")
     @ResponseBody
     public ResultObject editExamQa(@RequestBody ExmMedResultInspect dto) {
@@ -312,7 +312,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/exam/qa/status")
     @ResponseBody
     public ResultObject updateExamStatus(@RequestBody PfBachChangeStatusDto dto) {
@@ -329,7 +329,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/exam/qa/list")
     @ResponseBody
     public ResultObject listExamQa(@RequestBody PfTestExamTagDto dto) {
@@ -345,7 +345,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/referral/save")
     @ResponseBody
     public ResultObject saveReferral(@RequestBody ExmMedResultReferral dto) {
@@ -363,7 +363,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/referral/update")
     @ResponseBody
     public ResultObject updateReferral(@RequestBody ExmMedResultReferral dto) {
@@ -381,7 +381,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/referral/out")
     @ResponseBody
     public ResultObject outReferral(@RequestBody ExmMedResultReferral dto) {
@@ -399,7 +399,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/referral/list")
     @ResponseBody
     public ResultObject listReferral(@RequestBody PfTestExamTagDto dto) {
@@ -415,7 +415,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/orders/select")
     @ResponseBody
     public ResultObject selectOrders(@RequestBody ExmMedResultOrder dto) {
@@ -431,7 +431,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/orders/save")
     @ResponseBody
     public ResultObject saveOrders(@RequestBody ExmMedResultOrder dto) {
@@ -447,7 +447,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/orders/drugs/save")
     @ResponseBody
     public ResultObject saveDrugs(@RequestBody PfCommonListDto dto) {
@@ -465,7 +465,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/orders/drugs/del")
     @ResponseBody
     public ResultObject delDrugs(@RequestBody PfChangeStatusDto dto) {
@@ -482,7 +482,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/summary/diagnosis/save")
     @ResponseBody
     public ResultObject saveDiagnosis(@RequestBody ExmMedResultDiagnosis dto) {
@@ -500,7 +500,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/summary/diagnosis/identify/save")
     @ResponseBody
     public ResultObject saveIdentifyDiagnosis(@RequestBody ExmMedResultIdentify dto) {
@@ -518,7 +518,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/identify/del")
     @ResponseBody
     public ResultObject delIdentify(@RequestBody ExmMedResultIdentify dto) {
@@ -534,7 +534,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/identify/reason/list")
     @ResponseBody
     public ResultObject listIdentifyReasons(@RequestBody ExmMedResultIdentifyReason dto) {
@@ -550,7 +550,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/identify/list")
     @ResponseBody
     public ResultObject listIdentifyDiagnosis(@RequestBody ExmMedResultIdentify dto) {
@@ -566,7 +566,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/summary/save")
     @ResponseBody
     public ResultObject saveSummary(@RequestBody ExmMedResultSummary dto) {
@@ -582,7 +582,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/summary/die/reason/save")
     @ResponseBody
     public ResultObject saveDieReason(@RequestBody List<ExmMedResultDieReason> dto) {
@@ -598,7 +598,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/summary/reason/del")
     @ResponseBody
     public ResultObject delDieReason(@RequestBody ExmMedResultDieReason dto) {
@@ -614,7 +614,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/diagnosis/select")
     @ResponseBody
     public ResultObject selectAllDiagnosis(@RequestBody PfTestExamTagDto dto) {
@@ -630,14 +630,14 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/referral/select/all")
     @ResponseBody
     public ResultObject selectAllReferral(@RequestBody PfTestExamTagDto dto) {
         /* 参数校验 */
         Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
         return ResultObject.createSuccess("selectAllReferral", ResultObject.DATA_TYPE_LIST,
-                pfTestWaitingRoomService.selectAllReferral(dto.getIdTestexecResult()));
+                pfTestWaitingRoomService.selectAllReferral(dto.getIdTestexecResult(), dto.isFlag()));
     }
 
     /**
@@ -646,7 +646,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/summary/diagnosis/select")
     @ResponseBody
     public ResultObject selectDiagnosis(@RequestBody ExmMedResultDiagnosis dto) {
@@ -662,7 +662,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
                 pfTestWaitingRoomService.selectDiagnosis(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/summary/diagnosis/list")
     @ResponseBody
     public ResultObject listDiagnosis(@RequestBody ExmMedResultDiagnosis dto) {
@@ -672,7 +672,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
                 pfTestWaitingRoomService.listDiagnosis(dto));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/summary/diagnosis/del")
     @ResponseBody
     public ResultObject delDiagnosis(@RequestBody ExmMedResultDiagnosis dto) {
@@ -688,7 +688,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/summary/select")
     @ResponseBody
     public ResultObject selectSummary(@RequestBody PfTestExamTagDto dto) {
@@ -753,7 +753,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/med/eva")
     @ResponseBody
     public ResultObject medEva(@RequestBody PfTestEvaDto dto) {
@@ -769,7 +769,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/eva/edit")
     @ResponseBody
     public ResultObject editEva(@RequestBody ExmEvaDimension dto) {
@@ -821,7 +821,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param list
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/referral/reason/save")
     @ResponseBody
     public ResultObject saveReferralReason(@RequestBody List<ExmMedResultReferralReason> list) {
@@ -852,7 +852,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @PostMapping(value = "/case/simulate")
     @ResponseBody
     public ResultObject simulateCase() {
@@ -871,7 +871,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030', 'ROLE_EXM0040','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300', 'ROLE_EXM0040','ROLE_SUPER')")
     @PostMapping(value = "/exec/serial/save")
     @ResponseBody
     public ResultObject saveExecSerialNo(@RequestBody ExmTestexec dto) {
@@ -923,7 +923,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0040', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_EXM0040', 'ROLE_SUPER')")
     @RequestMapping(value = "/referral/catalogue/tree", method = RequestMethod.POST)
     @ResponseBody
     public Object listDiseaseCatalogueTree(@RequestBody PfCatalogueTreeDto dto) {
@@ -935,7 +935,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0040', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_EXM0040', 'ROLE_SUPER')")
     @RequestMapping(value = "/referral/chart/data", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject selectReferralChartData(@RequestBody PfTestEvaDto dto) {
@@ -955,7 +955,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0040', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_EXM0040', 'ROLE_SUPER')")
     @RequestMapping(value = "/exam/finish/select", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject selectFinishExamInfo(@RequestBody ExmTestexec dto) {
@@ -971,7 +971,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0040', 'ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_EXM0040', 'ROLE_SUPER')")
     @RequestMapping(value = "/assess/pat/idMedCase", method = RequestMethod.POST)
     @ResponseBody
     public ResultObject selectAssessPatIdMedCase(@RequestBody ExmTestexec dto) {

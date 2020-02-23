@@ -192,8 +192,8 @@
                 <div class="layui-input-block" style="vertical-align: middle;">
                     <div class="layui-upload">
                         <button type="button" class="layui-btn layui-btn-normal layui-btn-sm" id="testList">选择多文件</button>
-                        <div class="layui-upload-list">
-                            <table class="layui-table">
+                        <div class="layui-upload-list" style="max-height: 410px; overflow-y: auto">
+                            <table class="layui-table" lay-size="sm" style="max-height: 400px; overflow-y: auto">
                                 <thead>
                                 <tr>
                                     <th>文件名</th>

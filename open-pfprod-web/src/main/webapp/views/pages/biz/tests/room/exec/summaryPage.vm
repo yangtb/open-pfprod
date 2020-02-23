@@ -141,14 +141,14 @@
                 </div>
                 <div class="layui-row">
                     <div class="input">
-                        <div class="word">既往史：</div>
+                        <div class="word">病史小结：</div>
                         <textarea class="layui-textarea input" rows="5"
-                                  style="height: 165px; text-indent: 60px;"
+                                  style="height: 620px; text-indent: 60px;"
                                   name="desSumaryHpi" id="desSumaryHpi"></textarea>
                     </div>
                 </div>
 
-                <div class="layui-row" style="padding-top: 20px;">
+                <div class="layui-row" style="padding-top: 20px; display: none;">
                     <div class="input">
                         <div class="word">查体：</div>
                         <textarea class="layui-textarea input" rows="5"
@@ -157,7 +157,7 @@
                     </div>
                 </div>
 
-                <div class="layui-row" style="padding-top: 20px;">
+                <div class="layui-row" style="padding-top: 20px; display: none;">
                     <div class="input">
                         <div class="word">辅助检查：</div>
                         <textarea class="layui-textarea input" rows="5"

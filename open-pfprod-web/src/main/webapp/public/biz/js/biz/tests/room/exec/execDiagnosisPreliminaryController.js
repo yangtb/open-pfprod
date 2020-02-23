@@ -51,8 +51,9 @@ layui.config({
     }
 
     function loadNz() {
-        var bizData = {
-            idTestexecResult: idTestexecResult
+        let bizData = {
+            idTestexecResult: idTestexecResult,
+            flag : true
         };
         $.ajax({
             url: basePath + '/pf/r/waiting/room/referral/select/all',
@@ -125,6 +126,7 @@ layui.config({
     $('#question-select').on('change', function () {
         $("#question-select-detail").empty();
         $('#desDieReason').val('');
+        $(":radio[name='mainFlag'][value='0']").prop("checked", "checked");
         loadDieReasonCommon();
     });
 
@@ -204,10 +206,14 @@ layui.config({
                     layer.msg(data.msg);
                     return false;
                 } else {
+                    console.log(data.data)
                     if (data.data) {
+                        console.log(data.data.mainFlag)
                         $('#desDieReason').val(data.data.desDieReason ? data.data.desDieReason : '' );
-                        $(":radio[name=mainFlag][value=" + data.data.mainFlag + "]").attr("checked", "true");
+                        $(":radio[name='mainFlag'][value='" + data.data.mainFlag + "']").prop("checked", "checked");
+
                     } else {
+                        $(":radio[name='mainFlag'][value='0']").prop("checked", "checked");
                         $('#desDieReason').val('');
                     }
                 }

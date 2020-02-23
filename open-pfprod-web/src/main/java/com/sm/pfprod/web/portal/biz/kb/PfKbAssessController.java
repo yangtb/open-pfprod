@@ -16,6 +16,7 @@ import com.sm.pfprod.web.portal.BaseController;
 import com.sm.pfprod.web.security.CurrentUserUtils;
 import com.sm.pfprod.web.security.User;
 import com.sm.pfprod.web.util.EnumUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -153,6 +154,7 @@ public class PfKbAssessController extends BaseController {
         model.addAttribute("tagFlag", dto.getTagFlag());
         model.addAttribute("caseName", dto.getCaseName());
         model.addAttribute("caseTag", dto.getCaseTag());
+        model.addAttribute("caseEdit", StringUtils.isNotBlank(dto.getCaseEdit()) ? dto.getCaseEdit() : "0");
         model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
         model.addAttribute("sheets", JSON.parseArray(JSON.toJSONString(pfClinicPartsService.listAllSheet())));
         return "pages/biz/kb/assess/define/assessReason";

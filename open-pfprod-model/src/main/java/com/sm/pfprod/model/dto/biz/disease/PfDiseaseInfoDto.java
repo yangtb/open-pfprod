@@ -46,5 +46,10 @@ public class PfDiseaseInfoDto extends PageParam implements Serializable {
     /**
      * 目录id
      */
-    private Long catalogueId;
+    private String catalogueId;
+
+    /**
+     * 病例id
+     */
+    private Long idMedicalrec;
 }

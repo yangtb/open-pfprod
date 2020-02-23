@@ -245,15 +245,18 @@ layui.config({
 
                 if (data) {
                     $.each(data, function (index, context) {
-                        //console.log(context);
-                        var styleTab = index == 0 ? 'layui-this' : '';
+                        console.log(context);
+                        if ((context.name == '月经生育史' || context.id == '05') && sexInt == 1) {
+                            return true;
+                        }
+                        let styleTab = index == 0 ? 'layui-this' : '';
                         $('#labelTab').append('<li class="' + styleTab + '">' + context.name + '</li>');
                         if (context.children) {
                             //console.log("------------------");
-                            var styleContent = index == 0 ? 'layui-show' : '';
-                            var attrContent = index == 0 ? 'id="key"' : '';
+                            let styleContent = index == 0 ? 'layui-show' : '';
+                            let attrContent = index == 0 ? 'id="key"' : '';
 
-                            var html = ' <div class="layui-tab-item ' + styleContent + '" ' + attrContent + '>\n';
+                            let html = ' <div class="layui-tab-item ' + styleContent + '" ' + attrContent + '>\n';
                             $.each(context.children, function (index, context) {
                                 //console.log(context);
                                 html += '<div class="layui-col-md4" data-key="' + context.id + '">\n' +
@@ -535,7 +538,7 @@ layui.config({
 
                         var html =
                             "                           <div style='background-color: #F2F2F2; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
-                            "                               <div style='font-weight: bold; padding: 2px;'>● 解释患者的回复</div>\n" +
+                            "                               <div style='font-weight: bold; padding: 2px;'>● 请判读体检结果</div>\n" +
                             "                               <div>" + desReply + "</div>\n" +
                             "                           </div>\n";
                         if (desExpert) {
@@ -703,12 +706,12 @@ layui.config({
             "                        <div  id='reply-" + data.idTestexecResultInques + "' style='" + showPatReplay + "padding-left: 45px; " + replyStyle + "'>\n";
         if (data.fgBack == '1' && !data.desReply) {
             html +=
-                '                            <button id="reply-btn-' + data.idTestexecResultInques + '" data-index="' + data.idTestexecResultInques + '" data-expert="' + data.desExpert + '" class="layui-btn layui-btn-xs layui-btn-radius cons-reply" style="background-color: #999999">解释患者的回复</button>\n';
+                '                            <button id="reply-btn-' + data.idTestexecResultInques + '" data-index="' + data.idTestexecResultInques + '" data-expert="' + data.desExpert + '" class="layui-btn layui-btn-xs layui-btn-radius cons-reply" style="background-color: #999999">请判读体检结果</button>\n';
         }
         if (data.desReply) {
             html +=
                 "                           <div style='background-color: #F2F2F2; padding: 10px; margin: 5px 5px 5px 0;'>\n" +
-                "                               <div style='font-weight: bold; padding: 2px;'>● 解释患者的回复</div>\n" +
+                "                               <div style='font-weight: bold; padding: 2px;'>● 请判读体检结果</div>\n" +
                 "                               <div>" + data.desReply + "</div>\n" +
                 "                           </div>\n";
         }

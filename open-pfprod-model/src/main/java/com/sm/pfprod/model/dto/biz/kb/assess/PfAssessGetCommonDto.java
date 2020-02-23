@@ -19,6 +19,7 @@ public class PfAssessGetCommonDto implements Serializable {
     private String showBtn;
     private String tagFlag;
     private String previewFlag;
+    private String caseEdit;
 
     /**
      * 病例id

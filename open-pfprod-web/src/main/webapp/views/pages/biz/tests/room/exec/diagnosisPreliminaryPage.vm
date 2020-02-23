@@ -181,14 +181,14 @@
                 <div class="layui-card" style="border: 1px #e9e9e9 solid; height: 350px; overflow: auto">
                     <div class="layui-card-body">
                         <div style="padding: 10px;">
-                            <span style="font-weight: bold;">既往史：</span>
+                            <span style="font-weight: bold;">病史小结：</span>
                             <span name="desSumaryHpi" id="desSumaryHpi" style="text-decoration: underline;"></span>
                         </div>
-                        <div style="padding: 10px;">
+                        <div style="padding: 10px; display: none">
                             <span style="font-weight: bold;">查体：</span>
                             <span name="desSumaryPe" id="desSumaryPe" style="text-decoration: underline;"></span>
                         </div>
-                        <div style="padding: 10px;">
+                        <div style="padding: 10px; display: none">
                             <span style="font-weight: bold;">辅助检查：</span>
                             <span name="desSumaryFe" id="desSumaryFe" style="text-decoration: underline;"></span>
                         </div>
@@ -235,7 +235,7 @@
                 <div style="padding-top: 10px;">
                     <div>主要诊断：
                         <label><input type="radio" name="mainFlag" value="1">&nbsp;是&nbsp;</label>&nbsp;&nbsp;
-                        <label><input type="radio" name="mainFlag" value="0" checked>&nbsp;否&nbsp;</label>
+                        <label><input type="radio" name="mainFlag" value="0">&nbsp;否&nbsp;</label>
                     </div>
                 </div>
 

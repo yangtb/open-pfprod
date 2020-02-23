@@ -87,7 +87,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="layui-inline">
+                            <div class="layui-inline" style="display: none">
                                 <label class="layui-form-label">CRS<i class="iconfont icon-required"
                                                                       style="color: #f03f2d"></i></label>
                                 <div class="layui-input-block">

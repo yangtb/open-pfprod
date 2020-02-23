@@ -109,14 +109,14 @@ layui.config({
                 //$('#caseName').val("");
                 return;
             }
-            var dataUrl = basePath + caseTagList[dataIndex].script,
+            let dataUrl = basePath + caseTagList[dataIndex].script,
                 cd = caseTagList[dataIndex].cdMedAsse,
                 idTag = caseTagList[dataIndex].idTag,
                 dataCase = caseTagList[dataIndex].idMedCase;
             if (!dataUrl) {
                 return;
             }
-            var medUrl = dataCase ? '?idMedCase=' + dataCase : '?idMedCase=';
+            let medUrl = dataCase ? '?idMedCase=' + dataCase : '?idMedCase=';
             //$('#caseName').val(caseTagList[dataIndex].caseName);
             currentMedIdTag = idTag;
             currentIdMedCase = dataCase;
@@ -137,7 +137,7 @@ layui.config({
                 $('#assessName').val("");
                 return;
             }
-            var dataUrl = basePath + assessTagList[dataIndex].script,
+            let dataUrl = basePath + assessTagList[dataIndex].script,
                 cd = assessTagList[dataIndex].cdEvaAsse,
                 idTag = assessTagList[dataIndex].idTag,
                 dataCase = assessTagList[dataIndex].idEvaCase;
@@ -147,13 +147,13 @@ layui.config({
             if (!dataCase) {
                 dataCase = '';
             }
-            var evaUrl = '?cdEvaAsse=' + cd + '&idEvaCase=' + dataCase + '&showForm=0';
+            let evaUrl = '?cdEvaAsse=' + cd + '&idEvaCase=' + dataCase + '&showForm=0';
             //$('#assessName').val(assessTagList[dataIndex].caseName);
             currentEvaIdTag = idTag;
             currentIdEvaCase = dataCase;
             currentCdEvaAsse = cd;
             evaUrl += '&idMedicalrec=' + idMedicalrec + '&idTag=' + currentEvaIdTag
-                + '&caseName=' + caseName + '&previewFlag=' + previewFlag;
+                + '&caseName=' + caseName + '&previewFlag=' + previewFlag + '&caseEdit=1' ;
             $('#assessTag').attr('src', dataUrl + evaUrl + '&showBtn=1&tagFlag=1&caseTag=' + caseTag);
             evaRender();
         }

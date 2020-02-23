@@ -437,8 +437,8 @@ public class PfTestWaitingRoomServiceImpl implements PfTestWaitingRoomService {
     }
 
     @Override
-    public List<ExmMedResultReferral> selectAllReferral(Long idTestexecResult) {
-        CommonResult<List<ExmMedResultReferralResult>> result = testWaitingRoomClient.selectAllReferral(idTestexecResult);
+    public List<ExmMedResultReferral> selectAllReferral(Long idTestexecResult, boolean flag) {
+        CommonResult<List<ExmMedResultReferralResult>> result = testWaitingRoomClient.selectAllReferral(idTestexecResult, flag);
         if (result != null && result.getIsSuccess()) {
             return BeanUtil.convertList(result.getContent(), ExmMedResultReferral.class);
         }

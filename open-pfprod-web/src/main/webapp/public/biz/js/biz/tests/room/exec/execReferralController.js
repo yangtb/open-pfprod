@@ -298,7 +298,7 @@ layui.config({
                 checkedKey: 'idDie',
                 searchPlaceholder: '疾病名称/ICD/拼音码',
                 table: {
-                    url: basePath + '/pf/p/disease/info/list?catalogueId=' + item.idDie,
+                    url: basePath + '/pf/p/disease/info/list/byCatalogueId?catalogueId=' + item.idDie,
                     cols: [[
                         {type:'radio'},
                         {field: 'name', title: '疾病名称'},
@@ -379,19 +379,38 @@ layui.config({
         });
     }
 
+    function getInFlag(oldData, sdEvaEffciency, idMedCaseList) {
+        let flag = true;
+        $.each(oldData, function (index, content) {
+            if (sdEvaEffciency == content.sdEvaEffciency && idMedCaseList == content.id) {
+                flag = false;
+            }
+        });
+        //console.log("------------" + flag)
+        return flag;
+    }
+
     function saveDieReason(data, idTestexecResultReferral, i, fgExclude) {
-        var reqData = new Array();
+        let reqData = new Array();
+        let oldData = table.cache["inTableId" + i];
+        //console.log(oldData)
         $.each(data, function (index, content) {
-            var bizData = {
+            let bizData = {
                 idTestexecResultReferral: idTestexecResultReferral,
                 fgExclude: fgExclude,
                 sdEvaEffciency: content.sdEvaEffciency,
                 idMedCaseList: content.id,
                 extId: content.extId
             }
-            reqData.push(bizData);
+            if (getInFlag(oldData, content.sdEvaEffciency, content.id) == true) {
+                reqData.push(bizData);
+            }
         });
+        //console.log(reqData)
 
+        if (reqData.length == 0) {
+            return;
+        }
         $.ajax({
             url: basePath + '/pf/r/waiting/room/referral/reason/save',
             type: 'post',
@@ -587,9 +606,9 @@ layui.config({
     });
 
     function loadChartData() {
-        var bizData = {
+        let bizData = {
             idTestexecResult: idTestexecResult,
-            chartType : 2
+            chartType : 1
         };
         $.ajax({
             url: basePath + '/pf/r/waiting/room/referral/chart/data',
@@ -625,7 +644,7 @@ layui.config({
                     if (data.type == 1) {
                         $node.html('<button class="layui-btn layui-btn-radius">' + data.name + '</button>');
                     } else if (data.type == 2) {
-                        let fgExcludeHtml = '';
+                        let fgExcludeHtml = data.name;
                         if (data.fgExclude == '1') {
                             fgExcludeHtml = '<span style="text-decoration: line-through; color: #FF5722;">' + data.name + '</span>';
                         } else {

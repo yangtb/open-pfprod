@@ -196,8 +196,8 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.selectAllDiagnosis(idTestexecResult);
     }
 
-    public CommonResult<List<ExmMedResultReferralResult>> selectAllReferral(Long idTestexecResult) {
-        return pfTestWaitingRoomFacade.selectAllReferral(idTestexecResult);
+    public CommonResult<List<ExmMedResultReferralResult>> selectAllReferral(Long idTestexecResult, boolean flag) {
+        return pfTestWaitingRoomFacade.selectAllReferral(idTestexecResult, flag);
     }
 
     public CommonResult<PfWaitingRoomDiagnosisResult> selectDiagnosis(ExmMedResultDiagnosisParam param) {

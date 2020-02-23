@@ -47,7 +47,7 @@
             <span class="test-info-name">患者：$!patName</span>
             <span class="test-info-name">年龄：$!patAge</span>
             <span class="test-info-name">
-                性别：#if($!{patSex} == '0')女#elseif($!{patSex} == '1' )男#end
+                性别：#if($!{patSex} == '2')女#elseif($!{patSex} == '1' )男#end
             </span>
             <span class="test-info-org">出题机构： $!examInfo.paperInfo.orgName</span>
         </div>

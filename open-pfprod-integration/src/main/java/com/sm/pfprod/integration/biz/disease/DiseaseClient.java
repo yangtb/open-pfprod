@@ -11,7 +11,6 @@ import com.sm.open.core.facade.model.result.pf.biz.disease.PfDiseaseZtreeResult;
 import com.sm.open.core.facade.model.rpc.CommonResult;
 import com.sm.open.core.facade.model.rpc.PfPageResult;
 import com.sm.open.core.facade.pf.biz.disease.PfDiseaseFacade;
-import com.sm.pfprod.model.entity.BasDieClass;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -42,6 +41,15 @@ public class DiseaseClient {
 
     public PfPageResult listDiseaseInfo(PfDiseaseInfoParam param) {
         return pfDiseaseFacade.listDiseaseInfo(param);
+    }
+
+    public PfPageResult listIdeReason(PfDiseaseInfoParam param) {
+        return pfDiseaseFacade.listIdeReason(param);
+    }
+
+
+    public PfPageResult listDiseaseByCatalogueId(PfDiseaseInfoParam param) {
+        return pfDiseaseFacade.listDiseaseByCatalogueId(param);
     }
 
     public CommonResult<Boolean> addDiseaseInfo(BasDieParam param) {

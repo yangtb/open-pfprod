@@ -60,6 +60,16 @@ public interface PfDiseaseService {
      */
     PageResult listDiseaseInfo(PfDiseaseInfoDto dto);
 
+    PageResult listIdeReason(PfDiseaseInfoDto dto);
+
+    /**
+     * 获取目录下所有疾病
+     *
+     * @param dto
+     * @return
+     */
+    PageResult listDiseaseByCatalogueId(PfDiseaseInfoDto dto);
+
 
     /**
      * 新增疾病信息

@@ -92,7 +92,7 @@
                                 <label class="layui-form-label">CRS<i class="iconfont icon-required"
                                                                       style="color: #f03f2d"></i></label>
                                 <div class="layui-input-block">
-                                    <input type="checkbox" checked="" name="fgCrs" lay-skin="switch" value="1" lay-text="NO|OFF">
+                                    <input type="checkbox" name="fgCrs" lay-skin="switch" value="1" lay-text="是|否">
                                 </div>
 
                             </div>
