@@ -550,7 +550,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_EXM0400','ROLE_SUPER')")
     @PostMapping(value = "/identify/list")
     @ResponseBody
     public ResultObject listIdentifyDiagnosis(@RequestBody ExmMedResultIdentify dto) {
@@ -688,7 +688,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
      * @param dto
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_EXM0040','ROLE_SUPER')")
     @PostMapping(value = "/summary/select")
     @ResponseBody
     public ResultObject selectSummary(@RequestBody PfTestExamTagDto dto) {

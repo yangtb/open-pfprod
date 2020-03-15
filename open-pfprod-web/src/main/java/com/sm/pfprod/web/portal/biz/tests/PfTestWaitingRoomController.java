@@ -314,11 +314,11 @@ public class PfTestWaitingRoomController extends BaseController {
      * @param
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_EXM0400','ROLE_SUPER')")
     @RequestMapping(value = "/test/die/ready/reason/list")
     @ResponseBody
-    public PageResult listReadyDieReason(Long idTestexecResult, String keyword) {
-        List<PfWaitingRoomDieReasonVo> dieReasonVos = pfTestWaitingRoomService.listReadyDieReason(idTestexecResult, keyword);
+    public PageResult listReadyDieReason(Long idTestexecResult, String keyword, Integer status) {
+        List<PfWaitingRoomDieReasonVo> dieReasonVos = pfTestWaitingRoomService.listReadyDieReason(idTestexecResult, keyword, status);
         return PageResult.create(dieReasonVos);
     }
 
@@ -378,6 +378,7 @@ public class PfTestWaitingRoomController extends BaseController {
         model.addAttribute("idStudent", dto.getIdStudent());
         model.addAttribute("idTestexecResult", dto.getIdTestexecResult());
         model.addAttribute("autoAssess", dto.getAutoAssess());
+        model.addAttribute("sdEva", enumUtil.getEnumList(SysDicGroupEnum.SD_EVA.getCode()));
 
         PfTestPaperVo pfTestPaperVo = pfTestWaitingRoomService.selectTestPaper(dto);
         if (pfTestPaperVo.getStudentInfo() != null) {

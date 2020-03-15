@@ -151,7 +151,7 @@ layui.config({
         }
         $.each(parData, function (i, item) {
             titleHtml += '<th>' + item.pgItem + '</th>';
-            scoreHtml += '<td>' + item.weightScoreDimemsion + '</td>';
+            scoreHtml += '<td>' + item.scoreDimemsion + '</td>';
             if (i == 1) {
                 titleHtml += '<th>临床思维评价</th>';
                 scoreHtml += '<td id="pjResult"></td>';
@@ -353,16 +353,164 @@ layui.config({
         let fgSystemAlgorithm = obj.data.fgSystemAlgorithm; // 1=系统 0主观
         //CASE WHEN 类型 = 主观 OR 评分项名称 = 诊断表现  THEN  打开文本页  ELSE 打开LIST页
         if (fgSystemAlgorithm == 0 || obj.data.pgItem == '诊断表现') {
-            $('#guideContent').show();
+            $('#guideContentText').show();
             //$('#dimensionResult').hide();
             $('div[lay-id="dimensionResultTableId"]').hide();
         } else {
-            $('#guideContent').hide();
+            $('#guideContentText').hide();
             $('div[lay-id="dimensionResultTableId"]').show();
             // 加载table
             dimensionResult(obj.data.idTestexecResultDimension);
         }
+        // 加载病史小结
+        if (obj.data.pgItem == '病例书写得分'
+            || obj.data.nzName == '主观资料(S)' || obj.data.nzName == '客观资料(O)' || obj.data.nzName == '评估资料(A)' || obj.data.nzName == '计划(P)') {
+            $('#bsxj').show();
+            loadSummary(1);
+        } else {
+            $('#bsxj').hide();
+        }
+        // 能力和素养
+        if (obj.data.nzName == '病情描述') {
+            $('#bqms').show();
+            loadSummary(2);
+        } else {
+            $('#bqms').hide();
+        }
+        if (obj.data.nzName == '诊断论证') {
+            //ROLE_EXM0040
+            $('#zdlz').show();
+            loadJbzdList();
+        } else {
+            $('#zdlz').hide();
+        }
+        if (obj.data.nzName == '判读' || obj.data.nzName == '理由') {
+            $('#readyReasonHtml').show();
+            if (obj.data.nzName == '判读') {
+                $('#nlText').text('判读的项');
+                loadReadyReason(1);
+            }
+            if (obj.data.nzName == '理由') {
+                $('#nlText').text('说明理由的项');
+                loadReadyReason(2);
+            }
+        } else {
+            $('#readyReasonHtml').hide();
+        }
+
     });
+
+    function loadReadyReason(status) {
+        table.render({
+            elem: '#readyReason'
+            , id: 'readyReasonTableId'
+            , size: 'sm'
+            , cols: [[ //标题栏
+                {type: 'numbers'},
+                {field: 'idText', minWidth: 150, title: '问题', align : 'left'},
+                {field: 'resultText', minWidth: 150, title: '结果', align : 'left'},
+                {field: 'sdEvaEffciency', width: 80, title: '阶段', templet: '#sdEvaTpl'}
+            ]]
+            , url: basePath + '/pf/p/waiting/room/test/die/ready/reason/list?idTestexecResult=' + idTestexecResult+ '&status=' + status
+            , page: false
+            , limit: 1000
+        });
+    }
+
+    function loadJbzdList() {
+        let bizData = {
+            idTestexecResult: idTestexecResult
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/identify/list',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                if (data.code != 0) {
+                    common.errorMsg(data.msg);
+                    return false;
+                } else {
+                    if (data.data) {
+                        refreshJbzd(data.data);
+                    }
+                }
+            },
+            error: function () {
+                layui.common.errorMsg("网络异常");
+                return false;
+            }
+        });
+    }
+
+    function refreshJbzd(dataList){
+        if (dataList.length == 0) {
+            return;
+        }
+        let result = '';
+        $.each(dataList, function (i, item) {
+            result += jbzdHtml(i, item);
+        });
+        $('#jbzdField').empty();
+        $('#jbzdField').append(result);
+    }
+
+    function jbzdHtml(i, data) {
+
+        let newHtml = '         <div id="jbzd-'+ data.idTestexecResultIdentify +'" class="layui-row referral">\n' +
+            '                        <div style="margin: 15px 0 0 5px">\n' +
+            '                            <span class="disc"></span>\n' +
+            '                            <span class="diagnose-title">鉴别诊断'+(i + 1)+'：'+ data.naDie +' <span style="color: red; font-size: 20px;"><i class="iconfont icon-zhu"></i></span></span>\n' +
+            '                        </div>\n' +
+            '                        <div style="margin: 5px 0 0px 5px">\n' +
+            '                            <span class="disc"></span>\n' +
+            '                            诊断说明：<span class="diagnose-title" id="desDieReason'+ data.idTestexecResultIdentify +'">'+ data.desDieReason +'</span>\n' +
+            '                        </div>\n';
+        return newHtml;
+    }
+
+    function loadSummary(flag) {
+        let bizData = {
+            idTestexecResult: idTestexecResult
+        };
+        $.ajax({
+            url: basePath + '/pf/r/waiting/room/summary/select',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(bizData),
+            success: function (data) {
+                if (data.code != 0) {
+                    layer.msg(data.msg);
+                    return false;
+                } else {
+                    if (data.data) {
+                        if (data.data) {
+                            if (flag == 1 && data.data.desSumaryHpi) {
+                                $("#desSumaryHpi").val(data.data.desSumaryHpi);
+                            }
+                            if (flag == 2) {
+                                if ( data.data.desConditionHpi) {
+                                    $("#desConditionHpi").val(data.data.desConditionHpi);
+                                }
+                                if ( data.data.desConditionPe) {
+                                    $("#desConditionPe").val(data.data.desConditionPe);
+                                }
+                                if ( data.data.desConditionFe) {
+                                    $("#desConditionFe").val(data.data.desConditionFe);
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            error: function () {
+                layer.msg("网络异常");
+                return false;
+            }
+        });
+    }
 
     function dimensionResult(idTestexecResultDimension) {
         //展示已知数据

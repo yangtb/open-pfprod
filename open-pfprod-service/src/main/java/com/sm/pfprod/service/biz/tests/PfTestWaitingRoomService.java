@@ -407,7 +407,7 @@ public interface PfTestWaitingRoomService {
      *
      * @return
      */
-    List<PfWaitingRoomDieReasonVo> listReadyDieReason(Long idTestexecResult, String keyword);
+    List<PfWaitingRoomDieReasonVo> listReadyDieReason(Long idTestexecResult, String keyword, Integer status);
 
     /**
      * 查询确诊理由

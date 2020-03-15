@@ -213,8 +213,8 @@ public class TestWaitingRoomClient {
         return pfTestWaitingRoomFacade.selectSummary(idTestexecResult);
     }
 
-    public CommonResult<List<PfWaitingRoomDieReasonResult>> listReadyDieReason(Long idTestexecResult, String keyword) {
-        return pfTestWaitingRoomFacade.listReadyDieReason(idTestexecResult, keyword);
+    public CommonResult<List<PfWaitingRoomDieReasonResult>> listReadyDieReason(Long idTestexecResult, String keyword, Integer status) {
+        return pfTestWaitingRoomFacade.listReadyDieReason(idTestexecResult, keyword, status);
     }
 
     public PfPageResult listDieReason(Long idTestexecResultDiagnosis) {

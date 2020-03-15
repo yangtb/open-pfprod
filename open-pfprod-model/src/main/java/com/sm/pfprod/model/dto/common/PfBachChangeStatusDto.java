@@ -43,4 +43,14 @@ public class PfBachChangeStatusDto implements Serializable {
      * 扩展类型
      */
     private String extType;
+
+    /**
+     * 生成拟诊确诊理由
+     */
+    private boolean nzFlag;
+
+    /**
+     * 主键
+     */
+    private Long idTestexecResultReferral;
 }

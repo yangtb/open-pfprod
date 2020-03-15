@@ -54,8 +54,8 @@ layui.config({
     });
 
     function saveReferral() {
-        var url = basePath + '/pf/r/waiting/room/referral/save';
-        var bizData = {
+        let url = basePath + '/pf/r/waiting/room/referral/save';
+        let bizData = {
             idTestexecResult: idTestexecResult,
             idDie: $('#idDie').val()
         };
@@ -69,7 +69,7 @@ layui.config({
     }
 
     function loadNz() {
-        var bizData = {
+        let bizData = {
             idTestexecResult: idTestexecResult
         };
         $.ajax({
@@ -579,8 +579,8 @@ layui.config({
     function zTreeOnCheck(event, treeId, treeNode) {
 
         if (treeNode.checked) {
-            var url = basePath + '/pf/r/waiting/room/referral/save';
-            var bizData = {
+            let url = basePath + '/pf/r/waiting/room/referral/save';
+            let bizData = {
                 idTestexecResult: idTestexecResult ,
                 fgDieClass:  treeNode.idDieclass ? '1' : '2' ,
                 idDie: treeNode.idDieclass ? treeNode.idDieclass : treeNode.idDie
@@ -686,6 +686,7 @@ layui.config({
         // type = 1 加载拟真下面的检查，检验（且都是单选的）
         let idTestexecResultReferral = id.substring(5, id.length);
         // type = 2 加载拟真下的检查检验（只加载多选）
+        console.log(idTestexecResultReferral)
 
         tableSelect.render({
             elem: '#' + id,
@@ -703,12 +704,12 @@ layui.config({
             },
             done: function (elem, data) {
                 let selectData = data.data;
-                saveFgClue(selectData, type);
+                saveFgClue(selectData, type, idTestexecResultReferral);
             }
         });
     }
 
-    function saveFgClue(data, type) {
+    function saveFgClue(data, type, idTestexecResultReferral) {
         let reqBodyData = new Array();
         let reqExamData = new Array();
         $.each(data, function (index, content) {
@@ -720,15 +721,18 @@ layui.config({
             }
         });
 
+        let nzFlag = type == 1 ? true : false;
         if (reqBodyData.length >= 1) {
             let bizBodyData = {
                 list : reqBodyData,
                 status : '1',
                 extId : idTestexecResult,
                 operationType : type,
-                extType : 1 // 先删后插
+                extType : 1, // 先删后插
+                nzFlag : nzFlag,
+                idTestexecResultReferral : idTestexecResultReferral
             };
-            common.commonPost(basePath + '/pf/r/waiting/room/check/qa/status', bizBodyData, null);
+            common.commonPost(basePath + '/pf/r/waiting/room/check/qa/status', bizBodyData, null, null, updateFgClueCallback);
         }
         if (reqExamData.length >= 1) {
             let bizExamData = {
@@ -736,11 +740,17 @@ layui.config({
                 status : '1',
                 extId : idTestexecResult,
                 operationType : type,
-                extType : 1 // 先删后插
+                extType : 1, // 先删后插
+                nzFlag : nzFlag,
+                idTestexecResultReferral : idTestexecResultReferral
             };
-            common.commonPost(basePath + '/pf/r/waiting/room/exam/qa/status', bizExamData, null);
+            common.commonPost(basePath + '/pf/r/waiting/room/exam/qa/status', bizExamData,  null, null, updateFgClueCallback);
         }
 
+    }
+
+    function updateFgClueCallback(data) {
+        loadNz();
     }
 
 
