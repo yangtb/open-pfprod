@@ -1,11 +1,11 @@
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['table', 'jquery', 'common', 'tableSelect'], function () {
+}).use(['table', 'jquery', 'common','element',  'tableSelect'], function () {
     var $ = layui.$
         , table = layui.table
         , common = layui.common
+        , element = layui.element
         , tableSelect = layui.tableSelect;
-
     initData();
 
     function initData() {
@@ -392,7 +392,12 @@ layui.config({
 
     function saveDieReason(data, idTestexecResultReferral, i, fgExclude) {
         let reqData = new Array();
-        let oldData = table.cache["inTableId" + i];
+        let oldData;
+        if (fgExclude == '0') {
+            oldData = table.cache["inTableId" + i];
+        } else {
+            oldData = table.cache["outTableId" + i];
+        }
         //console.log(oldData)
         $.each(data, function (index, content) {
             let bizData = {

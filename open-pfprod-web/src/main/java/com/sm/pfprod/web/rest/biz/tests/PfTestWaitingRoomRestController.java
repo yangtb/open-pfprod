@@ -507,7 +507,7 @@ public class PfTestWaitingRoomRestController extends BaseController {
         /* 参数校验 */
         Assert.isTrue(dto.getIdTestexecResult() != null, "idTestexecResult");
         Assert.isTrue(StringUtils.isNotBlank(dto.getNaDie()), "naDie");
-        Assert.isTrue(StringUtils.isNotBlank(dto.getDesDieReason()), "desDieReason");
+        //Assert.isTrue(StringUtils.isNotBlank(dto.getDesDieReason()), "desDieReason");
         return ResultObject.createSuccess("saveDiagnosis", ResultObject.DATA_TYPE_OBJECT,
                 pfTestWaitingRoomService.saveIdentifyDiagnosis(dto));
     }

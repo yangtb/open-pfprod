@@ -36,7 +36,7 @@ layui.config({
                     return false;
                 } else {
                     if (data.data) {
-                        $('#desSumaryHpi').text(data.data.desSumaryHpi);
+                        $('#desSumaryHpi').prepend(data.data.desSumaryHpi);
                         $('#desSumaryPe').text(data.data.desSumaryPe);
                         $('#desSumaryFe').text(data.data.desSumaryFe);
                     }

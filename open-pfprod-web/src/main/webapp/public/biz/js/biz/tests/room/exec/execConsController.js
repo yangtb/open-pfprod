@@ -250,8 +250,9 @@ layui.config({
                             return true;
                         }
                         let styleTab = index == 0 ? 'layui-this' : '';
-                        $('#labelTab').append('<li class="' + styleTab + '">' + context.name + '</li>');
-                        if (context.children) {
+                        $('#labelTab').append('<li class="' + styleTab + '" lay-id="' + context.id + '">' + context.name + '</li>');
+                        console.log(context.children);
+                        if (context.children && context.children.length > 0) {
                             //console.log("------------------");
                             let styleContent = index == 0 ? 'layui-show' : '';
                             let attrContent = index == 0 ? 'id="key"' : '';
@@ -268,10 +269,24 @@ layui.config({
                             $('#labelContent').append(html);
                             //console.log("------------------");
                         } else {
+                            console.log("1------------");
                             $('#labelContent').append('<div class="layui-tab-item"</div>');
                         }
                     });
                 }
+
+                element.on('tab(docDemoTabBrief)', function(data){
+                    //console.log(this); //当前Tab标题所在的原始DOM元素
+                    //console.log(data.index); //得到当前Tab的所在下标
+                    //console.log(data.elem); //得到当前的Tab大容器
+                    if ($("#labelContent").find(".layui-tab-item").eq(data.index).find(".layui-col-md4").length == 0) {
+                        var sdInquesLabel = this.getAttribute('lay-id');
+                        $('#key-tab').hide();
+                        _tableReloadBysdInquesLabel(sdInquesLabel);
+                        $('#table').show();
+                        $('#k').text(($(this).text().trim()));
+                    }
+                });
 
                 $('.layui-col-md4').on('click', function () {
                     var sdInquesLabel = $(this).attr("data-key");
@@ -348,7 +363,7 @@ layui.config({
 
                 var elem = $('#queryBtn');
                 var t = elem.offset().top + elem.outerHeight() + "px";
-                var l = (elem.offset().left + 60) + "px";
+                var l = (elem.offset().left - 470) + "px";
 
                 var html =
                     '<div id="div-pop-cons-pre" class="layui-anim layui-anim-upbit" style="left:' + l + ';top:' + t + ';border: 1px solid #d2d2d2;background-color: #fff;box-shadow: 0 2px 4px rgba(0,0,0,.12);padding:0px 0px 0 0px;position: absolute;z-index:666;margin: 5px 0;border-radius: 2px;width:450px; height: 350px;">' +

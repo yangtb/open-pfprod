@@ -1,14 +1,41 @@
 layui.config({
     base: basePath + '/public/layui/build/js/'
-}).use(['table', 'jquery','form',  /*'tableSelect',*/ 'common'], function () {
+}).use(['table', 'jquery','form',  /*'tableSelect',*/'common'], function () {
     var $ = layui.$
         , table = layui.table
         , common = layui.common
         , form = layui.form
         /*, tableSelect = layui.tableSelect*/;
 
+    var index_layedit;
     $(document).ready(function () {
+        $('.summernote').summernote({
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'hr']],
+            ],
+            height: 530,
+            tabsize: 2,
+            lang: 'zh-CN'
+        });
+
         initData();
+    });
+
+
+    $('.summernote').on('summernote.blur', function () {
+        let desSumaryHpi = $('.summernote').summernote('code');
+        if (!desSumaryHpi) { return}
+        let bizData = {
+            desSumaryHpi: desSumaryHpi
+        }
+        saveSummary(bizData);
     });
 
     function initData() {
@@ -38,6 +65,7 @@ layui.config({
                 } else {
                     if (data.data) {
                         form.val("summaryFormFilter", data.data);
+                        $('.summernote').summernote('code', data.data.desSumaryHpi);
                     }
                 }
             },
@@ -49,7 +77,8 @@ layui.config({
     }
 
 
-    $("#desSumaryHpi").change(function () {
+    $("#demo-desSumaryHpi").change(function () {
+        alert(1)
         var bizData = {
             desSumaryHpi: $('#desSumaryHpi').val()
         }
