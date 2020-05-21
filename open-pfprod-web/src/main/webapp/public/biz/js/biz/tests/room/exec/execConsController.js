@@ -93,7 +93,9 @@ layui.config({
         , height: '580' //容器高度
         , cols: [[
             {type: 'numbers',width: 50, title: 'R'},
-            {field: 'desInques', title: '问题'},
+            {field: 'desInques', title: '问题', event: 'setSign', templet: function(d){
+                    return d.preFlag == true ? '<a href="javascript: void(0)" class="layui-table-link" lay-filter="qaPreSeeFilter" style="text-decoration: underline">'+ d.desInques +'</a>' : d.desInques;
+                }},
             {field: 'qa', width: 60, title: '提问', fixed: 'right', align: 'center', templet: '#qaTpl'}
         ]] //设置表头
         , url: basePath + '/pf/p/waiting/room/test/cons/list'
@@ -109,6 +111,24 @@ layui.config({
             , first: false //不显示首页
             , last: false //不显示尾页
             , limits: [20, 30, 50]
+        }
+    });
+
+    //监听单元格事件
+    table.on('tool(partConsTableFilter)', function (obj) {
+        let data = obj.data;
+        if (obj.event === 'setSign') {
+            //console.log(data)
+            if (!data.preFlag) {
+                return;
+            }
+            if (data.extQa) {
+                // 查询是否有前置条件
+                queryInquesPre(data.idInques);
+            } else {
+                //console.log(obj)
+                layer.tips("请先勾选此项", this, {tips: 1});
+            }
         }
     });
 
@@ -169,6 +189,8 @@ layui.config({
     });
 
     form.on('checkbox(qaConsFilter)', function (obj) {
+        console.log(obj)
+        console.log(obj.data)
         var qaValue = this.value;
         var qaArr = qaValue.split("-");
         var bizData = {
@@ -193,6 +215,24 @@ layui.config({
                     queryResult(bizData.idInques)
                     if (obj.elem.checked) {
                         $('#cons' + qaArr[1]).attr("disabled", true);
+                    }
+                    let oldData = table.cache["partConsTableId"];
+                    //console.log(oldData)
+                    if (oldData) {
+                        //console.log(bizData.idMedCaseList)
+                        //console.log("------------------")
+                        let index_list = oldData.map(function (item) {
+                            //console.log(item.idMedCaseList)
+                            return item.idMedCaseList;
+                        }).indexOf(parseInt(bizData.idMedCaseList));
+
+                        //console.log(index_list)
+                        if (index_list >= 0) {
+                            oldData[index_list].extQa = true;
+                            table.reload('partConsTableId', {
+                                data: oldData
+                            });
+                        }
                     }
                     return true;
                 }
@@ -339,7 +379,7 @@ layui.config({
         // 查询是否有前置条件
         queryInquesPre(idInques);
     }
-    
+
     function queryInquesPre(idInques) {
         var bizData = {
             idMedicalrec: idMedicalrec,
@@ -595,7 +635,7 @@ layui.config({
             $('#expert-div-' + idTestexecResultInques).css("display","block");
         })
     }
-    
+
     function appendMediahtml(data) {
         let patientVar = '';
         var begin = '<span>';
@@ -704,7 +744,7 @@ layui.config({
             showPatReplay = 'display: none; ';
         }
 
-        html += 
+        html +=
             "                        <div id='pat-reply-" + data.idTestexecResultInques + "' style='" + showPatReplay + "margin-left: 41px; margin-top: 7px; overflow: hidden'>\n" +
             "                            <div style='float: left'>\n" +
             "                                <span>【患者】</span>\n" +
@@ -743,7 +783,7 @@ layui.config({
         html +=
             "                        </div>\n";
 
-        html +=  
+        html +=
             "                    </div>\n" +
             "                </li>";
 

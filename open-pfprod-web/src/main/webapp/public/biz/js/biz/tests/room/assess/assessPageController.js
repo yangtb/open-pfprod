@@ -977,7 +977,8 @@ function updateScore(ele, idTestexecResultDimension) {
                     layer.msg(data.msg, {icon: 5});
                     return false;
                 } else {
-                    layer.tips('修改成功，请刷新页面查看结果', '#dimension-' + idTestexecResultDimension, {tips: 1});
+                    layer.tips('修改成功', '#dimension-' + idTestexecResultDimension, {tips: 1});
+                    assessCase(idTestexecResultDimension)
                     return true;
                 }
             },
@@ -988,6 +989,141 @@ function updateScore(ele, idTestexecResultDimension) {
         });
 
     }
+}
+
+function assessCase(idTestexecResultDimension) {
+    layer.load(2);
+    var bizData = {
+        idTestexecResult: idTestexecResult
+    };
+    $.ajax({
+        url: basePath + '/pf/r/waiting/room/med/eva',
+        type: 'post',
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify(bizData),
+        success: function (data) {
+            layer.closeAll('loading');
+            if (data.code != 0) {
+                layer.msg(data.msg, {icon: 5});
+                return false;
+            } else {
+                initData(idTestexecResultDimension);
+                //layer.tips('评估完成', '#accessMed', {tips: 1});
+                return true;
+            }
+        },
+        error: function () {
+            layer.closeAll('loading');
+            return false;
+        }
+    });
+}
+function initData(idTestexecResultDimension) {
+    var filterFlag = autoAssess == 1 ? 1 : 0;
+    //layer.msg('正在加载数据，请稍后...', {icon: 16, shade: 0.01});
+    var bizData = {
+        idTestexecResult: idTestexecResult,
+        filterFlag : filterFlag
+    };
+    $.ajax({
+        url: basePath + '/pf/r/waiting/room/eva/list',
+        type: 'post',
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify(bizData),
+        success: function (data) {
+            layer.closeAll('loading');
+            if (data.code != 0) {
+                layer.msg(data.msg, {icon: 5});
+                return false;
+            } else {
+                // 加载评估得分
+                appendScoreHtml(data.data)
+                // 加载评估列表
+                tableRender(data.data, idTestexecResultDimension);
+                return true;
+            }
+            layer.closeAll('loading');
+        },
+        error: function () {
+            layer.closeAll('loading');
+            return false;
+        }
+    });
+}
+var parData = [];
+
+function appendScoreHtml(data) {
+    parData = [];
+    $.each(data, function (i, item) {
+        if (!item.parDimemsion) {
+            parData.push(item)
+        }
+    });
+    var titleHtml = '', scoreHtml = '';
+    var totalScore = 0;
+    if (parData.length == 0) {
+        defaultHtml();
+        return;
+    }
+    $.each(parData, function (i, item) {
+        titleHtml += '<th>' + item.pgItem + '</th>';
+        scoreHtml += '<td>' + item.scoreDimemsion + '</td>';
+        if (i == 1) {
+            titleHtml += '<th>临床思维评价</th>';
+            scoreHtml += '<td id="pjResult"></td>';
+        }
+        totalScore += item.weightScoreDimemsion;
+    });
+    titleHtml += '<th>总得分</th>';
+    scoreHtml += '<td>' + totalScore.toFixed(2) + '</td>';
+
+    $('#scoreTitle').empty();
+    $('#scoreTitle').append(titleHtml);
+    $('#score').empty();
+    $('#score').append(scoreHtml);
+
+    console.log('==================')
+}
+
+function defaultHtml() {
+    var titleHtml = '<th>诊断表现得分</th>\n' +
+        '<th>临床思维得分</th>\n' +
+        '<th>临床思维评价</th>\n' +
+        '<th>医嘱得分</th>\n' +
+        '<th>病例书写得分</th>\n' +
+        '<th>知识掌握得分</th>\n' +
+        '<th>总得分</th>';
+
+    var scoreHtml = '<td></td>\n' +
+        '<td></td>\n' +
+        '<td></td>\n' +
+        '<td></td>\n' +
+        '<td></td>\n' +
+        '<td></td>\n' +
+        '<td></td>';
+
+    $('#scoreTitle').empty();
+    $('#scoreTitle').append(titleHtml);
+    $('#score').empty();
+    $('#score').append(scoreHtml);
+}
+
+function tableRender(list, idTestexecResultDimension) {
+    if (list && list.length > 0) {
+        list[0].nzName = 'pgResult';
+    }
+    layui.use('table', function () {
+        layui.table.reload('demoTableId', {
+            data: list
+        });
+        //console.log("%%%%%%%%%%%%%")
+    });
+    //console.log($('#dimension-' + idTestexecResultDimension))
+
+    document.getElementById('dimension-'+idTestexecResultDimension).focus();
+    //setTimeout("document.getElementById('dimension-" + idTestexecResultDimension + "').focus()", 1000);
 }
 
 function saveTips(idTestexecResultDimension) {

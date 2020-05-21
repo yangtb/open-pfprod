@@ -220,11 +220,11 @@ layui.config({
             }
             , limit: 20
             , page: {//支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                layout: ['limit', 'count', 'prev', 'page', 'next'] //自定义分页布局
                 //,curr: 5 //设定初始在第 5 页
-                , groups: 1 //只显示 1 个连续页码
-                , first: false //不显示首页
-                , last: false //不显示尾页
+                //, groups: 2 //只显示 1 个连续页码
+                , first: '首页' //不显示首页
+                , last: '尾页' //不显示尾页
                 , limits: [20, 30, 50, 100]
             },done: function () {
                 $("[data-field='isMasculine']").css('display','none');
@@ -400,7 +400,11 @@ layui.config({
     });
 
     let _callBack = function (data) {
-        _tableReload();
+        table.reload('partConsTableId', {
+            where: {
+                idMedCase: idMedCase
+            }
+        });
         $('#idMedCaseList').val(data.data);
     }
 
