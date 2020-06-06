@@ -17,7 +17,7 @@
 <body class="childrenBody">
 <div style="text-align: center; padding:8% 0;">
     <i class="iconfont icon-huanying" style="line-height:10rem; font-size:10rem; color: #393D50;"></i>
-    <p style="font-size: 20px; font-weight: 300; padding-top: 30px;">欢迎使用嘉奕临床思维综合系统~</p>
+    <p style="font-size: 20px; font-weight: 300; padding-top: 30px;">欢迎使用$!{websiteName}~</p>
 </div>
 </body>
 </html>

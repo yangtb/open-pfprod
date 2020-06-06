@@ -88,7 +88,8 @@ public class PfHomeController extends BaseController {
     }
 
     @RequestMapping("/main")
-    public String main() {
+    public String main(Model model) {
+        model.addAttribute("websiteName", websiteName);
         return "/pages/main";
     }
 }

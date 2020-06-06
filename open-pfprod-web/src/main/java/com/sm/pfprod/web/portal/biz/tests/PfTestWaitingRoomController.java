@@ -87,6 +87,18 @@ public class PfTestWaitingRoomController extends BaseController {
         return "pages/biz/tests/room/studentRoomPage";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_EXM0300','ROLE_SUPER')")
+    @RequestMapping(value = "/student/page")
+    @ResponseBody
+    public PageResult pageStudent(Long idMedicalrecCa) {
+        PfTestWatingRoomDto dto = new PfTestWatingRoomDto();
+        dto.setPage(1);
+        dto.setLimit(20);
+        dto.setIdMedicalrecCa(idMedicalrecCa);
+        PageResult pageResult = this.listWaitingRoom(dto);
+        return pageResult;
+    }
+
     @PreAuthorize("hasAnyRole('ROLE_EXM0030','ROLE_EXM0300','ROLE_SUPER')")
     @RequestMapping("/exam/page")
     public String papPage(Model model, PfTestExamDto dto) {

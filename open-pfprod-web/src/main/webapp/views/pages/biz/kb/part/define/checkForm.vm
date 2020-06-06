@@ -121,10 +121,9 @@
 
             <div class="layui-form-item">
                 <div class="layui-inline">
-                    <label class="layui-form-label">所属体位<i class="iconfont icon-required"
-                                                           style="color: #f03f2d"></i></label>
+                    <label class="layui-form-label">所属体位</label>
                     <div class="layui-input-block" style="width: 158px;">
-                        <select name="sdBody" id="sdBody" autocomplete="off" lay-verify="required" lay-vertype="tips"
+                        <select name="sdBody" id="sdBody" autocomplete="off" #*lay-verify="required" lay-vertype="tips"*#
                                 placeholder="所属体位">
                             <option value="">请选择</option>
                             #foreach($param in ${bodyPosition})

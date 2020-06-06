@@ -396,6 +396,10 @@ layui.config({
         if (!data.field.fgCarried) {
             data.field.fgCarried = '0';
         }
+        if (data.field.cdCheck != "1" && !data.field.sdBody) {
+            layer.msg('请选择所属体位');
+            return false;
+        }
         var idMedia = '';
         $(".media-value").each(function(index, item) {
             //console.log($(this).val())
@@ -525,6 +529,8 @@ layui.config({
 
 
     function fillForm(data) {
+        //console.log(data)
+
         $('#reset').click();
 
         data.path = data.path ? data.path : '';
@@ -535,6 +541,10 @@ layui.config({
         fullMediaUrl(data.mediaList);
         formSelects.value('cdCheckSelect', [data.cdCheck]);
         setFormStatus(data.fgCarried, formIdArr);
+        if (data.cdCheck && data.cdCheck == "1") {
+            $('#sdBody').addClass("layui-disabled");
+            $('#sdBody').attr("disabled", "true");
+        }
         form.render();
     };
 

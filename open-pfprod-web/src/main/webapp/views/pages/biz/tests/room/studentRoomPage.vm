@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="$!{contextPath}/public/biz/css/common.css">
+    <link rel="stylesheet" href="${contextPath}/public/ztree/zTreeStyle/zTreeStyle.css" type="text/css">
     <link rel="stylesheet" href="$!{contextPath}/public/layui/plugins/style/admin.css" media="all">
     <link rel="stylesheet" type="text/css" href="$!{contextPath}/public/biz/iconfont/iconfont.css">
 
@@ -65,12 +66,12 @@
         }
 
         .title {
-            width:80px;
-            height:20px;
-            font-size:20px;
-            font-family:MicrosoftYaHei-Bold;
-            font-weight:bold;
-            color:rgba(51,51,51,1);
+            width: 80px;
+            height: 30px;
+            font-size: 16px;
+            font-family: MicrosoftYaHei-Bold;
+            font-weight: bold;
+            color: rgba(51, 51, 51, 1);
             padding-top: 0;
             margin-bottom: 3px;
         }
@@ -79,96 +80,105 @@
 
 </head>
 <body>
-<div style="padding: 20px; background-color: #F2F2F2;">
-    <div class="layui-row layui-col-space15">
-    <p class="title">患者列表</p>
+<div style="padding: 15px 20px 20px 10px; background-color: #F2F2F2;">
+    <div class="layui-col-xs2" style="padding-top:20px;">
+        <div id="treeDiv" style="overflow:auto; border: 1px solid #cccccc">
+            <ul id="treeDemo" class="ztree"></ul>
+        </div>
+    </div>
+    <div class="layui-col-xs10" style="padding-left: 10px;">
+        <div>
+            <p class="title">患者列表</p>
 
 
-        <button id="test" type="button" class="layui-btn layui-btn-normal"
-                lay-href="" style="display: none">
-            <i class="iconfont icon-monikaoshi"></i><span id="patName"></span>:模拟就诊
-        </button>
+            <button id="test" type="button" class="layui-btn layui-btn-normal"
+                    lay-href="" style="display: none">
+                <i class="iconfont icon-monikaoshi"></i><span id="patName"></span>:模拟就诊
+            </button>
 
-
-        #foreach($!element in $!result)
-            <div class="layui-col-md4">
-                <div class="layui-card">
-                    <div class="layui-card-body
+            <div id="patInfo" class="layui-row layui-col-space15" style="padding-top: 10px">
+                #foreach($!element in $!result)
+                    <div class="layui-col-md4">
+                        <div class="layui-card">
+                            <div class="layui-card-body
                                 #if($!{element.status} == 0)
                                     layui-bg-green
                                 #elseif($!{element.status} == 1 )
                                     bg-diagnosing
                                 #end">
-                        <div class="layout-flex-self">
-                            <div>
-                                <img src="https://jiayiyixue.oss-cn-beijing.aliyuncs.com/582BD4D0DFBB4236BBF296D2A0ED46E7.jpg">
-                            </div>
+                                <div class="layout-flex-self">
+                                    <div>
+                                        <img src="https://jiayiyixue.oss-cn-beijing.aliyuncs.com/582BD4D0DFBB4236BBF296D2A0ED46E7.jpg">
+                                    </div>
 
-                            <div class="d-flex flex-column">
-                                <div>
-                                    <span>姓名：</span>
-                                    <span>$!element.patName</span>
-                                </div>
-                                <div>
-                                    <span>性别：</span>
-                                    <span>
-                                        #if($!{element.patSex} == 2)
+                                    <div class="d-flex flex-column">
+                                        <div>
+                                            <span>姓名：</span>
+                                            <span>$!element.patName</span>
+                                        </div>
+                                        <div>
+                                            <span>性别：</span>
+                                            <span>
+                                                #if($!{element.patSex} == 2)
                                             女
-                                        #elseif($!{element.patSex} == 1 )
-                                            男
-                                        #end
-                                    </span>
-                                </div>
-                                <div>
-                                    <span>年龄：</span>
-                                    <span>$!element.patAge</span>
-                                </div>
-                                <div style="height: 70px">
-                                    <span>患者主诉：</span>
-                                    <span>$!element.complaint</span>
-                                </div>
-                            </div>
+                                                #elseif($!{element.patSex} == 1 )
+                                                    男
+                                                #end
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span>年龄：</span>
+                                            <span>$!element.patAge</span>
+                                        </div>
+                                        <div style="height: 70px">
+                                            <span>患者主诉：</span>
+                                            <span>$!element.complaint</span>
+                                        </div>
+                                    </div>
 
-                            #if($!{element.status} == 0)
-                                <span class="status-float">
+                                    #if($!{element.status} == 0)
+                                        <span class="status-float">
                                     待接诊
                                 </span>
-                            #elseif($!{element.status} == 1 )
-                                <span class="status-float color-diagnosing-status">
+                                    #elseif($!{element.status} == 1 )
+                                        <span class="status-float color-diagnosing-status">
                                     正在接诊
                                 </span>
-                            #end
+                                    #end
 
-                            <input class="$!element.idTestplanDetail" value="$!element.idDemo" hidden>
-                            <input class="$!element.idTestplanDetail" value="$!element.idTestplan" hidden>
-                            <input class="$!element.idTestplanDetail" value="$!element.idStudent" hidden>
-                            <input class="$!element.idTestplanDetail" value="$!element.idTestpaper" hidden>
-                            <input class="$!element.idTestplanDetail" value="$!element.idMedicalrec" hidden>
-                            <input class="$!element.idTestplanDetail" value="$!element.patName" hidden>
-                            <input class="$!element.idTestplanDetail" value="$!element.patSex" hidden>
-                            <input class="$!element.idTestplanDetail" value="$!element.patAge" hidden>
-                            <input class="$!element.idTestplanDetail" value="$!element.complaint" hidden>
-                            <input class="$!element.idTestplanDetail" value="$!element.idMedCase" hidden>
+                                    <input class="$!element.idTestplanDetail" value="$!element.idDemo" hidden>
+                                    <input class="$!element.idTestplanDetail" value="$!element.idTestplan" hidden>
+                                    <input class="$!element.idTestplanDetail" value="$!element.idStudent" hidden>
+                                    <input class="$!element.idTestplanDetail" value="$!element.idTestpaper" hidden>
+                                    <input class="$!element.idTestplanDetail" value="$!element.idMedicalrec" hidden>
+                                    <input class="$!element.idTestplanDetail" value="$!element.patName" hidden>
+                                    <input class="$!element.idTestplanDetail" value="$!element.patSex" hidden>
+                                    <input class="$!element.idTestplanDetail" value="$!element.patAge" hidden>
+                                    <input class="$!element.idTestplanDetail" value="$!element.complaint" hidden>
+                                    <input class="$!element.idTestplanDetail" value="$!element.idMedCase" hidden>
 
+                                </div>
+                            </div>
+                            <div class="layui-card-header">
+                                <button class="layui-btn layui-btn-primary layui-btn-fluid receivePat" style="border:none" value="$!element.idTestplanDetail">
+                                    #if($!{element.status} == 0)
+                                        待接诊
+                                    #elseif($!{element.status} == 1 )
+                                        继续接诊
+                                    #end
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="layui-card-header">
-                        <button class="layui-btn layui-btn-primary layui-btn-fluid receivePat" style="border:none" value="$!element.idTestplanDetail">
-                            #if($!{element.status} == 0)
-                                    待接诊
-                            #elseif($!{element.status} == 1 )
-                                    继续接诊
-                            #end
-                        </button>
-                    </div>
-                </div>
+                #end
             </div>
-        #end
 
-
+        </div>
+    </div>
 </div>
-
 <script src="$!{contextPath}/public/layui/plugins/layui/layui.js"></script>
+<script src="${contextPath}/public/common/js/jquery.min.js"></script>
+<script src="${contextPath}/public/ztree/js/jquery.ztree.core.js"></script>
 <script src="$!{contextPath}/public/biz/js/biz/tests/room/studentRoomPage.js"></script>
 
 </body>

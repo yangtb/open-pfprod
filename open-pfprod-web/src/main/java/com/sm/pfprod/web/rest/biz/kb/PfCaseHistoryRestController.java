@@ -43,7 +43,7 @@ public class PfCaseHistoryRestController {
      *
      * @return
      */
-    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER')")
+    @PreAuthorize("hasAnyRole('ROLE_FAQ0040','ROLE_SUPER','ROLE_EXM0300')")
     @PostMapping(value = "/classify/tree")
     public ResultObject listClassifyTree() {
         Long idOrg = CurrentUserUtils.getCurrentUserIdOrg();
