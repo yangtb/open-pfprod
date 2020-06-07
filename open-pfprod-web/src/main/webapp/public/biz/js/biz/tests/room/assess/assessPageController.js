@@ -488,7 +488,9 @@ layui.config({
                     if (data.data) {
                         if (data.data) {
                             if (flag == 1 && data.data.desSumaryHpi) {
-                                $("#desSumaryHpi").val(data.data.desSumaryHpi);
+                                //$("#desSumaryHpi").val($(data.data.desSumaryHpi).text());
+                                $('#desSumaryHpi').empty();
+                                $('#desSumaryHpi').prepend(data.data.desSumaryHpi);
                             }
                             if (flag == 2) {
                                 if ( data.data.desConditionHpi) {

@@ -176,7 +176,7 @@
 <div style="overflow:hidden">
 
     <div class="layui-row layui-col-space5">
-        <div class="layui-col-md7 layui-col-space5">
+        <div class="layui-col-xs7 layui-col-space5">
             <div class="layui-row">
                 <div class="layui-card" style="border: 1px #e9e9e9 solid; height: 350px; overflow: auto">
                         <div style="padding: 10px;">
@@ -218,7 +218,7 @@
             </div>
         </div>
 
-        <div class="layui-col-md5">
+        <div class="layui-col-xs5">
             <div class="titile" style="margin-top: 5px;">
                 <ul>
                     <li style="width: 100%">

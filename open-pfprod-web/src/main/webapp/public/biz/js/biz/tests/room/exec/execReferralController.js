@@ -588,7 +588,7 @@ layui.config({
             let bizData = {
                 idTestexecResult: idTestexecResult ,
                 fgDieClass:  treeNode.idDieclass ? '1' : '2' ,
-                idDie: treeNode.idDieclass ? treeNode.idDieclass : treeNode.idDie
+                idDie: treeNode.id ? treeNode.id : treeNode.idDie
             };
             common.commonPost(url, bizData, '添加', null, saveReferralCallback)
         } else {

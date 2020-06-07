@@ -21,6 +21,7 @@ import com.sm.pfprod.web.security.SecurityContext;
 import com.sm.pfprod.web.security.User;
 import com.sm.pfprod.web.util.EnumUtil;
 import com.sm.pfprod.web.util.ParamUtil;
+import com.sm.pfprod.web.util.SysUserAuthUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -413,6 +414,9 @@ public class PfTestWaitingRoomController extends BaseController {
         } else {
             dto.setCurrentUserId(null);
         }
+        dto.setUserId(user.getUserId());
+        dto.setSuper(SysUserAuthUtils.isSuper());
+
         return pfTestWaitingRoomService.listWaitingRoom(dto);
     }
 
@@ -436,6 +440,12 @@ public class PfTestWaitingRoomController extends BaseController {
     @ResponseBody
     public PageResult listReceivePat(PfTestWatingRoomDto dto) {
         dto.setIdOrg(CurrentUserUtils.getCurrentUserIdOrg());
+        User user = CurrentUserUtils.getCurrentUser();
+        if (!SysUserAuthUtils.isPlatOrSuper()) {
+            dto.setIdOrg(user.getIdOrg());
+        }
+        dto.setUserId(user.getUserId());
+        dto.setSuper(SysUserAuthUtils.isSuper());
         return pfTestWaitingRoomService.listReceivePat(dto);
     }
 
