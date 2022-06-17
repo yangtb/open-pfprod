@@ -35,7 +35,7 @@
         <open.pfprod.web.version>1.0.0</open.pfprod.web.version>
 
         <!-- 阿里的jar版本管理 -->
-        <fastjson.version>1.2.51</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <dubbo.version>2.5.9</dubbo.version>
 
         <zookeeper.version>3.4.6</zookeeper.version>
