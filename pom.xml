@@ -38,7 +38,7 @@
         <fastjson.version>1.2.51</fastjson.version>
         <dubbo.version>2.5.9</dubbo.version>
 
-        <zookeeper.version>3.4.6</zookeeper.version>
+        <zookeeper.version>3.4.14</zookeeper.version>
         <zkclient.version>0.10</zkclient.version>
 
         <!-- 第三方jar的版本管理 -->
